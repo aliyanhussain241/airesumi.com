@@ -1,9 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "same-as-website",
+  "name": "airesumi",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat", "nodejs_compat_populate_process_env"],
-  "main": "src/server.ts",
+  "main": "dist/server/server.js",
+  "assets": {
+    "directory": "dist/client"
+  },
   "vars": {
     "SUPABASE_URL": "https://qxcitpdsdskrelowtigN.supabase.co",
     "VITE_SUPABASE_URL": "https://qxcitpdsdskrelowtigN.supabase.co",

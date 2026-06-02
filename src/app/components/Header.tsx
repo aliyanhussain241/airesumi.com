@@ -68,11 +68,12 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         isScrolled
           ? 'bg-white/60 backdrop-blur-lg shadow-[0_2px_12px_rgba(234,88,12,0.08)] border-b border-[#FED7AA]/50'
           : 'bg-[#FFFFFF] border-b border-transparent shadow-none'
-      } px-[20px] md:px-[32px] lg:px-[48px] box-border w-full flex items-center justify-between font-['Inter',sans-serif]`}
+      } w-full font-['Inter',sans-serif]`}
     >
-      <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
-        <Logo />
-      </Link>
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between box-border">
+        <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
+          <Logo />
+        </Link>
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-[20px] lg:gap-[32px]">

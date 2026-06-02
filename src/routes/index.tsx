@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import "../app/app.css";
 import { LandingPage } from "../app/LandingPage";
 import { useStepNavigate } from "../app/lib/navigation";
 

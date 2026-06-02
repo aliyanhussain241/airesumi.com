@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 
-import "../app/app.css";
 import { Step } from "../app/App";
 import { JobDescription, ResumeData, UserData } from "../app/lib/types";
 import { DesignId } from "../app/components/ResumePreview";

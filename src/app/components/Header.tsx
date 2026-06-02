@@ -101,10 +101,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         {user ? (
           // ✅ LOGGED IN — User email + Logout button
           <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-gray-600 bg-orange-50 px-3 py-2 rounded-lg">
+            <Link
+              to="/dashboard"
+              className="flex items-center gap-2 text-sm text-gray-600 bg-orange-50 px-3 py-2 rounded-lg hover:bg-orange-100 transition-colors no-underline"
+            >
               <User size={15} className="text-orange-500" />
-              <span className="max-w-[140px] truncate">{user.email}</span>
-            </div>
+              <span className="max-w-[140px] truncate">My Resumes</span>
+            </Link>
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 text-[14px] font-semibold px-[18px] py-[10px] rounded-[8px] border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all duration-200 cursor-pointer"

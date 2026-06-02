@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 
+import "../app/app.css";
 import { Step } from "../app/App";
 import { JobDescription, ResumeData, UserData } from "../app/lib/types";
 import { DesignId } from "../app/components/ResumePreview";
@@ -16,7 +17,6 @@ import { supabase } from "@/integrations/supabase/client";
 
 type Phase = Step.DETAILS | Step.DESIGN | Step.JOB | Step.GENERATING | Step.DONE;
 
-// ✅ AI ke baghair seedha resume banao user data se
 function buildResumeFromUserData(userData: UserData, jobData: JobDescription): ResumeData {
   return {
     header: {
@@ -55,11 +55,57 @@ function buildResumeFromUserData(userData: UserData, jobData: JobDescription): R
   };
 }
 
+// ✅ Supabase mein resume save karo
+async function saveResumeToSupabase(
+  userId: string,
+  resumeData: ResumeData,
+  userData: UserData,
+  jobData: JobDescription,
+  designId: DesignId,
+  existingId?: string
+): Promise<string | null> {
+  const title =
+    [userData.fullName, jobData.title, jobData.company].filter(Boolean).join(" — ") ||
+    "My Resume";
+
+  const payload = {
+    user_id: userId,
+    title,
+    job_title: jobData.title || null,
+    company: jobData.company || null,
+    design_id: designId,
+    resume_data: resumeData as any,
+    user_data: userData as any,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (existingId) {
+    const { error } = await supabase
+      .from("saved_resumes")
+      .update(payload)
+      .eq("id", existingId);
+    if (error) console.error("Resume update failed:", error);
+    return existingId;
+  } else {
+    const { data, error } = await supabase
+      .from("saved_resumes")
+      .insert(payload)
+      .select("id")
+      .single();
+    if (error) {
+      console.error("Resume save failed:", error);
+      return null;
+    }
+    return data?.id ?? null;
+  }
+}
+
 function ResumeBuilder() {
   const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<Phase>(Step.DETAILS);
   const [designId, setDesignId] = useState<DesignId>("classic");
+  const [savedResumeId, setSavedResumeId] = useState<string | undefined>(undefined);
   const [userData, setUserData] = useState<UserData>({
     fullName: "",
     email: "",
@@ -80,7 +126,33 @@ function ResumeBuilder() {
   const [error, setError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+
+    // ✅ Dashboard se "Edit" kiya? sessionStorage se load karo
+    const editData = sessionStorage.getItem("edit_resume");
+    if (editData) {
+      try {
+        const saved = JSON.parse(editData);
+        if (saved.resume_data) setResumeData(saved.resume_data);
+        if (saved.user_data) setUserData(saved.user_data);
+        if (saved.design_id) setDesignId(saved.design_id as DesignId);
+        if (saved.job_title || saved.company) {
+          setJobData((prev) => ({
+            ...prev,
+            title: saved.job_title ?? "",
+            company: saved.company ?? "",
+          }));
+        }
+        if (saved.id) setSavedResumeId(saved.id);
+        // Load hone ke baad DONE phase pe le jao agar resume_data hai
+        if (saved.resume_data) setPhase(Step.DONE);
+        sessionStorage.removeItem("edit_resume");
+      } catch (e) {
+        console.error("Failed to load edit data", e);
+      }
+    }
+  }, []);
 
   const setStep = (target: Step) => {
     switch (target) {
@@ -130,7 +202,6 @@ function ResumeBuilder() {
     }
   };
 
-  // ✅ CV Upload — bina auth ke
   const handleCVUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -165,9 +236,7 @@ function ResumeBuilder() {
     }
   };
 
-  // ✅ Login check + AI nahi — seedha user data se resume banao
   const handleGenerate = async () => {
-    // ✅ Login check
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       setError("Please log in to generate your resume.");
@@ -179,17 +248,39 @@ function ResumeBuilder() {
     setError(null);
     setStatusMessage("Building your resume...");
 
-    // Thoda delay taake loading screen dikhe
     await new Promise((resolve) => setTimeout(resolve, 1200));
 
     try {
       const data = buildResumeFromUserData(userData, jobData);
       setResumeData(data);
+
+      // ✅ Auto-save to Supabase
+      setStatusMessage("Saving to your dashboard...");
+      const savedId = await saveResumeToSupabase(
+        session.user.id,
+        data,
+        userData,
+        jobData,
+        designId,
+        savedResumeId
+      );
+      if (savedId) setSavedResumeId(savedId);
+
       setPhase(Step.DONE);
     } catch (err: any) {
       setError("Something went wrong. Please try again.");
       setPhase(Step.JOB);
     }
+  };
+
+  // ✅ Design change pe bhi Supabase update karo
+  const handleDesignChange = async (newDesignId: DesignId) => {
+    setDesignId(newDesignId);
+    if (!savedResumeId || !resumeData) return;
+    await supabase
+      .from("saved_resumes")
+      .update({ design_id: newDesignId, updated_at: new Date().toISOString() })
+      .eq("id", savedResumeId);
   };
 
   const handlePrint = async () => {
@@ -243,7 +334,7 @@ function ResumeBuilder() {
           resumeData={resumeData}
           setStep={setStep}
           designId={designId}
-          setDesignId={setDesignId}
+          setDesignId={handleDesignChange}
           handlePrint={handlePrint}
         />
       )}

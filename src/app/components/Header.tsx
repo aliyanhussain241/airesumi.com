@@ -7,7 +7,7 @@ import rezumiLogo from '@/assets/ai-resumi.webp';
 
 export const Logo = () => (
   <div className="flex items-center select-none z-50 transition-transform duration-200 hover:scale-[1.02]">
-    <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="h-8 w-auto" />
+    <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="h-10 w-auto" />
   </div>
 );
 
@@ -68,11 +68,12 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         isScrolled
           ? 'bg-white/60 backdrop-blur-lg shadow-[0_2px_12px_rgba(234,88,12,0.08)] border-b border-[#FED7AA]/50'
           : 'bg-[#FFFFFF] border-b border-transparent shadow-none'
-      } px-[20px] md:px-[32px] lg:px-[48px] box-border w-full flex items-center justify-between font-['Inter',sans-serif]`}
+      } w-full font-['Inter',sans-serif]`}
     >
-      <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
-        <Logo />
-      </Link>
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between box-border">
+        <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
+          <Logo />
+        </Link>
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-[20px] lg:gap-[32px]">
@@ -151,6 +152,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         >
           <Menu size={24} strokeWidth={2} />
         </button>
+      </div>
       </div>
 
       {/* Mobile Menu */}

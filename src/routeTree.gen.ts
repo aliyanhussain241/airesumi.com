@@ -13,8 +13,10 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SalaryAnalyzerRouteImport } from './routes/salary-analyzer'
 import { Route as ResumeRouteImport } from './routes/resume'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as InterviewPrepRouteImport } from './routes/interview-prep'
 import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as CoverLetterRouteImport } from './routes/cover-letter'
@@ -23,6 +25,8 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
 import { Route as ApiParseCvTextRouteImport } from './routes/api/parse-cv-text'
 import { Route as ApiGenerateResumeRouteImport } from './routes/api/generate-resume'
@@ -49,6 +53,11 @@ const ResumeRoute = ResumeRouteImport.update({
   path: '/resume',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -57,6 +66,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PremiumRoute = PremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InterviewPrepRoute = InterviewPrepRouteImport.update({
@@ -99,6 +113,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiUploadCvRoute = ApiUploadCvRouteImport.update({
   id: '/api/upload-cv',
   path: '/api/upload-cv',
@@ -129,13 +153,15 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/login': typeof LoginRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resume': typeof ResumeRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -145,18 +171,22 @@ export interface FileRoutesByFullPath {
   '/api/generate-resume': typeof ApiGenerateResumeRoute
   '/api/parse-cv-text': typeof ApiParseCvTextRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/login': typeof LoginRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resume': typeof ResumeRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -166,19 +196,23 @@ export interface FileRoutesByTo {
   '/api/generate-resume': typeof ApiGenerateResumeRoute
   '/api/parse-cv-text': typeof ApiParseCvTextRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/login': typeof LoginRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/resume': typeof ResumeRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -188,6 +222,8 @@ export interface FileRoutesById {
   '/api/generate-resume': typeof ApiGenerateResumeRoute
   '/api/parse-cv-text': typeof ApiParseCvTextRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,8 +236,10 @@ export interface FileRouteTypes {
     | '/cover-letter'
     | '/examples'
     | '/interview-prep'
+    | '/login'
     | '/premium'
     | '/privacy'
+    | '/reset-password'
     | '/resume'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -211,6 +249,8 @@ export interface FileRouteTypes {
     | '/api/generate-resume'
     | '/api/parse-cv-text'
     | '/api/upload-cv'
+    | '/auth/callback'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -221,8 +261,10 @@ export interface FileRouteTypes {
     | '/cover-letter'
     | '/examples'
     | '/interview-prep'
+    | '/login'
     | '/premium'
     | '/privacy'
+    | '/reset-password'
     | '/resume'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -232,6 +274,8 @@ export interface FileRouteTypes {
     | '/api/generate-resume'
     | '/api/parse-cv-text'
     | '/api/upload-cv'
+    | '/auth/callback'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
@@ -242,8 +286,10 @@ export interface FileRouteTypes {
     | '/cover-letter'
     | '/examples'
     | '/interview-prep'
+    | '/login'
     | '/premium'
     | '/privacy'
+    | '/reset-password'
     | '/resume'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -253,19 +299,23 @@ export interface FileRouteTypes {
     | '/api/generate-resume'
     | '/api/parse-cv-text'
     | '/api/upload-cv'
+    | '/auth/callback'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AtsCheckerRoute: typeof AtsCheckerRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   CoverLetterRoute: typeof CoverLetterRoute
   ExamplesRoute: typeof ExamplesRoute
   InterviewPrepRoute: typeof InterviewPrepRoute
+  LoginRoute: typeof LoginRoute
   PremiumRoute: typeof PremiumRoute
   PrivacyRoute: typeof PrivacyRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ResumeRoute: typeof ResumeRoute
   SalaryAnalyzerRoute: typeof SalaryAnalyzerRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -275,6 +325,7 @@ export interface RootRouteChildren {
   ApiGenerateResumeRoute: typeof ApiGenerateResumeRoute
   ApiParseCvTextRoute: typeof ApiParseCvTextRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -307,6 +358,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -319,6 +377,13 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/premium'
       preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/interview-prep': {
@@ -377,6 +442,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/upload-cv': {
       id: '/api/upload-cv'
       path: '/api/upload-cv'
@@ -415,17 +494,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AtsCheckerRoute: AtsCheckerRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   CoverLetterRoute: CoverLetterRoute,
   ExamplesRoute: ExamplesRoute,
   InterviewPrepRoute: InterviewPrepRoute,
+  LoginRoute: LoginRoute,
   PremiumRoute: PremiumRoute,
   PrivacyRoute: PrivacyRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ResumeRoute: ResumeRoute,
   SalaryAnalyzerRoute: SalaryAnalyzerRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -435,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGenerateResumeRoute: ApiGenerateResumeRoute,
   ApiParseCvTextRoute: ApiParseCvTextRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

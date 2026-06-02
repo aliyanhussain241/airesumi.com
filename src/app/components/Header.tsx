@@ -7,7 +7,7 @@ import rezumiLogo from '@/assets/ai-resumi.webp';
 
 export const Logo = () => (
   <div className="flex items-center select-none z-50 transition-transform duration-200 hover:scale-[1.02]">
-    <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="h-10 w-auto" />
+    <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="h-8 w-auto" />
   </div>
 );
 
@@ -70,10 +70,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           : 'bg-[#FFFFFF] border-b border-transparent shadow-none'
       } w-full font-['Inter',sans-serif]`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between box-border">
-        <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
-          <Logo />
-        </Link>
+      <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between">
+      <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
+        <Logo />
+      </Link>
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-[20px] lg:gap-[32px]">

@@ -153,6 +153,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           <Menu size={24} strokeWidth={2} />
         </button>
       </div>
+      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>

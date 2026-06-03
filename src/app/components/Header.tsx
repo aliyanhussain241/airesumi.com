@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, LogOut, User } from 'lucide-react';
+import { Menu, X, LogOut, User, Moon, Sun } from 'lucide-react';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
@@ -25,6 +25,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [isDark, setIsDark] = useState(false);
   const [width, setWidth] = useState(
     windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200)
   );
@@ -44,6 +45,22 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Dark mode — localStorage se restore karo
+  useEffect(() => {
+    const saved = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldDark = saved === 'dark' || (!saved && prefersDark);
+    setIsDark(shouldDark);
+    document.documentElement.classList.toggle('dark', shouldDark);
+  }, []);
+
+  const toggleDark = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -102,6 +119,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         {user ? (
           // ✅ LOGGED IN — User email + Logout button
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleDark}
+              className="flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <Link
               to="/dashboard"
               className="flex items-center gap-2 text-sm text-gray-600 bg-orange-50 px-3 py-2 rounded-lg hover:bg-orange-100 transition-colors no-underline"
@@ -126,6 +150,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         ) : (
           // ✅ NOT LOGGED IN — Login + Start Free buttons
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={toggleDark}
+              className="flex items-center justify-center w-9 h-9 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <button
               onClick={() => navigate({ to: '/login' })}
               className="text-[14px] font-semibold px-[18px] py-[10px] rounded-[8px] border border-[#EA580C] text-[#EA580C] hover:bg-orange-50 transition-all duration-200 cursor-pointer bg-transparent"

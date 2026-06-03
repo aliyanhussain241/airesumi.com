@@ -12,142 +12,67 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
   const [progressKey, setProgressKey] = useState(0);
 
   useEffect(() => {
-  const timer = setInterval(() => {
-    setActiveToolsTab((prev) => (prev % 4) + 1);
-    setProgressKey((prev) => prev + 1);
-  }, 5000);
-
-  // ✅ ADD THESE SEO LINES:
-  document.title = "Free AI Resume Builder – ATS-Optimized Resumes in Minutes | AIResumi";
-  
-  // Remove existing meta description if any
-  const existingMeta = document.querySelector('meta[name="description"]');
-  if (existingMeta) existingMeta.remove();
-  
-  const metaDesc = document.createElement('meta');
-  metaDesc.name = "description";
-  metaDesc.content = "Build a professional, ATS-optimized resume in minutes using AI. Free to use, no signup needed. Trusted by job seekers in Pakistan, India & worldwide. Download PDF instantly.";
-  document.head.appendChild(metaDesc);
-
-  // OG Tags
-  const ogTitle = document.createElement('meta');
-  ogTitle.setAttribute('property', 'og:title');
-  ogTitle.content = "Free AI Resume Builder – ATS-Optimized | AIResumi";
-  document.head.appendChild(ogTitle);
-
-  const ogDesc = document.createElement('meta');
-  ogDesc.setAttribute('property', 'og:description');
-  ogDesc.content = "Create a job-winning resume in minutes. AI-powered, ATS-optimized, 100% free.";
-  document.head.appendChild(ogDesc);
-
-  const ogUrl = document.createElement('meta');
-  ogUrl.setAttribute('property', 'og:url');
-  ogUrl.content = "https://airesumi.com/";
-  document.head.appendChild(ogUrl);
-
-  const ogImage = document.createElement('meta');
-  ogImage.setAttribute('property', 'og:image');
-  ogImage.content = "https://airesumi.com/ai-resumi.webp";
-  document.head.appendChild(ogImage);
-
-  // Canonical
-  const existingCanonical = document.querySelector('link[rel="canonical"]');
-  if (existingCanonical) existingCanonical.remove();
-  const canonical = document.createElement('link');
-  canonical.rel = "canonical";
-  canonical.href = "https://airesumi.com/";
-  document.head.appendChild(canonical);
-
-  // Schema — SoftwareApplication
-  const existingSchema = document.getElementById('homepage-schema');
-  if (existingSchema) existingSchema.remove();
-  const schema = document.createElement('script');
-  schema.id = 'homepage-schema';
-  schema.type = 'application/ld+json';
-  schema.text = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "AIResumi",
-    "url": "https://airesumi.com",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web Browser",
-    "description": "AIResumi is a free AI-powered resume builder that creates ATS-optimized, professional resumes in minutes.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
-    "featureList": [
-      "AI-generated resume content",
-      "ATS-optimized templates",
-      "PDF download",
-      "Cover letter builder",
-      "ATS Checker",
-      "Interview preparation"
-    ]
-  });
-  document.head.appendChild(schema);
-
-  // Schema — FAQPage
-  const existingFaqSchema = document.getElementById('homepage-faq-schema');
-  if (existingFaqSchema) existingFaqSchema.remove();
-  const faqSchema = document.createElement('script');
-  faqSchema.id = 'homepage-faq-schema';
-  faqSchema.type = 'application/ld+json';
-  faqSchema.text = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is AIResumi free to use?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, AIResumi is completely free. You can create, edit, and download your resume as a PDF at no cost. No credit card required."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is AIResumi ATS-friendly?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. All AIResumi templates are designed to pass Applicant Tracking Systems (ATS). The formatting avoids tables, graphics, and complex layouts that ATS systems cannot parse."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does the AI resume builder work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Enter your work experience, skills, and education. AIResumi's AI analyzes your input and generates optimized resume content — including a professional summary, bullet points, and keyword suggestions — in seconds."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use AIResumi to apply for jobs in Pakistan?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Absolutely. AIResumi is used by thousands of job seekers in Pakistan. The platform supports standard international resume formats accepted by Pakistani employers and international companies."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I need to sign up?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. You can start building your resume immediately without creating an account."
-        }
-      }
-    ]
-  });
-  document.head.appendChild(faqSchema);
-
-  return () => clearInterval(timer);
-}, [progressKey]);
+    const timer = setInterval(() => {
+      setActiveToolsTab((prev) => (prev % 4) + 1);
+      setProgressKey((prev) => prev + 1);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [progressKey]);
+
+  useEffect(() => {
+    document.title = "Free AI Resume Builder – ATS-Optimized Resumes in Minutes | AIResumi";
+
+    const existingMeta = document.querySelector('meta[name="description"]');
+    if (existingMeta) existingMeta.remove();
+    const metaDesc = document.createElement('meta');
+    metaDesc.name = "description";
+    metaDesc.content = "Build a professional, ATS-optimized resume in minutes using AI. Free to use, no signup needed. Trusted by job seekers in Pakistan, India & worldwide. Download PDF instantly.";
+    document.head.appendChild(metaDesc);
+
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    if (existingCanonical) existingCanonical.remove();
+    const canonical = document.createElement('link');
+    canonical.rel = "canonical";
+    canonical.href = "https://airesumi.com/";
+    document.head.appendChild(canonical);
+
+    const existingSchema = document.getElementById('homepage-schema');
+    if (existingSchema) existingSchema.remove();
+    const schema = document.createElement('script');
+    schema.id = 'homepage-schema';
+    schema.type = 'application/ld+json';
+    schema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AIResumi",
+      "url": "https://airesumi.com",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "description": "AIResumi is a free AI-powered resume builder that creates ATS-optimized, professional resumes in minutes.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": ["AI-generated resume content","ATS-optimized templates","PDF download","Cover letter builder","ATS Checker","Interview preparation"]
+    });
+    document.head.appendChild(schema);
+
+    const existingFaq = document.getElementById('homepage-faq-schema');
+    if (existingFaq) existingFaq.remove();
+    const faqSchema = document.createElement('script');
+    faqSchema.id = 'homepage-faq-schema';
+    faqSchema.type = 'application/ld+json';
+    faqSchema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is AIResumi free to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, AIResumi is completely free. Create, edit and download your resume as a PDF at no cost. No credit card required." } },
+        { "@type": "Question", "name": "Is AIResumi ATS-friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All AIResumi templates are designed to pass Applicant Tracking Systems (ATS). The formatting avoids tables and graphics that break parsing." } },
+        { "@type": "Question", "name": "Can I use AIResumi for jobs in Pakistan?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. AIResumi is used by thousands of job seekers in Pakistan. It supports standard international resume formats accepted by Pakistani and international employers." } },
+        { "@type": "Question", "name": "Do I need to sign up?", "acceptedAnswer": { "@type": "Answer", "text": "No. You can start building your resume immediately without creating an account." } }
+      ]
+    });
+    document.head.appendChild(faqSchema);
+  }, []);
+
 
   const handleTabClick = (index: number) => {
     setActiveToolsTab(index);
@@ -323,7 +248,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <Wand2 size={32} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] text-center sm:text-left">
-              <h2 className="text-4xl lg:text-5xl font-medium text-[#2d3748]">   Build a resume that <span className="text-[#FF6321]">gets you hired</span> </h2>
+              <span className="text-[#FF6321]">47,602</span> resumes created today
             </h2>
          </div>
 

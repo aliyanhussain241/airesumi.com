@@ -104,7 +104,7 @@ export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void
             <ul>
               <li><strong>Creating an Account:</strong> To access certain features of Rezumi, you must create an account by providing a valid email address and password, or by using Google or LinkedIn OAuth authentication. You must be at least 16 years of age to create a Rezumi account.</li>
               <li><strong>Account Accuracy:</strong> You agree to provide accurate, current, and complete information during registration and to keep your account information updated. Rezumi is not responsible for problems caused by inaccurate account information.</li>
-              <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your account credentials. You agree to notify Rezumi immediately at info@rezumi.com if you become aware of any unauthorized use of your account or any security breach.</li>
+              <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your account credentials. You agree to notify Rezumi immediately at info@airesumi.com if you become aware of any unauthorized use of your account or any security breach.</li>
               <li><strong>One Account Per User:</strong> Each user may maintain only one free account. Creating multiple accounts to circumvent free tier limits is a violation of these Terms and may result in all associated accounts being suspended.</li>
               <li><strong>Account Responsibility:</strong> You are responsible for all activity that occurs under your account, whether or not you authorized that activity.</li>
             </ul>
@@ -117,7 +117,7 @@ export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void
               <li><strong>Pro Subscription:</strong> Rezumi Pro is a paid subscription that unlocks unlimited resumes, premium templates, PDF and DOCX downloads, the cover letter generator, advanced ATS analysis, and other premium features. Pro pricing is displayed on our Pricing page and may change with 30 days notice to existing subscribers.</li>
               <li><strong>Billing:</strong> Pro subscriptions are billed monthly or annually in advance. Payments are processed securely by Stripe. By subscribing to Pro, you authorize Rezumi to charge your payment method on a recurring basis until you cancel.</li>
               <li><strong>Cancellation:</strong> You may cancel your Pro subscription at any time from Account Settings. Cancellation takes effect at the end of your current billing period. You will retain Pro access until the period ends. We do not provide partial refunds for unused subscription periods except as described in our Refund Policy.</li>
-              <li><strong>Refunds:</strong> We offer a full refund within 7 days of your initial Pro subscription purchase if you are not satisfied. After 7 days, refunds are evaluated on a case-by-case basis. Contact info@rezumi.com to request a refund.</li>
+              <li><strong>Refunds:</strong> We offer a full refund within 7 days of your initial Pro subscription purchase if you are not satisfied. After 7 days, refunds are evaluated on a case-by-case basis. Contact info@airesumi.com to request a refund.</li>
               <li><strong>Free Trial:</strong> If Rezumi offers a free trial of Pro features, your payment method will be charged at the end of the trial period unless you cancel before the trial expires. Trial terms will be clearly stated at sign-up.</li>
             </ul>
           </div>
@@ -207,7 +207,7 @@ export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void
             <h2>11. Governing Law and Dispute Resolution</h2>
             <ul>
               <li><strong>Governing Law:</strong> These Terms are governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to conflict of law principles.</li>
-              <li><strong>Informal Resolution:</strong> Before filing any formal legal claim, you agree to contact Rezumi at info@rezumi.com to attempt to resolve the dispute informally. We will make good faith efforts to resolve disputes within 30 days.</li>
+              <li><strong>Informal Resolution:</strong> Before filing any formal legal claim, you agree to contact Rezumi at info@airesumi.com to attempt to resolve the dispute informally. We will make good faith efforts to resolve disputes within 30 days.</li>
               <li><strong>Arbitration:</strong> If informal resolution fails, any dispute arising from these Terms or your use of Rezumi shall be resolved through binding individual arbitration administered by the American Arbitration Association (AAA) under its Consumer Arbitration Rules. You waive your right to participate in class action lawsuits.</li>
               <li><strong>Exceptions:</strong> Either party may seek emergency injunctive relief from a court of competent jurisdiction. Claims of intellectual property infringement may be brought in court.</li>
               <li><strong>EU/UK Users:</strong> If you are located in the European Union or United Kingdom, you may have the right to resolve disputes through your local courts or consumer protection agencies under applicable EU or UK law.</li>
@@ -230,10 +230,10 @@ export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void
             <h2>13. Contact Us About These Terms</h2>
             <p>If you have questions about these Terms of Service, need clarification on any provision, or want to report a violation, please contact us:</p>
             <ul>
-              <li><strong>General Terms Questions:</strong> info@rezumi.com</li>
-              <li><strong>Legal Notices:</strong> info@rezumi.com</li>
-              <li><strong>Privacy Matters:</strong> info@rezumi.com</li>
-              <li><strong>Billing Disputes:</strong> info@rezumi.com</li>
+              <li><strong>General Terms Questions:</strong> info@airesumi.com</li>
+              <li><strong>Legal Notices:</strong> info@airesumi.com</li>
+              <li><strong>Privacy Matters:</strong> info@airesumi.com</li>
+              <li><strong>Billing Disputes:</strong> info@airesumi.com</li>
               <li><strong>Response Time:</strong> We respond to all legal and compliance inquiries within 5 business days.</li>
             </ul>
             <br />
@@ -367,21 +367,21 @@ export const PrivacyPolicy = ({ onNavigate }: { onNavigate: (step: any) => void 
             <h2>6. Your Rights and Choices</h2>
             <p>Depending on where you live, you have the following rights regarding your personal data:</p>
             <ul>
-              <li><strong>Right to Access:</strong> You can request a complete export of all personal data we hold about you at any time. Email info@rezumi.com with 'Data Access Request' in the subject line and we will send your data within 30 days.</li>
+              <li><strong>Right to Access:</strong> You can request a complete export of all personal data we hold about you at any time. Email info@airesumi.com with 'Data Access Request' in the subject line and we will send your data within 30 days.</li>
               <li><strong>Right to Deletion:</strong> You can delete your Rezumi account and all associated data at any time from Account Settings → Delete Account. We permanently delete your data within 30 days. This includes your resume content, account information, and usage history.</li>
               <li><strong>Right to Correction:</strong> If any personal information we hold about you is inaccurate, you can update it directly in your Account Settings or contact our support team.</li>
-              <li><strong>Right to Portability:</strong> You can export your resume data in PDF or DOCX format at any time from the resume builder. You can also request a JSON export of your raw account data by contacting info@rezumi.com.</li>
+              <li><strong>Right to Portability:</strong> You can export your resume data in PDF or DOCX format at any time from the resume builder. You can also request a JSON export of your raw account data by contacting info@airesumi.com.</li>
               <li><strong>Right to Object:</strong> You can opt out of optional analytics cookies, marketing emails, and non-essential data processing at any time through your Account Settings.</li>
               <li><strong>GDPR Rights (EU/EEA users):</strong> If you are located in the European Union or European Economic Area, you have additional rights under the General Data Protection Regulation including the right to lodge a complaint with your local Data Protection Authority.</li>
               <li><strong>CCPA Rights (California users):</strong> If you are a California resident, you have the right to know what personal information we collect, the right to delete it, and the right to opt out of the sale of personal information. We do not sell personal information to third parties.</li>
             </ul>
-            <p>To exercise any of these rights, contact us at info@rezumi.com. We respond to all privacy requests within 30 days.</p>
+            <p>To exercise any of these rights, contact us at info@airesumi.com. We respond to all privacy requests within 30 days.</p>
           </div>
 
           <div id="sec-7" className="mb-12 scroll-mt-32">
             <h2>7. Children's Privacy</h2>
             <p>Rezumi is designed for adults and professional job seekers. Our service is not directed at children under the age of 16. We do not knowingly collect personal information from anyone under 16 years of age.</p>
-            <p>If you are a parent or guardian and believe your child has provided personal information to Rezumi, please contact us immediately at info@rezumi.com. We will delete the information promptly upon verification.</p>
+            <p>If you are a parent or guardian and believe your child has provided personal information to Rezumi, please contact us immediately at info@airesumi.com. We will delete the information promptly upon verification.</p>
           </div>
 
           <div id="sec-8" className="mb-12 scroll-mt-32">
@@ -407,7 +407,7 @@ export const PrivacyPolicy = ({ onNavigate }: { onNavigate: (step: any) => void 
             <h2>10. Contact Us About Privacy</h2>
             <p>If you have questions about this Privacy Policy, want to exercise your privacy rights, or have a concern about how we handle your data, please contact our Privacy team:</p>
             <ul>
-              <li><strong>Email:</strong> info@rezumi.com</li>
+              <li><strong>Email:</strong> info@airesumi.com</li>
               <li><strong>Subject line:</strong> Please include 'Privacy Request' or 'Data Question' for fastest response</li>
               <li><strong>Response time:</strong> We respond to all privacy requests within 5 business days</li>
             </ul>
@@ -458,14 +458,14 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><CreditCard /></div>
             <h3 className="font-bold text-gray-900 mb-2">Billing & Account Help</h3>
             <p className="text-gray-500 text-sm mb-4">Questions about your subscription, payment, invoice, cancellation, or account settings.</p>
-            <a href="mailto:info@rezumi.com" className="block text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Billing Team</a>
+            <a href="mailto:info@airesumi.com" className="block text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Billing Team</a>
             <div className="text-xs text-gray-400 font-medium">Avg response: 2 hours</div>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><Handshake /></div>
             <h3 className="font-bold text-gray-900 mb-2">Partnerships & Press</h3>
             <p className="text-gray-500 text-sm mb-4">Interested in partnering with Rezumi, featuring us in an article, or exploring integration opportunities?</p>
-            <a href="mailto:info@rezumi.com" className="block text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Partnerships</a>
+            <a href="mailto:info@airesumi.com" className="block text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Partnerships</a>
             <div className="text-xs text-gray-400 font-medium">Avg response: 1 business day</div>
           </div>
         </div>
@@ -558,11 +558,11 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
           {[
             { q: "Is Rezumi completely free to use?", a: "Our core AI resume builder is free to use with no credit card required. You can create, edit, and preview your resume for free. Our Pro plan unlocks unlimited downloads, premium templates, the cover letter generator, and advanced ATS analysis. You can upgrade at any time from your account dashboard." },
             { q: "How do I download my resume as a PDF?", a: "Once you have built your resume in the Rezumi builder, click the Download button in the top right corner of the editor. Free users can download one resume as a PDF. Pro users can download unlimited resumes in both PDF and DOCX format. If your download is not working, try using Google Chrome and disabling any ad blockers." },
-            { q: "Can I cancel my Pro subscription at any time?", a: "Yes. You can cancel your Rezumi Pro subscription at any time from your Account Settings page under Billing. Your Pro access continues until the end of your current billing period. We do not charge cancellation fees. If you have any trouble cancelling, email info@rezumi.com and we will process it within 2 hours." },
+            { q: "Can I cancel my Pro subscription at any time?", a: "Yes. You can cancel your Rezumi Pro subscription at any time from your Account Settings page under Billing. Your Pro access continues until the end of your current billing period. We do not charge cancellation fees. If you have any trouble cancelling, email info@airesumi.com and we will process it within 2 hours." },
             { q: "How does the ATS resume checker work?", a: "Our ATS checker analyzes your resume against the formatting rules and keyword scanning logic used by major Applicant Tracking Systems including Workday, Greenhouse, Taleo, and Lever. It checks for ATS-incompatible formatting (tables, columns, images, unusual fonts), missing keywords compared to a target job description, section structure, and content completeness. You receive a score out of 100 with specific recommendations to improve it." },
             { q: "Is my resume data private and secure?", a: "Yes. Your resume data is encrypted and stored securely. We never sell your personal information or resume content to third parties. We never share your data with employers, recruiters, or job boards without your explicit consent. You can delete your account and all associated data at any time from Account Settings. Read our full Privacy Policy for complete details." },
-            { q: "How do I reset my password?", a: "Click Sign In on the Rezumi homepage, then click Forgot Password below the login form. Enter your registered email address and we will send you a password reset link within 5 minutes. Check your spam folder if you do not see it. If you still have trouble accessing your account, contact info@rezumi.com." },
-            { q: "Do you offer refunds?", a: "We offer a full refund within 7 days of your first Pro subscription payment if you are not satisfied — no questions asked. After 7 days, refunds are considered on a case-by-case basis. Contact info@rezumi.com with your account email and order details to request a refund." },
+            { q: "How do I reset my password?", a: "Click Sign In on the Rezumi homepage, then click Forgot Password below the login form. Enter your registered email address and we will send you a password reset link within 5 minutes. Check your spam folder if you do not see it. If you still have trouble accessing your account, contact info@airesumi.com." },
+            { q: "Do you offer refunds?", a: "We offer a full refund within 7 days of your first Pro subscription payment if you are not satisfied — no questions asked. After 7 days, refunds are considered on a case-by-case basis. Contact info@airesumi.com with your account email and order details to request a refund." },
             { q: "Can I use Rezumi for multiple resumes?", a: "Yes. Free users can create and save up to 3 resumes. Pro users can create unlimited resumes and tailor each one to a different job description. This is especially useful for job seekers applying to multiple roles or industries simultaneously." }
           ].map((faq, i) => (
             <FAQItem key={i} question={faq.q} answer={faq.a} />

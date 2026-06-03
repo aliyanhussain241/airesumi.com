@@ -16,6 +16,7 @@ const navLinks: { name: string; to: string; matches: string[] }[] = [
   { name: 'Resume', to: '/resume', matches: ['/resume'] },
   { name: 'Cover Letter', to: '/cover-letter', matches: ['/cover-letter'] },
   { name: 'ATS Checker', to: '/ats-checker', matches: ['/ats-checker'] },
+  { name: 'LinkedIn Bio', to: '/linkedin-bio', matches: ['/linkedin-bio'] },
   { name: 'Examples', to: '/examples', matches: ['/examples'] },
   { name: 'Blog', to: '/blog', matches: ['/blog'] },
 ];
@@ -68,8 +69,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         isScrolled
           ? 'bg-white/60 backdrop-blur-lg shadow-[0_2px_12px_rgba(234,88,12,0.08)] border-b border-[#FED7AA]/50'
           : 'bg-[#FFFFFF] border-b border-transparent shadow-none'
-      } px-[20px] md:px-[32px] lg:px-[48px] box-border w-full flex items-center justify-between font-['Inter',sans-serif]`}
+      } w-full font-['Inter',sans-serif]`}
     >
+      <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between">
       <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
         <Logo />
       </Link>
@@ -100,10 +102,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         {user ? (
           // ✅ LOGGED IN — User email + Logout button
           <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-gray-600 bg-orange-50 px-3 py-2 rounded-lg">
+            <Link
+              to="/dashboard"
+              className="flex items-center gap-2 text-sm text-gray-600 bg-orange-50 px-3 py-2 rounded-lg hover:bg-orange-100 transition-colors no-underline"
+            >
               <User size={15} className="text-orange-500" />
-              <span className="max-w-[140px] truncate">{user.email}</span>
-            </div>
+              <span className="max-w-[140px] truncate">My Resumes</span>
+            </Link>
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 text-[14px] font-semibold px-[18px] py-[10px] rounded-[8px] border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all duration-200 cursor-pointer"
@@ -151,6 +156,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         >
           <Menu size={24} strokeWidth={2} />
         </button>
+      </div>
       </div>
 
       {/* Mobile Menu */}

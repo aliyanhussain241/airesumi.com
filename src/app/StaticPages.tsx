@@ -70,7 +70,7 @@ export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void
 
         <div className="md:col-span-3 prose prose-orange max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-[#FF6321]">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Terms of Service — Rezumi User Agreement</h1>
-          <p className="text-xl text-gray-600 leading-relaxed font-medium mb-4">These Terms of Service govern your use of Rezumi and all related career tools. By using Rezumi, you agree to these terms. Please read them carefully.</p>
+          <p className="text-xl text-gray-600 leading-relaxed font-medium mb-4">These Terms of Service govern your use of Rezumi and all related career tools. By using AIResumi, you agree to these terms. Please read them carefully.</p>
           <div className="inline-block bg-gray-100 text-gray-600 text-sm font-bold px-4 py-2 rounded-lg mb-8">Last Updated: January 1, 2025 | Effective: January 1, 2025</div>
 
           <div className="bg-orange-50 border border-orange-100 p-6 rounded-2xl mb-12">
@@ -79,7 +79,7 @@ export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void
 
           <div id="sec-1" className="mb-12 scroll-mt-32">
             <h2>1. Acceptance of Terms</h2>
-            <p>By accessing or using Rezumi (rezumi.com) and any related services, applications, or tools (collectively, the 'Service'), you agree to be bound by these Terms of Service ('Terms') and our Privacy Policy, which is incorporated into these Terms by reference.</p>
+            <p>By accessing or using Rezumi (airesumi.com) and any related services, applications, or tools (collectively, the 'Service'), you agree to be bound by these Terms of Service ('Terms') and our Privacy Policy, which is incorporated into these Terms by reference.</p>
             <p>If you are using Rezumi on behalf of an organization, company, or institution, you represent that you have the authority to bind that organization to these Terms.</p>
             <p>If you do not agree to these Terms, you may not access or use Rezumi. Your continued use of the Service following any updates to these Terms constitutes your acceptance of the revised Terms.</p>
             <p>These Terms constitute a legally binding agreement between you ('User') and Rezumi ('Company', 'we', 'us', 'our').</p>

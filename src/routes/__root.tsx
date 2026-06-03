@@ -89,9 +89,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" },
       { rel: "stylesheet", href: appCss },
       { rel: "canonical", href: "https://airesumi.com/" },
       { rel: "icon", href: "/favicon.webp", type: "image/webp" },
@@ -129,18 +126,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
-        {/* Anti-flash: apply dark class before paint */}
-        <script dangerouslySetInnerHTML={{ __html: `
-(function(){
-  try {
-    var t = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (t === 'dark' || (!t && prefersDark)) {
-      document.documentElement.classList.add('dark');
-    }
-  } catch(e){}
-})();
-        `}} />
       </head>
       <body>
         {children}
@@ -155,7 +140,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-[#f5f5f4] dark:bg-[#0a0a0a] text-[#0a0a0a] dark:text-[#fafafa] font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
+      <div className="min-h-screen bg-[#f5f5f4] text-[#0a0a0a] font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
         <Header />
         <Outlet />
         <Footer />

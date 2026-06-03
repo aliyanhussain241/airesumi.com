@@ -323,7 +323,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <Wand2 size={32} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] text-center sm:text-left">
-              <span className="text-[#FF6321]">47,602</span> resumes created today
+              <h2 className="text-4xl lg:text-5xl font-medium text-[#2d3748]">   Build a resume that <span className="text-[#FF6321]">gets you hired</span> </h2>
             </h2>
          </div>
 

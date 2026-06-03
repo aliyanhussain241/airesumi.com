@@ -129,6 +129,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Anti-flash: apply dark class before paint */}
+        <script dangerouslySetInnerHTML={{ __html: `
+(function(){
+  try {
+    var t = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (t === 'dark' || (!t && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e){}
+})();
+        `}} />
       </head>
       <body>
         {children}
@@ -143,7 +155,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-[#f5f5f4] text-[#0a0a0a] font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
+      <div className="min-h-screen bg-[#f5f5f4] dark:bg-[#0a0a0a] text-[#0a0a0a] dark:text-[#fafafa] font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
         <Header />
         <Outlet />
         <Footer />

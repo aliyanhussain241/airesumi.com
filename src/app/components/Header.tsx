@@ -16,6 +16,7 @@ const navLinks: { name: string; to: string; matches: string[] }[] = [
   { name: 'Resume', to: '/resume', matches: ['/resume'] },
   { name: 'Cover Letter', to: '/cover-letter', matches: ['/cover-letter'] },
   { name: 'ATS Checker', to: '/ats-checker', matches: ['/ats-checker'] },
+  { name: 'LinkedIn Bio', to: '/linkedin-bio', matches: ['/linkedin-bio'] },
   { name: 'Examples', to: '/examples', matches: ['/examples'] },
   { name: 'Blog', to: '/blog', matches: ['/blog'] },
 ];

@@ -17,7 +17,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = "Free ATS Resume Checker 2025 — Instant ATS Score & Keyword Analysis | Rezumi";
+    document.title = "Free ATS Resume Checker – Instant ATS Score & Keyword Analysis | AIResumi";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", "Check your resume's ATS score instantly for free. Our ATS resume checker analyzes keyword match, formatting issues, and ATS compatibility — no sign-up required. See your score in seconds.");
   }, []);

@@ -91,11 +91,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
            <div className="max-w-xl relative z-10">
              <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
-              Free AI Resume Builder for ATS-Friendly <span className="text-[#FF6321]">Professional Resumes</span>
-             </h1>
-             <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
-               Only 2% of resumes win. Yours will be one of them.
-             </p>
+  Build a job-winning resume in{" "}
+  <span className="text-[#FF6321]">3 minutes</span>
+  {" "}— free, no signup
+</h1>
+<p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
+  Enter your experience. AI writes your resume.{" "}
+  ATS-ready PDF — download instantly.
+</p>
              <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
                <button
                  onClick={() => setStep(Step.DETAILS)}
@@ -257,28 +260,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <Sparkles size={32} className="text-[#1a202c] mb-6" />
               <h3 className="font-semibold text-[#1a202c] text-xl mb-3">A draft in 10 mins</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">The AI builder is 10 x faster than doing on your own.</p>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">Fill in your details, AI writes the bullet points. No blank page, no writer's block.</p>
             </div>
             
             {/* Feature 2 */}
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero mistakes</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Don't stress over typos; you'll sound great!</p>
+              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero ATS errors</h3>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">Clean formatting, correct sections, right keywords. Your resume parses perfectly on every ATS.</p>
             </div>
             
             {/* Feature 3 */}
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <Target size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">ATS templates</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Your resume will be 100% compliant. Recruiters will see you.</p>
+              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">18+ ATS-tested templates</h3>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">Every template is tested against Taleo, Workday, and Greenhouse. No tables, no graphics that break parsing.</p>
             </div>
             
             {/* Feature 4 */}
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Get paid 7% more</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">We can help you negotiate a higher starting salary...</p>
+              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Salary insight included</h3>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">See salary ranges for your target role before you negotiate. Built into the builder.</p>
             </div>
          </div>
       </div>

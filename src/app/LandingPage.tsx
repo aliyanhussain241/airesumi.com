@@ -27,7 +27,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
     if (existingMeta) existingMeta.remove();
     const metaDesc = document.createElement('meta');
     metaDesc.name = "description";
-    metaDesc.content = "Build a professional, ATS-optimized resume in minutes using AI. Free to use, no signup needed. Trusted by job seekers in Pakistan, India & worldwide. Download PDF instantly.";
+    metaDesc.content = "Build a professional, ATS-optimized resume in minutes using AI. Free to use. Trusted by job seekers in Pakistan, India & worldwide. Download PDF instantly.";
     document.head.appendChild(metaDesc);
 
     const existingCanonical = document.querySelector('link[rel="canonical"]');
@@ -93,7 +93,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
              <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
   Build a job-winning resume in{" "}
   <span className="text-[#FF6321]">3 minutes</span>
-  {" "}— free, no signup
+  {" "}— Free!
 </h1>
 <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
   Enter your experience. AI writes your resume.{" "}

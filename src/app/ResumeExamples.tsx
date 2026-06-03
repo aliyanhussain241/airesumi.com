@@ -335,7 +335,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
 
     const linkCanonical = document.createElement('link');
     linkCanonical.rel = "canonical";
-    linkCanonical.href = "https://same-as-website.lovable.app/resume-examples";
+    linkCanonical.href = "https://airesumi.com/examples";
     document.head.appendChild(linkCanonical);
 
     const schema = document.createElement('script');
@@ -345,7 +345,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
       "@type": "WebPage",
       "name": "Resume Examples 2025 — 500+ Free Professional Resume Samples",
       "description": "Browse 500+ free resume examples and resume samples for every job title and industry in 2025. ATS-optimized and recruiter-approved.",
-      "url": "https://same-as-website.lovable.app/resume-examples",
+      "url": "https://airesumi.com/examples",
       "mainEntity": {
         "@type": "ItemList",
         "name": "Professional Resume Examples",

@@ -116,38 +116,38 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <LogOut size={15} />
               Logout
             </button>
-            <button
-              onClick={() => navigate({ to: '/resume' })}
-              className="bg-[#EA580C] text-white text-[14px] font-semibold px-[22px] py-[10px] rounded-[8px] hover:bg-[#C2410C] hover:scale-[1.02] transition-all duration-200 cursor-pointer border-none"
+            <Link
+              to="/resume"
+              className="bg-[#EA580C] text-white text-[14px] font-semibold px-[22px] py-[10px] rounded-[8px] hover:bg-[#C2410C] transition-all duration-200 no-underline"
             >
               {width >= 1024 ? 'Build My Resume →' : 'Start →'}
-            </button>
+            </Link>
           </div>
         ) : (
           // ✅ NOT LOGGED IN — Login + Start Free buttons
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={() => navigate({ to: '/login' })}
-              className="text-[14px] font-semibold px-[18px] py-[10px] rounded-[8px] border border-[#EA580C] text-[#EA580C] hover:bg-orange-50 transition-all duration-200 cursor-pointer bg-transparent"
+            <Link
+              to="/login"
+              className="text-[14px] font-semibold px-[18px] py-[10px] rounded-[8px] border border-[#EA580C] text-[#EA580C] hover:bg-orange-50 transition-all duration-200 no-underline"
             >
               Login
-            </button>
-            <button
-              onClick={() => navigate({ to: '/resume' })}
-              className="bg-[#EA580C] text-white text-[14px] font-semibold px-[22px] py-[10px] rounded-[8px] hover:bg-[#C2410C] hover:scale-[1.02] transition-all duration-200 cursor-pointer border-none"
+            </Link>
+            <Link
+              to="/resume"
+              className="bg-[#EA580C] text-white text-[14px] font-semibold px-[22px] py-[10px] rounded-[8px] hover:bg-[#C2410C] transition-all duration-200 no-underline"
             >
               {width >= 1024 ? 'Build My Resume →' : 'Start Free →'}
-            </button>
+            </Link>
           </div>
         )}
 
         {/* Mobile Start Button */}
-        <button
-          onClick={() => navigate({ to: '/resume' })}
-          className="bg-[#EA580C] text-white text-[14px] font-semibold px-[16px] py-[8px] rounded-[8px] hover:bg-[#C2410C] transition-all duration-200 cursor-pointer md:hidden border-none"
+        <Link
+          to="/resume"
+          className="bg-[#EA580C] text-white text-[14px] font-semibold px-[16px] py-[8px] rounded-[8px] hover:bg-[#C2410C] transition-all duration-200 md:hidden no-underline"
         >
           Start Free →
-        </button>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button

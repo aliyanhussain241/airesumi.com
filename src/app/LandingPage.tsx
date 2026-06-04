@@ -7,6 +7,69 @@ interface LandingPageProps {
   setStep: (step: Step) => void;
 }
 
+const FAQ_SCHEMA = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is airesumi free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an ATS resume and why does it matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An ATS (Applicant Tracking System) resume is formatted to pass the automated screening software used by 99% of large employers. Without ATS optimization, your resume may never reach a human recruiter. airesumi automatically formats and optimizes every resume for ATS compatibility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the AI resume builder work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste the job description and your career details. Our AI generates a tailored, ATS-optimized resume in under 10 minutes — no manual formatting needed. You can then download it as a PDF."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to sign up to use airesumi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No sign-up is required to build your first resume. Create a free account to save and manage multiple resumes across sessions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can airesumi generate a cover letter too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. airesumi has a free AI cover letter generator that creates a tailored cover letter matching your resume and the target job description — in under 2 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is airesumi different from other resume builders?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "airesumi uses AI to tailor your resume to each specific job description, not just a generic template. It also includes an ATS checker, cover letter generator, LinkedIn bio tool, salary analyzer, and interview prep — all in one free platform."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What resume formats does airesumi support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application."
+      }
+    }
+  ]
+});
+
 export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
   const [activeToolsTab, setActiveToolsTab] = useState(1);
   const [progressKey, setProgressKey] = useState(0);
@@ -442,6 +505,63 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <div className="max-w-3xl mx-auto px-6 pb-24">
+        <h2 className="text-3xl lg:text-4xl font-medium text-[#2d3748] mb-10 text-center">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-3">
+          {[
+            {
+              q: "Is airesumi free to use?",
+              a: "Yes, airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates.",
+            },
+            {
+              q: "What is an ATS resume and why does it matter?",
+              a: "An ATS (Applicant Tracking System) resume is formatted to pass the automated screening software used by 99% of large employers. Without ATS optimization, your resume may never reach a human recruiter. airesumi automatically formats and optimizes every resume for ATS compatibility.",
+            },
+            {
+              q: "How does the AI resume builder work?",
+              a: "Paste the job description and your career details. Our AI generates a tailored, ATS-optimized resume in under 10 minutes — no manual formatting needed. You can then download it as a PDF.",
+            },
+            {
+              q: "Do I need to sign up to use airesumi?",
+              a: "No sign-up is required to build your first resume. Create a free account to save and manage multiple resumes across sessions.",
+            },
+            {
+              q: "Can airesumi generate a cover letter too?",
+              a: "Yes. airesumi has a free AI cover letter generator that creates a tailored cover letter matching your resume and the target job description — in under 2 minutes.",
+            },
+            {
+              q: "How is airesumi different from other resume builders?",
+              a: "airesumi uses AI to tailor your resume to each specific job description, not just a generic template. It also includes an ATS checker, cover letter generator, LinkedIn bio tool, salary analyzer, and interview prep — all in one free platform.",
+            },
+            {
+              q: "What resume formats does airesumi support?",
+              a: "airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application.",
+            },
+          ].map((item, i) => (
+            <details
+              key={i}
+              className="border border-[#e2e8f0] rounded-xl p-5 cursor-pointer group bg-white"
+            >
+              <summary className="font-semibold text-[#1a202c] text-[17px] list-none flex justify-between items-center gap-4">
+                <span>{item.q}</span>
+                <span className="text-[#FF6321] text-2xl shrink-0 group-open:rotate-45 transition-transform duration-200">+</span>
+              </summary>
+              <p className="mt-3 text-[#4a5568] leading-relaxed text-[15px]">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+
+      {/* FAQ JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: FAQ_SCHEMA }}
+      />
+
     </motion.div>
   );
 }

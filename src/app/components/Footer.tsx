@@ -19,7 +19,7 @@ export const Footer = () => (
           <li><Link to="/resume" className="hover:text-[#FF6321] transition-colors text-left no-underline">Resume Builder</Link></li>
           <li><Link to="/cover-letter" className="hover:text-[#FF6321] transition-colors text-left no-underline">Cover Letter</Link></li>
           <li><Link to="/ats-checker" className="hover:text-[#FF6321] transition-colors text-left no-underline">ATS Resume Checker</Link></li>
-          <li><Link to="/premium" className="hover:text-[#FF6321] transition-colors text-left no-underline">Rezumi Pro</Link></li>
+          <li><Link to="/premium" className="hover:text-[#FF6321] transition-colors text-left no-underline">airesumi Pro</Link></li>
         </ul>
       </div>
 

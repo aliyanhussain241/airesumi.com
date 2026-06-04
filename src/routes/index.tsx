@@ -1,13 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import "../app/app.css";
 import { LandingPage } from "../app/LandingPage";
 import { useStepNavigate } from "../app/lib/navigation";
 
 function Index() {
-  const [mounted, setMounted] = useState(false);
   const setStep = useStepNavigate();
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
   return <LandingPage setStep={setStep} />;
 }
 

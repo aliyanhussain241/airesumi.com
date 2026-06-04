@@ -37,7 +37,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
            <div className="max-w-xl relative z-10">
              <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
-               This resume builder gets you <span className="text-[#FF6321]">a remote job</span>
+               Free AI Resume Builder — <span className="text-[#FF6321]">ATS-Optimized</span> Resumes
              </h1>
              <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
                Only 2% of resumes win. Yours will be one of them.

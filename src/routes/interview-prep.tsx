@@ -13,7 +13,7 @@ function Page() {
 }
 
 export const Route = createFileRoute("/interview-prep")({
-  head: () => ({
+  head: () => ({     links: [{ rel: "canonical", href: "https://airesumi.com/interview-prep" }],
     meta: [
       { title: "Free AI Interview Question Generator | airesumi.com" },
       { name: "description", content: "Practice with AI-generated interview questions tailored to your role and seniority." },

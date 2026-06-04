@@ -102,7 +102,6 @@ async function saveResumeToSupabase(
 
 function ResumeBuilder() {
   const navigate = useNavigate();
-  const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<Phase>(Step.DETAILS);
   const [designId, setDesignId] = useState<DesignId>("classic");
   const [savedResumeId, setSavedResumeId] = useState<string | undefined>(undefined);
@@ -127,8 +126,6 @@ function ResumeBuilder() {
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     // ✅ Dashboard se "Edit" kiya? sessionStorage se load karo
     const editData = sessionStorage.getItem("edit_resume");
     if (editData) {
@@ -302,8 +299,6 @@ function ResumeBuilder() {
       window.print();
     }
   };
-
-  if (!mounted) return null;
 
   return (
     <AnimatePresence mode="wait">

@@ -53,6 +53,7 @@ const ATS_FAQ_SCHEMA = JSON.stringify({
 function ATSContentSection() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-20">
+
       {/* What is ATS */}
       <div className="mb-16">
         <h2 className="text-3xl font-medium text-[#2d3748] mb-6">
@@ -144,11 +145,6 @@ function ATSContentSection() {
         </div>
       </div>
 
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: ATS_FAQ_SCHEMA }}
-      />
     </div>
   );
 }
@@ -159,6 +155,10 @@ function Page() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full bg-[#F8FAFC]">
       <ATSChecker onNavigate={onNavigate} />
       <ATSContentSection />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: ATS_FAQ_SCHEMA }}
+      />
     </motion.div>
   );
 }

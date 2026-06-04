@@ -20,60 +20,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
     return () => clearInterval(timer);
   }, [progressKey]);
 
-  useEffect(() => {
-    document.title = "Free AI Resume Builder – ATS-Optimized Resumes in Minutes | AIResumi";
-
-    const existingMeta = document.querySelector('meta[name="description"]');
-    if (existingMeta) existingMeta.remove();
-    const metaDesc = document.createElement('meta');
-    metaDesc.name = "description";
-    metaDesc.content = "Build a professional, ATS-optimized resume in minutes using AI. Free to use. Trusted by job seekers in Pakistan, India & worldwide. Download PDF instantly.";
-    document.head.appendChild(metaDesc);
-
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) existingCanonical.remove();
-    const canonical = document.createElement('link');
-    canonical.rel = "canonical";
-    canonical.href = "https://airesumi.com/";
-    document.head.appendChild(canonical);
-
-    const existingSchema = document.getElementById('homepage-schema');
-    if (existingSchema) existingSchema.remove();
-    const schema = document.createElement('script');
-    schema.id = 'homepage-schema';
-    schema.type = 'application/ld+json';
-    schema.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "AIResumi",
-      "url": "https://airesumi.com",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web Browser",
-      "description": "AIResumi is a free AI-powered resume builder that creates ATS-optimized, professional resumes in minutes.",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "featureList": ["AI-generated resume content","ATS-optimized templates","PDF download","Cover letter builder","ATS Checker","Interview preparation"]
-    });
-    document.head.appendChild(schema);
-
-    const existingFaq = document.getElementById('homepage-faq-schema');
-    if (existingFaq) existingFaq.remove();
-    const faqSchema = document.createElement('script');
-    faqSchema.id = 'homepage-faq-schema';
-    faqSchema.type = 'application/ld+json';
-    faqSchema.text = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Is AIResumi free to use?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, AIResumi is completely free. Create, edit and download your resume as a PDF at no cost. No credit card required." } },
-        { "@type": "Question", "name": "Is AIResumi ATS-friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. All AIResumi templates are designed to pass Applicant Tracking Systems (ATS). The formatting avoids tables and graphics that break parsing." } },
-        { "@type": "Question", "name": "Can I use AIResumi for jobs in Pakistan?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. AIResumi is used by thousands of job seekers in Pakistan. It supports standard international resume formats accepted by Pakistani and international employers." } },
-        { "@type": "Question", "name": "Do I need to sign up?", "acceptedAnswer": { "@type": "Answer", "text": "No. You can start building your resume immediately without creating an account." } }
-      ]
-    });
-    document.head.appendChild(faqSchema);
-  }, []);
-
-
   const handleTabClick = (index: number) => {
     setActiveToolsTab(index);
     setProgressKey(prev => prev + 1);
@@ -91,28 +37,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
            <div className="max-w-xl relative z-10">
              <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
-  Build a job-winning resume in{" "}
-  <span className="text-[#FF6321]">3 minutes</span>
-  {" "}— Free!
-</h1>
-<p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
-  Enter your experience. AI writes your resume.{" "}
-  ATS-ready PDF — download instantly.
-</p>
+               This resume builder gets you <span className="text-[#FF6321]">a remote job</span>
+             </h1>
+             <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
+               Only 2% of resumes win. Yours will be one of them.
+             </p>
              <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
-               <button
-                 onClick={() => setStep(Step.DETAILS)}
-                 className="relative w-full sm:w-auto px-10 py-4 bg-[#FF6321] text-white font-bold text-[17px] rounded-full transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_8px_25px_-8px_rgba(255,99,33,0.6)] hover:shadow-[0_12px_30px_-10px_rgba(255,99,33,0.8)] flex justify-center items-center overflow-hidden group"
+               <a
+                 href="/resume"
+                 className="relative w-full sm:w-auto px-10 py-4 bg-[#FF6321] text-white font-bold text-[17px] rounded-full transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_8px_25px_-8px_rgba(255,99,33,0.6)] hover:shadow-[0_12px_30px_-10px_rgba(255,99,33,0.8)] flex justify-center items-center overflow-hidden group no-underline"
                >
                  <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
                  <span className="relative z-10">Create my resume</span>
-               </button>
-               <button
-                 onClick={() => setStep(Step.DETAILS)}
-                 className="w-full sm:w-auto px-10 py-4 bg-white text-[#4b5563] hover:text-[#111827] font-bold text-[17px] rounded-full border border-[#e5e7eb] hover:border-[#FF6321] hover:bg-[#fff9f6] transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_25px_-8px_rgba(255,99,33,0.3)] flex justify-center items-center"
+               </a>
+               <a
+                 href="/resume"
+                 className="w-full sm:w-auto px-10 py-4 bg-white text-[#4b5563] hover:text-[#111827] font-bold text-[17px] rounded-full border border-[#e5e7eb] hover:border-[#FF6321] hover:bg-[#fff9f6] transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_25px_-8px_rgba(255,99,33,0.3)] flex justify-center items-center no-underline"
                >
                  Upload my resume
-               </button>
+               </a>
              </div>
              
              <div className="space-y-4">
@@ -120,17 +63,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                  <div className="bg-[#22c55e] rounded-full p-0.5">
                    <CheckCircle2 size={16} className="text-white" />
                  </div>
-                 <span className="text-[15px]"><strong className="text-[#22c55e] font-semibold"> ATS-optimized resumes </strong> trusted by job seekers worldwide</span>
+                 <span className="text-[15px]"><strong className="text-[#22c55e] font-semibold">39%</strong> more likely to land the job</span>
                </div>
                <div className="flex items-center gap-2 text-[15px] text-[#4a5568]">
                  <div className="flex text-[#00b67a] gap-1 items-center">
                     <Star size={20} fill="#00b67a" className="text-[#00b67a]" />
-                    <span className="font-bold text-[#1a202c]"></span>
+                    <span className="font-bold text-[#1a202c]">Trustpilot</span>
                  </div>
-                 <span>
-✓ ATS Optimized
-✓ AI Generated Content
-✓ Professional Templates</span>
+                 <span>4.4 out of 5 | 37,389 reviews</span>
                </div>
              </div>
            </div>
@@ -260,28 +200,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <Sparkles size={32} className="text-[#1a202c] mb-6" />
               <h3 className="font-semibold text-[#1a202c] text-xl mb-3">A draft in 10 mins</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Fill in your details, AI writes the bullet points. No blank page, no writer's block.</p>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">The AI builder is 10 x faster than doing on your own.</p>
             </div>
             
             {/* Feature 2 */}
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero ATS errors</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Clean formatting, correct sections, right keywords. Your resume parses perfectly on every ATS.</p>
+              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero mistakes</h3>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">Don't stress over typos; you'll sound great!</p>
             </div>
             
             {/* Feature 3 */}
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <Target size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">18+ ATS-tested templates</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Every template is tested against Taleo, Workday, and Greenhouse. No tables, no graphics that break parsing.</p>
+              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">ATS templates</h3>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">Your resume will be 100% compliant. Recruiters will see you.</p>
             </div>
             
             {/* Feature 4 */}
             <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
               <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Salary insight included</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">See salary ranges for your target role before you negotiate. Built into the builder.</p>
+              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Get paid 7% more</h3>
+              <p className="text-[#64748b] text-[15px] leading-relaxed">We can help you negotiate a higher starting salary...</p>
             </div>
          </div>
       </div>
@@ -468,7 +408,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <div className="flex items-center gap-1.5 bg-[#fff3ed] text-[#FF6321] px-3 py-1.5 rounded-lg text-[13px] font-bold w-max mb-5"><Sparkles size={14} className="fill-[#FF6321] shrink-0"/> AI-powered</div>
               <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3">Step-by-step guidance</h3>
               <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed max-w-sm mb-6 relative z-10">No need to think much. We guide you through every step of the process. We show you what to add, and where to add it in. It's clear and simple.</p>
-              <button onClick={() => setStep(Step.DETAILS)} className="text-[#FF6321] font-medium text-[15px] text-left hover:underline w-max relative z-10 transition-all flex items-center gap-1 group">Create my resume <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
+              <a href="/resume" className="text-[#FF6321] font-medium text-[15px] text-left hover:underline w-max relative z-10 transition-all flex items-center gap-1 group no-underline">Create my resume <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></a>
            </div>
            
            <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">

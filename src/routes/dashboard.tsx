@@ -8,9 +8,8 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { ResumeData, UserData } from "../app/lib/types";
 import { ResumePreview, DesignId } from "../app/components/ResumePreview";
-import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
-import "../app/app.css";
+// FIX #1: Removed top-level toPng and jsPDF imports.
+// FIX #3: Removed duplicate "import ../app/app.css" — styles.css in root already covers this.
 
 interface SavedResume {
   id: string;
@@ -195,14 +194,13 @@ function Dashboard() {
   }
 
   function handleEdit(resume: SavedResume) {
-    // Store in sessionStorage taake resume builder pick kar sake
     sessionStorage.setItem("edit_resume", JSON.stringify(resume));
     navigate({ to: "/resume" });
   }
 
+  // FIX #1: Dynamic import — jsPDF and html-to-image only load when user clicks Download.
   async function handleDownload(resume: SavedResume) {
     setDownloadingId(resume.id);
-    // Ek hidden div render karo, screenshot lo
     const container = document.createElement("div");
     container.style.cssText =
       "position:fixed;left:-9999px;top:0;width:850px;background:white;z-index:-1";
@@ -216,6 +214,8 @@ function Dashboard() {
     await new Promise((r) => setTimeout(r, 600));
 
     try {
+      const { toPng } = await import("html-to-image");
+      const jsPDF = (await import("jspdf")).default;
       const dataUrl = await toPng(container, { pixelRatio: 2, backgroundColor: "#ffffff" });
       const pdf = new jsPDF("p", "pt", "a4");
       const w = pdf.internal.pageSize.getWidth();
@@ -352,7 +352,6 @@ function Dashboard() {
                     downloading={downloadingId === resume.id}
                   />
                 ) : (
-                  /* List View */
                   <motion.div
                     key={resume.id}
                     layout

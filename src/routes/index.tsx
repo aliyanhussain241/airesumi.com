@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import "../app/app.css";
+// FIX #3: Removed "import ../app/app.css" — it re-imports all of Tailwind.
+// The root layout (styles.css via __root.tsx) already covers all styles globally.
 import { LandingPage } from "../app/LandingPage";
 import { useStepNavigate } from "../app/lib/navigation";
 
@@ -62,7 +63,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:image",
-        content: "https://airesumi.com/assets/og-image.png",
+        content: "https://airesumi.com/og-image.webp",
       },
       {
         name: "twitter:card",

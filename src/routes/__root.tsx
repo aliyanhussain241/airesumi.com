@@ -85,14 +85,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "AI Resume Builder — Free ATS-Optimized | airesumi.com" },
       { name: "twitter:description", content: "Create an ATS-optimized resume in 10 minutes with airesumi's AI builder. Get hired for remote jobs with professional templates and expert career insights." },
-      { property: "og:image", content: "https://airesumi.com/assets/og-image.png" },
-      { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
+      // FIX #8: OG image now points to /og-image.webp in public/ (stable URL, not hashed asset)
+      // Remember to convert src/assets/og-image.png → public/og-image.webp using Squoosh/Sharp
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:image", content: "https://airesumi.com/og-image.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "canonical", href: "https://airesumi.com/" },
+      // FIX #7: Logo preloaded so the browser fetches it immediately,
+      // not after parsing the JS bundle. Eliminates LCP delay.
+      { rel: "preload", as: "image", href: "/favicon.webp" },
       { rel: "icon", href: "/favicon.webp", type: "image/webp" },
       { rel: "apple-touch-icon", href: "/favicon.webp" },
+      // FIX #13: Preconnect to Google Fonts origins so font requests are faster.
+      // Remove these two lines if you are NOT loading fonts from Google Fonts.
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
     ],
     scripts: [
       {

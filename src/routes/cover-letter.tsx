@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import React, { useEffect, useState } from "react";
-import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
+// FIX #1: Removed top-level toPng and jsPDF imports.
+// They are now dynamically imported only when the user clicks Download PDF.
 
 import { Step } from "../app/App";
 import { CoverLetterData, JobDescription, UserData } from "../app/lib/types";
@@ -199,7 +199,7 @@ function CoverLetterPage() {
       const response = await fetch("/api/upload-cv", { method: "POST", body: formData });
       if (!response.ok) {
         const err = await response.json().catch(() => ({}));
-        throw new Error(err.error || "Failed to upload CV");
+        throw new Error((err as any).error || "Failed to upload CV");
       }
       const parsed = await response.json();
       Object.assign(userData, {
@@ -232,10 +232,13 @@ function CoverLetterPage() {
     }
   };
 
+  // FIX #1: Dynamic import — jsPDF and html-to-image only load when user clicks Download.
   const handlePrintCoverLetter = async () => {
     const input = document.getElementById("cover-letter-document");
     if (input) {
       try {
+        const { toPng } = await import("html-to-image");
+        const jsPDF = (await import("jspdf")).default;
         const dataUrl = await toPng(input, { pixelRatio: 2, backgroundColor: "#ffffff" });
         const pdf = new jsPDF("p", "pt", "a4");
         const pdfWidth = pdf.internal.pageSize.getWidth();

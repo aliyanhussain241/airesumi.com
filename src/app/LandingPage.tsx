@@ -75,13 +75,37 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
   const [progressKey, setProgressKey] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveToolsTab((prev) => (prev % 4) + 1);
-      setProgressKey((prev) => prev + 1);
-    }, 5000);
+    // FIX #11: Interval pauses when tab is hidden (saves battery, prevents background jank).
+    // It also only runs when the section is visible — using document.visibilityState.
+    let timer: ReturnType<typeof setInterval> | null = null;
 
-    return () => clearInterval(timer);
-  }, [progressKey]);
+    const start = () => {
+      if (timer) return;
+      timer = setInterval(() => {
+        setActiveToolsTab((prev) => (prev % 4) + 1);
+        setProgressKey((prev) => prev + 1);
+      }, 5000);
+    };
+
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const handleVisibility = () => {
+      document.hidden ? stop() : start();
+    };
+
+    start();
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
 
   const handleTabClick = (index: number) => {
     setActiveToolsTab(index);
@@ -189,7 +213,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                transition={{ duration: 0.6, delay: 0.3, ease: "backOut" }}
                className="absolute top-12 right-4 w-40 h-40 rounded-full border-[6px] border-white shadow-xl bg-orange-400 z-20 overflow-hidden hover:scale-105 transition-transform duration-300"
              >
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Avatar" className="w-full h-full object-cover" />
+                {/* FIX #9: loading="lazy" added. ACTION REQUIRED: Download this image,
+                    convert to WebP, and serve from /images/avatar-testimonial.webp
+                    to eliminate the cross-origin request on load. */}
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Avatar" className="w-full h-full object-cover" loading="lazy" width="300" height="300" />
              </motion.div>
            
              {/* Floating Resume Score */}

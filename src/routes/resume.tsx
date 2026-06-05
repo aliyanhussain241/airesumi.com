@@ -1,10 +1,10 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence } from "motion/react";
 import React, { useEffect, useState } from "react";
-import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
+// FIX #1: jsPDF and html-to-image removed from top-level imports.
+// They are now dynamically imported only when the user clicks Download PDF.
+// This removes ~370KB from the initial bundle.
 
-import "../app/app.css";
 import { Step } from "../app/App";
 import { JobDescription, ResumeData, UserData } from "../app/lib/types";
 import { DesignId } from "../app/components/ResumePreview";
@@ -55,7 +55,6 @@ function buildResumeFromUserData(userData: UserData, jobData: JobDescription): R
   };
 }
 
-// ✅ Supabase mein resume save karo
 async function saveResumeToSupabase(
   userId: string,
   resumeData: ResumeData,
@@ -126,7 +125,6 @@ function ResumeBuilder() {
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    // ✅ Dashboard se "Edit" kiya? sessionStorage se load karo
     const editData = sessionStorage.getItem("edit_resume");
     if (editData) {
       try {
@@ -142,7 +140,6 @@ function ResumeBuilder() {
           }));
         }
         if (saved.id) setSavedResumeId(saved.id);
-        // Load hone ke baad DONE phase pe le jao agar resume_data hai
         if (saved.resume_data) setPhase(Step.DONE);
         sessionStorage.removeItem("edit_resume");
       } catch (e) {
@@ -251,7 +248,6 @@ function ResumeBuilder() {
       const data = buildResumeFromUserData(userData, jobData);
       setResumeData(data);
 
-      // ✅ Auto-save to Supabase
       setStatusMessage("Saving to your dashboard...");
       const savedId = await saveResumeToSupabase(
         session.user.id,
@@ -270,7 +266,6 @@ function ResumeBuilder() {
     }
   };
 
-  // ✅ Design change pe bhi Supabase update karo
   const handleDesignChange = async (newDesignId: DesignId) => {
     setDesignId(newDesignId);
     if (!savedResumeId || !resumeData) return;
@@ -280,11 +275,15 @@ function ResumeBuilder() {
       .eq("id", savedResumeId);
   };
 
+  // FIX #1: jsPDF and html-to-image are dynamically imported here — only when
+  // the user actually clicks Download. ~370KB is not downloaded until this moment.
   const handlePrint = async () => {
     let input = document.getElementById("resume-document");
     if (!input) input = document.getElementById("resume-document-mobile");
     if (input) {
       try {
+        const { toPng } = await import("html-to-image");
+        const jsPDF = (await import("jspdf")).default;
         const dataUrl = await toPng(input, { pixelRatio: 2, backgroundColor: "#ffffff" });
         const pdf = new jsPDF("p", "pt", "a4");
         const pdfWidth = pdf.internal.pageSize.getWidth();

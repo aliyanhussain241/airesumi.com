@@ -6,7 +6,10 @@ export const Route = createFileRoute("/api/stripe-webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2025-04-30.basil" });
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+          apiVersion: "2025-04-30.basil",
+          httpClient: Stripe.createFetchHttpClient(),
+        });
         const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
         const body = await request.text();
@@ -14,7 +17,7 @@ export const Route = createFileRoute("/api/stripe-webhook")({
 
         let event: Stripe.Event;
         try {
-          event = stripe.webhooks.constructEvent(body, sig!, webhookSecret);
+          event = await stripe.webhooks.constructEventAsync(body, sig!, webhookSecret);
         } catch (err: any) {
           console.error("Webhook signature error:", err.message);
           return new Response(JSON.stringify({ error: "Invalid signature" }), { status: 400 });
@@ -149,4 +152,3 @@ export const Route = createFileRoute("/api/stripe-webhook")({
     },
   },
 });
-// rebuild trigger Wed Jun 17 09:53:34 UTC 2026

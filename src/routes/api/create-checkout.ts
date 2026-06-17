@@ -26,7 +26,10 @@ export const Route = createFileRoute("/api/create-checkout")({
 
           const { plan } = await request.json() as { plan: "pro_monthly" | "pro_yearly" | "lifetime" };
 
-          const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2025-04-30.basil" });
+          const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+            apiVersion: "2025-04-30.basil",
+            httpClient: Stripe.createFetchHttpClient(),
+          });
 
           // Price IDs — Stripe Dashboard se copy karo
           const PRICES: Record<string, string> = {

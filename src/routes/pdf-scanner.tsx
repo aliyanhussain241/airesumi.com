@@ -154,7 +154,7 @@ function PDFScanner() {
             Scan Documents to <span className="text-[#FF6321]">PDF</span>
           </h1>
           <p className="text-[14px] text-[#6b7280]">
-            Camera se photo lo ya gallery se upload karo — instant PDF tayyar
+            Take a photo or upload from gallery — instant PDF ready
           </p>
         </div>
 
@@ -168,7 +168,7 @@ function PDFScanner() {
             <Camera size={28} />
             <div>
               <p className="text-[14px] font-bold">Camera Scan</p>
-              <p className="text-[11px] opacity-80 mt-0.5">Document photo lo</p>
+              <p className="text-[11px] opacity-80 mt-0.5">Take a photo</p>
             </div>
           </button>
 
@@ -180,7 +180,7 @@ function PDFScanner() {
             <ImageIcon size={28} />
             <div>
               <p className="text-[14px] font-bold">Gallery Upload</p>
-              <p className="text-[11px] text-[#9ca3af] mt-0.5">Photos select karo</p>
+              <p className="text-[11px] text-[#9ca3af] mt-0.5">Select photos</p>
             </div>
           </button>
         </div>
@@ -220,7 +220,7 @@ function PDFScanner() {
                   onClick={() => cameraInputRef.current?.click()}
                   className="flex items-center gap-1.5 text-[12px] font-medium text-[#FF6321] border border-[#FF6321]/30 px-3 py-1.5 rounded-lg hover:bg-orange-50 transition-colors cursor-pointer bg-transparent"
                 >
-                  <Plus size={13} /> Page add karo
+                  <Plus size={13} /> Add Page
                 </button>
               </div>
 
@@ -286,7 +286,7 @@ function PDFScanner() {
                 type="text"
                 value={pdfName}
                 onChange={e => setPdfName(e.target.value)}
-                placeholder="PDF ka naam likho..."
+                placeholder="Enter PDF name..."
                 className="flex-1 text-[14px] text-[#111827] focus:outline-none bg-transparent"
               />
               <span className="text-[12px] text-[#9ca3af]">.pdf</span>
@@ -300,25 +300,25 @@ function PDFScanner() {
                 className="w-full flex items-center justify-center gap-2 bg-[#FF6321] text-white font-bold text-[15px] py-4 rounded-2xl hover:bg-[#ea580c] hover:shadow-lg hover:shadow-orange-500/25 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed border-none cursor-pointer"
               >
                 {generating ? (
-                  <><RotateCw size={18} className="animate-spin" /> PDF ban rahi hai...</>
+                  <><RotateCw size={18} className="animate-spin" /> Generating PDF...</>
                 ) : (
-                  <><Download size={18} /> {pages.length} page{pages.length > 1 ? "s" : ""} ka PDF banao</>
+                  <><Download size={18} /> {pages.length} page{pages.length > 1 ? "s" : ""} PDF — Download</>
                 )}
               </button>
             ) : (
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
                 className="bg-green-50 border border-green-200 rounded-2xl p-5 text-center">
                 <CheckCircle2 size={32} className="text-green-500 mx-auto mb-2" />
-                <p className="text-[15px] font-bold text-green-700 mb-1">PDF Download ho gayi! ✅</p>
+                <p className="text-[15px] font-bold text-green-700 mb-1">PDF Downloaded Successfully! ✅</p>
                 <p className="text-[13px] text-green-600 mb-4">{pdfName}.pdf — {pages.length} page{pages.length > 1 ? "s" : ""}</p>
                 <div className="flex gap-2 justify-center">
                   <button onClick={generatePDF}
                     className="flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl border border-green-300 text-green-700 hover:bg-green-100 transition-colors cursor-pointer bg-transparent">
-                    <Download size={14} /> Dobara download karo
+                    <Download size={14} /> Download Again
                   </button>
                   <button onClick={reset}
                     className="flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl bg-[#FF6321] text-white hover:bg-[#ea580c] transition-colors cursor-pointer border-none">
-                    <ScanLine size={14} /> Naya scan karo
+                    <ScanLine size={14} /> New Scan
                   </button>
                 </div>
               </motion.div>
@@ -328,7 +328,7 @@ function PDFScanner() {
             {!done && (
               <button onClick={reset}
                 className="w-full py-2.5 text-[13px] font-medium text-[#9ca3af] hover:text-red-400 transition-colors cursor-pointer bg-transparent border-none">
-                Sab pages hatao
+                Clear All Pages
               </button>
             )}
           </motion.div>
@@ -338,20 +338,20 @@ function PDFScanner() {
         {pages.length === 0 && (
           <div className="text-center py-10 text-[#9ca3af]">
             <ScanLine size={40} className="mx-auto mb-3 opacity-30" />
-            <p className="text-[14px]">Camera ya gallery se pages add karo</p>
-            <p className="text-[12px] mt-1">Multiple pages ek PDF mein ban jaayenge</p>
+            <p className="text-[14px]">Add pages from camera or gallery</p>
+            <p className="text-[12px] mt-1">Multiple pages will be combined into one PDF</p>
           </div>
         )}
 
         {/* Tips */}
         <div className="mt-8 bg-orange-50 border border-orange-100 rounded-2xl p-4">
-          <p className="text-[12px] font-semibold text-[#EA580C] mb-2">📸 Best results ke liye:</p>
+          <p className="text-[12px] font-semibold text-[#EA580C] mb-2">📸 Tips for best results:</p>
           <ul className="space-y-1">
             {[
-              "Document flat surface pe rakhein",
-              "Achhi lighting mein scan karein",
-              "Camera seedha upar se rakhen",
-              "Scan karne ke baad pages reorder kar sakte hain",
+              "Place document on a flat surface",
+              "Scan in good lighting",
+              "Hold camera directly above the document",
+              "You can reorder pages after scanning",
             ].map(tip => (
               <li key={tip} className="text-[12px] text-[#92400e] flex items-start gap-1.5">
                 <span className="mt-0.5">→</span> {tip}
@@ -368,7 +368,7 @@ export const Route = createFileRoute("/pdf-scanner")({
   head: () => ({
     meta: [
       { title: "PDF Scanner — Scan Documents to PDF | airesumi.com" },
-      { name: "description", content: "Mobile camera se documents scan karo aur instant PDF banao." },
+      { name: "description", content: "Scan documents with your mobile camera and create instant PDFs." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/pdf-scanner" }],
   }),

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, LogOut, User, ChevronDown, FileText, Mail, Target, Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard } from 'lucide-react';
+import { Menu, X, LogOut, User, ChevronDown, FileText, Mail, Target, Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine } from 'lucide-react';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
@@ -24,6 +24,7 @@ const otherTools = [
   { name: 'ATS Checker', to: '/ats-checker', icon: Target, desc: 'Score your resume' },
   { name: 'Interview Prep', to: '/interview-prep', icon: Wand2, desc: 'Practice questions' },
   { name: 'Resignation Letter', to: '/resignation-letter', icon: FileText, desc: 'Leave on good terms' },
+  { name: 'PDF Scanner', to: '/pdf-scanner', icon: ScanLine, desc: 'Scan documents to PDF' },
   { name: 'Job Search', to: '/salary-analyzer', icon: Briefcase, desc: 'Salary & market insights' },
 ];
 

@@ -14,7 +14,12 @@ export default defineConfig({
   },
   vite: {
     ssr: {
-      external: ["stripe"],
+      external: (id: string) => id === "stripe" || id.startsWith("stripe/"),
+    },
+    build: {
+      rollupOptions: {
+        external: (id: string) => id === "stripe" || id.startsWith("stripe/"),
+      },
     },
   },
 });

@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { FileText, Sparkles, Copy, Check, RefreshCw, AlertCircle, Download, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import jsPDF from "jspdf";
+// FIX (new): jsPDF removed from top-level import. It is now dynamically
+// imported only when the user clicks Download — this page no longer loads
+// ~190KB of jsPDF before the user even reaches the download button.
 
 const TONES = [
   { id: "Professional", desc: "Formal, corporate" },
@@ -70,7 +72,8 @@ function ResignationLetterPage() {
     }
   }
 
-  function handleDownloadPDF() {
+  async function handleDownloadPDF() {
+    const jsPDF = (await import("jspdf")).default;
     const pdf = new jsPDF("p", "pt", "a4");
     const margin = 60;
     const pageWidth = pdf.internal.pageSize.getWidth();

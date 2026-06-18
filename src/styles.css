@@ -4,20 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -140,5 +126,52 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+}
+
+/*
+ * Liquid glass utilities.
+ *
+ * These derive their tint from the existing theme tokens (--background /
+ * --foreground) via color-mix, so the site's color palette never changes —
+ * light mode stays light-glass, dark mode stays dark-glass automatically.
+ * Apply on top of any element that sits over other content (navbars,
+ * dropdowns, cards, sticky footers). Needs something colorful/textured
+ * behind it to actually read as "glass" — on a flat single-color page it
+ * will just look like a translucent panel.
+ */
+@layer utilities {
+  .glass {
+    background: color-mix(in oklch, var(--background) 62%, transparent);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklch, white 40%, transparent),
+      0 8px 30px color-mix(in oklch, var(--foreground) 8%, transparent);
+  }
+
+  /* More opaque variant — for places that need stronger text contrast,
+     e.g. a navbar once the page has scrolled past colorful hero art. */
+  .glass-strong {
+    background: color-mix(in oklch, var(--background) 80%, transparent);
+    backdrop-filter: blur(26px) saturate(180%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+  }
+
+  /* For buttons/badges that carry a brand color (e.g. bg-primary) — keeps
+     the hue intact, just adds the frosted/specular glass quality on top. */
+  .glass-tint {
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass, .glass-strong {
+      background: var(--background);
+    }
   }
 }

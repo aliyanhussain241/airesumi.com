@@ -79,10 +79,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] transition-all duration-300 print:hidden ${
+    <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] transition-all duration-300 print:hidden glass ${
       isScrolled
-        ? 'bg-white/90 backdrop-blur-lg shadow-[0_2px_12px_rgba(234,88,12,0.08)] border-b border-[#FED7AA]/50'
-        : 'bg-[#FFFFFF] border-b border-transparent shadow-none'
+        ? 'glass-strong shadow-[0_2px_12px_rgba(234,88,12,0.08)] border-b border-[#FED7AA]/50'
+        : 'border-b border-transparent shadow-none'
     } w-full font-['Inter',sans-serif]`}>
       <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between">
 
@@ -112,7 +112,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.18 }}
-                  className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[580px] bg-white border border-[#e5e7eb] rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] overflow-hidden"
+                  className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[580px] glass glass-strong rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] overflow-hidden"
                 >
                   <div className="flex">
                     <div className="flex-1 p-4 border-r border-[#f3f4f6]">

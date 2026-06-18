@@ -137,7 +137,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                  <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
                  <span className="relative z-10">Create my resume</span>
                </a>
-               
+               <a
                  href="/resume"
                  className="w-full sm:w-auto px-10 py-4 glass text-[#4b5563] hover:text-[#111827] font-bold text-[17px] rounded-full hover:border-[#FF6321] hover:bg-[#fff9f6] transition-all hover:-translate-y-0.5 active:scale-95 flex justify-center items-center no-underline"
                >

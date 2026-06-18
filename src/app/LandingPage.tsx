@@ -132,14 +132,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
              <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
                <a
                  href="/resume"
-                 className="relative w-full sm:w-auto px-10 py-4 bg-[#FF6321] text-white font-bold text-[17px] rounded-full transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_8px_25px_-8px_rgba(255,99,33,0.6)] hover:shadow-[0_12px_30px_-10px_rgba(255,99,33,0.8)] flex justify-center items-center overflow-hidden group no-underline"
+                 className="relative w-full sm:w-auto px-10 py-4 bg-[#FF6321]/75 glass-tint text-white font-bold text-[17px] rounded-full transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_8px_25px_-8px_rgba(255,99,33,0.6)] hover:shadow-[0_12px_30px_-10px_rgba(255,99,33,0.8)] hover:bg-[#FF6321]/85 flex justify-center items-center overflow-hidden group no-underline"
                >
                  <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
                  <span className="relative z-10">Create my resume</span>
                </a>
-               <a
+               
                  href="/resume"
-                 className="w-full sm:w-auto px-10 py-4 bg-white text-[#4b5563] hover:text-[#111827] font-bold text-[17px] rounded-full border border-[#e5e7eb] hover:border-[#FF6321] hover:bg-[#fff9f6] transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_25px_-8px_rgba(255,99,33,0.3)] flex justify-center items-center no-underline"
+                 className="w-full sm:w-auto px-10 py-4 glass text-[#4b5563] hover:text-[#111827] font-bold text-[17px] rounded-full hover:border-[#FF6321] hover:bg-[#fff9f6] transition-all hover:-translate-y-0.5 active:scale-95 flex justify-center items-center no-underline"
                >
                  Upload my resume
                </a>
@@ -287,28 +287,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {/* Feature 1 */}
-            <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
+            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
               <Sparkles size={32} className="text-[#1a202c] mb-6" />
               <h3 className="font-semibold text-[#1a202c] text-xl mb-3">A draft in 10 mins</h3>
               <p className="text-[#64748b] text-[15px] leading-relaxed">The AI builder is 10 x faster than doing on your own.</p>
             </div>
             
             {/* Feature 2 */}
-            <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
+            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
               <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
               <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero mistakes</h3>
               <p className="text-[#64748b] text-[15px] leading-relaxed">Don't stress over typos; you'll sound great!</p>
             </div>
             
             {/* Feature 3 */}
-            <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
+            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
               <Target size={32} className="text-[#1a202c] mb-6" />
               <h3 className="font-semibold text-[#1a202c] text-xl mb-3">ATS templates</h3>
               <p className="text-[#64748b] text-[15px] leading-relaxed">Your resume will be 100% compliant. Recruiters will see you.</p>
             </div>
             
             {/* Feature 4 */}
-            <div className="bg-[#f8fafc] rounded-2xl p-8 hover:shadow-md transition-shadow">
+            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
               <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
               <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Get paid 7% more</h3>
               <p className="text-[#64748b] text-[15px] leading-relaxed">We can help you negotiate a higher starting salary...</p>

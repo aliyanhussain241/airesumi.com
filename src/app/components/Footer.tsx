@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import rezumiLogo from "@/assets/ai-resumi.webp";
 
 export const Footer = () => (
-  <footer className="bg-white border-t border-gray-100 py-16 w-full print:hidden">
+  <footer className="glass border-t border-gray-100 py-16 w-full print:hidden">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-[#4b5563]">
       <div className="space-y-4">
         <div className="flex items-center">
@@ -19,7 +19,7 @@ export const Footer = () => (
           <li><Link to="/resume" className="hover:text-[#FF6321] transition-colors text-left no-underline">Resume Builder</Link></li>
           <li><Link to="/cover-letter" className="hover:text-[#FF6321] transition-colors text-left no-underline">Cover Letter</Link></li>
           <li><Link to="/ats-checker" className="hover:text-[#FF6321] transition-colors text-left no-underline">ATS Resume Checker</Link></li>
-          <li><Link to="/premium" className="hover:text-[#FF6321] transition-colors text-left no-underline">airesumi Pro</Link></li>
+          <li><Link to="/premium" className="hover:text-[#FF6321] transition-colors text-left no-underline">Airesumi Pro</Link></li>
         </ul>
       </div>
 

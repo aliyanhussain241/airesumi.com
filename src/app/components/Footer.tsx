@@ -10,7 +10,6 @@ const tape = (
 export const Footer = () => (
   <footer className="my-8 px-4 max-w-7xl mx-auto print:hidden">
     <div className="relative bg-white rounded-3xl px-8 py-10">
-      {/* Tape decorations */}
       <div className="hidden md:block absolute -top-4 -left-8 w-[80px] scale-75 opacity-10">
         {tape}
       </div>
@@ -18,17 +17,18 @@ export const Footer = () => (
         {tape}
       </div>
 
-      {/* Main grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Brand */}
         <div className="flex flex-col gap-3">
-          <img src={rezumiLogo} alt="Rezumi - AI Resume Builder" className="h-10 w-auto" />
+          <img
+            src={rezumiLogo}
+            alt="Rezumi - AI Resume Builder"
+            className="h-10 w-auto object-contain"
+          />
           <p className="text-sm text-neutral/50 leading-relaxed max-w-[220px]">
             The fastest, most effective way to secure your next role. Built with top recruiters and AI.
           </p>
         </div>
 
-        {/* Product */}
         <div className="flex flex-col gap-4">
           <h4 className="uppercase text-xs tracking-widest font-semibold text-neutral/50">Product</h4>
           <ul className="flex flex-col gap-3 text-sm text-neutral/50">
@@ -39,7 +39,6 @@ export const Footer = () => (
           </ul>
         </div>
 
-        {/* Resources */}
         <div className="flex flex-col gap-4">
           <h4 className="uppercase text-xs tracking-widest font-semibold text-neutral/50">Resources</h4>
           <ul className="flex flex-col gap-3 text-sm text-neutral/50">
@@ -50,7 +49,6 @@ export const Footer = () => (
           </ul>
         </div>
 
-        {/* Company */}
         <div className="flex flex-col gap-4">
           <h4 className="uppercase text-xs tracking-widest font-semibold text-neutral/50">Company</h4>
           <ul className="flex flex-col gap-3 text-sm text-neutral/50">
@@ -62,10 +60,8 @@ export const Footer = () => (
         </div>
       </div>
 
-      {/* Divider */}
       <hr className="my-8 border-gray-100" />
 
-      {/* Bottom bar */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral/50">
         <span>© {new Date().getFullYear()} Rezumi. All rights reserved.</span>
         <div className="flex gap-6">

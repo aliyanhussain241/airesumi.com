@@ -139,7 +139,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                </a>
                <a
                  href="/resume"
-               className="hdr-btn-primary text-white text-[17px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap">
+               className="hdr-tag flex items-center gap-1.5 text-[17px] font-medium text-[#EA580C] px-10 py-4 rounded-xl no-underline transition-all hover:bg-orange-50">
                  Upload my resume
                </a>
              </div>

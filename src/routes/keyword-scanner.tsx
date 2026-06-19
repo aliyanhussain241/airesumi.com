@@ -102,7 +102,7 @@ function KeywordScanner() {
         )}
 
         <button onClick={handleScan} disabled={loading}
-          className="w-full flex items-center justify-center gap-2 bg-[#FF6321] text-white font-bold text-[15px] py-4 rounded-2xl hover:bg-[#ea580c] hover:shadow-lg hover:shadow-orange-500/25 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed mb-6">
+          className="hdr-btn-primary text-white text-[15px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap">
           {loading ? <><RefreshCw size={18} className="animate-spin" /> Scanning...</> : <><Sparkles size={18} /> Scan Keywords</>}
         </button>
 

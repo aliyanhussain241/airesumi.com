@@ -18,16 +18,16 @@ export const Footer = () => (
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-        <div className="flex flex-col gap-3">
-          <img
-            src={rezumiLogo}
-            alt="Rezumi - AI Resume Builder"
-            className="h-10 w-auto object-contain"
-          />
-          <p className="text-sm text-neutral/50 leading-relaxed max-w-[220px]">
-            The fastest, most effective way to secure your next role. Built with top recruiters and AI.
-          </p>
-        </div>
+        <div className="flex flex-col gap-3 items-start">
+  <img
+    src={rezumiLogo}
+    alt="Rezumi - AI Resume Builder"
+    className="h-10 w-auto object-contain"
+  />
+  <p className="text-sm text-neutral/50 leading-relaxed max-w-[220px]">
+    The fastest, most effective way to secure your next role. Built with top recruiters and AI.
+  </p>
+</div>
 
         <div className="flex flex-col gap-4">
           <h4 className="uppercase text-xs tracking-widest font-semibold text-neutral/50">Product</h4>

@@ -1,218 +1,371 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  Mail, Lock, Eye, EyeOff, ArrowRight,
+  ArrowLeft, AlertCircle, CheckCircle2, Loader2
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/login")({
-  component: LoginPage,
-});
+// ── LIQUID GLASS STYLES ──────────────────────────────────────────────────────
+const GLASS_STYLES = `
+  @property --angle-1 { syntax: "<angle>"; inherits: false; initial-value: -75deg; }
+  @property --angle-2 { syntax: "<angle>"; inherits: false; initial-value: -45deg; }
 
+  /* Animated gradient blobs */
+  @keyframes blob1 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-20px) scale(1.05); } 66% { transform: translate(-20px,15px) scale(0.97); } }
+  @keyframes blob2 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(-25px,20px) scale(1.03); } 66% { transform: translate(20px,-15px) scale(0.98); } }
+  @keyframes blob3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(15px,25px) scale(1.04); } }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow:
+      0 8px 32px rgba(234,88,12,0.08),
+      0 2px 8px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.04);
+  }
+
+  /* Glass input */
+  .glass-input {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.45);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.04),
+      0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.25s ease;
+  }
+  .glass-input:focus-within {
+    background: rgba(255,255,255,0.38);
+    border-color: rgba(234,88,12,0.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      0 0 0 3px rgba(234,88,12,0.12),
+      0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* Glass button */
+  .glass-btn {
+    background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow:
+      0 4px 16px rgba(234,88,12,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.25),
+      inset 0 -1px 0 rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+  }
+  .glass-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow:
+      0 8px 24px rgba(234,88,12,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .glass-btn:active:not(:disabled) { transform: translateY(0); }
+
+  /* Google glass button */
+  .glass-btn-outline {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: all 0.2s ease;
+  }
+  .glass-btn-outline:hover {
+    background: rgba(255,255,255,0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  /* Tab pill */
+  .glass-tab-active {
+    background: rgba(255,255,255,0.6);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    -webkit-text-fill-color: #1f2937 !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+`;
+
+// ── BACKGROUND BLOBS ─────────────────────────────────────────────────────────
+function LiquidBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Base gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-amber-50 to-orange-200" />
+      {/* Blobs */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-400/40 to-amber-300/30 blur-3xl"
+        style={{ animation: "blob1 18s ease-in-out infinite" }} />
+      <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-orange-500/30 to-red-400/20 blur-3xl"
+        style={{ animation: "blob2 22s ease-in-out infinite" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-amber-300/25 to-orange-300/20 blur-2xl"
+        style={{ animation: "blob3 15s ease-in-out infinite" }} />
+    </div>
+  );
+}
+
+// ── GLASS INPUT ──────────────────────────────────────────────────────────────
+function GlassInput({
+  icon, type = "text", placeholder, value, onChange, rightAction
+}: {
+  icon: React.ReactNode; type?: string; placeholder: string;
+  value: string; onChange: (v: string) => void; rightAction?: React.ReactNode;
+}) {
+  return (
+    <div className="glass-input rounded-2xl flex items-center gap-3 px-4 py-3.5">
+      <span className="text-orange-400 flex-shrink-0">{icon}</span>
+      <input
+        type={type} placeholder={placeholder} value={value}
+        onChange={e => onChange(e.target.value)}
+        className="flex-1 bg-transparent text-[#1f2937] placeholder-gray-400 text-[15px] focus:outline-none"
+      />
+      {rightAction}
+    </div>
+  );
+}
+
+// ── MAIN PAGE ────────────────────────────────────────────────────────────────
 function LoginPage() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<"login" | "signup" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: "error" | "success" } | null>(null);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  function switchTab(t: typeof tab) {
+    setTab(t);
     setMessage(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      setMessage({ text: error.message, type: "error" });
-    } else {
-      navigate({ to: "/resume" });
-    }
-    setLoading(false);
-  };
+    setPassword("");
+    setConfirmPassword("");
+  }
 
-  const handleSignup = async (e: React.FormEvent) => {
+  // ── Auth handlers ────────────────────────────────────────────────────────
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
-    setMessage(null);
+    setLoading(true); setMessage(null);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) setMessage({ text: error.message, type: "error" });
+    else navigate({ to: "/resume" });
+    setLoading(false);
+  }
+
+  async function handleSignup(e: React.FormEvent) {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage({ text: "Passwords do not match!", type: "error" }); return;
+    }
+    setLoading(true); setMessage(null);
     const { error } = await supabase.auth.signUp({
-      email,
-      password,
+      email, password,
       options: { emailRedirectTo: `${window.location.origin}/resume` },
     });
-    if (error) {
-      setMessage({ text: error.message, type: "error" });
-    } else {
-      setMessage({ text: "Account created! Please check your email to confirm.", type: "success" });
-    }
+    if (error) setMessage({ text: error.message, type: "error" });
+    else setMessage({ text: "Account created! Check your email to confirm.", type: "success" });
     setLoading(false);
-  };
+  }
 
-  const handleForgot = async (e: React.FormEvent) => {
+  async function handleForgot(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
-    setMessage(null);
+    setLoading(true); setMessage(null);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
-    if (error) {
-      setMessage({ text: error.message, type: "error" });
-    } else {
-      setMessage({ text: "Password reset email sent! Check your inbox.", type: "success" });
-    }
+    if (error) setMessage({ text: error.message, type: "error" });
+    else setMessage({ text: "Reset link sent! Check your inbox.", type: "success" });
     setLoading(false);
-  };
-
-const handleGoogle = async () => {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: `https://airesumi.com/auth/callback`,
-      skipBrowserRedirect: false,
-    },
-  });
-  if (error) {
-    setMessage({ text: error.message, type: "error" });
   }
-};
+
+  async function handleGoogle() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `https://airesumi.com/auth/callback` },
+    });
+    if (error) setMessage({ text: error.message, type: "error" });
+  }
+
+  const submitHandler = tab === "login" ? handleLogin : tab === "signup" ? handleSignup : handleForgot;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
+      <style>{GLASS_STYLES}</style>
+      <LiquidBackground />
 
+      {/* Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="glass-card relative z-10 w-full max-w-[400px] mx-4 rounded-3xl p-8"
+      >
         {/* Logo */}
-        <div className="text-center mb-6">
-          <Link to="/">
-            <img src="/ai-resumi.webp" alt="airesumi" className="h-10 mx-auto mb-2" />
-          </Link>
-          <h1 className="text-2xl font-bold text-gray-800">
-            {tab === "login" && "Welcome Back"}
-            {tab === "signup" && "Create Account"}
-            {tab === "forgot" && "Reset Password"}
+        <div className="flex flex-col items-center mb-7">
+          <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30 mb-4">
+            <span className="text-white font-black text-xl">A</span>
+          </div>
+          <h1 className="text-[22px] font-bold text-[#111827] tracking-tight">
+            {tab === "login" ? "Welcome back" : tab === "signup" ? "Create account" : "Reset password"}
           </h1>
-          <p className="text-gray-500 text-sm mt-1">
-            {tab === "login" && "Sign in to your airesumi account"}
-            {tab === "signup" && "Start building your perfect resume"}
-            {tab === "forgot" && "We'll send you a reset link"}
+          <p className="text-[13px] text-gray-500 mt-1">
+            {tab === "login" ? "Sign in to airesumi" : tab === "signup" ? "Join airesumi for free" : "We'll send you a reset link"}
           </p>
         </div>
 
-        {/* Tabs */}
+        {/* Tab switcher */}
         {tab !== "forgot" && (
-          <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
-            <button
-              onClick={() => { setTab("login"); setMessage(null); }}
-              className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${
-                tab === "login" ? "bg-white shadow text-orange-600" : "text-gray-500"
-              }`}
-            >
-              Login
+          <div className="flex bg-black/5 rounded-2xl p-1 mb-6">
+            {(["login", "signup"] as const).map(t => (
+              <button key={t} onClick={() => switchTab(t)}
+                className={`flex-1 py-2 text-[13px] font-semibold rounded-xl transition-all cursor-pointer border-none ${
+                  tab === t ? "glass-tab-active text-[#111827]" : "text-gray-400 bg-transparent"
+                }`}>
+                {t === "login" ? "Sign In" : "Sign Up"}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <form onSubmit={submitHandler} className="space-y-3">
+          {/* Google */}
+          {tab !== "forgot" && (
+            <button type="button" onClick={handleGoogle}
+              className="glass-btn-outline w-full flex items-center justify-center gap-3 py-3 rounded-2xl text-[14px] font-semibold text-[#374151] cursor-pointer mb-4">
+              <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
+              Continue with Google
             </button>
-            <button
-              onClick={() => { setTab("signup"); setMessage(null); }}
-              className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${
-                tab === "signup" ? "bg-white shadow text-orange-600" : "text-gray-500"
-              }`}
-            >
-              Sign Up
-            </button>
-          </div>
-        )}
-
-        {/* Google Button */}
-        {tab !== "forgot" && (
-          <button
-            onClick={handleGoogle}
-            className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition mb-4"
-          >
-            <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
-            Continue with Google
-          </button>
-        )}
-
-        {/* Divider */}
-        {tab !== "forgot" && (
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex-1 h-px bg-gray-200" />
-            <span className="text-xs text-gray-400">or</span>
-            <div className="flex-1 h-px bg-gray-200" />
-          </div>
-        )}
-
-        {/* Message */}
-        {message && (
-          <div className={`rounded-lg px-4 py-3 text-sm mb-4 ${
-            message.type === "error"
-              ? "bg-red-50 text-red-600 border border-red-200"
-              : "bg-green-50 text-green-600 border border-green-200"
-          }`}>
-            {message.text}
-          </div>
-        )}
-
-        {/* Form */}
-        <form onSubmit={tab === "login" ? handleLogin : tab === "signup" ? handleSignup : handleForgot}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+          )}
 
           {tab !== "forgot" && (
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-              />
+            <div className="flex items-center gap-3 mb-1">
+              <div className="flex-1 h-px bg-black/10" />
+              <span className="text-[11px] font-medium text-gray-400">or email</span>
+              <div className="flex-1 h-px bg-black/10" />
             </div>
           )}
 
+          {/* Email */}
+          <GlassInput icon={<Mail size={17} />} type="email" placeholder="Email address"
+            value={email} onChange={setEmail} />
+
+          {/* Password */}
+          <AnimatePresence>
+            {tab !== "forgot" && (
+              <motion.div key="password"
+                initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
+                <GlassInput icon={<Lock size={17} />} type={showPass ? "text" : "password"}
+                  placeholder="Password" value={password} onChange={setPassword}
+                  rightAction={
+                    <button type="button" onClick={() => setShowPass(!showPass)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer bg-transparent border-none">
+                      {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  } />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Confirm password (signup) */}
+          <AnimatePresence>
+            {tab === "signup" && (
+              <motion.div key="confirm"
+                initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
+                <GlassInput icon={<Lock size={17} />} type={showConfirm ? "text" : "password"}
+                  placeholder="Confirm password" value={confirmPassword} onChange={setConfirmPassword}
+                  rightAction={
+                    <button type="button" onClick={() => setShowConfirm(!showConfirm)}
+                      className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer bg-transparent border-none">
+                      {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  } />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Forgot password link */}
           {tab === "login" && (
-            <div className="text-right mb-4">
-              <button
-                type="button"
-                onClick={() => { setTab("forgot"); setMessage(null); }}
-                className="text-sm text-orange-500 hover:underline"
-              >
+            <div className="text-right">
+              <button type="button" onClick={() => switchTab("forgot")}
+                className="text-[12px] text-orange-500 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-none">
                 Forgot password?
               </button>
             </div>
           )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50"
-          >
-            {loading ? "Please wait..." : tab === "login" ? "Sign In" : tab === "signup" ? "Create Account" : "Send Reset Link"}
+          {/* Error / success message */}
+          <AnimatePresence>
+            {message && (
+              <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                className={`flex items-start gap-2.5 rounded-2xl px-4 py-3 text-[13px] ${
+                  message.type === "error"
+                    ? "bg-red-50/80 text-red-600 border border-red-200/60"
+                    : "bg-green-50/80 text-green-600 border border-green-200/60"
+                }`}>
+                {message.type === "error"
+                  ? <AlertCircle size={15} className="flex-shrink-0 mt-0.5" />
+                  : <CheckCircle2 size={15} className="flex-shrink-0 mt-0.5" />}
+                {message.text}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Submit */}
+          <button type="submit" disabled={loading}
+            className="glass-btn w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[15px] font-bold text-white cursor-pointer border-none disabled:opacity-60 disabled:cursor-not-allowed mt-1">
+            {loading
+              ? <><Loader2 size={17} className="animate-spin" /> Please wait...</>
+              : <>
+                  {tab === "login" ? "Sign In" : tab === "signup" ? "Create Account" : "Send Reset Link"}
+                  <ArrowRight size={16} />
+                </>
+            }
           </button>
+
+          {/* Back to login */}
+          {tab === "forgot" && (
+            <button type="button" onClick={() => switchTab("login")}
+              className="w-full flex items-center justify-center gap-2 text-[13px] text-gray-500 hover:text-orange-500 transition-colors cursor-pointer bg-transparent border-none mt-1">
+              <ArrowLeft size={14} /> Back to Sign In
+            </button>
+          )}
         </form>
 
-        {/* Back to login */}
-        {tab === "forgot" && (
-          <button
-            onClick={() => { setTab("login"); setMessage(null); }}
-            className="w-full text-center text-sm text-gray-500 hover:text-orange-500 mt-4"
-          >
-            ← Back to Login
-          </button>
-        )}
-
         {/* Footer */}
-        <p className="text-center text-xs text-gray-400 mt-6">
+        <p className="text-center text-[11px] text-gray-400 mt-6 leading-relaxed">
           By continuing, you agree to our{" "}
-          <Link to="/terms" className="text-orange-500 hover:underline">Terms</Link>
+          <Link to="/terms" className="text-orange-500 hover:underline no-underline">Terms</Link>
           {" "}and{" "}
-          <Link to="/privacy" className="text-orange-500 hover:underline">Privacy Policy</Link>
+          <Link to="/privacy" className="text-orange-500 hover:underline no-underline">Privacy Policy</Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }
+
+export const Route = createFileRoute("/login")({
+  head: () => ({
+    meta: [
+      { title: "Sign In — airesumi.com" },
+      { name: "description", content: "Sign in to your airesumi account." },
+    ],
+  }),
+  component: LoginPage,
+});

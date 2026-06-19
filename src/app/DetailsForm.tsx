@@ -212,8 +212,8 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                         type="text"
                         className={fieldClass}
                         placeholder="e.g. Hyderabad, Pakistan"
-                        value={(userData as any).location ?? ""}
-                        onChange={(e) => setUserData({ ...userData, location: e.target.value } as any)}
+                        value={userData.location ?? ""}
+                        onChange={(e) => setUserData({ ...userData, location: e.target.value })}
                       />
                     </div>
                   </div>
@@ -244,8 +244,8 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                         type="text"
                         className={fieldClass}
                         placeholder="behance.net/username or yoursite.com"
-                        value={(userData as any).portfolio ?? ""}
-                        onChange={(e) => setUserData({ ...userData, portfolio: e.target.value } as any)}
+                        value={userData.portfolio ?? ""}
+                        onChange={(e) => setUserData({ ...userData, portfolio: e.target.value })}
                       />
                     </div>
                   </div>
@@ -387,7 +387,7 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                   </label>
                 </div>
                 <div className="space-y-4">
-                  {((userData as any).certifications ?? [""]).map((cert: string, index: number) => (
+                  {(userData.certifications ?? [""]).map((cert: string, index: number) => (
                     <div key={index} className="relative group">
                       <div className="relative">
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"><Award size={18} /></div>
@@ -397,16 +397,16 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                           placeholder="e.g. Graphic Design & Video Editing — Zeb Tech, 2023"
                           value={cert}
                           onChange={(e) => {
-                            const certs = [...((userData as any).certifications ?? [""])];
+                            const certs = [...(userData.certifications ?? [""])];
                             certs[index] = e.target.value;
-                            setUserData({ ...userData, certifications: certs } as any);
+                            setUserData({ ...userData, certifications: certs });
                           }}
                         />
-                        {((userData as any).certifications ?? [""]).length > 1 && (
+                        {(userData.certifications ?? [""]).length > 1 && (
                           <button
                             onClick={() => {
-                              const certs = ((userData as any).certifications ?? [""]).filter((_: any, i: number) => i !== index);
-                              setUserData({ ...userData, certifications: certs } as any);
+                              const certs = (userData.certifications ?? [""]).filter((_: string, i: number) => i !== index);
+                              setUserData({ ...userData, certifications: certs });
                             }}
                             className="absolute top-1/2 -translate-y-1/2 right-4 text-gray-400 hover:text-red-500 transition-colors"
                             type="button"
@@ -420,8 +420,8 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                 </div>
                 <button
                   onClick={() => {
-                    const certs = [...((userData as any).certifications ?? [""])];
-                    setUserData({ ...userData, certifications: [...certs, ""] } as any);
+                    const certs = [...(userData.certifications ?? [""])];
+                    setUserData({ ...userData, certifications: [...certs, ""] });
                   }}
                   className="mt-4 flex items-center justify-center gap-2 text-sm font-bold text-gray-600 bg-gray-50 border border-gray-100 hover:border-gray-200 hover:bg-gray-100 px-6 py-3 rounded-xl transition-colors w-full sm:w-auto"
                   type="button"

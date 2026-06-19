@@ -1,289 +1,387 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, LogOut, User, ChevronDown, FileText, Mail, Target, Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine } from 'lucide-react';
+import {
+  Menu, X, LogOut, ChevronDown, FileText, Mail, Target,
+  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine
+} from 'lucide-react';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
 
+// ── Liquid Glass CSS ─────────────────────────────────────────────────────────
+const GLASS_HEADER_STYLES = `
+  .hdr-glass {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 2px 24px rgba(234,88,12,0.06), 0 1px 0 rgba(255,255,255,0.8) inset;
+    transition: all 0.3s ease;
+  }
+  .hdr-glass-scrolled {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
+    border-bottom: 1px solid rgba(234,88,12,0.1);
+  }
+  .hdr-dropdown {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
+  }
+  .hdr-btn-primary {
+    background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 4px 14px rgba(234,88,12,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: all 0.2s ease;
+  }
+  .hdr-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(234,88,12,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .hdr-btn-outline {
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(234,88,12,0.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: all 0.2s ease;
+  }
+  .hdr-btn-outline:hover {
+    background: rgba(255,255,255,0.65);
+    border-color: rgba(234,88,12,0.4);
+    transform: translateY(-1px);
+  }
+  .hdr-nav-link {
+    transition: all 0.18s ease;
+    border-radius: 10px;
+    padding: 6px 12px;
+  }
+  .hdr-nav-link:hover {
+    background: rgba(234,88,12,0.08);
+    color: #EA580C;
+  }
+  .hdr-nav-link.active {
+    background: rgba(234,88,12,0.1);
+    color: #EA580C;
+  }
+  .hdr-tool-item:hover {
+    background: rgba(234,88,12,0.06);
+  }
+  .hdr-tool-item.active {
+    background: rgba(234,88,12,0.1);
+  }
+  .hdr-mobile {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+  }
+  .hdr-tag {
+    background: rgba(234,88,12,0.12);
+    border: 1px solid rgba(234,88,12,0.15);
+    backdrop-filter: blur(4px);
+  }
+`;
+
 export const Logo = () => (
-  <div className="flex items-center select-none z-50 transition-transform duration-200 hover:scale-[1.02]">
-    <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="h-8 w-auto" />
+  <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">
+    <img src={rezumiLogo} alt="airesumi" className="h-8 w-auto" />
   </div>
 );
 
 const resumeTools = [
-  { name: 'AI Resume Builder', to: '/resume', icon: FileText, desc: 'ATS-optimized resume in minutes' },
-  { name: 'Resume Bullet Writer', to: '/bullet-writer', icon: PenLine, desc: 'Stronger bullet points instantly' },
-  { name: 'Resume Summary', to: '/summary-generator', icon: List, desc: 'Generate a compelling summary' },
-  { name: 'Keyword Scanner', to: '/keyword-scanner', icon: Target, desc: 'Match keywords to job posting' },
+  { name: 'AI Resume Builder',   to: '/resume',            icon: FileText, desc: 'ATS-optimized resume in minutes' },
+  { name: 'Resume Bullet Writer',to: '/bullet-writer',     icon: PenLine,  desc: 'Stronger bullet points instantly' },
+  { name: 'Resume Summary',      to: '/summary-generator', icon: List,     desc: 'Generate a compelling summary' },
+  { name: 'Keyword Scanner',     to: '/keyword-scanner',   icon: Target,   desc: 'Match keywords to job posting' },
 ];
 
 const otherTools = [
-  { name: 'Cover Letter', to: '/cover-letter', icon: Mail, desc: 'Tailored cover letters' },
-  { name: 'LinkedIn Bio', to: '/linkedin-bio', icon: Linkedin, desc: 'Profile generator' },
-  { name: 'ATS Checker', to: '/ats-checker', icon: Target, desc: 'Score your resume' },
-  { name: 'Interview Prep', to: '/interview-prep', icon: Wand2, desc: 'Practice questions' },
-  { name: 'Resignation Letter', to: '/resignation-letter', icon: FileText, desc: 'Leave on good terms' },
-  { name: 'PDF Scanner', to: '/pdf-scanner', icon: ScanLine, desc: 'Scan documents to PDF' },
-  { name: 'Job Search', to: '/salary-analyzer', icon: Briefcase, desc: 'Salary & market insights' },
+  { name: 'Cover Letter',        to: '/cover-letter',       icon: Mail,          desc: 'Tailored cover letters' },
+  { name: 'LinkedIn Bio',        to: '/linkedin-bio',       icon: Linkedin,      desc: 'Profile generator' },
+  { name: 'ATS Checker',         to: '/ats-checker',        icon: Target,        desc: 'Score your resume' },
+  { name: 'Interview Prep',      to: '/interview-prep',     icon: Wand2,         desc: 'Practice questions' },
+  { name: 'Resignation Letter',  to: '/resignation-letter', icon: FileText,      desc: 'Leave on good terms' },
+  { name: 'PDF Scanner',         to: '/pdf-scanner',        icon: ScanLine,      desc: 'Scan documents to PDF' },
+  { name: 'Job Search',          to: '/salary-analyzer',    icon: Briefcase,     desc: 'Salary & market insights' },
 ];
 
 export const Header = ({ windowWidth }: { windowWidth?: number }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isToolsOpen, setIsToolsOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const [width, setWidth] = useState(
-    windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200)
-  );
-  const location = useLocation();
-  const navigate = useNavigate();
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const allTools = [...resumeTools, ...otherTools];
+  const [isScrolled, setIsScrolled]       = useState(false);
+  const [isMobileOpen, setIsMobileOpen]   = useState(false);
+  const [isToolsOpen, setIsToolsOpen]     = useState(false);
+  const [user, setUser]                   = useState<any>(null);
+  const [width, setWidth]                 = useState(windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200));
+  const location  = useLocation();
+  const navigate  = useNavigate();
+  const dropRef   = useRef<HTMLDivElement>(null);
+  const allTools  = [...resumeTools, ...otherTools];
   const isToolActive = allTools.some(t => t.to === location.pathname);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setUser(session?.user ?? null));
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, s) => setUser(s?.user ?? null));
     return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const fn = () => setIsScrolled(window.scrollY > 10);
+    fn(); window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const fn = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
   }, []);
 
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsToolsOpen(false);
-      }
+    const fn = (e: MouseEvent) => {
+      if (dropRef.current && !dropRef.current.contains(e.target as Node)) setIsToolsOpen(false);
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('mousedown', fn);
+    return () => document.removeEventListener('mousedown', fn);
   }, []);
 
-  useEffect(() => { setIsToolsOpen(false); }, [location.pathname]);
+  useEffect(() => { setIsToolsOpen(false); setIsMobileOpen(false); }, [location.pathname]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate({ to: '/' });
-  };
+  const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] transition-all duration-300 print:hidden glass ${
-      isScrolled
-        ? 'glass-strong shadow-[0_2px_12px_rgba(234,88,12,0.08)] border-b border-[#FED7AA]/50'
-        : 'border-b border-transparent shadow-none'
-    } w-full font-['Inter',sans-serif]`}>
-      <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between">
+    <>
+      <style>{GLASS_HEADER_STYLES}</style>
+      <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] print:hidden font-['Inter',sans-serif] ${isScrolled ? 'hdr-glass-scrolled' : 'hdr-glass'}`}>
+        <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between gap-6">
 
-        <Link to="/" className="flex-shrink-0 cursor-pointer no-underline">
-          <Logo />
-        </Link>
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0 no-underline"><Logo /></Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          <Link to="/"
-            className={`px-3 py-2 rounded-lg text-[14px] font-medium transition-colors no-underline ${location.pathname === '/' ? 'text-[#EA580C]' : 'text-[#374151] hover:text-[#EA580C]'}`}>
-            Home
-          </Link>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-0.5 flex-1">
 
-          {/* Mega Dropdown */}
-          <div ref={dropdownRef} className="relative">
-            <button
-              onClick={() => setIsToolsOpen(v => !v)}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[14px] font-medium transition-colors cursor-pointer border-none bg-transparent ${isToolActive || isToolsOpen ? 'text-[#EA580C]' : 'text-[#374151] hover:text-[#EA580C]'}`}>
-              AI Tools
-              <ChevronDown size={14} className={`transition-transform duration-200 ${isToolsOpen ? 'rotate-180' : ''}`} />
-            </button>
+            <Link to="/" className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              Home
+            </Link>
 
-            <AnimatePresence>
-              {isToolsOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.18 }}
-                  className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[580px] glass glass-strong rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] overflow-hidden"
-                >
-                  <div className="flex">
-                    <div className="flex-1 p-4 border-r border-[#f3f4f6]">
-                      <p className="text-[11px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-3 px-2">Resume Tools</p>
-                      {resumeTools.map(tool => {
-                        const Icon = tool.icon;
-                        const active = location.pathname === tool.to;
-                        return (
-                          <Link key={tool.to} to={tool.to} onClick={() => setIsToolsOpen(false)}
-                            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'bg-orange-50' : 'hover:bg-[#f9fafb]'}`}>
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-[#f3f4f6] group-hover:bg-orange-100'}`}>
-                              <Icon size={15} className={active ? 'text-white' : 'text-[#6b7280] group-hover:text-[#EA580C]'} />
-                            </div>
-                            <div>
-                              <p className={`text-[13px] font-semibold leading-tight ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-                              <p className="text-[11px] text-[#9ca3af] mt-0.5">{tool.desc}</p>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                    <div className="flex-1 p-4">
-                      <p className="text-[11px] font-semibold text-[#9ca3af] uppercase tracking-wider mb-3 px-2">Other Tools</p>
-                      {otherTools.map(tool => {
-                        const Icon = tool.icon;
-                        const active = location.pathname === tool.to;
-                        return (
-                          <Link key={tool.to} to={tool.to} onClick={() => setIsToolsOpen(false)}
-                            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'bg-orange-50' : 'hover:bg-[#f9fafb]'}`}>
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-[#f3f4f6] group-hover:bg-orange-100'}`}>
-                              <Icon size={15} className={active ? 'text-white' : 'text-[#6b7280] group-hover:text-[#EA580C]'} />
-                            </div>
-                            <div>
-                              <p className={`text-[13px] font-semibold leading-tight ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-                              <p className="text-[11px] text-[#9ca3af] mt-0.5">{tool.desc}</p>
-                            </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div className="bg-[#f9fafb] border-t border-[#f3f4f6] px-6 py-3 flex items-center justify-between">
-                    <span className="text-[12px] text-[#9ca3af]">10 AI-powered tools for your career</span>
-                    <Link to="/resume" onClick={() => setIsToolsOpen(false)}
-                      className="text-[12px] font-semibold text-[#EA580C] no-underline hover:underline">
-                      Start building free →
-                    </Link>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <Link to="/examples"
-            className={`px-3 py-2 rounded-lg text-[14px] font-medium transition-colors no-underline ${location.pathname === '/examples' ? 'text-[#EA580C]' : 'text-[#374151] hover:text-[#EA580C]'}`}>
-            Examples
-          </Link>
-          <Link to="/blog"
-            className={`px-3 py-2 rounded-lg text-[14px] font-medium transition-colors no-underline ${location.pathname === '/blog' ? 'text-[#EA580C]' : 'text-[#374151] hover:text-[#EA580C]'}`}>
-            Blog
-          </Link>
-        </nav>
-
-        <div className="flex items-center gap-2 flex-shrink-0">
-          {user ? (
-            <div className="hidden md:flex items-center gap-2">
-              <Link to="/dashboard"
-                className="flex items-center gap-2 text-[13px] font-medium text-gray-600 bg-orange-50 px-3 py-2 rounded-lg hover:bg-orange-100 transition-colors no-underline">
-                <LayoutDashboard size={14} className="text-orange-500" />
-                My Resumes
-              </Link>
-              <button onClick={handleLogout}
-                className="flex items-center gap-2 text-[13px] font-medium px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-all cursor-pointer bg-transparent">
-                <LogOut size={14} /> Logout
+            {/* Tools dropdown */}
+            <div ref={dropRef} className="relative">
+              <button onClick={() => setIsToolsOpen(v => !v)}
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isToolActive || isToolsOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                AI Tools
+                <ChevronDown size={13} className={`transition-transform duration-200 ${isToolsOpen ? 'rotate-180' : ''}`} />
               </button>
-              <Link to="/resume"
-                className="bg-[#EA580C] text-white text-[13px] font-semibold px-4 py-2 rounded-lg hover:bg-[#C2410C] transition-all no-underline whitespace-nowrap">
-                {width >= 1024 ? 'Build My Resume →' : 'Start →'}
-              </Link>
+
+              <AnimatePresence>
+                {isToolsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                    transition={{ duration: 0.18, ease: [0.22,1,0.36,1] }}
+                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[580px] rounded-2xl overflow-hidden"
+                  >
+                    <div className="flex">
+                      {/* Resume Tools */}
+                      <div className="flex-1 p-4 border-r border-white/40">
+                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
+                        {resumeTools.map(tool => {
+                          const Icon = tool.icon;
+                          const active = location.pathname === tool.to;
+                          return (
+                            <Link key={tool.to} to={tool.to} onClick={() => setIsToolsOpen(false)}
+                              className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
+                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
+                                <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
+                              </div>
+                              <div>
+                                <p className={`text-[13px] font-semibold ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
+                                <p className="text-[11px] text-[#9ca3af]">{tool.desc}</p>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                      {/* Other Tools */}
+                      <div className="flex-1 p-4">
+                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
+                        {otherTools.map(tool => {
+                          const Icon = tool.icon;
+                          const active = location.pathname === tool.to;
+                          return (
+                            <Link key={tool.to} to={tool.to} onClick={() => setIsToolsOpen(false)}
+                              className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
+                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
+                                <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
+                              </div>
+                              <div>
+                                <p className={`text-[13px] font-semibold ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
+                                <p className="text-[11px] text-[#9ca3af]">{tool.desc}</p>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    {/* Bottom bar */}
+                    <div className="border-t border-white/40 bg-white/30 px-6 py-2.5 flex items-center justify-between">
+                      <span className="text-[11px] text-[#9ca3af]">11 AI-powered tools</span>
+                      <Link to="/resume" onClick={() => setIsToolsOpen(false)}
+                        className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
+                        Start free →
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          ) : (
-            <div className="hidden md:flex items-center gap-2">
-              <Link to="/login"
-                className="text-[13px] font-semibold px-4 py-2 rounded-lg border border-[#EA580C] text-[#EA580C] hover:bg-orange-50 transition-all no-underline">
-                Login
-              </Link>
-              <Link to="/resume"
-                className="bg-[#EA580C] text-white text-[13px] font-semibold px-4 py-2 rounded-lg hover:bg-[#C2410C] transition-all no-underline whitespace-nowrap">
-                {width >= 1024 ? 'Build My Resume →' : 'Start Free →'}
-              </Link>
-            </div>
-          )}
-          <Link to="/resume" className="bg-[#EA580C] text-white text-[13px] font-semibold px-4 py-2 rounded-lg hover:bg-[#C2410C] md:hidden no-underline">
-            Start Free →
-          </Link>
-          <button className="md:hidden text-[#374151] flex items-center justify-center p-1 cursor-pointer bg-transparent border-none"
-            onClick={() => setIsMobileMenuOpen(true)}>
-            <Menu size={24} strokeWidth={2} />
-          </button>
+
+            <Link to="/examples" className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>Examples</Link>
+            <Link to="/blog"     className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog'     ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>Blog</Link>
+          </nav>
+
+          {/* Right side */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {user ? (
+              <div className="hidden md:flex items-center gap-2">
+                <Link to="/dashboard"
+                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50">
+                  <LayoutDashboard size={14} /> My Resumes
+                </Link>
+                <button onClick={handleLogout}
+                  className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
+                  <LogOut size={13} /> Logout
+                </button>
+                <Link to="/resume"
+                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
+                  {width >= 1024 ? 'Build My Resume →' : 'Start →'}
+                </Link>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-2">
+                <Link to="/login"
+                  className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
+                  Login
+                </Link>
+                <Link to="/resume"
+                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
+                  {width >= 1024 ? 'Build My Resume →' : 'Start Free →'}
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile */}
+            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl md:hidden no-underline">
+              Start Free
+            </Link>
+            <button onClick={() => setIsMobileOpen(true)}
+              className="md:hidden text-[#374151] p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              <Menu size={22} strokeWidth={2} />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 bg-white z-[1001] flex flex-col font-['Inter',sans-serif] overflow-y-auto">
-            <div className="flex justify-between items-center px-6 py-4 border-b border-[#f3f4f6]">
-              <Link to="/" className="cursor-pointer no-underline" onClick={() => setIsMobileMenuOpen(false)}><Logo /></Link>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="text-[#374151] p-2 cursor-pointer bg-transparent border-none">
-                <X size={24} strokeWidth={2} />
-              </button>
-            </div>
-            <div className="px-6 py-4 flex-1">
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center py-3 text-[15px] font-medium text-[#374151] no-underline border-b border-[#f3f4f6]">Home</Link>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[1002]"
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} />
 
-              <p className="text-[11px] font-semibold text-[#9ca3af] uppercase tracking-wider mt-5 mb-2">Resume Tools</p>
-              {resumeTools.map(tool => {
-                const Icon = tool.icon;
-                return (
-                  <Link key={tool.to} to={tool.to} onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-3 py-3 text-[14px] font-medium text-[#374151] no-underline border-b border-[#f9fafb] hover:text-[#EA580C]">
-                    <Icon size={16} className="text-[#EA580C]" />{tool.name}
+            {/* Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.28, ease: [0.22,1,0.36,1] }}
+              className="hdr-mobile absolute right-0 top-0 bottom-0 w-[85%] max-w-[340px] flex flex-col overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-black/5">
+                <Logo />
+                <button onClick={() => setIsMobileOpen(false)}
+                  className="p-2 rounded-xl text-[#374151] cursor-pointer bg-black/5 border-none">
+                  <X size={20} strokeWidth={2} />
+                </button>
+              </div>
+
+              <div className="flex-1 px-4 py-4">
+                <Link to="/" onClick={() => setIsMobileOpen(false)}
+                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
+                  Home
+                </Link>
+
+                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">Resume Tools</p>
+                {resumeTools.map(tool => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link key={tool.to} to={tool.to} onClick={() => setIsMobileOpen(false)}
+                      className="flex items-center gap-3 py-2.5 px-2 text-[14px] font-medium text-[#374151] no-underline border-b border-black/5 hover:text-[#EA580C]">
+                      <div className="w-7 h-7 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Icon size={13} className="text-[#EA580C]" />
+                      </div>
+                      {tool.name}
+                    </Link>
+                  );
+                })}
+
+                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">Other Tools</p>
+                {otherTools.map(tool => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link key={tool.to} to={tool.to} onClick={() => setIsMobileOpen(false)}
+                      className="flex items-center gap-3 py-2.5 px-2 text-[14px] font-medium text-[#374151] no-underline border-b border-black/5 hover:text-[#EA580C]">
+                      <div className="w-7 h-7 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Icon size={13} className="text-[#EA580C]" />
+                      </div>
+                      {tool.name}
+                    </Link>
+                  );
+                })}
+
+                <Link to="/examples" onClick={() => setIsMobileOpen(false)}
+                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5 mt-2">Examples</Link>
+                <Link to="/blog" onClick={() => setIsMobileOpen(false)}
+                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">Blog</Link>
+
+                {user ? (
+                  <>
+                    <Link to="/dashboard" onClick={() => setIsMobileOpen(false)}
+                      className="flex items-center gap-2 py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
+                      <LayoutDashboard size={16} className="text-[#EA580C]" /> My Resumes
+                    </Link>
+                    <button onClick={() => { setIsMobileOpen(false); handleLogout(); }}
+                      className="w-full text-left py-3 px-2 text-[15px] font-medium text-red-500 bg-transparent border-none cursor-pointer">
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link to="/login" onClick={() => setIsMobileOpen(false)}
+                    className="flex items-center py-3 px-2 text-[15px] font-medium text-[#EA580C] no-underline">
+                    Login / Sign Up
                   </Link>
-                );
-              })}
+                )}
+              </div>
 
-              <p className="text-[11px] font-semibold text-[#9ca3af] uppercase tracking-wider mt-5 mb-2">Other Tools</p>
-              {otherTools.map(tool => {
-                const Icon = tool.icon;
-                return (
-                  <Link key={tool.to} to={tool.to} onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-3 py-3 text-[14px] font-medium text-[#374151] no-underline border-b border-[#f9fafb] hover:text-[#EA580C]">
-                    <Icon size={16} className="text-[#EA580C]" />{tool.name}
-                  </Link>
-                );
-              })}
-
-              <Link to="/examples" onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center py-3 text-[15px] font-medium text-[#374151] no-underline border-b border-[#f3f4f6] mt-2">Examples</Link>
-              <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center py-3 text-[15px] font-medium text-[#374151] no-underline border-b border-[#f3f4f6]">Blog</Link>
-
-              {user ? (
-                <>
-                  <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-2 py-3 text-[15px] font-medium text-[#374151] no-underline border-b border-[#f3f4f6]">
-                    <LayoutDashboard size={16} /> My Resumes
-                  </Link>
-                  <button onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
-                    className="w-full text-left py-3 text-[15px] font-medium text-red-500 bg-transparent border-none cursor-pointer">Logout</button>
-                </>
-              ) : (
-                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center py-3 text-[15px] font-medium text-[#EA580C] no-underline">Login / Sign Up</Link>
-              )}
-            </div>
-            <div className="px-6 pb-8">
-              <Link to="/resume" onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full bg-[#EA580C] text-white text-[16px] font-semibold py-4 rounded-xl hover:bg-[#C2410C] transition-colors text-center no-underline">
-                Build My Resume Free →
-              </Link>
-            </div>
+              <div className="px-4 pb-8 pt-2">
+                <Link to="/resume" onClick={() => setIsMobileOpen(false)}
+                  className="hdr-btn-primary block w-full text-white text-[15px] font-bold py-4 rounded-2xl text-center no-underline">
+                  Build My Resume Free →
+                </Link>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 };

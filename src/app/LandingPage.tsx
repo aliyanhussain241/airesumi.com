@@ -132,8 +132,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
              <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
                <a
                  href="/resume"
-                 className="relative w-full sm:w-auto px-10 py-4 bg-[#FF6321]/75 glass-tint text-white font-bold text-[17px] rounded-full transition-all hover:-translate-y-0.5 active:scale-95 shadow-[0_8px_25px_-8px_rgba(255,99,33,0.6)] hover:shadow-[0_12px_30px_-10px_rgba(255,99,33,0.8)] hover:bg-[#FF6321]/85 flex justify-center items-center overflow-hidden group no-underline"
-               >
+                 className="hdr-btn-primary text-white text-[17px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap">
                  <div className="absolute inset-0 bg-white/20 translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
                  <span className="relative z-10">Create my resume</span>
                </a>

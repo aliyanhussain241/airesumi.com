@@ -8,7 +8,6 @@ import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
 
-// ── Liquid Glass CSS ─────────────────────────────────────────────────────────
 const GLASS_HEADER_STYLES = `
   .hdr-glass {
     background: rgba(255,255,255,0.55);
@@ -87,38 +86,41 @@ const GLASS_HEADER_STYLES = `
 
 export const Logo = () => (
   <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">
-    <img src={rezumiLogo} alt="airesumi" className="h-8 w-auto" />
+    <img src={rezumiLogo} alt="airesumi" className="h-8 w-auto object-contain" />
   </div>
 );
 
 const resumeTools = [
-  { name: 'AI Resume Builder',   to: '/resume',            icon: FileText, desc: 'ATS-optimized resume in minutes' },
-  { name: 'Resume Bullet Writer',to: '/bullet-writer',     icon: PenLine,  desc: 'Stronger bullet points instantly' },
-  { name: 'Resume Summary',      to: '/summary-generator', icon: List,     desc: 'Generate a compelling summary' },
-  { name: 'Keyword Scanner',     to: '/keyword-scanner',   icon: Target,   desc: 'Match keywords to job posting' },
+  { name: 'AI Resume Builder',    to: '/resume',            icon: FileText, desc: 'ATS-optimized resume in minutes' },
+  { name: 'Resume Bullet Writer', to: '/bullet-writer',     icon: PenLine,  desc: 'Stronger bullet points instantly' },
+  { name: 'Resume Summary',       to: '/summary-generator', icon: List,     desc: 'Generate a compelling summary' },
+  { name: 'Keyword Scanner',      to: '/keyword-scanner',   icon: Target,   desc: 'Match keywords to job posting' },
 ];
 
 const otherTools = [
-  { name: 'Cover Letter',        to: '/cover-letter',       icon: Mail,          desc: 'Tailored cover letters' },
-  { name: 'LinkedIn Bio',        to: '/linkedin-bio',       icon: Linkedin,      desc: 'Profile generator' },
-  { name: 'ATS Checker',         to: '/ats-checker',        icon: Target,        desc: 'Score your resume' },
-  { name: 'Interview Prep',      to: '/interview-prep',     icon: Wand2,         desc: 'Practice questions' },
-  { name: 'Resignation Letter',  to: '/resignation-letter', icon: FileText,      desc: 'Leave on good terms' },
-  { name: 'PDF Scanner',         to: '/pdf-scanner',        icon: ScanLine,      desc: 'Scan documents to PDF' },
-  { name: 'Job Search',          to: '/salary-analyzer',    icon: Briefcase,     desc: 'Salary & market insights' },
+  { name: 'Cover Letter',       to: '/cover-letter',       icon: Mail,          desc: 'Tailored cover letters' },
+  { name: 'LinkedIn Bio',       to: '/linkedin-bio',       icon: Linkedin,      desc: 'Profile generator' },
+  { name: 'ATS Checker',        to: '/ats-checker',        icon: Target,        desc: 'Score your resume' },
+  { name: 'Interview Prep',     to: '/interview-prep',     icon: Wand2,         desc: 'Practice questions' },
+  { name: 'Resignation Letter', to: '/resignation-letter', icon: FileText,      desc: 'Leave on good terms' },
+  { name: 'PDF Scanner',        to: '/pdf-scanner',        icon: ScanLine,      desc: 'Scan documents to PDF' },
+  { name: 'Job Search',         to: '/salary-analyzer',    icon: Briefcase,     desc: 'Salary & market insights' },
 ];
 
 export const Header = ({ windowWidth }: { windowWidth?: number }) => {
-  const [isScrolled, setIsScrolled]       = useState(false);
-  const [isMobileOpen, setIsMobileOpen]   = useState(false);
-  const [isToolsOpen, setIsToolsOpen]     = useState(false);
-  const [user, setUser]                   = useState<any>(null);
-  const [width, setWidth]                 = useState(windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200));
+  const [isScrolled, setIsScrolled]           = useState(false);
+  const [isMobileOpen, setIsMobileOpen]       = useState(false);
+  const [isResumeOpen, setIsResumeOpen]       = useState(false);
+  const [isOtherOpen, setIsOtherOpen]         = useState(false);
+  const [user, setUser]                       = useState<any>(null);
+  const [width, setWidth]                     = useState(windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200));
   const location  = useLocation();
   const navigate  = useNavigate();
-  const dropRef   = useRef<HTMLDivElement>(null);
-  const allTools  = [...resumeTools, ...otherTools];
-  const isToolActive = allTools.some(t => t.to === location.pathname);
+  const resumeRef = useRef<HTMLDivElement>(null);
+  const otherRef  = useRef<HTMLDivElement>(null);
+
+  const isResumeActive = resumeTools.some(t => t.to === location.pathname);
+  const isOtherActive  = otherTools.some(t => t.to === location.pathname);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setUser(session?.user ?? null));
@@ -140,15 +142,33 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
   useEffect(() => {
     const fn = (e: MouseEvent) => {
-      if (dropRef.current && !dropRef.current.contains(e.target as Node)) setIsToolsOpen(false);
+      if (resumeRef.current && !resumeRef.current.contains(e.target as Node)) setIsResumeOpen(false);
+      if (otherRef.current && !otherRef.current.contains(e.target as Node)) setIsOtherOpen(false);
     };
     document.addEventListener('mousedown', fn);
     return () => document.removeEventListener('mousedown', fn);
   }, []);
 
-  useEffect(() => { setIsToolsOpen(false); setIsMobileOpen(false); }, [location.pathname]);
+  useEffect(() => { setIsResumeOpen(false); setIsOtherOpen(false); setIsMobileOpen(false); }, [location.pathname]);
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
+
+  const ToolItem = ({ tool, onClose }: { tool: typeof resumeTools[0]; onClose: () => void }) => {
+    const Icon = tool.icon;
+    const active = location.pathname === tool.to;
+    return (
+      <Link key={tool.to} to={tool.to} onClick={onClose}
+        className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
+        <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
+          <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
+        </div>
+        <div>
+          <p className={`text-[13px] font-semibold ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
+          <p className="text-[11px] text-[#9ca3af]">{tool.desc}</p>
+        </div>
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -166,71 +186,71 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               Home
             </Link>
 
-            {/* Tools dropdown */}
-            <div ref={dropRef} className="relative">
-              <button onClick={() => setIsToolsOpen(v => !v)}
-                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isToolActive || isToolsOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-                AI Tools
-                <ChevronDown size={13} className={`transition-transform duration-200 ${isToolsOpen ? 'rotate-180' : ''}`} />
+            {/* Resume Tools dropdown */}
+            <div ref={resumeRef} className="relative">
+              <button
+                onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                Resume Tools
+                <ChevronDown size={13} className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
-                {isToolsOpen && (
+                {isResumeOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 10, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.97 }}
                     transition={{ duration: 0.18, ease: [0.22,1,0.36,1] }}
-                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[580px] rounded-2xl overflow-hidden"
+                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl overflow-hidden"
                   >
-                    <div className="flex">
-                      {/* Resume Tools */}
-                      <div className="flex-1 p-4 border-r border-white/40">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
-                        {resumeTools.map(tool => {
-                          const Icon = tool.icon;
-                          const active = location.pathname === tool.to;
-                          return (
-                            <Link key={tool.to} to={tool.to} onClick={() => setIsToolsOpen(false)}
-                              className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
-                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
-                                <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
-                              </div>
-                              <div>
-                                <p className={`text-[13px] font-semibold ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-                                <p className="text-[11px] text-[#9ca3af]">{tool.desc}</p>
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                      {/* Other Tools */}
-                      <div className="flex-1 p-4">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
-                        {otherTools.map(tool => {
-                          const Icon = tool.icon;
-                          const active = location.pathname === tool.to;
-                          return (
-                            <Link key={tool.to} to={tool.to} onClick={() => setIsToolsOpen(false)}
-                              className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
-                              <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
-                                <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
-                              </div>
-                              <div>
-                                <p className={`text-[13px] font-semibold ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-                                <p className="text-[11px] text-[#9ca3af]">{tool.desc}</p>
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
+                    <div className="p-4">
+                      <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
+                      {resumeTools.map(tool => (
+                        <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
+                      ))}
                     </div>
-                    {/* Bottom bar */}
                     <div className="border-t border-white/40 bg-white/30 px-6 py-2.5 flex items-center justify-between">
-                      <span className="text-[11px] text-[#9ca3af]">11 AI-powered tools</span>
-                      <Link to="/resume" onClick={() => setIsToolsOpen(false)}
+                      <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
+                      <Link to="/resume" onClick={() => setIsResumeOpen(false)}
                         className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
                         Start free →
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Other Tools dropdown */}
+            <div ref={otherRef} className="relative">
+              <button
+                onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                Other Tools
+                <ChevronDown size={13} className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {isOtherOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                    transition={{ duration: 0.18, ease: [0.22,1,0.36,1] }}
+                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl overflow-hidden"
+                  >
+                    <div className="p-4">
+                      <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
+                      {otherTools.map(tool => (
+                        <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
+                      ))}
+                    </div>
+                    <div className="border-t border-white/40 bg-white/30 px-6 py-2.5 flex items-center justify-between">
+                      <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
+                      <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)}
+                        className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
+                        Explore →
                       </Link>
                     </div>
                   </motion.div>
@@ -294,10 +314,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-[1002]"
           >
-            {/* Backdrop */}
             <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} />
 
-            {/* Panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -305,7 +323,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               transition={{ duration: 0.28, ease: [0.22,1,0.36,1] }}
               className="hdr-mobile absolute right-0 top-0 bottom-0 w-[85%] max-w-[340px] flex flex-col overflow-y-auto"
             >
-              {/* Header */}
               <div className="flex items-center justify-between px-5 py-4 border-b border-black/5">
                 <Logo />
                 <button onClick={() => setIsMobileOpen(false)}

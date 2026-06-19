@@ -13,10 +13,10 @@ export const Route = createFileRoute("/api/generate-resume")({
             return new Response(JSON.stringify({ error: "Unauthorized. Please log in." }), { status: 401 });
           }
           const token = authHeader.replace("Bearer ", "");
-         const supabase = createClient(
-  (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL)!,
-  (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY)!
-);
+          const supabase = createClient(
+            (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL)!,
+            (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY)!
+          );
           const { data: { user }, error: authError } = await supabase.auth.getUser(token);
           if (authError || !user) {
             return new Response(JSON.stringify({ error: "Invalid or expired session. Please log in again." }), { status: 401 });
@@ -39,6 +39,8 @@ Rules:
 3. TAILORED SUMMARY: Write a focused 2-3 sentence professional summary.
 4. NO LIES: Do not invent experiences or skills the user did not provide.
 5. RELEVANCE: Keep only the most relevant education and skills.
+6. CERTIFICATIONS: Always include certifications if provided — they are important for ATS.
+7. CONTACT: Include location and portfolio/website in contactInfo if provided.
 
 Respond ONLY in JSON.`;
 
@@ -50,7 +52,7 @@ ${clean(jobData.description)}
 
 USER RAW DATA:
 Name: ${clean(userData.fullName)}
-Contact: Email: ${clean(userData.email)} | Phone: ${clean(userData.phone)} | LinkedIn: ${clean(userData.linkedin)}
+Contact: Email: ${clean(userData.email)} | Phone: ${clean(userData.phone)} | Location: ${clean(userData.location || "")} | LinkedIn: ${clean(userData.linkedin || "")}${userData.portfolio ? ` | Portfolio: ${clean(userData.portfolio)}` : ""}
 Current Role: ${clean(userData.currentRole)}
 Skills:
 ${(userData.skills || []).map((s: string, i: number) => `Group ${i + 1}: ${clean(s)}`).join("\n")}
@@ -58,6 +60,8 @@ Experience:
 ${(userData.experience || []).map((e: string, i: number) => `Role ${i + 1}:\n${clean(e)}`).join("\n\n")}
 Education:
 ${clean(userData.education)}
+Certifications:
+${(userData.certifications || []).filter(Boolean).map((c: string) => clean(c)).join("\n") || "None"}
 
 Generate a highly optimized resume in JSON matching:
 {
@@ -65,7 +69,8 @@ Generate a highly optimized resume in JSON matching:
   "summary": "string",
   "experience": [{ "title": "string", "company": "string", "dateRange": "string", "bullets": ["string"] }],
   "education": [{ "degree": "string", "institution": "string", "dateRange": "string" }],
-  "skills": [{ "category": "string", "items": ["string"] }]
+  "skills": [{ "category": "string", "items": ["string"] }],
+  "certifications": [{ "name": "string", "issuer": "string" }]
 }`;
 
           const text = await callAIGateway({

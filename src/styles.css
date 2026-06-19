@@ -4,6 +4,20 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -129,49 +143,191 @@
   }
 }
 
-/*
- * Liquid glass utilities.
- *
- * These derive their tint from the existing theme tokens (--background /
- * --foreground) via color-mix, so the site's color palette never changes —
- * light mode stays light-glass, dark mode stays dark-glass automatically.
- * Apply on top of any element that sits over other content (navbars,
- * dropdowns, cards, sticky footers). Needs something colorful/textured
- * behind it to actually read as "glass" — on a flat single-color page it
- * will just look like a translucent panel.
- */
-@layer utilities {
-  .glass {
-    background: color-mix(in oklch, var(--background) 62%, transparent);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
-    box-shadow:
-      inset 0 1px 0 color-mix(in oklch, white 40%, transparent),
-      0 8px 30px color-mix(in oklch, var(--foreground) 8%, transparent);
-  }
+/* ============================================================
+   LIQUID GLASS DESIGN SYSTEM — iOS 26 inspired
+   Applies globally across all pages
+   ============================================================ */
 
-  /* More opaque variant — for places that need stronger text contrast,
-     e.g. a navbar once the page has scrolled past colorful hero art. */
-  .glass-strong {
-    background: color-mix(in oklch, var(--background) 80%, transparent);
-    backdrop-filter: blur(26px) saturate(180%);
-    -webkit-backdrop-filter: blur(26px) saturate(180%);
-  }
+/* Animated background blobs */
+@keyframes liquid-blob-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -30px) scale(1.06); }
+  66%       { transform: translate(-25px, 20px) scale(0.96); }
+}
+@keyframes liquid-blob-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-30px, 25px) scale(1.04); }
+  66%       { transform: translate(20px, -20px) scale(0.98); }
+}
+@keyframes liquid-blob-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(20px, 30px) scale(1.05); }
+}
 
-  /* For buttons/badges that carry a brand color (e.g. bg-primary) — keeps
-     the hue intact, just adds the frosted/specular glass quality on top. */
-  .glass-tint {
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-  }
+/* ── Global page background ── */
+body {
+  background: linear-gradient(135deg, #fff7ed 0%, #fffbf5 40%, #fff3e0 100%) !important;
+  min-height: 100vh;
+}
 
-  @supports not (backdrop-filter: blur(1px)) {
-    .glass, .glass-strong {
-      background: var(--background);
-    }
-  }
+/* ── Glass card — use on any card/panel ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 8px 32px rgba(234, 88, 12, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* ── Glass input ── */
+.glass-input-field {
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+.glass-input-field:focus {
+  background: rgba(255, 255, 255, 0.65) !important;
+  border-color: rgba(234, 88, 12, 0.35) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 0 0 3px rgba(234, 88, 12, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  outline: none !important;
+}
+
+/* ── Glass button — primary ── */
+.glass-btn-primary {
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.92), rgba(194, 65, 12, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 4px 16px rgba(234, 88, 12, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  color: white;
+}
+.glass-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 24px rgba(234, 88, 12, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.glass-btn-primary:active:not(:disabled) { transform: translateY(0); }
+
+/* ── Glass button — secondary/outline ── */
+.glass-btn-secondary {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(234, 88, 12, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+.glass-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(234, 88, 12, 0.35);
+  transform: translateY(-1px);
+}
+
+/* ── Glass panel — for sections/containers ── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* ── Override existing white backgrounds with glass ── */
+.bg-white {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.bg-\[\#f9fafb\],
+.bg-\[\#f8fafc\],
+.bg-\[\#f5f5f4\] {
+  background: rgba(255, 247, 237, 0.6) !important;
+}
+
+/* ── Inputs global override ── */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+textarea:focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(234, 88, 12, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1) !important;
+  outline: none !important;
+}
+
+/* ── Buttons with orange bg keep their style ── */
+.bg-\[\#FF6321\],
+.bg-\[\#EA580C\],
+[class*="bg-orange-5"] {
+  box-shadow: 0 4px 16px rgba(234, 88, 12, 0.28) !important;
+}
+
+/* ── Border override ── */
+.border-\[\#e5e7eb\],
+.border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* ── Shadow softening ── */
+.shadow-md  { box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important; }
+.shadow-lg  { box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important; }
+.shadow-xl  { box-shadow: 0 12px 48px rgba(0,0,0,0.1) !important; }
+
+/* ── Liquid blob background helper class ── */
+.liquid-bg {
+  position: relative;
+  overflow: hidden;
+}
+.liquid-bg::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(251,191,36,0.18) 0%, transparent 70%);
+  animation: liquid-blob-1 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.liquid-bg::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(ellipse, rgba(234,88,12,0.15) 0%, transparent 70%);
+  animation: liquid-blob-2 24s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }

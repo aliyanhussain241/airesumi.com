@@ -8,6 +8,9 @@ export interface UserData {
   education: string;
   skills: string[];
   profilePicture?: string;
+  location?: string;
+  portfolio?: string;
+  certifications?: string[];
 }
 
 export interface JobDescription {

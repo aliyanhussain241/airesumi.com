@@ -114,6 +114,10 @@ function ResumeBuilder() {
     skills: [""],
     experience: [""],
     education: "",
+    // ✅ New fields
+    location: "",
+    portfolio: "",
+    certifications: [""],
   });
   const [jobData, setJobData] = useState<JobDescription>({
     title: "",
@@ -372,4 +376,3 @@ export const Route = createFileRoute("/resume")({
   }),
   component: ResumeBuilder,
 });
-

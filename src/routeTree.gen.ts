@@ -10,32 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SummaryGeneratorRouteImport } from './routes/summary-generator'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SalaryAnalyzerRouteImport } from './routes/salary-analyzer'
 import { Route as ResumeRouteImport } from './routes/resume'
+import { Route as ResignationLetterRouteImport } from './routes/resignation-letter'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as PdfScannerRouteImport } from './routes/pdf-scanner'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LinkedinBioRouteImport } from './routes/linkedin-bio'
+import { Route as KeywordScannerRouteImport } from './routes/keyword-scanner'
 import { Route as InterviewPrepRouteImport } from './routes/interview-prep'
 import { Route as ExamplesRouteImport } from './routes/examples'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CoverLetterRouteImport } from './routes/cover-letter'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BulletWriterRouteImport } from './routes/bullet-writer'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PremiumSuccessRouteImport } from './routes/premium /success'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
+import { Route as ApiSubscriptionStatusRouteImport } from './routes/api/subscription-status'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe-webhook'
+import { Route as ApiScanKeywordsRouteImport } from './routes/api/scan-keywords'
 import { Route as ApiParseCvTextRouteImport } from './routes/api/parse-cv-text'
+import { Route as ApiGenerateSummaryRouteImport } from './routes/api/generate-summary'
 import { Route as ApiGenerateResumeRouteImport } from './routes/api/generate-resume'
+import { Route as ApiGenerateResignationRouteImport } from './routes/api/generate-resignation'
+import { Route as ApiGenerateLinkedinBioRouteImport } from './routes/api/generate-linkedin-bio'
 import { Route as ApiGenerateCoverLetterRouteImport } from './routes/api/generate-cover-letter'
+import { Route as ApiGenerateBulletsRouteImport } from './routes/api/generate-bullets'
+import { Route as ApiCreateCheckoutRouteImport } from './routes/api/create-checkout'
 import { Route as ApiAnalyzeAtsRouteImport } from './routes/api/analyze-ats'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SummaryGeneratorRoute = SummaryGeneratorRouteImport.update({
+  id: '/summary-generator',
+  path: '/summary-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -53,6 +74,11 @@ const ResumeRoute = ResumeRouteImport.update({
   path: '/resume',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResignationLetterRoute = ResignationLetterRouteImport.update({
+  id: '/resignation-letter',
+  path: '/resignation-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -68,9 +94,24 @@ const PremiumRoute = PremiumRouteImport.update({
   path: '/premium',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PdfScannerRoute = PdfScannerRouteImport.update({
+  id: '/pdf-scanner',
+  path: '/pdf-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LinkedinBioRoute = LinkedinBioRouteImport.update({
+  id: '/linkedin-bio',
+  path: '/linkedin-bio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KeywordScannerRoute = KeywordScannerRouteImport.update({
+  id: '/keyword-scanner',
+  path: '/keyword-scanner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InterviewPrepRoute = InterviewPrepRouteImport.update({
@@ -83,6 +124,11 @@ const ExamplesRoute = ExamplesRouteImport.update({
   path: '/examples',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoverLetterRoute = CoverLetterRouteImport.update({
   id: '/cover-letter',
   path: '/cover-letter',
@@ -91,6 +137,11 @@ const CoverLetterRoute = CoverLetterRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BulletWriterRoute = BulletWriterRouteImport.update({
+  id: '/bullet-writer',
+  path: '/bullet-writer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -113,6 +164,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
+  id: '/premium /success',
+  path: '/premium /success',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -128,9 +184,29 @@ const ApiUploadCvRoute = ApiUploadCvRouteImport.update({
   path: '/api/upload-cv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSubscriptionStatusRoute = ApiSubscriptionStatusRouteImport.update({
+  id: '/api/subscription-status',
+  path: '/api/subscription-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe-webhook',
+  path: '/api/stripe-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiScanKeywordsRoute = ApiScanKeywordsRouteImport.update({
+  id: '/api/scan-keywords',
+  path: '/api/scan-keywords',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiParseCvTextRoute = ApiParseCvTextRouteImport.update({
   id: '/api/parse-cv-text',
   path: '/api/parse-cv-text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateSummaryRoute = ApiGenerateSummaryRouteImport.update({
+  id: '/api/generate-summary',
+  path: '/api/generate-summary',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiGenerateResumeRoute = ApiGenerateResumeRouteImport.update({
@@ -138,9 +214,29 @@ const ApiGenerateResumeRoute = ApiGenerateResumeRouteImport.update({
   path: '/api/generate-resume',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGenerateResignationRoute = ApiGenerateResignationRouteImport.update({
+  id: '/api/generate-resignation',
+  path: '/api/generate-resignation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateLinkedinBioRoute = ApiGenerateLinkedinBioRouteImport.update({
+  id: '/api/generate-linkedin-bio',
+  path: '/api/generate-linkedin-bio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiGenerateCoverLetterRoute = ApiGenerateCoverLetterRouteImport.update({
   id: '/api/generate-cover-letter',
   path: '/api/generate-cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateBulletsRoute = ApiGenerateBulletsRouteImport.update({
+  id: '/api/generate-bullets',
+  path: '/api/generate-bullets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCreateCheckoutRoute = ApiCreateCheckoutRouteImport.update({
+  id: '/api/create-checkout',
+  path: '/api/create-checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAnalyzeAtsRoute = ApiAnalyzeAtsRouteImport.update({
@@ -154,50 +250,82 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
+  '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/keyword-scanner': typeof KeywordScannerRoute
+  '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
+  '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/summary-generator': typeof SummaryGeneratorRoute
   '/terms': typeof TermsRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
+  '/api/create-checkout': typeof ApiCreateCheckoutRoute
+  '/api/generate-bullets': typeof ApiGenerateBulletsRoute
   '/api/generate-cover-letter': typeof ApiGenerateCoverLetterRoute
+  '/api/generate-linkedin-bio': typeof ApiGenerateLinkedinBioRoute
+  '/api/generate-resignation': typeof ApiGenerateResignationRoute
   '/api/generate-resume': typeof ApiGenerateResumeRoute
+  '/api/generate-summary': typeof ApiGenerateSummaryRoute
   '/api/parse-cv-text': typeof ApiParseCvTextRoute
+  '/api/scan-keywords': typeof ApiScanKeywordsRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/api/subscription-status': typeof ApiSubscriptionStatusRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/premium /success': typeof PremiumSuccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
+  '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/keyword-scanner': typeof KeywordScannerRoute
+  '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
+  '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/summary-generator': typeof SummaryGeneratorRoute
   '/terms': typeof TermsRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
+  '/api/create-checkout': typeof ApiCreateCheckoutRoute
+  '/api/generate-bullets': typeof ApiGenerateBulletsRoute
   '/api/generate-cover-letter': typeof ApiGenerateCoverLetterRoute
+  '/api/generate-linkedin-bio': typeof ApiGenerateLinkedinBioRoute
+  '/api/generate-resignation': typeof ApiGenerateResignationRoute
   '/api/generate-resume': typeof ApiGenerateResumeRoute
+  '/api/generate-summary': typeof ApiGenerateSummaryRoute
   '/api/parse-cv-text': typeof ApiParseCvTextRoute
+  '/api/scan-keywords': typeof ApiScanKeywordsRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/api/subscription-status': typeof ApiSubscriptionStatusRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/premium /success': typeof PremiumSuccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -205,25 +333,41 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
+  '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/keyword-scanner': typeof KeywordScannerRoute
+  '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
+  '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/summary-generator': typeof SummaryGeneratorRoute
   '/terms': typeof TermsRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
+  '/api/create-checkout': typeof ApiCreateCheckoutRoute
+  '/api/generate-bullets': typeof ApiGenerateBulletsRoute
   '/api/generate-cover-letter': typeof ApiGenerateCoverLetterRoute
+  '/api/generate-linkedin-bio': typeof ApiGenerateLinkedinBioRoute
+  '/api/generate-resignation': typeof ApiGenerateResignationRoute
   '/api/generate-resume': typeof ApiGenerateResumeRoute
+  '/api/generate-summary': typeof ApiGenerateSummaryRoute
   '/api/parse-cv-text': typeof ApiParseCvTextRoute
+  '/api/scan-keywords': typeof ApiScanKeywordsRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/api/subscription-status': typeof ApiSubscriptionStatusRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/premium /success': typeof PremiumSuccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -232,75 +376,123 @@ export interface FileRouteTypes {
     | '/about'
     | '/ats-checker'
     | '/blog'
+    | '/bullet-writer'
     | '/contact'
     | '/cover-letter'
+    | '/dashboard'
     | '/examples'
     | '/interview-prep'
+    | '/keyword-scanner'
+    | '/linkedin-bio'
     | '/login'
+    | '/pdf-scanner'
     | '/premium'
     | '/privacy'
     | '/reset-password'
+    | '/resignation-letter'
     | '/resume'
     | '/salary-analyzer'
     | '/sitemap.xml'
+    | '/summary-generator'
     | '/terms'
     | '/api/analyze-ats'
+    | '/api/create-checkout'
+    | '/api/generate-bullets'
     | '/api/generate-cover-letter'
+    | '/api/generate-linkedin-bio'
+    | '/api/generate-resignation'
     | '/api/generate-resume'
+    | '/api/generate-summary'
     | '/api/parse-cv-text'
+    | '/api/scan-keywords'
+    | '/api/stripe-webhook'
+    | '/api/subscription-status'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/premium /success'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/ats-checker'
     | '/blog'
+    | '/bullet-writer'
     | '/contact'
     | '/cover-letter'
+    | '/dashboard'
     | '/examples'
     | '/interview-prep'
+    | '/keyword-scanner'
+    | '/linkedin-bio'
     | '/login'
+    | '/pdf-scanner'
     | '/premium'
     | '/privacy'
     | '/reset-password'
+    | '/resignation-letter'
     | '/resume'
     | '/salary-analyzer'
     | '/sitemap.xml'
+    | '/summary-generator'
     | '/terms'
     | '/api/analyze-ats'
+    | '/api/create-checkout'
+    | '/api/generate-bullets'
     | '/api/generate-cover-letter'
+    | '/api/generate-linkedin-bio'
+    | '/api/generate-resignation'
     | '/api/generate-resume'
+    | '/api/generate-summary'
     | '/api/parse-cv-text'
+    | '/api/scan-keywords'
+    | '/api/stripe-webhook'
+    | '/api/subscription-status'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/premium /success'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/ats-checker'
     | '/blog'
+    | '/bullet-writer'
     | '/contact'
     | '/cover-letter'
+    | '/dashboard'
     | '/examples'
     | '/interview-prep'
+    | '/keyword-scanner'
+    | '/linkedin-bio'
     | '/login'
+    | '/pdf-scanner'
     | '/premium'
     | '/privacy'
     | '/reset-password'
+    | '/resignation-letter'
     | '/resume'
     | '/salary-analyzer'
     | '/sitemap.xml'
+    | '/summary-generator'
     | '/terms'
     | '/api/analyze-ats'
+    | '/api/create-checkout'
+    | '/api/generate-bullets'
     | '/api/generate-cover-letter'
+    | '/api/generate-linkedin-bio'
+    | '/api/generate-resignation'
     | '/api/generate-resume'
+    | '/api/generate-summary'
     | '/api/parse-cv-text'
+    | '/api/scan-keywords'
+    | '/api/stripe-webhook'
+    | '/api/subscription-status'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/premium /success'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -308,24 +500,40 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AtsCheckerRoute: typeof AtsCheckerRoute
   BlogRoute: typeof BlogRouteWithChildren
+  BulletWriterRoute: typeof BulletWriterRoute
   ContactRoute: typeof ContactRoute
   CoverLetterRoute: typeof CoverLetterRoute
+  DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
   InterviewPrepRoute: typeof InterviewPrepRoute
+  KeywordScannerRoute: typeof KeywordScannerRoute
+  LinkedinBioRoute: typeof LinkedinBioRoute
   LoginRoute: typeof LoginRoute
+  PdfScannerRoute: typeof PdfScannerRoute
   PremiumRoute: typeof PremiumRoute
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ResignationLetterRoute: typeof ResignationLetterRoute
   ResumeRoute: typeof ResumeRoute
   SalaryAnalyzerRoute: typeof SalaryAnalyzerRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SummaryGeneratorRoute: typeof SummaryGeneratorRoute
   TermsRoute: typeof TermsRoute
   ApiAnalyzeAtsRoute: typeof ApiAnalyzeAtsRoute
+  ApiCreateCheckoutRoute: typeof ApiCreateCheckoutRoute
+  ApiGenerateBulletsRoute: typeof ApiGenerateBulletsRoute
   ApiGenerateCoverLetterRoute: typeof ApiGenerateCoverLetterRoute
+  ApiGenerateLinkedinBioRoute: typeof ApiGenerateLinkedinBioRoute
+  ApiGenerateResignationRoute: typeof ApiGenerateResignationRoute
   ApiGenerateResumeRoute: typeof ApiGenerateResumeRoute
+  ApiGenerateSummaryRoute: typeof ApiGenerateSummaryRoute
   ApiParseCvTextRoute: typeof ApiParseCvTextRoute
+  ApiScanKeywordsRoute: typeof ApiScanKeywordsRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
+  ApiSubscriptionStatusRoute: typeof ApiSubscriptionStatusRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  PremiumSuccessRoute: typeof PremiumSuccessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -335,6 +543,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/summary-generator': {
+      id: '/summary-generator'
+      path: '/summary-generator'
+      fullPath: '/summary-generator'
+      preLoaderRoute: typeof SummaryGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -358,6 +573,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resignation-letter': {
+      id: '/resignation-letter'
+      path: '/resignation-letter'
+      fullPath: '/resignation-letter'
+      preLoaderRoute: typeof ResignationLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -379,11 +601,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PremiumRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pdf-scanner': {
+      id: '/pdf-scanner'
+      path: '/pdf-scanner'
+      fullPath: '/pdf-scanner'
+      preLoaderRoute: typeof PdfScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/linkedin-bio': {
+      id: '/linkedin-bio'
+      path: '/linkedin-bio'
+      fullPath: '/linkedin-bio'
+      preLoaderRoute: typeof LinkedinBioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/keyword-scanner': {
+      id: '/keyword-scanner'
+      path: '/keyword-scanner'
+      fullPath: '/keyword-scanner'
+      preLoaderRoute: typeof KeywordScannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/interview-prep': {
@@ -400,6 +643,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExamplesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cover-letter': {
       id: '/cover-letter'
       path: '/cover-letter'
@@ -412,6 +662,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bullet-writer': {
+      id: '/bullet-writer'
+      path: '/bullet-writer'
+      fullPath: '/bullet-writer'
+      preLoaderRoute: typeof BulletWriterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -442,6 +699,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/premium /success': {
+      id: '/premium /success'
+      path: '/premium /success'
+      fullPath: '/premium /success'
+      preLoaderRoute: typeof PremiumSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -463,11 +727,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadCvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/subscription-status': {
+      id: '/api/subscription-status'
+      path: '/api/subscription-status'
+      fullPath: '/api/subscription-status'
+      preLoaderRoute: typeof ApiSubscriptionStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe-webhook': {
+      id: '/api/stripe-webhook'
+      path: '/api/stripe-webhook'
+      fullPath: '/api/stripe-webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/scan-keywords': {
+      id: '/api/scan-keywords'
+      path: '/api/scan-keywords'
+      fullPath: '/api/scan-keywords'
+      preLoaderRoute: typeof ApiScanKeywordsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/parse-cv-text': {
       id: '/api/parse-cv-text'
       path: '/api/parse-cv-text'
       fullPath: '/api/parse-cv-text'
       preLoaderRoute: typeof ApiParseCvTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-summary': {
+      id: '/api/generate-summary'
+      path: '/api/generate-summary'
+      fullPath: '/api/generate-summary'
+      preLoaderRoute: typeof ApiGenerateSummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/generate-resume': {
@@ -477,11 +769,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGenerateResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/generate-resignation': {
+      id: '/api/generate-resignation'
+      path: '/api/generate-resignation'
+      fullPath: '/api/generate-resignation'
+      preLoaderRoute: typeof ApiGenerateResignationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-linkedin-bio': {
+      id: '/api/generate-linkedin-bio'
+      path: '/api/generate-linkedin-bio'
+      fullPath: '/api/generate-linkedin-bio'
+      preLoaderRoute: typeof ApiGenerateLinkedinBioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/generate-cover-letter': {
       id: '/api/generate-cover-letter'
       path: '/api/generate-cover-letter'
       fullPath: '/api/generate-cover-letter'
       preLoaderRoute: typeof ApiGenerateCoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-bullets': {
+      id: '/api/generate-bullets'
+      path: '/api/generate-bullets'
+      fullPath: '/api/generate-bullets'
+      preLoaderRoute: typeof ApiGenerateBulletsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/create-checkout': {
+      id: '/api/create-checkout'
+      path: '/api/create-checkout'
+      fullPath: '/api/create-checkout'
+      preLoaderRoute: typeof ApiCreateCheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/analyze-ats': {
@@ -509,24 +829,40 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AtsCheckerRoute: AtsCheckerRoute,
   BlogRoute: BlogRouteWithChildren,
+  BulletWriterRoute: BulletWriterRoute,
   ContactRoute: ContactRoute,
   CoverLetterRoute: CoverLetterRoute,
+  DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
   InterviewPrepRoute: InterviewPrepRoute,
+  KeywordScannerRoute: KeywordScannerRoute,
+  LinkedinBioRoute: LinkedinBioRoute,
   LoginRoute: LoginRoute,
+  PdfScannerRoute: PdfScannerRoute,
   PremiumRoute: PremiumRoute,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ResignationLetterRoute: ResignationLetterRoute,
   ResumeRoute: ResumeRoute,
   SalaryAnalyzerRoute: SalaryAnalyzerRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SummaryGeneratorRoute: SummaryGeneratorRoute,
   TermsRoute: TermsRoute,
   ApiAnalyzeAtsRoute: ApiAnalyzeAtsRoute,
+  ApiCreateCheckoutRoute: ApiCreateCheckoutRoute,
+  ApiGenerateBulletsRoute: ApiGenerateBulletsRoute,
   ApiGenerateCoverLetterRoute: ApiGenerateCoverLetterRoute,
+  ApiGenerateLinkedinBioRoute: ApiGenerateLinkedinBioRoute,
+  ApiGenerateResignationRoute: ApiGenerateResignationRoute,
   ApiGenerateResumeRoute: ApiGenerateResumeRoute,
+  ApiGenerateSummaryRoute: ApiGenerateSummaryRoute,
   ApiParseCvTextRoute: ApiParseCvTextRoute,
+  ApiScanKeywordsRoute: ApiScanKeywordsRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
+  ApiSubscriptionStatusRoute: ApiSubscriptionStatusRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  PremiumSuccessRoute: PremiumSuccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

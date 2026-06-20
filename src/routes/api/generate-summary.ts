@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { callAIGateway } from "@/lib/ai-gateway";
+import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
 import { createClient } from "@supabase/supabase-js";
 
 export const Route = createFileRoute("/api/generate-summary")({
@@ -37,7 +37,7 @@ Rules:
 4. End with value proposition
 5. ATS-optimized, no buzzwords
 
-Return ONLY valid JSON:
+Return ONLY valid JSON, no markdown:
 {
   "summaries": [
     { "label": "Results-Focused", "text": "..." },
@@ -52,8 +52,7 @@ Return ONLY valid JSON:
             temperature: 0.7,
           });
 
-          const clean = response.trim().replace(/^```json\s*/i, "").replace(/```\s*$/i, "");
-          const parsed = JSON.parse(clean);
+          const parsed = safeJSON(response);
 
           return new Response(JSON.stringify(parsed), {
             status: 200,

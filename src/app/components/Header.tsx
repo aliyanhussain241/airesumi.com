@@ -25,9 +25,9 @@ const GLASS_HEADER_STYLES = `
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
   .hdr-dropdown {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(80px) saturate(200%) brightness(1.06);
-    border: 1px solid rgba(255, 255, 255, 0.80);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
     box-shadow:
       0 24px 64px rgba(0, 0, 0, 0.13),
       0 4px 16px rgba(234, 88, 12, 0.07),

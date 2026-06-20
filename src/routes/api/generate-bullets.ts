@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { callAIGateway } from "@/lib/ai-gateway";
+import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
 import { createClient } from "@supabase/supabase-js";
 
 export const Route = createFileRoute("/api/generate-bullets")({
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/api/generate-bullets")({
 
 Role: ${role || "Professional"}
 Company: ${company || ""}
-Existing bullet (improve this): ${existingBullet || ""}
+Existing bullet to improve: ${existingBullet || ""}
 Job description keywords: ${jobDescription || ""}
 
 Rules:
@@ -35,10 +35,10 @@ Rules:
 2. Include metrics/numbers where possible (%, $, time saved)
 3. Show impact, not just duties
 4. Keep each bullet under 20 words
-5. Make them ATS-friendly
+5. ATS-friendly
 
-Return ONLY a JSON array of 5 strings. No markdown, no explanation.
-Example: ["Led cross-functional team of 8 to deliver $2M project 2 weeks early", "..."]`;
+Return ONLY a JSON array of 5 strings, no markdown, no explanation:
+["bullet 1", "bullet 2", "bullet 3", "bullet 4", "bullet 5"]`;
 
           const response = await callAIGateway({
             messages: [{ role: "user", content: prompt }],
@@ -46,15 +46,15 @@ Example: ["Led cross-functional team of 8 to deliver $2M project 2 weeks early",
             temperature: 0.7,
           });
 
-          const clean = response.trim().replace(/^```json\s*/i, "").replace(/```\s*$/i, "");
           let bullets: string[];
           try {
-            bullets = JSON.parse(clean);
+            bullets = safeJSON<string[]>(response);
             if (!Array.isArray(bullets)) throw new Error("Not array");
           } catch {
-            // fallback: split by newline
-            bullets = clean.split("\n").filter((l: string) => l.trim().startsWith('"') || l.trim().startsWith("-"))
-              .map((l: string) => l.replace(/^[-"•]\s*/, "").replace(/",$/, "").replace(/^"|"$/g, "").trim())
+            bullets = response
+              .split("\n")
+              .filter((l: string) => l.trim().length > 10)
+              .map((l: string) => l.replace(/^[-•"*\d.]+\s*/, "").replace(/",$/, "").replace(/^"|"$/g, "").trim())
               .filter(Boolean)
               .slice(0, 5);
           }

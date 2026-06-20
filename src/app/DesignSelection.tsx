@@ -1,3 +1,10 @@
+**Zabardast!** Main abhi aapko 5 bilkul naye aur **Highly Detailed Premium Designs** ka code de raha hoon. In preview designs mein maine avatar (profile picture) ki jagah, skill progress bars, timelines, aur modern 2-column layouts add kiye hain taake ye waqai premium feel dein.
+
+Aap apni `src/app/DesignSelection.tsx` file ka poora code is naye code se replace kar dain.
+
+### Updated `DesignSelection.tsx` Code:
+
+```tsx
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, Crown } from "lucide-react";
@@ -10,7 +17,7 @@ interface DesignSelectionProps {
   setStep: (step: Step) => void;
 }
 
-// 1. Pehle 20 Free Themes (18 purane + 2 naye)
+// 1. 20 Free Themes (Originals)
 const freeDesigns: { id: string; name: string; desc: string; preview: React.ReactNode; isPremium?: boolean }[] = [
   {
     id: 'classic', name: 'Classic', desc: 'Timeless & professional',
@@ -94,29 +101,130 @@ const freeDesigns: { id: string; name: string; desc: string; preview: React.Reac
   }
 ];
 
-// 2. 30 Naye Premium Themes Generate kiye hain (Smart Code ke zariye)
-const premiumColors = ['#F59E0B', '#10B981', '#3B82F6', '#8B5CF6', '#EF4444', '#EC4899', '#06B6D4', '#F97316', '#14B8A6', '#6366F1'];
-const premiumDesigns = Array.from({ length: 30 }).map((_, index) => {
-  const color = premiumColors[index % premiumColors.length];
-  return {
-    id: `premium-theme-${index + 1}`,
-    name: `Pro Design ${index + 1}`,
-    desc: 'Exclusive Premium Template',
-    isPremium: true,
+// 2. 5 Detailed Premium Themes
+const premiumDesigns: { id: string; name: string; desc: string; preview: React.ReactNode; isPremium?: boolean }[] = [
+  {
+    id: 'pro-executive', name: 'Pro Executive', desc: 'Advanced avatar & skills layout', isPremium: true,
     preview: (
-      <div className="w-full h-full bg-white flex flex-col overflow-hidden border-t-4" style={{ borderColor: color }}>
-        <div className="p-2 flex-1">
-          <div className="h-2 w-3/4 bg-gray-800 mb-1 rounded-sm"></div>
-          <div className="h-1 w-1/2 mb-2 rounded-sm" style={{ backgroundColor: color }}></div>
-          <div className="w-full h-1 bg-gray-200 mb-1 rounded-sm"></div>
-          <div className="w-4/5 h-1 bg-gray-200 rounded-sm"></div>
+      <div className="w-full h-full flex overflow-hidden border border-gray-200">
+        <div className="w-[40%] bg-slate-900 p-2 flex flex-col items-center">
+          <div className="w-8 h-8 rounded-full border-2 border-amber-400 mb-2"></div>
+          <div className="flex flex-col gap-1.5 w-full">
+            <div className="h-1 w-full bg-slate-800 rounded-full"><div className="h-full w-[80%] bg-amber-400 rounded-full"></div></div>
+            <div className="h-1 w-full bg-slate-800 rounded-full"><div className="h-full w-[60%] bg-amber-400 rounded-full"></div></div>
+            <div className="h-1 w-full bg-slate-800 rounded-full"><div className="h-full w-[90%] bg-amber-400 rounded-full"></div></div>
+          </div>
+        </div>
+        <div className="w-[60%] bg-white p-2 flex flex-col gap-1.5">
+          <div className="w-5/6 h-2 bg-slate-900 mb-0.5"></div>
+          <div className="w-1/2 h-1 bg-amber-400 mb-2"></div>
+          <div className="flex gap-1 items-start"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-0.5"></div><div className="flex-1 h-1 bg-slate-200"></div></div>
+          <div className="flex gap-1 items-start"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-0.5"></div><div className="flex-1 h-1 bg-slate-200"></div></div>
         </div>
       </div>
     )
-  };
-});
+  },
+  {
+    id: 'pro-infographic', name: 'Pro Infographic', desc: 'Modern header & data viz', isPremium: true,
+    preview: (
+      <div className="w-full h-full flex flex-col bg-slate-50 overflow-hidden border border-gray-200">
+        <div className="h-10 w-full bg-indigo-600 flex items-center px-2 gap-2">
+          <div className="w-6 h-6 rounded-full bg-white border-2 border-indigo-200 shadow-sm"></div>
+          <div className="flex flex-col gap-1 w-1/2">
+            <div className="w-full h-1.5 bg-white rounded"></div>
+            <div className="w-2/3 h-1 bg-indigo-300 rounded"></div>
+          </div>
+        </div>
+        <div className="flex flex-1 p-2 gap-2">
+          <div className="w-[65%] flex flex-col gap-1.5">
+            <div className="w-full h-1.5 bg-slate-300 rounded-sm"></div>
+            <div className="w-5/6 h-1 bg-slate-200"></div>
+            <div className="w-full h-1 bg-slate-300 mt-1"></div>
+          </div>
+          <div className="w-[35%] flex flex-col gap-1.5 border-l border-slate-200 pl-1.5">
+            <div className="w-full h-2 bg-indigo-200 rounded"></div>
+            <div className="w-4/5 h-2 bg-indigo-200 rounded"></div>
+            <div className="w-full h-2 bg-indigo-200 rounded"></div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'pro-developer', name: 'Pro Developer', desc: 'Dark mode code aesthetic', isPremium: true,
+    preview: (
+      <div className="w-full h-full bg-[#0d1117] flex flex-col overflow-hidden p-2 border border-[#30363d]">
+        <div className="flex items-center gap-1 mb-2 border-b border-[#30363d] pb-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+          <div className="w-1/2 h-1 bg-[#8b949e] ml-2"></div>
+        </div>
+        <div className="flex gap-2 flex-1">
+          <div className="w-1/3 flex flex-wrap content-start gap-1">
+            <div className="w-full h-1.5 bg-[#58a6ff] rounded-full"></div>
+            <div className="w-4/5 h-1.5 bg-[#7ee787] rounded-full"></div>
+            <div className="w-full h-1.5 bg-[#ff7b72] rounded-full"></div>
+          </div>
+          <div className="w-2/3 border-l border-[#30363d] pl-2 flex flex-col gap-1.5">
+             <div className="w-full h-1 bg-[#c9d1d9]"></div>
+             <div className="w-5/6 h-1 bg-[#c9d1d9]"></div>
+             <div className="w-full h-1 bg-[#8b949e] mt-1"></div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'pro-agency', name: 'Pro Agency', desc: 'Vibrant split & typography', isPremium: true,
+    preview: (
+      <div className="w-full h-full flex overflow-hidden">
+        <div className="w-[45%] bg-gradient-to-br from-pink-500 to-orange-400 p-2 flex flex-col justify-between">
+           <div className="w-8 h-8 rounded-xl bg-white/30 backdrop-blur-sm border border-white/50"></div>
+           <div>
+             <div className="w-full h-1.5 bg-white mb-1 rounded-sm"></div>
+             <div className="w-2/3 h-1 bg-white/70 rounded-sm"></div>
+           </div>
+        </div>
+        <div className="w-[55%] bg-white p-2 flex flex-col gap-2">
+           <div className="w-full h-2 bg-slate-800 rounded-sm"></div>
+           <div className="w-3/4 h-1 bg-slate-300"></div>
+           <div className="grid grid-cols-2 gap-1 mt-1">
+              <div className="h-6 bg-slate-100 rounded border border-slate-200"></div>
+              <div className="h-6 bg-slate-100 rounded border border-slate-200"></div>
+           </div>
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 'pro-elegant', name: 'Pro Elegant', desc: 'High-end serif & gold', isPremium: true,
+    preview: (
+      <div className="w-full h-full bg-[#fdfbf7] p-2 flex flex-col border-2 border-[#d4af37]/20">
+         <div className="flex flex-col items-center border-b border-[#d4af37] pb-2 mb-2">
+            <div className="w-7 h-7 rounded-full bg-[#2c3e50] flex items-center justify-center mb-1">
+               <div className="w-4 h-4 rounded-full border border-[#d4af37]"></div>
+            </div>
+            <div className="w-1/2 h-1.5 bg-[#2c3e50] mb-0.5"></div>
+            <div className="w-1/4 h-0.5 bg-[#d4af37]"></div>
+         </div>
+         <div className="flex justify-between gap-2 px-1">
+            <div className="w-1/2 flex flex-col gap-1 text-center items-center">
+               <div className="w-full h-0.5 bg-[#2c3e50]"></div>
+               <div className="w-4/5 h-0.5 bg-slate-300"></div>
+            </div>
+            <div className="w-px h-6 bg-[#d4af37]/50"></div>
+            <div className="w-1/2 flex flex-col gap-1 text-center items-center">
+               <div className="w-full h-0.5 bg-[#2c3e50]"></div>
+               <div className="w-4/5 h-0.5 bg-slate-300"></div>
+            </div>
+         </div>
+      </div>
+    )
+  }
+];
 
-// 3. Dono (Free + Premium) ko mila kar 50 themes ka mukammal Array banaya
+// 3. Combine both arrays
 const allDesigns = [...freeDesigns, ...premiumDesigns];
 
 export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setDesignId, setStep }) => {
@@ -132,7 +240,7 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
         <div>
           <span className="text-xs uppercase tracking-widest font-bold text-[#FF6321] mb-2 block">Step 02 / 03</span>
           <h2 className="text-4xl font-bold tracking-tight">Choose Design</h2>
-          <p className="text-gray-500 text-sm mt-1">{allDesigns.length} templates available (20 Free, 30 Premium)</p>
+          <p className="text-gray-500 text-sm mt-1">{allDesigns.length} templates available (20 Free, {premiumDesigns.length} Premium)</p>
         </div>
       </div>
 
@@ -148,7 +256,7 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
                   : 'border-[#e5e7eb] hover:border-[#d1d5db] hover:shadow-sm'
               }`}
             >
-              {/* Premium Badge Logic */}
+              {/* Premium Crown Badge */}
               {design.isPremium && (
                 <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white p-1.5 rounded-full shadow-lg z-10">
                   <Crown size={14} className="fill-current" />
@@ -187,3 +295,5 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
     </motion.div>
   );
 };
+
+```

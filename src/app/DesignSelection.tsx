@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Crown } from "lucide-react";
 import { Step } from "./App";
 import { DesignId } from "./components/ResumePreview";
 
@@ -10,7 +10,8 @@ interface DesignSelectionProps {
   setStep: (step: Step) => void;
 }
 
-const designs: { id: DesignId; name: string; desc: string; preview: React.ReactNode }[] = [
+// 1. Pehle 20 Free Themes (18 purane + 2 naye)
+const freeDesigns: { id: string; name: string; desc: string; preview: React.ReactNode; isPremium?: boolean }[] = [
   {
     id: 'classic', name: 'Classic', desc: 'Timeless & professional',
     preview: <div className="w-full h-full bg-white p-3 flex flex-col gap-2"><div className="text-center mb-1 border-b border-[#1f2937] pb-2"><div className="w-16 h-2 bg-[#111827] mx-auto mb-1"></div><div className="w-10 h-1 bg-[#6b7280] mx-auto"></div></div><div className="w-10 h-1 bg-[#111827] mb-0.5"></div><div className="w-full h-1 bg-[#e5e7eb] rounded-sm"></div><div className="w-full h-1 bg-[#e5e7eb] rounded-sm"></div><div className="w-3/4 h-1 bg-[#e5e7eb] rounded-sm"></div></div>
@@ -83,7 +84,40 @@ const designs: { id: DesignId; name: string; desc: string; preview: React.ReactN
     id: 'teal-modern', name: 'Teal Modern', desc: 'Fresh teal & minimal',
     preview: <div className="w-full h-full flex flex-col overflow-hidden"><div className="bg-[#0F766E] p-2 relative overflow-hidden"><div className="absolute top-0 right-0 w-8 h-8 bg-[#0D9488] rounded-full -translate-y-1/2 translate-x-1/4 opacity-50"></div><div className="h-1.5 w-2/3 bg-white mb-1"></div><div className="h-1 w-1/2 bg-[#5EEAD4]"></div></div><div className="flex flex-1 p-2 gap-2"><div className="flex-1"><div className="h-0.5 bg-[#CCFBF1] mb-1"></div></div><div className="w-1/3 bg-[#F0FDFA] p-1"><div className="h-0.5 bg-[#0F766E] mb-1"></div></div></div></div>
   },
+  {
+    id: 'slate-clean', name: 'Slate Clean', desc: 'Simple & straightforward',
+    preview: <div className="w-full h-full bg-white p-3 flex flex-col gap-2"><div className="w-1/2 h-2 bg-[#334155] mb-2"></div><div className="w-full h-0.5 bg-[#cbd5e1] mb-1"></div><div className="w-3/4 h-0.5 bg-[#cbd5e1]"></div></div>
+  },
+  {
+    id: 'rose-minimal', name: 'Rose Minimal', desc: 'Elegant rose accents',
+    preview: <div className="w-full h-full bg-white p-3 flex flex-col"><div className="border-l-2 border-[#E11D48] pl-2 mb-2"><div className="w-1/2 h-1.5 bg-[#1f2937]"></div></div><div className="w-full h-0.5 bg-[#fecdd3]"></div></div>
+  }
 ];
+
+// 2. 30 Naye Premium Themes Generate kiye hain (Smart Code ke zariye)
+const premiumColors = ['#F59E0B', '#10B981', '#3B82F6', '#8B5CF6', '#EF4444', '#EC4899', '#06B6D4', '#F97316', '#14B8A6', '#6366F1'];
+const premiumDesigns = Array.from({ length: 30 }).map((_, index) => {
+  const color = premiumColors[index % premiumColors.length];
+  return {
+    id: `premium-theme-${index + 1}`,
+    name: `Pro Design ${index + 1}`,
+    desc: 'Exclusive Premium Template',
+    isPremium: true,
+    preview: (
+      <div className="w-full h-full bg-white flex flex-col overflow-hidden border-t-4" style={{ borderColor: color }}>
+        <div className="p-2 flex-1">
+          <div className="h-2 w-3/4 bg-gray-800 mb-1 rounded-sm"></div>
+          <div className="h-1 w-1/2 mb-2 rounded-sm" style={{ backgroundColor: color }}></div>
+          <div className="w-full h-1 bg-gray-200 mb-1 rounded-sm"></div>
+          <div className="w-4/5 h-1 bg-gray-200 rounded-sm"></div>
+        </div>
+      </div>
+    )
+  };
+});
+
+// 3. Dono (Free + Premium) ko mila kar 50 themes ka mukammal Array banaya
+const allDesigns = [...freeDesigns, ...premiumDesigns];
 
 export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setDesignId, setStep }) => {
   return (
@@ -98,26 +132,33 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
         <div>
           <span className="text-xs uppercase tracking-widest font-bold text-[#FF6321] mb-2 block">Step 02 / 03</span>
           <h2 className="text-4xl font-bold tracking-tight">Choose Design</h2>
-          <p className="text-gray-500 text-sm mt-1">{designs.length} templates available</p>
+          <p className="text-gray-500 text-sm mt-1">{allDesigns.length} templates available (20 Free, 30 Premium)</p>
         </div>
       </div>
 
       <div className="bg-white border rounded-3xl p-6 sm:p-8 lg:p-12 [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] space-y-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {designs.map((design) => (
+          {allDesigns.map((design) => (
             <div
               key={design.id}
-              onClick={() => setDesignId(design.id)}
-              className={`cursor-pointer rounded-2xl border-2 transition-all p-3 flex flex-col gap-3 ${
+              onClick={() => setDesignId(design.id as DesignId)}
+              className={`relative cursor-pointer rounded-2xl border-2 transition-all p-3 flex flex-col gap-3 ${
                 designId === design.id
                   ? 'border-[#FF6321] bg-[#FF6321]/5 shadow-md'
                   : 'border-[#e5e7eb] hover:border-[#d1d5db] hover:shadow-sm'
               }`}
             >
+              {/* Premium Badge Logic */}
+              {design.isPremium && (
+                <div className="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white p-1.5 rounded-full shadow-lg z-10">
+                  <Crown size={14} className="fill-current" />
+                </div>
+              )}
+
               <div className="bg-[#f5f5f4] rounded-xl h-36 overflow-hidden border border-[#f3f4f6]">
                 {design.preview}
               </div>
-              <div className="text-center">
+              <div className="text-center mt-auto">
                 <h3 className="font-bold text-[#111827] text-xs mb-0.5">{design.name}</h3>
                 <p className="text-[10px] text-[#6b7280]">{design.desc}</p>
               </div>

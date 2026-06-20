@@ -24,20 +24,39 @@ const GLASS_HEADER_STYLES = `
     box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
-  /* Updated: Clean & Readable Glass dropdown */
+  /* Liquid Glass dropdown - RESTORED */
   .hdr-dropdown {
     position: absolute;
-    background: rgba(255, 255, 255, 0.94); /* Solidified white background */
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    isolation: isolate;
+    background: transparent;
     border-radius: 1.5rem;
     overflow: hidden;
     box-shadow:
-      0 10px 40px rgba(0, 0, 0, 0.12),
-      0 0 20px rgba(234, 88, 12, 0.05);
+      0 6px 6px rgba(0, 0, 0, 0.18),
+      0 12px 40px rgba(0, 0, 0, 0.12),
+      0 0 20px rgba(234, 88, 12, 0.06);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
   }
+  /* Layer 1: refracted/distorted background - (Blur increased for readability) */
+  .hdr-dropdown::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    backdrop-filter: blur(24px) saturate(160%); /* Pehle 3px tha, ab 24px hai taake background blur ho */
+    filter: url(#hdr-glass-distortion);
+    isolation: isolate;
+  }
+  /* Layer 2: soft white tint - (Opacity increased to hide text behind) */
+  .hdr-dropdown::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.75); /* Pehle 0.28 tha, ab 0.75 hai */
+    pointer-events: none;
+  }
+  /* Layer 3: inner highlight ring */
   .hdr-dropdown > .hdr-dropdown-shine {
     position: absolute;
     inset: 0;
@@ -53,8 +72,8 @@ const GLASS_HEADER_STYLES = `
     z-index: 3;
   }
   .hdr-dropdown-footer {
-    background: rgba(0, 0, 0, 0.03);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.45);
   }
   .hdr-btn-primary {
     background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
@@ -211,6 +230,16 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   return (
     <>
       <style>{GLASS_HEADER_STYLES}</style>
+      {/* Liquid Glass SVG distortion filter (shared) */}
+      <svg width="0" height="0" style={{ position: 'absolute', overflow: 'hidden' }} aria-hidden="true">
+        <defs>
+          <filter id="hdr-glass-distortion" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+            <feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise" />
+            <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="60" xChannelSelector="R" yChannelSelector="B" />
+          </filter>
+        </defs>
+      </svg>
       <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] print:hidden font-['Inter',sans-serif] ${isScrolled ? 'hdr-glass-scrolled' : 'hdr-glass'}`}>
         <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between gap-6">
 

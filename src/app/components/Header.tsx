@@ -25,11 +25,19 @@ const GLASS_HEADER_STYLES = `
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
   .hdr-dropdown {
-    background: rgba(255,255,255,0.75);
-    backdrop-filter: blur(32px) saturate(180%);
-    -webkit-backdrop-filter: blur(32px) saturate(180%);
-    border: 1px solid rgba(255,255,255,0.6);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
+    background: rgba(255, 255, 255, 0.58);
+    backdrop-filter: blur(48px) saturate(200%) brightness(1.06);
+    -webkit-backdrop-filter: blur(48px) saturate(200%) brightness(1.06);
+    border: 1px solid rgba(255, 255, 255, 0.80);
+    box-shadow:
+      0 24px 64px rgba(0, 0, 0, 0.13),
+      0 4px 16px rgba(234, 88, 12, 0.07),
+      inset 0 1px 0 rgba(255, 255, 255, 0.98),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+  }
+  .hdr-dropdown-footer {
+    background: rgba(255, 255, 255, 0.35);
+    border-top: 1px solid rgba(255, 255, 255, 0.55);
   }
   .hdr-btn-primary {
     background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
@@ -68,9 +76,11 @@ const GLASS_HEADER_STYLES = `
   }
   .hdr-tool-item:hover {
     background: rgba(234,88,12,0.06);
+    border-radius: 12px;
   }
   .hdr-tool-item.active {
     background: rgba(234,88,12,0.1);
+    border-radius: 12px;
   }
   .hdr-mobile {
     background: rgba(255,255,255,0.88);
@@ -98,22 +108,22 @@ const resumeTools = [
 ];
 
 const otherTools = [
-  { name: 'Cover Letter',       to: '/cover-letter',       icon: Mail,          desc: 'Tailored cover letters' },
-  { name: 'LinkedIn Bio',       to: '/linkedin-bio',       icon: Linkedin,      desc: 'Profile generator' },
-  { name: 'ATS Checker',        to: '/ats-checker',        icon: Target,        desc: 'Score your resume' },
-  { name: 'Interview Prep',     to: '/interview-prep',     icon: Wand2,         desc: 'Practice questions' },
-  { name: 'Resignation Letter', to: '/resignation-letter', icon: FileText,      desc: 'Leave on good terms' },
-  { name: 'PDF Scanner',        to: '/pdf-scanner',        icon: ScanLine,      desc: 'Scan documents to PDF' },
-  { name: 'Job Search',         to: '/salary-analyzer',    icon: Briefcase,     desc: 'Salary & market insights' },
+  { name: 'Cover Letter',       to: '/cover-letter',       icon: Mail,     desc: 'Tailored cover letters' },
+  { name: 'LinkedIn Bio',       to: '/linkedin-bio',       icon: Linkedin, desc: 'Profile generator' },
+  { name: 'ATS Checker',        to: '/ats-checker',        icon: Target,   desc: 'Score your resume' },
+  { name: 'Interview Prep',     to: '/interview-prep',     icon: Wand2,    desc: 'Practice questions' },
+  { name: 'Resignation Letter', to: '/resignation-letter', icon: FileText, desc: 'Leave on good terms' },
+  { name: 'PDF Scanner',        to: '/pdf-scanner',        icon: ScanLine, desc: 'Scan documents to PDF' },
+  { name: 'Job Search',         to: '/salary-analyzer',    icon: Briefcase,desc: 'Salary & market insights' },
 ];
 
 export const Header = ({ windowWidth }: { windowWidth?: number }) => {
-  const [isScrolled, setIsScrolled]           = useState(false);
-  const [isMobileOpen, setIsMobileOpen]       = useState(false);
-  const [isResumeOpen, setIsResumeOpen]       = useState(false);
-  const [isOtherOpen, setIsOtherOpen]         = useState(false);
-  const [user, setUser]                       = useState<any>(null);
-  const [width, setWidth]                     = useState(windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200));
+  const [isScrolled, setIsScrolled]     = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [isOtherOpen, setIsOtherOpen]   = useState(false);
+  const [user, setUser]                 = useState<any>(null);
+  const [width, setWidth]               = useState(windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200));
   const location  = useLocation();
   const navigate  = useNavigate();
   const resumeRef = useRef<HTMLDivElement>(null);
@@ -143,13 +153,17 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   useEffect(() => {
     const fn = (e: MouseEvent) => {
       if (resumeRef.current && !resumeRef.current.contains(e.target as Node)) setIsResumeOpen(false);
-      if (otherRef.current && !otherRef.current.contains(e.target as Node)) setIsOtherOpen(false);
+      if (otherRef.current  && !otherRef.current.contains(e.target as Node))  setIsOtherOpen(false);
     };
     document.addEventListener('mousedown', fn);
     return () => document.removeEventListener('mousedown', fn);
   }, []);
 
-  useEffect(() => { setIsResumeOpen(false); setIsOtherOpen(false); setIsMobileOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setIsResumeOpen(false);
+    setIsOtherOpen(false);
+    setIsMobileOpen(false);
+  }, [location.pathname]);
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
@@ -157,8 +171,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
     const Icon = tool.icon;
     const active = location.pathname === tool.to;
     return (
-      <Link key={tool.to} to={tool.to} onClick={onClose}
-        className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
+      <Link to={tool.to} onClick={onClose}
+        className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
         <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
           <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
         </div>
@@ -168,6 +182,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         </div>
       </Link>
     );
+  };
+
+  const DropdownAnimation = {
+    initial: { opacity: 0, y: 8, scale: 0.96 },
+    animate: { opacity: 1, y: 0, scale: 1 },
+    exit:    { opacity: 0, y: 8, scale: 0.96 },
+    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] },
   };
 
   return (
@@ -182,11 +203,12 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-0.5 flex-1">
 
-            <Link to="/" className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+            <Link to="/"
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               Home
             </Link>
 
-            {/* Resume Tools dropdown */}
+            {/* Resume Tools */}
             <div ref={resumeRef} className="relative">
               <button
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
@@ -198,11 +220,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <AnimatePresence>
                 {isResumeOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
-                    transition={{ duration: 0.18, ease: [0.22,1,0.36,1] }}
-                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl overflow-hidden"
+                    {...DropdownAnimation}
+                    style={{ transformOrigin: 'top center' }}
+                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl"
                   >
                     <div className="p-4">
                       <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
@@ -210,7 +230,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                         <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
                       ))}
                     </div>
-                    <div className="border-t border-white/40 bg-white/30 px-6 py-2.5 flex items-center justify-between">
+                    <div className="hdr-dropdown-footer rounded-b-2xl px-5 py-2.5 flex items-center justify-between">
                       <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
                       <Link to="/resume" onClick={() => setIsResumeOpen(false)}
                         className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
@@ -222,7 +242,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </AnimatePresence>
             </div>
 
-            {/* Other Tools dropdown */}
+            {/* Other Tools */}
             <div ref={otherRef} className="relative">
               <button
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
@@ -234,11 +254,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <AnimatePresence>
                 {isOtherOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.97 }}
-                    transition={{ duration: 0.18, ease: [0.22,1,0.36,1] }}
-                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl overflow-hidden"
+                    {...DropdownAnimation}
+                    style={{ transformOrigin: 'top center' }}
+                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl"
                   >
                     <div className="p-4">
                       <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
@@ -246,7 +264,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                         <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
                       ))}
                     </div>
-                    <div className="border-t border-white/40 bg-white/30 px-6 py-2.5 flex items-center justify-between">
+                    <div className="hdr-dropdown-footer rounded-b-2xl px-5 py-2.5 flex items-center justify-between">
                       <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
                       <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)}
                         className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
@@ -258,8 +276,14 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </AnimatePresence>
             </div>
 
-            <Link to="/examples" className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>Examples</Link>
-            <Link to="/blog"     className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog'     ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>Blog</Link>
+            <Link to="/examples"
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              Examples
+            </Link>
+            <Link to="/blog"
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              Blog
+            </Link>
           </nav>
 
           {/* Right side */}
@@ -315,7 +339,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             className="fixed inset-0 z-[1002]"
           >
             <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} />
-
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -366,9 +389,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 })}
 
                 <Link to="/examples" onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5 mt-2">Examples</Link>
+                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5 mt-2">
+                  Examples
+                </Link>
                 <Link to="/blog" onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">Blog</Link>
+                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
+                  Blog
+                </Link>
 
                 {user ? (
                   <>

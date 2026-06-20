@@ -230,6 +230,16 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   return (
     <>
       <style>{GLASS_HEADER_STYLES}</style>
+      {/* Liquid Glass SVG distortion filter (shared) */}
+      <svg width="0" height="0" style={{ position: 'absolute', overflow: 'hidden' }} aria-hidden="true">
+        <defs>
+          <filter id="hdr-glass-distortion" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+            <feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise" />
+            <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="60" xChannelSelector="R" yChannelSelector="B" />
+          </filter>
+        </defs>
+      </svg>
       <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] print:hidden font-['Inter',sans-serif] ${isScrolled ? 'hdr-glass-scrolled' : 'hdr-glass'}`}>
         <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between gap-6">
 
@@ -260,18 +270,21 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl"
                   >
-                    <div className="p-4">
-                      <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
-                      {resumeTools.map(tool => (
-                        <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
-                      ))}
-                    </div>
-                    <div className="hdr-dropdown-footer rounded-b-2xl px-5 py-2.5 flex items-center justify-between">
-                      <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
-                      <Link to="/resume" onClick={() => setIsResumeOpen(false)}
-                        className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                        Start free →
-                      </Link>
+                    <span className="hdr-dropdown-shine" aria-hidden="true" />
+                    <div className="hdr-dropdown-content">
+                      <div className="p-4">
+                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
+                        {resumeTools.map(tool => (
+                          <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
+                        ))}
+                      </div>
+                      <div className="hdr-dropdown-footer rounded-b-2xl px-5 py-2.5 flex items-center justify-between">
+                        <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
+                        <Link to="/resume" onClick={() => setIsResumeOpen(false)}
+                          className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
+                          Start free →
+                        </Link>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -294,18 +307,21 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[280px] rounded-2xl"
                   >
-                    <div className="p-4">
-                      <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
-                      {otherTools.map(tool => (
-                        <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
-                      ))}
-                    </div>
-                    <div className="hdr-dropdown-footer rounded-b-2xl px-5 py-2.5 flex items-center justify-between">
-                      <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
-                      <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)}
-                        className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                        Explore →
-                      </Link>
+                    <span className="hdr-dropdown-shine" aria-hidden="true" />
+                    <div className="hdr-dropdown-content">
+                      <div className="p-4">
+                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
+                        {otherTools.map(tool => (
+                          <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
+                        ))}
+                      </div>
+                      <div className="hdr-dropdown-footer rounded-b-2xl px-5 py-2.5 flex items-center justify-between">
+                        <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
+                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)}
+                          className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
+                          Explore →
+                        </Link>
+                      </div>
                     </div>
                   </motion.div>
                 )}

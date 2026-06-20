@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   CheckCircle2, XCircle, AlertTriangle, ArrowRight, BarChart3, 
@@ -37,8 +38,12 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
       const formData = new FormData();
       formData.append('cv', file);
 
+      const { data: { session: cvSession } } = await supabase.auth.getSession();
       const response = await fetch('/api/parse-cv-text', {
         method: 'POST',
+        headers: {
+          ...(cvSession?.access_token ? { 'Authorization': `Bearer ${cvSession.access_token}` } : {}),
+        },
         body: formData,
       });
 
@@ -70,9 +75,13 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
     setError(null);
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const response = await fetch('/api/analyze-ats', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { 'Authorization': `Bearer ${session.access_token}` } : {}),
+        },
         body: JSON.stringify({ resumeText, jobDescription })
       });
 

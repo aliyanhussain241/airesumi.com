@@ -11,16 +11,16 @@ import rezumiLogo from '@/assets/ai-resumi.webp';
 const GLASS_HEADER_STYLES = `
   .hdr-glass {
     background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(60px) saturate(180%);
+    -webkit-backdrop-filter: blur(60px) saturate(180%);
     border-bottom: 1px solid rgba(255,255,255,0.5);
     box-shadow: 0 2px 24px rgba(234,88,12,0.06), 0 1px 0 rgba(255,255,255,0.8) inset;
     transition: all 0.3s ease;
   }
   .hdr-glass-scrolled {
     background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    backdrop-filter: blur(62px) saturate(200%);
+    -webkit-backdrop-filter: blur(62px) saturate(200%);
     box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
@@ -42,8 +42,8 @@ const GLASS_HEADER_STYLES = `
     position: absolute;
     inset: 0;
     z-index: 0;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     filter: url(#glass-distortion);
     isolation: isolate;
   }

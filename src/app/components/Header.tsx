@@ -25,9 +25,9 @@ const GLASS_HEADER_STYLES = `
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
   .hdr-dropdown {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(80px) saturate(200%) brightness(1.06);
-    border: 1px solid rgba(255, 255, 255, 0.80);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
     box-shadow:
       0 24px 64px rgba(0, 0, 0, 0.13),
       0 4px 16px rgba(234, 88, 12, 0.07),
@@ -187,7 +187,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
     initial: { opacity: 0, y: 8, scale: 0.96 },
     animate: { opacity: 1, y: 0, scale: 1 },
     exit:    { opacity: 0, y: 8, scale: 0.96 },
-    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   };
 
   return (

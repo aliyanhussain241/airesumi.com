@@ -7,7 +7,7 @@ export const Route = createFileRoute("/api/stripe-webhook")({
     handlers: {
       POST: async ({ request }) => {
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-          apiVersion: "2025-04-30.basil",
+          apiVersion: "2025-04-30.basil" as any,
           httpClient: Stripe.createFetchHttpClient(),
         });
         const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -82,7 +82,7 @@ export const Route = createFileRoute("/api/stripe-webhook")({
 
             // ✅ Subscription renewed
             case "invoice.payment_succeeded": {
-              const invoice = event.data.object as Stripe.Invoice;
+              const invoice = event.data.object as Stripe.Invoice & { subscription?: string };
               if (!invoice.subscription) break;
               const sub = await stripe.subscriptions.retrieve(invoice.subscription as string);
               const userId = sub.metadata?.user_id;
@@ -100,7 +100,7 @@ export const Route = createFileRoute("/api/stripe-webhook")({
 
             // ✅ Payment failed
             case "invoice.payment_failed": {
-              const invoice = event.data.object as Stripe.Invoice;
+              const invoice = event.data.object as Stripe.Invoice & { subscription?: string };
               if (!invoice.subscription) break;
               const sub = await stripe.subscriptions.retrieve(invoice.subscription as string);
               const userId = sub.metadata?.user_id;

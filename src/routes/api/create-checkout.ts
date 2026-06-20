@@ -27,7 +27,7 @@ export const Route = createFileRoute("/api/create-checkout")({
           const { plan } = await request.json() as { plan: "pro_monthly" | "pro_yearly" | "lifetime" };
 
           const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-            apiVersion: "2025-04-30.basil",
+            apiVersion: "2025-04-30.basil" as any,
             httpClient: Stripe.createFetchHttpClient(),
           });
 

@@ -183,7 +183,7 @@ function Dashboard() {
     if (error) {
       setError("Could not load resumes. Please try again.");
     } else {
-      setResumes((data as SavedResume[]) ?? []);
+      setResumes((data as unknown as SavedResume[]) ?? []);
     }
     setLoading(false);
   }

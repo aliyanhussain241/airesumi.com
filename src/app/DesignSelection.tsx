@@ -1,10 +1,3 @@
-**Zabardast!** Main abhi aapko 5 bilkul naye aur **Highly Detailed Premium Designs** ka code de raha hoon. In preview designs mein maine avatar (profile picture) ki jagah, skill progress bars, timelines, aur modern 2-column layouts add kiye hain taake ye waqai premium feel dein.
-
-Aap apni `src/app/DesignSelection.tsx` file ka poora code is naye code se replace kar dain.
-
-### Updated `DesignSelection.tsx` Code:
-
-```tsx
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, Crown } from "lucide-react";
@@ -295,5 +288,3 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
     </motion.div>
   );
 };
-
-```

@@ -11,44 +11,47 @@ import rezumiLogo from '@/assets/ai-resumi.webp';
 const GLASS_HEADER_STYLES = `
   .hdr-glass {
     background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(60px) saturate(180%);
-    -webkit-backdrop-filter: blur(60px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid rgba(255,255,255,0.5);
     box-shadow: 0 2px 24px rgba(234,88,12,0.06), 0 1px 0 rgba(255,255,255,0.8) inset;
     transition: all 0.3s ease;
   }
   .hdr-glass-scrolled {
     background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(62px) saturate(200%);
-    -webkit-backdrop-filter: blur(62px) saturate(200%);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
     box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
   
-  /* PERFECT LIQUID GLASS DROPDOWN (From your Prompt) */
+  /* HEAVY GAUSSIAN BLUR + LIQUID GLASS DROPDOWN */
   .hdr-dropdown {
     position: absolute;
     isolation: isolate;
     background: transparent;
     border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.05);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    
+    /* BASE LAYER: STRONG GAUSSIAN BLUR */
+    backdrop-filter: blur(40px) saturate(160%);
+    -webkit-backdrop-filter: blur(40px) saturate(160%);
   }
   
-  /* Layer 1: Distorted Glass Filter */
+  /* Layer 1: Distorted Glass Filter (Liquid Effect) */
   .hdr-dropdown::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: -20px; /* Negative inset to prevent edge clipping */
     z-index: 0;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     filter: url(#glass-distortion);
-    isolation: isolate;
+    opacity: 0.6; /* Balanced to let the Gaussian Blur shine through */
+    pointer-events: none;
   }
   
-  /* Layer 2: White Tint (Slightly increased to 0.45 so text is readable over any background) */
+  /* Layer 2: White Tint for Readability */
   .hdr-dropdown::after {
     content: "";
     position: absolute;
@@ -74,8 +77,8 @@ const GLASS_HEADER_STYLES = `
   }
   
   .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
   }
 
   .hdr-btn-primary {
@@ -234,7 +237,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
     <>
       <style>{GLASS_HEADER_STYLES}</style>
       
-      {/* EXACT LIQUID GLASS SVG FILTER FROM YOUR PROMPT */}
+      {/* PERFECTED LIQUID GLASS SVG FILTER */}
       <svg style={{ display: "none" }} aria-hidden="true">
         <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
           <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence" />

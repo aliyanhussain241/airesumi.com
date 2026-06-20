@@ -60,7 +60,7 @@ function SuccessPage() {
   );
 }
 
-export const Route = createFileRoute("/premium/success")({
+export const Route = createFileRoute("/premium /success")({
   head: () => ({
     meta: [{ title: "Payment Successful — airesumi Pro" }],
   }),

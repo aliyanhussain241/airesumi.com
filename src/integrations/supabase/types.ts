@@ -80,6 +80,45 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_resumes: {
+        Row: {
+          company: string | null
+          created_at: string
+          design_id: string
+          id: string
+          job_title: string | null
+          resume_data: Json
+          title: string
+          updated_at: string
+          user_data: Json | null
+          user_id: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          design_id: string
+          id?: string
+          job_title?: string | null
+          resume_data: Json
+          title: string
+          updated_at?: string
+          user_data?: Json | null
+          user_id: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          design_id?: string
+          id?: string
+          job_title?: string | null
+          resume_data?: Json
+          title?: string
+          updated_at?: string
+          user_data?: Json | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

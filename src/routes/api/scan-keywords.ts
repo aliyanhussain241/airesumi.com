@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { callAIGateway } from "@/lib/ai-gateway";
+import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
 import { createClient } from "@supabase/supabase-js";
 
 export const Route = createFileRoute("/api/scan-keywords")({
@@ -31,14 +31,14 @@ ${(resumeText || "").slice(0, 3000)}
 JOB DESCRIPTION:
 ${(jobDescription || "").slice(0, 2000)}
 
-Return ONLY valid JSON:
+Return ONLY valid JSON, no markdown:
 {
   "score": 72,
   "matched_keywords": ["React", "Node.js", "API"],
   "missing_keywords": ["TypeScript", "AWS", "Docker"],
   "recommended_keywords": ["CI/CD", "Agile", "REST API"],
   "tips": [
-    "Add 'TypeScript' to your skills section",
+    "Add TypeScript to your skills section",
     "Mention AWS experience in your work history"
   ]
 }`;
@@ -49,8 +49,7 @@ Return ONLY valid JSON:
             temperature: 0.2,
           });
 
-          const clean = response.trim().replace(/^```json\s*/i, "").replace(/```\s*$/i, "");
-          const parsed = JSON.parse(clean);
+          const parsed = safeJSON(response);
 
           return new Response(JSON.stringify(parsed), {
             status: 200,

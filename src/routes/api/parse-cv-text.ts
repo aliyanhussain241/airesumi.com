@@ -29,13 +29,45 @@ export const Route = createFileRoute("/api/parse-cv-text")({
           }
 
           // ✅ MIME TYPE VALIDATION
-          const allowedTypes = ["application/pdf", "text/plain"];
-          if (!allowedTypes.includes(file.type)) {
-            return new Response(JSON.stringify({ error: "Invalid file type. Only PDF and TXT allowed." }), { status: 415 });
+          const allowedTypes = [
+            "application/pdf",
+            "text/plain",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          ];
+          // Also allow by extension if browser sends generic type
+          const fileName = file.name?.toLowerCase() || "";
+          const isAllowed = allowedTypes.includes(file.type) ||
+            fileName.endsWith(".pdf") || fileName.endsWith(".txt") ||
+            fileName.endsWith(".doc") || fileName.endsWith(".docx");
+          if (!isAllowed) {
+            return new Response(JSON.stringify({ error: "Invalid file type. Please upload PDF, DOC, DOCX, or TXT." }), { status: 415 });
           }
 
-          if (file.type !== "application/pdf") {
+          // TXT files - read directly
+          if (file.type === "text/plain" || fileName.endsWith(".txt")) {
             const text = await file.text();
+            return new Response(JSON.stringify({ text }), { headers: { "Content-Type": "application/json" } });
+          }
+
+          // DOC/DOCX - extract text via AI
+          if (fileName.endsWith(".doc") || fileName.endsWith(".docx") ||
+              file.type === "application/msword" ||
+              file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+            const buf = new Uint8Array(await file.arrayBuffer());
+            let binary = "";
+            for (let i = 0; i < buf.length; i++) binary += String.fromCharCode(buf[i]);
+            const dataUrl = `data:${file.type || "application/octet-stream"};base64,${btoa(binary)}`;
+            const text = await callAIGateway({
+              messages: [{
+                role: "user",
+                content: [
+                  { type: "text", text: "Extract ALL the raw text from this CV/resume Word document. Return only the plain text content, no commentary, preserving structure." },
+                  { type: "image_url", image_url: { url: dataUrl } },
+                ] as any,
+              }],
+              temperature: 0,
+            });
             return new Response(JSON.stringify({ text }), { headers: { "Content-Type": "application/json" } });
           }
 

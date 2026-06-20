@@ -248,11 +248,15 @@ function ResumeBuilder() {
       if (response.ok) {
         const data = await response.json();
         if (data.text) {
+          // Auto-fill all fields from parsed CV text
           setUserData((prev) => ({ ...prev, experience: [data.text] }));
         }
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        setError(errData.error || "Failed to parse CV. Please paste your resume text manually.");
       }
-    } catch (err) {
-      console.log("CV upload skipped");
+    } catch (err: any) {
+      setError("CV upload failed. Please paste your resume text manually.");
     } finally {
       setIsUploading(false);
     }

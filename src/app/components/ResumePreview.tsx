@@ -5,9 +5,580 @@ export type DesignId =
   | 'creative-orange' | 'corporate-dark' | 'modern-block' | 'contrast-bold'
   | 'navy-executive' | 'green-fresh' | 'purple-creative' | 'red-impact'
   | 'elegant-serif' | 'tech-dark' | 'pastel-soft' | 'gold-luxury'
-  | 'blue-professional' | 'teal-modern';
+  | 'blue-professional' | 'teal-modern'
+  | 'slate-clean' | 'rose-minimal'
+  | 'pro-executive' | 'pro-infographic' | 'pro-developer' | 'pro-agency' | 'pro-elegant';
 
 export function ResumePreview({ data, designId = 'classic' }: { data: ResumeData, designId?: DesignId }) {
+
+  // ==================== NEW PREMIUM DESIGNS ====================
+
+  if (designId === 'pro-executive') {
+    return (
+      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] flex font-sans overflow-hidden border border-gray-200">
+        <div className="w-[35%] bg-slate-900 text-white p-8 flex flex-col items-center pt-12">
+          {data.header.profilePicture && (
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-amber-400 mb-6 shrink-0">
+              <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
+            </div>
+          )}
+          <h2 className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 w-full border-b border-slate-700 pb-2">Contact</h2>
+          <div className="space-y-3 text-xs text-slate-300 w-full mb-8">
+            {data.header.contactInfo.split('|').map((info, i) => <span key={i} className="block break-words">{info.trim()}</span>)}
+          </div>
+          
+          <h2 className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 w-full border-b border-slate-700 pb-2">Skills</h2>
+          <div className="w-full space-y-4 mb-8">
+            {data.skills.map((sg, i) => (
+              <div key={i}>
+                <span className="text-xs font-bold text-white block mb-2">{sg.category}</span>
+                <div className="space-y-2">
+                  {sg.items.map((item, ii) => (
+                    <div key={ii}>
+                      <div className="flex justify-between text-[10px] text-slate-400 mb-1">
+                        <span>{item}</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: `${Math.max(40, 100 - (ii * 15))}%` }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-[65%] p-10 pt-12 bg-slate-50">
+          <div className="mb-10">
+            <h1 className="text-5xl font-extrabold text-slate-900 tracking-tight mb-2 uppercase">{data.header.fullName}</h1>
+            <p className="text-xl text-amber-500 font-bold uppercase tracking-widest">{data.header.title}</p>
+          </div>
+          
+          <div className="mb-10">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-400 rounded-full"></span> Professional Profile
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">{data.summary}</p>
+          </div>
+
+          <div className="mb-10">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-400 rounded-full"></span> Experience
+            </h2>
+            <div className="space-y-8">
+              {data.experience.map((exp, i) => (
+                <div key={i} className="relative pl-6 border-l-2 border-slate-200">
+                  <div className="absolute w-3 h-3 bg-amber-400 rounded-full -left-[7px] top-1 border-2 border-slate-50"></div>
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="font-bold text-slate-900 text-base">{exp.title}</h3>
+                    <span className="text-xs font-bold text-slate-500 bg-white px-2 py-1 rounded shadow-sm">{exp.dateRange}</span>
+                  </div>
+                  <p className="text-sm font-semibold text-amber-500 mb-3">{exp.company}</p>
+                  <ul className="list-disc pl-4 space-y-1.5">
+                    {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-slate-600 leading-relaxed">{b}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-400 rounded-full"></span> Education
+            </h2>
+            <div className="space-y-4">
+              {data.education.map((edu, i) => (
+                <div key={i} className="bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+                  <h3 className="text-sm font-bold text-slate-900">{edu.degree}</h3>
+                  <p className="text-sm text-slate-600">{edu.institution}</p>
+                  <span className="text-xs font-bold text-amber-500 mt-1 block">{edu.dateRange}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-infographic') {
+    return (
+      <div className="bg-slate-50 mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
+        <div className="bg-indigo-600 p-10 flex items-center gap-8 relative overflow-hidden">
+          <div className="absolute right-0 top-0 w-64 h-64 bg-indigo-500 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4"></div>
+          {data.header.profilePicture && (
+            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10 shrink-0">
+              <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
+            </div>
+          )}
+          <div className="relative z-10">
+            <h1 className="text-4xl font-black text-white mb-1 tracking-tight">{data.header.fullName}</h1>
+            <p className="text-indigo-200 text-xl font-medium mb-4">{data.header.title}</p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/90">
+              {data.header.contactInfo.split('|').map((info, i) => <span key={i} className="bg-indigo-500/50 px-3 py-1 rounded-full">{info.trim()}</span>)}
+            </div>
+          </div>
+        </div>
+        <div className="p-10 grid grid-cols-[2fr_1fr] gap-10">
+          <div>
+            <div className="mb-10">
+              <h2 className="text-xs font-black uppercase tracking-widest text-indigo-600 mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-indigo-600"></span> Summary
+              </h2>
+              <p className="text-sm text-slate-600 leading-relaxed font-medium bg-white p-5 rounded-xl shadow-sm border border-slate-100">{data.summary}</p>
+            </div>
+            <div>
+              <h2 className="text-xs font-black uppercase tracking-widest text-indigo-600 mb-6 flex items-center gap-2">
+                <span className="w-6 h-px bg-indigo-600"></span> Work Experience
+              </h2>
+              <div className="space-y-6">
+                {data.experience.map((exp, i) => (
+                  <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="font-bold text-slate-800 text-lg">{exp.title}</h3>
+                        <p className="text-sm font-bold text-indigo-500">{exp.company}</p>
+                      </div>
+                      <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">{exp.dateRange}</span>
+                    </div>
+                    <ul className="list-disc pl-5 space-y-1 mt-4">
+                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-slate-600">{b}</li>)}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="space-y-10">
+            <div>
+              <h2 className="text-xs font-black uppercase tracking-widest text-indigo-600 mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-indigo-600"></span> Skills
+              </h2>
+              <div className="space-y-4">
+                {data.skills.map((sg, i) => (
+                  <div key={i} className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <span className="text-xs font-bold text-slate-800 block mb-3 uppercase">{sg.category}</span>
+                    <div className="flex flex-wrap gap-2">
+                      {sg.items.map((item, ii) => (
+                        <span key={ii} className="text-[11px] font-semibold bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-md border border-indigo-100">{item}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h2 className="text-xs font-black uppercase tracking-widest text-indigo-600 mb-4 flex items-center gap-2">
+                <span className="w-6 h-px bg-indigo-600"></span> Education
+              </h2>
+              <div className="space-y-4">
+                {data.education.map((edu, i) => (
+                  <div key={i} className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 border-l-4 border-l-indigo-500">
+                    <h3 className="text-sm font-bold text-slate-800">{edu.degree}</h3>
+                    <p className="text-xs text-slate-500 mt-1">{edu.institution}</p>
+                    <span className="text-xs font-bold text-indigo-500 mt-2 block">{edu.dateRange}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-developer') {
+    return (
+      <div className="bg-[#0d1117] text-[#c9d1d9] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-mono border-2 border-[#30363d] overflow-hidden rounded-xl shadow-2xl">
+        <div className="bg-[#161b22] px-4 py-3 flex items-center gap-2 border-b border-[#30363d]">
+          <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+          <div className="ml-4 text-xs text-[#8b949e] font-mono select-none">~/developer/resume.ts</div>
+        </div>
+        <div className="p-10">
+          <div className="flex items-start gap-8 mb-10 border-b border-[#30363d] pb-10">
+            {data.header.profilePicture && (
+              <div className="w-24 h-24 rounded-lg overflow-hidden border border-[#30363d] shrink-0 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
+              </div>
+            )}
+            <div>
+              <div className="text-[#8b949e] text-xs mb-2">const developer = {"{"}</div>
+              <h1 className="text-4xl font-bold text-[#58a6ff] mb-2 pl-4">name: '{data.header.fullName}',</h1>
+              <p className="text-xl text-[#7ee787] mb-2 pl-4">role: '{data.header.title}',</p>
+              <div className="pl-4 text-sm text-[#c9d1d9]">
+                contact: [
+                {data.header.contactInfo.split('|').map((info, i) => <span key={i} className="text-[#a5d6ff]"> '{info.trim()}',</span>)} ]
+              </div>
+              <div className="text-[#8b949e] text-xs mt-2">{"};"}</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-[1fr_2fr] gap-12">
+            <div className="space-y-10">
+              <div>
+                <h2 className="text-[#ff7b72] text-sm font-bold uppercase tracking-widest mb-4">## Skills</h2>
+                <div className="space-y-4">
+                  {data.skills.map((sg, i) => (
+                    <div key={i}>
+                      <span className="text-xs font-bold text-[#d2a8ff] block mb-2">{sg.category}:</span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {sg.items.map((item, ii) => (
+                          <span key={ii} className="text-[10px] bg-[#21262d] border border-[#30363d] text-[#c9d1d9] px-2 py-1 rounded">{item}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h2 className="text-[#ff7b72] text-sm font-bold uppercase tracking-widest mb-4">## Education</h2>
+                <div className="space-y-5">
+                  {data.education.map((edu, i) => (
+                    <div key={i} className="border-l-2 border-[#30363d] pl-4">
+                      <h3 className="text-sm font-bold text-[#7ee787]">{edu.degree}</h3>
+                      <p className="text-xs text-[#8b949e] my-1">{edu.institution}</p>
+                      <span className="text-xs text-[#58a6ff]">{edu.dateRange}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-10">
+              <div>
+                <h2 className="text-[#ff7b72] text-sm font-bold uppercase tracking-widest mb-4">## About</h2>
+                <p className="text-sm text-[#8b949e] leading-relaxed">
+                  <span className="text-[#7ee787]">/*</span><br/>
+                  {data.summary}<br/>
+                  <span className="text-[#7ee787]">*/</span>
+                </p>
+              </div>
+              <div>
+                <h2 className="text-[#ff7b72] text-sm font-bold uppercase tracking-widest mb-6">## Experience</h2>
+                <div className="space-y-8">
+                  {data.experience.map((exp, i) => (
+                    <div key={i} className="relative">
+                      <div className="flex justify-between items-baseline mb-2">
+                        <h3 className="font-bold text-[#58a6ff] text-base">{exp.title}</h3>
+                        <span className="text-xs text-[#8b949e] bg-[#21262d] px-2 py-1 rounded">{exp.dateRange}</span>
+                      </div>
+                      <p className="text-sm text-[#d2a8ff] mb-3">@{exp.company}</p>
+                      <ul className="space-y-2">
+                        {exp.bullets.map((b, bi) => (
+                          <li key={bi} className="text-sm text-[#c9d1d9] flex items-start">
+                            <span className="text-[#ff7b72] mr-2">{">"}</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-agency') {
+    return (
+      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] flex font-sans overflow-hidden">
+        <div className="w-[45%] bg-gradient-to-br from-pink-500 via-red-500 to-orange-400 p-10 text-white flex flex-col relative">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+          <div className="relative z-10 flex-1">
+            {data.header.profilePicture && (
+              <div className="w-32 h-32 rounded-2xl overflow-hidden border-4 border-white/30 shadow-2xl mb-8 transform -rotate-3">
+                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
+              </div>
+            )}
+            <h1 className="text-5xl font-black mb-2 leading-none tracking-tighter">{data.header.fullName}</h1>
+            <p className="text-xl font-bold text-white/90 mb-8 uppercase tracking-widest">{data.header.title}</p>
+            
+            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 mb-8">
+              <h2 className="text-xs font-black uppercase tracking-widest text-white/70 mb-4">Contact</h2>
+              <div className="space-y-3 text-sm font-medium">
+                {data.header.contactInfo.split('|').map((info, i) => <span key={i} className="block break-words">{info.trim()}</span>)}
+              </div>
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20">
+              <h2 className="text-xs font-black uppercase tracking-widest text-white/70 mb-4">Education</h2>
+              <div className="space-y-4">
+                {data.education.map((edu, i) => (
+                  <div key={i}>
+                    <h3 className="text-sm font-bold">{edu.degree}</h3>
+                    <p className="text-xs text-white/80">{edu.institution}</p>
+                    <span className="text-[10px] font-black bg-white/20 px-2 py-1 rounded inline-block mt-2">{edu.dateRange}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-[55%] p-10 bg-slate-50">
+          <div className="mb-10">
+            <h2 className="text-3xl font-black text-slate-800 mb-4 lowercase tracking-tighter relative inline-block">
+              about_me
+              <div className="absolute bottom-1 left-0 w-full h-3 bg-orange-400/30 -z-10"></div>
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed font-medium">{data.summary}</p>
+          </div>
+
+          <div className="mb-10">
+            <h2 className="text-3xl font-black text-slate-800 mb-6 lowercase tracking-tighter relative inline-block">
+              experience
+              <div className="absolute bottom-1 left-0 w-full h-3 bg-pink-400/30 -z-10"></div>
+            </h2>
+            <div className="space-y-8">
+              {data.experience.map((exp, i) => (
+                <div key={i} className="group">
+                  <span className="text-xs font-black text-orange-500 mb-1 block">{exp.dateRange}</span>
+                  <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight">{exp.title}</h3>
+                  <p className="text-sm font-bold text-slate-500 mb-3">{exp.company}</p>
+                  <ul className="space-y-2">
+                    {exp.bullets.map((b, bi) => (
+                      <li key={bi} className="text-sm text-slate-600 flex items-start">
+                        <span className="text-pink-500 mr-2 font-black">+</span> {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-3xl font-black text-slate-800 mb-6 lowercase tracking-tighter relative inline-block">
+              skills
+              <div className="absolute bottom-1 left-0 w-full h-3 bg-red-400/30 -z-10"></div>
+            </h2>
+            <div className="space-y-4">
+              {data.skills.map((sg, i) => (
+                <div key={i}>
+                  <span className="text-xs font-black text-slate-800 uppercase block mb-2">{sg.category}</span>
+                  <div className="flex flex-wrap gap-2">
+                    {sg.items.map((item, ii) => (
+                      <span key={ii} className="text-[11px] font-bold bg-white shadow-sm border border-slate-200 text-slate-600 px-3 py-1.5 rounded-lg">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-elegant') {
+    return (
+      <div className="bg-[#fdfbf7] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-serif overflow-hidden border-[12px] border-[#2c3e50] p-10">
+        <header className="flex flex-col items-center text-center border-b-[3px] border-[#d4af37] pb-8 mb-8">
+          {data.header.profilePicture && (
+            <div className="w-24 h-24 rounded-full overflow-hidden border-[3px] border-[#2c3e50] p-1 mb-6">
+              <div className="w-full h-full rounded-full overflow-hidden">
+                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover grayscale" />
+              </div>
+            </div>
+          )}
+          <h1 className="text-5xl font-normal text-[#2c3e50] mb-3 tracking-widest uppercase">{data.header.fullName}</h1>
+          <p className="text-xl text-[#d4af37] italic mb-6">{data.header.title}</p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-[#7f8c8d] uppercase tracking-widest font-sans font-bold">
+            {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
+          </div>
+        </header>
+
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <p className="text-sm text-[#34495e] leading-loose italic">{data.summary}</p>
+        </div>
+
+        <div className="grid grid-cols-[1fr_auto_1fr] gap-10">
+          <div className="space-y-10">
+            <div>
+              <h2 className="text-sm font-bold text-[#2c3e50] uppercase tracking-[0.3em] mb-6 text-center flex flex-col items-center">
+                Experience
+                <span className="w-10 h-0.5 bg-[#d4af37] mt-3 block"></span>
+              </h2>
+              <div className="space-y-8">
+                {data.experience.map((exp, i) => (
+                  <div key={i} className="text-center">
+                    <h3 className="font-bold text-[#2c3e50] text-base uppercase tracking-wider">{exp.title}</h3>
+                    <p className="text-sm text-[#d4af37] font-bold my-1">{exp.company}</p>
+                    <span className="text-[10px] text-[#7f8c8d] uppercase tracking-widest font-sans block mb-3">{exp.dateRange}</span>
+                    <ul className="text-sm text-[#34495e] space-y-2 text-left list-disc pl-5">
+                      {exp.bullets.map((b, bi) => <li key={bi} className="leading-relaxed">{b}</li>)}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div className="w-px bg-[#d4af37]/30"></div>
+
+          <div className="space-y-10">
+            <div>
+              <h2 className="text-sm font-bold text-[#2c3e50] uppercase tracking-[0.3em] mb-6 text-center flex flex-col items-center">
+                Education
+                <span className="w-10 h-0.5 bg-[#d4af37] mt-3 block"></span>
+              </h2>
+              <div className="space-y-6">
+                {data.education.map((edu, i) => (
+                  <div key={i} className="text-center">
+                    <h3 className="font-bold text-[#2c3e50] text-sm uppercase tracking-wider">{edu.degree}</h3>
+                    <p className="text-sm text-[#7f8c8d] italic my-1">{edu.institution}</p>
+                    <span className="text-[10px] text-[#d4af37] uppercase tracking-widest font-sans font-bold">{edu.dateRange}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-sm font-bold text-[#2c3e50] uppercase tracking-[0.3em] mb-6 text-center flex flex-col items-center">
+                Skills
+                <span className="w-10 h-0.5 bg-[#d4af37] mt-3 block"></span>
+              </h2>
+              <div className="space-y-5 text-center">
+                {data.skills.map((sg, i) => (
+                  <div key={i}>
+                    <span className="text-xs font-bold text-[#2c3e50] uppercase tracking-widest block mb-2">{sg.category}</span>
+                    <span className="text-sm text-[#7f8c8d] leading-relaxed italic block">{sg.items.join(', ')}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ==================== NEW FREE DESIGNS ====================
+
+  if (designId === 'slate-clean') {
+    return (
+      <div className="bg-white text-[#334155] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans p-12 overflow-hidden border-t-[12px] border-[#334155]">
+        <header className="mb-10 pb-6 border-b-2 border-[#e2e8f0]">
+          <h1 className="text-4xl font-bold tracking-tight text-[#0f172a] mb-2">{data.header.fullName}</h1>
+          <p className="text-xl text-[#475569] mb-4">{data.header.title}</p>
+          <div className="text-sm text-[#64748b] flex flex-wrap gap-x-4">
+            {data.header.contactInfo.split('|').map((info, idx) => (<span key={idx}>{info.trim()}</span>))}
+          </div>
+        </header>
+        <section className="mb-8">
+          <h2 className="text-sm font-bold text-[#0f172a] uppercase tracking-wider mb-3">Profile</h2>
+          <p className="text-sm leading-relaxed">{data.summary}</p>
+        </section>
+        <section className="mb-8">
+          <h2 className="text-sm font-bold text-[#0f172a] uppercase tracking-wider mb-5">Experience</h2>
+          <div className="space-y-6">
+            {data.experience.map((exp, idx) => (
+              <div key={idx}>
+                <div className="flex justify-between items-center mb-1">
+                  <h3 className="font-bold text-[#0f172a]">{exp.title}</h3>
+                  <span className="text-xs text-[#64748b]">{exp.dateRange}</span>
+                </div>
+                <p className="text-sm font-medium mb-2">{exp.company}</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  {exp.bullets.map((b, bi) => <li key={bi} className="text-sm">{b}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+        <div className="grid grid-cols-2 gap-8">
+          <section>
+            <h2 className="text-sm font-bold text-[#0f172a] uppercase tracking-wider mb-4">Education</h2>
+            <div className="space-y-4">
+              {data.education.map((edu, idx) => (
+                <div key={idx}>
+                  <h3 className="font-bold text-[#0f172a] text-sm">{edu.degree}</h3>
+                  <p className="text-sm">{edu.institution}</p>
+                  <span className="text-xs text-[#64748b]">{edu.dateRange}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section>
+            <h2 className="text-sm font-bold text-[#0f172a] uppercase tracking-wider mb-4">Skills</h2>
+            <div className="space-y-3">
+              {data.skills.map((sg, idx) => (
+                <div key={idx}>
+                  <span className="font-bold text-sm block">{sg.category}</span>
+                  <span className="text-sm">{sg.items.join(', ')}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'rose-minimal') {
+    return (
+      <div className="bg-white text-[#1f2937] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans p-10 overflow-hidden">
+        <header className="border-l-[3px] border-[#e11d48] pl-6 mb-10">
+          <h1 className="text-4xl font-light tracking-tight mb-2">{data.header.fullName}</h1>
+          <p className="text-lg font-medium text-[#e11d48] mb-4">{data.header.title}</p>
+          <div className="text-sm text-[#6b7280] flex flex-wrap gap-x-4 gap-y-2">
+            {data.header.contactInfo.split('|').map((info, idx) => (<span key={idx} className="bg-[#fff1f2] px-2 py-1 rounded text-[#9f1239]">{info.trim()}</span>))}
+          </div>
+        </header>
+        <section className="mb-10">
+          <p className="text-sm leading-relaxed text-[#4b5563]">{data.summary}</p>
+        </section>
+        <div className="grid grid-cols-[1fr_2fr] gap-8">
+          <div className="space-y-8">
+            <section>
+              <h2 className="text-xs font-bold text-[#9ca3af] uppercase tracking-widest mb-4 border-b border-[#f3f4f6] pb-2">Education</h2>
+              <div className="space-y-4">
+                {data.education.map((edu, idx) => (
+                  <div key={idx}>
+                    <h3 className="font-bold text-sm">{edu.degree}</h3>
+                    <p className="text-xs text-[#6b7280] my-1">{edu.institution}</p>
+                    <span className="text-[10px] text-[#e11d48] font-bold">{edu.dateRange}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section>
+              <h2 className="text-xs font-bold text-[#9ca3af] uppercase tracking-widest mb-4 border-b border-[#f3f4f6] pb-2">Skills</h2>
+              <div className="space-y-4">
+                {data.skills.map((sg, idx) => (
+                  <div key={idx}>
+                    <span className="font-bold text-sm block mb-1">{sg.category}</span>
+                    <span className="text-xs text-[#4b5563] leading-relaxed block">{sg.items.join(', ')}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+          <section>
+            <h2 className="text-xs font-bold text-[#9ca3af] uppercase tracking-widest mb-4 border-b border-[#f3f4f6] pb-2">Experience</h2>
+            <div className="space-y-6">
+              {data.experience.map((exp, idx) => (
+                <div key={idx}>
+                  <div className="flex justify-between items-baseline mb-1">
+                    <h3 className="font-bold text-base">{exp.title}</h3>
+                    <span className="text-[10px] text-[#e11d48] font-bold">{exp.dateRange}</span>
+                  </div>
+                  <p className="text-sm font-medium text-[#6b7280] mb-3">{exp.company}</p>
+                  <ul className="list-disc pl-4 space-y-1">
+                    {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563] leading-relaxed">{b}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    );
+  }
 
   // ==================== NAVY EXECUTIVE ====================
   if (designId === 'navy-executive') {
@@ -95,730 +666,4 @@ export function ResumePreview({ data, designId = 'classic' }: { data: ResumeData
           <div>
             <div className="mb-8">
               <h2 className="text-sm font-bold uppercase tracking-widest text-[#059669] mb-3 flex items-center gap-2"><span className="w-4 h-1 bg-[#059669] inline-block"></span> About Me</h2>
-              <p className="text-sm text-[#374151] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#059669] mb-4 flex items-center gap-2"><span className="w-4 h-1 bg-[#059669] inline-block"></span> Experience</h2>
-              <div className="space-y-6">
-                {data.experience.map((exp, i) => (
-                  <div key={i} className="pl-4 border-l-2 border-[#D1FAE5]">
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-bold text-[#064E3B]">{exp.title}</h3>
-                      <span className="text-xs text-[#059669] font-semibold">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm text-[#6b7280] mb-2">{exp.company}</p>
-                    <ul className="list-disc pl-4 space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-[#ECFDF5] rounded-2xl p-6 mb-6">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#059669] mb-4">Education</h2>
-              <div className="space-y-4">
-                {data.education.map((edu, i) => (
-                  <div key={i}>
-                    <h3 className="text-sm font-bold text-[#064E3B]">{edu.degree}</h3>
-                    <p className="text-xs text-[#6b7280]">{edu.institution}</p>
-                    <span className="text-xs text-[#059669]">{edu.dateRange}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-[#ECFDF5] rounded-2xl p-6">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#059669] mb-4">Skills</h2>
-              <div className="space-y-3">
-                {data.skills.map((sg, i) => (
-                  <div key={i}>
-                    <span className="text-xs font-bold text-[#064E3B] block mb-1">{sg.category}</span>
-                    <span className="text-xs text-[#6b7280]">{sg.items.join(', ')}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== PURPLE CREATIVE ====================
-  if (designId === 'purple-creative') {
-    return (
-      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
-        <div className="bg-[#6D28D9] text-white p-10">
-          <div className="flex items-center gap-6">
-            {data.header.profilePicture && (
-              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#A78BFA] shrink-0">
-                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-              </div>
-            )}
-            <div>
-              <h1 className="text-4xl font-extrabold mb-1">{data.header.fullName}</h1>
-              <p className="text-[#C4B5FD] text-lg font-medium mb-3">{data.header.title}</p>
-              <div className="flex flex-wrap gap-x-4 text-sm text-[#DDD6FE]">
-                {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex">
-          <div className="w-[60%] p-10">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#6D28D9] border-b-2 border-[#EDE9FE] pb-1 mb-4">Summary</h2>
-            <p className="text-sm text-[#374151] leading-relaxed mb-8">{data.summary}</p>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#6D28D9] border-b-2 border-[#EDE9FE] pb-1 mb-4">Experience</h2>
-            <div className="space-y-6">
-              {data.experience.map((exp, i) => (
-                <div key={i}>
-                  <div className="flex justify-between mb-1">
-                    <h3 className="font-bold text-[#1F2937]">{exp.title}</h3>
-                    <span className="text-xs bg-[#EDE9FE] text-[#6D28D9] px-2 py-1 rounded-full font-semibold">{exp.dateRange}</span>
-                  </div>
-                  <p className="text-sm font-semibold text-[#7C3AED] mb-2">{exp.company}</p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="w-[40%] bg-[#F5F3FF] p-8">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#6D28D9] mb-4">Education</h2>
-            <div className="space-y-4 mb-8">
-              {data.education.map((edu, i) => (
-                <div key={i} className="bg-white rounded-xl p-4">
-                  <h3 className="text-sm font-bold text-[#1F2937]">{edu.degree}</h3>
-                  <p className="text-xs text-[#6b7280]">{edu.institution}</p>
-                  <span className="text-xs text-[#7C3AED] font-semibold">{edu.dateRange}</span>
-                </div>
-              ))}
-            </div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#6D28D9] mb-4">Skills</h2>
-            <div className="space-y-3">
-              {data.skills.map((sg, i) => (
-                <div key={i}>
-                  <span className="text-xs font-bold text-[#6D28D9] block mb-2">{sg.category}</span>
-                  <div className="flex flex-wrap gap-1">
-                    {sg.items.map((item, ii) => <span key={ii} className="text-[10px] bg-[#6D28D9] text-white px-2 py-1 rounded-full">{item}</span>)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== RED IMPACT ====================
-  if (designId === 'red-impact') {
-    return (
-      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
-        <div className="h-3 bg-[#DC2626]"></div>
-        <div className="p-10 border-b-2 border-[#FEE2E2] mb-2">
-          <div className="flex justify-between items-end">
-            <div>
-              <h1 className="text-5xl font-black text-[#111827] uppercase tracking-tight mb-1">{data.header.fullName}</h1>
-              <p className="text-xl text-[#DC2626] font-bold uppercase tracking-widest">{data.header.title}</p>
-            </div>
-            {data.header.profilePicture && (
-              <div className="w-20 h-20 rounded overflow-hidden border-2 border-[#DC2626]">
-                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-              </div>
-            )}
-          </div>
-          <div className="flex flex-wrap gap-x-6 text-sm text-[#6b7280] mt-4">
-            {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-          </div>
-        </div>
-        <div className="grid grid-cols-[2fr_1fr] gap-0">
-          <div className="p-10 pr-6">
-            <div className="mb-8">
-              <h2 className="text-sm font-black uppercase tracking-widest text-[#DC2626] mb-3">Profile</h2>
-              <p className="text-sm text-[#374151] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-black uppercase tracking-widest text-[#DC2626] mb-4">Experience</h2>
-              <div className="space-y-6">
-                {data.experience.map((exp, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-black text-[#111827] uppercase">{exp.title}</h3>
-                      <span className="text-xs text-[#DC2626] font-bold">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm font-bold text-[#6b7280] mb-2">{exp.company}</p>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#1F2937] text-white p-8">
-            <h2 className="text-xs font-black uppercase tracking-widest text-[#DC2626] mb-4">Education</h2>
-            <div className="space-y-4 mb-8">
-              {data.education.map((edu, i) => (
-                <div key={i}>
-                  <h3 className="text-sm font-bold text-white">{edu.degree}</h3>
-                  <p className="text-xs text-[#9ca3af]">{edu.institution}</p>
-                  <span className="text-xs text-[#DC2626] font-bold">{edu.dateRange}</span>
-                </div>
-              ))}
-            </div>
-            <h2 className="text-xs font-black uppercase tracking-widest text-[#DC2626] mb-4">Skills</h2>
-            <div className="space-y-3">
-              {data.skills.map((sg, i) => (
-                <div key={i}>
-                  <span className="text-xs font-bold text-white block mb-1">{sg.category}</span>
-                  <span className="text-xs text-[#9ca3af]">{sg.items.join(', ')}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== ELEGANT SERIF ====================
-  if (designId === 'elegant-serif') {
-    return (
-      <div className="bg-[#FFFBF5] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-serif p-12 overflow-hidden">
-        <div className="text-center mb-10 pb-8 border-b border-[#D4A853]">
-          {data.header.profilePicture && (
-            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#D4A853] mx-auto mb-4">
-              <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-            </div>
-          )}
-          <h1 className="text-4xl font-bold text-[#2C1810] mb-2 tracking-wide">{data.header.fullName}</h1>
-          <p className="text-lg text-[#D4A853] italic mb-4">{data.header.title}</p>
-          <div className="flex flex-wrap justify-center gap-x-6 text-sm text-[#6b5744]">
-            {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-          </div>
-        </div>
-        <div className="grid grid-cols-[1fr_2px_2fr] gap-8">
-          <div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#D4A853] mb-4">Education</h2>
-            <div className="space-y-4 mb-8">
-              {data.education.map((edu, i) => (
-                <div key={i}>
-                  <h3 className="text-sm font-bold text-[#2C1810]">{edu.degree}</h3>
-                  <p className="text-xs text-[#6b5744] italic">{edu.institution}</p>
-                  <span className="text-xs text-[#D4A853]">{edu.dateRange}</span>
-                </div>
-              ))}
-            </div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#D4A853] mb-4">Skills</h2>
-            <div className="space-y-3">
-              {data.skills.map((sg, i) => (
-                <div key={i}>
-                  <span className="text-xs font-bold text-[#2C1810] block mb-1">{sg.category}</span>
-                  <span className="text-xs text-[#6b5744] italic">{sg.items.join(', ')}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="bg-[#D4A853] w-px"></div>
-          <div>
-            <div className="mb-8">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#D4A853] mb-4">Profile</h2>
-              <p className="text-sm text-[#374151] leading-relaxed italic">{data.summary}</p>
-            </div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-[#D4A853] mb-4">Experience</h2>
-            <div className="space-y-6">
-              {data.experience.map((exp, i) => (
-                <div key={i}>
-                  <div className="flex justify-between mb-1">
-                    <h3 className="font-bold text-[#2C1810]">{exp.title}</h3>
-                    <span className="text-xs text-[#D4A853] italic">{exp.dateRange}</span>
-                  </div>
-                  <p className="text-sm italic text-[#6b5744] mb-2">{exp.company}</p>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== TECH DARK ====================
-  if (designId === 'tech-dark') {
-    return (
-      <div className="bg-[#0F172A] text-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-mono overflow-hidden">
-        <div className="border-b border-[#1E293B] p-10">
-          <div className="text-[#22D3EE] text-xs mb-2 font-mono">// resume.json</div>
-          <h1 className="text-4xl font-bold text-white mb-1">{data.header.fullName}</h1>
-          <p className="text-[#22D3EE] text-lg mb-4">{data.header.title}</p>
-          <div className="flex flex-wrap gap-x-6 text-sm text-[#64748B]">
-            {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-          </div>
-        </div>
-        <div className="flex">
-          <div className="w-[65%] p-10 border-r border-[#1E293B]">
-            <div className="mb-8">
-              <h2 className="text-[#22D3EE] text-xs font-bold uppercase tracking-widest mb-3 font-mono">{">"} about()</h2>
-              <p className="text-sm text-[#94A3B8] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-[#22D3EE] text-xs font-bold uppercase tracking-widest mb-4 font-mono">{">"} experience()</h2>
-              <div className="space-y-6">
-                {data.experience.map((exp, i) => (
-                  <div key={i} className="border-l-2 border-[#1E293B] pl-4">
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-bold text-white">{exp.title}</h3>
-                      <span className="text-xs text-[#22D3EE]">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm text-[#64748B] mb-2 font-mono">{exp.company}</p>
-                    <ul className="space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#94A3B8] before:content-['→_']">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="w-[35%] p-8">
-            {data.header.profilePicture && (
-              <div className="w-20 h-20 rounded overflow-hidden border-2 border-[#22D3EE] mx-auto mb-6">
-                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover grayscale" />
-              </div>
-            )}
-            <h2 className="text-[#22D3EE] text-xs font-bold uppercase tracking-widest mb-4 font-mono">{">"} skills()</h2>
-            <div className="space-y-3 mb-8">
-              {data.skills.map((sg, i) => (
-                <div key={i}>
-                  <span className="text-xs text-[#64748B] font-mono block mb-1">// {sg.category}</span>
-                  <div className="flex flex-wrap gap-1">
-                    {sg.items.map((item, ii) => <span key={ii} className="text-[10px] border border-[#22D3EE] text-[#22D3EE] px-2 py-0.5 rounded">{item}</span>)}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <h2 className="text-[#22D3EE] text-xs font-bold uppercase tracking-widest mb-4 font-mono">{">"} education()</h2>
-            <div className="space-y-4">
-              {data.education.map((edu, i) => (
-                <div key={i}>
-                  <h3 className="text-sm font-bold text-white">{edu.degree}</h3>
-                  <p className="text-xs text-[#64748B] font-mono">{edu.institution}</p>
-                  <span className="text-xs text-[#22D3EE]">{edu.dateRange}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== PASTEL SOFT ====================
-  if (designId === 'pastel-soft') {
-    return (
-      <div className="bg-[#FFF9FB] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans p-10 overflow-hidden">
-        <div className="flex items-center gap-8 mb-10">
-          {data.header.profilePicture && (
-            <div className="w-28 h-28 rounded-3xl overflow-hidden border-4 border-[#FBCFE8] shrink-0">
-              <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-            </div>
-          )}
-          <div>
-            <h1 className="text-4xl font-bold text-[#831843] mb-1">{data.header.fullName}</h1>
-            <p className="text-lg text-[#EC4899] mb-3">{data.header.title}</p>
-            <div className="flex flex-wrap gap-x-4 text-sm text-[#9D174D]">
-              {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-[2fr_1fr] gap-8">
-          <div>
-            <div className="bg-[#FCE7F3] rounded-2xl p-6 mb-6">
-              <h2 className="text-sm font-bold text-[#831843] uppercase tracking-widest mb-3">About Me</h2>
-              <p className="text-sm text-[#374151] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-bold text-[#831843] uppercase tracking-widest mb-4">Experience</h2>
-              <div className="space-y-5">
-                {data.experience.map((exp, i) => (
-                  <div key={i} className="bg-white rounded-2xl p-5 border border-[#FBCFE8]">
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-bold text-[#831843]">{exp.title}</h3>
-                      <span className="text-xs bg-[#FCE7F3] text-[#EC4899] px-2 py-1 rounded-full font-semibold">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm text-[#EC4899] mb-2">{exp.company}</p>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-[#FCE7F3] rounded-2xl p-6 mb-6">
-              <h2 className="text-sm font-bold text-[#831843] uppercase tracking-widest mb-4">Education</h2>
-              <div className="space-y-4">
-                {data.education.map((edu, i) => (
-                  <div key={i}>
-                    <h3 className="text-sm font-bold text-[#831843]">{edu.degree}</h3>
-                    <p className="text-xs text-[#6b7280]">{edu.institution}</p>
-                    <span className="text-xs text-[#EC4899]">{edu.dateRange}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-[#FCE7F3] rounded-2xl p-6">
-              <h2 className="text-sm font-bold text-[#831843] uppercase tracking-widest mb-4">Skills</h2>
-              <div className="space-y-3">
-                {data.skills.map((sg, i) => (
-                  <div key={i}>
-                    <span className="text-xs font-bold text-[#831843] block mb-2">{sg.category}</span>
-                    <div className="flex flex-wrap gap-1">
-                      {sg.items.map((item, ii) => <span key={ii} className="text-[10px] bg-white text-[#EC4899] border border-[#FBCFE8] px-2 py-1 rounded-full">{item}</span>)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== GOLD LUXURY ====================
-  if (designId === 'gold-luxury') {
-    return (
-      <div className="bg-[#0C0C0C] text-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
-        <div className="bg-gradient-to-r from-[#B8860B] to-[#DAA520] p-10 text-center">
-          {data.header.profilePicture && (
-            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white mx-auto mb-4">
-              <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-            </div>
-          )}
-          <h1 className="text-4xl font-bold text-white mb-1 tracking-wide">{data.header.fullName}</h1>
-          <p className="text-white/80 text-lg mb-4">{data.header.title}</p>
-          <div className="flex flex-wrap justify-center gap-x-6 text-sm text-white/70">
-            {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-          </div>
-        </div>
-        <div className="flex">
-          <div className="w-[65%] p-10">
-            <div className="mb-8">
-              <h2 className="text-[#DAA520] text-xs font-bold uppercase tracking-widest border-b border-[#DAA520]/30 pb-2 mb-4">Profile</h2>
-              <p className="text-sm text-[#D1D5DB] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-[#DAA520] text-xs font-bold uppercase tracking-widest border-b border-[#DAA520]/30 pb-2 mb-4">Experience</h2>
-              <div className="space-y-6">
-                {data.experience.map((exp, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-bold text-white">{exp.title}</h3>
-                      <span className="text-xs text-[#DAA520]">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm text-[#DAA520]/70 mb-2">{exp.company}</p>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#9CA3AF]">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="w-[35%] bg-[#1A1A1A] p-8">
-            <h2 className="text-[#DAA520] text-xs font-bold uppercase tracking-widest mb-4">Education</h2>
-            <div className="space-y-4 mb-8">
-              {data.education.map((edu, i) => (
-                <div key={i} className="border-l-2 border-[#DAA520] pl-4">
-                  <h3 className="text-sm font-bold text-white">{edu.degree}</h3>
-                  <p className="text-xs text-[#9CA3AF]">{edu.institution}</p>
-                  <span className="text-xs text-[#DAA520]">{edu.dateRange}</span>
-                </div>
-              ))}
-            </div>
-            <h2 className="text-[#DAA520] text-xs font-bold uppercase tracking-widest mb-4">Skills</h2>
-            <div className="space-y-3">
-              {data.skills.map((sg, i) => (
-                <div key={i}>
-                  <span className="text-xs font-bold text-[#DAA520] block mb-2">{sg.category}</span>
-                  <div className="flex flex-wrap gap-1">
-                    {sg.items.map((item, ii) => <span key={ii} className="text-[10px] border border-[#DAA520]/40 text-[#DAA520] px-2 py-0.5 rounded">{item}</span>)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== BLUE PROFESSIONAL ====================
-  if (designId === 'blue-professional') {
-    return (
-      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
-        <div className="flex">
-          <div className="w-[35%] bg-[#1E40AF] text-white p-8 min-h-[1100px]">
-            {data.header.profilePicture && (
-              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#93C5FD] mx-auto mb-6">
-                <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-              </div>
-            )}
-            <div className="mb-8">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#93C5FD] mb-4 border-b border-[#2563EB] pb-2">Contact</h2>
-              <div className="space-y-2 text-xs text-[#BFDBFE]">
-                {data.header.contactInfo.split('|').map((info, i) => <span key={i} className="block">{info.trim()}</span>)}
-              </div>
-            </div>
-            <div className="mb-8">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#93C5FD] mb-4 border-b border-[#2563EB] pb-2">Education</h2>
-              <div className="space-y-4">
-                {data.education.map((edu, i) => (
-                  <div key={i}>
-                    <h3 className="text-sm font-bold text-white">{edu.degree}</h3>
-                    <p className="text-xs text-[#93C5FD]">{edu.institution}</p>
-                    <span className="text-xs text-[#BFDBFE]">{edu.dateRange}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#93C5FD] mb-4 border-b border-[#2563EB] pb-2">Skills</h2>
-              <div className="space-y-3">
-                {data.skills.map((sg, i) => (
-                  <div key={i}>
-                    <span className="text-xs font-bold text-white block mb-1">{sg.category}</span>
-                    <span className="text-xs text-[#BFDBFE]">{sg.items.join(', ')}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="w-[65%] p-10">
-            <div className="mb-8 pb-6 border-b-2 border-[#DBEAFE]">
-              <h1 className="text-4xl font-bold text-[#1E40AF] mb-1">{data.header.fullName}</h1>
-              <p className="text-xl text-[#3B82F6] font-medium">{data.header.title}</p>
-            </div>
-            <div className="mb-8">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#1E40AF] mb-3">About Me</h2>
-              <p className="text-sm text-[#374151] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#1E40AF] mb-4">Experience</h2>
-              <div className="space-y-6">
-                {data.experience.map((exp, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-bold text-[#111827]">{exp.title}</h3>
-                      <span className="text-xs bg-[#DBEAFE] text-[#1E40AF] px-2 py-1 rounded font-semibold">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm font-semibold text-[#3B82F6] mb-2">{exp.company}</p>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== TEAL MODERN ====================
-  if (designId === 'teal-modern') {
-    return (
-      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
-        <div className="bg-[#0F766E] p-10 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#0D9488] rounded-full -translate-y-1/2 translate-x-1/4 opacity-50"></div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-6">
-              {data.header.profilePicture && (
-                <div className="w-24 h-24 rounded-2xl overflow-hidden border-4 border-[#5EEAD4] shrink-0">
-                  <img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" />
-                </div>
-              )}
-              <div>
-                <h1 className="text-4xl font-bold text-white mb-1">{data.header.fullName}</h1>
-                <p className="text-[#5EEAD4] text-lg font-medium mb-3">{data.header.title}</p>
-                <div className="flex flex-wrap gap-x-4 text-sm text-[#99F6E4]">
-                  {data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-[2fr_1fr] gap-0">
-          <div className="p-10">
-            <div className="mb-8">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#0F766E] border-b-2 border-[#CCFBF1] pb-2 mb-4">Summary</h2>
-              <p className="text-sm text-[#374151] leading-relaxed">{data.summary}</p>
-            </div>
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#0F766E] border-b-2 border-[#CCFBF1] pb-2 mb-4">Experience</h2>
-              <div className="space-y-6">
-                {data.experience.map((exp, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between mb-1">
-                      <h3 className="font-bold text-[#111827]">{exp.title}</h3>
-                      <span className="text-xs bg-[#CCFBF1] text-[#0F766E] px-2 py-1 rounded font-semibold">{exp.dateRange}</span>
-                    </div>
-                    <p className="text-sm font-semibold text-[#0D9488] mb-2">{exp.company}</p>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-[#4b5563]">{b}</li>)}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#F0FDFA] p-8">
-            <div className="mb-8">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#0F766E] mb-4">Education</h2>
-              <div className="space-y-4">
-                {data.education.map((edu, i) => (
-                  <div key={i} className="bg-white rounded-xl p-4 border border-[#CCFBF1]">
-                    <h3 className="text-sm font-bold text-[#0F766E]">{edu.degree}</h3>
-                    <p className="text-xs text-[#6b7280]">{edu.institution}</p>
-                    <span className="text-xs text-[#0D9488]">{edu.dateRange}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-widest text-[#0F766E] mb-4">Skills</h2>
-              <div className="space-y-3">
-                {data.skills.map((sg, i) => (
-                  <div key={i}>
-                    <span className="text-xs font-bold text-[#0F766E] block mb-2">{sg.category}</span>
-                    <div className="flex flex-wrap gap-1">
-                      {sg.items.map((item, ii) => <span key={ii} className="text-[10px] bg-[#0F766E] text-white px-2 py-1 rounded-full">{item}</span>)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== EXISTING TEMPLATES ====================
-  if (designId === 'creative-orange') {
-    return (
-      <div className="bg-[#f3f4f6] text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] flex font-sans overflow-hidden p-6 gap-6 relative">
-         <div className="w-[35%] bg-[#EA580C] text-white p-8 rounded-3xl flex flex-col [box-shadow:0_10px_15px_-3px_rgba(0,0,0,0.1)] z-10 print:shadow-[0_0_0_1000px_#EA580C_inset] print:[box-shadow:none]">
-           {data.header.profilePicture && (<div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white [box-shadow:0_4px_6px_-1px_rgba(0,0,0,0.1)] mx-auto mb-8 mt-4 shrink-0 bg-white"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div>)}
-           <div className="mb-8 w-full"><h2 className="text-sm font-bold uppercase tracking-widest text-white/90 mb-4 border-b border-white/20 pb-2">Education</h2><div className="space-y-4">{data.education.map((edu, idx) => (<div key={idx}><h3 className="text-sm font-bold text-white mb-1">{edu.degree}</h3><p className="text-xs text-white/80">{edu.institution}</p><span className="text-xs font-bold mt-1 block opacity-70">{edu.dateRange}</span></div>))}</div></div>
-           <div className="mb-8 w-full"><h2 className="text-sm font-bold uppercase tracking-widest text-white/90 mb-4 border-b border-white/20 pb-2">Skills</h2><div className="space-y-4">{data.skills.map((skillGroup, idx) => (<div key={idx}><span className="block text-xs font-bold text-white mb-1">{skillGroup.category}</span><span className="text-xs text-white/80 leading-relaxed block">{skillGroup.items.join(', ')}</span></div>))}</div></div>
-         </div>
-         <div className="w-[65%] bg-white p-10 rounded-3xl [box-shadow:0_10px_15px_-3px_rgba(0,0,0,0.1)] z-10 print:[box-shadow:none] font-sans flex flex-col">
-           <div className="mb-8"><h1 className="text-4xl font-extrabold text-[#111827] uppercase tracking-tighter mb-1">{data.header.fullName}</h1><p className="text-xl text-[#6b7280] font-medium tracking-widest uppercase">{data.header.title}</p><div className="text-xs font-semibold text-[#9ca3af] uppercase tracking-widest flex flex-wrap gap-x-4 gap-y-2 mt-4 pt-4 border-t border-[#f3f4f6]">{data.header.contactInfo.split('|').map((info, idx) => <span key={idx}>{info.trim()}</span>)}</div></div>
-           <div className="mb-8"><h2 className="text-sm font-bold uppercase tracking-widest text-[#EA580C] mb-3 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EA580C]"></span> About Me</h2><p className="text-sm text-[#4b5563] leading-relaxed">{data.summary}</p></div>
-           <div><h2 className="text-sm font-bold uppercase tracking-widest text-[#EA580C] mb-5 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[#EA580C]"></span> Job Experience</h2><div className="space-y-6">{data.experience.map((exp, idx) => (<div key={idx}><div className="flex justify-between items-baseline mb-1"><h3 className="text-sm font-bold text-[#111827] uppercase">{exp.title}</h3><span className="text-xs font-bold text-[#6b7280] bg-[#f3f4f6] px-2 py-1 rounded">{exp.dateRange}</span></div><p className="text-sm font-bold text-[#6b7280] mb-2">{exp.company}</p><ul className="list-disc pl-5 space-y-1">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-xs text-[#4b5563] leading-relaxed marker:text-[#d1d5db]">{bullet}</li>))}</ul></div>))}</div></div>
-         </div>
-      </div>
-    );
-  }
-
-  if (designId === 'corporate-dark') {
-    return (
-      <div className="bg-[#f0f2f5] text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] font-sans flex flex-col relative overflow-hidden">
-        <div className="w-full bg-[#E5E7EB] flex items-stretch min-h-[180px]">
-          <div className="w-[60%] p-8 flex flex-col justify-center"><h2 className="text-sm font-bold uppercase tracking-widest text-[#1f2937] mb-3 flex items-center gap-2"><span className="w-6 h-6 rounded-full bg-[#1f2937] text-white flex items-center justify-center text-xs">◆</span> About Me</h2><p className="text-xs text-[#4b5563] leading-relaxed">{data.summary}</p></div>
-          <div className="w-[40%] flex flex-col justify-center items-end text-right p-8 relative z-10 bg-white/40 border-l border-white/60"><h1 className="text-3xl font-extrabold uppercase text-[#111827] leading-none mb-2">{data.header.fullName.split(' ')[0]} <br/> <span className="text-[#4b5563] font-light">{data.header.fullName.split(' ').slice(1).join(' ')}</span></h1><p className="text-xs text-[#1f2937] uppercase tracking-widest font-bold mt-1 bg-white px-2 py-1">{data.header.title}</p></div>
-        </div>
-        <div className="flex flex-1">
-          <div className="w-[60%] bg-white p-8 pt-12">
-            <div className="mb-10"><h2 className="text-sm font-bold uppercase tracking-[0.2em] text-[#111827] mb-6 flex items-center gap-3"><span className="w-8 h-px bg-[#111827]"></span> Job Experience</h2><div className="space-y-8">{data.experience.map((exp, idx) => (<div key={idx}><div className="flex justify-between items-baseline mb-1"><h3 className="text-sm font-bold text-[#111827] uppercase tracking-wide">{exp.title}</h3><span className="text-xs font-bold text-[#9ca3af]">{exp.dateRange}</span></div><p className="text-xs font-black text-[#6b7280] uppercase tracking-wider mb-3">{exp.company}</p><ul className="space-y-2">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-xs text-[#4b5563] leading-relaxed pl-4 relative"><span className="absolute left-0 top-1.5 w-1.5 h-1.5 border border-[#9ca3af] rounded-sm"></span>{bullet}</li>))}</ul></div>))}</div></div>
-            <div><h2 className="text-sm font-bold uppercase tracking-[0.2em] text-[#111827] mb-6 flex items-center gap-3"><span className="w-8 h-px bg-[#111827]"></span> Skills</h2><div className="grid grid-cols-2 gap-4">{data.skills.map((skillGroup, idx) => (<div key={idx}><span className="block text-xs font-bold text-[#111827] uppercase tracking-widest mb-1">{skillGroup.category}</span><span className="text-xs text-[#6b7280] leading-relaxed block">{skillGroup.items.join(', ')}</span></div>))}</div></div>
-          </div>
-          <div className="w-[40%] bg-[#1F2937] text-white p-8 pt-24 relative print:shadow-[0_0_0_1000px_#1F2937_inset]">
-            {data.header.profilePicture && (<div className="absolute -top-[70px] left-1/2 -translate-x-1/2 w-[140px] h-[140px] rounded-full border-[6px] border-[#1F2937] bg-white overflow-hidden z-20"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div>)}
-            <div className="mb-10 text-center"><h2 className="text-xs font-bold uppercase tracking-widest text-white mb-4 bg-white/10 py-2 rounded">Contact</h2><div className="space-y-3 text-xs text-[#9ca3af]">{data.header.contactInfo.split('|').map((info, idx) => <span key={idx} className="block">{info.trim()}</span>)}</div></div>
-            <div className="mb-10 text-center"><h2 className="text-xs font-bold uppercase tracking-widest text-white mb-4 bg-white/10 py-2 rounded">Education</h2><div className="space-y-5 break-words">{data.education.map((edu, idx) => (<div key={idx}><h3 className="text-xs font-bold text-white mb-1 uppercase leading-snug">{edu.degree}</h3><p className="text-xs text-[#9ca3af] mb-1">{edu.institution}</p><span className="text-[10px] text-[#6b7280] block">{edu.dateRange}</span></div>))}</div></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (designId === 'modern-block') {
-    return (
-      <div className="bg-white text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] font-sans p-10 overflow-hidden relative border-t-[16px] border-[#F97316]">
-        <div className="flex mb-8 items-center gap-8">{data.header.profilePicture && (<div className="w-[180px] h-[220px] bg-[#f3f4f6] shrink-0 overflow-hidden"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover grayscale opacity-90 contrast-125" /></div>)}<div className="flex-1"><h1 className="text-[2.5rem] leading-[1.1] font-light text-[#1f2937] uppercase tracking-tight mb-3"><span className="font-bold text-[#111827]">{data.header.fullName.split(' ')[0]}</span> <br/> {data.header.fullName.split(' ').slice(1).join(' ')}</h1><p className="text-lg font-medium text-[#F97316] mb-6 tracking-widest uppercase">{data.header.title}</p><div className="text-xs text-[#6b7280] uppercase tracking-widest border-t border-b py-3 font-medium flex gap-4 flex-wrap">{data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}</div></div></div>
-        <div className="flex bg-[#374151] text-white p-4 font-bold uppercase tracking-[0.2em] justify-center mb-10 w-[90%] text-sm">{data.header.title}</div>
-        <div className="flex gap-10"><div className="w-[35%] space-y-10"><div><h2 className="text-sm font-bold uppercase tracking-widest text-[#F97316] mb-4 border-b pb-2">Profile</h2><p className="text-xs leading-relaxed text-[#4b5563]">{data.summary}</p></div><div><h2 className="text-sm font-bold uppercase tracking-widest text-[#F97316] mb-4 border-b pb-2">Expertise</h2><div className="space-y-4">{data.skills.map((skillGroup, idx) => (<div key={idx}><span className="block text-xs font-bold text-[#1f2937] uppercase tracking-wider mb-1">{skillGroup.category}</span><span className="text-xs text-[#6b7280] leading-relaxed block">{skillGroup.items.join(', ')}</span></div>))}</div></div><div><h2 className="text-sm font-bold uppercase tracking-widest text-[#F97316] mb-4 border-b pb-2">Education</h2><div className="space-y-4">{data.education.map((edu, idx) => (<div key={idx}><h3 className="text-xs font-bold text-[#1f2937] mb-1">{edu.degree}</h3><p className="text-[10px] uppercase font-bold text-[#9ca3af] mb-1">{edu.institution}</p><span className="text-[10px] text-[#F97316] block">{edu.dateRange}</span></div>))}</div></div></div><div className="w-[65%]"><h2 className="text-sm font-bold uppercase tracking-widest text-[#F97316] mb-6 border-b pb-2">Experience</h2><div className="space-y-8">{data.experience.map((exp, idx) => (<div key={idx}><div className="flex justify-between items-baseline mb-2"><h3 className="text-sm font-bold text-[#111827] uppercase tracking-widest">{exp.title}</h3><span className="text-[10px] font-bold text-[#F97316]">{exp.dateRange}</span></div><p className="text-xs font-medium text-[#6b7280] uppercase tracking-widest mb-3">{exp.company}</p><ul className="list-disc pl-4 space-y-1">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-xs text-[#4b5563] leading-relaxed marker:text-[#d1d5db]">{bullet}</li>))}</ul></div>))}</div></div></div>
-      </div>
-    );
-  }
-
-  if (designId === 'contrast-bold') {
-    return (
-      <div className="bg-white text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] flex font-sans overflow-hidden">
-        <div className="w-[45%] flex flex-col relative z-20"><div className="h-[240px] flex items-center justify-center p-8 relative"><div className="absolute top-0 right-[-50px] w-full h-[60%] bg-white rounded-br-full z-0"></div>{data.header.profilePicture && (<div className="w-48 h-48 rounded-full border-[8px] border-[#F97316] p-1 bg-white z-30 ml-8 mt-12"><div className="w-full h-full rounded-full overflow-hidden"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div></div>)}</div><div className="p-10 pt-4 space-y-10"><div><h2 className="text-sm font-black text-white uppercase tracking-[0.2em] mb-6 bg-[#F97316] py-2 px-4 rounded-r-full -ml-10 inline-block w-4/5">Education</h2><div className="space-y-6">{data.education.map((edu, idx) => (<div key={idx} className="relative pl-6"><div className="absolute left-0 top-1 w-3 h-3 bg-[#F97316]"></div><span className="text-[10px] font-bold text-[#6b7280] mb-1 block">{edu.dateRange}</span><h3 className="text-xs font-bold text-[#111827] uppercase tracking-widest mb-1 leading-snug">{edu.degree}</h3><p className="text-xs text-[#4b5563]">{edu.institution}</p></div>))}</div></div><div><h2 className="text-sm font-black text-white uppercase tracking-[0.2em] mb-6 bg-[#F97316] py-2 px-4 rounded-r-full -ml-10 inline-block w-4/5">Experience</h2><div className="space-y-8">{data.experience.map((exp, idx) => (<div key={idx} className="relative pl-6"><div className="absolute left-0 top-1 w-3 h-3 bg-[#F97316]"></div><span className="text-[10px] font-bold text-[#6b7280] mb-1 block">{exp.dateRange}</span><h3 className="text-xs font-bold text-[#111827] uppercase tracking-widest mb-1 leading-snug">{exp.title}</h3><p className="text-[10px] font-bold text-[#F97316] uppercase tracking-widest mb-2">{exp.company}</p><ul className="space-y-1.5 border-t border-[#f3f4f6] pt-2">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-[11px] text-[#4b5563] leading-snug">- {bullet}</li>))}</ul></div>))}</div></div></div></div>
-        <div className="w-[55%] bg-[#1F2937] text-white flex flex-col print:shadow-[0_0_0_1000px_#1F2937_inset]"><div className="min-h-[220px] bg-[#F97316] w-[120%] -ml-12 p-10 pl-24 pt-16 flex flex-col justify-center rounded-l-[100px] z-10"><h1 className="text-4xl font-extrabold uppercase tracking-tighter text-white mb-2 leading-none">{data.header.fullName}</h1><p className="text-sm font-bold text-white/90 uppercase tracking-[0.25em]">{data.header.title}</p></div><div className="p-10 pl-16 space-y-12 shrink-0"><div><h2 className="text-sm font-bold text-white uppercase tracking-[0.2em] mb-4 border border-white/20 rounded-full px-6 py-2 inline-block">Contact Me</h2><div className="space-y-4 text-xs text-[#d1d5db] mt-2">{data.header.contactInfo.split('|').map((info, idx) => (<div key={idx} className="flex items-center gap-3"><span className="w-6 h-6 rounded bg-[#F97316] text-white flex items-center justify-center shrink-0 text-[10px]">C</span><span className="leading-snug break-all">{info.trim()}</span></div>))}</div></div><div><h2 className="text-sm font-bold text-white uppercase tracking-[0.2em] mb-4 border border-white/20 rounded-full px-6 py-2 inline-block">Pro Skills</h2><div className="space-y-6 mt-2">{data.skills.map((skillGroup, idx) => (<div key={idx}><span className="block text-xs font-bold text-white uppercase tracking-widest mb-2 text-center">{skillGroup.category}</span><div className="flex flex-wrap justify-center gap-1.5">{skillGroup.items.map((item, i) => (<span key={i} className="text-[10px] border border-white/10 px-2 py-1 rounded bg-white/5 text-[#d1d5db]">{item}</span>))}</div></div>))}</div></div></div></div>
-      </div>
-    );
-  }
-
-  if (designId === 'split') {
-    return (
-      <div className="bg-white text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] flex font-sans overflow-hidden">
-        <div className="w-[30%] bg-[#1f2937] text-white p-8 flex flex-col pt-12 items-center">
-          {data.header.profilePicture && (<div className="mb-6 rounded-full overflow-hidden border-4 border-[#eab308] w-32 h-32 flex-shrink-0"><img src={data.header.profilePicture} alt={data.header.fullName} className="w-full h-full object-cover" /></div>)}
-          <div className="w-full mb-8"><h2 className="text-xs font-bold tracking-widest text-[#eab308] uppercase mb-4 text-center border-b border-[#4b5563] pb-2">Contact</h2><div className="space-y-3 text-xs text-[#d1d5db] flex flex-col items-center text-center">{data.header.contactInfo.split('|').map((info, idx) => (<span key={idx} className="block">{info.trim()}</span>))}</div></div>
-          <div className="w-full mb-8 text-center"><h2 className="text-xs font-bold tracking-widest text-[#eab308] uppercase mb-4 border-b border-[#4b5563] pb-2">Education</h2><div className="space-y-4">{data.education.map((edu, idx) => (<div key={idx}><h3 className="text-sm font-bold text-white mb-1">{edu.degree}</h3><p className="text-xs text-[#9ca3af] capitalize">{edu.institution}</p><span className="text-[10px] text-[#eab308] mt-1 block">{edu.dateRange}</span></div>))}</div></div>
-          <div className="w-full text-center"><h2 className="text-xs font-bold tracking-widest text-[#eab308] uppercase mb-4 border-b border-[#4b5563] pb-2">Skills</h2><div className="space-y-4">{data.skills.map((skillGroup, idx) => (<div key={idx}><span className="block text-xs font-bold text-white mb-1">{skillGroup.category}</span><span className="text-xs text-[#9ca3af] leading-relaxed block">{skillGroup.items.join(', ')}</span></div>))}</div></div>
-        </div>
-        <div className="w-[70%] bg-white p-10 pt-12">
-          <header className="mb-10 text-center"><h1 className="text-4xl font-extrabold tracking-tight text-[#111827] mb-2 uppercase">{data.header.fullName}</h1><p className="text-lg text-[#eab308] font-bold tracking-widest uppercase">{data.header.title}</p></header>
-          <section className="mb-10"><div className="flex items-center gap-3 mb-4"><div className="w-8 h-8 rounded-full bg-[#1f2937] flex items-center justify-center"><div className="w-3 h-3 bg-[#eab308] rounded-full"></div></div><h2 className="text-lg font-bold text-[#111827] uppercase tracking-widest">About Me</h2></div><p className="text-sm leading-relaxed text-[#4b5563]">{data.summary}</p></section>
-          <section><div className="flex items-center gap-3 mb-6"><div className="w-8 h-8 rounded-full bg-[#1f2937] flex items-center justify-center"><div className="w-3 h-3 bg-[#eab308] rounded-full"></div></div><h2 className="text-lg font-bold text-[#111827] uppercase tracking-widest">Job Experience</h2></div><div className="space-y-6">{data.experience.map((exp, idx) => (<div key={idx}><div className="flex justify-between items-baseline mb-1"><h3 className="text-base font-bold text-[#111827] uppercase">{exp.title}</h3><span className="text-xs font-bold text-[#111827]">{exp.dateRange}</span></div><p className="text-sm font-bold text-[#eab308] mb-2">{exp.company}</p><ul className="list-disc pl-5 space-y-1">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-sm text-[#4b5563] leading-relaxed marker:text-[#d1d5db]">{bullet}</li>))}</ul></div>))}</div></section>
-        </div>
-      </div>
-    );
-  }
-
-  if (designId === 'modern') {
-    return (
-      <div className="bg-white text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] p-8 sm:p-12 font-sans overflow-hidden">
-        <header className="border-l-4 border-[#FF6321] pl-6 mb-8"><h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-[#111827] mb-2">{data.header.fullName}</h1><p className="text-2xl text-[#FF6321] font-semibold mb-3">{data.header.title}</p><div className="text-sm text-[#4b5563] flex flex-wrap gap-x-4 gap-y-1 font-medium">{data.header.contactInfo.split('|').map((info, idx) => (<span key={idx}>{info.trim()}</span>))}</div></header>
-        <section className="mb-8"><p className="text-[15px] leading-relaxed text-[#374151]">{data.summary}</p></section>
-        <section className="mb-8"><h2 className="text-xl font-bold text-[#111827] mb-4 flex items-center gap-4">Experience <div className="h-px flex-1 bg-[#e5e7eb]"></div></h2><div className="space-y-6">{data.experience.map((exp, idx) => (<div key={idx}><div className="flex justify-between items-baseline mb-1"><h3 className="text-[17px] font-bold text-[#111827]">{exp.title}</h3><span className="text-sm font-medium bg-[#f3f4f6] px-2 py-1 rounded text-[#4b5563]">{exp.dateRange}</span></div><p className="text-[15px] font-semibold text-[#FF6321] mb-2">{exp.company}</p><ul className="list-disc pl-5 space-y-1.5">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-sm text-[#374151] leading-relaxed marker:text-[#9ca3af]">{bullet}</li>))}</ul></div>))}</div></section>
-        <div className="grid md:grid-cols-2 gap-8"><section><h2 className="text-xl font-bold text-[#111827] mb-4 flex items-center gap-4">Education <div className="h-px flex-1 bg-[#e5e7eb]"></div></h2><div className="space-y-4">{data.education.map((edu, idx) => (<div key={idx}><h3 className="text-base font-bold text-[#111827]">{edu.degree}</h3><p className="text-[15px] text-[#FF6321] font-medium">{edu.institution}</p><span className="text-sm text-[#6b7280]">{edu.dateRange}</span></div>))}</div></section><section><h2 className="text-xl font-bold text-[#111827] mb-4 flex items-center gap-4">Skills <div className="h-px flex-1 bg-[#e5e7eb]"></div></h2><div className="space-y-3">{data.skills.map((skillGroup, idx) => (<div key={idx} className="text-[15px]"><div className="font-bold text-[#111827] mb-1">{skillGroup.category}</div><div className="text-[#4b5563] leading-snug">{skillGroup.items.join(' • ')}</div></div>))}</div></section></div>
-      </div>
-    );
-  }
-
-  if (designId === 'minimal') {
-    return (
-      <div className="bg-white text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] p-8 sm:p-12 font-sans overflow-hidden">
-        <header className="mb-10 text-center"><h1 className="text-3xl font-medium tracking-wide text-[#111827] mb-2">{data.header.fullName}</h1><p className="text-lg text-[#6b7280] mb-4">{data.header.title}</p><div className="text-xs text-[#9ca3af] flex flex-wrap justify-center gap-x-6 gap-y-1 uppercase tracking-wider">{data.header.contactInfo.split('|').map((info, idx) => (<span key={idx}>{info.trim()}</span>))}</div></header>
-        <section className="mb-10 text-center max-w-2xl mx-auto"><p className="text-sm leading-loose text-[#4b5563]">{data.summary}</p></section>
-        <section className="mb-10"><h2 className="text-xs font-bold tracking-[0.2em] text-[#9ca3af] uppercase mb-6 text-center">Experience</h2><div className="space-y-8">{data.experience.map((exp, idx) => (<div key={idx} className="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-4"><div className="text-sm text-[#6b7280] pt-1">{exp.dateRange}</div><div><h3 className="text-base font-medium text-[#111827]">{exp.title}</h3><p className="text-sm text-[#6b7280] mb-3">{exp.company}</p><ul className="space-y-2">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-sm text-[#4b5563] leading-relaxed flex items-start"><span className="mr-3 text-[#d1d5db]">-</span><span>{bullet}</span></li>))}</ul></div></div>))}</div></section>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10"><section><h2 className="text-xs font-bold tracking-[0.2em] text-[#9ca3af] uppercase mb-6">Education</h2><div className="space-y-6">{data.education.map((edu, idx) => (<div key={idx}><h3 className="text-sm font-medium text-[#111827]">{edu.degree}</h3><p className="text-sm text-[#6b7280]">{edu.institution}</p><span className="text-xs text-[#9ca3af] mt-1 block">{edu.dateRange}</span></div>))}</div></section><section><h2 className="text-xs font-bold tracking-[0.2em] text-[#9ca3af] uppercase mb-6">Skills</h2><div className="space-y-4">{data.skills.map((skillGroup, idx) => (<div key={idx}><span className="block text-sm font-medium text-[#111827] mb-1">{skillGroup.category}</span><span className="text-sm text-[#6b7280] leading-relaxed">{skillGroup.items.join(', ')}</span></div>))}</div></section></div>
-      </div>
-    );
-  }
-
-  // default classic
-  return (
-    <div className="bg-white text-[#111827] mx-auto print:mx-0 w-full max-w-[850px] [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] print:[box-shadow:none] min-h-[1100px] p-8 sm:p-12 font-sans overflow-hidden">
-      <header className="text-center border-b-2 border-[#1f2937] pb-6 mb-6"><h1 className="text-3xl md:text-4xl font-bold tracking-tight uppercase text-[#111827] mb-2">{data.header.fullName}</h1><p className="text-xl text-[#374151] font-medium tracking-wide mb-3">{data.header.title}</p><div className="text-sm text-[#4b5563] flex flex-wrap justify-center gap-x-4 gap-y-1">{data.header.contactInfo.split('|').map((info, idx) => (<span key={idx}>{info.trim()}</span>))}</div></header>
-      <section className="mb-6"><h2 className="text-sm font-bold tracking-widest text-[#111827] uppercase border-b border-[#d1d5db] pb-1 mb-3">Professional Summary</h2><p className="text-sm leading-relaxed text-[#1f2937]">{data.summary}</p></section>
-      <section className="mb-6"><h2 className="text-sm font-bold tracking-widest text-[#111827] uppercase border-b border-[#d1d5db] pb-1 mb-3">Experience</h2><div className="space-y-5">{data.experience.map((exp, idx) => (<div key={idx}><div className="flex justify-between items-baseline mb-1"><h3 className="text-base font-bold text-[#111827]">{exp.title}</h3><span className="text-sm font-medium text-[#4b5563]">{exp.dateRange}</span></div><p className="text-sm font-semibold text-[#374151] mb-2">{exp.company}</p><ul className="list-disc pl-5 space-y-1">{exp.bullets.map((bullet, bIdx) => (<li key={bIdx} className="text-sm text-[#1f2937] leading-relaxed marker:text-[#6b7280]">{bullet}</li>))}</ul></div>))}</div></section>
-      <section className="mb-6"><h2 className="text-sm font-bold tracking-widest text-[#111827] uppercase border-b border-[#d1d5db] pb-1 mb-3">Education</h2><div className="space-y-3">{data.education.map((edu, idx) => (<div key={idx} className="flex justify-between items-baseline"><div><h3 className="text-base font-bold text-[#111827]">{edu.degree}</h3><p className="text-sm text-[#374151]">{edu.institution}</p></div><span className="text-sm font-medium text-[#4b5563]">{edu.dateRange}</span></div>))}</div></section>
-      <section><h2 className="text-sm font-bold tracking-widest text-[#111827] uppercase border-b border-[#d1d5db] pb-1 mb-3">Skills</h2><div className="space-y-2">{data.skills.map((skillGroup, idx) => (<div key={idx} className="text-sm"><span className="font-bold text-[#111827] mr-2">{skillGroup.category}:</span><span className="text-[#1f2937]">{skillGroup.items.join(', ')}</span></div>))}</div></section>
-    </div>
-  );
-}
+              <p

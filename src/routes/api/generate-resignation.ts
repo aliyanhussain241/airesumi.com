@@ -26,14 +26,14 @@ export const Route = createFileRoute("/api/generate-resignation")({
           const prompt = `You are an expert HR writer. Write a professional resignation letter.
 
 Details:
-- Your Name: ${yourName || ""}
+- Name: ${yourName || ""}
 - Job Title: ${jobTitle || ""}
 - Company: ${companyName || ""}
-- Manager Name: ${managerName || "Hiring Manager"}
+- Manager: ${managerName || "Hiring Manager"}
 - Last Working Day: ${lastDay || "two weeks from today"}
-- Reason for leaving: ${reason || "personal reasons"}
+- Reason: ${reason || "personal reasons"}
 - Tone: ${tone || "Professional"}
-- Positive highlights to mention: ${highlights || ""}
+- Positive highlights: ${highlights || ""}
 
 Rules:
 1. Keep it short — 3-4 paragraphs max
@@ -42,7 +42,7 @@ Rules:
 4. Offer to help with transition
 5. Professional closing
 
-Return ONLY the letter text, no subject line, no JSON. Start directly with "Dear ${managerName || "Hiring Manager"},"`;
+Return ONLY the letter text. Start with "Dear ${managerName || "Hiring Manager"},"`;
 
           const response = await callAIGateway({
             messages: [{ role: "user", content: prompt }],

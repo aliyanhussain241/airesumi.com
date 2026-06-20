@@ -24,19 +24,56 @@ const GLASS_HEADER_STYLES = `
     box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
+  /* Liquid Glass dropdown */
   .hdr-dropdown {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.75);
+    position: absolute;
+    isolation: isolate;
+    background: transparent;
+    border-radius: 1.5rem;
+    overflow: hidden;
     box-shadow:
-      0 24px 64px rgba(0, 0, 0, 0.13),
-      0 4px 16px rgba(234, 88, 12, 0.07),
-      inset 0 1px 0 rgba(255, 255, 255, 0.98),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+      0 6px 6px rgba(0, 0, 0, 0.18),
+      0 12px 40px rgba(0, 0, 0, 0.12),
+      0 0 20px rgba(234, 88, 12, 0.06);
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  }
+  /* Layer 1: refracted/distorted background */
+  .hdr-dropdown::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    backdrop-filter: blur(3px) saturate(160%);
+    filter: url(#hdr-glass-distortion);
+    isolation: isolate;
+  }
+  /* Layer 2: soft white tint */
+  .hdr-dropdown::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.28);
+    pointer-events: none;
+  }
+  /* Layer 3: inner highlight ring */
+  .hdr-dropdown > .hdr-dropdown-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    box-shadow:
+      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.75),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+  }
+  .hdr-dropdown > .hdr-dropdown-content {
+    position: relative;
+    z-index: 3;
   }
   .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.35);
-    border-top: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.45);
   }
   .hdr-btn-primary {
     background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));

@@ -283,33 +283,45 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             </h2>
          </div>
 
-         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {/* Feature 1 */}
-            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
-              <Sparkles size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">A draft in 10 mins</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">The AI builder is 10 x faster than doing on your own.</p>
+            <div className="liquid-card rounded-2xl">
+              <span className="liquid-card-shine" aria-hidden="true" />
+              <div className="liquid-card-content p-8">
+                <Sparkles size={32} className="text-[#1a202c] mb-6" />
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">A draft in 10 mins</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">The AI builder is 10 x faster than doing on your own.</p>
+              </div>
             </div>
-            
+
             {/* Feature 2 */}
-            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
-              <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero mistakes</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Don't stress over typos; you'll sound great!</p>
+            <div className="liquid-card rounded-2xl">
+              <span className="liquid-card-shine" aria-hidden="true" />
+              <div className="liquid-card-content p-8">
+                <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero mistakes</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">Don't stress over typos; you'll sound great!</p>
+              </div>
             </div>
-            
+
             {/* Feature 3 */}
-            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
-              <Target size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">ATS templates</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">Your resume will be 100% compliant. Recruiters will see you.</p>
+            <div className="liquid-card rounded-2xl">
+              <span className="liquid-card-shine" aria-hidden="true" />
+              <div className="liquid-card-content p-8">
+                <Target size={32} className="text-[#1a202c] mb-6" />
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">ATS templates</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">Your resume will be 100% compliant. Recruiters will see you.</p>
+              </div>
             </div>
-            
+
             {/* Feature 4 */}
-            <div className="glass rounded-2xl p-8 hover:shadow-md transition-shadow">
-              <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
-              <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Get paid 7% more</h3>
-              <p className="text-[#64748b] text-[15px] leading-relaxed">We can help you negotiate a higher starting salary...</p>
+            <div className="liquid-card rounded-2xl">
+              <span className="liquid-card-shine" aria-hidden="true" />
+              <div className="liquid-card-content p-8">
+                <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Get paid 7% more</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">We can help you negotiate a higher starting salary...</p>
+              </div>
             </div>
          </div>
       </div>

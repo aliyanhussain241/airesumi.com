@@ -364,8 +364,15 @@ function LinkedInBioGenerator() {
 export const Route = createFileRoute("/linkedin-bio")({
   head: () => ({
     meta: [
-      { title: "LinkedIn Bio Generator — AI Powered | airesumi.com" },
-      { name: "description", content: "Turn your resume into a compelling LinkedIn headline and About section with AI." },
+      { title: "LinkedIn Bio Generator — AI-Powered Profile Writer | airesumi.com" },
+      { name: "description", content: "Turn your resume into a compelling LinkedIn headline, About section, and skills list. AI-powered, free LinkedIn profile generator." },
+      { property: "og:title", content: "AI LinkedIn Bio Generator | airesumi.com" },
+      { property: "og:description", content: "Generate a compelling LinkedIn headline and About section from your resume with AI." },
+      { property: "og:url", content: "https://airesumi.com/linkedin-bio" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:title", content: "AI LinkedIn Bio Generator | airesumi.com" },
+      { name: "twitter:description", content: "Generate a compelling LinkedIn headline and About section from your resume with AI." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/linkedin-bio" }],
   }),

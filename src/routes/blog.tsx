@@ -12,8 +12,15 @@ function Page() {
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Career Blog — Resume Tips & AI Advice | airesumi.com" },
-      { name: "description", content: "Expert advice on resumes, interviews, and landing remote jobs." },
+      { title: "Resume Tips & Career Advice Blog | airesumi.com" },
+      { name: "description", content: "Expert resume writing tips, interview advice, salary guides, and AI career tools. Updated weekly to help job seekers land their dream job faster." },
+      { property: "og:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
+      { property: "og:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
+      { property: "og:url", content: "https://airesumi.com/blog" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
+      { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
   }),

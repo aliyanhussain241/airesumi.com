@@ -373,8 +373,15 @@ function PDFScanner() {
 export const Route = createFileRoute("/pdf-scanner")({
   head: () => ({
     meta: [
-      { title: "Document Scanner — Scan to PDF | airesumi.com" },
-      { name: "description", content: "Scan documents with your mobile camera and convert to PDF with filters." },
+      { title: "Document Scanner — Scan to PDF on Mobile | airesumi.com" },
+      { name: "description", content: "Scan documents with your phone camera and convert to PDF instantly. Apply document filters, reorder pages, and download — no app required." },
+      { property: "og:title", content: "Free Mobile Document Scanner — Scan to PDF | airesumi.com" },
+      { property: "og:description", content: "Scan documents with your phone camera and create PDF instantly. Free, no app needed." },
+      { property: "og:url", content: "https://airesumi.com/pdf-scanner" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:title", content: "Free Mobile Document Scanner — Scan to PDF | airesumi.com" },
+      { name: "twitter:description", content: "Scan documents with your phone camera and create PDF instantly. Free, no app needed." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/pdf-scanner" }],
   }),

@@ -75,7 +75,6 @@ function LinkedInBioGenerator() {
   const [error, setError] = useState<string | null>(null);
   const [loadingResumes, setLoadingResumes] = useState(true);
 
-  // Manual input fields
   const [manual, setManual] = useState({
     fullName: "", currentRole: "", skills: "", experience: "", education: "",
   });
@@ -112,7 +111,6 @@ function LinkedInBioGenerator() {
         userData = found.user_data;
       }
     } else {
-      // Build minimal resumeData from manual input
       resumeData = {
         header: { fullName: manual.fullName, title: manual.currentRole, contactInfo: "" },
         summary: "",
@@ -170,7 +168,7 @@ function LinkedInBioGenerator() {
 
               {/* Source selector */}
               <div className="bg-white border border-[#e5e7eb] rounded-2xl p-6 mb-4">
-                <h2 className="text-[15px] font-semibold text-[#111827] mb-4">1. Resume source chuno</h2>
+                <h2 className="text-[15px] font-semibold text-[#111827] mb-4">1. Select Resume Source</h2>
 
                 {loadingResumes ? (
                   <div className="h-10 bg-gray-100 rounded-xl animate-pulse" />
@@ -181,13 +179,13 @@ function LinkedInBioGenerator() {
                         onClick={() => setManualMode(false)}
                         className={`flex-1 py-2.5 px-4 rounded-xl text-[13px] font-medium border transition-all ${!manualMode ? "bg-[#FF6321] text-white border-[#FF6321]" : "border-[#e5e7eb] text-[#374151] hover:border-[#FF6321]"}`}
                       >
-                        Saved Resume se
+                        Use Saved Resume
                       </button>
                       <button
                         onClick={() => setManualMode(true)}
                         className={`flex-1 py-2.5 px-4 rounded-xl text-[13px] font-medium border transition-all ${manualMode ? "bg-[#FF6321] text-white border-[#FF6321]" : "border-[#e5e7eb] text-[#374151] hover:border-[#FF6321]"}`}
                       >
-                        Manually bharo
+                        Enter Manually
                       </button>
                     </div>
 
@@ -229,7 +227,7 @@ function LinkedInBioGenerator() {
                       </div>
                     ))}
                     <div>
-                      <label className="text-[12px] font-medium text-[#374151] mb-1 block">Experience (ek line per role)</label>
+                      <label className="text-[12px] font-medium text-[#374151] mb-1 block">Experience (one role per line)</label>
                       <textarea
                         rows={3}
                         placeholder={"Senior Dev at Google, 2022-2024\nFrontend Engineer at Meta, 2020-2022"}
@@ -244,7 +242,7 @@ function LinkedInBioGenerator() {
 
               {/* Tone selector */}
               <div className="bg-white border border-[#e5e7eb] rounded-2xl p-6 mb-4">
-                <h2 className="text-[15px] font-semibold text-[#111827] mb-4">2. Tone chuno</h2>
+                <h2 className="text-[15px] font-semibold text-[#111827] mb-4">2. Select Tone</h2>
                 <div className="grid grid-cols-2 gap-3">
                   {TONES.map((t) => (
                     <button
@@ -284,7 +282,7 @@ function LinkedInBioGenerator() {
                 <Linkedin size={30} className="text-[#0a66c2]" />
               </div>
               <h3 className="text-[20px] font-bold text-[#111827] mb-2">Writing your LinkedIn bio...</h3>
-              <p className="text-[14px] text-[#6b7280]">AI aapka profile craft kar raha hai</p>
+              <p className="text-[14px] text-[#6b7280]">AI is crafting your profile</p>
               <div className="flex gap-1.5 mt-6">
                 {[0, 1, 2].map((i) => (
                   <div key={i} className="w-2 h-2 bg-[#FF6321] rounded-full animate-bounce"
@@ -298,9 +296,8 @@ function LinkedInBioGenerator() {
           {step === "result" && bio && (
             <motion.div key="result" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
 
-              {/* All copy button */}
               <div className="flex items-center justify-between mb-2">
-                <h2 className="text-[18px] font-bold text-[#111827]">Aapka LinkedIn Profile ✨</h2>
+                <h2 className="text-[18px] font-bold text-[#111827]">Your LinkedIn Profile ✨</h2>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setStep("input")}
@@ -333,8 +330,8 @@ function LinkedInBioGenerator() {
               {/* LinkedIn link */}
               <div className="bg-[#0a66c2] rounded-2xl px-6 py-5 flex items-center justify-between">
                 <div>
-                  <p className="text-white font-semibold text-[15px]">LinkedIn pe update karo</p>
-                  <p className="text-[#bfdbfe] text-[13px] mt-0.5">Copy karo aur LinkedIn Profile Edit mein paste karo</p>
+                  <p className="text-white font-semibold text-[15px]">Update your LinkedIn profile</p>
+                  <p className="text-[#bfdbfe] text-[13px] mt-0.5">Copy and paste into your LinkedIn Profile Editor</p>
                 </div>
                 <a
                   href="https://www.linkedin.com/in/edit/intro/"
@@ -350,7 +347,7 @@ function LinkedInBioGenerator() {
                 onClick={() => { setBio(null); setStep("input"); }}
                 className="w-full py-3 border border-[#e5e7eb] rounded-xl text-[14px] font-medium text-[#374151] hover:border-[#FF6321] hover:text-[#FF6321] transition-all"
               >
-                Naya bio generate karo
+                Generate a new bio
               </button>
             </motion.div>
           )}

@@ -8,8 +8,9 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { ResumeData, UserData } from "../app/lib/types";
 import { ResumePreview, DesignId } from "../app/components/ResumePreview";
-// FIX #1: Removed top-level toPng and jsPDF imports.
-// FIX #3: Removed duplicate "import ../app/app.css" — styles.css in root already covers this.
+import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
+import "../app/app.css";
 
 interface SavedResume {
   id: string;
@@ -183,7 +184,7 @@ function Dashboard() {
     if (error) {
       setError("Could not load resumes. Please try again.");
     } else {
-      setResumes((data as unknown as SavedResume[]) ?? []);
+      setResumes((data as SavedResume[]) ?? []);
     }
     setLoading(false);
   }
@@ -194,13 +195,14 @@ function Dashboard() {
   }
 
   function handleEdit(resume: SavedResume) {
+    // Store in sessionStorage taake resume builder pick kar sake
     sessionStorage.setItem("edit_resume", JSON.stringify(resume));
     navigate({ to: "/resume" });
   }
 
-  // FIX #1: Dynamic import — jsPDF and html-to-image only load when user clicks Download.
   async function handleDownload(resume: SavedResume) {
     setDownloadingId(resume.id);
+    // Ek hidden div render karo, screenshot lo
     const container = document.createElement("div");
     container.style.cssText =
       "position:fixed;left:-9999px;top:0;width:850px;background:white;z-index:-1";
@@ -214,8 +216,6 @@ function Dashboard() {
     await new Promise((r) => setTimeout(r, 600));
 
     try {
-      const { toPng } = await import("html-to-image");
-      const jsPDF = (await import("jspdf")).default;
       const dataUrl = await toPng(container, { pixelRatio: 2, backgroundColor: "#ffffff" });
       const pdf = new jsPDF("p", "pt", "a4");
       const w = pdf.internal.pageSize.getWidth();
@@ -352,6 +352,7 @@ function Dashboard() {
                     downloading={downloadingId === resume.id}
                   />
                 ) : (
+                  /* List View */
                   <motion.div
                     key={resume.id}
                     layout
@@ -404,8 +405,16 @@ function Dashboard() {
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "My Resumes — Dashboard | airesumi.com" },
-      { name: "description", content: "View, edit, and download all your saved resumes." },
+      { name: "robots", content: "noindex, nofollow" },
+      { title: "My Resumes Dashboard | airesumi.com" },
+      { name: "description", content: "View, edit, and download all your saved AI-generated resumes in one place." },
+      { property: "og:title", content: "My Resumes Dashboard | airesumi.com" },
+      { property: "og:description", content: "Manage all your saved resumes in one place." },
+      { property: "og:url", content: "https://airesumi.com/dashboard" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:title", content: "My Resumes Dashboard | airesumi.com" },
+      { name: "twitter:description", content: "Manage all your saved resumes in one place." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/dashboard" }],
   }),

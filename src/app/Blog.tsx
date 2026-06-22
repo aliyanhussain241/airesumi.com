@@ -154,9 +154,9 @@ const AdminPanel = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
       read_time: estimateReadTime(editing.content!),
     };
     if (editing.id) {
-      await supabase.from('blog_posts').update(payload).eq('id', editing.id);
+      await supabase.from('blog_posts').update(payload as any).eq('id', editing.id);
     } else {
-      await supabase.from('blog_posts').insert(payload);
+      await supabase.from('blog_posts').insert(payload as any);
     }
     setSaving(false);
     setSaved(true);

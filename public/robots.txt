@@ -30,4 +30,33 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+
+ 
+# Block private/auth pages from indexing
+Disallow: /dashboard
+Disallow: /auth/
+Disallow: /reset-password
+Disallow: /api/
+ 
+# Allow important pages
+Allow: /resume
+Allow: /cover-letter
+Allow: /ats-checker
+Allow: /linkedin-bio
+Allow: /bullet-writer
+Allow: /summary-generator
+Allow: /keyword-scanner
+Allow: /resignation-letter
+Allow: /pdf-scanner
+Allow: /interview-prep
+Allow: /salary-analyzer
+Allow: /examples
+Allow: /blog
+Allow: /premium
+Allow: /about
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+ 
+# Sitemap
 Sitemap: https://airesumi.com/sitemap.xml

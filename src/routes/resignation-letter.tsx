@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { FileText, Sparkles, Copy, Check, RefreshCw, AlertCircle, Download, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-// FIX (new): jsPDF removed from top-level import. It is now dynamically
-// imported only when the user clicks Download — this page no longer loads
-// ~190KB of jsPDF before the user even reaches the download button.
+import jsPDF from "jspdf";
 
 const TONES = [
   { id: "Professional", desc: "Formal, corporate" },
@@ -72,8 +70,7 @@ function ResignationLetterPage() {
     }
   }
 
-  async function handleDownloadPDF() {
-    const jsPDF = (await import("jspdf")).default;
+  function handleDownloadPDF() {
     const pdf = new jsPDF("p", "pt", "a4");
     const margin = 60;
     const pageWidth = pdf.internal.pageSize.getWidth();
@@ -257,8 +254,15 @@ function ResignationLetterPage() {
 export const Route = createFileRoute("/resignation-letter")({
   head: () => ({
     meta: [
-      { title: "Resignation Letter Generator — AI Powered | airesumi.com" },
-      { name: "description", content: "Generate a professional resignation letter in seconds. Leave on good terms." },
+      { title: "Resignation Letter Generator — Professional & Free | airesumi.com" },
+      { name: "description", content: "Generate a professional resignation letter in seconds. Choose your tone, add your details, and download as PDF. Leave your job on good terms." },
+      { property: "og:title", content: "Free Resignation Letter Generator | airesumi.com" },
+      { property: "og:description", content: "Generate a professional resignation letter in seconds. Free, AI-powered, downloadable as PDF." },
+      { property: "og:url", content: "https://airesumi.com/resignation-letter" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:title", content: "Free Resignation Letter Generator | airesumi.com" },
+      { name: "twitter:description", content: "Generate a professional resignation letter in seconds. Free, AI-powered, downloadable as PDF." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resignation-letter" }],
   }),

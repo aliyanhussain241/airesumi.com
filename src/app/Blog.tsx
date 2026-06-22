@@ -37,7 +37,7 @@ const CATEGORIES = ['Career Tips', 'Resume Writing', 'Interview Prep', 'Job Sear
 
 // ─── RICH TEXT TOOLBAR ───────────────────────────────────────
 const RichToolbar = ({ textareaRef, value, onChange }: {
-  textareaRef: React.RefObject<HTMLTextAreaElement>;
+  textareaRef: React.RefObject<HTMLTextAreaElement | null>;
   value: string;
   onChange: (v: string) => void;
 }) => {

@@ -24,7 +24,7 @@ const GLASS_HEADER_STYLES = `
     box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
-  
+
   /* HEAVY GAUSSIAN BLUR + LIQUID GLASS DROPDOWN */
   .hdr-dropdown {
     position: absolute;
@@ -34,24 +34,20 @@ const GLASS_HEADER_STYLES = `
     overflow: hidden;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.05);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
-    
-    /* BASE LAYER: STRONG GAUSSIAN BLUR */
     backdrop-filter: blur(40px) saturate(160%);
     -webkit-backdrop-filter: blur(40px) saturate(160%);
   }
-  
-  /* Layer 1: Distorted Glass Filter (Liquid Effect) */
+
   .hdr-dropdown::before {
     content: "";
     position: absolute;
-    inset: -20px; /* Negative inset to prevent edge clipping */
+    inset: -20px;
     z-index: 0;
     filter: url(#glass-distortion);
-    opacity: 0.6; /* Balanced to let the Gaussian Blur shine through */
+    opacity: 0.6;
     pointer-events: none;
   }
-  
-  /* Layer 2: White Tint for Readability */
+
   .hdr-dropdown::after {
     content: "";
     position: absolute;
@@ -60,8 +56,7 @@ const GLASS_HEADER_STYLES = `
     background: rgba(255, 255, 255, 0.45);
     pointer-events: none;
   }
-  
-  /* Layer 3: 3D Inner Highlight Rim */
+
   .hdr-dropdown > .hdr-dropdown-shine {
     position: absolute;
     inset: 0;
@@ -70,15 +65,27 @@ const GLASS_HEADER_STYLES = `
     box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.8), inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
     pointer-events: none;
   }
-  
+
   .hdr-dropdown > .hdr-dropdown-content {
     position: relative;
     z-index: 3;
   }
-  
+
   .hdr-dropdown-footer {
     background: rgba(255, 255, 255, 0.3);
     border-top: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  /* HORIZONTAL GRID */
+  .hdr-dropdown-grid {
+    display: grid;
+    gap: 4px;
+  }
+  .hdr-dropdown-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hdr-dropdown-grid.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   .hdr-btn-primary {
@@ -209,18 +216,22 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
+  // ✅ UPDATED: Horizontal tool card layout
   const ToolItem = ({ tool, onClose }: { tool: typeof resumeTools[0]; onClose: () => void }) => {
     const Icon = tool.icon;
     const active = location.pathname === tool.to;
     return (
-      <Link to={tool.to} onClick={onClose}
-        className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 no-underline transition-colors group mb-0.5 ${active ? 'active' : ''}`}>
+      <Link
+        to={tool.to}
+        onClick={onClose}
+        className={`hdr-tool-item flex items-center gap-2.5 px-3 py-2.5 no-underline transition-colors group ${active ? 'active' : ''}`}
+      >
         <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
           <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
         </div>
         <div>
-          <p className={`text-[13px] font-semibold ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-          <p className="text-[11px] text-[#9ca3af]">{tool.desc}</p>
+          <p className={`text-[13px] font-semibold leading-tight ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
+          <p className="text-[11px] text-[#9ca3af] leading-tight">{tool.desc}</p>
         </div>
       </Link>
     );
@@ -236,8 +247,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   return (
     <>
       <style>{GLASS_HEADER_STYLES}</style>
-      
-      {/* PERFECTED LIQUID GLASS SVG FILTER */}
+
+      {/* LIQUID GLASS SVG FILTER */}
       <svg style={{ display: "none" }} aria-hidden="true">
         <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
           <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence" />
@@ -269,7 +280,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               Home
             </Link>
 
-            {/* Resume Tools */}
+            {/* ✅ Resume Tools — 2 column horizontal grid */}
             <div ref={resumeRef} className="relative">
               <button
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
@@ -283,15 +294,18 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   <motion.div
                     {...DropdownAnimation}
                     style={{ transformOrigin: 'top center' }}
-                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[280px]"
+                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[480px]"
                   >
                     <span className="hdr-dropdown-shine" aria-hidden="true" />
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
                         <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
-                        {resumeTools.map(tool => (
-                          <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
-                        ))}
+                        {/* ✅ 2 columns grid */}
+                        <div className="hdr-dropdown-grid cols-2">
+                          {resumeTools.map(tool => (
+                            <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
+                          ))}
+                        </div>
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
@@ -306,7 +320,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </AnimatePresence>
             </div>
 
-            {/* Other Tools */}
+            {/* ✅ Other Tools — 3 column horizontal grid */}
             <div ref={otherRef} className="relative">
               <button
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
@@ -320,15 +334,18 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   <motion.div
                     {...DropdownAnimation}
                     style={{ transformOrigin: 'top center' }}
-                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[280px]"
+                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[600px]"
                   >
                     <span className="hdr-dropdown-shine" aria-hidden="true" />
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
                         <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
-                        {otherTools.map(tool => (
-                          <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
-                        ))}
+                        {/* ✅ 3 columns grid */}
+                        <div className="hdr-dropdown-grid cols-3">
+                          {otherTools.map(tool => (
+                            <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
+                          ))}
+                        </div>
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
@@ -395,7 +412,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — unchanged */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div

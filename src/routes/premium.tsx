@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useState, useEffect } from "react";
-import { Crown, Check, Zap, Shield, Sparkles, FileText, Target, Mail, Linkedin, PenLine, ArrowRight, Star } from "lucide-react";
+import { Crown, Check, Zap, Shield, Sparkles, FileText, Target, Mail, Linkedin, PenLine, ArrowRight, Star, AlertCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const PLANS = [
@@ -86,11 +86,25 @@ function PremiumPage() {
     try {
       const res = await fetch("/api/create-checkout", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify({ plan: selectedPlan }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      if (!res.ok) {
+        // Stripe config error — friendly message
+        if (
+          data.error?.includes("apiKey") ||
+          data.error?.includes("authenticator") ||
+          data.error?.includes("Stripe") ||
+          data.error?.includes("config")
+        ) {
+          throw new Error("Payment is temporarily unavailable. Please try again later or contact support.");
+        }
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
       window.location.href = data.url;
     } catch (err: any) {
       setError(err.message || "Something went wrong. Please try again.");
@@ -100,13 +114,16 @@ function PremiumPage() {
 
   if (checkingStatus) return null;
 
+  const selectedPlanData = PLANS.find(p => p.id === selectedPlan);
+
   return (
     <div className="min-h-screen bg-[#111827] text-white pt-[68px]">
 
       {/* Already Pro Banner */}
       {isPro && (
         <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white text-center py-3 px-4 text-[14px] font-semibold">
-          ✨ You are already on Pro! <Link to="/resume" className="underline ml-2 text-white">Start building →</Link>
+          ✨ You are already on Pro!{" "}
+          <Link to="/resume" className="underline ml-2 text-white">Start building →</Link>
         </div>
       )}
 
@@ -160,17 +177,27 @@ function PremiumPage() {
         {/* CTA Button */}
         <div className="flex flex-col items-center mb-16">
           {error && (
-            <p className="text-red-400 text-[13px] mb-3">{error}</p>
+            <div className="flex items-center gap-2 text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-[13px] mb-4 max-w-md text-center">
+              <AlertCircle size={15} className="flex-shrink-0" />
+              {error}
+            </div>
           )}
           {isPro ? (
-            <Link to="/resume"
-              className="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-[17px] rounded-full hover:scale-105 transition-all shadow-[0_10px_40px_-10px_rgba(249,115,22,0.8)] no-underline flex items-center gap-2">
+            <Link
+              to="/resume"
+              className="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-[17px] rounded-full hover:scale-105 transition-all shadow-[0_10px_40px_-10px_rgba(249,115,22,0.8)] no-underline flex items-center gap-2"
+            >
               Start Building <ArrowRight size={18} />
             </Link>
           ) : (
-            <button onClick={handleCheckout} disabled={loading}
-              className="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-[17px] rounded-full hover:scale-105 transition-all shadow-[0_10px_40px_-10px_rgba(249,115,22,0.8)] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 border-none cursor-pointer">
-              {loading ? "Redirecting to Stripe..." : `Get Pro — ${PLANS.find(p => p.id === selectedPlan)?.price}`}
+            <button
+              onClick={handleCheckout}
+              disabled={loading}
+              className="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-[17px] rounded-full hover:scale-105 transition-all shadow-[0_10px_40px_-10px_rgba(249,115,22,0.8)] disabled:opacity-60 disabled:cursor-not-allowed flex items-center gap-2 border-none cursor-pointer"
+            >
+              {loading
+                ? "Redirecting to Stripe..."
+                : `Get Pro — ${selectedPlanData?.price}`}
               {!loading && <ArrowRight size={18} />}
             </button>
           )}
@@ -242,8 +269,11 @@ function PremiumPage() {
         <div className="text-center">
           <p className="text-gray-400 text-[15px] mb-4">Ready to land your dream job?</p>
           {!isPro && (
-            <button onClick={handleCheckout} disabled={loading}
-              className="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-[17px] rounded-full hover:scale-105 transition-all shadow-[0_10px_40px_-10px_rgba(249,115,22,0.8)] disabled:opacity-60 border-none cursor-pointer">
+            <button
+              onClick={handleCheckout}
+              disabled={loading}
+              className="px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-[17px] rounded-full hover:scale-105 transition-all shadow-[0_10px_40px_-10px_rgba(249,115,22,0.8)] disabled:opacity-60 border-none cursor-pointer"
+            >
               Start Pro Today →
             </button>
           )}

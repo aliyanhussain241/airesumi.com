@@ -53,7 +53,7 @@ const HOMEPAGE_SCHEMA = {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.4",
-        "reviewCount": "37389",
+        "reviewCount": "120",
         "bestRating": "5"
       },
       "featureList": [

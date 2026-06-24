@@ -413,12 +413,21 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </div>
             )}
 
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+              className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
             {/* Mobile */}
             <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl md:hidden no-underline">
               Start Free
             </Link>
             <button onClick={() => setIsMobileOpen(true)}
-              className="md:hidden text-[#374151] p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              className="md:hidden text-[#374151] dark:text-orange-200 p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
               <Menu size={22} strokeWidth={2} />
             </button>
           </div>

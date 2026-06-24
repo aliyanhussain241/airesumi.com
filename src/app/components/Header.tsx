@@ -172,7 +172,17 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen]   = useState(false);
   const [user, setUser]                 = useState<any>(null);
-  const [width, setWidth]               = useState(windowWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1200));
+  // ⚠️ FIX (React error #418 — hydration mismatch breaking site-wide navigation):
+  // Pehle yahan `typeof window !== 'undefined' ? window.innerWidth : 1200` tha.
+  // Server pe `window` nahi hota → 1200 milta tha. Browser mein hydration ke waqt
+  // `window` hota hai → actual screen width milti thi (kabhi 1200 nahi hota).
+  // Isse server aur client ka pehla render mismatch ho jata tha (e.g. button text
+  // "Build My Resume →" vs "Start →"), jo React ko crash kar deta tha aur uske
+  // baad poori site par clicks/navigation tootne lagti thi.
+  // Fix: hamesha deterministic value se shuru karo (server = client = same),
+  // phir neeche wale useEffect (line ~196) mein asal width set karo — ye
+  // hydration ke BAAD chalta hai, isliye mismatch nahi hota.
+  const [width, setWidth]               = useState(windowWidth ?? 1200);
   const location  = useLocation();
   const navigate  = useNavigate();
   const resumeRef = useRef<HTMLDivElement>(null);
@@ -195,6 +205,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
   useEffect(() => {
     const fn = () => setWidth(window.innerWidth);
+    fn(); // ✅ mount hote hi asal width set karo (sirf browser mein chalta hai, hydration ke baad — safe)
     window.addEventListener('resize', fn);
     return () => window.removeEventListener('resize', fn);
   }, []);

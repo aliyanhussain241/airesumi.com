@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Calendar, Clock, ArrowRight, BookOpen, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Post {
   id: string;
@@ -40,6 +40,7 @@ function catColor(cat: string | null | undefined) {
 }
 
 function FeaturedCard({ post }: { post: Post }) {
+  const rt = post.read_time || readTime(post.content);
   return (
     <Link to="/blog/$slug" params={{ slug: post.slug }} className="no-underline group block">
       <motion.article initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
@@ -58,7 +59,7 @@ function FeaturedCard({ post }: { post: Post }) {
               </span>
             )}
             <span className="text-[12px] text-gray-400 flex items-center gap-1">
-              <Clock size={12} /> {post.read_time || readTime(post.content)} min read
+              <Clock size={12} /> {rt} min read
             </span>
           </div>
           <h2 className="text-[22px] font-bold text-[#111827] leading-tight mb-2 group-hover:text-[#EA580C] transition-colors">
@@ -82,6 +83,7 @@ function FeaturedCard({ post }: { post: Post }) {
 }
 
 function PostCard({ post }: { post: Post }) {
+  const rt = post.read_time || readTime(post.content);
   return (
     <Link to="/blog/$slug" params={{ slug: post.slug }} className="no-underline group block">
       <motion.article initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
@@ -103,7 +105,7 @@ function PostCard({ post }: { post: Post }) {
           </h3>
           <div className="flex items-center gap-3 text-[11px] text-gray-400">
             <span className="flex items-center gap-1"><Calendar size={10} /> {formatDate(post.published_at || post.created_at)}</span>
-            <span className="flex items-center gap-1"><Clock size={10} /> {post.read_time || readTime(post.content)} min</span>
+            <span className="flex items-center gap-1"><Clock size={10} /> {rt} min</span>
           </div>
         </div>
       </motion.article>
@@ -112,13 +114,26 @@ function PostCard({ post }: { post: Post }) {
 }
 
 function BlogPage() {
-  const { posts } = Route.useLoaderData();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", ...Array.from(new Set(posts.map((p: Post) => p.category).filter(Boolean) as string[]))];
+  useEffect(() => {
+    supabase
+      .from("blog_posts")
+      .select("id, title, slug, excerpt, content, cover_image_url, published_at, created_at, category, read_time")
+      .eq("published", true)
+      .order("published_at", { ascending: false })
+      .then(({ data }) => {
+        setPosts((data || []) as Post[]);
+        setLoading(false);
+      });
+  }, []);
 
-  const filtered = posts.filter((p: Post) => {
+  const categories = ["All", ...Array.from(new Set(posts.map(p => p.category).filter(Boolean) as string[]))];
+
+  const filtered = posts.filter(p => {
     const matchSearch = !search ||
       p.title.toLowerCase().includes(search.toLowerCase()) ||
       p.excerpt?.toLowerCase().includes(search.toLowerCase());
@@ -170,8 +185,21 @@ function BlogPage() {
           </div>
         )}
 
-        {/* Empty state */}
-        {filtered.length === 0 && (
+        {/* Loading */}
+        {loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[1,2,3,4].map(i => (
+              <div key={i} className="bg-white/50 rounded-2xl p-4 animate-pulse">
+                <div className="h-4 bg-gray-200 rounded w-1/3 mb-3" />
+                <div className="h-5 bg-gray-200 rounded w-full mb-2" />
+                <div className="h-4 bg-gray-200 rounded w-2/3" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Empty */}
+        {!loading && filtered.length === 0 && (
           <div className="text-center py-16 text-gray-400">
             <BookOpen size={40} className="mx-auto mb-3 opacity-30" />
             <p className="text-[15px]">No articles found</p>
@@ -179,58 +207,47 @@ function BlogPage() {
         )}
 
         {/* Featured */}
-        {featured && (
+        {!loading && featured && (
           <div className="mb-8"><FeaturedCard post={featured} /></div>
         )}
 
         {/* Grid */}
-        {rest.length > 0 && (
+        {!loading && rest.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {rest.map((post: Post) => <PostCard key={post.id} post={post} />)}
+            {rest.map(post => <PostCard key={post.id} post={post} />)}
           </div>
         )}
 
         {/* CTA */}
-        <div className="mt-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl p-8 text-center text-white">
-          <h3 className="text-[22px] font-bold mb-2">Ready to build your resume?</h3>
-          <p className="text-orange-100 text-[15px] mb-5">Put these tips into action with our free AI resume builder.</p>
-          <Link to="/resume"
-            className="inline-flex items-center gap-2 bg-white text-[#EA580C] font-bold px-6 py-3 rounded-2xl hover:bg-orange-50 transition-colors no-underline">
-            Build My Resume Free <ArrowRight size={16} />
-          </Link>
-        </div>
+        {!loading && (
+          <div className="mt-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl p-8 text-center text-white">
+            <h3 className="text-[22px] font-bold mb-2">Ready to build your resume?</h3>
+            <p className="text-orange-100 text-[15px] mb-5">Put these tips into action with our free AI resume builder.</p>
+            <Link to="/resume"
+              className="inline-flex items-center gap-2 bg-white text-[#EA580C] font-bold px-6 py-3 rounded-2xl hover:bg-orange-50 transition-colors no-underline">
+              Build My Resume Free <ArrowRight size={16} />
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export const Route = createFileRoute("/blog")({
-  // ✅ SSR loader — Google indexes real post titles/content
-  loader: async () => {
-    const { data } = await supabase
-      .from("blog_posts")
-      .select("id, title, slug, excerpt, content, cover_image_url, published_at, created_at, category, read_time")
-      .eq("published", true)
-      .order("published_at", { ascending: false });
-    return { posts: (data || []) as Post[] };
-  },
-  head: ({ loaderData }) => {
-    const posts = loaderData?.posts || [];
-    const titles = posts.slice(0, 3).map((p: Post) => p.title).join(", ");
-    return {
-      meta: [
-        { title: "Resume Tips & Career Advice Blog | airesumi.com" },
-        { name: "description", content: `Expert resume writing tips, interview advice, and AI career strategies. Latest: ${titles || "resume tips and job search guides"}.` },
-        { property: "og:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
-        { property: "og:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
-        { property: "og:url", content: "https://airesumi.com/blog" },
-        { property: "og:type", content: "website" },
-        { property: "og:image", content: "https://airesumi.com/og-image.webp" },
-        { name: "twitter:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
-        { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies." },
-      ],
-      links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
-    };
-  },
+  head: () => ({
+    meta: [
+      { title: "Resume Tips & Career Advice Blog | airesumi.com" },
+      { name: "description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
+      { property: "og:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
+      { property: "og:description", content: "Expert resume writing tips, interview advice, and AI career strategies." },
+      { property: "og:url", content: "https://airesumi.com/blog" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { name: "twitter:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
+      { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies." },
+    ],
+    links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
+  }),
   component: BlogPage,
 });

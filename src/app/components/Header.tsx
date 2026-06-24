@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Menu, X, LogOut, ChevronDown, FileText, Mail, Target,
-  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine
+  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon
 } from 'lucide-react';
+import { useTheme } from '@/hooks/use-theme';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
@@ -172,6 +173,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen]   = useState(false);
   const [user, setUser]                 = useState<any>(null);
+  const { theme, toggle: toggleTheme } = useTheme();
   // ⚠️ FIX (React error #418 — hydration mismatch breaking site-wide navigation):
   // Pehle yahan `typeof window !== 'undefined' ? window.innerWidth : 1200` tha.
   // Server pe `window` nahi hota → 1200 milta tha. Browser mein hydration ke waqt
@@ -411,12 +413,21 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </div>
             )}
 
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+              className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+
             {/* Mobile */}
             <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl md:hidden no-underline">
               Start Free
             </Link>
             <button onClick={() => setIsMobileOpen(true)}
-              className="md:hidden text-[#374151] p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              className="md:hidden text-[#374151] dark:text-orange-200 p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
               <Menu size={22} strokeWidth={2} />
             </button>
           </div>

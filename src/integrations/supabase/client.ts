@@ -1,6 +1,21 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
+// ⚠️ FIX (blog navigation bug):
+// Pehle code browser mein env vars missing hone par `throw new Error(...)` kar deta tha.
+// Isse jab bhi koi route's loader client-side navigation par supabase ko call karta
+// (e.g. /blog/$slug), woh error TanStack Router ki navigation ko beech mein tod deta tha:
+// URL change ho jata tha (history push already ho chuka hota) lekin route component
+// kabhi render nahi hota — exactly jo bug report hua tha.
+//
+// Yahan humne throw hata diya hai aur ek graceful fallback + clear console error
+// diya hai, taake navigation kabhi na toote. Lekin ASAL FIX ye hai ke aapko
+// VITE_SUPABASE_PUBLISHABLE_KEY ko BUILD-TIME env var ke taur par set karna hoga
+// (neeche diye gaye instructions dekhein) — warna data fetch fail hoga (empty/error
+// state dikhega), bas crash nahi hoga.
+
+let warnedMissingEnv = false;
+
 function createSupabaseClient() {
   // ✅ Browser aur Server dono ke liye
   const SUPABASE_URL =
@@ -14,16 +29,24 @@ function createSupabaseClient() {
     '';
 
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-    // ✅ Server side pe throw mat karo — sirf warn karo
-    if (typeof window === 'undefined') {
-      console.warn('[Supabase] Missing env vars on server side');
-      // Dummy client return karo taake crash na ho
-      return createClient<Database>(
-        'https://placeholder.supabase.co',
-        'placeholder-key'
+    if (!warnedMissingEnv) {
+      warnedMissingEnv = true;
+      // eslint-disable-next-line no-console
+      console.error(
+        '[Supabase] Missing env vars: ' +
+          [!SUPABASE_URL && 'VITE_SUPABASE_URL', !SUPABASE_PUBLISHABLE_KEY && 'VITE_SUPABASE_PUBLISHABLE_KEY']
+            .filter(Boolean)
+            .join(', ') +
+          '. Supabase calls will fail (empty data) until these are set as BUILD-TIME ' +
+          'environment variables — not just runtime/Worker vars or secrets.'
       );
     }
-    throw new Error('Missing Supabase environment variables');
+    // ✅ Crash nahi karte — chahe browser ho ya server, dummy client return karo.
+    // Iske bina koi bhi client-side loader (jaise blog/$slug) navigation ko tod deta tha.
+    return createClient<Database>(
+      'https://placeholder.supabase.co',
+      'placeholder-key'
+    );
   }
 
   return createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {

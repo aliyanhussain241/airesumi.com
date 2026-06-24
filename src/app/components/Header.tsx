@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Menu, X, LogOut, ChevronDown, FileText, Mail, Target,
-  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine
+  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon
 } from 'lucide-react';
+import { useTheme } from '@/hooks/use-theme';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';

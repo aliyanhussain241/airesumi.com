@@ -173,6 +173,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen]   = useState(false);
   const [user, setUser]                 = useState<any>(null);
+  const { theme, toggle: toggleTheme } = useTheme();
   // ⚠️ FIX (React error #418 — hydration mismatch breaking site-wide navigation):
   // Pehle yahan `typeof window !== 'undefined' ? window.innerWidth : 1200` tha.
   // Server pe `window` nahi hota → 1200 milta tha. Browser mein hydration ke waqt

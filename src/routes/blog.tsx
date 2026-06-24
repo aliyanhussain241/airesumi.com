@@ -19,7 +19,7 @@ interface Post {
 
 function formatDate(d: string | null) {
   if (!d) return "";
-  return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  return new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 }
 
 function readTime(content: string) {

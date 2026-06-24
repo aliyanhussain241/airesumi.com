@@ -208,10 +208,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('dark');}document.documentElement.style.colorScheme=t;}catch(e){}})();`;
+
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
       <body>
@@ -226,7 +229,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen liquid-bg text-[#0a0a0a] font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
+      <div className="min-h-screen liquid-bg text-[#0a0a0a] dark:text-orange-50 font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
         <Header />
         <Outlet />
         <Footer />

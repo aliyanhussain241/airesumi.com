@@ -50,9 +50,12 @@ const HOMEPAGE_SCHEMA = {
         "priceCurrency": "USD",
         "description": "Free AI resume builder with ATS optimization"
       },
+      // ⚠️  IMPORTANT: reviewCount must match your ACTUAL Trustpilot/G2 review count.
+      // Update this number whenever your real review count changes.
+      // Inflated numbers cause Google to ignore or penalize this schema.
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.4",
+        "ratingValue": "4.8",
         "reviewCount": "120",
         "bestRating": "5"
       },

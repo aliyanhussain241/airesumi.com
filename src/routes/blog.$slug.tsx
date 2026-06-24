@@ -110,7 +110,7 @@ function BlogPostPage() {
           .limit(3)
           .order("published_at", { ascending: false })
           .then(({ data: rel }) => {
-            setRelated((rel || []) as Post[]);
+            setRelated(((rel || []) as unknown) as Post[]);
             setLoading(false);
           });
       });

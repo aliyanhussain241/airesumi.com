@@ -126,7 +126,7 @@ function BlogPage() {
       .eq("published", true)
       .order("published_at", { ascending: false })
       .then(({ data }) => {
-        setPosts((data || []) as Post[]);
+        setPosts(((data || []) as unknown) as Post[]);
         setLoading(false);
       });
   }, []);

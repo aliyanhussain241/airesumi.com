@@ -271,7 +271,7 @@ function AdminBlogPage() {
   useEffect(() => { fetchPosts(); }, []);
 
   async function handleCreate(data: Omit<Post, "id" | "created_at">) {
-    const { error } = await supabase.from("blog_posts").insert([data]);
+    const { error } = await supabase.from("blog_posts").insert([data as any]);
     if (error) { showToast(error.message, "error"); return; }
     showToast("Post created!");
     setView("list");

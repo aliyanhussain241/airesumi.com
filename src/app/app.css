@@ -6,10 +6,11 @@
 .liquid-card {
   position: relative;
   isolation: isolate;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.82);
   overflow: hidden;
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   box-shadow:
     0 10px 32px rgba(15, 23, 42, 0.10),
     0 2px 6px rgba(15, 23, 42, 0.06);
@@ -17,21 +18,15 @@
     transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4),
     box-shadow 0.4s ease, background 0.3s ease;
 }
-.liquid-card::before {
-  content: "";
-  position: absolute;
-  inset: -24px;
-  z-index: 0;
-  filter: url(#glass-distortion);
-  opacity: 0.55;
-  pointer-events: none;
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .liquid-card { background: rgba(255, 255, 255, 0.55); }
 }
 .liquid-card::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.38) 45%, rgba(255,255,255,0.50) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.25) 100%);
   pointer-events: none;
 }
 .liquid-card > .liquid-card-shine {

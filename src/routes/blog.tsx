@@ -145,7 +145,7 @@ function BlogPage() {
   const rest = !search && activeCategory === "All" ? filtered.slice(1) : filtered;
 
   return (
-    <div className="min-h-screen pt-[68px]">
+    <div style={{ minHeight: "calc(100vh - 68px)" }} className="pt-[68px]">
       <div className="max-w-5xl mx-auto px-6 py-12">
 
         {/* Header */}

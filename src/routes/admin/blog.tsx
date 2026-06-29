@@ -280,7 +280,7 @@ function AdminBlogPage() {
 
   async function handleUpdate(data: Omit<Post, "id" | "created_at">) {
     if (!editing) return;
-    const { error } = await supabase.from("blog_posts").update(data).eq("id", editing.id);
+    const { error } = await supabase.from("blog_posts").update(data as any).eq("id", editing.id);
     if (error) { showToast(error.message, "error"); return; }
     showToast("Post updated!");
     setView("list");

@@ -48,6 +48,7 @@ import { Route as ApiGenerateCoverLetterRouteImport } from './routes/api/generat
 import { Route as ApiGenerateBulletsRouteImport } from './routes/api/generate-bullets'
 import { Route as ApiCreateCheckoutRouteImport } from './routes/api/create-checkout'
 import { Route as ApiAnalyzeAtsRouteImport } from './routes/api/analyze-ats'
+import { Route as AdminBlogRouteImport } from './routes/admin/blog'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -244,6 +245,11 @@ const ApiAnalyzeAtsRoute = ApiAnalyzeAtsRouteImport.update({
   path: '/api/analyze-ats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminBlogRoute = AdminBlogRouteImport.update({
+  id: '/admin/blog',
+  path: '/admin/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -269,6 +275,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/summary-generator': typeof SummaryGeneratorRoute
   '/terms': typeof TermsRoute
+  '/admin/blog': typeof AdminBlogRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
   '/api/generate-bullets': typeof ApiGenerateBulletsRoute
@@ -310,6 +317,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/summary-generator': typeof SummaryGeneratorRoute
   '/terms': typeof TermsRoute
+  '/admin/blog': typeof AdminBlogRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
   '/api/generate-bullets': typeof ApiGenerateBulletsRoute
@@ -352,6 +360,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/summary-generator': typeof SummaryGeneratorRoute
   '/terms': typeof TermsRoute
+  '/admin/blog': typeof AdminBlogRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
   '/api/generate-bullets': typeof ApiGenerateBulletsRoute
@@ -395,6 +404,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/summary-generator'
     | '/terms'
+    | '/admin/blog'
     | '/api/analyze-ats'
     | '/api/create-checkout'
     | '/api/generate-bullets'
@@ -436,6 +446,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/summary-generator'
     | '/terms'
+    | '/admin/blog'
     | '/api/analyze-ats'
     | '/api/create-checkout'
     | '/api/generate-bullets'
@@ -477,6 +488,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/summary-generator'
     | '/terms'
+    | '/admin/blog'
     | '/api/analyze-ats'
     | '/api/create-checkout'
     | '/api/generate-bullets'
@@ -519,6 +531,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SummaryGeneratorRoute: typeof SummaryGeneratorRoute
   TermsRoute: typeof TermsRoute
+  AdminBlogRoute: typeof AdminBlogRoute
   ApiAnalyzeAtsRoute: typeof ApiAnalyzeAtsRoute
   ApiCreateCheckoutRoute: typeof ApiCreateCheckoutRoute
   ApiGenerateBulletsRoute: typeof ApiGenerateBulletsRoute
@@ -811,6 +824,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyzeAtsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/blog': {
+      id: '/admin/blog'
+      path: '/admin/blog'
+      fullPath: '/admin/blog'
+      preLoaderRoute: typeof AdminBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -848,6 +868,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SummaryGeneratorRoute: SummaryGeneratorRoute,
   TermsRoute: TermsRoute,
+  AdminBlogRoute: AdminBlogRoute,
   ApiAnalyzeAtsRoute: ApiAnalyzeAtsRoute,
   ApiCreateCheckoutRoute: ApiCreateCheckoutRoute,
   ApiGenerateBulletsRoute: ApiGenerateBulletsRoute,

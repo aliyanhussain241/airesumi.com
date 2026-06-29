@@ -354,6 +354,24 @@ function LinkedInBioGenerator() {
 
         </AnimatePresence>
       </div>
+
+      {/* Internal link to blog article */}
+      <div className="max-w-xl mx-auto px-6 pb-12">
+        <div className="bg-[#FFF7ED] border border-orange-100 rounded-2xl p-5 text-center">
+          <p className="text-sm font-semibold text-[#111827] mb-1">
+            Want a full resume to match your LinkedIn?
+          </p>
+          <p className="text-xs text-[#6B7280] mb-3">
+            Learn how to build a resume with AI in 6 steps — ATS-ready, tailored to every job.
+          </p>
+          <a
+            href="/blog/build-resume-with-ai"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FF6321] hover:underline"
+          >
+            Read the Guide →
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

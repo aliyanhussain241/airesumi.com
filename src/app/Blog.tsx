@@ -520,62 +520,72 @@ const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
   });
 
   if (active) return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="min-h-screen liquid-bg">
+      <div className="max-w-3xl mx-auto px-6 py-12 relative z-10">
         <button onClick={() => { setActive(null); navigate({ to: '/blog' }); }}
-          className="flex items-center gap-2 text-sm text-[#6B7280] hover:text-[#FF6321] mb-8 transition-colors">
-          ← Back to Blog
+          className="liquid-pill inline-flex items-center gap-2 text-sm text-[#374151] hover:text-[#FF6321] mb-8 px-4 py-2 rounded-full">
+          <span className="liquid-card-shine"/>
+          <span className="liquid-card-content inline-flex items-center gap-2">← Back to Blog</span>
         </button>
-        {active.cover_image_url && <img src={active.cover_image_url} alt={active.title} className="w-full h-72 object-cover rounded-3xl mb-8"/>}
-        <div className="flex items-center gap-3 mb-4 flex-wrap">
-          {active.category && <span className="text-xs bg-[#FFF7ED] text-[#FF6321] px-3 py-1 rounded-full font-medium">{active.category}</span>}
-          {active.read_time && <span className="text-sm text-[#9CA3AF]">{active.read_time} min read</span>}
-          {active.published_at && <span className="text-sm text-[#9CA3AF]">{new Date(active.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
-        </div>
-        <h1 className="text-4xl font-black text-[#111827] mb-4 leading-tight">{active.title}</h1>
-        {active.excerpt && <p className="text-xl text-[#6B7280] mb-8 leading-relaxed">{active.excerpt}</p>}
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(active.content) }}/>
-        {active.tags && (
-          <div className="mt-10 pt-6 border-t border-[#F3F4F6] flex flex-wrap gap-2">
-            {active.tags.split(',').map((tag, i) => (
-              <span key={i} className="text-xs bg-[#F3F4F6] text-[#6B7280] px-3 py-1 rounded-full">#{tag.trim()}</span>
-            ))}
+        {active.cover_image_url && <img src={active.cover_image_url} alt={active.title} className="w-full h-72 object-cover rounded-3xl mb-8 shadow-xl"/>}
+        <div className="liquid-card rounded-3xl p-8 md:p-10">
+          <span className="liquid-card-shine"/>
+          <div className="liquid-card-content">
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
+              {active.category && <span className="text-xs bg-[#FFF7ED] text-[#FF6321] px-3 py-1 rounded-full font-medium">{active.category}</span>}
+              {active.read_time && <span className="text-sm text-[#9CA3AF]">{active.read_time} min read</span>}
+              {active.published_at && <span className="text-sm text-[#9CA3AF]">{new Date(active.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+            </div>
+            <h1 className="text-4xl font-black text-[#111827] mb-4 leading-tight">{active.title}</h1>
+            {active.excerpt && <p className="text-xl text-[#6B7280] mb-8 leading-relaxed">{active.excerpt}</p>}
+            <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(active.content) }}/>
+            {active.tags && (
+              <div className="mt-10 pt-6 border-t border-[#F3F4F6] flex flex-wrap gap-2">
+                {active.tags.split(',').map((tag, i) => (
+                  <span key={i} className="text-xs bg-[#F3F4F6] text-[#6B7280] px-3 py-1 rounded-full">#{tag.trim()}</span>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen liquid-bg">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#FFF7ED] to-white border-b border-[#F3F4F6] py-16 px-6">
+      <div className="py-16 px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-black text-[#111827] mb-4">Career <span className="text-[#FF6321]">Blog</span></h1>
           <p className="text-xl text-[#6B7280] mb-8">Expert tips on resumes, interviews & landing your dream job</p>
-          <div className="relative max-w-md mx-auto">
-            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9CA3AF]"/>
-            <input value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search articles..."
-              className="w-full pl-12 pr-4 py-3 border border-[#E5E7EB] rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6321]/20 focus:border-[#FF6321]"/>
+          <div className="relative max-w-md mx-auto liquid-card rounded-full">
+            <span className="liquid-card-shine"/>
+            <div className="liquid-card-content relative">
+              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9CA3AF] z-10"/>
+              <input value={search} onChange={e => setSearch(e.target.value)}
+                placeholder="Search articles..."
+                className="w-full pl-12 pr-4 py-3 bg-transparent border-0 rounded-full text-sm text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none"/>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-6 py-12 relative z-10">
         {/* Categories */}
         <div className="flex gap-2 flex-wrap mb-10">
           {categories.map(cat => (
             <button key={cat} onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat ? 'bg-[#FF6321] text-white' : 'bg-[#F3F4F6] text-[#6B7280] hover:bg-[#E5E7EB]'}`}>
-              {cat}
+              className={`liquid-pill px-4 py-2 rounded-full text-sm font-medium ${activeCategory === cat ? 'liquid-pill-active text-white' : 'text-[#374151]'}`}>
+              <span className="liquid-card-shine"/>
+              <span className="liquid-card-content">{cat}</span>
             </button>
           ))}
         </div>
 
         {loading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1,2,3].map(i => <div key={i} className="bg-[#F9FAFB] rounded-3xl h-80 animate-pulse"/>)}
+            {[1,2,3].map(i => <div key={i} className="liquid-card rounded-3xl h-80 animate-pulse"><span className="liquid-card-shine"/></div>)}
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20"><p className="text-lg text-[#9CA3AF]">No posts found</p></div>
@@ -584,20 +594,23 @@ const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
             {filtered.map(p => (
               <article key={p.id}
                 onClick={() => { setActive(p); navigate({ to: '/blog/' + p.slug }); }}
-                className="cursor-pointer bg-white rounded-3xl overflow-hidden border border-[#F3F4F6] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
-                <div className="h-48 overflow-hidden">
-                  {p.cover_image_url
-                    ? <img src={p.cover_image_url} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-                    : <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center"><BookOpen size={40} className="text-[#FF6321]/40"/></div>}
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    {p.category && <span className="text-[10px] bg-[#FFF7ED] text-[#FF6321] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide">{p.category}</span>}
-                    {p.read_time && <span className="text-xs text-[#9CA3AF]">{p.read_time} min read</span>}
+                className="liquid-card cursor-pointer rounded-3xl overflow-hidden group">
+                <span className="liquid-card-shine"/>
+                <div className="liquid-card-content">
+                  <div className="h-48 overflow-hidden">
+                    {p.cover_image_url
+                      ? <img src={p.cover_image_url} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                      : <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center"><BookOpen size={40} className="text-[#FF6321]/40"/></div>}
                   </div>
-                  <h3 className="font-bold text-lg text-[#111827] mb-2 line-clamp-2 leading-snug">{p.title}</h3>
-                  {p.excerpt && <p className="text-sm text-[#6B7280] line-clamp-2 mb-4">{p.excerpt}</p>}
-                  {p.published_at && <p className="text-xs text-[#9CA3AF]">{new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>}
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      {p.category && <span className="text-[10px] bg-[#FFF7ED] text-[#FF6321] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide">{p.category}</span>}
+                      {p.read_time && <span className="text-xs text-[#9CA3AF]">{p.read_time} min read</span>}
+                    </div>
+                    <h3 className="font-bold text-lg text-[#111827] mb-2 line-clamp-2 leading-snug">{p.title}</h3>
+                    {p.excerpt && <p className="text-sm text-[#6B7280] line-clamp-2 mb-4">{p.excerpt}</p>}
+                    {p.published_at && <p className="text-xs text-[#9CA3AF]">{new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>}
+                  </div>
                 </div>
               </article>
             ))}

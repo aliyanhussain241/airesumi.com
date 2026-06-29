@@ -71,9 +71,58 @@
   box-shadow: 0 18px 40px rgba(15,23,42,0.14), 0 4px 10px rgba(15,23,42,0.08);
 }
 
-/* ============================================================
-   DARK MODE
-   ============================================================ */
+/* Liquid bg surface (light) */
+.liquid-bg {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(255, 99, 33, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(99, 102, 241, 0.10), transparent 60%),
+    linear-gradient(180deg, #fff7ed 0%, #ffffff 60%, #f8fafc 100%);
+  min-height: 100%;
+}
+
+/* Liquid pill buttons (uses same glass system) */
+.liquid-pill {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: transparent;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 4px 14px rgba(15,23,42,0.08), inset 0 0 0 1px rgba(255,255,255,0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.2s ease;
+}
+.liquid-pill::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 100%);
+}
+.liquid-pill > .liquid-card-shine {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 1px 1px 0.5px 0 rgba(255,255,255,0.9), inset -1px -1px 1px 0 rgba(255,255,255,0.4);
+}
+.liquid-pill > .liquid-card-content { position: relative; z-index: 3; }
+.liquid-pill:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15,23,42,0.12), inset 0 0 0 1px rgba(255,255,255,0.55); }
+.liquid-pill-active::after {
+  background: linear-gradient(180deg, rgba(255,99,33,0.95) 0%, rgba(234,88,12,0.95) 100%);
+}
+.liquid-pill-active > .liquid-card-shine {
+  box-shadow: inset 1px 1px 0.5px 0 rgba(255,255,255,0.6), inset -1px -1px 1px 0 rgba(255,0,0,0.0), inset 0 0 0 1px rgba(255,255,255,0.25);
+}
+
+/* Dark variants for pill */
+.dark .liquid-pill {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+.dark .liquid-pill::after {
+  background: linear-gradient(180deg, rgba(20,20,28,0.65) 0%, rgba(20,20,28,0.45) 100%);
+}
+.dark .liquid-pill > .liquid-card-shine {
+  box-shadow: inset 1px 1px 0.5px 0 rgba(255,255,255,0.25), inset -1px -1px 1px 0 rgba(255,255,255,0.12);
+}
+.dark .liquid-pill-active::after {
+  background: linear-gradient(180deg, rgba(255,99,33,0.95) 0%, rgba(234,88,12,0.95) 100%);
+}
+
+   /* ============================================================ DARK MODE ============================================================ */
 
 html.dark { color-scheme: dark; }
 

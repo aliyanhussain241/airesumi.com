@@ -264,14 +264,14 @@ function AdminBlogPage() {
       .from("blog_posts")
       .select("id, title, slug, excerpt, content, cover_image_url, published_at, created_at, category, read_time, published")
       .order("created_at", { ascending: false });
-    setPosts((data || []) as Post[]);
+    setPosts(((data || []) as unknown) as Post[]);
     setLoading(false);
   }
 
   useEffect(() => { fetchPosts(); }, []);
 
   async function handleCreate(data: Omit<Post, "id" | "created_at">) {
-    const { error } = await supabase.from("blog_posts").insert([data]);
+    const { error } = await supabase.from("blog_posts").insert([data as any]);
     if (error) { showToast(error.message, "error"); return; }
     showToast("Post created!");
     setView("list");
@@ -280,7 +280,7 @@ function AdminBlogPage() {
 
   async function handleUpdate(data: Omit<Post, "id" | "created_at">) {
     if (!editing) return;
-    const { error } = await supabase.from("blog_posts").update(data).eq("id", editing.id);
+    const { error } = await supabase.from("blog_posts").update(data as any).eq("id", editing.id);
     if (error) { showToast(error.message, "error"); return; }
     showToast("Post updated!");
     setView("list");

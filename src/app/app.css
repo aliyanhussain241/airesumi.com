@@ -220,3 +220,85 @@ html.dark { color-scheme: dark; }
 /* Liquid card inner pill bg (A+ etc.) */
 .dark .liquid-card .bg-\[\#1a202c\] { background-color: #f1f5f9 !important; color: #14141c !important; }
 .dark .liquid-card .text-white { color: #14141c !important; }
+
+/* ============================================================
+   ACCESSIBILITY — focus rings & contrast for liquid glass
+   ============================================================ */
+
+/* Visible focus ring for all interactive liquid glass surfaces.
+   Uses a high-contrast double-ring so it reads on both light glass
+   (bright bg) and dark glass (bright orange + white halo). */
+.liquid-card:focus-visible,
+.liquid-pill:focus-visible,
+a.liquid-card:focus-visible,
+button.liquid-card:focus-visible,
+a.liquid-pill:focus-visible,
+button.liquid-pill:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #ea580c,
+    0 10px 32px rgba(15, 23, 42, 0.14);
+}
+
+.dark .liquid-card:focus-visible,
+.dark .liquid-pill:focus-visible,
+.dark a.liquid-card:focus-visible,
+.dark button.liquid-card:focus-visible,
+.dark a.liquid-pill:focus-visible,
+.dark button.liquid-pill:focus-visible {
+  box-shadow:
+    0 0 0 2px #0a0a0f,
+    0 0 0 4px #fb923c,
+    0 10px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Focus ring for nested focusable elements (links/buttons inside a card). */
+.liquid-card :focus-visible,
+.liquid-pill :focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.dark .liquid-card :focus-visible,
+.dark .liquid-pill :focus-visible {
+  outline-color: #fb923c;
+}
+
+/* Contrast: in dark mode, liquid glass overlays darken the background
+   enough that default body text colors can drop below AA. Force the
+   content layer to a high-contrast foreground and lift muted text. */
+.dark .liquid-card > .liquid-card-content,
+.dark .liquid-pill > .liquid-card-content {
+  color: #f8fafc;
+}
+.dark .liquid-card .text-gray-400,
+.dark .liquid-card .text-gray-500,
+.dark .liquid-pill .text-gray-400,
+.dark .liquid-pill .text-gray-500 {
+  color: #cbd5e1 !important;
+}
+.dark .liquid-card .text-gray-600,
+.dark .liquid-card .text-gray-700,
+.dark .liquid-pill .text-gray-600,
+.dark .liquid-pill .text-gray-700 {
+  color: #e2e8f0 !important;
+}
+
+/* Active orange pill keeps white text in both themes for AA on orange. */
+.liquid-pill-active > .liquid-card-content,
+.dark .liquid-pill-active > .liquid-card-content {
+  color: #ffffff;
+}
+
+/* Respect reduced motion: drop hover-lift transforms. */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-card,
+  .liquid-pill {
+    transition: none;
+  }
+  .liquid-card:hover,
+  .liquid-pill:hover {
+    transform: none;
+  }
+}

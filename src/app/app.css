@@ -134,12 +134,16 @@ html.dark { color-scheme: dark; }
 
 /* Liquid card in dark — black glass with bright rim */
 .dark .liquid-card {
+  background: rgba(20, 20, 28, 0.72);
+  border-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(28px) saturate(160%);
   box-shadow: 0 10px 32px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.35);
 }
-.dark .liquid-card::before { opacity: 0.35; }
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .dark .liquid-card { background: rgba(20, 20, 28, 0.55); }
+}
 .dark .liquid-card::after {
-  background: linear-gradient(180deg, rgba(20,20,28,0.65) 0%, rgba(20,20,28,0.45) 45%, rgba(20,20,28,0.60) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.05) 100%);
 }
 .dark .liquid-card > .liquid-card-shine {
   box-shadow:

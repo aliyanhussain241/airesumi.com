@@ -264,7 +264,7 @@ function AdminBlogPage() {
       .from("blog_posts")
       .select("id, title, slug, excerpt, content, cover_image_url, published_at, created_at, category, read_time, published")
       .order("created_at", { ascending: false });
-    setPosts((data || []) as Post[]);
+    setPosts(((data || []) as unknown) as Post[]);
     setLoading(false);
   }
 

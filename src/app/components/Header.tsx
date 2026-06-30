@@ -36,8 +36,13 @@ const GLASS_HEADER_STYLES = `
     overflow: hidden;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.05);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
-    backdrop-filter: blur(40px) saturate(160%);
-    -webkit-backdrop-filter: blur(40px) saturate(160%);
+    backdrop-filter: blur(80px) saturate(180%);
+    -webkit-backdrop-filter: blur(80px) saturate(180%);
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  :global(html.dark) .hdr-dropdown {
+    background: rgba(17, 17, 23, 0.92);
   }
 
   .hdr-dropdown::before {
@@ -46,7 +51,7 @@ const GLASS_HEADER_STYLES = `
     inset: -20px;
     z-index: 0;
     filter: url(#glass-distortion);
-    opacity: 0.6;
+    opacity: 0.3;
     pointer-events: none;
   }
 
@@ -55,8 +60,12 @@ const GLASS_HEADER_STYLES = `
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.6);
     pointer-events: none;
+  }
+
+  :global(html.dark) .hdr-dropdown::after {
+    background: rgba(17, 17, 23, 0.6);
   }
 
   .hdr-dropdown > .hdr-dropdown-shine {

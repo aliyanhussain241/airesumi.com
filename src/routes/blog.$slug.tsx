@@ -134,7 +134,7 @@ function BlogPost() {
   } : null;
 
   return (
-    <div className="min-h-screen liquid-bg">
+    <div className="min-h-screen liquid-bg pt-[68px]">
       {/* Inject schema */}
       <script
         type="application/ld+json"

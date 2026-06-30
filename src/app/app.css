@@ -2,6 +2,31 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------- Typography polish ---------- */
+:root {
+  --font-display: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+html, body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11", "kern";
+  letter-spacing: -0.005em;
+}
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.022em;
+  font-feature-settings: "ss01", "kern";
+}
+h1 { letter-spacing: -0.028em; }
+p { line-height: 1.65; }
+
+/* Smoother focus + selection */
+::selection { background: #FF6321; color: #fff; }
+:focus-visible { outline-offset: 3px; }
+
 /* ---------- iOS 26 Liquid Glass Card (LIGHT) ---------- */
 .liquid-card {
   position: relative;
@@ -301,3 +326,95 @@ button.liquid-pill:focus-visible {
     transform: none;
   }
 }
+
+/* ============================================================
+   POLISH LAYER — refined hover, shadow depth, micro-interactions
+   ============================================================ */
+
+/* Smoother, longer cubic-bezier for premium hover feel */
+.liquid-card {
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
+}
+.liquid-card:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow:
+    0 24px 56px -12px rgba(15, 23, 42, 0.18),
+    0 8px 16px -6px rgba(234, 88, 12, 0.10),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+}
+.dark .liquid-card:hover {
+  box-shadow:
+    0 24px 56px -12px rgba(0, 0, 0, 0.6),
+    0 8px 16px -6px rgba(234, 88, 12, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+}
+
+/* Pill button — crisper press + glow on hover */
+.liquid-pill {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease,
+    background 0.2s ease;
+}
+.liquid-pill:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 24px -6px rgba(15, 23, 42, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+}
+.liquid-pill:active { transform: translateY(0) scale(0.98); }
+
+.liquid-pill-active:hover {
+  box-shadow:
+    0 12px 28px -6px rgba(234, 88, 12, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+/* Primary orange CTA — richer gradient + glow */
+.bg-\[\#FF6321\],
+.bg-\[\#EA580C\] {
+  background-image: linear-gradient(135deg, #FF7A3D 0%, #FF6321 50%, #EA580C 100%) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, filter 0.2s ease !important;
+}
+.bg-\[\#FF6321\]:hover:not(:disabled),
+.bg-\[\#EA580C\]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -8px rgba(234, 88, 12, 0.55), 0 4px 10px -2px rgba(234, 88, 12, 0.3) !important;
+  filter: brightness(1.05);
+}
+.bg-\[\#FF6321\]:active:not(:disabled),
+.bg-\[\#EA580C\]:active:not(:disabled) { transform: translateY(0) scale(0.985); }
+
+/* Headings: tighter tracking + balanced wrap */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* Refined link underline */
+a:not(.liquid-pill):not(.liquid-card):not(.hdr-nav-link) {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+/* Smoother global scroll */
+html { scroll-behavior: smooth; }
+
+/* Image rendering polish */
+img { image-rendering: -webkit-optimize-contrast; }
+
+/* Subtle divider replacements */
+hr, .border-t, .border-b {
+  border-color: color-mix(in oklab, currentColor 12%, transparent);
+}
+
+/* Better default button focus across the app */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #EA580C;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+.dark button:focus-visible,
+.dark a:focus-visible { outline-color: #FB923C; }

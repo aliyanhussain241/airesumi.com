@@ -506,3 +506,18 @@ html.dark .hover\:bg-white:hover { background: rgba(255,255,255,0.08) !important
 html.dark .from-gray-900,
 html.dark .to-black { --tw-gradient-from: #1f2937 !important; --tw-gradient-to: #0b0b0f !important; }
 
+/* Light-orange tinted cards (landing "Way beyond..." grid) */
+html.dark .bg-\[\#fff3ed\],
+html.dark .bg-\[\#FFF3ED\],
+html.dark .bg-\[\#fff7ed\],
+html.dark .bg-\[\#fffbf5\] {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f3f4f6 !important;
+}
+html.dark .text-\[\#1a202c\],
+html.dark .text-\[\#1A202C\],
+html.dark .text-\[\#0f172a\],
+html.dark .text-\[\#111827\] { color: #f3f4f6 !important; }
+
+

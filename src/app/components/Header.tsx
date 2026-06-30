@@ -148,7 +148,7 @@ const GLASS_HEADER_STYLES = `
 export const Logo = () => (
   <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">
     <img src={rezumiLogo} alt="airesumi" className="h-8 w-auto object-contain block dark:hidden" />
-    <img src={rezumiLogoWhite.url} alt="airesumi" className="h-8 w-auto object-contain hidden dark:block" />
+    <img src={rezumiLogoWhite} alt="airesumi" className="h-8 w-auto object-contain hidden dark:block" />
   </div>
 );
 

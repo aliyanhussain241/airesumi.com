@@ -273,12 +273,13 @@ function LoginPage() {
           <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30 mb-4">
             <span className="text-white font-black text-xl">A</span>
           </div>
-          <h1 className="text-[22px] font-bold text-[#111827] tracking-tight">
+          <h1 className="text-[22px] font-bold text-[#111827] dark:text-gray-100 tracking-tight">
             {tab === "login" ? "Welcome back" : tab === "signup" ? "Create account" : "Reset password"}
           </h1>
-          <p className="text-[13px] text-gray-500 mt-1">
+          <p className="text-[13px] text-gray-500 dark:text-gray-400 mt-1">
             {tab === "login" ? "Sign in to airesumi" : tab === "signup" ? "Join airesumi for free" : "We'll send you a reset link"}
           </p>
+
         </div>
 
         {/* Tab switcher */}

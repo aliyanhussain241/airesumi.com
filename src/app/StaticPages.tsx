@@ -406,11 +406,10 @@ export const PrivacyPolicy = ({ onNavigate: _onNavigate }: { onNavigate: (step: 
             </p>
             <p>If you are an EU resident and are not satisfied with our response, you have the right to lodge a complaint with your national Data Protection Authority.</p>
           </div>
-        </div>
-      </div>
-    </div>
+    </LegalPageShell>
   );
 };
+
 export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: 'Resume Builder Help', message: '', agree: false });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');

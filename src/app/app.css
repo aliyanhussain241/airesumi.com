@@ -2,6 +2,31 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------- Typography polish ---------- */
+:root {
+  --font-display: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+html, body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11", "kern";
+  letter-spacing: -0.005em;
+}
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.022em;
+  font-feature-settings: "ss01", "kern";
+}
+h1 { letter-spacing: -0.028em; }
+p { line-height: 1.65; }
+
+/* Smoother focus + selection */
+::selection { background: #FF6321; color: #fff; }
+:focus-visible { outline-offset: 3px; }
+
 /* ---------- iOS 26 Liquid Glass Card (LIGHT) ---------- */
 .liquid-card {
   position: relative;

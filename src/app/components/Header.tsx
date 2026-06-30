@@ -30,33 +30,29 @@ const GLASS_HEADER_STYLES = `
   /* iOS 26 LIQUID GLASS DROPDOWN — translucent, distorted, shiny */
   .hdr-dropdown {
     position: absolute;
-    isolation: isolate;
     border-radius: 1.75rem;
     overflow: hidden;
     box-shadow:
       0 6px 6px rgba(0, 0, 0, 0.2),
       0 0 20px rgba(0, 0, 0, 0.1);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(28px) saturate(180%);
+    background: rgba(255, 255, 255, 0.65);
   }
 
   :global(html.dark) .hdr-dropdown {
-    background: rgba(20, 20, 28, 0.28);
+    background: rgba(20, 20, 28, 0.75);
   }
 
-  /* Distortion layer */
+  /* Distortion layer (decorative) */
   .hdr-dropdown::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
     filter: url(#glass-distortion) saturate(120%) brightness(1.15);
-    isolation: isolate;
     pointer-events: none;
+    opacity: 0.4;
   }
 
   /* Subtle tint layer */
@@ -65,13 +61,14 @@ const GLASS_HEADER_STYLES = `
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
     pointer-events: none;
   }
 
   :global(html.dark) .hdr-dropdown::after {
-    background: rgba(20, 20, 28, 0.25);
+    background: rgba(20, 20, 28, 0.35);
   }
+
 
   /* Glossy shine highlight */
   .hdr-dropdown > .hdr-dropdown-shine {

@@ -40,7 +40,7 @@ function KeywordScanner() {
 
   async function handleScan() {
     if (!resumeText.trim() || !jobDescription.trim()) {
-      setError("Dono fields bharna zaroori hai");
+      setError("Please fill in both fields");
       return;
     }
     setError(null);

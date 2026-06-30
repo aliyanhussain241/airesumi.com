@@ -35,7 +35,7 @@ function SummaryGenerator() {
   }, []);
 
   async function handleGenerate() {
-    if (!role.trim()) { setError("Current role zaroor bharo"); return; }
+    if (!role.trim()) { setError("Please enter your current role"); return; }
     setError(null);
     setLoading(true);
     const { data: { session } } = await supabase.auth.getSession();

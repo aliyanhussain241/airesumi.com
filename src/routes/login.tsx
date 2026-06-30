@@ -301,7 +301,7 @@ function LoginPage() {
           {/* Google */}
           {tab !== "forgot" && (
             <button type="button" onClick={handleGoogle}
-              className="glass-btn-outline w-full flex items-center justify-center gap-3 py-3 rounded-2xl text-[14px] font-semibold text-[#374151] cursor-pointer mb-4">
+              className="glass-btn-outline w-full flex items-center justify-center gap-3 py-3 rounded-2xl text-[14px] font-semibold text-[#374151] dark:text-gray-100 cursor-pointer mb-4">
               <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
               Continue with Google
             </button>
@@ -309,11 +309,12 @@ function LoginPage() {
 
           {tab !== "forgot" && (
             <div className="flex items-center gap-3 mb-1">
-              <div className="flex-1 h-px bg-black/10" />
-              <span className="text-[11px] font-medium text-gray-400">or email</span>
-              <div className="flex-1 h-px bg-black/10" />
+              <div className="flex-1 h-px bg-black/10 dark:bg-white/10" />
+              <span className="text-[11px] font-medium text-gray-400 dark:text-gray-500">or email</span>
+              <div className="flex-1 h-px bg-black/10 dark:bg-white/10" />
             </div>
           )}
+
 
           {/* Email */}
           <GlassInput icon={<Mail size={17} />} type="email" placeholder="Email address"

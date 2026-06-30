@@ -29,15 +29,19 @@ const GLASS_HEADER_STYLES = `
 
   /* iOS 26 LIQUID GLASS DROPDOWN — translucent, distorted, shiny */
   .hdr-dropdown {
+    --hdr-blur: 28px;
+    --hdr-sat: 180%;
     position: absolute;
     border-radius: 1.75rem;
     overflow: hidden;
     box-shadow:
       0 6px 6px rgba(0, 0, 0, 0.2),
       0 0 20px rgba(0, 0, 0, 0.1);
-    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
-    backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(var(--hdr-blur)) saturate(var(--hdr-sat));
     background: rgba(255, 255, 255, 0.65);
+    transition: backdrop-filter 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                background 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: backdrop-filter, transform, opacity;
   }
 
   :global(html.dark) .hdr-dropdown {
@@ -359,11 +363,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   };
 
   const DropdownAnimation = {
-
-    initial: { opacity: 0, y: 8, scale: 0.96 },
-    animate: { opacity: 1, y: 0, scale: 1 },
-    exit:    { opacity: 0, y: 8, scale: 0.96 },
-    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    initial: { opacity: 0, y: -6, scale: 0.97, "--hdr-blur": "0px", "--hdr-sat": "100%" } as any,
+    animate: { opacity: 1, y: 0, scale: 1, "--hdr-blur": "28px", "--hdr-sat": "180%" } as any,
+    exit:    { opacity: 0, y: -6, scale: 0.97, "--hdr-blur": "0px", "--hdr-sat": "100%" } as any,
+    transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   };
 
   return (

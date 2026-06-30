@@ -406,12 +406,13 @@ function LoginPage() {
         </form>
 
         {/* Footer */}
-        <p className="text-center text-[11px] text-gray-400 mt-6 leading-relaxed">
+        <p className="text-center text-[11px] text-gray-400 dark:text-gray-500 mt-6 leading-relaxed">
           By continuing, you agree to our{" "}
-          <Link to="/terms" className="text-orange-500 hover:underline no-underline">Terms</Link>
+          <Link to="/terms" className="text-orange-500 dark:text-orange-400 hover:underline no-underline">Terms</Link>
           {" "}and{" "}
-          <Link to="/privacy" className="text-orange-500 hover:underline no-underline">Privacy Policy</Link>
+          <Link to="/privacy" className="text-orange-500 dark:text-orange-400 hover:underline no-underline">Privacy Policy</Link>
         </p>
+
       </motion.div>
     </div>
   );

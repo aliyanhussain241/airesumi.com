@@ -8,6 +8,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
+import rezumiLogoWhite from '@/assets/rezumi-white.webp.asset.json';
 
 const GLASS_HEADER_STYLES = `
   .hdr-glass {

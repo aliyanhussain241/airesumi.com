@@ -157,15 +157,16 @@ function LiquidBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-amber-50 to-orange-200" />
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-amber-50 to-orange-200 dark:from-[#0b0b12] dark:via-[#11111a] dark:to-[#1a1320]" />
       {/* Blobs */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-400/40 to-amber-300/30 blur-3xl"
+      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-orange-400/40 to-amber-300/30 dark:from-orange-500/20 dark:to-amber-500/10 blur-3xl"
         style={{ animation: "blob1 18s ease-in-out infinite" }} />
-      <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-orange-500/30 to-red-400/20 blur-3xl"
+      <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-orange-500/30 to-red-400/20 dark:from-orange-600/15 dark:to-red-500/10 blur-3xl"
         style={{ animation: "blob2 22s ease-in-out infinite" }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-amber-300/25 to-orange-300/20 blur-2xl"
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-br from-amber-300/25 to-orange-300/20 dark:from-amber-500/10 dark:to-orange-500/10 blur-2xl"
         style={{ animation: "blob3 15s ease-in-out infinite" }} />
     </div>
+
   );
 }
 

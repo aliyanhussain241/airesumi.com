@@ -11,7 +11,9 @@ import {
 import appCss from "../styles.css?url";
 import { Header } from "../app/components/Header";
 import { Footer } from "../app/components/Footer";
+import { AutoTranslate } from "../app/components/AutoTranslate";
 import { initI18n } from "../app/lib/i18n";
+
 
 // Initialize i18next once (SSR-safe).
 initI18n();
@@ -239,7 +241,9 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <AutoTranslate />
       </div>
     </QueryClientProvider>
+
   );
 }

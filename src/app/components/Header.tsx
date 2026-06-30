@@ -446,16 +446,27 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             {/* ✅ Other Tools — 3 column horizontal grid */}
             <div ref={otherRef} className="relative">
               <button
+                ref={otherBtnRef}
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={isOtherOpen}
+                aria-controls="hdr-menu-other"
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
+                onKeyDown={(e) => handleTriggerKeyDown(e, isOtherOpen, () => { setIsOtherOpen(true); setIsResumeOpen(false); })}
                 className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 Other Tools
-                <ChevronDown size={13} className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
                 {isOtherOpen && (
                   <motion.div
                     {...DropdownAnimation}
+                    ref={otherMenuRef}
+                    id="hdr-menu-other"
+                    role="menu"
+                    aria-label="Other tools"
+                    onKeyDown={(e) => handleMenuKeyDown(e, () => setIsOtherOpen(false), otherBtnRef)}
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[600px]"
                   >
@@ -463,7 +474,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
                         <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
-                        {/* ✅ 3 columns grid */}
                         <div className="hdr-dropdown-grid cols-3">
                           {otherTools.map(tool => (
                             <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
@@ -472,7 +482,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
-                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)}
+                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
                           className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
                           Explore →
                         </Link>
@@ -482,6 +492,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 )}
               </AnimatePresence>
             </div>
+
 
             <Link to="/examples"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>

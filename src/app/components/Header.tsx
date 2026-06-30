@@ -220,6 +220,71 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const navigate  = useNavigate();
   const resumeRef = useRef<HTMLDivElement>(null);
   const otherRef  = useRef<HTMLDivElement>(null);
+  const resumeBtnRef = useRef<HTMLButtonElement>(null);
+  const otherBtnRef  = useRef<HTMLButtonElement>(null);
+  const resumeMenuRef = useRef<HTMLDivElement>(null);
+  const otherMenuRef  = useRef<HTMLDivElement>(null);
+
+  // Focus first menuitem when a dropdown opens
+  useEffect(() => {
+    if (isResumeOpen) {
+      requestAnimationFrame(() => {
+        resumeMenuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+      });
+    }
+  }, [isResumeOpen]);
+  useEffect(() => {
+    if (isOtherOpen) {
+      requestAnimationFrame(() => {
+        otherMenuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+      });
+    }
+  }, [isOtherOpen]);
+
+  // Global Escape: close open menu and return focus to trigger
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (isResumeOpen) { setIsResumeOpen(false); resumeBtnRef.current?.focus(); }
+      if (isOtherOpen)  { setIsOtherOpen(false);  otherBtnRef.current?.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isResumeOpen, isOtherOpen]);
+
+  // Roving keyboard handler for an open menu
+  const handleMenuKeyDown = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    close: () => void,
+    triggerRef: React.RefObject<HTMLButtonElement>,
+  ) => {
+    const items = Array.from(
+      e.currentTarget.querySelectorAll<HTMLElement>('[role="menuitem"]')
+    );
+    if (items.length === 0) return;
+    const idx = items.indexOf(document.activeElement as HTMLElement);
+    const focus = (i: number) => items[(i + items.length) % items.length]?.focus();
+    switch (e.key) {
+      case 'ArrowDown': e.preventDefault(); focus(idx + 1); break;
+      case 'ArrowUp':   e.preventDefault(); focus(idx - 1); break;
+      case 'Home':      e.preventDefault(); items[0]?.focus(); break;
+      case 'End':       e.preventDefault(); items[items.length - 1]?.focus(); break;
+      case 'Tab':       close(); break;
+      case 'Escape':    e.preventDefault(); close(); triggerRef.current?.focus(); break;
+    }
+  };
+
+  const handleTriggerKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    isOpen: boolean,
+    open: () => void,
+  ) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!isOpen) open(); // useEffect focuses first item
+    }
+  };
+
 
   const isResumeActive = resumeTools.some(t => t.to === location.pathname);
   const isOtherActive  = otherTools.some(t => t.to === location.pathname);

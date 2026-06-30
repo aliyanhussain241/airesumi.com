@@ -40,7 +40,7 @@ Rules:
 Return ONLY a JSON array of 5 strings, no markdown, no explanation:
 ["bullet 1", "bullet 2", "bullet 3", "bullet 4", "bullet 5"]`;
 
-          const response = await callAIGateway({
+          const response = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             json: true,
             temperature: 0.7,

@@ -73,7 +73,7 @@ Generate a highly optimized resume in JSON matching:
   "certifications": [{ "name": "string", "issuer": "string" }]
 }`;
 
-          const text = await callAIGateway({
+          const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [
               { role: "system", content: systemInstruction },
               { role: "user", content: prompt },

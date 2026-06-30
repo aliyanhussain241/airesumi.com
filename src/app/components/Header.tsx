@@ -4,11 +4,13 @@ import {
   Menu, X, LogOut, ChevronDown, FileText, Mail, Target,
   Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/hooks/use-theme';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
 import rezumiLogoWhite from '@/assets/rezumi-white.webp';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 const GLASS_HEADER_STYLES = `
   .hdr-glass {
@@ -195,24 +197,27 @@ export const Logo = () => (
   </div>
 );
 
-const resumeTools = [
-  { name: 'AI Resume Builder',    to: '/resume',            icon: FileText, desc: 'ATS-optimized resume in minutes' },
-  { name: 'Resume Bullet Writer', to: '/bullet-writer',     icon: PenLine,  desc: 'Stronger bullet points instantly' },
-  { name: 'Resume Summary',       to: '/summary-generator', icon: List,     desc: 'Generate a compelling summary' },
-  { name: 'Keyword Scanner',      to: '/keyword-scanner',   icon: Target,   desc: 'Match keywords to job posting' },
-];
+const resumeToolsBase = [
+  { key: 'resumeBuilder',  to: '/resume',            icon: FileText },
+  { key: 'bulletWriter',   to: '/bullet-writer',     icon: PenLine },
+  { key: 'summary',        to: '/summary-generator', icon: List },
+  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target },
+] as const;
 
-const otherTools = [
-  { name: 'Cover Letter',       to: '/cover-letter',       icon: Mail,     desc: 'Tailored cover letters' },
-  { name: 'LinkedIn Bio',       to: '/linkedin-bio',       icon: Linkedin, desc: 'Profile generator' },
-  { name: 'ATS Checker',        to: '/ats-checker',        icon: Target,   desc: 'Score your resume' },
-  { name: 'Interview Prep',     to: '/interview-prep',     icon: Wand2,    desc: 'Practice questions' },
-  { name: 'Resignation Letter', to: '/resignation-letter', icon: FileText, desc: 'Leave on good terms' },
-  { name: 'PDF Scanner',        to: '/pdf-scanner',        icon: ScanLine, desc: 'Scan documents to PDF' },
-  { name: 'Job Search',         to: '/salary-analyzer',    icon: Briefcase,desc: 'Salary & market insights' },
-];
+const otherToolsBase = [
+  { key: 'coverLetter',    to: '/cover-letter',       icon: Mail },
+  { key: 'linkedinBio',    to: '/linkedin-bio',       icon: Linkedin },
+  { key: 'atsChecker',     to: '/ats-checker',        icon: Target },
+  { key: 'interviewPrep',  to: '/interview-prep',     icon: Wand2 },
+  { key: 'resignation',    to: '/resignation-letter', icon: FileText },
+  { key: 'pdfScanner',     to: '/pdf-scanner',        icon: ScanLine },
+  { key: 'jobSearch',      to: '/salary-analyzer',    icon: Briefcase },
+] as const;
 
 export const Header = ({ windowWidth }: { windowWidth?: number }) => {
+  const { t } = useTranslation();
+  const resumeTools = resumeToolsBase.map(x => ({ ...x, name: t(`tools.${x.key}.name`), desc: t(`tools.${x.key}.desc`) }));
+  const otherTools  = otherToolsBase.map(x => ({ ...x, name: t(`tools.${x.key}.name`), desc: t(`tools.${x.key}.desc`) }));
   const [isScrolled, setIsScrolled]     = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -340,7 +345,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
   // ✅ UPDATED: Horizontal tool card layout
-  const ToolItem = ({ tool, onClose }: { tool: typeof resumeTools[0]; onClose: () => void }) => {
+  type HeaderTool = { key: string; to: string; icon: React.ComponentType<{ size?: number; className?: string }>; name: string; desc: string };
+  const ToolItem = ({ tool, onClose }: { tool: HeaderTool; onClose: () => void }) => {
     const Icon = tool.icon;
     const active = location.pathname === tool.to;
     return (
@@ -402,10 +408,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
             <Link to="/"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-              Home
+              {t('nav.home')}
             </Link>
 
-            {/* ✅ Resume Tools — 2 column horizontal grid */}
+            {/* Resume Tools */}
             <div ref={resumeRef} className="relative">
               <button
                 ref={resumeBtnRef}
@@ -416,7 +422,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isResumeOpen, () => { setIsResumeOpen(true); setIsOtherOpen(false); })}
                 className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-                Resume Tools
+                {t('nav.resumeTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -427,7 +433,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     ref={resumeMenuRef}
                     id="hdr-menu-resume"
                     role="menu"
-                    aria-label="Resume tools"
+                    aria-label={t('dropdown.resumeToolsLabel')}
                     onKeyDown={(e) => handleMenuKeyDown(e, () => setIsResumeOpen(false), resumeBtnRef)}
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[480px]"
@@ -435,7 +441,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     <span className="hdr-dropdown-shine" aria-hidden="true" />
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
+                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">{t('dropdown.resumeToolsLabel')}</p>
                         <div className="hdr-dropdown-grid cols-2">
                           {resumeTools.map(tool => (
                             <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
@@ -443,10 +449,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                         </div>
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
-                        <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
+                        <span className="text-[11px] text-[#9ca3af]">{t('dropdown.resumeToolsCount', { count: resumeTools.length })}</span>
                         <Link to="/resume" onClick={() => setIsResumeOpen(false)} role="menuitem"
                           className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                          Start free →
+                          {t('cta.startFreeArrow')}
                         </Link>
                       </div>
                     </div>
@@ -456,7 +462,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             </div>
 
 
-            {/* ✅ Other Tools — 3 column horizontal grid */}
+            {/* Other Tools */}
             <div ref={otherRef} className="relative">
               <button
                 ref={otherBtnRef}
@@ -467,7 +473,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isOtherOpen, () => { setIsOtherOpen(true); setIsResumeOpen(false); })}
                 className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-                Other Tools
+                {t('nav.otherTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -478,7 +484,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     ref={otherMenuRef}
                     id="hdr-menu-other"
                     role="menu"
-                    aria-label="Other tools"
+                    aria-label={t('dropdown.otherToolsLabel')}
                     onKeyDown={(e) => handleMenuKeyDown(e, () => setIsOtherOpen(false), otherBtnRef)}
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[600px]"
@@ -486,7 +492,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     <span className="hdr-dropdown-shine" aria-hidden="true" />
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
+                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">{t('dropdown.otherToolsLabel')}</p>
                         <div className="hdr-dropdown-grid cols-3">
                           {otherTools.map(tool => (
                             <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
@@ -494,10 +500,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                         </div>
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
-                        <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
+                        <span className="text-[11px] text-[#9ca3af]">{t('dropdown.otherToolsCount', { count: otherTools.length })}</span>
                         <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
                           className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                          Explore →
+                          {t('cta.explore')}
                         </Link>
                       </div>
                     </div>
@@ -509,13 +515,14 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
             <Link to="/examples"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-              Examples
+              {t('nav.examples')}
             </Link>
             <Link to="/blog"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-              Blog
+              {t('nav.blog')}
             </Link>
           </nav>
+
 
           {/* Right side */}
           <div className="flex items-center gap-2 flex-shrink-0">
@@ -523,34 +530,37 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <div className="hidden md:flex items-center gap-2">
                 <Link to="/dashboard"
                   className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50">
-                  <LayoutDashboard size={14} /> My Resumes
+                  <LayoutDashboard size={14} /> {t('cta.myResumes')}
                 </Link>
                 <button onClick={handleLogout}
                   className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
-                  <LogOut size={13} /> Logout
+                  <LogOut size={13} /> {t('cta.logout')}
                 </button>
                 <Link to="/resume"
                   className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1024 ? 'Build My Resume →' : 'Start →'}
+                  {width >= 1024 ? t('cta.buildResume') : t('cta.start')}
                 </Link>
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-2">
                 <Link to="/login"
                   className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
-                  Login
+                  {t('cta.login')}
                 </Link>
                 <Link to="/resume"
                   className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1024 ? 'Build My Resume →' : 'Start Free →'}
+                  {width >= 1024 ? t('cta.buildResume') : t('cta.startFree')}
                 </Link>
               </div>
             )}
 
+            {/* Language switcher */}
+            <LanguageSwitcher />
+
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
-              aria-label="Toggle dark mode"
+              aria-label={t('theme.toggle')}
               className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
@@ -558,13 +568,14 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
             {/* Mobile */}
             <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl md:hidden no-underline">
-              Start Free
+              {t('cta.startFreeShort')}
             </Link>
             <button onClick={() => setIsMobileOpen(true)}
               className="md:hidden text-[#374151] dark:text-orange-200 p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
               <Menu size={22} strokeWidth={2} />
             </button>
           </div>
+
         </div>
       </header>
 
@@ -597,10 +608,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <div className="flex-1 px-4 py-4">
                 <Link to="/" onClick={() => setIsMobileOpen(false)}
                   className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
-                  Home
+                  {t('nav.home')}
                 </Link>
 
-                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">Resume Tools</p>
+                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">{t('dropdown.resumeToolsLabel')}</p>
                 {resumeTools.map(tool => {
                   const Icon = tool.icon;
                   return (
@@ -614,7 +625,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   );
                 })}
 
-                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">Other Tools</p>
+                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">{t('dropdown.otherToolsLabel')}</p>
                 {otherTools.map(tool => {
                   const Icon = tool.icon;
                   return (
@@ -630,28 +641,28 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
                 <Link to="/examples" onClick={() => setIsMobileOpen(false)}
                   className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5 mt-2">
-                  Examples
+                  {t('nav.examples')}
                 </Link>
                 <Link to="/blog" onClick={() => setIsMobileOpen(false)}
                   className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
-                  Blog
+                  {t('nav.blog')}
                 </Link>
 
                 {user ? (
                   <>
                     <Link to="/dashboard" onClick={() => setIsMobileOpen(false)}
                       className="flex items-center gap-2 py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
-                      <LayoutDashboard size={16} className="text-[#EA580C]" /> My Resumes
+                      <LayoutDashboard size={16} className="text-[#EA580C]" /> {t('cta.myResumes')}
                     </Link>
                     <button onClick={() => { setIsMobileOpen(false); handleLogout(); }}
                       className="w-full text-left py-3 px-2 text-[15px] font-medium text-red-500 bg-transparent border-none cursor-pointer">
-                      Logout
+                      {t('cta.logout')}
                     </button>
                   </>
                 ) : (
                   <Link to="/login" onClick={() => setIsMobileOpen(false)}
                     className="flex items-center py-3 px-2 text-[15px] font-medium text-[#EA580C] no-underline">
-                    Login / Sign Up
+                    {t('cta.loginSignup')}
                   </Link>
                 )}
               </div>
@@ -659,9 +670,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <div className="px-4 pb-8 pt-2">
                 <Link to="/resume" onClick={() => setIsMobileOpen(false)}
                   className="hdr-btn-primary block w-full text-white text-[15px] font-bold py-4 rounded-2xl text-center no-underline">
-                  Build My Resume Free →
+                  {t('cta.buildResumeFree')}
                 </Link>
               </div>
+
             </motion.div>
           </motion.div>
         )}

@@ -284,17 +284,18 @@ function LoginPage() {
 
         {/* Tab switcher */}
         {tab !== "forgot" && (
-          <div className="flex bg-black/5 rounded-2xl p-1 mb-6">
+          <div className="flex bg-black/5 dark:bg-white/5 rounded-2xl p-1 mb-6">
             {(["login", "signup"] as const).map(t => (
               <button key={t} onClick={() => switchTab(t)}
                 className={`flex-1 py-2 text-[13px] font-semibold rounded-xl transition-all cursor-pointer border-none ${
-                  tab === t ? "glass-tab-active text-[#111827]" : "text-gray-400 bg-transparent"
+                  tab === t ? "glass-tab-active text-[#111827] dark:text-gray-100" : "text-gray-400 dark:text-gray-500 bg-transparent"
                 }`}>
                 {t === "login" ? "Sign In" : "Sign Up"}
               </button>
             ))}
           </div>
         )}
+
 
         <form onSubmit={submitHandler} className="space-y-3">
           {/* Google */}

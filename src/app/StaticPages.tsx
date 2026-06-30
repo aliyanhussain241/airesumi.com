@@ -42,42 +42,34 @@ const Navbar = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   );
 };
 
-export const TermsOfService = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+export const TermsOfService = ({ onNavigate: _onNavigate }: { onNavigate: (step: any) => void }) => {
+  const toc = [
+    { id: 'sec-1',  label: '1. Acceptance of Terms' },
+    { id: 'sec-2',  label: '2. Description of Service' },
+    { id: 'sec-3',  label: '3. Account Registration' },
+    { id: 'sec-4',  label: '4. Free and Paid Plans' },
+    { id: 'sec-5',  label: '5. Acceptable Use Policy' },
+    { id: 'sec-6',  label: '6. Intellectual Property' },
+    { id: 'sec-7',  label: '7. AI-Generated Content' },
+    { id: 'sec-8',  label: '8. Disclaimer of Warranties' },
+    { id: 'sec-9',  label: '9. Limitation of Liability' },
+    { id: 'sec-10', label: '10. Termination' },
+    { id: 'sec-11', label: '11. Governing Law' },
+    { id: 'sec-12', label: '12. Changes to Terms' },
+    { id: 'sec-13', label: '13. Contact Us' },
+  ];
 
   return (
-    <div className="min-h-screen bg-[#FFFBF7] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-24">
-      <Navbar onNavigate={onNavigate} />
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-12">
-        <div className="md:col-span-1 hidden md:block">
-          <div className="sticky top-32 space-y-3">
-            <h3 className="font-bold text-gray-900 mb-4 uppercase tracking-wider text-sm">Contents</h3>
-            <button onClick={() => scrollTo('sec-1')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">1. Acceptance of Terms</button>
-            <button onClick={() => scrollTo('sec-2')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">2. Description of Service</button>
-            <button onClick={() => scrollTo('sec-3')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">3. Account Registration</button>
-            <button onClick={() => scrollTo('sec-4')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">4. Free and Paid Plans</button>
-            <button onClick={() => scrollTo('sec-5')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">5. Acceptable Use Policy</button>
-            <button onClick={() => scrollTo('sec-6')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">6. Intellectual Property</button>
-            <button onClick={() => scrollTo('sec-7')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">7. AI-Generated Content</button>
-            <button onClick={() => scrollTo('sec-8')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">8. Disclaimer of Warranties</button>
-            <button onClick={() => scrollTo('sec-9')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">9. Limitation of Liability</button>
-            <button onClick={() => scrollTo('sec-10')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">10. Termination</button>
-            <button onClick={() => scrollTo('sec-11')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">11. Governing Law</button>
-            <button onClick={() => scrollTo('sec-12')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">12. Changes to Terms</button>
-            <button onClick={() => scrollTo('sec-13')} className="block text-left text-sm text-gray-600 hover:text-[#FF6321] font-medium transition-colors">13. Contact Us</button>
-          </div>
-        </div>
+    <LegalPageShell
+      kind="terms"
+      title="Terms of Service — airesumi User Agreement"
+      subtitle="These Terms govern your use of airesumi and all related career tools. By using airesumi, you agree to them. Please read carefully."
+      lastUpdated="January 1, 2025"
+      effective="January 1, 2025"
+      plainEnglish="Use airesumi honestly and for your own career. Don't misuse the service, steal content, or violate others' rights. We provide tools in good faith and ask you to use them in good faith. Full legal details below."
+      toc={toc}
+    >
 
-        <div className="md:col-span-3 prose prose-orange max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-[#FF6321]">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Terms of Service — airesumi User Agreement</h1>
-          <p className="text-xl text-gray-600 leading-relaxed font-medium mb-4">These Terms of Service govern your use of airesumi and all related career tools. By using AIResumi, you agree to these terms. Please read them carefully.</p>
-          <div className="inline-block bg-gray-100 text-gray-600 text-sm font-bold px-4 py-2 rounded-lg mb-8">Last Updated: January 1, 2025 | Effective: January 1, 2025</div>
-
-          <div className="bg-orange-50 border border-orange-100 p-6 rounded-2xl mb-12">
-            <p className="font-medium text-[#FF6321] m-0">In plain English: Use airesumi honestly and for your own career. Do not misuse the service, steal content, or violate others' rights. We provide tools in good faith and ask you to use them in good faith. Full legal details below.</p>
-          </div>
 
           <div id="sec-1" className="mb-12 scroll-mt-32">
             <h2>1. Acceptance of Terms</h2>

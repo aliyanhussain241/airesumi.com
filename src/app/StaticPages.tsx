@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, MessageSquare, CreditCard, Handshake, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { LegalPageShell } from './components/LegalPageShell';
+
 
 const Navbar = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   const [scrolled, setScrolled] = useState(false);

@@ -333,63 +333,63 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
          
          <div className="grid lg:grid-cols-3 gap-6 h-auto lg:h-[480px]">
             {/* Sidebar Nav */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] text-left flex flex-col overflow-hidden">
-               <div onClick={() => handleTabClick(1)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 1 ? 'bg-[#fff3ed]' : 'hover:bg-gray-50'}`}>
-                  {activeToolsTab === 1 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#FF6321]"></div>}
-                  <div className="text-[#1a202c]">
+             <div className="bg-tool-sidebar text-tool-sidebar-foreground rounded-2xl border border-border shadow-sm text-left flex flex-col overflow-hidden">
+                <div onClick={() => handleTabClick(1)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 1 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
+                   {activeToolsTab === 1 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
+                   <div className={activeToolsTab === 1 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
                     <FileText size={24} />
                   </div>
-                  <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 1 ? 'text-[#FF6321]' : 'text-[#1a202c]'}`}>1. Get Noticed</div>
+                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 1 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>1. Get Noticed</div>
                   {activeToolsTab === 1 && (
                     <div className="w-6 h-6 flex items-center justify-center">
                       <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                        <circle cx="12" cy="12" r="10" stroke="#fed7aa" strokeWidth="3" fill="none" />
-                        <motion.circle key={progressKey} cx="12" cy="12" r="10" stroke="#FF6321" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
+                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
+                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
                       </svg>
                     </div>
                   )}
                </div>
-               <div onClick={() => handleTabClick(2)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 2 ? 'bg-[#fff3ed]' : 'hover:bg-gray-50'}`}>
-                  {activeToolsTab === 2 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#FF6321]"></div>}
-                  <div className="text-[#1a202c]">
+                <div onClick={() => handleTabClick(2)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 2 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
+                   {activeToolsTab === 2 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
+                   <div className={activeToolsTab === 2 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
                     <Briefcase size={24} />
                   </div>
-                  <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 2 ? 'text-[#FF6321]' : 'text-[#1a202c]'}`}>2. Get Hired</div>
+                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 2 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>2. Get Hired</div>
                   {activeToolsTab === 2 && (
                     <div className="w-6 h-6 flex items-center justify-center">
                       <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                        <circle cx="12" cy="12" r="10" stroke="#fed7aa" strokeWidth="3" fill="none" />
-                        <motion.circle key={progressKey} cx="12" cy="12" r="10" stroke="#FF6321" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
+                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
+                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
                       </svg>
                     </div>
                   )}
                </div>
-               <div onClick={() => handleTabClick(3)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 3 ? 'bg-[#fff3ed]' : 'hover:bg-gray-50'}`}>
-                  {activeToolsTab === 3 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#FF6321]"></div>}
-                  <div className="text-[#1a202c]">
+                <div onClick={() => handleTabClick(3)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 3 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
+                   {activeToolsTab === 3 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
+                   <div className={activeToolsTab === 3 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
                     <CircleDollarSign size={24} />
                   </div>
-                  <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 3 ? 'text-[#FF6321]' : 'text-[#1a202c]'}`}>3. Get Paid More</div>
+                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 3 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>3. Get Paid More</div>
                   {activeToolsTab === 3 && (
                     <div className="w-6 h-6 flex items-center justify-center">
                       <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                        <circle cx="12" cy="12" r="10" stroke="#fed7aa" strokeWidth="3" fill="none" />
-                        <motion.circle key={progressKey} cx="12" cy="12" r="10" stroke="#FF6321" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
+                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
+                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
                       </svg>
                     </div>
                   )}
                </div>
-               <div onClick={() => handleTabClick(4)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 4 ? 'bg-[#fff3ed]' : 'hover:bg-gray-50'}`}>
-                  {activeToolsTab === 4 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#FF6321]"></div>}
-                  <div className="text-[#1a202c]">
+                <div onClick={() => handleTabClick(4)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 4 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
+                   {activeToolsTab === 4 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
+                   <div className={activeToolsTab === 4 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
                     <Crown size={24} />
                   </div>
-                  <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 4 ? 'text-[#FF6321]' : 'text-[#1a202c]'}`}>4. Get promoted</div>
+                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 4 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>4. Get promoted</div>
                   {activeToolsTab === 4 && (
                     <div className="w-6 h-6 flex items-center justify-center">
                       <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                        <circle cx="12" cy="12" r="10" stroke="#fed7aa" strokeWidth="3" fill="none" />
-                        <motion.circle key={progressKey} cx="12" cy="12" r="10" stroke="#FF6321" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
+                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
+                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
                       </svg>
                     </div>
                   )}
@@ -399,12 +399,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             {/* Content Cards */}
             {activeToolsTab === 1 && (
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><FileText size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Resume Builder</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><FileText size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Resume Builder</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Build the resume that gets you hired. We designed the builder with top employers. Finish a draft 20 mins with "Recruiter-AI".</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Build the resume that gets you hired. We designed the builder with top employers. Finish a draft 20 mins with "Recruiter-AI".</p>
                     
                     <div className="w-[280px] h-[340px] bg-white rounded-t-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.15)] border border-gray-100 p-8 absolute bottom-0 translate-y-20 hover:translate-y-8 transition-transform duration-500 z-0 flex flex-col">
                        <div className="border-b border-gray-100 pb-4 mb-4">
@@ -423,12 +423,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     </div>
                 </div>
                 
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><Target size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Recruiter Match</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Target size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Recruiter Match</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Recruiters come to us with roles they can't fill. We close-match your resume and then send it to 50 recruiters a week.</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Recruiters come to us with roles they can't fill. We close-match your resume and then send it to 50 recruiters a week.</p>
                     <div className="absolute bottom-0 translate-y-12 hover:translate-y-6 transition-transform duration-500 flex justify-center w-full z-0 h-48">
                     </div>
                 </div>
@@ -437,59 +437,59 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
             {activeToolsTab === 2 && (
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><Search size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Job Board</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Search size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Job Board</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">See every online job board in one place. We search the entire internet every day. If a role goes live, you won't miss it.</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">See every online job board in one place. We search the entire internet every day. If a role goes live, you won't miss it.</p>
                 </div>
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><Send size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Auto Apply</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Send size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Auto Apply</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Our team of experts apply for you. All they need is your resume and your target salary. Interviews come by email.</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Our team of experts apply for you. All they need is your resume and your target salary. Interviews come by email.</p>
                 </div>
               </motion.div>
             )}
 
             {activeToolsTab === 3 && (
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><MessageSquare size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Interview Prep</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><MessageSquare size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Interview Prep</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Practice the questions that get you hired. Choose from the world's best employers and see instant feedback.</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Practice the questions that get you hired. Choose from the world's best employers and see instant feedback.</p>
                 </div>
 
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><Gauge size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Salary Analyzer</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Gauge size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Salary Analyzer</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Get paid 7% more. Our salary analyzer shows you if your job offer is at the market rate. Always negotiate!</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Get paid 7% more. Our salary analyzer shows you if your job offer is at the market rate. Always negotiate!</p>
                 </div>
               </motion.div>
             )}
 
             {activeToolsTab === 4 && (
               <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><User size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Career Coaching</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><User size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Career Coaching</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Work 1-1 with an expert to expand your network, give better interviews and negotiate a higher salary.</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Work 1-1 with an expert to expand your network, give better interviews and negotiate a higher salary.</p>
                 </div>
 
-                <div className="bg-[#fff3ed] rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
+                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
                     <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-white p-2 rounded-xl text-[#FF6321] shadow-sm"><Sparkles size={28} className="fill-[#FF6321]/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-[#1a202c]">Future Learn</h3>
+                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Sparkles size={28} className="fill-brand-accent/20" /></div>
+                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Future Learn</h3>
                     </div>
-                    <p className="text-[#4b5563] text-[16px] leading-relaxed mb-8 z-10 w-full">Future proof yourself. Get the courses you need to grow. Accredited, certified and respected by employers.</p>
+                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Future proof yourself. Get the courses you need to grow. Accredited, certified and respected by employers.</p>
                 </div>
               </motion.div>
             )}

@@ -148,14 +148,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                  <div className="bg-[#22c55e] rounded-full p-0.5">
                    <CheckCircle2 size={16} className="text-white" />
                  </div>
-                 <span className="text-[15px]"><strong className="text-[#22c55e] font-semibold">39%</strong> more likely to land the job</span>
+                 <span className="text-[15px]"><strong className="text-[#22c55e] font-semibold"> </strong> ATS-optimized & recruiter-approved formatting</span>
                </div>
                <div className="flex items-center gap-2 text-[15px] text-[#4a5568]">
                  <div className="flex text-[#00b67a] gap-1 items-center">
                     <Star size={20} fill="#00b67a" className="text-[#00b67a]" />
-                    <span className="font-bold text-[#1a202c]">Trustpilot</span>
+                    <span className="font-bold text-[#1a202c]">100% free to start </span>
                  </div>
-                 <span>100% free to start · No credit card required</span>
+                 <span> No credit card required</span>
                </div>
              </div>
            </div>

@@ -103,7 +103,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FFF9] font-sans selection:bg-[#16A34A] selection:text-white pb-20 pt-[88px]">
+    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-[#FF6321] selection:text-white pb-20">
       
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto px-6 mb-16 text-center">
@@ -112,11 +112,11 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
           Paste your resume below and find out in seconds if it will pass ATS screening. Get a detailed keyword analysis, formatting report, and exact fixes — no sign-up required.
         </p>
 
-        <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6 text-left border-l-4 border-[#16A34A] pl-4 bg-white p-4 rounded-r-xl shadow-sm">
+        <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6 text-left border-l-4 border-[#FF6321] pl-4 bg-white p-4 rounded-r-xl shadow-sm">
           Over 98% of Fortune 500 companies and 75% of all employers use Applicant Tracking Systems to automatically screen resumes before a human recruiter ever sees them. If your resume is not ATS-optimized, it gets rejected automatically — regardless of how qualified you are. Our free ATS resume checker analyzes your resume against the same criteria used by major ATS platforms including Workday, Greenhouse, Taleo, Lever, and iCIMS. You get an instant ATS compatibility score, a full keyword gap analysis, and a detailed list of formatting fixes — all in under 10 seconds, completely free.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-[#15803D]">
+        <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-[#EA580C]">
           <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> 100% Free — No Sign-Up Required</span>
           <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Results in Under 10 Seconds</span>
           <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Used by 500,000+ Job Seekers</span>
@@ -139,19 +139,19 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
         )}
 
         {analyzeState === 'idle' && (
-          <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-[#BBF7D0] overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-[#FED7AA] overflow-hidden">
             <div className="flex border-b border-gray-100">
               <button 
                 onClick={() => setActiveCheckTab(0)} 
-                className={`flex-1 py-4 font-bold text-sm ${activeCheckTab === 0 ? 'text-[#16A34A] border-b-2 border-[#16A34A]' : 'text-gray-500 hover:text-gray-700'}`}
+                className={`flex-1 py-4 font-bold text-sm ${activeCheckTab === 0 ? 'text-[#FF6321] border-b-2 border-[#FF6321]' : 'text-gray-500 hover:text-gray-700'}`}
               >
                 Basic ATS Check
               </button>
               <button 
                 onClick={() => setActiveCheckTab(1)} 
-                className={`flex-1 py-4 font-bold text-sm flex items-center justify-center gap-2 ${activeCheckTab === 1 ? 'text-[#16A34A] border-b-2 border-[#16A34A]' : 'text-gray-500 hover:text-gray-700'}`}
+                className={`flex-1 py-4 font-bold text-sm flex items-center justify-center gap-2 ${activeCheckTab === 1 ? 'text-[#FF6321] border-b-2 border-[#FF6321]' : 'text-gray-500 hover:text-gray-700'}`}
               >
-                Full ATS Check <span className="bg-[#16A34A] text-white text-[10px] px-2 py-0.5 rounded-full">Recommended</span>
+                Full ATS Check <span className="bg-[#FF6321] text-white text-[10px] px-2 py-0.5 rounded-full">Recommended</span>
               </button>
             </div>
             
@@ -161,14 +161,14 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                   value={resumeText}
                   onChange={(e) => setResumeText(e.target.value)}
                   placeholder="Paste your resume text here... Copy all text from your resume (Word or PDF) and paste it here. Include your work experience, skills, education, and contact information."
-                  className="w-full h-64 border border-[#BBF7D0] rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-[#16A34A] resize-none"
+                  className="w-full h-64 border border-[#FED7AA] rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-[#FF6321] resize-none"
                 />
                 <div className="absolute bottom-4 right-4 text-xs font-medium text-gray-400">
                   {resumeText.length} / 5000 characters
                 </div>
               </div>
               
-              <div className="relative flex flex-col items-center justify-center border-2 border-dashed border-[#16A34A]/30 rounded-xl py-6 bg-[#F0FDF4] hover:bg-[#F0FDF4]/80 transition-colors cursor-pointer mb-6">
+              <div className="relative flex flex-col items-center justify-center border-2 border-dashed border-[#FF6321]/30 rounded-xl py-6 bg-[#FFF7ED] hover:bg-[#FFF7ED]/80 transition-colors cursor-pointer mb-6">
                 <input 
                   type="file" 
                   accept=".pdf,.txt,.doc,.docx"
@@ -176,8 +176,8 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                   disabled={isUploading}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-wait"
                 />
-                <UploadCloud className="w-6 h-6 text-[#16A34A] mb-2" />
-                <span className="text-sm font-medium text-[#15803D]">Or upload your resume file</span>
+                <UploadCloud className="w-6 h-6 text-[#FF6321] mb-2" />
+                <span className="text-sm font-medium text-[#EA580C]">Or upload your resume file</span>
                 <span className="text-xs text-gray-500 mt-1">Accepts .txt, .docx, .pdf</span>
               </div>
 
@@ -185,21 +185,21 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                 <div className="relative mb-6">
                   <div className="flex items-center justify-center my-6">
                     <div className="border-t border-gray-200 flex-1"></div>
-                    <div className="w-8 h-8 rounded-full bg-[#16A34A] text-white flex items-center justify-center mx-4"><Plus className="w-4 h-4" /></div>
+                    <div className="w-8 h-8 rounded-full bg-[#FF6321] text-white flex items-center justify-center mx-4"><Plus className="w-4 h-4" /></div>
                     <div className="border-t border-gray-200 flex-1"></div>
                   </div>
                   <textarea 
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Paste the job description here... Copy the full job posting you are applying for and paste it here. The more complete the job description, the more accurate your keyword match score."
-                    className="w-full h-48 border border-[#BBF7D0] rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-[#16A34A] resize-none"
+                    className="w-full h-48 border border-[#FED7AA] rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-[#FF6321] resize-none"
                   />
                 </div>
               )}
 
               <button 
                 onClick={startAnalysis}
-                className="w-full py-4 bg-[#16A34A] text-white font-bold rounded-xl hover:bg-[#15803D] hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#FF6321] text-white font-bold rounded-xl hover:bg-[#EA580C] hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
               >
                 {activeCheckTab === 1 ? 'Run Full ATS Analysis' : 'Check My ATS Score'} <ArrowRight className="w-4 h-4" />
               </button>
@@ -211,11 +211,11 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
         )}
 
         {analyzeState === 'analyzing' && (
-          <div className="bg-white rounded-2xl shadow-sm border border-[#BBF7D0] p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
-             <div className="w-16 h-16 rounded-full border-4 border-[#F0FDF4] border-t-[#16A34A] animate-spin mb-6"></div>
+          <div className="bg-white rounded-2xl shadow-sm border border-[#FED7AA] p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
+             <div className="w-16 h-16 rounded-full border-4 border-[#FFF7ED] border-t-[#FF6321] animate-spin mb-6"></div>
              <h3 className="text-xl font-bold text-gray-900 mb-2">{loadingText}</h3>
              <div className="w-64 h-2 bg-gray-100 rounded-full mt-4 overflow-hidden">
-               <div className="h-full bg-[#16A34A] animate-[pulse_2s_ease-in-out_infinite]" style={{ width: '60%' }}></div>
+               <div className="h-full bg-[#FF6321] animate-[pulse_2s_ease-in-out_infinite]" style={{ width: '60%' }}></div>
              </div>
           </div>
         )}
@@ -244,24 +244,24 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                   <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
                     <div className="text-xs font-bold text-gray-500 mb-1">Keyword Match</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.keywordMatch >= 80 ? 'text-[#16A34A]' : atsResult.metrics?.keywordMatch >= 60 ? 'text-[#CA8A04]' : 'text-red-600'}`}>{atsResult.metrics?.keywordMatch || 0}%</div>
+                    <div className={`text-lg font-extrabold ${atsResult.metrics?.keywordMatch >= 80 ? 'text-[#FF6321]' : atsResult.metrics?.keywordMatch >= 60 ? 'text-[#CA8A04]' : 'text-red-600'}`}>{atsResult.metrics?.keywordMatch || 0}%</div>
                   </div>
                   <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
                     <div className="text-xs font-bold text-gray-500 mb-1">Format Score</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.formatScore >= 80 ? 'text-[#16A34A]' : 'text-[#CA8A04]'}`}>{atsResult.metrics?.formatScore || 0}%</div>
+                    <div className={`text-lg font-extrabold ${atsResult.metrics?.formatScore >= 80 ? 'text-[#FF6321]' : 'text-[#CA8A04]'}`}>{atsResult.metrics?.formatScore || 0}%</div>
                   </div>
                   <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
                     <div className="text-xs font-bold text-gray-500 mb-1">Content Score</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.contentScore >= 80 ? 'text-[#16A34A]' : 'text-blue-600'}`}>{atsResult.metrics?.contentScore || 0}%</div>
+                    <div className={`text-lg font-extrabold ${atsResult.metrics?.contentScore >= 80 ? 'text-[#FF6321]' : 'text-blue-600'}`}>{atsResult.metrics?.contentScore || 0}%</div>
                   </div>
                   <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
                     <div className="text-xs font-bold text-gray-500 mb-1">Readability</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.readability >= 80 ? 'text-[#16A34A]' : 'text-blue-600'}`}>{atsResult.metrics?.readability || 0}%</div>
+                    <div className={`text-lg font-extrabold ${atsResult.metrics?.readability >= 80 ? 'text-[#FF6321]' : 'text-blue-600'}`}>{atsResult.metrics?.readability || 0}%</div>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                  <button onClick={() => onNavigate(1)} className="px-6 py-2.5 bg-[#16A34A] hover:bg-[#15803D] text-white font-bold rounded-xl transition-all hover:scale-[1.02] flex items-center gap-2">Fix My Resume With AI <ArrowRight className="w-4 h-4" /></button>
-                  <button className="px-6 py-2.5 bg-white border border-[#16A34A] text-[#16A34A] font-bold rounded-xl hover:bg-[#F0FDF4] transition-colors flex items-center gap-2"><Download className="w-4 h-4" /> Download Full Report</button>
+                  <button onClick={() => onNavigate(1)} className="px-6 py-2.5 bg-[#FF6321] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all hover:scale-[1.02] flex items-center gap-2">Fix My Resume With AI <ArrowRight className="w-4 h-4" /></button>
+                  <button className="px-6 py-2.5 bg-white border border-[#FF6321] text-[#FF6321] font-bold rounded-xl hover:bg-[#FFF7ED] transition-colors flex items-center gap-2"><Download className="w-4 h-4" /> Download Full Report</button>
                   <button onClick={() => setAnalyzeState('idle')} className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><RefreshCw className="w-4 h-4" /></button>
                   <button className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><Share2 className="w-4 h-4" /></button>
                 </div>
@@ -270,13 +270,13 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
             )}
 
             {/* Results Tabs */}
-            <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-[#BBF7D0] overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-[#FED7AA] overflow-hidden">
                <div className="flex border-b border-gray-100 overflow-x-auto no-scrollbar">
                  {['Issues Found', 'Keyword Analysis', 'Formatting Report', 'Improvement Plan'].map((tab, i) => (
                    <button 
                      key={i}
                      onClick={() => setActiveResultTab(i)}
-                     className={`px-6 py-4 font-bold text-sm whitespace-nowrap ${activeResultTab === i ? 'text-[#16A34A] border-b-2 border-[#16A34A] bg-[#F0FDF4]/50' : 'text-gray-500 hover:text-gray-800'}`}
+                     className={`px-6 py-4 font-bold text-sm whitespace-nowrap ${activeResultTab === i ? 'text-[#FF6321] border-b-2 border-[#FF6321] bg-[#FFF7ED]/50' : 'text-gray-500 hover:text-gray-800'}`}
                    >
                      {tab}
                    </button>
@@ -311,11 +311,11 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                        </div>
                      </div>
                      <div>
-                       <h3 className="text-lg font-bold flex items-center gap-2 text-[#16A34A] mb-4"><CheckCircle2 className="w-5 h-5"/> Passed Checks</h3>
+                       <h3 className="text-lg font-bold flex items-center gap-2 text-[#FF6321] mb-4"><CheckCircle2 className="w-5 h-5"/> Passed Checks</h3>
                        <div className="grid md:grid-cols-2 gap-3">
                          {atsResult.issues?.passed?.length > 0 ? atsResult.issues.passed.map((t: string, i: number) => (
-                           <div key={i} className="bg-[#F0FDF4] border border-[#BBF7D0] p-3 rounded-xl flex items-start gap-2">
-                             <Check className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
+                           <div key={i} className="bg-[#FFF7ED] border border-[#FED7AA] p-3 rounded-xl flex items-start gap-2">
+                             <Check className="w-4 h-4 text-[#FF6321] shrink-0 mt-0.5" />
                              <span className="text-sm text-green-900 font-medium">{t}</span>
                            </div>
                          )) : <p className="text-sm text-gray-500">No checks passed.</p>}
@@ -329,10 +329,10 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                      <h3 className="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Keyword Gap Analysis — Job Description Match</h3>
                      <div className="grid md:grid-cols-2 gap-8 mb-12">
                        <div>
-                         <h4 className="font-bold text-[#16A34A] mb-4 flex items-center gap-2"><CheckCircle2 className="w-4 h-4"/> Found in Your Resume</h4>
+                         <h4 className="font-bold text-[#FF6321] mb-4 flex items-center gap-2"><CheckCircle2 className="w-4 h-4"/> Found in Your Resume</h4>
                          <ul className="space-y-3">
                            {atsResult.keywords?.found?.length > 0 ? atsResult.keywords.found.map((k: string, i: number)=>(
-                             <li key={i} className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg"><Check className="text-[#16A34A] w-4 h-4"/> {k}</li>
+                             <li key={i} className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 px-3 py-2 rounded-lg"><Check className="text-[#FF6321] w-4 h-4"/> {k}</li>
                            )) : <li className="text-sm text-gray-500">No keywords found.</li>}
                          </ul>
                        </div>
@@ -352,7 +352,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                        <h4 className="font-bold text-gray-900 mb-4">Suggested Keywords to Add:</h4>
                        <div className="flex flex-wrap gap-2">
                          {atsResult.keywords?.suggested?.map((t: string, i: number)=>(
-                           <span key={i} className="px-3 py-1 bg-[#F0FDF4] text-[#15803D] border border-[#BBF7D0] rounded-full text-sm font-semibold">{t}</span>
+                           <span key={i} className="px-3 py-1 bg-[#FFF7ED] text-[#EA580C] border border-[#FED7AA] rounded-full text-sm font-semibold">{t}</span>
                          ))}
                        </div>
                      </div>
@@ -376,7 +376,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                              <tr key={i} className="border-b border-gray-50 hover:bg-gray-50/50">
                                <td className="py-3 px-4 font-medium text-gray-800">{r.check}</td>
                                <td className="py-3 px-4">
-                                 {r.status==='pass'?<span className="inline-flex items-center gap-1 text-[#16A34A] font-bold"><Check className="w-3 h-3"/> Pass</span>:
+                                 {r.status==='pass'?<span className="inline-flex items-center gap-1 text-[#FF6321] font-bold"><Check className="w-3 h-3"/> Pass</span>:
                                   r.status==='warn'?<span className="inline-flex items-center gap-1 text-yellow-600 font-bold"><AlertTriangle className="w-3 h-3"/> Warn</span>:
                                   <span className="inline-flex items-center gap-1 text-red-600 font-bold"><XCircle className="w-3 h-3"/> Fail</span>}
                                </td>
@@ -398,14 +398,14 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                        <div className={`absolute left-0 top-0 bottom-0 w-1 ${plan.priority === 1 ? 'bg-red-500' : plan.priority === 2 ? 'bg-red-400' : 'bg-yellow-400'}`}></div>
                        <h4 className="font-bold text-gray-900 mb-1 flex items-center gap-2">Priority {plan.priority} — {plan.title} <span className="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded font-bold">Impact: {plan.impact}</span></h4>
                        <p className="text-sm text-gray-600 mb-3">{plan.description}</p>
-                       {plan.example && <p className="text-sm bg-gray-50 p-2 rounded border border-gray-100 mb-4 font-mono text-gray-500"><span className="text-gray-900 font-bold block mb-1 font-sans">Example:</span> <span className="text-[#16A34A]">{plan.example}</span></p>}
+                       {plan.example && <p className="text-sm bg-gray-50 p-2 rounded border border-gray-100 mb-4 font-mono text-gray-500"><span className="text-gray-900 font-bold block mb-1 font-sans">Example:</span> <span className="text-[#FF6321]">{plan.example}</span></p>}
                        <button onClick={() => onNavigate(1)} className="text-sm font-bold text-blue-600 hover:text-blue-800">→ {plan.action}</button>
                      </div>
                      ))}
 
-                     <div className="bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl p-6 text-center mt-8">
+                     <div className="bg-[#FFF7ED] border border-[#FED7AA] rounded-xl p-6 text-center mt-8">
                        <h4 className="font-bold text-gray-900 mb-2">Fix all of these issues automatically in 2 minutes</h4>
-                       <button onClick={() => onNavigate(1)} className="mt-2 px-6 py-3 bg-[#16A34A] text-white font-bold rounded-xl hover:bg-[#15803D] transition-colors inline-flex items-center gap-2">Rebuild My Resume With AI <ArrowRight className="w-4 h-4"/></button>
+                       <button onClick={() => onNavigate(1)} className="mt-2 px-6 py-3 bg-[#FF6321] text-white font-bold rounded-xl hover:bg-[#EA580C] transition-colors inline-flex items-center gap-2">Rebuild My Resume With AI <ArrowRight className="w-4 h-4"/></button>
                      </div>
                    </div>
                  )}
@@ -436,8 +436,8 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
              <p className="text-sm text-gray-600 leading-relaxed">A score between 70 and 84 means your resume is ATS-compatible and will pass automated screening for most job postings. However, you may still be outranked by candidates with higher keyword match scores. Improving from Good to Excellent typically requires adding missing job-specific keywords and strengthening achievement bullets with quantified results.</p>
           </div>
           <div className="bg-white border border-gray-200 p-6 rounded-2xl relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-20 h-20 bg-[#F0FDF4] rounded-bl-[60px] flex items-start justify-end p-3 px-4"><span className="text-[#15803D] font-bold text-base text-right">85-100</span></div>
-             <h3 className="font-bold text-[#16A34A] mb-3 text-lg">Excellent ATS Score</h3>
+             <div className="absolute top-0 right-0 w-20 h-20 bg-[#FFF7ED] rounded-bl-[60px] flex items-start justify-end p-3 px-4"><span className="text-[#EA580C] font-bold text-base text-right">85-100</span></div>
+             <h3 className="font-bold text-[#FF6321] mb-3 text-lg">Excellent ATS Score</h3>
              <p className="text-sm text-gray-600 leading-relaxed">A score of 85 or above means your resume is fully ATS-optimized and will rank highly in candidate searches. Recruiters using ATS filtering will see your resume near the top of results. Resumes in this range have strong keyword match, clean formatting, complete sections, and quantified achievements. This is the target range for every job application.</p>
           </div>
         </div>
@@ -454,7 +454,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
             {s:'Step 4', t:'Resume Ranked', d:'Resumes are ranked by ATS score and presented to recruiters in order from highest match to lowest. Recruiters typically review only the top 10-20% of applicants. If your resume ranks below this threshold it will never be seen by a human.'}
           ].map((s,i)=>(
             <div key={i} className="relative z-10 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-              <div className="bg-[#16A34A] text-white text-xs font-bold px-2 py-1 rounded inline-block mb-3">{s.s}</div>
+              <div className="bg-[#FF6321] text-white text-xs font-bold px-2 py-1 rounded inline-block mb-3">{s.s}</div>
               <h4 className="font-bold text-gray-900 mb-2 text-sm">{s.t}</h4>
               <p className="text-xs text-gray-600 leading-relaxed">{s.d}</p>
             </div>
@@ -472,7 +472,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
             {t:'iCIMS', d:'Used by large enterprises and staffing agencies. iCIMS scores resumes based on skills match, experience years, and education level. It is strict about skills section formatting and certification keywords.'},
             {t:'BambooHR', d:'Popular with small and mid-size businesses. BambooHR ATS is more flexible than enterprise systems but still filters on keyword match and basic formatting compliance.'}
           ].map((a,i)=>(
-            <div key={i} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:border-[#BBF7D0] transition-colors">
+            <div key={i} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:border-[#FED7AA] transition-colors">
               <h4 className="font-extrabold text-gray-900 mb-2 text-lg">{a.t}</h4>
               <p className="text-sm text-gray-600 leading-relaxed">{a.d}</p>
             </div>
@@ -504,7 +504,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
         <h2 className="text-3xl font-bold text-gray-900 mb-8">ATS Screening vs Human Review — Understanding the Two-Stage Process</h2>
         <div className="grid md:grid-cols-2 gap-8 mb-10">
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8">
-            <div className="text-xs font-bold tracking-widest text-[#15803D] uppercase mb-4">Stage 1</div>
+            <div className="text-xs font-bold tracking-widest text-[#EA580C] uppercase mb-4">Stage 1</div>
             <h3 className="font-extrabold text-2xl text-gray-900 mb-4">ATS Stage (automated)</h3>
             <p className="text-gray-600 leading-relaxed">The ATS stage happens in milliseconds. The system parses your resume, extracts keywords, scores keyword match against the job description, evaluates formatting compliance, and ranks you among all applicants. No human is involved. Your resume either passes this filter or disappears from the candidate pool permanently. The ATS does not care about your personality, potential, or context — only whether your resume matches its scoring criteria.</p>
           </div>
@@ -515,11 +515,11 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
           </div>
         </div>
         
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-20 bg-[#F0FDF4] py-8 rounded-2xl border border-[#BBF7D0]">
-          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#16A34A] mb-1">98%</div><div className="text-xs font-bold text-gray-600 uppercase">of Fortune 500 use ATS</div></div>
-          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#16A34A] mb-1">75%</div><div className="text-xs font-bold text-gray-600 uppercase">of resumes rejected by ATS</div></div>
-          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#16A34A] mb-1">10s</div><div className="text-xs font-bold text-gray-600 uppercase">for human first scan</div></div>
-          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#16A34A] mb-1">20%</div><div className="text-xs font-bold text-gray-600 uppercase">top scores get reviewed</div></div>
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-20 bg-[#FFF7ED] py-8 rounded-2xl border border-[#FED7AA]">
+          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#FF6321] mb-1">98%</div><div className="text-xs font-bold text-gray-600 uppercase">of Fortune 500 use ATS</div></div>
+          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#FF6321] mb-1">75%</div><div className="text-xs font-bold text-gray-600 uppercase">of resumes rejected by ATS</div></div>
+          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#FF6321] mb-1">10s</div><div className="text-xs font-bold text-gray-600 uppercase">for human first scan</div></div>
+          <div className="text-center px-4"><div className="text-3xl font-extrabold text-[#FF6321] mb-1">20%</div><div className="text-xs font-bold text-gray-600 uppercase">top scores get reviewed</div></div>
         </div>
 
         <h2 className="text-3xl font-bold text-gray-900 mb-2">Frequently Asked Questions About ATS Resume Checking</h2>
@@ -551,21 +551,21 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600"/> Formatting issue report</li>
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-600"/> Priority fix list</li>
             </ul>
-            <button onClick={() => window.scrollTo({top: 200, behavior: 'smooth'})} className="w-full py-4 bg-white border border-[#16A34A] text-[#16A34A] font-bold rounded-xl hover:bg-[#F0FDF4] transition-colors">Check My Resume Free →</button>
+            <button onClick={() => window.scrollTo({top: 200, behavior: 'smooth'})} className="w-full py-4 bg-white border border-[#FF6321] text-[#FF6321] font-bold rounded-xl hover:bg-[#FFF7ED] transition-colors">Check My Resume Free →</button>
           </div>
-          <div className="bg-[#16A34A] text-white text-center p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden">
+          <div className="bg-[#FF6321] text-white text-center p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-black/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
             <div className="relative z-10 w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 backdrop-blur-sm"><FileText className="w-8 h-8 text-white"/></div>
             <h3 className="font-extrabold text-2xl mb-3">AI Resume Builder</h3>
-            <p className="text-[#BBF7D0] text-sm mb-6 leading-relaxed">Once you know what is wrong, our AI resume builder fixes everything automatically. Paste any job description and get a fully ATS-optimized resume in 2 minutes — with all the right keywords.</p>
+            <p className="text-[#FED7AA] text-sm mb-6 leading-relaxed">Once you know what is wrong, our AI resume builder fixes everything automatically. Paste any job description and get a fully ATS-optimized resume in 2 minutes — with all the right keywords.</p>
             <ul className="text-sm text-white space-y-3 mb-8 text-left max-w-[240px] mx-auto">
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-white"/> ATS score 85+ guaranteed</li>
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-white"/> Keywords auto-matched to job</li>
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-white"/> Clean ATS-safe formatting</li>
               <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-white"/> Achievement bullets auto-written</li>
             </ul>
-            <button onClick={() => onNavigate(1)} className="w-full py-4 bg-white text-[#16A34A] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm">Build ATS Resume With AI →</button>
+            <button onClick={() => onNavigate(1)} className="w-full py-4 bg-white text-[#FF6321] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-sm">Build ATS Resume With AI →</button>
           </div>
         </div>
 
@@ -586,14 +586,14 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
           ))}
         </div>
 
-        <div className="bg-gradient-to-br from-[#16A34A] to-[#15803D] text-white rounded-3xl p-10 md:p-14 text-center shadow-xl">
+        <div className="bg-gradient-to-br from-[#FF6321] to-[#EA580C] text-white rounded-3xl p-10 md:p-14 text-center shadow-xl">
           <h2 className="text-3xl font-bold mb-4 leading-tight">Your Resume Deserves to Be Seen — Start With a Free ATS Check</h2>
-          <p className="text-[#BBF7D0] text-lg mb-8 max-w-2xl mx-auto leading-relaxed">Thousands of qualified candidates lose jobs every day because their resume never reaches a human recruiter. Run your free ATS check now and find out exactly what is stopping yours — then fix it with AI in 2 minutes.</p>
+          <p className="text-[#FED7AA] text-lg mb-8 max-w-2xl mx-auto leading-relaxed">Thousands of qualified candidates lose jobs every day because their resume never reaches a human recruiter. Run your free ATS check now and find out exactly what is stopping yours — then fix it with AI in 2 minutes.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-            <button onClick={() => window.scrollTo({top: 200, behavior: 'smooth'})} className="px-8 py-4 bg-white text-[#16A34A] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-lg flex items-center justify-center gap-2">Check My ATS Score Free <ArrowRight className="w-4 h-4"/></button>
+            <button onClick={() => window.scrollTo({top: 200, behavior: 'smooth'})} className="px-8 py-4 bg-white text-[#FF6321] font-bold rounded-xl hover:bg-gray-50 transition-colors shadow-lg flex items-center justify-center gap-2">Check My ATS Score Free <ArrowRight className="w-4 h-4"/></button>
             <button onClick={() => onNavigate(1)} className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-colors">Build ATS-Optimized Resume</button>
           </div>
-          <p className="text-[#BBF7D0] text-sm font-medium">No sign-up required. Instant results. Used by 500,000+ job seekers in 120+ countries.</p>
+          <p className="text-[#FED7AA] text-sm font-medium">No sign-up required. Instant results. Used by 500,000+ job seekers in 120+ countries.</p>
         </div>
       </div>
     </div>
@@ -603,10 +603,10 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
 function FAQ({ q, a }: { q: string, a: string, key?: any }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#16A34A]/30 transition-colors">
+    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-[#FF6321]/30 transition-colors">
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-6 text-left focus:outline-none">
         <span className="font-bold text-lg text-gray-900">{q}</span>
-        <div className={`transform transition-transform duration-300 ${open ? 'rotate-180 text-[#16A34A]' : 'text-gray-400'}`}>
+        <div className={`transform transition-transform duration-300 ${open ? 'rotate-180 text-[#FF6321]' : 'text-gray-400'}`}>
           <ChevronDown className="w-5 h-5" />
         </div>
       </button>

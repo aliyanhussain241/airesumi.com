@@ -183,9 +183,10 @@ function GlassInput({
       <input
         type={type} placeholder={placeholder} value={value}
         onChange={e => onChange(e.target.value)}
-        className="flex-1 bg-transparent text-[#1f2937] placeholder-gray-400 text-[15px] focus:outline-none"
+        className="flex-1 bg-transparent text-[#1f2937] dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-[15px] focus:outline-none"
       />
       {rightAction}
+
     </div>
   );
 }

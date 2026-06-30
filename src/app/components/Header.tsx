@@ -106,6 +106,19 @@ const GLASS_HEADER_STYLES = `
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
+  /* Keyboard focus rings */
+  .hdr-nav-link:focus-visible,
+  .hdr-tool-item:focus-visible,
+  .hdr-dropdown-footer a:focus-visible {
+    outline: 2px solid #EA580C;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  .hdr-tool-item:focus-visible {
+    background: rgba(234, 88, 12, 0.08);
+  }
+
+
 
   /* HORIZONTAL GRID */
   .hdr-dropdown-grid {

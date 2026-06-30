@@ -229,9 +229,9 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col liquid-bg text-[#0a0a0a] dark:text-orange-50 font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
+      <div className="app-shell min-h-dvh flex flex-col liquid-bg text-[#0a0a0a] dark:text-orange-50 font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
         <Header />
-        <main className="flex-1 min-h-[60vh]">
+        <main className="app-main flex-1 min-h-[60vh]">
           <Outlet />
         </main>
         <Footer />

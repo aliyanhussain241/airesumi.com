@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import rezumiLogo from "@/assets/ai-resumi.webp";
 
 export const Footer = () => (
-  <footer className="bg-white border-t border-gray-100 py-16 w-full print:hidden">
+  <footer className="site-footer bg-white border-t border-gray-100 py-16 w-full print:hidden">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-10 text-[#4b5563]">
       <div className="space-y-4 md:col-span-1">
         <div className="flex items-center">

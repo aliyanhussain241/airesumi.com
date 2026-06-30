@@ -363,11 +363,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   };
 
   const DropdownAnimation = {
-
-    initial: { opacity: 0, y: 8, scale: 0.96 },
-    animate: { opacity: 1, y: 0, scale: 1 },
-    exit:    { opacity: 0, y: 8, scale: 0.96 },
-    transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    initial: { opacity: 0, y: -6, scale: 0.97, "--hdr-blur": "0px", "--hdr-sat": "100%" } as any,
+    animate: { opacity: 1, y: 0, scale: 1, "--hdr-blur": "28px", "--hdr-sat": "180%" } as any,
+    exit:    { opacity: 0, y: -6, scale: 0.97, "--hdr-blur": "0px", "--hdr-sat": "100%" } as any,
+    transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   };
 
   return (

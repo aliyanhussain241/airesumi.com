@@ -7,7 +7,8 @@ export const Footer = () => (
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-5 gap-10 text-[#4b5563]">
       <div className="space-y-4 md:col-span-1">
         <div className="flex items-center">
-          <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="h-10 w-auto" />
+          <img src={rezumiLogo} alt="airesumi - AI Resume Builder" className="theme-logo-light h-10 w-auto" />
+          <img src={rezumiLogoWhite} alt="airesumi - AI Resume Builder" className="theme-logo-dark h-10 w-auto" />
         </div>
         <p className="text-[15px] leading-relaxed">
           The fastest, most effective way to secure your next role. Built with top recruiters and AI.

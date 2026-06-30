@@ -146,6 +146,11 @@ p { line-height: 1.65; }
 
 html.dark { color-scheme: dark; }
 
+.theme-logo-dark { display: none; }
+.theme-logo-light { display: block; }
+html.dark .theme-logo-dark { display: block; }
+html.dark .theme-logo-light { display: none; }
+
 /* Base page tone */
 .dark body { background: #0a0a0f; color: #f1f5f9; }
 

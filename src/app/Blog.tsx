@@ -556,7 +556,7 @@ const PublicBlog = ({ onAdminClick: _onAdminClick }: { onAdminClick: () => void 
   const fmtDate = (d?: string | null) => d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 
   if (active) return (
-    <div className="min-h-screen liquid-bg">
+    <div className="min-h-screen liquid-bg pt-[68px]">
       <div className="max-w-3xl mx-auto px-6 py-12 relative z-10">
         <button onClick={() => { setActive(null); navigate({ to: '/blog' }); }}
           className="liquid-pill inline-flex items-center gap-2 text-sm text-[#374151] hover:text-[#FF6321] mb-8 px-4 py-2 rounded-full">
@@ -589,7 +589,7 @@ const PublicBlog = ({ onAdminClick: _onAdminClick }: { onAdminClick: () => void 
   );
 
   return (
-    <div className="min-h-screen liquid-bg">
+    <div className="min-h-screen liquid-bg pt-[68px]">
       {/* ─── HERO ─── */}
       <section className="py-16 px-6 relative z-10">
         <div className="max-w-6xl mx-auto text-center">

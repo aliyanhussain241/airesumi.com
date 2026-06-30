@@ -256,7 +256,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const handleMenuKeyDown = (
     e: React.KeyboardEvent<HTMLDivElement>,
     close: () => void,
-    triggerRef: React.RefObject<HTMLButtonElement>,
+    triggerRef: React.RefObject<HTMLButtonElement | null>,
   ) => {
     const items = Array.from(
       e.currentTarget.querySelectorAll<HTMLElement>('[role="menuitem"]')

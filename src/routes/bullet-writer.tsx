@@ -32,7 +32,7 @@ function BulletWriter() {
   }, []);
 
   async function handleGenerate() {
-    if (!role.trim()) { setError("Role zaroor bharo"); return; }
+    if (!role.trim()) { setError("Please enter a role"); return; }
     setError(null);
     setLoading(true);
     const { data: { session } } = await supabase.auth.getSession();

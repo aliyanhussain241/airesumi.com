@@ -45,7 +45,7 @@ function ResignationLetterPage() {
 
   async function handleGenerate() {
     if (!yourName.trim() || !companyName.trim()) {
-      setError("Aapka naam aur company name zaroor bharo");
+      setError("Please enter your name and company name");
       return;
     }
     setError(null);

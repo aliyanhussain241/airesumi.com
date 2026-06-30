@@ -103,7 +103,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-[#FF6321] selection:text-white pb-20">
+    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
       
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto px-6 mb-16 text-center">

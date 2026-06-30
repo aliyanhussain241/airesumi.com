@@ -234,7 +234,7 @@ export function SalaryAnalyzer({ onNavigate }: { onNavigate: (step: any) => void
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => onNavigate(0)}>
             <div className="w-10 h-10 bg-[#FF6321] text-white rounded-xl flex items-center justify-center font-serif text-2xl font-bold">R</div>
-            <span className="text-xl font-bold text-gray-900">Rezumi</span>
+            <span className="text-xl font-bold text-gray-900">airesumi</span>
           </div>
           <div className="flex items-center gap-4">
             <button 

@@ -372,8 +372,8 @@ function LoginPage() {
               <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                 className={`flex items-start gap-2.5 rounded-2xl px-4 py-3 text-[13px] ${
                   message.type === "error"
-                    ? "bg-red-50/80 text-red-600 border border-red-200/60"
-                    : "bg-green-50/80 text-green-600 border border-green-200/60"
+                    ? "bg-red-50/80 dark:bg-red-950/40 text-red-600 dark:text-red-300 border border-red-200/60 dark:border-red-800/50"
+                    : "bg-green-50/80 dark:bg-green-950/40 text-green-600 dark:text-green-300 border border-green-200/60 dark:border-green-800/50"
                 }`}>
                 {message.type === "error"
                   ? <AlertCircle size={15} className="flex-shrink-0 mt-0.5" />
@@ -382,6 +382,7 @@ function LoginPage() {
               </motion.div>
             )}
           </AnimatePresence>
+
 
           {/* Submit */}
           <button type="submit" disabled={loading}

@@ -183,6 +183,22 @@
   clear: both;
 }
 
+.theme-logo-dark {
+  display: none;
+}
+
+.theme-logo-light {
+  display: block;
+}
+
+html.dark .theme-logo-dark {
+  display: block;
+}
+
+html.dark .theme-logo-light {
+  display: none;
+}
+
 /* ============================================================
    LIQUID GLASS DESIGN SYSTEM — iOS 26 inspired
    Applies globally across all pages

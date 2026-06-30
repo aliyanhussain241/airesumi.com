@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useNavigate, useLocation } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import type { User } from '@supabase/supabase-js';
 import {
   LayoutDashboard, FileText, PenSquare, Eye, Trash2,
-  LogOut, Plus, Save, X, Search, ChevronRight,
+  LogOut, Plus, Save, X, Search, ChevronRight, ChevronLeft,
   Image, Tag, Globe, Clock, CheckCircle, AlertCircle,
   BarChart2, BookOpen, Upload, Bold, Italic, List,
-  Link, Heading1, Heading2, Quote, Code, AlignLeft
+  Link, Heading1, Heading2, Quote, Code, AlignLeft,
+  TrendingUp, Calendar, Grid3x3, Rows3, ArrowRight, Sparkles, Mail, Flame
 } from 'lucide-react';
 
 type Post = {

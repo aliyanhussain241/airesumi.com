@@ -106,6 +106,19 @@ const GLASS_HEADER_STYLES = `
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
+  /* Keyboard focus rings */
+  .hdr-nav-link:focus-visible,
+  .hdr-tool-item:focus-visible,
+  .hdr-dropdown-footer a:focus-visible {
+    outline: 2px solid #EA580C;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  .hdr-tool-item:focus-visible {
+    background: rgba(234, 88, 12, 0.08);
+  }
+
+
 
   /* HORIZONTAL GRID */
   .hdr-dropdown-grid {
@@ -220,6 +233,71 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const navigate  = useNavigate();
   const resumeRef = useRef<HTMLDivElement>(null);
   const otherRef  = useRef<HTMLDivElement>(null);
+  const resumeBtnRef = useRef<HTMLButtonElement>(null);
+  const otherBtnRef  = useRef<HTMLButtonElement>(null);
+  const resumeMenuRef = useRef<HTMLDivElement>(null);
+  const otherMenuRef  = useRef<HTMLDivElement>(null);
+
+  // Focus first menuitem when a dropdown opens
+  useEffect(() => {
+    if (isResumeOpen) {
+      requestAnimationFrame(() => {
+        resumeMenuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+      });
+    }
+  }, [isResumeOpen]);
+  useEffect(() => {
+    if (isOtherOpen) {
+      requestAnimationFrame(() => {
+        otherMenuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
+      });
+    }
+  }, [isOtherOpen]);
+
+  // Global Escape: close open menu and return focus to trigger
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (isResumeOpen) { setIsResumeOpen(false); resumeBtnRef.current?.focus(); }
+      if (isOtherOpen)  { setIsOtherOpen(false);  otherBtnRef.current?.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isResumeOpen, isOtherOpen]);
+
+  // Roving keyboard handler for an open menu
+  const handleMenuKeyDown = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    close: () => void,
+    triggerRef: React.RefObject<HTMLButtonElement | null>,
+  ) => {
+    const items = Array.from(
+      e.currentTarget.querySelectorAll<HTMLElement>('[role="menuitem"]')
+    );
+    if (items.length === 0) return;
+    const idx = items.indexOf(document.activeElement as HTMLElement);
+    const focus = (i: number) => items[(i + items.length) % items.length]?.focus();
+    switch (e.key) {
+      case 'ArrowDown': e.preventDefault(); focus(idx + 1); break;
+      case 'ArrowUp':   e.preventDefault(); focus(idx - 1); break;
+      case 'Home':      e.preventDefault(); items[0]?.focus(); break;
+      case 'End':       e.preventDefault(); items[items.length - 1]?.focus(); break;
+      case 'Tab':       close(); break;
+      case 'Escape':    e.preventDefault(); close(); triggerRef.current?.focus(); break;
+    }
+  };
+
+  const handleTriggerKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    isOpen: boolean,
+    open: () => void,
+  ) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (!isOpen) open(); // useEffect focuses first item
+    }
+  };
+
 
   const isResumeActive = resumeTools.some(t => t.to === location.pathname);
   const isOtherActive  = otherTools.some(t => t.to === location.pathname);
@@ -268,6 +346,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
       <Link
         to={tool.to}
         onClick={onClose}
+        role="menuitem"
+        aria-current={active ? 'page' : undefined}
         className={`hdr-tool-item flex items-center gap-2.5 px-3 py-2.5 no-underline transition-colors group ${active ? 'active' : ''}`}
       >
         <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
@@ -282,6 +362,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   };
 
   const DropdownAnimation = {
+
     initial: { opacity: 0, y: 8, scale: 0.96 },
     animate: { opacity: 1, y: 0, scale: 1 },
     exit:    { opacity: 0, y: 8, scale: 0.96 },
@@ -327,16 +408,27 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             {/* ✅ Resume Tools — 2 column horizontal grid */}
             <div ref={resumeRef} className="relative">
               <button
+                ref={resumeBtnRef}
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={isResumeOpen}
+                aria-controls="hdr-menu-resume"
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
+                onKeyDown={(e) => handleTriggerKeyDown(e, isResumeOpen, () => { setIsResumeOpen(true); setIsOtherOpen(false); })}
                 className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 Resume Tools
-                <ChevronDown size={13} className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
                 {isResumeOpen && (
                   <motion.div
                     {...DropdownAnimation}
+                    ref={resumeMenuRef}
+                    id="hdr-menu-resume"
+                    role="menu"
+                    aria-label="Resume tools"
+                    onKeyDown={(e) => handleMenuKeyDown(e, () => setIsResumeOpen(false), resumeBtnRef)}
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[480px]"
                   >
@@ -344,7 +436,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
                         <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
-                        {/* ✅ 2 columns grid */}
                         <div className="hdr-dropdown-grid cols-2">
                           {resumeTools.map(tool => (
                             <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
@@ -353,7 +444,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
-                        <Link to="/resume" onClick={() => setIsResumeOpen(false)}
+                        <Link to="/resume" onClick={() => setIsResumeOpen(false)} role="menuitem"
                           className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
                           Start free →
                         </Link>
@@ -364,19 +455,31 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </AnimatePresence>
             </div>
 
+
             {/* ✅ Other Tools — 3 column horizontal grid */}
             <div ref={otherRef} className="relative">
               <button
+                ref={otherBtnRef}
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={isOtherOpen}
+                aria-controls="hdr-menu-other"
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
+                onKeyDown={(e) => handleTriggerKeyDown(e, isOtherOpen, () => { setIsOtherOpen(true); setIsResumeOpen(false); })}
                 className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 Other Tools
-                <ChevronDown size={13} className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
                 {isOtherOpen && (
                   <motion.div
                     {...DropdownAnimation}
+                    ref={otherMenuRef}
+                    id="hdr-menu-other"
+                    role="menu"
+                    aria-label="Other tools"
+                    onKeyDown={(e) => handleMenuKeyDown(e, () => setIsOtherOpen(false), otherBtnRef)}
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[600px]"
                   >
@@ -384,7 +487,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
                         <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Other Tools</p>
-                        {/* ✅ 3 columns grid */}
                         <div className="hdr-dropdown-grid cols-3">
                           {otherTools.map(tool => (
                             <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
@@ -393,7 +495,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[11px] text-[#9ca3af]">{otherTools.length} other tools</span>
-                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)}
+                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
                           className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
                           Explore →
                         </Link>
@@ -403,6 +505,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 )}
               </AnimatePresence>
             </div>
+
 
             <Link to="/examples"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>

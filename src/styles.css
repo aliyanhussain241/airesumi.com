@@ -411,3 +411,98 @@ select:focus {
   pointer-events: none;
   z-index: 0;
 }
+
+/* ============================================================
+   DARK MODE OVERRIDES — make hardcoded light styles readable
+   ============================================================ */
+html.dark body {
+  background: linear-gradient(135deg, #0b0b0f 0%, #111118 50%, #0a0a10 100%) !important;
+  color: #e5e7eb;
+}
+
+/* Neutralize the global light-glass overrides above */
+html.dark .bg-white {
+  background: rgba(24, 24, 32, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e5e7eb;
+}
+html.dark .bg-\[\#f9fafb\],
+html.dark .bg-\[\#f8fafc\],
+html.dark .bg-\[\#f5f5f4\],
+html.dark .bg-\[\#F9FAFB\],
+html.dark .bg-gray-50,
+html.dark .bg-gray-100,
+html.dark .bg-slate-50,
+html.dark .bg-slate-100 {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #e5e7eb;
+}
+html.dark .bg-\[\#1F2937\],
+html.dark .bg-\[\#374151\] { background: rgba(255,255,255,0.04) !important; }
+
+/* Inputs in dark mode */
+html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html.dark textarea,
+html.dark select {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f3f4f6 !important;
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder { color: rgba(229,231,235,0.45) !important; }
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(234, 88, 12, 0.5) !important;
+}
+
+/* Text color remap for hardcoded grays */
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700,
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700,
+html.dark .text-\[\#111827\],
+html.dark .text-\[\#1f2937\],
+html.dark .text-\[\#1F2937\],
+html.dark .text-\[\#374151\],
+html.dark .text-\[\#111\],
+html.dark .text-black { color: #f3f4f6 !important; }
+
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-slate-600,
+html.dark .text-slate-500,
+html.dark .text-\[\#4b5563\],
+html.dark .text-\[\#4B5563\],
+html.dark .text-\[\#6B7280\],
+html.dark .text-\[\#6b7280\] { color: #cbd5e1 !important; }
+
+html.dark .text-gray-400,
+html.dark .text-gray-300,
+html.dark .text-\[\#9CA3AF\],
+html.dark .text-\[\#9ca3af\],
+html.dark .text-\[\#D1D5DB\] { color: #94a3b8 !important; }
+
+/* Borders */
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300,
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-\[\#f3f4f6\],
+html.dark .border-\[\#e5e7eb\],
+html.dark .border-\[\#E5E7EB\] { border-color: rgba(255,255,255,0.08) !important; }
+
+/* Hover states using light grays */
+html.dark .hover\:bg-gray-50:hover,
+html.dark .hover\:bg-gray-100:hover,
+html.dark .hover\:bg-\[\#F9FAFB\]:hover,
+html.dark .hover\:bg-white:hover { background: rgba(255,255,255,0.08) !important; }
+
+/* Gradient text & dark gradients to bg in light mode that look bad in dark */
+html.dark .from-gray-900,
+html.dark .to-black { --tw-gradient-from: #1f2937 !important; --tw-gradient-to: #0b0b0f !important; }
+

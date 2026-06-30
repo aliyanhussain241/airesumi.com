@@ -68,7 +68,7 @@ function BlogPost() {
 
   if (loading) {
     return (
-      <div className="min-h-screen liquid-bg flex items-center justify-center">
+      <div className="min-h-screen liquid-bg flex items-center justify-center pt-[68px]">
         <div className="animate-spin w-10 h-10 border-4 border-[#FF6321] border-t-transparent rounded-full" />
       </div>
     );
@@ -76,7 +76,7 @@ function BlogPost() {
 
   if (notFound || !post) {
     return (
-      <div className="min-h-screen liquid-bg flex items-center justify-center px-6">
+      <div className="min-h-screen liquid-bg flex items-center justify-center px-6 pt-[68px]">
         <div className="text-center">
           <BookOpen size={56} className="text-[#FF6321]/30 mx-auto mb-4" />
           <h1 className="text-2xl font-black text-[#111827] mb-2">Post Not Found</h1>

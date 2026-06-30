@@ -322,7 +322,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
     window.addEventListener('scroll', handleScroll);
     
     // Inject SEO tags
-    document.title = "Resume Examples 2025 — 500+ Free Professional Resume Samples | Rezumi";
+    document.title = "Resume Examples 2025 — 500+ Free Professional Resume Samples | airesumi";
     const metaDesc = document.createElement('meta');
     metaDesc.name = "description";
     metaDesc.content = "Browse 500+ free resume examples and resume samples for every job title and industry in 2025. ATS-optimized, recruiter-approved resume templates that get interviews. Download free.";
@@ -380,7 +380,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer shrink-0" onClick={() => onNavigate(0)}>
             <div className="w-10 h-10 bg-[#EA580C] text-white rounded-xl flex items-center justify-center font-serif text-2xl font-bold">R</div>
-            <span className="text-xl font-bold text-gray-900 hidden sm:block">Rezumi</span>
+            <span className="text-xl font-bold text-gray-900 hidden sm:block">airesumi</span>
           </div>
           
           <div className="hidden lg:flex gap-6 items-center">

@@ -155,7 +155,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     <Star size={20} fill="#00b67a" className="text-[#00b67a]" />
                     <span className="font-bold text-[#1a202c]">Trustpilot</span>
                  </div>
-                 <span>4.4 out of 5 | 37,389 reviews</span>
+                 <span>100% free to start · No credit card required</span>
                </div>
              </div>
            </div>
@@ -279,7 +279,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <Wand2 size={32} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] text-center sm:text-left">
-              <span className="text-[#FF6321]">47,602</span> resumes created today
+              <span className="text-[#FF6321]">Built</span> for every job seeker, free
             </h2>
          </div>
 

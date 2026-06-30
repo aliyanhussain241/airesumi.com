@@ -395,16 +395,27 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             {/* ✅ Resume Tools — 2 column horizontal grid */}
             <div ref={resumeRef} className="relative">
               <button
+                ref={resumeBtnRef}
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={isResumeOpen}
+                aria-controls="hdr-menu-resume"
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
+                onKeyDown={(e) => handleTriggerKeyDown(e, isResumeOpen, () => { setIsResumeOpen(true); setIsOtherOpen(false); })}
                 className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 Resume Tools
-                <ChevronDown size={13} className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
                 {isResumeOpen && (
                   <motion.div
                     {...DropdownAnimation}
+                    ref={resumeMenuRef}
+                    id="hdr-menu-resume"
+                    role="menu"
+                    aria-label="Resume tools"
+                    onKeyDown={(e) => handleMenuKeyDown(e, () => setIsResumeOpen(false), resumeBtnRef)}
                     style={{ transformOrigin: 'top center' }}
                     className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[480px]"
                   >
@@ -412,7 +423,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     <div className="hdr-dropdown-content">
                       <div className="p-4">
                         <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">Resume Tools</p>
-                        {/* ✅ 2 columns grid */}
                         <div className="hdr-dropdown-grid cols-2">
                           {resumeTools.map(tool => (
                             <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
@@ -421,7 +431,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                       </div>
                       <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
                         <span className="text-[11px] text-[#9ca3af]">{resumeTools.length} resume tools</span>
-                        <Link to="/resume" onClick={() => setIsResumeOpen(false)}
+                        <Link to="/resume" onClick={() => setIsResumeOpen(false)} role="menuitem"
                           className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
                           Start free →
                         </Link>
@@ -431,6 +441,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 )}
               </AnimatePresence>
             </div>
+
 
             {/* ✅ Other Tools — 3 column horizontal grid */}
             <div ref={otherRef} className="relative">

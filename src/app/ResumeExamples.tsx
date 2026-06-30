@@ -572,15 +572,15 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
              <p className="text-gray-600 mb-10 max-w-3xl">Each industry section contains job-specific resume samples with the right keywords, format, and structure recruiters in that field expect to see.</p>
              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                {[
-                 { i: "Tech 💻", c: "84" }, { i: "Healthcare 🏥", c: "62" }, { i: "Finance 💰", c: "48" }, 
-                 { i: "Marketing 📣", c: "55" }, { i: "Design 🎨", c: "38" }, { i: "Education 📚", c: "41" }, 
-                 { i: "Engineering ⚙️", c: "52" }, { i: "Sales 📈", c: "44" }, { i: "Legal ⚖️", c: "29" }, 
-                 { i: "HR 👥", c: "33" }, { i: "Creative 🎭", c: "31" }, { i: "Construction 🏗️", c: "27" }
+                 { i: "Tech 💻", c: "84", v: "Technology" }, { i: "Healthcare 🏥", c: "62", v: "Healthcare" }, { i: "Finance 💰", c: "48", v: "Finance" }, 
+                 { i: "Marketing 📣", c: "55", v: "Marketing" }, { i: "Design 🎨", c: "38", v: "Design" }, { i: "Education 📚", c: "41", v: "Education" }, 
+                 { i: "Engineering ⚙️", c: "52", v: "Engineering" }, { i: "Sales 📈", c: "44", v: "Sales" }, { i: "Legal ⚖️", c: "29", v: "Legal" }, 
+                 { i: "HR 👥", c: "33", v: "HR" }, { i: "Creative 🎭", c: "31", v: "Creative" }, { i: "Construction 🏗️", c: "27", v: "General" }
                ].map((ind, j) => (
-                 <a key={j} href="#" className="p-4 border border-gray-200 rounded-xl hover:border-[#EA580C] hover:bg-[#FFF7ED] transition-all flex justify-between items-center group">
+                 <button key={j} onClick={() => { setActiveIndustry(ind.v); document.getElementById("examples-grid")?.scrollIntoView({ behavior: "smooth" }); }} className="p-4 border border-gray-200 rounded-xl hover:border-[#EA580C] hover:bg-[#FFF7ED] transition-all flex justify-between items-center group cursor-pointer bg-white w-full text-left">
                    <span className="font-bold text-gray-800 group-hover:text-[#C2410C]">{ind.i}</span>
                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full group-hover:bg-white">{ind.c} examples</span>
-                 </a>
+                 </button>
                ))}
              </div>
            </div>
@@ -590,15 +590,15 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
              <h2 className="text-3xl font-extrabold text-gray-900 mb-10">Resume Examples by Experience Level — From Student to Executive</h2>
              <div className="grid md:grid-cols-2 gap-6">
                 {[
-                  { t: "Entry Level & No Experience", d: "Writing a resume with no experience is one of the most common challenges job seekers face. Our entry-level resume examples and no-experience resume samples show you how to highlight education, internships, volunteer work, and transferable skills to impress recruiters even without a full work history.", l: "47 entry-level resume examples →" },
-                  { t: "Mid Level (3–7 Years)", d: "Mid-level professionals need resumes that show career progression, measurable achievements, and readiness for greater responsibility. Our mid-level resume examples demonstrate how to frame 3 to 7 years of experience in a way that positions you for your next promotion or company move.", l: "89 mid-level resume examples →" },
-                  { t: "Senior Level (8+ Years)", d: "Senior professionals need resumes that lead with impact, not just duties. Our senior resume examples show how to quantify decades of experience, demonstrate leadership, and compete for director, VP, and head-of-department roles in a competitive job market.", l: "72 senior resume examples →" },
-                  { t: "Career Change", d: "Switching industries requires a different resume strategy. Our career change resume examples use a transferable skills format that repositions your existing experience for a completely new field — without hiding your background or leaving unexplained gaps.", l: "34 career change resume examples →" }
+                  { t: "Entry Level & No Experience", d: "Writing a resume with no experience is one of the most common challenges job seekers face. Our entry-level resume examples and no-experience resume samples show you how to highlight education, internships, volunteer work, and transferable skills to impress recruiters even without a full work history.", l: "47 entry-level resume examples →", v: "Entry Level" },
+                  { t: "Mid Level (3–7 Years)", d: "Mid-level professionals need resumes that show career progression, measurable achievements, and readiness for greater responsibility. Our mid-level resume examples demonstrate how to frame 3 to 7 years of experience in a way that positions you for your next promotion or company move.", l: "89 mid-level resume examples →", v: "Mid Level" },
+                  { t: "Senior Level (8+ Years)", d: "Senior professionals need resumes that lead with impact, not just duties. Our senior resume examples show how to quantify decades of experience, demonstrate leadership, and compete for director, VP, and head-of-department roles in a competitive job market.", l: "72 senior resume examples →", v: "Senior" },
+                  { t: "Career Change", d: "Switching industries requires a different resume strategy. Our career change resume examples use a transferable skills format that repositions your existing experience for a completely new field — without hiding your background or leaving unexplained gaps.", l: "34 career change resume examples →", v: "Career Change" }
                 ].map((lvl, k) => (
                   <div key={k} className="bg-[#FFFBF7] p-8 rounded-2xl border border-[#FED7AA]">
                     <h3 className="text-xl font-bold text-gray-900 mb-3">{lvl.t}</h3>
                     <p className="text-gray-600 text-sm leading-relaxed mb-6">{lvl.d}</p>
-                    <a href="#" className="font-bold text-[#EA580C] hover:text-[#C2410C] transition-colors">{lvl.l}</a>
+                    <button onClick={() => { setActiveExp(lvl.v); document.getElementById("examples-grid")?.scrollIntoView({ behavior: "smooth" }); }} className="font-bold text-[#EA580C] hover:text-[#C2410C] transition-colors cursor-pointer bg-transparent border-none p-0">{lvl.l}</button>
                   </div>
                 ))}
              </div>

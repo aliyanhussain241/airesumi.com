@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useNavigate, useLocation } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import type { User } from '@supabase/supabase-js';
 import {
   LayoutDashboard, FileText, PenSquare, Eye, Trash2,
-  LogOut, Plus, Save, X, Search, ChevronRight,
+  LogOut, Plus, Save, X, Search, ChevronRight, ChevronLeft,
   Image, Tag, Globe, Clock, CheckCircle, AlertCircle,
   BarChart2, BookOpen, Upload, Bold, Italic, List,
-  Link, Heading1, Heading2, Quote, Code, AlignLeft
+  Link, Heading1, Heading2, Quote, Code, AlignLeft,
+  TrendingUp, Calendar, Grid3x3, Rows3, ArrowRight, Sparkles, Mail, Flame
 } from 'lucide-react';
 
 type Post = {
@@ -491,8 +492,10 @@ const AdminPanel = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
   );
 };
 
-// ─── PUBLIC BLOG ─────────────────────────────────────────────
-const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
+// ─── PUBLIC BLOG (Advanced) ──────────────────────────────────
+const POSTS_PER_PAGE = 9;
+
+const PublicBlog = ({ onAdminClick: _onAdminClick }: { onAdminClick: () => void }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [posts, setPosts] = useState<Post[]>([]);
@@ -500,6 +503,11 @@ const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'reading'>('newest');
+  const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [page, setPage] = useState(1);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<null | 'ok' | 'err'>(null);
 
   useEffect(() => {
     supabase.from('blog_posts').select('*').eq('published', true).order('published_at', { ascending: false })
@@ -512,12 +520,40 @@ const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
     if (location.pathname === '/blog') setActive(null);
   }, [location.pathname, posts]);
 
-  const categories = ['All', ...Array.from(new Set(posts.map(p => p.category).filter(Boolean) as string[]))];
-  const filtered = posts.filter(p => {
-    const matchCat = activeCategory === 'All' || p.category === activeCategory;
-    const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) || (p.excerpt || '').toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSearch;
-  });
+  useEffect(() => { setPage(1); }, [search, activeCategory, sortBy]);
+
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(posts.map(p => p.category).filter(Boolean) as string[]))],
+    [posts]
+  );
+
+  const tagCloud = useMemo(() => {
+    const counts: Record<string, number> = {};
+    posts.forEach(p => (p.tags || '').split(',').map(t => t.trim()).filter(Boolean).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 12);
+  }, [posts]);
+
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase();
+    let list = posts.filter(p => {
+      const matchCat = activeCategory === 'All' || p.category === activeCategory;
+      const matchSearch = !q || p.title.toLowerCase().includes(q) || (p.excerpt || '').toLowerCase().includes(q) || (p.tags || '').toLowerCase().includes(q);
+      return matchCat && matchSearch;
+    });
+    if (sortBy === 'oldest') list = [...list].sort((a, b) => new Date(a.published_at || a.created_at).getTime() - new Date(b.published_at || b.created_at).getTime());
+    if (sortBy === 'reading') list = [...list].sort((a, b) => (a.read_time || 0) - (b.read_time || 0));
+    return list;
+  }, [posts, search, activeCategory, sortBy]);
+
+  const featured = posts[0];
+  const trending = useMemo(() => posts.slice(1, 5), [posts]);
+
+  // Pagination — exclude featured from page 1 grid for variety
+  const gridSource = filtered.filter(p => !(page === 1 && activeCategory === 'All' && !search && featured && p.id === featured.id));
+  const totalPages = Math.max(1, Math.ceil(gridSource.length / POSTS_PER_PAGE));
+  const pageItems = gridSource.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
+
+  const fmtDate = (d?: string | null) => d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 
   if (active) return (
     <div className="min-h-screen liquid-bg">
@@ -534,7 +570,7 @@ const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               {active.category && <span className="text-xs bg-[#FFF7ED] text-[#FF6321] px-3 py-1 rounded-full font-medium">{active.category}</span>}
               {active.read_time && <span className="text-sm text-[#9CA3AF]">{active.read_time} min read</span>}
-              {active.published_at && <span className="text-sm text-[#9CA3AF]">{new Date(active.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>}
+              {active.published_at && <span className="text-sm text-[#9CA3AF]">{fmtDate(active.published_at)}</span>}
             </div>
             <h1 className="text-4xl font-black text-[#111827] mb-4 leading-tight">{active.title}</h1>
             {active.excerpt && <p className="text-xl text-[#6B7280] mb-8 leading-relaxed">{active.excerpt}</p>}
@@ -554,68 +590,285 @@ const PublicBlog = ({ onAdminClick }: { onAdminClick: () => void }) => {
 
   return (
     <div className="min-h-screen liquid-bg">
-      {/* Hero */}
-      <div className="py-16 px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-black text-[#111827] mb-4">Career <span className="text-[#FF6321]">Blog</span></h1>
-          <p className="text-xl text-[#6B7280] mb-8">Expert tips on resumes, interviews & landing your dream job</p>
-          <div className="relative max-w-md mx-auto liquid-card rounded-full">
+      {/* ─── HERO ─── */}
+      <section className="py-16 px-6 relative z-10">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF7ED] text-[#FF6321] text-xs font-semibold uppercase tracking-wider mb-5">
+            <Sparkles size={12}/> Career Insights
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#111827] mb-4 tracking-tight">
+            The <span className="text-[#FF6321]">Rezumi</span> Blog
+          </h1>
+          <p className="text-lg sm:text-xl text-[#6B7280] mb-8 max-w-2xl mx-auto">
+            Expert resume strategies, interview prep, and AI-powered career advice — fresh every week.
+          </p>
+          <div className="relative max-w-xl mx-auto liquid-card rounded-full">
             <span className="liquid-card-shine"/>
             <div className="liquid-card-content relative">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9CA3AF] z-10"/>
+              <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-[#9CA3AF] z-10"/>
               <input value={search} onChange={e => setSearch(e.target.value)}
-                placeholder="Search articles..."
-                className="w-full pl-12 pr-4 py-3 bg-transparent border-0 rounded-full text-sm text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none"/>
+                placeholder="Search articles, tags, topics…"
+                className="w-full pl-12 pr-4 py-4 bg-transparent border-0 rounded-full text-sm text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none"/>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-6xl mx-auto px-6 py-12 relative z-10">
-        {/* Categories */}
-        <div className="flex gap-2 flex-wrap mb-10">
-          {categories.map(cat => (
-            <button key={cat} onClick={() => setActiveCategory(cat)}
-              className={`liquid-pill px-4 py-2 rounded-full text-sm font-medium ${activeCategory === cat ? 'liquid-pill-active text-white' : 'text-[#374151]'}`}>
-              <span className="liquid-card-shine"/>
-              <span className="liquid-card-content">{cat}</span>
-            </button>
-          ))}
-        </div>
-
-        {loading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1,2,3].map(i => <div key={i} className="liquid-card rounded-3xl h-80 animate-pulse"><span className="liquid-card-shine"/></div>)}
+      {/* ─── FEATURED ─── */}
+      {featured && !search && activeCategory === 'All' && page === 1 && (
+        <section className="max-w-6xl mx-auto px-6 mb-12 relative z-10">
+          <div className="flex items-center gap-2 mb-4">
+            <Flame size={16} className="text-[#FF6321]"/>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#FF6321]">Featured</span>
           </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-20"><p className="text-lg text-[#9CA3AF]">No posts found</p></div>
-        ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(p => (
-              <article key={p.id}
-                onClick={() => { setActive(p); navigate({ to: '/blog/' + p.slug }); }}
-                className="liquid-card cursor-pointer rounded-3xl overflow-hidden group">
-                <span className="liquid-card-shine"/>
-                <div className="liquid-card-content">
-                  <div className="h-48 overflow-hidden">
-                    {p.cover_image_url
-                      ? <img src={p.cover_image_url} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-                      : <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center"><BookOpen size={40} className="text-[#FF6321]/40"/></div>}
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      {p.category && <span className="text-[10px] bg-[#FFF7ED] text-[#FF6321] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide">{p.category}</span>}
-                      {p.read_time && <span className="text-xs text-[#9CA3AF]">{p.read_time} min read</span>}
-                    </div>
-                    <h3 className="font-bold text-lg text-[#111827] mb-2 line-clamp-2 leading-snug">{p.title}</h3>
-                    {p.excerpt && <p className="text-sm text-[#6B7280] line-clamp-2 mb-4">{p.excerpt}</p>}
-                    {p.published_at && <p className="text-xs text-[#9CA3AF]">{new Date(p.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>}
-                  </div>
+          <article
+            onClick={() => { setActive(featured); navigate({ to: '/blog/' + featured.slug }); }}
+            className="liquid-card cursor-pointer rounded-3xl overflow-hidden group">
+            <span className="liquid-card-shine"/>
+            <div className="liquid-card-content grid md:grid-cols-2 gap-0">
+              <div className="h-64 md:h-auto overflow-hidden">
+                {featured.cover_image_url
+                  ? <img src={featured.cover_image_url} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                  : <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-300 flex items-center justify-center"><BookOpen size={64} className="text-[#FF6321]/40"/></div>}
+              </div>
+              <div className="p-8 md:p-10 flex flex-col justify-center">
+                <div className="flex items-center gap-2 mb-3 flex-wrap">
+                  {featured.category && <span className="text-[10px] bg-[#FFF7ED] text-[#FF6321] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">{featured.category}</span>}
+                  {featured.read_time && <span className="text-xs text-[#9CA3AF] inline-flex items-center gap-1"><Clock size={11}/> {featured.read_time} min read</span>}
+                  {featured.published_at && <span className="text-xs text-[#9CA3AF] inline-flex items-center gap-1"><Calendar size={11}/> {fmtDate(featured.published_at)}</span>}
                 </div>
-              </article>
+                <h2 className="font-black text-2xl md:text-3xl text-[#111827] mb-3 leading-tight group-hover:text-[#FF6321] transition-colors">{featured.title}</h2>
+                {featured.excerpt && <p className="text-[#6B7280] mb-5 line-clamp-3">{featured.excerpt}</p>}
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF6321]">
+                  Read article <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform"/>
+                </span>
+              </div>
+            </div>
+          </article>
+        </section>
+      )}
+
+      {/* ─── MAIN LAYOUT ─── */}
+      <div className="max-w-6xl mx-auto px-6 py-8 relative z-10 grid lg:grid-cols-[1fr_300px] gap-10">
+        {/* ── LEFT: Listing ── */}
+        <div>
+          {/* Categories */}
+          <div className="flex gap-2 flex-wrap mb-6 overflow-x-auto">
+            {categories.map(cat => (
+              <button key={cat} onClick={() => setActiveCategory(cat)}
+                className={`liquid-pill px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${activeCategory === cat ? 'liquid-pill-active text-white' : 'text-[#374151]'}`}>
+                <span className="liquid-card-shine"/>
+                <span className="liquid-card-content">{cat}</span>
+              </button>
             ))}
           </div>
-        )}
+
+          {/* Toolbar */}
+          <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+            <div className="text-sm text-[#6B7280]">
+              {loading ? 'Loading…' : <><span className="font-semibold text-[#111827]">{filtered.length}</span> article{filtered.length === 1 ? '' : 's'}{activeCategory !== 'All' && <> in <span className="font-semibold text-[#FF6321]">{activeCategory}</span></>}</>}
+            </div>
+            <div className="flex items-center gap-2">
+              <select value={sortBy} onChange={e => setSortBy(e.target.value as any)}
+                className="text-xs bg-white dark:bg-white/10 border border-[#E5E7EB] dark:border-white/15 rounded-full px-3 py-2 text-[#374151] focus:outline-none focus:ring-2 focus:ring-[#FF6321]/30">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="reading">Quickest read</option>
+              </select>
+              <div className="flex bg-white dark:bg-white/10 border border-[#E5E7EB] dark:border-white/15 rounded-full p-1">
+                <button onClick={() => setView('grid')} aria-label="Grid view"
+                  className={`p-1.5 rounded-full transition-all ${view === 'grid' ? 'bg-[#FF6321] text-white' : 'text-[#9CA3AF] hover:text-[#374151]'}`}>
+                  <Grid3x3 size={14}/>
+                </button>
+                <button onClick={() => setView('list')} aria-label="List view"
+                  className={`p-1.5 rounded-full transition-all ${view === 'list' ? 'bg-[#FF6321] text-white' : 'text-[#9CA3AF] hover:text-[#374151]'}`}>
+                  <Rows3 size={14}/>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Results */}
+          {loading ? (
+            <div className="grid sm:grid-cols-2 gap-6">
+              {[1,2,3,4].map(i => <div key={i} className="liquid-card rounded-3xl h-80 animate-pulse"><span className="liquid-card-shine"/></div>)}
+            </div>
+          ) : pageItems.length === 0 ? (
+            <div className="text-center py-20 liquid-card rounded-3xl">
+              <span className="liquid-card-shine"/>
+              <div className="liquid-card-content py-10">
+                <BookOpen size={48} className="text-[#FF6321]/30 mx-auto mb-4"/>
+                <p className="text-lg font-semibold text-[#111827] mb-1">No articles found</p>
+                <p className="text-sm text-[#9CA3AF]">Try a different search or category.</p>
+              </div>
+            </div>
+          ) : view === 'grid' ? (
+            <div className="grid sm:grid-cols-2 gap-6">
+              {pageItems.map(p => (
+                <article key={p.id}
+                  onClick={() => { setActive(p); navigate({ to: '/blog/' + p.slug }); }}
+                  className="liquid-card cursor-pointer rounded-3xl overflow-hidden group">
+                  <span className="liquid-card-shine"/>
+                  <div className="liquid-card-content">
+                    <div className="h-48 overflow-hidden">
+                      {p.cover_image_url
+                        ? <img src={p.cover_image_url} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                        : <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center"><BookOpen size={40} className="text-[#FF6321]/40"/></div>}
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 mb-3 flex-wrap">
+                        {p.category && <span className="text-[10px] bg-[#FFF7ED] text-[#FF6321] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide">{p.category}</span>}
+                        {p.read_time && <span className="text-xs text-[#9CA3AF] inline-flex items-center gap-1"><Clock size={10}/> {p.read_time} min</span>}
+                      </div>
+                      <h3 className="font-bold text-lg text-[#111827] mb-2 line-clamp-2 leading-snug group-hover:text-[#FF6321] transition-colors">{p.title}</h3>
+                      {p.excerpt && <p className="text-sm text-[#6B7280] line-clamp-2 mb-4">{p.excerpt}</p>}
+                      <div className="flex items-center justify-between">
+                        {p.published_at && <p className="text-xs text-[#9CA3AF]">{fmtDate(p.published_at)}</p>}
+                        <ArrowRight size={14} className="text-[#FF6321] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"/>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {pageItems.map(p => (
+                <article key={p.id}
+                  onClick={() => { setActive(p); navigate({ to: '/blog/' + p.slug }); }}
+                  className="liquid-card cursor-pointer rounded-2xl overflow-hidden group">
+                  <span className="liquid-card-shine"/>
+                  <div className="liquid-card-content flex gap-5 p-4">
+                    <div className="w-40 h-32 shrink-0 rounded-xl overflow-hidden">
+                      {p.cover_image_url
+                        ? <img src={p.cover_image_url} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                        : <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center"><BookOpen size={28} className="text-[#FF6321]/40"/></div>}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                        {p.category && <span className="text-[10px] bg-[#FFF7ED] text-[#FF6321] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide">{p.category}</span>}
+                        {p.read_time && <span className="text-xs text-[#9CA3AF] inline-flex items-center gap-1"><Clock size={10}/> {p.read_time} min</span>}
+                        {p.published_at && <span className="text-xs text-[#9CA3AF]">· {fmtDate(p.published_at)}</span>}
+                      </div>
+                      <h3 className="font-bold text-base text-[#111827] mb-1 line-clamp-2 group-hover:text-[#FF6321] transition-colors">{p.title}</h3>
+                      {p.excerpt && <p className="text-sm text-[#6B7280] line-clamp-2">{p.excerpt}</p>}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-10">
+              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+                className="liquid-pill p-2 rounded-full text-[#374151] disabled:opacity-40 disabled:cursor-not-allowed">
+                <span className="liquid-card-shine"/>
+                <span className="liquid-card-content"><ChevronLeft size={16}/></span>
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+                <button key={n} onClick={() => setPage(n)}
+                  className={`liquid-pill min-w-[36px] h-9 rounded-full text-sm font-semibold ${page === n ? 'liquid-pill-active text-white' : 'text-[#374151]'}`}>
+                  <span className="liquid-card-shine"/>
+                  <span className="liquid-card-content">{n}</span>
+                </button>
+              ))}
+              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
+                className="liquid-pill p-2 rounded-full text-[#374151] disabled:opacity-40 disabled:cursor-not-allowed">
+                <span className="liquid-card-shine"/>
+                <span className="liquid-card-content"><ChevronRight size={16}/></span>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* ── RIGHT: Sidebar ── */}
+        <aside className="space-y-6 lg:sticky lg:top-24 self-start">
+          {/* Trending */}
+          <div className="liquid-card rounded-3xl">
+            <span className="liquid-card-shine"/>
+            <div className="liquid-card-content p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <TrendingUp size={16} className="text-[#FF6321]"/>
+                <h3 className="font-bold text-sm uppercase tracking-wider text-[#111827]">Trending Now</h3>
+              </div>
+              <div className="space-y-4">
+                {trending.length === 0 && <p className="text-xs text-[#9CA3AF]">No posts yet.</p>}
+                {trending.map((p, i) => (
+                  <button key={p.id} onClick={() => { setActive(p); navigate({ to: '/blog/' + p.slug }); }}
+                    className="w-full text-left flex gap-3 group">
+                    <div className="text-2xl font-black text-[#FF6321]/30 group-hover:text-[#FF6321] transition-colors leading-none w-6">
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-[#111827] line-clamp-2 group-hover:text-[#FF6321] transition-colors leading-snug">{p.title}</p>
+                      {p.read_time && <p className="text-[11px] text-[#9CA3AF] mt-1 inline-flex items-center gap-1"><Clock size={10}/> {p.read_time} min</p>}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div className="liquid-card rounded-3xl overflow-hidden">
+            <span className="liquid-card-shine"/>
+            <div className="liquid-card-content p-6 bg-gradient-to-br from-[#FFF7ED]/60 to-orange-100/60">
+              <div className="w-10 h-10 rounded-xl bg-[#FF6321] text-white flex items-center justify-center mb-3">
+                <Mail size={18}/>
+              </div>
+              <h3 className="font-black text-lg text-[#111827] mb-1">Weekly career tips</h3>
+              <p className="text-sm text-[#6B7280] mb-4">Free resume + interview advice in your inbox. No spam.</p>
+              <form onSubmit={(e) => { e.preventDefault(); if (/^\S+@\S+\.\S+$/.test(newsletterEmail)) { setNewsletterStatus('ok'); setNewsletterEmail(''); } else { setNewsletterStatus('err'); } }}
+                className="space-y-2">
+                <input type="email" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)}
+                  placeholder="you@email.com" required
+                  className="w-full text-sm bg-white border border-[#E5E7EB] rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#FF6321]/30 focus:border-[#FF6321]"/>
+                <button type="submit" className="w-full bg-[#FF6321] hover:bg-orange-600 text-white text-sm font-semibold py-2.5 rounded-xl transition-all inline-flex items-center justify-center gap-2">
+                  Subscribe <ArrowRight size={14}/>
+                </button>
+                {newsletterStatus === 'ok' && <p className="text-xs text-green-600 inline-flex items-center gap-1"><CheckCircle size={12}/> Subscribed! Check your inbox.</p>}
+                {newsletterStatus === 'err' && <p className="text-xs text-red-500">Please enter a valid email.</p>}
+              </form>
+            </div>
+          </div>
+
+          {/* Tags */}
+          {tagCloud.length > 0 && (
+            <div className="liquid-card rounded-3xl">
+              <span className="liquid-card-shine"/>
+              <div className="liquid-card-content p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Tag size={16} className="text-[#FF6321]"/>
+                  <h3 className="font-bold text-sm uppercase tracking-wider text-[#111827]">Popular Tags</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {tagCloud.map(([tag, count]) => (
+                    <button key={tag} onClick={() => setSearch(tag)}
+                      className="text-xs bg-[#F3F4F6] hover:bg-[#FF6321] hover:text-white text-[#6B7280] px-3 py-1.5 rounded-full transition-all">
+                      #{tag} <span className="opacity-60">{count}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CTA */}
+          <div className="liquid-card rounded-3xl overflow-hidden">
+            <span className="liquid-card-shine"/>
+            <div className="liquid-card-content p-6 text-center">
+              <Sparkles size={28} className="text-[#FF6321] mx-auto mb-2"/>
+              <h3 className="font-black text-lg text-[#111827] mb-1">Build your resume</h3>
+              <p className="text-xs text-[#6B7280] mb-4">AI-powered, ATS-optimized in 60 seconds.</p>
+              <button onClick={() => navigate({ to: '/' })}
+                className="w-full bg-[#111827] hover:bg-[#FF6321] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">
+                Start free →
+              </button>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   );

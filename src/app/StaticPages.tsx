@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from '@tanstack/react-router';
 import { ChevronRight, MessageSquare, CreditCard, Handshake, ChevronDown, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Router-native Navbar — uses Link instead of onNavigate to fix tsr-split build errors
-const Navbar = ({ onNavigate }: { onNavigate?: (step: any) => void }) => {
+const Navbar = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -15,27 +13,27 @@ const Navbar = ({ onNavigate }: { onNavigate?: (step: any) => void }) => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-[0_1px_3px_rgba(37,99,235,0.10)] border-b border-[#FF6321]/20' : 'bg-transparent'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 cursor-pointer shrink-0 no-underline">
+        <div className="flex items-center gap-2 cursor-pointer shrink-0" onClick={() => onNavigate(0)}>
           <div className="w-10 h-10 bg-[#FF6321] text-white rounded-xl flex items-center justify-center font-serif text-2xl font-bold">R</div>
           <span className="text-xl font-bold text-gray-900 hidden sm:block">airesumi</span>
-        </Link>
-
+        </div>
+        
         <div className="hidden lg:flex gap-6 items-center">
-          <Link to="/resume" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">Resume Builder</Link>
-          <Link to="/examples" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">Resume Examples</Link>
-          <Link to="/ats-checker" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">ATS Checker</Link>
-          <Link to="/interview-prep" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">Interview Questions</Link>
+          <button onClick={() => onNavigate(1)} className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Resume Builder</button>
+          <button onClick={() => onNavigate(11)} className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Resume Examples</button>
+          <button className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">ATS Checker</button>
+          <button onClick={() => onNavigate(10)} className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Interview Questions</button>
         </div>
 
         <div className="flex items-center gap-4 shrink-0">
-          <Link
-            to="/resume"
-            className="px-4 py-2 sm:px-6 sm:py-2.5 bg-[#FF6321] hover:bg-orange-700 text-white font-medium rounded-full transition-all text-sm flex items-center justify-center gap-2 whitespace-nowrap no-underline"
+          <button 
+            onClick={() => onNavigate(1)}
+            className="px-4 py-2 sm:px-6 sm:py-2.5 bg-[#FF6321] hover:bg-orange-700 text-white font-medium rounded-full transition-all text-sm flex items-center justify-center gap-2 whitespace-nowrap"
           >
             <span className="hidden sm:inline">Build My Free Resume</span>
             <span className="sm:hidden">Build Resume</span>
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </button>
         </div>
       </div>
     </nav>
@@ -545,12 +543,7 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-gray-900 mb-3">Connect With Us</h3>
-            <ul className="text-sm text-gray-600 space-y-2">
-              <li>Twitter/X: @airesumi</li>
-              <li>LinkedIn: /company/resumeai</li>
-              <li>YouTube: /airesumi</li>
-              <li>Product Hunt: airesumi</li>
-            </ul>
+            <p className="text-sm text-gray-600">For all inquiries, use the contact form above or email us directly. We typically respond within 24 hours.</p>
           </div>
         </div>
 
@@ -619,22 +612,22 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
 
         <div className="prose prose-lg max-w-none text-gray-600 mb-20">
           <p>
-            Every year, over 250 million people apply for jobs and get rejected — not because they lack the skills, but because their resume failed an ATS scan before a human ever read it. airesumi exists to solve that problem. We combine artificial intelligence with expert resume writing knowledge to help every job seeker — from fresh graduates to senior executives — write a professional, ATS-optimized resume that gets interviews. Since launching, we have helped over 500,000 job seekers in 120+ countries build better resumes and land jobs at companies like Google, Amazon, Microsoft, and thousands of small businesses worldwide.
+            Millions of qualified candidates get rejected every year — not because they lack the skills, but because their resume fails an ATS scan before a human ever reads it. airesumi exists to solve that problem. We combine artificial intelligence with resume writing best practices to help every job seeker — from fresh graduates to senior executives — write a professional, ATS-optimized resume that gets interviews.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 border-y border-gray-200 py-12">
           <div className="text-center">
-            <div className="text-4xl font-extrabold text-[#FF6321] mb-2">500,000+</div>
-            <div className="font-bold text-gray-900">Resumes Created</div>
+            <div className="text-4xl font-extrabold text-[#FF6321] mb-2">Free</div>
+            <div className="font-bold text-gray-900">Core Resume Builder</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-extrabold text-[#FF6321] mb-2">120+</div>
-            <div className="font-bold text-gray-900">Countries Reached</div>
+            <div className="text-4xl font-extrabold text-[#FF6321] mb-2">~2 min</div>
+            <div className="font-bold text-gray-900">To Build a Resume</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-extrabold text-[#FF6321] mb-2">94%</div>
-            <div className="font-bold text-gray-900">Average ATS Score</div>
+            <div className="text-4xl font-extrabold text-[#FF6321] mb-2">AI</div>
+            <div className="font-bold text-gray-900">Powered ATS Optimization</div>
           </div>
         </div>
 
@@ -675,10 +668,10 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8">The Story Behind airesumi — Why We Built This</h2>
         <div className="bg-white p-8 md:p-12 rounded-3xl border border-gray-100 shadow-sm space-y-6 text-gray-600 text-lg mb-24">
           <p>airesumi started with a frustration that millions of job seekers share.</p>
-          <p>Our founder spent months applying for jobs after university, sending hundreds of carefully written resumes into what felt like a black hole. No callbacks. No interviews. Just silence. After finally getting help from a career coach — and paying $350 for a single resume rewrite — the callbacks started coming immediately. The resume content had not changed dramatically. The format had changed. The keywords had changed. The ATS compliance had changed.</p>
-          <p>That experience raised a simple but powerful question: why should getting your resume right cost $350? Why is this knowledge locked behind expensive career coaches and resume writing services that most people cannot afford?</p>
-          <p>We spent two years building an AI system that understands resume writing the way an expert career coach does — analyzing job descriptions, identifying the right keywords, structuring achievements for maximum impact, and formatting everything to pass ATS screening automatically.</p>
-          <p>Today, airesumi is used by job seekers in 120+ countries — from fresh graduates applying for their first internship to senior executives targeting C-suite positions. Every resume we help create reflects our core belief: the right resume should not be a privilege. It should be a right.</p>
+          <p>Our founder spent months applying for jobs after university, sending carefully written resumes into what felt like a black hole. No callbacks. No interviews. Just silence. After finally getting help from a career coach, the callbacks started coming. The resume content had not changed dramatically — the format, keywords, and ATS compliance had.</p>
+          <p>That experience raised a simple but powerful question: why should getting your resume right require an expensive career coach? Why is this knowledge locked behind services most people cannot afford?</p>
+          <p>We built an AI system that understands resume writing the way an expert career coach does — analyzing job descriptions, identifying the right keywords, structuring achievements for maximum impact, and formatting everything to pass ATS screening automatically.</p>
+          <p>airesumi is built for every job seeker — from fresh graduates applying for their first internship to senior executives targeting C-suite positions. Every resume we help create reflects our core belief: the right resume should not be a privilege. It should be accessible to everyone.</p>
         </div>
 
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Our AI Resume Tools — Everything You Need to Land Your Next Job</h2>
@@ -732,13 +725,13 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           ))}
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">airesumi in the News</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">Why Job Seekers Choose airesumi</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
           {[
-            "Featured in Forbes — Best AI Career Tools of 2025",
-            "Product Hunt — #1 Product of the Day",
-            "TechCrunch — Top 10 AI Startups to Watch",
-            "G2 — Highest Rated Resume Builder 2025"
+            "100% Free to Start — No Credit Card Required",
+            "AI-Powered ATS Optimization",
+            "Built by Career & Recruiting Experts",
+            "No Sign-Up Required to Build Your First Resume"
           ].map((n, i) => (
             <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm font-medium text-gray-800 text-center">
               {n}
@@ -746,12 +739,12 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           ))}
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Trusted by 500,000+ Job Seekers Worldwide</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Built for Every Stage of Your Career</h2>
         <div className="grid md:grid-cols-3 gap-6 mb-24">
           {[
-            { q: "I applied to 40 jobs with my old resume and heard nothing. I rebuilt it with airesumi in 10 minutes and got 3 interview calls in the first week. The ATS score feature showed me exactly what was wrong.", a: "James K.", r: "Software Engineer hired at Amazon" },
-            { q: "As a career changer with no direct experience in marketing, I was struggling to frame my skills. airesumi helped me write a resume that made my background look relevant. I landed my first marketing role within 6 weeks.", a: "Priya S.", r: "Career Changer → Marketing Manager" },
-            { q: "I am a nurse who had not updated my resume in 8 years. airesumi built me a completely modern, ATS-optimized resume in minutes. I got called for 4 interviews in 2 weeks.", a: "Lisa M.", r: "Registered Nurse, Houston" }
+            { q: "Whether you're applying to your first job or your fifteenth, our AI tailors your resume to the exact role you want — highlighting the experience, skills, and achievements that matter most.", a: "For Every Job Seeker", r: "Entry-level to executive" },
+            { q: "Switching careers shouldn't mean starting from scratch. Our AI identifies your transferable skills and reframes your experience for the industry you're moving into.", a: "For Career Changers", r: "New industry, same expertise" },
+            { q: "Every resume is automatically checked against real ATS criteria — keyword matching, formatting, and structure — so your application reaches a human recruiter, not the rejection pile.", a: "ATS-First Approach", r: "Built to pass automated screening" }
           ].map((t, i) => (
             <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
               <p className="text-gray-600 italic mb-6 flex-1">"{t.q}"</p>
@@ -765,9 +758,9 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
 
         <div className="bg-[#FF6321] text-white rounded-3xl p-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Write a Resume That Actually Gets Interviews?</h2>
-          <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">Join 500,000+ job seekers who have used airesumi to build ATS-optimized resumes, land more interviews, and get hired faster. It takes 2 minutes. It is free to start.</p>
+          <p className="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">Build ATS-optimized resumes, land more interviews, and get hired faster — powered by AI. It takes 2 minutes. It is free to start.</p>
           <button onClick={() => onNavigate(1)} className="bg-white text-[#FF6321] px-8 py-4 rounded-full font-bold hover:bg-gray-50 transition-colors shadow-lg">Build My Free Resume Now →</button>
-          <p className="text-orange-200 text-sm mt-4 font-medium">No credit card required. ATS score shown instantly. Used in 120+ countries.</p>
+          <p className="text-orange-200 text-sm mt-4 font-medium">No credit card required. ATS score shown instantly.</p>
         </div>
       </div>
     </div>

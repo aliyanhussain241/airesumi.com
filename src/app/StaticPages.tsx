@@ -240,11 +240,10 @@ export const TermsOfService = ({ onNavigate: _onNavigate }: { onNavigate: (step:
             </p>
           </div>
 
-        </div>
-      </div>
-    </div>
+    </LegalPageShell>
   );
 };
+
 
 export const PrivacyPolicy = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   const scrollTo = (id: string) => {

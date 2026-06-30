@@ -333,6 +333,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
       <Link
         to={tool.to}
         onClick={onClose}
+        role="menuitem"
+        aria-current={active ? 'page' : undefined}
         className={`hdr-tool-item flex items-center gap-2.5 px-3 py-2.5 no-underline transition-colors group ${active ? 'active' : ''}`}
       >
         <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
@@ -347,6 +349,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   };
 
   const DropdownAnimation = {
+
     initial: { opacity: 0, y: 8, scale: 0.96 },
     animate: { opacity: 1, y: 0, scale: 1 },
     exit:    { opacity: 0, y: 8, scale: 0.96 },

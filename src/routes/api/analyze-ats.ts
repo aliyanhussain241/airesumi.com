@@ -54,7 +54,7 @@ Provide analysis in EXACTLY this JSON structure:
   "improvementPlan": [{ "priority": 1, "title": "", "impact": "", "description": "", "example": "", "action": "" }]
 }`;
 
-          const text = await callAIGateway({
+          const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [
               { role: "system", content: systemInstruction },
               { role: "user", content: prompt },

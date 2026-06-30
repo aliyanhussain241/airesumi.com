@@ -44,7 +44,7 @@ Rules:
 
 Return ONLY the letter text. Start with "Dear ${managerName || "Hiring Manager"},"`;
 
-          const response = await callAIGateway({
+          const response = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             temperature: 0.6,
           });

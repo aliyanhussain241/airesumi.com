@@ -40,11 +40,18 @@ function partsFromContent(content: AIMessage["content"]): GeminiPart[] {
   return parts;
 }
 
+const LANG_NAMES: Record<string, string> = {
+  en: "English", es: "Spanish", fr: "French", de: "German", pt: "Portuguese",
+  ar: "Arabic", hi: "Hindi", zh: "Simplified Chinese", ja: "Japanese", ru: "Russian",
+};
+
 export async function callAIGateway(opts: {
   messages: AIMessage[];
   model?: string;
   temperature?: number;
   json?: boolean;
+  /** Two-letter language code; the model will be instructed to respond in this language. */
+  language?: string;
 }): Promise<string> {
   const apiKey = (globalThis as any).GEMINI_API_KEY ?? process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY missing");
@@ -54,6 +61,16 @@ export async function callAIGateway(opts: {
   // Collect system instructions; merge consecutive non-system messages into Gemini "contents".
   const systemTexts: string[] = [];
   const contents: { role: "user" | "model"; parts: GeminiPart[] }[] = [];
+
+  // If a language was provided, add a top-level system instruction so the model
+  // responds in that language. Keep JSON keys in English when json mode is on.
+  if (opts.language && opts.language !== "en") {
+    const langName = LANG_NAMES[opts.language] || opts.language;
+    const note = opts.json
+      ? `Write all human-readable content (summaries, bullets, descriptions, narrative text) in ${langName}. Keep JSON property/field names in English exactly as specified.`
+      : `Respond in ${langName}.`;
+    systemTexts.push(note);
+  }
 
   for (const msg of opts.messages) {
     if (msg.role === "system") {
@@ -68,6 +85,7 @@ export async function callAIGateway(opts: {
       parts: partsFromContent(msg.content),
     });
   }
+
 
   const body: any = {
     contents,

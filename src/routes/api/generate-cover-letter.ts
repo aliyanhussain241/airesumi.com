@@ -57,7 +57,7 @@ Respond strictly with JSON:
   }
 }`;
 
-          const text = await callAIGateway({
+          const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [
               { role: "system", content: systemInstruction },
               { role: "user", content: prompt },

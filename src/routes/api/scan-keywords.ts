@@ -43,7 +43,7 @@ Return ONLY valid JSON, no markdown:
   ]
 }`;
 
-          const response = await callAIGateway({
+          const response = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             json: true,
             temperature: 0.2,

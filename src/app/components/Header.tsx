@@ -27,54 +27,68 @@ const GLASS_HEADER_STYLES = `
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
 
-  /* HEAVY GAUSSIAN BLUR + LIQUID GLASS DROPDOWN */
+  /* iOS 26 LIQUID GLASS DROPDOWN — translucent, distorted, shiny */
   .hdr-dropdown {
     position: absolute;
     isolation: isolate;
-    background: transparent;
-    border-radius: 1.5rem;
+    border-radius: 1.75rem;
     overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 6px 6px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(0, 0, 0, 0.1);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 2.2);
-    backdrop-filter: blur(80px) saturate(180%);
-    -webkit-backdrop-filter: blur(80px) saturate(180%);
-    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.18);
   }
 
   :global(html.dark) .hdr-dropdown {
-    background: rgba(17, 17, 23, 0.92);
+    background: rgba(20, 20, 28, 0.28);
   }
 
+  /* Distortion layer */
   .hdr-dropdown::before {
     content: "";
     position: absolute;
-    inset: -20px;
+    inset: 0;
     z-index: 0;
-    filter: url(#glass-distortion);
-    opacity: 0.3;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    filter: url(#glass-distortion) saturate(120%) brightness(1.15);
+    isolation: isolate;
     pointer-events: none;
   }
 
+  /* Subtle tint layer */
   .hdr-dropdown::after {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
     pointer-events: none;
   }
 
   :global(html.dark) .hdr-dropdown::after {
-    background: rgba(17, 17, 23, 0.6);
+    background: rgba(20, 20, 28, 0.25);
   }
 
+  /* Glossy shine highlight */
   .hdr-dropdown > .hdr-dropdown-shine {
     position: absolute;
     inset: 0;
     z-index: 2;
     border-radius: inherit;
-    box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.8), inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+    box-shadow:
+      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.75),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.4);
     pointer-events: none;
+  }
+
+  :global(html.dark) .hdr-dropdown > .hdr-dropdown-shine {
+    box-shadow:
+      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.18),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.08);
   }
 
   .hdr-dropdown > .hdr-dropdown-content {
@@ -83,9 +97,15 @@ const GLASS_HEADER_STYLES = `
   }
 
   .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
   }
+
+  :global(html.dark) .hdr-dropdown-footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
 
   /* HORIZONTAL GRID */
   .hdr-dropdown-grid {

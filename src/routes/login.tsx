@@ -99,7 +99,58 @@ const GLASS_STYLES = `
     -webkit-text-fill-color: #1f2937 !important;
     transition: background-color 5000s ease-in-out 0s !important;
   }
+
+  /* ── DARK MODE ──────────────────────────────────────────────────── */
+  html.dark .glass-card {
+    background: rgba(20,20,28,0.55);
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.5),
+      0 2px 8px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      inset 0 -1px 0 rgba(0,0,0,0.4);
+  }
+  html.dark .glass-input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 2px 8px rgba(0,0,0,0.3);
+  }
+  html.dark .glass-input:focus-within {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(251,146,60,0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 0 0 3px rgba(251,146,60,0.18);
+  }
+  html.dark .glass-input input {
+    color: #f3f4f6 !important;
+  }
+  html.dark .glass-input input::placeholder {
+    color: #9ca3af;
+  }
+  html.dark .glass-btn-outline {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #f3f4f6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  html.dark .glass-btn-outline:hover {
+    background: rgba(255,255,255,0.10);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  html.dark .glass-tab-active {
+    background: rgba(255,255,255,0.10);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  html.dark input:-webkit-autofill,
+  html.dark input:-webkit-autofill:hover,
+  html.dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f3f4f6 !important;
+  }
 `;
+
 
 // ── BACKGROUND BLOBS ─────────────────────────────────────────────────────────
 function LiquidBackground() {

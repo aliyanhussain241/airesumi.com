@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { FileText, Sparkles, Copy, Check, RefreshCw, AlertCircle, Download, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import jsPDF from "jspdf";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { RESIGNATION_CONTENT } from "../app/components/toolContent";
 
 const TONES = [
   { id: "Professional", desc: "Formal, corporate" },
@@ -266,5 +268,5 @@ export const Route = createFileRoute("/resignation-letter")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resignation-letter" }],
   }),
-  component: ResignationLetterPage,
+  component: () => (<><ResignationLetterPage /><ToolContentSection {...RESIGNATION_CONTENT} /></>),
 });

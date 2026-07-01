@@ -6,6 +6,8 @@ import {
   User, Briefcase, Tag, Zap, ArrowRight, AlertCircle, RefreshCw
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { LINKEDIN_CONTENT } from "../app/components/toolContent";
 import { ResumeData, UserData } from "../app/lib/types";
 
 interface LinkedInBio {
@@ -391,5 +393,5 @@ export const Route = createFileRoute("/linkedin-bio")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/linkedin-bio" }],
   }),
-  component: LinkedInBioGenerator,
+  component: () => (<><LinkedInBioGenerator /><ToolContentSection {...LINKEDIN_CONTENT} /></>),
 });

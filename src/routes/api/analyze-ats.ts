@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
-import { createClient } from "@supabase/supabase-js";
+import { requireAuth } from "@/lib/auth";
+import { checkUsage } from "@/lib/usage";
 
 export const Route = createFileRoute("/api/analyze-ats")({
   server: {
@@ -8,18 +9,26 @@ export const Route = createFileRoute("/api/analyze-ats")({
       POST: async ({ request }) => {
         try {
           // ✅ AUTH CHECK
-          const authHeader = request.headers.get("Authorization");
-          if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return new Response(JSON.stringify({ error: "Unauthorized. Please log in." }), { status: 401 });
+          let user: any;
+          let supabase: any;
+
+          try {
+            ({ user, supabase } = await requireAuth(request));
+          } catch (err: any) {
+            return new Response(
+              JSON.stringify({ error: err.message }),
+              { status: 401 }
+            );
           }
-          const token = authHeader.replace("Bearer ", "");
-         const supabase = createClient(
-  (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL)!,
-  (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY)!
-);
-          const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-          if (authError || !user) {
-            return new Response(JSON.stringify({ error: "Invalid or expired session. Please log in again." }), { status: 401 });
+
+          // ✅ USAGE CHECK (daily limit)
+          try {
+            await checkUsage(supabase, user.id, "ats");
+          } catch (err: any) {
+            return new Response(
+              JSON.stringify({ error: err.message }),
+              { status: 429 }
+            );
           }
 
           const { resumeText, jobDescription } = (await request.json()) as any;
@@ -54,7 +63,8 @@ Provide analysis in EXACTLY this JSON structure:
   "improvementPlan": [{ "priority": 1, "title": "", "impact": "", "description": "", "example": "", "action": "" }]
 }`;
 
-          const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
+          const text = await callAIGateway({
+            language: request.headers.get("x-user-language") || undefined,
             messages: [
               { role: "system", content: systemInstruction },
               { role: "user", content: prompt },
@@ -62,7 +72,9 @@ Provide analysis in EXACTLY this JSON structure:
             temperature: 0.2,
             json: true,
           });
+
           return new Response(JSON.stringify(safeJSON(text)), { headers: { "Content-Type": "application/json" } });
+
         } catch (e: any) {
           return new Response(JSON.stringify({ error: e?.message || "Failed to analyze ATS" }), { status: 500 });
         }

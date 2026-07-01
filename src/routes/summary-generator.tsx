@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { List, Sparkles, Copy, Check, RefreshCw, AlertCircle, ChevronDown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { SUMMARY_CONTENT } from "../app/components/toolContent";
 
 const TONES = ["Professional", "Confident", "Conversational", "Creative"];
 

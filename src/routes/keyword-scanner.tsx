@@ -184,5 +184,5 @@ export const Route = createFileRoute("/keyword-scanner")({
       { name: "description", content: "See which keywords your resume is missing and boost your ATS match score." },
     ],
   }),
-  component: KeywordScanner,
+  component: () => (<><KeywordScanner /><ToolContentSection {...KEYWORD_CONTENT} /></>),
 });

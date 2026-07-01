@@ -230,14 +230,15 @@ function PostRow({ post, onEdit, onToggle, onDelete }: {
           {post.published ? "Live" : "Draft"}
         </span>
         <button onClick={onToggle} title={post.published ? "Unpublish" : "Publish"}
+          aria-label={post.published ? "Unpublish post" : "Publish post"}
           className="p-2 rounded-xl hover:bg-orange-50 text-gray-400 hover:text-[#EA580C] transition-colors cursor-pointer">
           {post.published ? <EyeOff size={15} /> : <Eye size={15} />}
         </button>
-        <button onClick={onEdit}
+        <button onClick={onEdit} aria-label="Edit post"
           className="p-2 rounded-xl hover:bg-orange-50 text-gray-400 hover:text-[#EA580C] transition-colors cursor-pointer">
           <Edit3 size={15} />
         </button>
-        <button onClick={onDelete}
+        <button onClick={onDelete} aria-label="Delete post"
           className="p-2 rounded-xl hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors cursor-pointer">
           <Trash2 size={15} />
         </button>

@@ -262,8 +262,8 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                 <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                   <button onClick={() => onNavigate(1)} className="px-6 py-2.5 bg-[#FF6321] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all hover:scale-[1.02] flex items-center gap-2">Fix My Resume With AI <ArrowRight className="w-4 h-4" /></button>
                   <button className="px-6 py-2.5 bg-white border border-[#FF6321] text-[#FF6321] font-bold rounded-xl hover:bg-[#FFF7ED] transition-colors flex items-center gap-2"><Download className="w-4 h-4" /> Download Full Report</button>
-                  <button onClick={() => setAnalyzeState('idle')} className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><RefreshCw className="w-4 h-4" /></button>
-                  <button className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><Share2 className="w-4 h-4" /></button>
+                  <button onClick={() => setAnalyzeState('idle')} aria-label="Reset analysis" className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><RefreshCw className="w-4 h-4" /></button>
+                  <button aria-label="Share report" className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><Share2 className="w-4 h-4" /></button>
                 </div>
               </div>
             </div>

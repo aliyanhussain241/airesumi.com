@@ -302,6 +302,7 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
             >
               <button
                 onClick={() => setPreviewId(null)}
+                aria-label="Close preview"
                 className="absolute top-4 right-4 w-8 h-8 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center text-foreground"
               >
                 <X size={16} />

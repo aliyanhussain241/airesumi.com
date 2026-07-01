@@ -262,6 +262,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen]   = useState(false);
+  const [mobileSection, setMobileSection] = useState<'resume' | 'other' | null>('resume');
   const [user, setUser]                 = useState<any>(null);
   const { theme, toggle: toggleTheme } = useTheme();
   // ⚠️ FIX (React error #418 — hydration mismatch breaking site-wide navigation):

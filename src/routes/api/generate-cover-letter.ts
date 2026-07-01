@@ -8,70 +8,35 @@ export const Route = createFileRoute("/api/generate-cover-letter")({
     handlers: {
       POST: async ({ request }) => {
         try {
-          // ✅ AUTH CHECK
-          let user: any;
-          let supabase: any;
-
+          let user: any, supabase: any;
           try {
             ({ user, supabase } = await requireAuth(request));
           } catch (err: any) {
-            return new Response(
-              JSON.stringify({ error: err.message }),
-              { status: 401 }
-            );
+            return new Response(JSON.stringify({ error: err.message }), { status: 401 });
           }
 
-          // ✅ USAGE CHECK (daily limit)
           try {
             await checkUsage(supabase, user.id, "coverLetter");
           } catch (err: any) {
-            return new Response(
-              JSON.stringify({ error: err.message }),
-              { status: 429 }
-            );
+            return new Response(JSON.stringify({ error: err.message }), { status: 429 });
           }
 
           const { userData, jobData, tone } = (await request.json()) as any;
+          const trim = (s: string, n = 600) => String(s || "").replace(/[<>\[\]]/g, "").slice(0, n);
 
-          // ✅ PROMPT INJECTION PROTECTION
-          const clean = (str: string) => String(str || "").replace(/[<>\[\]]/g, "").slice(0, 2000);
+          const prompt = `Expert cover letter writer. Tone: ${tone || "Professional"}. Strong opening, key matches, call to action. Respond ONLY in JSON:
+{"content":"cover letter text with \\n breaks","insights":{"matchedSkills":[""],"missingKeywords":[""],"improvementTips":[""]}}
 
-          const systemInstruction = `You are an expert Career Coach and Cover Letter Writer.
-Rules:
-1. TONE: ${tone || "Professional"}.
-2. STRUCTURE: Strong opening hook, body paragraph highlighting key matches, professional closing with call to action.
-3. PERSONALIZATION: Reference the specific company name, job title, and user experiences.
-4. FORMAT: Plain text content with paragraph breaks.
-5. INSIGHTS: Provide matched skills, missing keywords, and improvement tips.
-Respond ONLY in JSON.`;
+JOB: ${trim(jobData.title, 100)} at ${trim(jobData.company, 100)}
+${trim(jobData.description, 800)}
 
-          const prompt = `TARGET JOB:
-Title: ${clean(jobData.title)}
-Company: ${clean(jobData.company)}
-Description:
-${clean(jobData.description)}
-USER:
-Name: ${clean(userData.fullName)}
-Experience:
-${(userData.experience || []).map((e: string, i: number) => `Role ${i + 1}:\n${clean(e)}`).join("\n\n")}
-Skills:
-${(userData.skills || []).map((s: string, i: number) => `Group ${i + 1}: ${clean(s)}`).join("\n")}
-Respond strictly with JSON:
-{
-  "content": "string (cover letter text with \\n line breaks)",
-  "insights": {
-    "matchedSkills": ["string"],
-    "missingKeywords": ["string"],
-    "improvementTips": ["string"]
-  }
-}`;
+CANDIDATE: ${trim(userData.fullName, 80)}
+Experience: ${(userData.experience || []).map((e: string) => trim(e, 300)).join("\n")}
+Skills: ${(userData.skills || []).map((s: string) => trim(s, 150)).join(", ")}`;
 
           const text = await callAIGateway({
             language: request.headers.get("x-user-language") || undefined,
-            messages: [
-              { role: "system", content: systemInstruction },
-              { role: "user", content: prompt },
-            ],
+            messages: [{ role: "user", content: prompt }],
             temperature: 0.5,
             json: true,
           });

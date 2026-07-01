@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Sparkles, Target, CircleDollarSign, Crown, Search, Send, MessageSquare, Gauge, User, CheckCircle2, Star, Wand2, FileText, Briefcase, CheckCircle, ArrowRight } from "lucide-react";
+import { Sparkles, Target, CircleDollarSign, Crown, Search, Send, MessageSquare, Gauge, User, CheckCircle2, Star, Wand2, FileText, Briefcase, CheckCircle, ArrowRight, Compass, Mic, Mail, Link2, Users, GraduationCap, TrendingUp, Zap } from "lucide-react";
 import { Step } from "./App";
 
 interface LandingPageProps {
@@ -497,50 +497,94 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       </div>
 
       {/* Way beyond a resume builder section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-32">
-        <h2 className="text-3xl lg:text-4xl font-medium text-[#1a202c] mb-12 text-center tracking-tight">
-          Way beyond a resume builder...
-        </h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-           <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 lg:col-span-2 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">
-              <div className="flex items-center gap-1.5 bg-[#fff3ed] text-[#FF6321] px-3 py-1.5 rounded-lg text-[13px] font-bold w-max mb-5"><Sparkles size={14} className="fill-[#FF6321] shrink-0"/> AI-powered</div>
-              <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3">Step-by-step guidance</h3>
-              <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed max-w-sm mb-6 relative z-10">No need to think much. We guide you through every step of the process. We show you what to add, and where to add it in. It's clear and simple.</p>
-              <a href="/resume" className="text-[#FF6321] font-medium text-[15px] text-left hover:underline w-max relative z-10 transition-all flex items-center gap-1 group no-underline">Create my resume <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></a>
-           </div>
-           
-           <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">
-              <div className="flex items-center gap-1.5 bg-[#fff3ed] text-[#FF6321] px-3 py-1.5 rounded-lg text-[13px] font-bold w-max mb-5"><Sparkles size={14} className="fill-[#FF6321] shrink-0"/> AI-powered</div>
-              <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3 relative z-10">AI writes for you</h3>
-              <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed relative z-10">Speak into the mic and the AI fixes mistakes. Stuck? Click to add phrases that sound professional.</p>
-           </div>
-
-           <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">
-              <div className="flex items-center gap-1.5 bg-[#fff3ed] text-[#FF6321] px-3 py-1.5 rounded-lg text-[13px] font-bold w-max mb-5"><Sparkles size={14} className="fill-[#FF6321] shrink-0"/> AI-powered</div>
-              <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3 relative z-10">Instant cover letters</h3>
-              <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed relative z-10">Just paste a job link. We create a matching cover letter, using your resume. You're done in 2 mins! Purpose built to impress recruiters.</p>
-           </div>
-
-           <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 lg:col-span-2 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">
-              <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3 relative z-10">Paste any job link</h3>
-              <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed mb-6 max-w-[280px] relative z-10">Simple and effective. We have the formula that works for recruiters. Just paste the job description and we pre-build your resume to match.</p>
-              <button className="text-[#FF6321] font-medium text-[15px] text-left hover:underline w-max relative z-10 flex items-center gap-1 group">Tailor my resume <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
-           </div>
-
-           <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 lg:col-span-2 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">
-              <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3 relative z-10">Recruiter Match</h3>
-              <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed mb-6 max-w-[280px] relative z-10">Recruiters come to us with roles they can't fill. We can match your resume with up to 50 recruiters a week. When there's a match, they will contact you via email.</p>
-              <button className="text-[#FF6321] font-medium text-[15px] text-left hover:underline w-max relative z-10 flex items-center gap-1 group">Start distributing <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /></button>
-           </div>
-
-           <div className="bg-[#fff3ed] rounded-[32px] p-6 sm:p-8 lg:p-10 relative overflow-hidden flex flex-col justify-start min-h-[360px] lg:min-h-[420px]">
-              <h3 className="text-2xl lg:text-[28px] font-semibold text-[#1a202c] mb-3 relative z-10">Need some advice?</h3>
-              <p className="text-[#4b5563] text-[15px] lg:text-[16px] leading-relaxed relative z-10 mb-8">98% of our coaching clients receive a job offer with 12 weeks.</p>
-           </div>
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-32 relative">
+        {/* Ambient background glow */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[720px] h-[720px] rounded-full bg-[radial-gradient(closest-side,rgba(255,99,33,0.14),transparent)] blur-2xl" />
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14 relative z-10"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
+            <Zap size={13} className="fill-[#FF6321]" /> All-in-one career OS
+          </div>
+          <h2 className="text-3xl lg:text-5xl font-semibold text-foreground mb-4 tracking-tight text-balance">
+            Way beyond a{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-[#FF6321] to-[#ff9a3c]">resume builder</span>
+              <svg aria-hidden viewBox="0 0 200 12" className="absolute -bottom-1 left-0 w-full h-2.5 text-[#FF6321]/40"><path d="M2 8 Q 60 2 100 6 T 198 5" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round"/></svg>
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-[16px] lg:text-[17px] max-w-xl mx-auto text-pretty">
+            Seven tools working together — from first draft to signed offer.
+          </p>
+        </motion.div>
+
+        {(() => {
+          const features = [
+            { icon: Compass,  title: "Step-by-step guidance", desc: "No need to think much. We guide you through every step of the process — showing what to add and where.", cta: "Create my resume", href: "/resume", tag: "AI-powered", span: 2 },
+            { icon: Wand2,    title: "AI writes for you",     desc: "Speak into the mic and the AI fixes mistakes. Stuck? Click to add phrases that sound professional.", tag: "AI-powered" },
+            { icon: Mail,     title: "Instant cover letters", desc: "Paste a job link. We craft a matching cover letter using your resume in 2 minutes — built to impress recruiters.", cta: "Write my letter", href: "/cover-letter", tag: "AI-powered" },
+            { icon: Link2,    title: "Paste any job link",    desc: "We know the formula recruiters look for. Drop a job description and we pre-build your resume to match it.", cta: "Tailor my resume", href: "/resume", span: 2 },
+            { icon: Users,    title: "Recruiter Match",       desc: "Recruiters come to us with roles they can't fill. We match your resume with up to 50 recruiters a week.", cta: "Start distributing", href: "/premium", span: 2 },
+            { icon: GraduationCap, title: "Need some advice?", desc: "98% of our coaching clients receive a job offer within 12 weeks. Real humans, real results.", cta: "Book a coach", href: "/contact" },
+          ] as const;
+          return (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6 relative z-10">
+              {features.map((f, i) => {
+                const Icon = f.icon;
+                const span = "span" in f && f.span === 2 ? "lg:col-span-2" : "";
+                return (
+                  <motion.div
+                    key={f.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.5, delay: i * 0.05 }}
+                    className={`group relative ${span}`}
+                  >
+                    {/* Gradient border shell */}
+                    <div className="absolute -inset-px rounded-[32px] bg-gradient-to-br from-[#FF6321]/40 via-[#ff9a3c]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[2px]" />
+                    <div className="relative h-full rounded-[32px] bg-gradient-to-br from-[#fff5ef] to-[#ffe9dc] dark:from-white/[0.04] dark:to-white/[0.02] border border-[#FF6321]/10 dark:border-white/10 p-6 sm:p-8 lg:p-10 overflow-hidden transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_20px_60px_-25px_rgba(255,99,33,0.45)] min-h-[300px] lg:min-h-[340px] flex flex-col">
+                      {/* Corner shine */}
+                      <div aria-hidden className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-[radial-gradient(closest-side,rgba(255,154,60,0.35),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                      <div className="flex items-start justify-between mb-6 relative z-10">
+                        <div className="w-12 h-12 rounded-2xl bg-white/80 dark:bg-white/10 border border-[#FF6321]/15 dark:border-white/10 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                          <Icon size={22} className="text-[#FF6321]" strokeWidth={2.2} />
+                        </div>
+                        {"tag" in f && f.tag && (
+                          <div className="flex items-center gap-1.5 bg-white/70 dark:bg-white/10 backdrop-blur text-[#FF6321] px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider border border-[#FF6321]/15">
+                            <Sparkles size={11} className="fill-[#FF6321]" /> {f.tag}
+                          </div>
+                        )}
+                      </div>
+
+                      <h3 className="text-2xl lg:text-[26px] font-semibold text-foreground mb-3 relative z-10 tracking-tight">{f.title}</h3>
+                      <p className="text-muted-foreground text-[15px] lg:text-[15.5px] leading-relaxed relative z-10 mb-6 max-w-md">{f.desc}</p>
+
+                      {"cta" in f && f.cta && (
+                        <a href={"href" in f ? f.href : "#"} className="mt-auto inline-flex items-center gap-1.5 text-[#FF6321] font-semibold text-[14.5px] w-max relative z-10 no-underline group/link">
+                          {f.cta}
+                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#FF6321]/10 group-hover/link:bg-[#FF6321] group-hover/link:text-white transition-all duration-300">
+                            <ArrowRight size={12} className="group-hover/link:translate-x-0.5 transition-transform" />
+                          </span>
+                        </a>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          );
+        })()}
       </div>
+
 
       {/* FAQ Section */}
       <div className="max-w-3xl mx-auto px-6 pb-24">

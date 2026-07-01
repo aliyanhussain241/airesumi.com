@@ -383,6 +383,16 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
     setIsMobileOpen(false);
   }, [location.pathname]);
 
+  // Body scroll lock while mobile menu is open
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (isMobileOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [isMobileOpen]);
+
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
   // Enhanced tool card with badge + hover arrow

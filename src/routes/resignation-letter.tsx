@@ -268,5 +268,5 @@ export const Route = createFileRoute("/resignation-letter")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resignation-letter" }],
   }),
-  component: ResignationLetterPage,
+  component: () => (<><ResignationLetterPage /><ToolContentSection {...RESIGNATION_CONTENT} /></>),
 });

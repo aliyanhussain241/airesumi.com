@@ -72,9 +72,9 @@ export const Footer = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className={headCls}>{t("footer.resources")}</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-1">
                 <li><Link to="/cover-letter" className={linkCls}>{t("tools.coverLetter.name")}</Link></li>
                 <li><Link to="/linkedin-bio" className={linkCls}>{t("tools.linkedinBio.name")}</Link></li>
                 <li><Link to="/interview-prep" className={linkCls}>{t("footer.interviewQuestions")}</Link></li>
@@ -83,9 +83,10 @@ export const Footer = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className={headCls}>{t("footer.company")}</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-1">
+
                 <li><Link to="/about" className={linkCls}>{t("footer.about")}</Link></li>
                 <li><Link to="/blog" className={linkCls}>{t("footer.careerBlog")}</Link></li>
                 <li><Link to="/contact" className={linkCls}>{t("footer.contact")}</Link></li>

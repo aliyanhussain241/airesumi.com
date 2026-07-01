@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseServer } from "@/lib/supabase-server";
 
 export const Route = createFileRoute("/api/generate-resume")({
   server: {

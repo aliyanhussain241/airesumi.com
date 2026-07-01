@@ -10,6 +10,8 @@ import { JobDescription, ResumeData, UserData } from "../app/lib/types";
 import { DesignId } from "../app/components/ResumePreview";
 import { DetailsForm } from "../app/DetailsForm";
 import { DesignSelection } from "../app/DesignSelection";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { RESUME_CONTENT } from "../app/components/toolContent";
 import { JobForm } from "../app/JobForm";
 import { GeneratingView } from "../app/GeneratingView";
 import { DoneView } from "../app/DoneView";

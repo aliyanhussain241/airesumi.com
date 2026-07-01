@@ -162,5 +162,5 @@ export const Route = createFileRoute("/summary-generator")({
       { name: "description", content: "Generate 3 tailored professional resume summaries with AI." },
     ],
   }),
-  component: SummaryGenerator,
+  component: () => (<><SummaryGenerator /><ToolContentSection {...SUMMARY_CONTENT} /></>),
 });

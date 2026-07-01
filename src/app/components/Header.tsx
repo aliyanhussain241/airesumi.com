@@ -384,8 +384,15 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
-  // ✅ UPDATED: Horizontal tool card layout
-  type HeaderTool = { key: string; to: string; icon: React.ComponentType<{ size?: number; className?: string }>; name: string; desc: string };
+  // Enhanced tool card with badge + hover arrow
+  type HeaderTool = {
+    key: string;
+    to: string;
+    icon: React.ComponentType<{ size?: number; className?: string }>;
+    name: string;
+    desc: string;
+    badge?: 'new' | 'popular' | null;
+  };
   const ToolItem = ({ tool, onClose }: { tool: HeaderTool; onClose: () => void }) => {
     const Icon = tool.icon;
     const active = location.pathname === tool.to;
@@ -395,15 +402,20 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         onClick={onClose}
         role="menuitem"
         aria-current={active ? 'page' : undefined}
-        className={`hdr-tool-item flex items-center gap-2.5 px-3 py-2.5 no-underline transition-colors group ${active ? 'active' : ''}`}
+        className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 no-underline group ${active ? 'active' : ''}`}
       >
-        <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
-          <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
+        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${active ? 'bg-gradient-to-br from-[#EA580C] to-[#C2410C] shadow-md shadow-orange-500/30' : 'bg-orange-50 dark:bg-orange-500/15 group-hover:bg-orange-100 dark:group-hover:bg-orange-500/25'}`}>
+          <Icon size={15} className={active ? 'text-white' : 'text-[#EA580C]'} />
         </div>
-        <div>
-          <p className={`text-[13px] font-semibold leading-tight ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-          <p className="text-[11px] text-[#9ca3af] leading-tight">{tool.desc}</p>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5">
+            <p className={`text-[13px] font-semibold leading-tight truncate ${active ? 'text-[#EA580C]' : 'hdr-tool-name'}`}>{tool.name}</p>
+            {tool.badge === 'new' && <span className="hdr-badge-new">New</span>}
+            {tool.badge === 'popular' && <span className="hdr-badge-pro">Popular</span>}
+          </div>
+          <p className="text-[11px] hdr-tool-desc leading-tight mt-0.5 truncate">{tool.desc}</p>
         </div>
+        <ArrowRight size={14} className="hdr-tool-arrow text-[#EA580C] flex-shrink-0" aria-hidden="true" />
       </Link>
     );
   };

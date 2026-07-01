@@ -694,7 +694,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         </div>
       </header>
 
-      {/* Mobile Menu — unchanged */}
+      {/* Mobile Menu — tap-friendly, animated, collapsible sections */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -702,93 +702,229 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[1002]"
+            className="fixed inset-0 z-[1002] md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
           >
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="absolute inset-0 bg-black/40 backdrop-blur-md"
+              onClick={() => setIsMobileOpen(false)}
+            />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.28, ease: [0.22,1,0.36,1] }}
-              className="hdr-mobile absolute right-0 top-0 bottom-0 w-[85%] max-w-[340px] flex flex-col overflow-y-auto"
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={{ left: 0, right: 0.4 }}
+              onDragEnd={(_, info) => { if (info.offset.x > 80 || info.velocity.x > 400) setIsMobileOpen(false); }}
+              className="hdr-mobile absolute right-0 top-0 bottom-0 w-[88%] max-w-[380px] flex flex-col shadow-2xl"
             >
-              <div className="flex items-center justify-between px-5 py-4 border-b border-black/5">
+              {/* Drag handle */}
+              <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1 h-12 rounded-full bg-black/10 dark:bg-white/15" aria-hidden="true" />
+
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-black/5 dark:border-white/5 flex-shrink-0">
                 <Logo />
-                <button onClick={() => setIsMobileOpen(false)}
-                  className="p-2 rounded-xl text-[#374151] cursor-pointer bg-black/5 border-none">
-                  <X size={20} strokeWidth={2} />
+                <button
+                  onClick={() => setIsMobileOpen(false)}
+                  aria-label="Close menu"
+                  className="w-11 h-11 flex items-center justify-center rounded-2xl text-[#374151] dark:text-orange-200 cursor-pointer bg-black/5 dark:bg-white/5 border-none active:scale-95 transition-transform"
+                >
+                  <X size={22} strokeWidth={2.2} />
                 </button>
               </div>
 
-              <div className="flex-1 px-4 py-4">
-                <Link to="/" onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
-                  {t('nav.home')}
-                </Link>
-
-                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">{t('dropdown.resumeToolsLabel')}</p>
-                {resumeTools.map(tool => {
-                  const Icon = tool.icon;
-                  return (
-                    <Link key={tool.to} to={tool.to} onClick={() => setIsMobileOpen(false)}
-                      className="flex items-center gap-3 py-2.5 px-2 text-[14px] font-medium text-[#374151] no-underline border-b border-black/5 hover:text-[#EA580C]">
-                      <div className="w-7 h-7 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Icon size={13} className="text-[#EA580C]" />
-                      </div>
-                      {tool.name}
+              {/* Scrollable body */}
+              <motion.div
+                className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-1.5"
+                initial="hidden"
+                animate="visible"
+                variants={{ visible: { transition: { staggerChildren: 0.035, delayChildren: 0.1 } } }}
+              >
+                {/* Primary links */}
+                {[
+                  { to: '/', label: t('nav.home') },
+                  { to: '/examples', label: t('nav.examples') },
+                  { to: '/blog', label: t('nav.blog') },
+                ].map(link => (
+                  <motion.div
+                    key={link.to}
+                    variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}
+                  >
+                    <Link
+                      to={link.to}
+                      onClick={() => setIsMobileOpen(false)}
+                      className={`flex items-center min-h-[52px] px-4 rounded-2xl text-[16px] font-semibold no-underline active:scale-[0.98] transition-all ${location.pathname === link.to ? 'bg-orange-50 dark:bg-orange-500/15 text-[#EA580C]' : 'text-[#374151] dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/5'}`}
+                    >
+                      {link.label}
                     </Link>
-                  );
-                })}
+                  </motion.div>
+                ))}
 
-                <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mt-5 mb-2 px-2">{t('dropdown.otherToolsLabel')}</p>
-                {otherTools.map(tool => {
-                  const Icon = tool.icon;
-                  return (
-                    <Link key={tool.to} to={tool.to} onClick={() => setIsMobileOpen(false)}
-                      className="flex items-center gap-3 py-2.5 px-2 text-[14px] font-medium text-[#374151] no-underline border-b border-black/5 hover:text-[#EA580C]">
-                      <div className="w-7 h-7 bg-orange-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Icon size={13} className="text-[#EA580C]" />
-                      </div>
-                      {tool.name}
+                {/* Collapsible: Resume Tools */}
+                <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setMobileSection(s => s === 'resume' ? null : 'resume')}
+                    aria-expanded={mobileSection === 'resume'}
+                    className="w-full min-h-[52px] flex items-center justify-between px-4 rounded-2xl text-[15px] font-bold text-[#111827] dark:text-white bg-black/[0.03] dark:bg-white/5 border-none cursor-pointer active:scale-[0.98] transition-transform"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#EA580C] to-[#C2410C] flex items-center justify-center shadow-md shadow-orange-500/25">
+                        <FileText size={15} className="text-white" />
+                      </span>
+                      {t('nav.resumeTools')}
+                    </span>
+                    <ChevronDown size={18} className={`transition-transform duration-300 text-[#6b7280] ${mobileSection === 'resume' ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {mobileSection === 'resume' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-2 pl-2 space-y-1">
+                          {resumeTools.map(tool => {
+                            const Icon = tool.icon;
+                            const active = location.pathname === tool.to;
+                            return (
+                              <Link
+                                key={tool.to}
+                                to={tool.to}
+                                onClick={() => setIsMobileOpen(false)}
+                                className={`flex items-center gap-3 min-h-[56px] px-3 rounded-2xl no-underline active:scale-[0.98] transition-all ${active ? 'bg-orange-50 dark:bg-orange-500/15' : 'hover:bg-black/5 dark:hover:bg-white/5'}`}
+                              >
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${active ? 'bg-gradient-to-br from-[#EA580C] to-[#C2410C] shadow-md shadow-orange-500/30' : 'bg-orange-50 dark:bg-orange-500/15'}`}>
+                                  <Icon size={16} className={active ? 'text-white' : 'text-[#EA580C]'} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <p className={`text-[14px] font-semibold leading-tight truncate ${active ? 'text-[#EA580C]' : 'text-[#111827] dark:text-gray-100'}`}>{tool.name}</p>
+                                    {tool.badge === 'new' && <span className="hdr-badge-new">New</span>}
+                                    {tool.badge === 'popular' && <span className="hdr-badge-pro">Popular</span>}
+                                  </div>
+                                  <p className="text-[11.5px] text-[#6b7280] dark:text-gray-400 leading-tight mt-0.5 truncate">{tool.desc}</p>
+                                </div>
+                                <ArrowRight size={15} className="text-[#EA580C] flex-shrink-0 opacity-60" />
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+                {/* Collapsible: Other Tools */}
+                <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}>
+                  <button
+                    type="button"
+                    onClick={() => setMobileSection(s => s === 'other' ? null : 'other')}
+                    aria-expanded={mobileSection === 'other'}
+                    className="w-full min-h-[52px] flex items-center justify-between px-4 rounded-2xl text-[15px] font-bold text-[#111827] dark:text-white bg-black/[0.03] dark:bg-white/5 border-none cursor-pointer active:scale-[0.98] transition-transform"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#EA580C] to-[#C2410C] flex items-center justify-center shadow-md shadow-orange-500/25">
+                        <Sparkles size={15} className="text-white" />
+                      </span>
+                      {t('nav.otherTools')}
+                    </span>
+                    <ChevronDown size={18} className={`transition-transform duration-300 text-[#6b7280] ${mobileSection === 'other' ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {mobileSection === 'other' && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-2 pl-2 space-y-1">
+                          {otherTools.map(tool => {
+                            const Icon = tool.icon;
+                            const active = location.pathname === tool.to;
+                            return (
+                              <Link
+                                key={tool.to}
+                                to={tool.to}
+                                onClick={() => setIsMobileOpen(false)}
+                                className={`flex items-center gap-3 min-h-[56px] px-3 rounded-2xl no-underline active:scale-[0.98] transition-all ${active ? 'bg-orange-50 dark:bg-orange-500/15' : 'hover:bg-black/5 dark:hover:bg-white/5'}`}
+                              >
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${active ? 'bg-gradient-to-br from-[#EA580C] to-[#C2410C] shadow-md shadow-orange-500/30' : 'bg-orange-50 dark:bg-orange-500/15'}`}>
+                                  <Icon size={16} className={active ? 'text-white' : 'text-[#EA580C]'} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <p className={`text-[14px] font-semibold leading-tight truncate ${active ? 'text-[#EA580C]' : 'text-[#111827] dark:text-gray-100'}`}>{tool.name}</p>
+                                    {tool.badge === 'new' && <span className="hdr-badge-new">New</span>}
+                                    {tool.badge === 'popular' && <span className="hdr-badge-pro">Popular</span>}
+                                  </div>
+                                  <p className="text-[11.5px] text-[#6b7280] dark:text-gray-400 leading-tight mt-0.5 truncate">{tool.desc}</p>
+                                </div>
+                                <ArrowRight size={15} className="text-[#EA580C] flex-shrink-0 opacity-60" />
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+                {/* Account section */}
+                <motion.div
+                  variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}
+                  className="pt-3 mt-2 border-t border-black/5 dark:border-white/5"
+                >
+                  {user ? (
+                    <>
+                      <Link
+                        to="/dashboard"
+                        onClick={() => setIsMobileOpen(false)}
+                        className="flex items-center gap-3 min-h-[52px] px-4 rounded-2xl text-[15px] font-semibold text-[#374151] dark:text-gray-200 no-underline active:scale-[0.98] transition-all hover:bg-black/5 dark:hover:bg-white/5"
+                      >
+                        <LayoutDashboard size={18} className="text-[#EA580C]" /> {t('cta.myResumes')}
+                      </Link>
+                      <button
+                        onClick={() => { setIsMobileOpen(false); handleLogout(); }}
+                        className="w-full flex items-center gap-3 min-h-[52px] px-4 rounded-2xl text-left text-[15px] font-semibold text-red-500 bg-transparent border-none cursor-pointer active:scale-[0.98] transition-transform"
+                      >
+                        <LogOut size={18} /> {t('cta.logout')}
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      to="/login"
+                      onClick={() => setIsMobileOpen(false)}
+                      className="flex items-center min-h-[52px] px-4 rounded-2xl text-[15px] font-semibold text-[#EA580C] no-underline active:scale-[0.98] transition-transform bg-orange-50 dark:bg-orange-500/15"
+                    >
+                      {t('cta.loginSignup')}
                     </Link>
-                  );
-                })}
+                  )}
+                </motion.div>
+              </motion.div>
 
-                <Link to="/examples" onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5 mt-2">
-                  {t('nav.examples')}
+              {/* Sticky CTA footer */}
+              <div className="px-4 pt-3 pb-6 border-t border-black/5 dark:border-white/5 bg-white/60 dark:bg-black/30 backdrop-blur-md flex-shrink-0" style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}>
+                <Link
+                  to="/resume"
+                  onClick={() => setIsMobileOpen(false)}
+                  className="hdr-btn-primary flex items-center justify-center gap-2 w-full text-white text-[15px] font-bold min-h-[54px] rounded-2xl no-underline active:scale-[0.98] transition-transform"
+                >
+                  <Zap size={16} /> {t('cta.buildResumeFree')}
                 </Link>
-                <Link to="/blog" onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
-                  {t('nav.blog')}
-                </Link>
-
-                {user ? (
-                  <>
-                    <Link to="/dashboard" onClick={() => setIsMobileOpen(false)}
-                      className="flex items-center gap-2 py-3 px-2 text-[15px] font-medium text-[#374151] no-underline border-b border-black/5">
-                      <LayoutDashboard size={16} className="text-[#EA580C]" /> {t('cta.myResumes')}
-                    </Link>
-                    <button onClick={() => { setIsMobileOpen(false); handleLogout(); }}
-                      className="w-full text-left py-3 px-2 text-[15px] font-medium text-red-500 bg-transparent border-none cursor-pointer">
-                      {t('cta.logout')}
-                    </button>
-                  </>
-                ) : (
-                  <Link to="/login" onClick={() => setIsMobileOpen(false)}
-                    className="flex items-center py-3 px-2 text-[15px] font-medium text-[#EA580C] no-underline">
-                    {t('cta.loginSignup')}
-                  </Link>
-                )}
               </div>
-
-              <div className="px-4 pb-8 pt-2">
-                <Link to="/resume" onClick={() => setIsMobileOpen(false)}
-                  className="hdr-btn-primary block w-full text-white text-[15px] font-bold py-4 rounded-2xl text-center no-underline">
-                  {t('cta.buildResumeFree')}
-                </Link>
-              </div>
-
             </motion.div>
           </motion.div>
         )}

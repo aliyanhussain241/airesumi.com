@@ -30,69 +30,40 @@ const GLASS_HEADER_STYLES = `
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
 
-  /* iOS 26 LIQUID GLASS DROPDOWN — translucent, distorted, shiny */
+  /* ADVANCED DROPDOWN — high-visibility opaque glass with premium feel */
   .hdr-dropdown {
-    --hdr-blur: 28px;
+    --hdr-blur: 32px;
     --hdr-sat: 180%;
     position: absolute;
-    border-radius: 1.75rem;
+    border-radius: 1.5rem;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(234, 88, 12, 0.12);
     box-shadow:
-      0 6px 6px rgba(0, 0, 0, 0.2),
-      0 0 20px rgba(0, 0, 0, 0.1);
+      0 30px 60px -15px rgba(17, 24, 39, 0.25),
+      0 10px 20px -5px rgba(234, 88, 12, 0.10),
+      0 0 0 1px rgba(255, 255, 255, 0.6) inset;
     backdrop-filter: blur(var(--hdr-blur)) saturate(var(--hdr-sat));
-    background: rgba(255, 255, 255, 0.65);
-    transition: backdrop-filter 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-                background 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: backdrop-filter, transform, opacity;
+    transition: background 0.28s ease;
+    will-change: transform, opacity;
   }
-
   :global(html.dark) .hdr-dropdown {
-    background: rgba(20, 20, 28, 0.75);
+    background: rgba(17, 20, 28, 0.98);
+    border: 1px solid rgba(234, 88, 12, 0.22);
+    box-shadow:
+      0 30px 60px -15px rgba(0, 0, 0, 0.7),
+      0 10px 20px -5px rgba(234, 88, 12, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   }
 
-  /* Distortion layer (decorative) */
+  /* Ambient glow at top of dropdown */
   .hdr-dropdown::before {
     content: "";
     position: absolute;
-    inset: 0;
-    z-index: 0;
-    filter: url(#glass-distortion) saturate(120%) brightness(1.15);
+    top: -1px; left: 20%; right: 20%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(234,88,12,0.5), transparent);
     pointer-events: none;
-    opacity: 0.4;
-  }
-
-  /* Subtle tint layer */
-  .hdr-dropdown::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.25);
-    pointer-events: none;
-  }
-
-  :global(html.dark) .hdr-dropdown::after {
-    background: rgba(20, 20, 28, 0.35);
-  }
-
-
-  /* Glossy shine highlight */
-  .hdr-dropdown > .hdr-dropdown-shine {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    box-shadow:
-      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.75),
-      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.4);
-    pointer-events: none;
-  }
-
-  :global(html.dark) .hdr-dropdown > .hdr-dropdown-shine {
-    box-shadow:
-      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.18),
-      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.08);
+    z-index: 4;
   }
 
   .hdr-dropdown > .hdr-dropdown-content {
@@ -100,14 +71,34 @@ const GLASS_HEADER_STYLES = `
     z-index: 3;
   }
 
-  .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.25);
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
+  /* Featured side panel */
+  .hdr-featured {
+    background: linear-gradient(160deg, rgba(234,88,12,0.10) 0%, rgba(251,146,60,0.06) 60%, transparent 100%);
+    border-right: 1px solid rgba(234,88,12,0.10);
+  }
+  :global(html.dark) .hdr-featured {
+    background: linear-gradient(160deg, rgba(234,88,12,0.18) 0%, rgba(194,65,12,0.08) 60%, transparent 100%);
+    border-right: 1px solid rgba(234,88,12,0.20);
   }
 
+  .hdr-featured-cta {
+    background: linear-gradient(135deg, #EA580C, #C2410C);
+    color: #fff;
+    box-shadow: 0 8px 20px -6px rgba(234,88,12,0.55);
+    transition: all 0.2s ease;
+  }
+  .hdr-featured-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -6px rgba(234,88,12,0.7);
+  }
+
+  .hdr-dropdown-footer {
+    background: rgba(249, 250, 251, 0.9);
+    border-top: 1px solid rgba(17, 24, 39, 0.06);
+  }
   :global(html.dark) .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 12, 18, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   /* Keyboard focus rings */
@@ -116,25 +107,78 @@ const GLASS_HEADER_STYLES = `
   .hdr-dropdown-footer a:focus-visible {
     outline: 2px solid #EA580C;
     outline-offset: 2px;
-    border-radius: 8px;
-  }
-  .hdr-tool-item:focus-visible {
-    background: rgba(234, 88, 12, 0.08);
+    border-radius: 10px;
   }
 
+  /* Tool item card */
+  .hdr-tool-item {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    transition: all 0.18s ease;
+  }
+  .hdr-tool-item:hover {
+    background: rgba(234, 88, 12, 0.06);
+    border-color: rgba(234, 88, 12, 0.15);
+    transform: translateY(-1px);
+  }
+  :global(html.dark) .hdr-tool-item:hover {
+    background: rgba(234, 88, 12, 0.14);
+    border-color: rgba(234, 88, 12, 0.28);
+  }
+  .hdr-tool-item.active {
+    background: rgba(234, 88, 12, 0.10);
+    border-color: rgba(234, 88, 12, 0.25);
+  }
+  .hdr-tool-arrow {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.18s ease;
+  }
+  .hdr-tool-item:hover .hdr-tool-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .hdr-tool-name {
+    color: #111827;
+  }
+  .hdr-tool-desc {
+    color: #6b7280;
+  }
+  :global(html.dark) .hdr-tool-name { color: #f3f4f6; }
+  :global(html.dark) .hdr-tool-desc { color: #9ca3af; }
 
+  .hdr-badge-new {
+    background: linear-gradient(135deg, #EA580C, #F97316);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .hdr-badge-pro {
+    background: rgba(234, 88, 12, 0.12);
+    color: #C2410C;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  :global(html.dark) .hdr-badge-pro {
+    background: rgba(234, 88, 12, 0.25);
+    color: #FDBA74;
+  }
 
-  /* HORIZONTAL GRID */
   .hdr-dropdown-grid {
     display: grid;
-    gap: 4px;
+    gap: 6px;
   }
-  .hdr-dropdown-grid.cols-2 {
-    grid-template-columns: 1fr 1fr;
-  }
-  .hdr-dropdown-grid.cols-3 {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  .hdr-dropdown-grid.cols-1 { grid-template-columns: 1fr; }
+  .hdr-dropdown-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 
   .hdr-btn-primary {
     background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
@@ -171,18 +215,13 @@ const GLASS_HEADER_STYLES = `
     background: rgba(234,88,12,0.1);
     color: #EA580C;
   }
-  .hdr-tool-item:hover {
-    background: rgba(234,88,12,0.06);
-    border-radius: 12px;
-  }
-  .hdr-tool-item.active {
-    background: rgba(234,88,12,0.1);
-    border-radius: 12px;
-  }
   .hdr-mobile {
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.98);
     backdrop-filter: blur(40px) saturate(200%);
     -webkit-backdrop-filter: blur(40px) saturate(200%);
+  }
+  :global(html.dark) .hdr-mobile {
+    background: rgba(17, 20, 28, 0.98);
   }
   .hdr-tag {
     background: rgba(234,88,12,0.12);

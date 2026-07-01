@@ -37,7 +37,7 @@ export const Route = createFileRoute("/api/translate")({
             messages: [
               {
                 role: "system",
-                content: `You are a professional UI translator. Translate each numbered English string into natural, concise ${langName} suitable for a SaaS web app (resume builder). Preserve placeholders like {{name}}, %s, arrows (→, ←), emojis, and punctuation. Do NOT translate brand names: airesumi, Rezumi, LinkedIn, ATS, PDF, AI. Return strict JSON: {"items":[{"i":1,"t":"..."}, ...]} with one entry per input, in order.`,
+                content: `You are a professional UI translator. Translate each numbered English string into natural, concise ${langName} suitable for a SaaS web app (resume builder). Preserve placeholders like {{name}}, %s, arrows (→, ←), emojis, and punctuation. Do NOT translate brand names: airesumi, Resumi, LinkedIn, ATS, PDF, AI. Return strict JSON: {"items":[{"i":1,"t":"..."}, ...]} with one entry per input, in order.`,
               },
               { role: "user", content: numbered },
             ],

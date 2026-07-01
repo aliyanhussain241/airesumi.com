@@ -459,6 +459,6 @@ export const JobForm: React.FC<JobFormProps> = ({
           </div>
         </aside>
       </div>
-    </motion.div>
+    </MultiStepFormShell>
   );
 };

@@ -5,7 +5,7 @@ import rezumiLogo from "@/assets/ai-resumi.webp";
 import rezumiLogoWhite from "@/assets/rezumi-white.webp";
 
 const linkCls =
-  "block py-2 -mx-2 px-2 rounded-md text-[15px] sm:text-[14px] text-neutral-200 hover:text-[#FF6321] hover:bg-white/5 active:bg-white/10 transition-colors no-underline whitespace-nowrap";
+  "block py-2 -mx-2 px-2 rounded-md text-[15px] sm:text-[14px] text-neutral-300 hover:text-[#FF6321] hover:bg-white/5 active:bg-white/10 transition-colors no-underline whitespace-nowrap";
 const headCls =
   "text-[11px] font-bold tracking-[0.18em] text-[#FF6321] uppercase mb-3 sm:mb-5";
 
@@ -36,7 +36,7 @@ export const Footer = () => {
                   className="h-10 w-auto shrink-0"
                 />
               </div>
-              <p className="text-[14px] leading-relaxed text-neutral-300 max-w-xs mx-auto sm:mx-0">
+              <p className="text-[14px] leading-relaxed text-neutral-400 max-w-xs mx-auto sm:mx-0">
                 {t("footer.tagline")}
               </p>
               <div className="flex gap-3 pt-1 justify-center sm:justify-start">
@@ -98,7 +98,7 @@ export const Footer = () => {
         </div>
 
         {/* Copyright below the card */}
-        <div className="relative mt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[13px] text-neutral-300">
+        <div className="relative mt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[13px] text-neutral-500">
           <div>{t("footer.copyright", { year: new Date().getFullYear() })}</div>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-[#FF6321] transition-colors no-underline">

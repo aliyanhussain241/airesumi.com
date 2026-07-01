@@ -144,10 +144,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
              
              <div className="space-y-4">
                <div className="flex items-center gap-2 text-[#4a5568]">
-                 <div className="bg-[#15803d] rounded-full p-0.5">
+                 <div className="bg-[#22c55e] rounded-full p-0.5">
                    <CheckCircle2 size={16} className="text-white" />
                  </div>
-                 <span className="text-[15px]"><strong className="text-[#15803d] font-semibold"> </strong> ATS-optimized & recruiter-approved formatting</span>
+                 <span className="text-[15px]"><strong className="text-[#22c55e] font-semibold"> </strong> ATS-optimized & recruiter-approved formatting</span>
                </div>
                <div className="flex items-center gap-2 text-[15px] text-[#4a5568]">
                  <div className="flex text-[#00b67a] gap-1 items-center">
@@ -223,7 +223,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                className="absolute top-44 -left-12 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2.5 flex items-center gap-3 z-30 hover:-translate-y-1 transition-transform duration-300 pointer-events-auto cursor-default"
              >
-                <div className="bg-[#15803d] text-white font-bold text-lg px-2.5 py-1 rounded-lg">81%</div>
+                <div className="bg-[#22c55e] text-white font-bold text-lg px-2.5 py-1 rounded-lg">81%</div>
                 <div className="text-sm font-bold text-[#2d3748] leading-tight pr-2">Resume<br/>Score</div>
              </motion.div>
            
@@ -418,7 +418,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     </div>
                     
                     <div className="absolute bottom-40 -mr-48 bg-white rounded-xl shadow-lg p-2.5 flex items-center gap-2 border border-gray-50 z-20">
-                      <div className="bg-[#15803d] text-white text-sm font-bold px-2 py-1 rounded-md">81%</div>
+                      <div className="bg-[#22c55e] text-white text-sm font-bold px-2 py-1 rounded-md">81%</div>
                       <div className="text-[12px] font-bold text-gray-700 leading-tight pr-1">Resume<br/>Score</div>
                     </div>
                 </div>

@@ -655,6 +655,6 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
           </div>
         </aside>
       </div>
-    </motion.div>
+    </MultiStepFormShell>
   );
 };

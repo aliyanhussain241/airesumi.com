@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { PenLine, Sparkles, Copy, Check, RefreshCw, AlertCircle, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { BULLET_CONTENT } from "../app/components/toolContent";
+
 
 function CopyBtn({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);

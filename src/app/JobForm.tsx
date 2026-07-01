@@ -121,12 +121,9 @@ export const JobForm: React.FC<JobFormProps> = ({
   };
 
   return (
-    <motion.div
+    <MultiStepFormShell
       key="target-role"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
-      className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 print:hidden min-h-screen pt-[88px]"
+      className="py-12"
     >
       {/* Header */}
       <div className="mb-10 flex flex-wrap items-end justify-between gap-6">

@@ -7,6 +7,8 @@ import {
   ScanLine, Sliders, CheckCircle2, ChevronLeft
 } from "lucide-react";
 import jsPDF from "jspdf";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { PDF_SCANNER_CONTENT } from "../app/components/toolContent";
 
 interface ScannedPage {
   id: string;

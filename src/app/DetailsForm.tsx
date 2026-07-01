@@ -186,7 +186,7 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                 key={s.id}
                 type="button"
                 onClick={() => { if (i <= section || sectionStatus(i - 1)) setSection(i); }}
-                className={`group text-left rounded-2xl px-3 py-3 sm:px-4 sm:py-3.5 border transition-all ${
+                className={`group text-left rounded-2xl px-2 py-2.5 sm:px-4 sm:py-3.5 border transition-all ${
                   active
                     ? "bg-white dark:bg-white/[0.06] border-[#FF6321] shadow-[0_10px_30px_-15px_rgba(255,99,33,0.5)]"
                     : done
@@ -194,7 +194,7 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                     : "bg-white/60 dark:bg-white/[0.03] border-gray-100 dark:border-white/10 hover:border-gray-200"
                 }`}
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-col items-center text-center gap-1.5 sm:flex-row sm:items-center sm:text-left sm:gap-2.5">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
                     active ? "bg-[#FF6321] text-white" :
                     done ? "bg-orange-100 dark:bg-orange-500/20 text-[#FF6321]" :
@@ -202,16 +202,17 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                   }`}>
                     {done ? <Check size={15} strokeWidth={3} /> : <Icon size={15} />}
                   </div>
-                  <div className="min-w-0">
-                    <div className={`text-[11px] uppercase tracking-wider font-bold ${active ? "text-[#FF6321]" : done ? "text-[#FF6321]/80" : "text-gray-400"}`}>
+                  <div className="min-w-0 w-full">
+                    <div className={`text-[10px] sm:text-[11px] uppercase tracking-wider font-bold ${active ? "text-[#FF6321]" : done ? "text-[#FF6321]/80" : "text-gray-400"}`}>
                       Step {i + 1}
                     </div>
-                    <div className={`text-[13px] font-semibold truncate ${active ? "text-foreground" : done ? "text-foreground/90" : "text-muted-foreground"}`}>
+                    <div className={`text-[12px] sm:text-[13px] font-semibold truncate ${active ? "text-foreground" : done ? "text-foreground/90" : "text-muted-foreground"}`}>
                       <span className="hidden sm:inline">{s.title}</span>
                       <span className="sm:hidden">{s.short}</span>
                     </div>
                   </div>
                 </div>
+
               </button>
             );
           })}

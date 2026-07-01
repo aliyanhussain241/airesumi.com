@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
-import { getSupabaseServer } from "@/lib/supabase-server";
+import { requireAuth } from "@/lib/auth";
+import { checkUsage } from "@/lib/usage";
 
 export const Route = createFileRoute("/api/generate-resume")({
   server: {
@@ -8,17 +9,27 @@ export const Route = createFileRoute("/api/generate-resume")({
       POST: async ({ request }) => {
         try {
           // ✅ AUTH CHECK
-let user;
-let supabase;
+          let user: any;
+          let supabase: any;
 
-try {
-  ({ user, supabase } = await requireAuth(request));
-} catch (err: any) {
-  return new Response(
-    JSON.stringify({ error: err.message }),
-    { status: 401 }
-  );
-}
+          try {
+            ({ user, supabase } = await requireAuth(request));
+          } catch (err: any) {
+            return new Response(
+              JSON.stringify({ error: err.message }),
+              { status: 401 }
+            );
+          }
+
+          // ✅ USAGE CHECK (daily limit)
+          try {
+            await checkUsage(supabase, user.id, "resume");
+          } catch (err: any) {
+            return new Response(
+              JSON.stringify({ error: err.message }),
+              { status: 429 }
+            );
+          }
 
           const { userData, jobData } = (await request.json()) as any;
           if (!userData || !jobData) {
@@ -70,12 +81,9 @@ Generate a highly optimized resume in JSON matching:
   "skills": [{ "category": "string", "items": ["string"] }],
   "certifications": [{ "name": "string", "issuer": "string" }]
 }`;
-await checkUsage(
-  supabase,
-  user.id,
-  "resume"
-);
-        const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
+
+          const text = await callAIGateway({
+            language: request.headers.get("x-user-language") || undefined,
             messages: [
               { role: "system", content: systemInstruction },
               { role: "user", content: prompt },
@@ -83,9 +91,11 @@ await checkUsage(
             temperature: 0.3,
             json: true,
           });
+
           const parsed = safeJSON(text);
           if (userData.profilePicture) parsed.header.profilePicture = userData.profilePicture;
           return new Response(JSON.stringify(parsed), { headers: { "Content-Type": "application/json" } });
+
         } catch (e: any) {
           return new Response(JSON.stringify({ error: e?.message || "Failed to generate resume" }), { status: 500 });
         }

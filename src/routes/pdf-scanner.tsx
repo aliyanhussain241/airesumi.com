@@ -387,5 +387,5 @@ export const Route = createFileRoute("/pdf-scanner")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/pdf-scanner" }],
   }),
-  component: PDFScanner,
+  component: () => (<><PDFScanner /><ToolContentSection {...PDF_SCANNER_CONTENT} /></>),
 });

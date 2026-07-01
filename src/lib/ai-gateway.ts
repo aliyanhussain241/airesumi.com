@@ -88,11 +88,12 @@ export async function callAIGateway(opts: {
 
 
   const body: any = {
-    contents,
-    generationConfig: {
-      temperature: opts.temperature ?? 0.3,
-    },
-  };
+  contents,
+  generationConfig: {
+    temperature: opts.temperature ?? 0.3,
+    maxOutputTokens: 2048,
+  },
+};
   if (systemTexts.length) {
     body.systemInstruction = { parts: [{ text: systemTexts.join("\n\n") }] };
   }

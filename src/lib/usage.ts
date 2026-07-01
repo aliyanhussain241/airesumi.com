@@ -1,13 +1,39 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-export async function trackUsage(
+export const LIMITS = {
+  resume: 10,
+  coverLetter: 5,
+  ats: 5,
+};
+
+export async function checkUsage(
   supabase: SupabaseClient,
   userId: string,
-  feature: string
+  feature: keyof typeof LIMITS
 ) {
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().slice(0, 10);
 
-  const { error } = await supabase
+  const { count, error } = await supabase
+    .from("ai_usage")
+    .select("*", {
+      count: "exact",
+      head: true,
+    })
+    .eq("user_id", userId)
+    .eq("feature", feature)
+    .eq("usage_date", today);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if ((count ?? 0) >= LIMITS[feature]) {
+    throw new Error(
+      `Daily ${feature} limit reached. Upgrade to Premium.`
+    );
+  }
+
+  const { error: insertError } = await supabase
     .from("ai_usage")
     .insert({
       user_id: userId,
@@ -15,7 +41,7 @@ export async function trackUsage(
       usage_date: today,
     });
 
-  if (error) {
-    console.error("AI Usage Error:", error.message);
+  if (insertError) {
+    throw new Error(insertError.message);
   }
 }

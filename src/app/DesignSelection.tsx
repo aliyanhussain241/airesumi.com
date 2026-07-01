@@ -115,12 +115,9 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
   const previewDesign = previewId ? allDesigns.find(d => d.id === previewId) : null;
 
   return (
-    <motion.div
+    <MultiStepFormShell
       key="design"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
-      className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 print:hidden min-h-screen pt-[88px]"
+      className="py-12"
     >
       {/* Header */}
       <div className="mb-8 flex flex-wrap items-end justify-between gap-6">

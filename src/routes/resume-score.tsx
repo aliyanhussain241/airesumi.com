@@ -189,6 +189,76 @@ function ResumeScore() {
           </button>
         </div>
 
+        {/* Multi-step loader */}
+        <AnimatePresence>
+          {loading && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              className="mt-6 bg-white border border-[#e5e7eb] rounded-2xl p-6 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.15)]"
+            >
+              <div className="flex items-center gap-4">
+                <AnimatePresence mode="wait">
+                  {(() => {
+                    const Icon = LOADING_STEPS[loadingStep].icon;
+                    return (
+                      <motion.div
+                        key={loadingStep}
+                        initial={{ scale: 0.6, opacity: 0, rotate: -20 }}
+                        animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                        exit={{ scale: 0.6, opacity: 0, rotate: 20 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-12 h-12 rounded-xl bg-[#FF6321]/10 text-[#FF6321] flex items-center justify-center shrink-0"
+                      >
+                        <Icon size={22} />
+                      </motion.div>
+                    );
+                  })()}
+                </AnimatePresence>
+                <div className="flex-1 min-w-0">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={loadingStep}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <div className="text-[15px] font-semibold text-[#1a202c]">
+                        {LOADING_STEPS[loadingStep].label}
+                      </div>
+                      <div className="text-[13px] text-[#6b7280] mt-0.5">
+                        {LOADING_STEPS[loadingStep].detail}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Step dots */}
+              <div className="mt-5 flex gap-1.5">
+                {LOADING_STEPS.map((_, i) => (
+                  <div key={i} className="flex-1 h-1.5 rounded-full bg-[#f1f5f9] overflow-hidden">
+                    <motion.div
+                      className="h-full bg-[#FF6321]"
+                      initial={{ width: "0%" }}
+                      animate={{
+                        width: i < loadingStep ? "100%" : i === loadingStep ? "100%" : "0%",
+                      }}
+                      transition={{
+                        duration: i === loadingStep ? 1.8 : 0.3,
+                        ease: "linear",
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+
         {/* Results */}
         <AnimatePresence>
           {result && (

@@ -1,4 +1,4 @@
-// Direct Google Gemini API client (replaces Lovable AI Gateway).
+// Direct Google Gemini API client with OpenRouter fallback.
 // Uses GEMINI_API_KEY env var. Works on Cloudflare Workers / Node / any fetch-capable runtime.
 
 export type AIMessage = {
@@ -12,7 +12,6 @@ const DEFAULT_MODEL = "gemini-2.5-flash";
 
 function mapModel(model?: string): string {
   if (!model) return DEFAULT_MODEL;
-  // Strip provider prefix like "google/" if present, drop "-preview" suffix variants.
   return model.replace(/^google\//, "");
 }
 
@@ -32,7 +31,6 @@ function partsFromContent(content: AIMessage["content"]): GeminiPart[] {
       if (m) {
         parts.push({ inlineData: { mimeType: m[1], data: m[2] } });
       } else {
-        // Fall back: include URL as text reference
         parts.push({ text: url });
       }
     }
@@ -45,7 +43,6 @@ const LANG_NAMES: Record<string, string> = {
   ar: "Arabic", hi: "Hindi", zh: "Simplified Chinese", ja: "Japanese", ru: "Russian",
 };
 
-
 async function fetchWithRetry(
   url: string,
   options: RequestInit,
@@ -56,40 +53,35 @@ async function fetchWithRetry(
     try {
       const response = await fetch(url, options);
       if (response.ok) return response;
-      if (![429,500,502,503,504].includes(response.status)) return response;
+      if (![429, 500, 502, 503, 504].includes(response.status)) return response;
       lastError = new Error(`HTTP ${response.status}`);
     } catch (err) {
       lastError = err;
     }
     const delay = 1000 * Math.pow(2, attempt - 1);
-    await new Promise(r=>setTimeout(r,delay));
+    await new Promise(r => setTimeout(r, delay));
   }
   throw lastError;
 }
 
-export async function callAIGateway(opts: {
+async function callGemini(opts: {
   messages: AIMessage[];
   model?: string;
   temperature?: number;
   json?: boolean;
-  /** Two-letter language code; the model will be instructed to respond in this language. */
   language?: string;
 }): Promise<string> {
   const apiKey = (globalThis as any).GEMINI_API_KEY ?? process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY missing");
 
   const model = mapModel(opts.model);
-
-  // Collect system instructions; merge consecutive non-system messages into Gemini "contents".
   const systemTexts: string[] = [];
   const contents: { role: "user" | "model"; parts: GeminiPart[] }[] = [];
 
-  // If a language was provided, add a top-level system instruction so the model
-  // responds in that language. Keep JSON keys in English when json mode is on.
   if (opts.language && opts.language !== "en") {
     const langName = LANG_NAMES[opts.language] || opts.language;
     const note = opts.json
-      ? `Write all human-readable content (summaries, bullets, descriptions, narrative text) in ${langName}. Keep JSON property/field names in English exactly as specified.`
+      ? `Write all human-readable content in ${langName}. Keep JSON property/field names in English exactly as specified.`
       : `Respond in ${langName}.`;
     systemTexts.push(note);
   }
@@ -108,12 +100,9 @@ export async function callAIGateway(opts: {
     });
   }
 
-
   const body: any = {
     contents,
-    generationConfig: {
-      temperature: opts.temperature ?? 0.3,
-    },
+    generationConfig: { temperature: opts.temperature ?? 0.3 },
   };
   if (systemTexts.length) {
     body.systemInstruction = { parts: [{ text: systemTexts.join("\n\n") }] };
@@ -122,9 +111,7 @@ export async function callAIGateway(opts: {
     body.generationConfig.responseMimeType = "application/json";
   }
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(
-    model
-  )}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
   const res = await fetchWithRetry(url, {
     method: "POST",
@@ -134,11 +121,93 @@ export async function callAIGateway(opts: {
 
   if (!res.ok) {
     const errText = await res.text();
-    throw new Error(`Gemini API error ${res.status}: ${errText}`);
+    throw new Error(`Gemini error ${res.status}: ${errText}`);
   }
+
   const data: any = await res.json();
   const parts = data?.candidates?.[0]?.content?.parts ?? [];
   return parts.map((p: any) => p?.text ?? "").join("");
+}
+
+async function callOpenRouter(opts: {
+  messages: AIMessage[];
+  temperature?: number;
+  json?: boolean;
+  language?: string;
+}): Promise<string> {
+  const apiKey = (globalThis as any).OPENROUTER_API_KEY ?? process.env.OPENROUTER_API_KEY;
+  if (!apiKey) throw new Error("OPENROUTER_API_KEY missing");
+
+  const messages: { role: string; content: string }[] = [];
+
+  if (opts.language && opts.language !== "en") {
+    const langName = LANG_NAMES[opts.language] || opts.language;
+    messages.push({
+      role: "system",
+      content: opts.json
+        ? `Write all human-readable content in ${langName}. Keep JSON property/field names in English.`
+        : `Respond in ${langName}.`,
+    });
+  }
+
+  for (const msg of opts.messages) {
+    messages.push({
+      role: msg.role,
+      content: typeof msg.content === "string"
+        ? msg.content
+        : msg.content.map((c) => c.text || "").join("\n"),
+    });
+  }
+
+  const body: any = {
+    model: "deepseek/deepseek-chat",
+    messages,
+    temperature: opts.temperature ?? 0.3,
+  };
+
+  if (opts.json) {
+    body.response_format = { type: "json_object" };
+  }
+
+  const res = await fetchWithRetry("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+      "HTTP-Referer": "https://airesumi.com",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`OpenRouter error ${res.status}: ${errText}`);
+  }
+
+  const data: any = await res.json();
+  return data?.choices?.[0]?.message?.content ?? "";
+}
+
+export async function callAIGateway(opts: {
+  messages: AIMessage[];
+  model?: string;
+  temperature?: number;
+  json?: boolean;
+  language?: string;
+}): Promise<string> {
+  try {
+    return await callGemini(opts);
+  } catch (geminiError: any) {
+    console.warn("[ai-gateway] Gemini failed, trying OpenRouter:", geminiError.message);
+    try {
+      const result = await callOpenRouter(opts);
+      console.log("[ai-gateway] OpenRouter fallback succeeded");
+      return result;
+    } catch (openRouterError: any) {
+      console.error("[ai-gateway] Both failed");
+      throw new Error("AI service temporarily unavailable. Please try again.");
+    }
+  }
 }
 
 export function safeJSON<T = any>(text: string): T {

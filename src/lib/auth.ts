@@ -3,11 +3,11 @@ import { getSupabaseServer } from "./supabase-server";
 export async function requireAuth(request: Request) {
   const authHeader = request.headers.get("Authorization");
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw new Error("Unauthorized. Please log in.");
+  if (!authHeader?.startsWith("Bearer ")) {
+    throw new Error("Unauthorized");
   }
 
-  const token = authHeader.replace("Bearer ", "");
+  const token = authHeader.substring(7);
 
   const supabase = getSupabaseServer();
 
@@ -17,10 +17,11 @@ export async function requireAuth(request: Request) {
   } = await supabase.auth.getUser(token);
 
   if (error || !user) {
-    throw new Error("Invalid or expired session.");
+    throw new Error("Invalid session");
   }
 
   return {
+    token,
     user,
     supabase,
   };

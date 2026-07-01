@@ -328,6 +328,6 @@ export const DesignSelection: React.FC<DesignSelectionProps> = ({ designId, setD
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </MultiStepFormShell>
   );
 };

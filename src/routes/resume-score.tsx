@@ -1,7 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Flame, Sparkles, AlertCircle, CheckCircle2, XCircle, Wrench, ArrowRight, Loader2 } from "lucide-react";
+import { Flame, Sparkles, AlertCircle, CheckCircle2, XCircle, Wrench, ArrowRight, Loader2, FileSearch, Brain, Target, Zap } from "lucide-react";
+
+const LOADING_STEPS = [
+  { icon: FileSearch, label: "Scanning your resume...", detail: "Reading every line, word, and bullet point" },
+  { icon: Target, label: "Checking ATS compatibility...", detail: "Testing how applicant tracking systems parse it" },
+  { icon: Brain, label: "Analyzing content quality...", detail: "Measuring impact language and achievements" },
+  { icon: Zap, label: "Matching keywords...", detail: "Cross-referencing with job market signals" },
+  { icon: Flame, label: "Preparing the roast...", detail: "Getting brutally honest — brace yourself" },
+];
+
 
 type Result = {
   score: number;

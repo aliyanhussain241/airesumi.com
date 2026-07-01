@@ -45,6 +45,28 @@ const LANG_NAMES: Record<string, string> = {
   ar: "Arabic", hi: "Hindi", zh: "Simplified Chinese", ja: "Japanese", ru: "Russian",
 };
 
+
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  retries = 3
+): Promise<Response> {
+  let lastError: any;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) return response;
+      if (![429,500,502,503,504].includes(response.status)) return response;
+      lastError = new Error(`HTTP ${response.status}`);
+    } catch (err) {
+      lastError = err;
+    }
+    const delay = 1000 * Math.pow(2, attempt - 1);
+    await new Promise(r=>setTimeout(r,delay));
+  }
+  throw lastError;
+}
+
 export async function callAIGateway(opts: {
   messages: AIMessage[];
   model?: string;
@@ -88,12 +110,11 @@ export async function callAIGateway(opts: {
 
 
   const body: any = {
-  contents,
-  generationConfig: {
-    temperature: opts.temperature ?? 0.3,
-    maxOutputTokens: 2048,
-  },
-};
+    contents,
+    generationConfig: {
+      temperature: opts.temperature ?? 0.3,
+    },
+  };
   if (systemTexts.length) {
     body.systemInstruction = { parts: [{ text: systemTexts.join("\n\n") }] };
   }
@@ -105,7 +126,7 @@ export async function callAIGateway(opts: {
     model
   )}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
-  const res = await fetch(url, {
+  const res = await fetchWithRetry(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

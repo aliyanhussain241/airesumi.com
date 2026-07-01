@@ -393,5 +393,5 @@ export const Route = createFileRoute("/linkedin-bio")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/linkedin-bio" }],
   }),
-  component: LinkedInBioGenerator,
+  component: () => (<><LinkedInBioGenerator /><ToolContentSection {...LINKEDIN_CONTENT} /></>),
 });

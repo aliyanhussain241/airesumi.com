@@ -111,6 +111,21 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  /* Height of the fixed site header. Change here to shift every page's top offset. */
+  --app-header-h: 68px;
+}
+
+/* Shared utilities for pages that sit under the fixed header.
+ * Use `pt-app-header` for a flush offset, or `pt-app-header-lg`/`-xl` for a
+ * multi-step form / hero that needs extra breathing room below the header. */
+@utility pt-app-header {
+  padding-top: var(--app-header-h);
+}
+@utility pt-app-header-lg {
+  padding-top: calc(var(--app-header-h) + 1.25rem);
+}
+@utility pt-app-header-xl {
+  padding-top: calc(var(--app-header-h) + 2.25rem);
 }
 
 .dark {

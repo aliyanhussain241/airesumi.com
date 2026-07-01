@@ -98,7 +98,7 @@ export const Footer = () => {
         </div>
 
         {/* Copyright below the card */}
-        <div className="relative mt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[13px] text-neutral-500">
+        <div className="relative mt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[13px] text-neutral-300">
           <div>{t("footer.copyright", { year: new Date().getFullYear() })}</div>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-[#FF6321] transition-colors no-underline">

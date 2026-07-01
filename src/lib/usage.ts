@@ -11,7 +11,8 @@ function getServiceClient() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
-    throw new Error("Supabase service role key missing.");
+    console.error("[usage] Missing env vars:", { url: !!url, key: !!key });
+    return null;
   }
 
   return createClient(url, key, {
@@ -25,18 +26,27 @@ export async function checkUsage(
   feature: keyof typeof LIMITS
 ) {
   const supabase = getServiceClient();
+
+  if (!supabase) {
+    console.error("[usage] Could not create service client");
+    return;
+  }
+
   const today = new Date().toISOString().slice(0, 10);
 
-  const { count, error } = await supabase
+  const { count, error: countError } = await supabase
     .from("ai_usage")
     .select("*", { count: "exact", head: true })
     .eq("user_id", userId)
     .eq("feature", feature)
     .eq("usage_date", today);
 
-  if (error) {
-    throw new Error(error.message);
+  if (countError) {
+    console.error("[usage] Count error:", countError.message);
+    return;
   }
+
+  console.log(`[usage] ${feature} count today: ${count}`);
 
   if ((count ?? 0) >= LIMITS[feature]) {
     throw new Error(`Daily ${feature} limit reached. Upgrade to Premium.`);
@@ -52,6 +62,8 @@ export async function checkUsage(
     });
 
   if (insertError) {
-    throw new Error(insertError.message);
+    console.error("[usage] Insert error:", insertError.message, insertError.code);
+  } else {
+    console.log("[usage] Insert success for", feature, userId);
   }
 }

@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Step } from "./App";
 import { UserData } from "./lib/types";
+import { MultiStepFormShell } from "./components/MultiStepFormShell";
 
 interface DetailsFormProps {
   userData: UserData;

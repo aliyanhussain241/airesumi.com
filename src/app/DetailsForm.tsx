@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Step } from "./App";
 import { UserData } from "./lib/types";
+import { MultiStepFormShell } from "./components/MultiStepFormShell";
 
 interface DetailsFormProps {
   userData: UserData;
@@ -123,12 +124,12 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
   const nameError = touched.fullName && !userData.fullName.trim();
 
   return (
-    <motion.div
+    <MultiStepFormShell
       key="details"
+      headerGap="spacious"
+      maxWidth="max-w-6xl"
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="max-w-6xl mx-auto pt-[92px] pb-10 lg:pt-[104px] lg:pb-14 px-4 sm:px-6 print:hidden min-h-screen"
     >
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-8 gap-6">
@@ -655,6 +656,6 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
           </div>
         </aside>
       </div>
-    </motion.div>
+    </MultiStepFormShell>
   );
 };

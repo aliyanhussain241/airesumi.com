@@ -565,24 +565,50 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     aria-label={t('dropdown.otherToolsLabel')}
                     onKeyDown={(e) => handleMenuKeyDown(e, () => setIsOtherOpen(false), otherBtnRef)}
                     style={{ transformOrigin: 'top center' }}
-                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[600px]"
+                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[720px]"
                   >
-                    <span className="hdr-dropdown-shine" aria-hidden="true" />
-                    <div className="hdr-dropdown-content">
-                      <div className="p-4">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">{t('dropdown.otherToolsLabel')}</p>
-                        <div className="hdr-dropdown-grid cols-3">
-                          {otherTools.map(tool => (
-                            <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
-                          ))}
+                    <div className="hdr-dropdown-content grid grid-cols-[220px_1fr]">
+                      {/* Featured side panel */}
+                      <div className="hdr-featured p-5 flex flex-col">
+                        <div className="inline-flex items-center gap-1.5 self-start rounded-full bg-white/70 dark:bg-white/10 backdrop-blur px-2.5 py-1 text-[10px] font-bold text-[#C2410C] dark:text-orange-300 uppercase tracking-widest border border-orange-200/60 dark:border-orange-500/30">
+                          <Sparkles size={11} /> Career Suite
+                        </div>
+                        <h3 className="mt-3 text-[17px] font-bold leading-snug text-[#111827] dark:text-white">
+                          Go beyond the resume.
+                        </h3>
+                        <p className="mt-1.5 text-[12px] leading-relaxed text-[#6b7280] dark:text-gray-400">
+                          Cover letters, LinkedIn, ATS checks, interviews & more — every tool you need to land the offer.
+                        </p>
+                        <div className="mt-auto pt-4">
+                          <Link
+                            to="/cover-letter"
+                            role="menuitem"
+                            onClick={() => setIsOtherOpen(false)}
+                            className="hdr-featured-cta inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] font-bold no-underline"
+                          >
+                            <Zap size={13} /> Explore Tools
+                            <ArrowRight size={13} />
+                          </Link>
                         </div>
                       </div>
-                      <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
-                        <span className="text-[11px] text-[#9ca3af]">{t('dropdown.otherToolsCount', { count: otherTools.length })}</span>
-                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
-                          className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                          {t('cta.explore')}
-                        </Link>
+
+                      {/* Tools list */}
+                      <div className="flex flex-col">
+                        <div className="p-4">
+                          <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-2 px-2">{t('dropdown.otherToolsLabel')}</p>
+                          <div className="hdr-dropdown-grid cols-2">
+                            {otherTools.map(tool => (
+                              <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between mt-auto">
+                          <span className="text-[11px] text-[#9ca3af] flex items-center gap-1"><TrendingUp size={11} /> {t('dropdown.otherToolsCount', { count: otherTools.length })}</span>
+                          <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
+                            className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline flex items-center gap-1">
+                            {t('cta.explore')} <ArrowRight size={12} />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

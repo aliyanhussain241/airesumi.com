@@ -8,16 +8,16 @@ export const Route = createFileRoute("/api/generate-resume")({
       POST: async ({ request }) => {
         try {
           // ✅ AUTH CHECK
-          const authHeader = request.headers.get("Authorization");
-          if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return new Response(JSON.stringify({ error: "Unauthorized. Please log in." }), { status: 401 });
-          }
-          const token = authHeader.replace("Bearer ", "");
-          const supabase = getSupabaseServer();
-          const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-          if (authError || !user) {
-            return new Response(JSON.stringify({ error: "Invalid or expired session. Please log in again." }), { status: 401 });
-          }
+          let user;
+
+try {
+  ({ user } = await requireAuth(request));
+} catch (err: any) {
+  return new Response(
+    JSON.stringify({ error: err.message }),
+    { status: 401 }
+  );
+}
 
           const { userData, jobData } = (await request.json()) as any;
           if (!userData || !jobData) {

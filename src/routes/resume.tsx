@@ -380,5 +380,5 @@ export const Route = createFileRoute("/resume")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resume" }],
   }),
-  component: ResumeBuilder,
+  component: () => (<><ResumeBuilder /><ToolContentSection {...RESUME_CONTENT} /></>),
 });

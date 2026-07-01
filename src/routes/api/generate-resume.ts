@@ -8,10 +8,11 @@ export const Route = createFileRoute("/api/generate-resume")({
       POST: async ({ request }) => {
         try {
           // ✅ AUTH CHECK
-          let user;
+let user;
+let supabase;
 
 try {
-  ({ user } = await requireAuth(request));
+  ({ user, supabase } = await requireAuth(request));
 } catch (err: any) {
   return new Response(
     JSON.stringify({ error: err.message }),
@@ -69,8 +70,12 @@ Generate a highly optimized resume in JSON matching:
   "skills": [{ "category": "string", "items": ["string"] }],
   "certifications": [{ "name": "string", "issuer": "string" }]
 }`;
-
-          const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
+await checkUsage(
+  supabase,
+  user.id,
+  "resume"
+);
+        const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
             messages: [
               { role: "system", content: systemInstruction },
               { role: "user", content: prompt },

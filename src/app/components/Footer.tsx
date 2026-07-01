@@ -36,7 +36,7 @@ export const Footer = () => {
                   className="h-10 w-auto shrink-0"
                 />
               </div>
-              <p className="text-[14px] leading-relaxed text-neutral-400 max-w-xs mx-auto sm:mx-0">
+              <p className="text-[14px] leading-relaxed text-neutral-300 max-w-xs mx-auto sm:mx-0">
                 {t("footer.tagline")}
               </p>
               <div className="flex gap-3 pt-1 justify-center sm:justify-start">

@@ -238,20 +238,20 @@ export const Logo = () => (
 );
 
 const resumeToolsBase = [
-  { key: 'resumeBuilder',  to: '/resume',            icon: FileText },
-  { key: 'bulletWriter',   to: '/bullet-writer',     icon: PenLine },
-  { key: 'summary',        to: '/summary-generator', icon: List },
-  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target },
+  { key: 'resumeBuilder',  to: '/resume',            icon: FileText, badge: 'popular' as const },
+  { key: 'bulletWriter',   to: '/bullet-writer',     icon: PenLine,  badge: null },
+  { key: 'summary',        to: '/summary-generator', icon: List,     badge: null },
+  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target,   badge: 'new' as const },
 ] as const;
 
 const otherToolsBase = [
-  { key: 'coverLetter',    to: '/cover-letter',       icon: Mail },
-  { key: 'linkedinBio',    to: '/linkedin-bio',       icon: Linkedin },
-  { key: 'atsChecker',     to: '/ats-checker',        icon: Target },
-  { key: 'interviewPrep',  to: '/interview-prep',     icon: Wand2 },
-  { key: 'resignation',    to: '/resignation-letter', icon: FileText },
-  { key: 'pdfScanner',     to: '/pdf-scanner',        icon: ScanLine },
-  { key: 'jobSearch',      to: '/salary-analyzer',    icon: Briefcase },
+  { key: 'coverLetter',    to: '/cover-letter',       icon: Mail,     badge: 'popular' as const },
+  { key: 'linkedinBio',    to: '/linkedin-bio',       icon: Linkedin, badge: null },
+  { key: 'atsChecker',     to: '/ats-checker',        icon: Target,   badge: null },
+  { key: 'interviewPrep',  to: '/interview-prep',     icon: Wand2,    badge: 'new' as const },
+  { key: 'resignation',    to: '/resignation-letter', icon: FileText, badge: null },
+  { key: 'pdfScanner',     to: '/pdf-scanner',        icon: ScanLine, badge: null },
+  { key: 'jobSearch',      to: '/salary-analyzer',    icon: Briefcase, badge: null },
 ] as const;
 
 export const Header = ({ windowWidth }: { windowWidth?: number }) => {

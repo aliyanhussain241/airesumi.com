@@ -7,9 +7,259 @@ export type DesignId =
   | 'elegant-serif' | 'tech-dark' | 'pastel-soft' | 'gold-luxury'
   | 'blue-professional' | 'teal-modern'
   | 'slate-clean' | 'rose-minimal'
-  | 'pro-executive' | 'pro-infographic' | 'pro-developer' | 'pro-agency' | 'pro-elegant';
+  | 'pro-executive' | 'pro-infographic' | 'pro-developer' | 'pro-agency' | 'pro-elegant'
+  | 'pro-monochrome' | 'pro-timeline' | 'pro-gradient' | 'pro-startup' | 'pro-diamond' | 'pro-minimalist';
 
 export function ResumePreview({ data, designId = 'classic' }: { data: ResumeData, designId?: DesignId }) {
+
+  if (designId === 'pro-monochrome') {
+    return (
+      <div className="bg-white text-neutral-900 mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-serif p-14 overflow-hidden border border-neutral-200">
+        <header className="mb-12 pb-8 border-b-4 border-neutral-900">
+          <div className="text-[10px] uppercase tracking-[0.4em] text-neutral-500 mb-4">Curriculum Vitae — {new Date().getFullYear()}</div>
+          <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <h1 className="text-6xl font-bold tracking-tight leading-[0.95] mb-3">{data.header.fullName}</h1>
+              <p className="text-lg italic text-neutral-600">{data.header.title}</p>
+            </div>
+            {data.header.profilePicture && (
+              <div className="w-24 h-24 rounded-full overflow-hidden border border-neutral-300 shrink-0"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover grayscale" /></div>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-neutral-500 mt-6 font-sans">{data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}</div>
+        </header>
+        <section className="mb-10"><p className="text-base leading-[1.9] text-neutral-700 italic first-letter:text-5xl first-letter:font-bold first-letter:mr-2 first-letter:float-left first-letter:leading-[0.9] first-letter:not-italic first-letter:text-neutral-900">{data.summary}</p></section>
+        <section className="mb-10">
+          <h2 className="text-[10px] font-sans font-bold uppercase tracking-[0.4em] text-neutral-500 mb-6">— Experience</h2>
+          <div className="space-y-8">{data.experience.map((exp, i) => (
+            <div key={i} className="grid grid-cols-[140px_1fr] gap-8">
+              <div className="text-xs uppercase tracking-widest text-neutral-500 font-sans pt-1">{exp.dateRange}</div>
+              <div>
+                <h3 className="text-xl font-bold mb-1">{exp.title}</h3>
+                <p className="text-sm text-neutral-600 italic mb-3">{exp.company}</p>
+                <ul className="space-y-2">{exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-neutral-700 leading-relaxed pl-4 relative before:content-['—'] before:absolute before:left-0 before:text-neutral-400">{b}</li>)}</ul>
+              </div>
+            </div>
+          ))}</div>
+        </section>
+        <div className="grid grid-cols-2 gap-10">
+          <section><h2 className="text-[10px] font-sans font-bold uppercase tracking-[0.4em] text-neutral-500 mb-4">— Education</h2><div className="space-y-4">{data.education.map((edu, i) => (<div key={i}><h3 className="font-bold">{edu.degree}</h3><p className="text-sm italic text-neutral-600">{edu.institution}</p><span className="text-xs uppercase tracking-widest text-neutral-500 font-sans">{edu.dateRange}</span></div>))}</div></section>
+          <section><h2 className="text-[10px] font-sans font-bold uppercase tracking-[0.4em] text-neutral-500 mb-4">— Skills</h2><div className="space-y-3 font-sans">{data.skills.map((sg, i) => (<div key={i}><span className="text-xs font-bold uppercase tracking-widest block mb-1">{sg.category}</span><span className="text-sm text-neutral-600">{sg.items.join(' · ')}</span></div>))}</div></section>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-timeline') {
+    return (
+      <div className="bg-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-10 relative overflow-hidden">
+          <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#FF6321]/20 rounded-full blur-3xl" />
+          <div className="relative flex items-center gap-6">
+            {data.header.profilePicture && (<div className="w-24 h-24 rounded-2xl overflow-hidden ring-4 ring-[#FF6321]/60 shrink-0"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div>)}
+            <div>
+              <h1 className="text-4xl font-black tracking-tight mb-1">{data.header.fullName}</h1>
+              <p className="text-lg text-[#FF6321] font-bold uppercase tracking-widest mb-3">{data.header.title}</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-300">{data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}</div>
+            </div>
+          </div>
+        </div>
+        <div className="p-10">
+          <p className="text-sm text-slate-600 leading-relaxed mb-10 border-l-4 border-[#FF6321] pl-4 italic">{data.summary}</p>
+          <div className="grid grid-cols-[1fr_2fr] gap-10">
+            <aside className="space-y-8">
+              <div>
+                <h2 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#FF6321] rounded-full" />Skills</h2>
+                <div className="space-y-3">{data.skills.map((sg, i) => (<div key={i}><span className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block mb-1.5">{sg.category}</span><div className="flex flex-wrap gap-1">{sg.items.map((it, ii) => <span key={ii} className="text-[10px] bg-slate-100 border border-slate-200 text-slate-700 px-2 py-0.5 rounded-full">{it}</span>)}</div></div>))}</div>
+              </div>
+              <div>
+                <h2 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#FF6321] rounded-full" />Education</h2>
+                <div className="space-y-3">{data.education.map((edu, i) => (<div key={i} className="pb-3 border-b border-slate-100 last:border-0"><h3 className="text-sm font-bold text-slate-900">{edu.degree}</h3><p className="text-xs text-slate-600">{edu.institution}</p><span className="text-[10px] text-[#FF6321] font-bold uppercase tracking-widest">{edu.dateRange}</span></div>))}</div>
+              </div>
+            </aside>
+            <div>
+              <h2 className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6 flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#FF6321] rounded-full" />Career Timeline</h2>
+              <div className="relative pl-8 border-l-2 border-slate-200 space-y-8">{data.experience.map((exp, i) => (
+                <div key={i} className="relative">
+                  <div className="absolute -left-[41px] top-1 w-6 h-6 rounded-full bg-white border-4 border-[#FF6321] shadow-md" />
+                  <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:shadow-md transition-shadow">
+                    <div className="flex justify-between items-baseline mb-1"><h3 className="font-bold text-slate-900">{exp.title}</h3><span className="text-[10px] text-white bg-[#FF6321] px-2 py-0.5 rounded-full font-bold">{exp.dateRange}</span></div>
+                    <p className="text-sm font-semibold text-slate-600 mb-3">{exp.company}</p>
+                    <ul className="space-y-1.5">{exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-slate-700 flex gap-2"><span className="text-[#FF6321] shrink-0">▸</span>{b}</li>)}</ul>
+                  </div>
+                </div>
+              ))}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-gradient') {
+    return (
+      <div className="bg-gradient-to-br from-orange-50 via-white to-amber-50 mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans p-10 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF6321]/10 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-300/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
+        <div className="relative">
+          <header className="mb-10 backdrop-blur-xl bg-white/60 border border-white/80 rounded-3xl p-8 shadow-xl shadow-orange-500/5">
+            <div className="flex items-center gap-6">
+              {data.header.profilePicture && (<div className="w-28 h-28 rounded-2xl overflow-hidden ring-4 ring-white shadow-lg shrink-0"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div>)}
+              <div>
+                <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-[#FF6321] to-amber-500 bg-clip-text text-transparent mb-1">{data.header.fullName}</h1>
+                <p className="text-lg text-slate-700 font-medium mb-3">{data.header.title}</p>
+                <div className="flex flex-wrap gap-2">{data.header.contactInfo.split('|').map((info, i) => <span key={i} className="text-[11px] bg-white/80 backdrop-blur px-3 py-1 rounded-full text-slate-600 border border-white">{info.trim()}</span>)}</div>
+              </div>
+            </div>
+          </header>
+          <section className="mb-8 backdrop-blur-xl bg-white/50 border border-white/70 rounded-2xl p-6"><h2 className="text-xs font-bold uppercase tracking-widest text-[#FF6321] mb-3">Profile</h2><p className="text-sm text-slate-700 leading-relaxed">{data.summary}</p></section>
+          <div className="grid grid-cols-[2fr_1fr] gap-6">
+            <section className="backdrop-blur-xl bg-white/50 border border-white/70 rounded-2xl p-6">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#FF6321] mb-4">Experience</h2>
+              <div className="space-y-5">{data.experience.map((exp, i) => (
+                <div key={i} className="pb-5 border-b border-white/80 last:border-0 last:pb-0">
+                  <div className="flex justify-between mb-1"><h3 className="font-bold text-slate-900">{exp.title}</h3><span className="text-[10px] bg-gradient-to-r from-[#FF6321] to-amber-500 text-white px-2 py-1 rounded-full font-bold">{exp.dateRange}</span></div>
+                  <p className="text-sm text-slate-600 mb-2">{exp.company}</p>
+                  <ul className="space-y-1">{exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-slate-700 pl-4 relative before:content-['✦'] before:absolute before:left-0 before:text-[#FF6321] before:text-[10px] before:top-1">{b}</li>)}</ul>
+                </div>
+              ))}</div>
+            </section>
+            <div className="space-y-6">
+              <section className="backdrop-blur-xl bg-white/50 border border-white/70 rounded-2xl p-6"><h2 className="text-xs font-bold uppercase tracking-widest text-[#FF6321] mb-3">Education</h2><div className="space-y-3">{data.education.map((edu, i) => (<div key={i}><h3 className="text-sm font-bold text-slate-900">{edu.degree}</h3><p className="text-xs text-slate-600">{edu.institution}</p><span className="text-[10px] text-[#FF6321] font-bold">{edu.dateRange}</span></div>))}</div></section>
+              <section className="backdrop-blur-xl bg-white/50 border border-white/70 rounded-2xl p-6"><h2 className="text-xs font-bold uppercase tracking-widest text-[#FF6321] mb-3">Skills</h2><div className="space-y-2">{data.skills.map((sg, i) => (<div key={i}><span className="text-[11px] font-bold text-slate-800 block mb-1">{sg.category}</span><div className="flex flex-wrap gap-1">{sg.items.map((it, ii) => <span key={ii} className="text-[10px] bg-gradient-to-r from-orange-100 to-amber-100 text-[#FF6321] px-2 py-0.5 rounded-full">{it}</span>)}</div></div>))}</div></section>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-startup') {
+    return (
+      <div className="bg-[#FAF7F2] mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-neutral-900">
+          <div className="bg-[#FF6321] text-white p-8 flex flex-col justify-between min-h-[280px]">
+            {data.header.profilePicture && (<div className="w-20 h-20 rounded-2xl overflow-hidden ring-4 ring-white/40"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div>)}
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.3em] mb-2 opacity-80">Hi, I'm</div>
+              <h1 className="text-4xl font-black leading-none mb-2">{data.header.fullName}</h1>
+              <p className="text-sm font-bold opacity-90">{data.header.title}</p>
+            </div>
+          </div>
+          <div className="bg-neutral-900 text-white p-8 flex flex-col justify-between">
+            <div className="text-[10px] uppercase tracking-[0.3em] text-neutral-400">Contact</div>
+            <div className="space-y-2 text-sm">{data.header.contactInfo.split('|').map((info, i) => <div key={i} className="border-b border-white/10 pb-2 break-words">{info.trim()}</div>)}</div>
+          </div>
+        </div>
+        <div className="p-10">
+          <div className="mb-10">
+            <div className="inline-block px-3 py-1 bg-neutral-900 text-white text-[10px] uppercase tracking-widest font-bold rounded-full mb-3">About</div>
+            <p className="text-lg text-neutral-800 leading-relaxed font-medium">{data.summary}</p>
+          </div>
+          <div className="mb-10">
+            <div className="inline-block px-3 py-1 bg-[#FF6321] text-white text-[10px] uppercase tracking-widest font-bold rounded-full mb-4">Experience</div>
+            <div className="space-y-6">{data.experience.map((exp, i) => (
+              <div key={i} className="grid grid-cols-[80px_1fr] gap-6 items-start">
+                <div className="text-right">
+                  <div className="text-3xl font-black text-[#FF6321] leading-none">0{i + 1}</div>
+                  <div className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold mt-1">{exp.dateRange}</div>
+                </div>
+                <div className="border-l-2 border-neutral-900 pl-6 pb-2">
+                  <h3 className="font-bold text-lg text-neutral-900">{exp.title}</h3>
+                  <p className="text-sm font-bold text-[#FF6321] mb-2 uppercase tracking-wider">{exp.company}</p>
+                  <ul className="space-y-1">{exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-neutral-700 leading-relaxed">→ {b}</li>)}</ul>
+                </div>
+              </div>
+            ))}</div>
+          </div>
+          <div className="grid grid-cols-2 gap-8">
+            <div>
+              <div className="inline-block px-3 py-1 bg-neutral-900 text-white text-[10px] uppercase tracking-widest font-bold rounded-full mb-4">Education</div>
+              <div className="space-y-3">{data.education.map((edu, i) => (<div key={i} className="bg-white border border-neutral-200 rounded-2xl p-4"><h3 className="font-bold text-sm text-neutral-900">{edu.degree}</h3><p className="text-xs text-neutral-600">{edu.institution}</p><span className="text-[10px] font-bold text-[#FF6321] uppercase tracking-widest">{edu.dateRange}</span></div>))}</div>
+            </div>
+            <div>
+              <div className="inline-block px-3 py-1 bg-[#FF6321] text-white text-[10px] uppercase tracking-widest font-bold rounded-full mb-4">Skills</div>
+              <div className="flex flex-wrap gap-2">{data.skills.flatMap(sg => sg.items).map((it, i) => <span key={i} className="text-xs font-bold bg-white border-2 border-neutral-900 text-neutral-900 px-3 py-1.5 rounded-full">{it}</span>)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-diamond') {
+    return (
+      <div className="bg-[#0A0E1A] text-white mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans overflow-hidden relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.15),transparent_50%)]" />
+        <div className="relative p-12">
+          <header className="text-center mb-10 pb-8 border-b border-[#D4AF37]/30">
+            {data.header.profilePicture && (<div className="w-28 h-28 rounded-full overflow-hidden mx-auto mb-4 ring-2 ring-[#D4AF37] ring-offset-4 ring-offset-[#0A0E1A]"><img src={data.header.profilePicture} alt="Profile" className="w-full h-full object-cover" /></div>)}
+            <div className="text-[#D4AF37] text-xs uppercase tracking-[0.5em] mb-3">◆ Curriculum Vitae ◆</div>
+            <h1 className="text-5xl font-light tracking-[0.15em] uppercase mb-3">{data.header.fullName}</h1>
+            <p className="text-[#D4AF37] text-sm uppercase tracking-[0.4em]">{data.header.title}</p>
+            <div className="flex flex-wrap justify-center gap-x-6 mt-6 text-xs text-slate-400">{data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}</div>
+          </header>
+          <section className="mb-10 text-center max-w-2xl mx-auto"><div className="flex items-center justify-center gap-3 mb-4"><div className="w-8 h-px bg-[#D4AF37]" /><span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em]">Profile</span><div className="w-8 h-px bg-[#D4AF37]" /></div><p className="text-sm text-slate-300 leading-loose italic">{data.summary}</p></section>
+          <section className="mb-10">
+            <div className="flex items-center gap-3 mb-6"><div className="flex-1 h-px bg-[#D4AF37]/30" /><span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em]">◆ Experience ◆</span><div className="flex-1 h-px bg-[#D4AF37]/30" /></div>
+            <div className="space-y-6">{data.experience.map((exp, i) => (
+              <div key={i} className="border border-[#D4AF37]/20 bg-white/[0.02] backdrop-blur rounded-lg p-5">
+                <div className="flex justify-between items-baseline mb-1"><h3 className="font-bold text-white tracking-wide">{exp.title}</h3><span className="text-[10px] text-[#D4AF37] uppercase tracking-[0.3em]">{exp.dateRange}</span></div>
+                <p className="text-sm text-[#D4AF37]/80 italic mb-3">{exp.company}</p>
+                <ul className="space-y-1.5">{exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-slate-300 flex gap-3"><span className="text-[#D4AF37] shrink-0 text-xs mt-1">◆</span>{b}</li>)}</ul>
+              </div>
+            ))}</div>
+          </section>
+          <div className="grid grid-cols-2 gap-8">
+            <section><div className="flex items-center gap-3 mb-4"><span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em]">Education</span><div className="flex-1 h-px bg-[#D4AF37]/30" /></div><div className="space-y-3">{data.education.map((edu, i) => (<div key={i}><h3 className="text-sm font-bold text-white">{edu.degree}</h3><p className="text-xs text-slate-400 italic">{edu.institution}</p><span className="text-[10px] text-[#D4AF37] uppercase tracking-[0.3em]">{edu.dateRange}</span></div>))}</div></section>
+            <section><div className="flex items-center gap-3 mb-4"><span className="text-[#D4AF37] text-[10px] uppercase tracking-[0.4em]">Expertise</span><div className="flex-1 h-px bg-[#D4AF37]/30" /></div><div className="space-y-2">{data.skills.map((sg, i) => (<div key={i}><span className="text-[11px] font-bold text-white block mb-1 uppercase tracking-wider">{sg.category}</span><span className="text-xs text-slate-400">{sg.items.join(' · ')}</span></div>))}</div></section>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (designId === 'pro-minimalist') {
+    return (
+      <div className="bg-white text-neutral-900 mx-auto print:mx-0 w-full max-w-[850px] min-h-[1100px] font-sans p-16 overflow-hidden">
+        <header className="mb-14">
+          <h1 className="text-5xl font-light tracking-tight mb-2">{data.header.fullName}</h1>
+          <p className="text-lg text-neutral-500 font-light mb-4">{data.header.title}</p>
+          <div className="flex flex-wrap gap-x-8 gap-y-1 text-xs text-neutral-400">{data.header.contactInfo.split('|').map((info, i) => <span key={i}>{info.trim()}</span>)}</div>
+        </header>
+        <section className="mb-14">
+          <div className="grid grid-cols-[120px_1fr] gap-8">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 pt-1">Summary</span>
+            <p className="text-[15px] text-neutral-700 leading-[1.9] max-w-2xl">{data.summary}</p>
+          </div>
+        </section>
+        <section className="mb-14">
+          <div className="grid grid-cols-[120px_1fr] gap-8">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 pt-1">Experience</span>
+            <div className="space-y-10">{data.experience.map((exp, i) => (
+              <div key={i}>
+                <div className="flex justify-between items-baseline mb-1"><h3 className="text-base font-medium text-neutral-900">{exp.title}, <span className="text-neutral-500 font-light">{exp.company}</span></h3><span className="text-xs text-neutral-400">{exp.dateRange}</span></div>
+                <ul className="mt-3 space-y-2">{exp.bullets.map((b, bi) => <li key={bi} className="text-sm text-neutral-600 leading-relaxed max-w-2xl">{b}</li>)}</ul>
+              </div>
+            ))}</div>
+          </div>
+        </section>
+        <section className="mb-14">
+          <div className="grid grid-cols-[120px_1fr] gap-8">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 pt-1">Education</span>
+            <div className="space-y-4">{data.education.map((edu, i) => (<div key={i} className="flex justify-between items-baseline"><div><h3 className="text-base font-medium">{edu.degree}</h3><p className="text-sm text-neutral-500">{edu.institution}</p></div><span className="text-xs text-neutral-400">{edu.dateRange}</span></div>))}</div>
+          </div>
+        </section>
+        <section>
+          <div className="grid grid-cols-[120px_1fr] gap-8">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 pt-1">Skills</span>
+            <div className="space-y-3 max-w-2xl">{data.skills.map((sg, i) => (<div key={i} className="flex gap-4 pb-3 border-b border-neutral-100 last:border-0"><span className="text-sm font-medium w-32 shrink-0">{sg.category}</span><span className="text-sm text-neutral-600">{sg.items.join(', ')}</span></div>))}</div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
 
   if (designId === 'pro-executive') {
     return (

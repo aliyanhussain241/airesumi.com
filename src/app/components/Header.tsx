@@ -686,6 +686,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               {t('cta.startFreeShort')}
             </Link>
             <button onClick={() => setIsMobileOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={isMobileOpen}
+              aria-controls="mobile-navigation"
               className="md:hidden text-[#374151] dark:text-orange-200 p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
               <Menu size={22} strokeWidth={2} />
             </button>

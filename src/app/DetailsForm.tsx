@@ -389,6 +389,7 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                           <div className="shrink-0 relative group">
                             <img src={userData.profilePicture} alt="Profile" className="w-16 h-16 object-cover rounded-2xl border-4 border-white dark:border-white/10 shadow-lg" />
                             <button type="button" onClick={() => setUserData({ ...userData, profilePicture: undefined })}
+                              aria-label="Remove profile picture"
                               className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><X size={12} /></button>
                           </div>
                         )}
@@ -526,7 +527,7 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                       {skillChips.map(chip => (
                         <span key={chip} className="inline-flex items-center gap-1.5 bg-white dark:bg-white/10 border border-[#FF6321]/25 text-foreground text-[13px] font-medium px-3 py-1.5 rounded-full">
                           {chip}
-                          <button type="button" onClick={() => removeSkill(chip)} className="text-gray-400 hover:text-red-500 -mr-1"><X size={13} /></button>
+                          <button type="button" onClick={() => removeSkill(chip)} aria-label={`Remove ${chip}`} className="text-gray-400 hover:text-red-500 -mr-1"><X size={13} /></button>
                         </span>
                       ))}
                       <input

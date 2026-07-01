@@ -326,7 +326,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelected(null)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
             <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 20 }} className="relative bg-background w-full max-w-6xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden border border-border">
-              <button onClick={() => setSelected(null)} className="absolute top-4 right-4 z-10 w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted">
+              <button onClick={() => setSelected(null)} aria-label="Close preview" className="absolute top-4 right-4 z-10 w-10 h-10 bg-background border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted">
                 <X className="w-5 h-5" />
               </button>
               <div className="flex-1 bg-muted/30 p-6 md:p-10 overflow-y-auto hidden md:block">

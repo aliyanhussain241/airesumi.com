@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Step } from "./App";
 import { JobDescription } from "./lib/types";
+import { MultiStepFormShell } from "./components/MultiStepFormShell";
 
 interface JobFormProps {
   jobData: JobDescription;

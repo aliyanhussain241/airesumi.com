@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Menu, X, LogOut, ChevronDown, FileText, Mail, Target,
-  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon
+  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon,
+  ArrowRight, Sparkles, Zap, TrendingUp
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/hooks/use-theme';
@@ -29,69 +30,40 @@ const GLASS_HEADER_STYLES = `
     border-bottom: 1px solid rgba(234,88,12,0.1);
   }
 
-  /* iOS 26 LIQUID GLASS DROPDOWN — translucent, distorted, shiny */
+  /* ADVANCED DROPDOWN — high-visibility opaque glass with premium feel */
   .hdr-dropdown {
-    --hdr-blur: 28px;
+    --hdr-blur: 32px;
     --hdr-sat: 180%;
     position: absolute;
-    border-radius: 1.75rem;
+    border-radius: 1.5rem;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(234, 88, 12, 0.12);
     box-shadow:
-      0 6px 6px rgba(0, 0, 0, 0.2),
-      0 0 20px rgba(0, 0, 0, 0.1);
+      0 30px 60px -15px rgba(17, 24, 39, 0.25),
+      0 10px 20px -5px rgba(234, 88, 12, 0.10),
+      0 0 0 1px rgba(255, 255, 255, 0.6) inset;
     backdrop-filter: blur(var(--hdr-blur)) saturate(var(--hdr-sat));
-    background: rgba(255, 255, 255, 0.65);
-    transition: backdrop-filter 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-                background 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: backdrop-filter, transform, opacity;
+    transition: background 0.28s ease;
+    will-change: transform, opacity;
   }
-
   :global(html.dark) .hdr-dropdown {
-    background: rgba(20, 20, 28, 0.75);
+    background: rgba(17, 20, 28, 0.98);
+    border: 1px solid rgba(234, 88, 12, 0.22);
+    box-shadow:
+      0 30px 60px -15px rgba(0, 0, 0, 0.7),
+      0 10px 20px -5px rgba(234, 88, 12, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   }
 
-  /* Distortion layer (decorative) */
+  /* Ambient glow at top of dropdown */
   .hdr-dropdown::before {
     content: "";
     position: absolute;
-    inset: 0;
-    z-index: 0;
-    filter: url(#glass-distortion) saturate(120%) brightness(1.15);
+    top: -1px; left: 20%; right: 20%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(234,88,12,0.5), transparent);
     pointer-events: none;
-    opacity: 0.4;
-  }
-
-  /* Subtle tint layer */
-  .hdr-dropdown::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0.25);
-    pointer-events: none;
-  }
-
-  :global(html.dark) .hdr-dropdown::after {
-    background: rgba(20, 20, 28, 0.35);
-  }
-
-
-  /* Glossy shine highlight */
-  .hdr-dropdown > .hdr-dropdown-shine {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    box-shadow:
-      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.75),
-      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.4);
-    pointer-events: none;
-  }
-
-  :global(html.dark) .hdr-dropdown > .hdr-dropdown-shine {
-    box-shadow:
-      inset 2px 2px 1px 0 rgba(255, 255, 255, 0.18),
-      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.08);
+    z-index: 4;
   }
 
   .hdr-dropdown > .hdr-dropdown-content {
@@ -99,14 +71,34 @@ const GLASS_HEADER_STYLES = `
     z-index: 3;
   }
 
-  .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.25);
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
+  /* Featured side panel */
+  .hdr-featured {
+    background: linear-gradient(160deg, rgba(234,88,12,0.10) 0%, rgba(251,146,60,0.06) 60%, transparent 100%);
+    border-right: 1px solid rgba(234,88,12,0.10);
+  }
+  :global(html.dark) .hdr-featured {
+    background: linear-gradient(160deg, rgba(234,88,12,0.18) 0%, rgba(194,65,12,0.08) 60%, transparent 100%);
+    border-right: 1px solid rgba(234,88,12,0.20);
   }
 
+  .hdr-featured-cta {
+    background: linear-gradient(135deg, #EA580C, #C2410C);
+    color: #fff;
+    box-shadow: 0 8px 20px -6px rgba(234,88,12,0.55);
+    transition: all 0.2s ease;
+  }
+  .hdr-featured-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -6px rgba(234,88,12,0.7);
+  }
+
+  .hdr-dropdown-footer {
+    background: rgba(249, 250, 251, 0.9);
+    border-top: 1px solid rgba(17, 24, 39, 0.06);
+  }
   :global(html.dark) .hdr-dropdown-footer {
-    background: rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 12, 18, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   /* Keyboard focus rings */
@@ -115,25 +107,78 @@ const GLASS_HEADER_STYLES = `
   .hdr-dropdown-footer a:focus-visible {
     outline: 2px solid #EA580C;
     outline-offset: 2px;
-    border-radius: 8px;
-  }
-  .hdr-tool-item:focus-visible {
-    background: rgba(234, 88, 12, 0.08);
+    border-radius: 10px;
   }
 
+  /* Tool item card */
+  .hdr-tool-item {
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    transition: all 0.18s ease;
+  }
+  .hdr-tool-item:hover {
+    background: rgba(234, 88, 12, 0.06);
+    border-color: rgba(234, 88, 12, 0.15);
+    transform: translateY(-1px);
+  }
+  :global(html.dark) .hdr-tool-item:hover {
+    background: rgba(234, 88, 12, 0.14);
+    border-color: rgba(234, 88, 12, 0.28);
+  }
+  .hdr-tool-item.active {
+    background: rgba(234, 88, 12, 0.10);
+    border-color: rgba(234, 88, 12, 0.25);
+  }
+  .hdr-tool-arrow {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.18s ease;
+  }
+  .hdr-tool-item:hover .hdr-tool-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .hdr-tool-name {
+    color: #111827;
+  }
+  .hdr-tool-desc {
+    color: #6b7280;
+  }
+  :global(html.dark) .hdr-tool-name { color: #f3f4f6; }
+  :global(html.dark) .hdr-tool-desc { color: #9ca3af; }
 
+  .hdr-badge-new {
+    background: linear-gradient(135deg, #EA580C, #F97316);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .hdr-badge-pro {
+    background: rgba(234, 88, 12, 0.12);
+    color: #C2410C;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  :global(html.dark) .hdr-badge-pro {
+    background: rgba(234, 88, 12, 0.25);
+    color: #FDBA74;
+  }
 
-  /* HORIZONTAL GRID */
   .hdr-dropdown-grid {
     display: grid;
-    gap: 4px;
+    gap: 6px;
   }
-  .hdr-dropdown-grid.cols-2 {
-    grid-template-columns: 1fr 1fr;
-  }
-  .hdr-dropdown-grid.cols-3 {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+  .hdr-dropdown-grid.cols-1 { grid-template-columns: 1fr; }
+  .hdr-dropdown-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 
   .hdr-btn-primary {
     background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
@@ -170,18 +215,13 @@ const GLASS_HEADER_STYLES = `
     background: rgba(234,88,12,0.1);
     color: #EA580C;
   }
-  .hdr-tool-item:hover {
-    background: rgba(234,88,12,0.06);
-    border-radius: 12px;
-  }
-  .hdr-tool-item.active {
-    background: rgba(234,88,12,0.1);
-    border-radius: 12px;
-  }
   .hdr-mobile {
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.98);
     backdrop-filter: blur(40px) saturate(200%);
     -webkit-backdrop-filter: blur(40px) saturate(200%);
+  }
+  :global(html.dark) .hdr-mobile {
+    background: rgba(17, 20, 28, 0.98);
   }
   .hdr-tag {
     background: rgba(234,88,12,0.12);
@@ -198,20 +238,20 @@ export const Logo = () => (
 );
 
 const resumeToolsBase = [
-  { key: 'resumeBuilder',  to: '/resume',            icon: FileText },
-  { key: 'bulletWriter',   to: '/bullet-writer',     icon: PenLine },
-  { key: 'summary',        to: '/summary-generator', icon: List },
-  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target },
+  { key: 'resumeBuilder',  to: '/resume',            icon: FileText, badge: 'popular' as const },
+  { key: 'bulletWriter',   to: '/bullet-writer',     icon: PenLine,  badge: null },
+  { key: 'summary',        to: '/summary-generator', icon: List,     badge: null },
+  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target,   badge: 'new' as const },
 ] as const;
 
 const otherToolsBase = [
-  { key: 'coverLetter',    to: '/cover-letter',       icon: Mail },
-  { key: 'linkedinBio',    to: '/linkedin-bio',       icon: Linkedin },
-  { key: 'atsChecker',     to: '/ats-checker',        icon: Target },
-  { key: 'interviewPrep',  to: '/interview-prep',     icon: Wand2 },
-  { key: 'resignation',    to: '/resignation-letter', icon: FileText },
-  { key: 'pdfScanner',     to: '/pdf-scanner',        icon: ScanLine },
-  { key: 'jobSearch',      to: '/salary-analyzer',    icon: Briefcase },
+  { key: 'coverLetter',    to: '/cover-letter',       icon: Mail,     badge: 'popular' as const },
+  { key: 'linkedinBio',    to: '/linkedin-bio',       icon: Linkedin, badge: null },
+  { key: 'atsChecker',     to: '/ats-checker',        icon: Target,   badge: null },
+  { key: 'interviewPrep',  to: '/interview-prep',     icon: Wand2,    badge: 'new' as const },
+  { key: 'resignation',    to: '/resignation-letter', icon: FileText, badge: null },
+  { key: 'pdfScanner',     to: '/pdf-scanner',        icon: ScanLine, badge: null },
+  { key: 'jobSearch',      to: '/salary-analyzer',    icon: Briefcase, badge: null },
 ] as const;
 
 export const Header = ({ windowWidth }: { windowWidth?: number }) => {
@@ -344,8 +384,15 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
   const handleLogout = async () => { await supabase.auth.signOut(); navigate({ to: '/' }); };
 
-  // ✅ UPDATED: Horizontal tool card layout
-  type HeaderTool = { key: string; to: string; icon: React.ComponentType<{ size?: number; className?: string }>; name: string; desc: string };
+  // Enhanced tool card with badge + hover arrow
+  type HeaderTool = {
+    key: string;
+    to: string;
+    icon: React.ComponentType<{ size?: number; className?: string }>;
+    name: string;
+    desc: string;
+    badge?: 'new' | 'popular' | null;
+  };
   const ToolItem = ({ tool, onClose }: { tool: HeaderTool; onClose: () => void }) => {
     const Icon = tool.icon;
     const active = location.pathname === tool.to;
@@ -355,15 +402,20 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
         onClick={onClose}
         role="menuitem"
         aria-current={active ? 'page' : undefined}
-        className={`hdr-tool-item flex items-center gap-2.5 px-3 py-2.5 no-underline transition-colors group ${active ? 'active' : ''}`}
+        className={`hdr-tool-item flex items-center gap-3 px-3 py-2.5 no-underline group ${active ? 'active' : ''}`}
       >
-        <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${active ? 'bg-[#EA580C]' : 'bg-orange-50 group-hover:bg-orange-100'}`}>
-          <Icon size={14} className={active ? 'text-white' : 'text-[#EA580C]'} />
+        <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all ${active ? 'bg-gradient-to-br from-[#EA580C] to-[#C2410C] shadow-md shadow-orange-500/30' : 'bg-orange-50 dark:bg-orange-500/15 group-hover:bg-orange-100 dark:group-hover:bg-orange-500/25'}`}>
+          <Icon size={15} className={active ? 'text-white' : 'text-[#EA580C]'} />
         </div>
-        <div>
-          <p className={`text-[13px] font-semibold leading-tight ${active ? 'text-[#EA580C]' : 'text-[#111827]'}`}>{tool.name}</p>
-          <p className="text-[11px] text-[#9ca3af] leading-tight">{tool.desc}</p>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5">
+            <p className={`text-[13px] font-semibold leading-tight truncate ${active ? 'text-[#EA580C]' : 'hdr-tool-name'}`}>{tool.name}</p>
+            {tool.badge === 'new' && <span className="hdr-badge-new">New</span>}
+            {tool.badge === 'popular' && <span className="hdr-badge-pro">Popular</span>}
+          </div>
+          <p className="text-[11px] hdr-tool-desc leading-tight mt-0.5 truncate">{tool.desc}</p>
         </div>
+        <ArrowRight size={14} className="hdr-tool-arrow text-[#EA580C] flex-shrink-0" aria-hidden="true" />
       </Link>
     );
   };
@@ -436,24 +488,50 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     aria-label={t('dropdown.resumeToolsLabel')}
                     onKeyDown={(e) => handleMenuKeyDown(e, () => setIsResumeOpen(false), resumeBtnRef)}
                     style={{ transformOrigin: 'top center' }}
-                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[480px]"
+                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[640px]"
                   >
-                    <span className="hdr-dropdown-shine" aria-hidden="true" />
-                    <div className="hdr-dropdown-content">
-                      <div className="p-4">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">{t('dropdown.resumeToolsLabel')}</p>
-                        <div className="hdr-dropdown-grid cols-2">
-                          {resumeTools.map(tool => (
-                            <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
-                          ))}
+                    <div className="hdr-dropdown-content grid grid-cols-[220px_1fr]">
+                      {/* Featured side panel */}
+                      <div className="hdr-featured p-5 flex flex-col">
+                        <div className="inline-flex items-center gap-1.5 self-start rounded-full bg-white/70 dark:bg-white/10 backdrop-blur px-2.5 py-1 text-[10px] font-bold text-[#C2410C] dark:text-orange-300 uppercase tracking-widest border border-orange-200/60 dark:border-orange-500/30">
+                          <Sparkles size={11} /> AI Powered
+                        </div>
+                        <h3 className="mt-3 text-[17px] font-bold leading-snug text-[#111827] dark:text-white">
+                          Build a resume that gets you hired.
+                        </h3>
+                        <p className="mt-1.5 text-[12px] leading-relaxed text-[#6b7280] dark:text-gray-400">
+                          Tailored to any role in seconds — with ATS keywords, punchy bullets & a clean design.
+                        </p>
+                        <div className="mt-auto pt-4">
+                          <Link
+                            to="/resume"
+                            role="menuitem"
+                            onClick={() => setIsResumeOpen(false)}
+                            className="hdr-featured-cta inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] font-bold no-underline"
+                          >
+                            <Zap size={13} /> Start Building
+                            <ArrowRight size={13} />
+                          </Link>
                         </div>
                       </div>
-                      <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
-                        <span className="text-[11px] text-[#9ca3af]">{t('dropdown.resumeToolsCount', { count: resumeTools.length })}</span>
-                        <Link to="/resume" onClick={() => setIsResumeOpen(false)} role="menuitem"
-                          className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                          {t('cta.startFreeArrow')}
-                        </Link>
+
+                      {/* Tools list */}
+                      <div className="flex flex-col">
+                        <div className="p-4">
+                          <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-2 px-2">{t('dropdown.resumeToolsLabel')}</p>
+                          <div className="hdr-dropdown-grid cols-1">
+                            {resumeTools.map(tool => (
+                              <ToolItem key={tool.to} tool={tool} onClose={() => setIsResumeOpen(false)} />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between mt-auto">
+                          <span className="text-[11px] text-[#9ca3af] flex items-center gap-1"><TrendingUp size={11} /> {t('dropdown.resumeToolsCount', { count: resumeTools.length })}</span>
+                          <Link to="/resume" onClick={() => setIsResumeOpen(false)} role="menuitem"
+                            className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline flex items-center gap-1">
+                            {t('cta.startFreeArrow')} <ArrowRight size={12} />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -487,24 +565,50 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                     aria-label={t('dropdown.otherToolsLabel')}
                     onKeyDown={(e) => handleMenuKeyDown(e, () => setIsOtherOpen(false), otherBtnRef)}
                     style={{ transformOrigin: 'top center' }}
-                    className="hdr-dropdown absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 w-[600px]"
+                    className="hdr-dropdown absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 w-[720px]"
                   >
-                    <span className="hdr-dropdown-shine" aria-hidden="true" />
-                    <div className="hdr-dropdown-content">
-                      <div className="p-4">
-                        <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-3 px-2">{t('dropdown.otherToolsLabel')}</p>
-                        <div className="hdr-dropdown-grid cols-3">
-                          {otherTools.map(tool => (
-                            <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
-                          ))}
+                    <div className="hdr-dropdown-content grid grid-cols-[220px_1fr]">
+                      {/* Featured side panel */}
+                      <div className="hdr-featured p-5 flex flex-col">
+                        <div className="inline-flex items-center gap-1.5 self-start rounded-full bg-white/70 dark:bg-white/10 backdrop-blur px-2.5 py-1 text-[10px] font-bold text-[#C2410C] dark:text-orange-300 uppercase tracking-widest border border-orange-200/60 dark:border-orange-500/30">
+                          <Sparkles size={11} /> Career Suite
+                        </div>
+                        <h3 className="mt-3 text-[17px] font-bold leading-snug text-[#111827] dark:text-white">
+                          Go beyond the resume.
+                        </h3>
+                        <p className="mt-1.5 text-[12px] leading-relaxed text-[#6b7280] dark:text-gray-400">
+                          Cover letters, LinkedIn, ATS checks, interviews & more — every tool you need to land the offer.
+                        </p>
+                        <div className="mt-auto pt-4">
+                          <Link
+                            to="/cover-letter"
+                            role="menuitem"
+                            onClick={() => setIsOtherOpen(false)}
+                            className="hdr-featured-cta inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] font-bold no-underline"
+                          >
+                            <Zap size={13} /> Explore Tools
+                            <ArrowRight size={13} />
+                          </Link>
                         </div>
                       </div>
-                      <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between">
-                        <span className="text-[11px] text-[#9ca3af]">{t('dropdown.otherToolsCount', { count: otherTools.length })}</span>
-                        <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
-                          className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline">
-                          {t('cta.explore')}
-                        </Link>
+
+                      {/* Tools list */}
+                      <div className="flex flex-col">
+                        <div className="p-4">
+                          <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-widest mb-2 px-2">{t('dropdown.otherToolsLabel')}</p>
+                          <div className="hdr-dropdown-grid cols-2">
+                            {otherTools.map(tool => (
+                              <ToolItem key={tool.to} tool={tool} onClose={() => setIsOtherOpen(false)} />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="hdr-dropdown-footer px-5 py-2.5 flex items-center justify-between mt-auto">
+                          <span className="text-[11px] text-[#9ca3af] flex items-center gap-1"><TrendingUp size={11} /> {t('dropdown.otherToolsCount', { count: otherTools.length })}</span>
+                          <Link to="/cover-letter" onClick={() => setIsOtherOpen(false)} role="menuitem"
+                            className="text-[12px] font-bold text-[#EA580C] no-underline hover:underline flex items-center gap-1">
+                            {t('cta.explore')} <ArrowRight size={12} />
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

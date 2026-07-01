@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Target, Sparkles, RefreshCw, AlertCircle, CheckCircle2, XCircle, Lightbulb } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { ToolContentSection } from "../app/components/ToolContentSection";
+import { KEYWORD_CONTENT } from "../app/components/toolContent";
 
 function ScoreRing({ score }: { score: number }) {
   const color = score >= 70 ? "#22c55e" : score >= 50 ? "#f59e0b" : "#ef4444";

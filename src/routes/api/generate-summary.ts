@@ -1,60 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
-import { createClient } from "@supabase/supabase-js";
+import { requireAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/api/generate-summary")({
   server: {
     handlers: {
       POST: async ({ request }) => {
         try {
-          const authHeader = request.headers.get("Authorization");
-          if (!authHeader?.startsWith("Bearer ")) {
-            return new Response(JSON.stringify({ error: "Unauthorized. Please log in." }), { status: 401 });
-          }
-          const token = authHeader.replace("Bearer ", "");
-          const supabase = createClient(
-            (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL)!,
-            (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY)!
-          );
-          const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-          if (authError || !user) {
-            return new Response(JSON.stringify({ error: "Invalid session." }), { status: 401 });
+          let user: any, supabase: any;
+          try {
+            ({ user, supabase } = await requireAuth(request));
+          } catch (err: any) {
+            return new Response(JSON.stringify({ error: err.message }), { status: 401 });
           }
 
           const { role, experience, skills, jobTitle, tone } = await request.json() as any;
 
-          const prompt = `You are an expert resume writer. Generate 3 different professional resume summary options.
+          const prompt = `Resume writer. Generate 3 professional summary options (50-80 words each). ATS-optimized. Respond ONLY in JSON:
+{"summaries":[{"label":"Results-Focused","text":""},{"label":"Skills-Led","text":""},{"label":"Story-Driven","text":""}]}
 
-Target Role: ${jobTitle || role || "Professional"}
-Years of Experience: ${experience || ""}
-Key Skills: ${skills || ""}
-Tone: ${tone || "Professional"}
+Role: ${String(jobTitle || role || "").slice(0, 100)}
+Experience: ${String(experience || "").slice(0, 100)}
+Skills: ${String(skills || "").slice(0, 300)}
+Tone: ${String(tone || "Professional").slice(0, 50)}`;
 
-Rules:
-1. Each summary 2-3 sentences, 50-80 words
-2. Start with years of experience or key strength
-3. Include 2-3 relevant skills
-4. End with value proposition
-5. ATS-optimized, no buzzwords
-
-Return ONLY valid JSON, no markdown:
-{
-  "summaries": [
-    { "label": "Results-Focused", "text": "..." },
-    { "label": "Skills-Led", "text": "..." },
-    { "label": "Story-Driven", "text": "..." }
-  ]
-}`;
-
-          const response = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
+          const response = await callAIGateway({
+            language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             json: true,
             temperature: 0.7,
           });
 
-          const parsed = safeJSON(response);
-
-          return new Response(JSON.stringify(parsed), {
+          return new Response(JSON.stringify(safeJSON(response)), {
             status: 200,
             headers: { "Content-Type": "application/json" },
           });

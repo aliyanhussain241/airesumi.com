@@ -5,9 +5,9 @@ import rezumiLogo from "@/assets/ai-resumi.webp";
 import rezumiLogoWhite from "@/assets/rezumi-white.webp";
 
 const linkCls =
-  "text-[14px] text-neutral-300 hover:text-[#FF6321] transition-colors no-underline";
+  "block py-2 -mx-2 px-2 rounded-md text-[15px] sm:text-[14px] text-neutral-300 hover:text-[#FF6321] hover:bg-white/5 active:bg-white/10 transition-colors no-underline whitespace-nowrap";
 const headCls =
-  "text-[11px] font-bold tracking-[0.18em] text-[#FF6321] uppercase mb-5";
+  "text-[11px] font-bold tracking-[0.18em] text-[#FF6321] uppercase mb-3 sm:mb-5";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -26,20 +26,20 @@ export const Footer = () => {
           <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#FF6321]/20 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-32 -right-24 h-80 w-80 rounded-full bg-[#FF6321]/15 blur-3xl" />
 
-          <div className="relative grid grid-cols-2 md:grid-cols-5 gap-10">
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10">
             {/* Brand */}
-            <div className="col-span-2 space-y-5">
-              <div className="flex items-center">
+            <div className="sm:col-span-2 space-y-5 text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start">
                 <img
                   src={rezumiLogoWhite}
                   alt="airesumi - AI Resume Builder"
-                  className="h-10 w-auto"
+                  className="h-10 w-auto shrink-0"
                 />
               </div>
-              <p className="text-[14px] leading-relaxed text-neutral-400 max-w-xs">
+              <p className="text-[14px] leading-relaxed text-neutral-400 max-w-xs mx-auto sm:mx-0">
                 {t("footer.tagline")}
               </p>
-              <div className="flex gap-3 pt-1">
+              <div className="flex gap-3 pt-1 justify-center sm:justify-start">
                 {[
                   { Icon: Twitter, href: "#", label: "Twitter" },
                   { Icon: Github, href: "#", label: "GitHub" },
@@ -50,7 +50,7 @@ export const Footer = () => {
                     key={label}
                     href={href}
                     aria-label={label}
-                    className="w-9 h-9 rounded-full bg-[#FF6321]/15 border border-[#FF6321]/30 flex items-center justify-center text-[#FF6321] hover:bg-[#FF6321] hover:text-white transition-all hover:scale-110"
+                    className="w-11 h-11 shrink-0 rounded-full bg-[#FF6321]/15 border border-[#FF6321]/30 flex items-center justify-center text-[#FF6321] hover:bg-[#FF6321] hover:text-white transition-all hover:scale-110"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -58,9 +58,12 @@ export const Footer = () => {
               </div>
             </div>
 
-            <div>
+
+
+            <div className="min-w-0">
               <h4 className={headCls}>{t("footer.resumeTools")}</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-1">
+
                 <li><Link to="/resume" className={linkCls}>{t("tools.resumeBuilder.name")}</Link></li>
                 <li><Link to="/bullet-writer" className={linkCls}>{t("tools.bulletWriter.name")}</Link></li>
                 <li><Link to="/summary-generator" className={linkCls}>{t("tools.summary.name")}</Link></li>
@@ -69,9 +72,9 @@ export const Footer = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className={headCls}>{t("footer.resources")}</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-1">
                 <li><Link to="/cover-letter" className={linkCls}>{t("tools.coverLetter.name")}</Link></li>
                 <li><Link to="/linkedin-bio" className={linkCls}>{t("tools.linkedinBio.name")}</Link></li>
                 <li><Link to="/interview-prep" className={linkCls}>{t("footer.interviewQuestions")}</Link></li>
@@ -80,9 +83,10 @@ export const Footer = () => {
               </ul>
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className={headCls}>{t("footer.company")}</h4>
-              <ul className="space-y-3">
+              <ul className="space-y-1">
+
                 <li><Link to="/about" className={linkCls}>{t("footer.about")}</Link></li>
                 <li><Link to="/blog" className={linkCls}>{t("footer.careerBlog")}</Link></li>
                 <li><Link to="/contact" className={linkCls}>{t("footer.contact")}</Link></li>

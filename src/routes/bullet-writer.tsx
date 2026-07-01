@@ -154,5 +154,5 @@ export const Route = createFileRoute("/bullet-writer")({
       { name: "description", content: "Generate powerful, metric-driven resume bullet points with AI." },
     ],
   }),
-  component: BulletWriter,
+  component: () => (<><BulletWriter /><ToolContentSection {...BULLET_CONTENT} /></>),
 });

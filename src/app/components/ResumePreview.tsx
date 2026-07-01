@@ -7,7 +7,8 @@ export type DesignId =
   | 'elegant-serif' | 'tech-dark' | 'pastel-soft' | 'gold-luxury'
   | 'blue-professional' | 'teal-modern'
   | 'slate-clean' | 'rose-minimal'
-  | 'pro-executive' | 'pro-infographic' | 'pro-developer' | 'pro-agency' | 'pro-elegant';
+  | 'pro-executive' | 'pro-infographic' | 'pro-developer' | 'pro-agency' | 'pro-elegant'
+  | 'pro-monochrome' | 'pro-timeline' | 'pro-gradient' | 'pro-startup' | 'pro-diamond' | 'pro-minimalist';
 
 export function ResumePreview({ data, designId = 'classic' }: { data: ResumeData, designId?: DesignId }) {
 

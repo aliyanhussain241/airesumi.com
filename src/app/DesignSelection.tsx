@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight, Crown, Search, Sparkles, Check, Eye, X } from "lucide-react";
 import { Step } from "./App";
 import { DesignId } from "./components/ResumePreview";
+import { MultiStepFormShell } from "./components/MultiStepFormShell";
 
 interface DesignSelectionProps {
   designId: DesignId;

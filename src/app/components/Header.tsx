@@ -730,7 +730,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1 h-12 rounded-full bg-black/10 dark:bg-white/15" aria-hidden="true" />
 
               {/* Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-black/5 dark:border-white/5 flex-shrink-0">
+              <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-4 border-b border-black/5 dark:border-white/5 flex-shrink-0 bg-white/95 dark:bg-[#0b0b12]/95 backdrop-blur-xl">
                 <Logo />
                 <button
                   onClick={() => setIsMobileOpen(false)}

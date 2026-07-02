@@ -356,8 +356,17 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   }, []);
 
   useEffect(() => {
-    const fn = () => setIsScrolled(window.scrollY > 10);
-    fn(); window.addEventListener('scroll', fn);
+    // Passive + rAF-throttled to avoid forced reflow / main-thread jank on scroll.
+    let ticking = false;
+    let last = false;
+    const update = () => {
+      const next = window.scrollY > 10;
+      if (next !== last) { last = next; setIsScrolled(next); }
+      ticking = false;
+    };
+    const fn = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    update();
+    window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
   }, []);
 

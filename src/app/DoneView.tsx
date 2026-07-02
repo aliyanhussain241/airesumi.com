@@ -126,9 +126,14 @@ export const DoneView: React.FC<DoneViewProps> = ({
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#0a0a0a] rounded-b-2xl z-50"></div>
             <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth pt-10 pb-12 w-full bg-[#f3f4f6]">
               <div className="w-[850px] mx-auto origin-top-left flex flex-col" style={{ transform: 'scale(0.407)' }}>
-                <div id="resume-document-mobile" className="bg-white shadow-xl flex-1 w-full min-h-[1100px] flex flex-col">
+              <div id="resume-document-mobile" className="relative bg-white shadow-xl flex-1 w-full min-h-[1100px] flex flex-col">
                    <ResumePreview data={resumeData} designId={designId} />
-                </div>
+                   {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
+                     <div className="absolute top-6 right-6 z-10">
+                       <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
+                     </div>
+                   )}
+                 </div>
               </div>
             </div>
           </div>

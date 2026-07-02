@@ -1,4 +1,4 @@
-import type { HowToStep, FaqItem } from "../components/ToolContentSection";
+import type { HowToStep, FaqItem, FeatureItem } from "../components/ToolContentSection";
 
 export interface ToolContent {
   whatTitle: string;
@@ -6,6 +6,7 @@ export interface ToolContent {
   howToTitle: string;
   howToSteps: HowToStep[];
   faqs: FaqItem[];
+  features?: FeatureItem[];
 }
 
 /* ------------------------------------------------------------------ */

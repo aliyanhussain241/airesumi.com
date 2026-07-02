@@ -111,9 +111,14 @@ export const DoneView: React.FC<DoneViewProps> = ({
               className="origin-top flex justify-center print:transform-none"
               style={{ transform: `scale(${Math.min(1, Math.max(0.35, (windowWidth - 48) / 850))})` }}
             >
-              <div id="resume-document" className="bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col">
+            <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col">
                  <ResumePreview data={resumeData} designId={designId} />
-              </div>
+                 {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
+                   <div className="absolute top-6 right-6 z-10 print:top-6 print:right-6">
+                     <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
+                   </div>
+                 )}
+               </div>
             </div>
           </div>
         ) : (

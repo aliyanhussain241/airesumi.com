@@ -390,6 +390,58 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                           <span className="text-[12px] font-semibold text-foreground">Show on resume</span>
                         </label>
                       </div>
+
+                      {userData.showQrCode !== false && (userData.qrCodeUrl ?? "").trim() !== "" && (
+                        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-muted/40 border border-border/60">
+                          <div>
+                            <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">Placement</label>
+                            <div className="grid grid-cols-2 gap-2">
+                              {([
+                                { id: "top-left", label: "Top Left" },
+                                { id: "top-right", label: "Top Right" },
+                                { id: "bottom-left", label: "Bottom Left" },
+                                { id: "bottom-right", label: "Bottom Right" },
+                              ] as const).map((p) => {
+                                const active = (userData.qrPosition ?? "top-right") === p.id;
+                                return (
+                                  <button
+                                    type="button"
+                                    key={p.id}
+                                    onClick={() => setUserData({ ...userData, qrPosition: p.id })}
+                                    className={`px-3 py-2 rounded-lg text-[11px] font-semibold uppercase tracking-wider transition-all border ${
+                                      active
+                                        ? "bg-[#FF6321] text-white border-[#FF6321] shadow-sm"
+                                        : "bg-background text-foreground border-border hover:border-[#FF6321]/50"
+                                    }`}
+                                    aria-pressed={active}
+                                  >
+                                    {p.label}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                          <div>
+                            <label className="flex items-center justify-between text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                              <span>Size</span>
+                              <span className="text-foreground normal-case tracking-normal">{userData.qrSize ?? 72}px</span>
+                            </label>
+                            <input
+                              type="range"
+                              min={60}
+                              max={80}
+                              step={2}
+                              value={userData.qrSize ?? 72}
+                              onChange={(e) => setUserData({ ...userData, qrSize: Number(e.target.value) })}
+                              className="w-full accent-[#FF6321]"
+                              aria-label="QR code size"
+                            />
+                            <div className="mt-1 flex justify-between text-[10px] text-muted-foreground">
+                              <span>60</span><span>70</span><span>80</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
 

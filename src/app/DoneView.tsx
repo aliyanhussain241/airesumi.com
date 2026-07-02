@@ -30,6 +30,15 @@ export const DoneView: React.FC<DoneViewProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const qrPosClass: Record<string, string> = {
+    "top-right": "top-6 right-6",
+    "top-left": "top-6 left-6",
+    "bottom-right": "bottom-6 right-6",
+    "bottom-left": "bottom-6 left-6",
+  };
+  const qrPos = qrPosClass[resumeData.header.qrPosition ?? "top-right"] ?? qrPosClass["top-right"];
+  const qrSize = resumeData.header.qrSize ?? 72;
+
   return (
     <motion.div
       key="done"
@@ -122,8 +131,8 @@ export const DoneView: React.FC<DoneViewProps> = ({
                 <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col overflow-hidden">
                   <ResumePreview data={resumeData} designId={designId} />
                   {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
-                    <div className="absolute top-6 right-6 z-10 print:top-6 print:right-6">
-                      <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
+                    <div className={`absolute ${qrPos} z-10`}>
+                      <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />
                     </div>
                   )}
                 </div>
@@ -138,8 +147,8 @@ export const DoneView: React.FC<DoneViewProps> = ({
               <div id="resume-document-mobile" className="relative bg-white shadow-xl flex-1 w-full min-h-[1100px] flex flex-col">
                    <ResumePreview data={resumeData} designId={designId} />
                    {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
-                     <div className="absolute top-6 right-6 z-10">
-                       <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
+                     <div className={`absolute ${qrPos} z-10`}>
+                       <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />
                      </div>
                    )}
                  </div>

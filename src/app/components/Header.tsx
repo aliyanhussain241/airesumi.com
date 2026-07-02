@@ -704,8 +704,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               aria-label="Open menu"
               aria-expanded={isMobileOpen}
               aria-controls="mobile-navigation"
-              className="md:hidden text-[#374151] dark:text-orange-200 p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
-              <Menu size={22} strokeWidth={2} />
+              /* Fixed w/h so the icon-only button reserves a stable box (CLS fix). */
+              className="md:hidden w-10 h-10 flex items-center justify-center text-[#374151] dark:text-orange-200 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              <Menu size={22} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>
 

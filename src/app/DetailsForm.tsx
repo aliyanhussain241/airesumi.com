@@ -359,6 +359,40 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
                       </div>
                     </div>
 
+                    {/* QR Code */}
+                    <div className="md:col-span-2">
+                      <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">
+                        QR Code Link <span className="normal-case font-normal text-gray-400">(optional)</span>
+                      </label>
+                      <div className="relative">
+                        <Zap size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="url"
+                          inputMode="url"
+                          className={fieldClass}
+                          placeholder="https://linkedin.com/in/you  or  yourportfolio.com"
+                          value={userData.qrCodeUrl ?? ""}
+                          onChange={(e) => setUserData({ ...userData, qrCodeUrl: e.target.value })}
+                        />
+                      </div>
+                      <div className="mt-2 flex items-start justify-between gap-3 flex-wrap">
+                        <p className="text-[12px] text-muted-foreground leading-snug max-w-md">
+                          Add a QR code linking to your LinkedIn, portfolio, or online resume so recruiters can scan and visit instantly.
+                        </p>
+                        <label className="inline-flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            className="peer sr-only"
+                            checked={userData.showQrCode !== false}
+                            onChange={(e) => setUserData({ ...userData, showQrCode: e.target.checked })}
+                          />
+                          <span className="w-9 h-5 rounded-full bg-gray-200 dark:bg-white/10 relative transition-colors peer-checked:bg-[#FF6321] after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-4 after:h-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-4" />
+                          <span className="text-[12px] font-semibold text-foreground">Show on resume</span>
+                        </label>
+                      </div>
+                    </div>
+
+
                     {/* Job Title */}
                     <div className="md:col-span-2">
                       <label className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2">Current / Target Job Title</label>

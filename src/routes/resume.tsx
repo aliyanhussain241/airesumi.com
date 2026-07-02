@@ -26,6 +26,8 @@ function buildResumeFromUserData(userData: UserData, jobData: JobDescription): R
       contactInfo: [userData.email, userData.phone, userData.linkedin].filter(Boolean).join(" | "),
       title: jobData.title || userData.currentRole || "Professional",
       profilePicture: userData.profilePicture,
+      qrCodeUrl: userData.qrCodeUrl,
+      showQrCode: userData.showQrCode,
     },
     summary: `${userData.currentRole || "Professional"} with experience in ${
       userData.skills.filter(Boolean).join(", ") || "various domains"
@@ -120,6 +122,8 @@ function ResumeBuilder() {
     location: "",
     portfolio: "",
     certifications: [""],
+    qrCodeUrl: "",
+    showQrCode: true,
   });
   const [jobData, setJobData] = useState<JobDescription>({
     title: "",

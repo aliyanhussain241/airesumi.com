@@ -11,6 +11,8 @@ export interface UserData {
   location?: string;
   portfolio?: string;
   certifications?: string[];
+  qrCodeUrl?: string;
+  showQrCode?: boolean;
 }
 
 export interface JobDescription {
@@ -34,6 +36,8 @@ export interface ResumeData {
     contactInfo: string;
     title: string;
     profilePicture?: string;
+    qrCodeUrl?: string;
+    showQrCode?: boolean;
   };
   summary: string;
   experience: {

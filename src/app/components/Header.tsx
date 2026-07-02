@@ -232,8 +232,9 @@ const GLASS_HEADER_STYLES = `
 
 export const Logo = () => (
   <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">
-    <img src={rezumiLogo} alt="airesumi" className="theme-logo-light h-8 w-auto object-contain" />
-    <img src={rezumiLogoWhite} alt="airesumi" className="theme-logo-dark h-8 w-auto object-contain" />
+    {/* Explicit width/height reserves space so the header doesn't shift when the logo webp decodes (CLS fix). */}
+    <img src={rezumiLogo} alt="airesumi" width={128} height={32} className="theme-logo-light h-8 w-auto object-contain" />
+    <img src={rezumiLogoWhite} alt="airesumi" width={128} height={32} className="theme-logo-dark h-8 w-auto object-contain" />
   </div>
 );
 
@@ -703,8 +704,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               aria-label="Open menu"
               aria-expanded={isMobileOpen}
               aria-controls="mobile-navigation"
-              className="md:hidden text-[#374151] dark:text-orange-200 p-1.5 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
-              <Menu size={22} strokeWidth={2} />
+              /* Fixed w/h so the icon-only button reserves a stable box (CLS fix). */
+              className="md:hidden w-10 h-10 flex items-center justify-center text-[#374151] dark:text-orange-200 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              <Menu size={22} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>
 

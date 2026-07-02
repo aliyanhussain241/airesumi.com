@@ -28,6 +28,8 @@ function buildResumeFromUserData(userData: UserData, jobData: JobDescription): R
       profilePicture: userData.profilePicture,
       qrCodeUrl: userData.qrCodeUrl,
       showQrCode: userData.showQrCode,
+      qrPosition: userData.qrPosition,
+      qrSize: userData.qrSize,
     },
     summary: `${userData.currentRole || "Professional"} with experience in ${
       userData.skills.filter(Boolean).join(", ") || "various domains"

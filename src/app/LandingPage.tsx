@@ -159,115 +159,230 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
              </div>
            </div>
            
-           <div className="relative h-[500px] lg:h-[600px] flex items-center justify-center mt-8 lg:mt-0 transform scale-[0.6] sm:scale-[0.8] lg:scale-100 origin-top -mb-[150px] sm:-mb-[80px] lg:mb-0">
-             {/* Background Glow */}
-             <motion.div 
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 0.7 }}
-               transition={{ duration: 1.5, delay: 0.2 }}
-               className="absolute w-[450px] h-[450px] bg-orange-50 rounded-full blur-3xl z-0"
-             />
-             
-             {/* Main Resume Paper */}
-             <motion.div 
-               initial={{ opacity: 0, y: 40 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.8, ease: "easeOut" }}
-               className="absolute bg-white rounded-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] p-8 w-[400px] h-[520px] z-10 border border-gray-100/50 flex flex-col pt-12 text-left"
-             >
-               <div className="border-b border-gray-100 pb-5 mb-5 select-none">
-                 <h3 className="text-[#FF6321] text-3xl font-serif font-semibold tracking-tight">Alice Hart</h3>
-                 <p className="text-gray-500 text-sm mt-1">Math Teacher</p>
-               </div>
-               <div className="space-y-2 mb-6">
-                 <div className="h-2.5 bg-gray-200 rounded w-full"></div>
-                 <div className="h-2.5 bg-gray-200 rounded w-11/12"></div>
-                 <div className="h-2.5 bg-gray-200 rounded w-10/12"></div>
-                 <div className="h-2.5 bg-gray-200 rounded w-full"></div>
-               </div>
-               <div className="space-y-4 flex-1">
-                 <div>
-                   <p className="text-sm font-semibold text-gray-400 mb-2">Employment History</p>
-                   <div className="space-y-2">
-                     <div className="h-2.5 bg-gray-200 rounded w-full"></div>
-                     <div className="h-2.5 bg-gray-200 rounded w-full"></div>
-                     <div className="h-2.5 bg-gray-200 rounded w-3/4"></div>
-                   </div>
-                 </div>
-                 <div>
-                   <div className="space-y-2">
-                     <div className="h-2.5 bg-gray-200 rounded w-full"></div>
-                     <div className="h-2.5 bg-gray-200 rounded w-5/6"></div>
-                   </div>
-                 </div>
-               </div>
-             </motion.div>
-           
-             {/* Floating Avatar */}
-             <motion.div 
-               initial={{ opacity: 0, scale: 0.8, x: 20 }}
-               animate={{ opacity: 1, scale: 1, x: 0 }}
-               transition={{ duration: 0.6, delay: 0.3, ease: "backOut" }}
-               className="absolute top-12 right-4 w-40 h-40 rounded-full border-[6px] border-white shadow-xl bg-orange-400 z-20 overflow-hidden hover:scale-105 transition-transform duration-300"
-             >
-                {/* FIX #9: loading="lazy" added. ACTION REQUIRED: Download this image,
-                    convert to WebP, and serve from /images/avatar-testimonial.webp
-                    to eliminate the cross-origin request on load. */}
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Avatar" className="w-full h-full object-cover" loading="lazy" width="300" height="300" />
-             </motion.div>
-           
-             {/* Floating Resume Score */}
-             <motion.div 
-               initial={{ opacity: 0, x: -30 }}
-               animate={{ opacity: 1, x: 0 }}
-               transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-               className="absolute top-44 -left-12 bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-2.5 flex items-center gap-3 z-30 hover:-translate-y-1 transition-transform duration-300 pointer-events-auto cursor-default"
-             >
-                <div className="bg-[#22c55e] text-white font-bold text-lg px-2.5 py-1 rounded-lg">81%</div>
-                <div className="text-sm font-bold text-[#2d3748] leading-tight pr-2">Resume<br/>Score</div>
-             </motion.div>
-           
-             {/* Floating ATS Perfect */}
-             <motion.div 
-               initial={{ opacity: 0, scale: 0.8, x: 30 }}
-               animate={{ opacity: 1, scale: 1, x: 0 }}
-               transition={{ duration: 0.6, delay: 0.6, ease: "backOut" }}
-               className="absolute top-[40%] right-[-10%] bg-[#FF6321] text-white px-4 py-3 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] font-bold flex items-center gap-2 z-30 hover:scale-105 transition-transform duration-300 cursor-default"
-             >
-                 <Wand2 size={18} /> ATS Perfect
-             </motion.div>
-           
-             {/* Floating Skills Card */}
-             <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-               className="absolute bottom-20 -right-8 bg-white p-5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] z-20 w-56 border border-gray-50 hover:-translate-y-1 transition-transform duration-300"
-             >
-                <h4 className="font-bold text-[#2d3748] text-opacity-90 mb-3 flex justify-between items-center">Skills <span className="text-gray-400 font-normal">✎</span></h4>
-                <div className="space-y-2.5">
-                  <div className="bg-[#f8fafc] text-[#475569] text-[13px] py-1.5 px-3 rounded-md font-medium border border-gray-100">Management Skills</div>
-                  <div className="bg-[#f8fafc] text-[#475569] text-[13px] py-1.5 px-3 rounded-md font-medium border border-gray-100">Analytical Thinking</div>
-                  <div className="bg-[#f8fafc] text-[#475569] text-[13px] py-1.5 px-3 rounded-md font-medium border border-gray-100">Leadership</div>
+            <div className="relative h-[500px] lg:h-[620px] flex items-center justify-center mt-8 lg:mt-0 transform scale-[0.6] sm:scale-[0.8] lg:scale-100 origin-top -mb-[150px] sm:-mb-[80px] lg:mb-0">
+              {/* Ambient Gradient Glows */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.6, delay: 0.1 }}
+                className="absolute w-[520px] h-[520px] rounded-full blur-3xl z-0 pointer-events-none"
+                style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,99,33,0.35), rgba(255,140,90,0.15) 40%, transparent 70%)" }}
+              />
+              <motion.div
+                animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.55, 0.35] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-10 right-10 w-72 h-72 rounded-full blur-3xl z-0 pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(255,99,33,0.28), transparent 70%)" }}
+              />
+
+              {/* Subtle grid backdrop */}
+              <div
+                className="absolute inset-0 z-0 opacity-[0.35] pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(15,23,42,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.06) 1px, transparent 1px)",
+                  backgroundSize: "28px 28px",
+                  maskImage: "radial-gradient(circle at 50% 50%, black 40%, transparent 75%)",
+                  WebkitMaskImage: "radial-gradient(circle at 50% 50%, black 40%, transparent 75%)",
+                }}
+              />
+
+              {/* Main Resume Paper */}
+              <motion.div
+                initial={{ opacity: 0, y: 40, rotateX: 10 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
+                className="absolute bg-white rounded-2xl p-8 w-[400px] h-[540px] z-10 flex flex-col pt-10 text-left overflow-hidden"
+                style={{
+                  boxShadow:
+                    "0 30px 60px -25px rgba(15,23,42,0.25), 0 10px 30px -12px rgba(255,99,33,0.15), inset 0 0 0 1px rgba(255,255,255,0.9)",
+                }}
+              >
+                {/* Top gradient bar */}
+                <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#FF6321] via-[#ff8c5a] to-[#FF6321]" />
+
+                {/* Live status pill */}
+                <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                  </span>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-700">Live</span>
                 </div>
-                <button className="text-[#FF6321] font-bold text-sm mt-3 pt-3 flex items-center gap-1 w-full justify-center border-t border-orange-50 hover:bg-orange-50 transition-colors rounded-none">
+
+                <div className="border-b border-gray-100 pb-5 mb-5 select-none">
+                  <h3 className="text-[#FF6321] text-3xl font-serif font-semibold tracking-tight">Alice Hart</h3>
+                  <p className="text-gray-500 text-sm mt-1">Math Teacher · San Francisco, CA</p>
+                </div>
+
+                {/* AI-typing summary */}
+                <div className="space-y-2 mb-6">
+                  <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1.2, delay: 0.6 }} className="h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
+                  <motion.div initial={{ width: 0 }} animate={{ width: "91.6667%" }} transition={{ duration: 1.2, delay: 0.9 }} className="h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
+                  <motion.div initial={{ width: 0 }} animate={{ width: "83.3333%" }} transition={{ duration: 1.2, delay: 1.2 }} className="h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
+                </div>
+
+                <div className="space-y-4 flex-1">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-1 h-4 bg-[#FF6321] rounded-full" />
+                      <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Employment History</p>
+                    </div>
+                    <div className="space-y-2">
+                      <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.4 }} className="h-2.5 bg-gray-200 rounded w-full" />
+                      <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.55 }} className="h-2.5 bg-gray-200 rounded w-11/12" />
+                      <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.7 }} className="h-2.5 bg-gray-200 rounded w-3/4" />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-1 h-4 bg-[#FF6321] rounded-full" />
+                      <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">Education</p>
+                    </div>
+                    <div className="space-y-2">
+                      <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.85 }} className="h-2.5 bg-gray-200 rounded w-full" />
+                      <motion.div initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2 }} className="h-2.5 bg-gray-200 rounded w-5/6" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom keyword chips */}
+                <div className="mt-4 pt-3 border-t border-gray-100 flex flex-wrap gap-1.5">
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#FF6321]/10 text-[#FF6321] uppercase tracking-wider">Curriculum</span>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 uppercase tracking-wider">STEM</span>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 uppercase tracking-wider">Mentoring</span>
+                </div>
+              </motion.div>
+
+              {/* Floating Avatar */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: "backOut" }}
+                className="absolute top-8 right-2 w-40 h-40 rounded-full border-[6px] border-white z-20 overflow-hidden hover:scale-105 transition-transform duration-300"
+                style={{ boxShadow: "0 20px 45px -15px rgba(255,99,33,0.45), 0 8px 20px -8px rgba(15,23,42,0.2)" }}
+              >
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Avatar" className="w-full h-full object-cover" loading="lazy" width="300" height="300" />
+                {/* Verified badge */}
+                <div className="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#FF6321] border-2 border-white flex items-center justify-center shadow-md">
+                  <CheckCircle2 size={14} className="text-white" />
+                </div>
+              </motion.div>
+
+              {/* Floating Resume Score with animated ring */}
+              <motion.div
+                initial={{ opacity: 0, x: -30, y: 10 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
+                className="absolute top-40 -left-14 bg-white/85 backdrop-blur-xl rounded-2xl p-3 pr-4 flex items-center gap-3 z-30 hover:-translate-y-1 transition-transform duration-300 pointer-events-auto cursor-default border border-white"
+                style={{ boxShadow: "0 20px 45px -18px rgba(15,23,42,0.25)" }}
+              >
+                <div className="relative w-12 h-12">
+                  <svg viewBox="0 0 44 44" className="w-12 h-12 -rotate-90">
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#e5e7eb" strokeWidth="4" />
+                    <motion.circle
+                      cx="22" cy="22" r="18" fill="none" stroke="#22c55e" strokeWidth="4" strokeLinecap="round"
+                      strokeDasharray={2 * Math.PI * 18}
+                      initial={{ strokeDashoffset: 2 * Math.PI * 18 }}
+                      animate={{ strokeDashoffset: 2 * Math.PI * 18 * (1 - 0.81) }}
+                      transition={{ duration: 1.4, delay: 0.8, ease: "easeOut" }}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center text-[11px] font-bold text-emerald-600">81%</div>
+                </div>
+                <div>
+                  <div className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Resume Score</div>
+                  <div className="text-sm font-bold text-[#2d3748]">Recruiter Ready</div>
+                </div>
+              </motion.div>
+
+              {/* Floating ATS Perfect */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, x: 30 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6, ease: "backOut" }}
+                className="absolute top-[42%] right-[-10%] text-white px-4 py-3 rounded-xl font-bold flex items-center gap-2 z-30 hover:scale-105 transition-transform duration-300 cursor-default"
+                style={{
+                  background: "linear-gradient(135deg, #FF6321 0%, #ff8c5a 100%)",
+                  boxShadow: "0 15px 40px -10px rgba(255,99,33,0.6), inset 0 1px 0 rgba(255,255,255,0.3)",
+                }}
+              >
+                <Wand2 size={18} /> ATS Perfect
+                <span className="ml-1 text-[10px] bg-white/25 px-1.5 py-0.5 rounded font-bold">v2</span>
+              </motion.div>
+
+              {/* Floating Skills Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+                className="absolute bottom-20 -right-10 bg-white/90 backdrop-blur-xl p-5 rounded-2xl z-20 w-60 border border-white/80 hover:-translate-y-1 transition-transform duration-300"
+                style={{ boxShadow: "0 25px 50px -20px rgba(15,23,42,0.3)" }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-lg bg-[#FF6321]/10 flex items-center justify-center">
+                      <Sparkles size={12} className="text-[#FF6321]" />
+                    </div>
+                    <h4 className="font-bold text-[#2d3748] text-sm">AI Skills</h4>
+                  </div>
+                  <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded uppercase tracking-wider">+3</span>
+                </div>
+                <div className="space-y-2">
+                  {[
+                    { label: "Management Skills", pct: 92 },
+                    { label: "Analytical Thinking", pct: 87 },
+                    { label: "Leadership", pct: 78 },
+                  ].map((s, i) => (
+                    <div key={s.label} className="bg-gray-50/80 rounded-lg px-2.5 py-1.5 border border-gray-100">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[12px] font-semibold text-gray-700">{s.label}</span>
+                        <span className="text-[10px] font-bold text-gray-400">{s.pct}%</span>
+                      </div>
+                      <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${s.pct}%` }}
+                          transition={{ duration: 1, delay: 0.9 + i * 0.15, ease: "easeOut" }}
+                          className="h-full rounded-full bg-gradient-to-r from-[#FF6321] to-[#ff8c5a]"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="text-[#FF6321] font-bold text-xs mt-3 pt-2 flex items-center gap-1 w-full justify-center border-t border-orange-50 hover:bg-orange-50 transition-colors rounded-none">
                   + Add skill
                 </button>
-             </motion.div>
-           
-             {/* Floating Ask AI */}
-             <motion.div 
-               initial={{ opacity: 0, y: 20 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-               className="absolute bottom-16 -left-8 bg-white p-4 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] z-30 flex items-center gap-3 border border-gray-50 pr-12 w-80 hover:scale-105 transition-transform duration-300 pointer-events-auto"
-             >
-                <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-orange-400 via-orange-500 to-orange-600 border-2 border-white shadow-sm flex items-center justify-center">
-                  <div className="w-3 h-3 bg-white rounded-full"></div>
+              </motion.div>
+
+              {/* Floating Ask AI */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                className="absolute bottom-14 -left-10 bg-white/90 backdrop-blur-xl p-3.5 rounded-2xl z-30 flex items-center gap-3 border border-white/80 pr-5 w-80 hover:scale-[1.02] transition-transform duration-300 pointer-events-auto"
+                style={{ boxShadow: "0 25px 50px -20px rgba(15,23,42,0.3)" }}
+              >
+                <div className="relative w-9 h-9 shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-orange-400 via-orange-500 to-orange-600 border-2 border-white shadow-md flex items-center justify-center">
+                    <Sparkles size={14} className="text-white" />
+                  </div>
+                  <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6321] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF6321] border border-white" />
+                  </span>
                 </div>
-                <span className="text-gray-500 text-sm font-medium">Ask AI coach anything...</span>
-             </motion.div>
-           </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] font-bold text-[#FF6321] uppercase tracking-wider mb-0.5">AI Coach</div>
+                  <div className="text-gray-600 text-[13px] font-medium truncate">Ask anything about your resume…</div>
+                </div>
+                <div className="flex gap-0.5 items-center">
+                  <span className="w-1 h-1 rounded-full bg-gray-400 animate-pulse" />
+                  <span className="w-1 h-1 rounded-full bg-gray-400 animate-pulse" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1 h-1 rounded-full bg-gray-400 animate-pulse" style={{ animationDelay: "300ms" }} />
+                </div>
+              </motion.div>
+            </div>
         </div>
       </div>
       

@@ -441,174 +441,149 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       </div>
 
       {/* Tools Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-32 text-center">
-         <h2 className="text-4xl lg:text-5xl font-medium text-[#2d3748] mb-16">
-           Every tool you need is here...
-         </h2>
-         
-         <div className="grid lg:grid-cols-3 gap-6 h-auto lg:h-[480px]">
-            {/* Sidebar Nav */}
-             <div className="bg-tool-sidebar text-tool-sidebar-foreground rounded-2xl border border-border shadow-sm text-left flex flex-col overflow-hidden">
-                <div onClick={() => handleTabClick(1)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 1 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
-                   {activeToolsTab === 1 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
-                   <div className={activeToolsTab === 1 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
-                    <FileText size={24} />
-                  </div>
-                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 1 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>1. Get Noticed</div>
-                  {activeToolsTab === 1 && (
-                    <div className="w-6 h-6 flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
-                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
-                      </svg>
-                    </div>
-                  )}
-               </div>
-                <div onClick={() => handleTabClick(2)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 2 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
-                   {activeToolsTab === 2 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
-                   <div className={activeToolsTab === 2 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
-                    <Briefcase size={24} />
-                  </div>
-                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 2 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>2. Get Hired</div>
-                  {activeToolsTab === 2 && (
-                    <div className="w-6 h-6 flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
-                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
-                      </svg>
-                    </div>
-                  )}
-               </div>
-                <div onClick={() => handleTabClick(3)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 3 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
-                   {activeToolsTab === 3 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
-                   <div className={activeToolsTab === 3 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
-                    <CircleDollarSign size={24} />
-                  </div>
-                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 3 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>3. Get Paid More</div>
-                  {activeToolsTab === 3 && (
-                    <div className="w-6 h-6 flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
-                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
-                      </svg>
-                    </div>
-                  )}
-               </div>
-                <div onClick={() => handleTabClick(4)} className={`flex items-center p-6 lg:p-7 gap-4 cursor-pointer relative ${activeToolsTab === 4 ? 'bg-tool-tab-active' : 'hover:bg-secondary/70'}`}>
-                   {activeToolsTab === 4 && <div className="absolute right-0 top-0 bottom-0 w-1 bg-brand-accent"></div>}
-                   <div className={activeToolsTab === 4 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}>
-                    <Crown size={24} />
-                  </div>
-                   <div className={`flex-1 text-[17px] font-medium ${activeToolsTab === 4 ? 'text-brand-accent' : 'text-tool-sidebar-foreground'}`}>4. Get promoted</div>
-                  {activeToolsTab === 4 && (
-                    <div className="w-6 h-6 flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                         <circle cx="12" cy="12" r="10" className="stroke-brand-accent/25" strokeWidth="3" fill="none" />
-                         <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-brand-accent" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
-                      </svg>
-                    </div>
-                  )}
-               </div>
+      <div className="max-w-7xl mx-auto px-6 pb-32">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
+            <Sparkles size={13} /> The Career Toolkit
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-semibold text-[#2d3748] mb-4 tracking-tight">
+            Every tool you need is here.
+          </h2>
+          <p className="text-muted-foreground text-[16px] max-w-xl mx-auto">
+            One workflow, four milestones — from a blank page to a signed offer.
+          </p>
+        </div>
+
+        {(() => {
+          const TABS = [
+            {
+              id: 1, icon: FileText, label: "Get Noticed", short: "Stand out from 1,000+ applicants",
+              cards: [
+                { icon: FileText, title: "Resume Builder", desc: "Build the resume that gets you hired. Finish a draft in 20 minutes with Recruiter‑AI.", stat: "20 min", statLabel: "avg. draft" },
+                { icon: Target, title: "Recruiter Match", desc: "We close-match your resume and send it to 50 recruiters every week.", stat: "50/wk", statLabel: "recruiter sends" },
+              ],
+            },
+            {
+              id: 2, icon: Briefcase, label: "Get Hired", short: "Land interviews faster",
+              cards: [
+                { icon: Search, title: "Job Board", desc: "Every online job board in one place. We scan the entire internet every day.", stat: "1.2M+", statLabel: "live jobs" },
+                { icon: Send, title: "Auto Apply", desc: "Our experts apply for you. Interviews land straight in your inbox.", stat: "10x", statLabel: "faster applies" },
+              ],
+            },
+            {
+              id: 3, icon: CircleDollarSign, label: "Get Paid More", short: "Negotiate with confidence",
+              cards: [
+                { icon: MessageSquare, title: "Interview Prep", desc: "Practice the questions that get you hired with instant AI feedback.", stat: "500+", statLabel: "questions" },
+                { icon: Gauge, title: "Salary Analyzer", desc: "See if your offer beats the market. Always negotiate — earn 7% more.", stat: "+7%", statLabel: "avg. lift" },
+              ],
+            },
+            {
+              id: 4, icon: Crown, label: "Get Promoted", short: "Grow into your next title",
+              cards: [
+                { icon: User, title: "Career Coaching", desc: "1‑on‑1 with an expert — expand network, interview better, negotiate higher.", stat: "1:1", statLabel: "expert access" },
+                { icon: Sparkles, title: "Future Learn", desc: "Certified courses respected by employers. Future‑proof yourself.", stat: "200+", statLabel: "courses" },
+              ],
+            },
+          ] as const;
+
+          const current = TABS.find(t => t.id === activeToolsTab)!;
+
+          return (
+            <div className="grid lg:grid-cols-12 gap-6 h-auto lg:h-[520px]">
+              {/* Sidebar Nav */}
+              <div className="lg:col-span-4 bg-white rounded-3xl border border-gray-100 text-left flex flex-col overflow-hidden" style={{ boxShadow: "0 20px 45px -25px rgba(15,23,42,0.15)" }}>
+                {TABS.map((tab) => {
+                  const active = activeToolsTab === tab.id;
+                  const Icon = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab.id)}
+                      className={`flex items-center gap-4 p-5 lg:p-6 cursor-pointer relative text-left transition-colors border-b border-gray-100 last:border-b-0 ${active ? "bg-gradient-to-r from-[#FF6321]/10 via-[#FF6321]/5 to-transparent" : "hover:bg-gray-50"}`}
+                    >
+                      {active && (
+                        <motion.div layoutId="toolTabIndicator" className="absolute right-0 top-2 bottom-2 w-1 rounded-l-full bg-[#FF6321]" transition={{ type: "spring", stiffness: 400, damping: 34 }} />
+                      )}
+                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all ${active ? "bg-[#FF6321] text-white shadow-lg shadow-[#FF6321]/30" : "bg-gray-100 text-gray-500"}`}>
+                        <Icon size={20} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className={`text-[15px] font-bold ${active ? "text-[#FF6321]" : "text-[#1a202c]"}`}>
+                          <span className="text-gray-400 font-medium mr-1.5">0{tab.id}.</span>{tab.label}
+                        </div>
+                        <div className="text-[12px] text-gray-500 mt-0.5 truncate">{tab.short}</div>
+                      </div>
+                      {active && (
+                        <div className="w-7 h-7 flex items-center justify-center shrink-0">
+                          <svg width="28" height="28" viewBox="0 0 24 24" className="-rotate-90">
+                            <circle cx="12" cy="12" r="10" className="stroke-[#FF6321]/20" strokeWidth="2.5" fill="none" />
+                            <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-[#FF6321]" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
+                          </svg>
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Content Cards */}
+              <motion.div
+                key={activeToolsTab}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="lg:col-span-8 grid sm:grid-cols-2 gap-6 h-full"
+              >
+                {current.cards.map((c, i) => {
+                  const Icon = c.icon;
+                  return (
+                    <motion.div
+                      key={c.title}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      className="group relative bg-gradient-to-br from-orange-50/70 via-white to-white rounded-3xl border border-orange-100/60 p-7 lg:p-8 text-left overflow-hidden flex flex-col hover:border-[#FF6321]/40 hover:-translate-y-1 transition-all duration-300"
+                      style={{ boxShadow: "0 20px 45px -25px rgba(255,99,33,0.2)" }}
+                    >
+                      {/* corner glow */}
+                      <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-[#FF6321]/15 blur-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      <div className="flex items-start justify-between mb-5 relative z-10">
+                        <div className="w-12 h-12 rounded-2xl bg-white border border-orange-100 flex items-center justify-center text-[#FF6321] shadow-sm">
+                          <Icon size={22} />
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-[#FF6321] leading-none">{c.stat}</div>
+                          <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{c.statLabel}</div>
+                        </div>
+                      </div>
+
+                      <h3 className="text-[22px] font-bold text-[#1a202c] mb-2 relative z-10">{c.title}</h3>
+                      <p className="text-[#4a5568] text-[15px] leading-relaxed mb-6 relative z-10 flex-1">{c.desc}</p>
+
+                      {/* Preview strip */}
+                      <div className="relative z-10 bg-white/80 backdrop-blur border border-gray-100 rounded-2xl p-4 mb-5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Live preview</span>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="h-2 rounded-full bg-gradient-to-r from-[#FF6321]/40 to-[#FF6321]/10" style={{ width: "88%" }} />
+                          <div className="h-2 rounded-full bg-gray-100" style={{ width: "72%" }} />
+                          <div className="h-2 rounded-full bg-gray-100" style={{ width: "60%" }} />
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-[#FF6321] font-bold text-sm relative z-10 group-hover:gap-3 transition-all">
+                        Explore tool <ArrowRight size={16} />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
             </div>
-
-            {/* Content Cards */}
-            {activeToolsTab === 1 && (
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><FileText size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Resume Builder</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Build the resume that gets you hired. We designed the builder with top employers. Finish a draft 20 mins with "Recruiter-AI".</p>
-                    
-                    <div className="w-[280px] h-[340px] bg-white rounded-t-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.15)] border border-gray-100 p-8 absolute bottom-0 translate-y-20 hover:translate-y-8 transition-transform duration-500 z-0 flex flex-col">
-                       <div className="border-b border-gray-100 pb-4 mb-4">
-                          <h4 className="font-bold font-serif text-[20px] text-[#1a202c]">Chloé Anne Bouchard</h4>
-                       </div>
-                       <div className="space-y-3 mb-6">
-                          <div className="h-1.5 w-full bg-gray-200 rounded"></div>
-                          <div className="h-1.5 w-full bg-gray-200 rounded"></div>
-                          <div className="h-1.5 w-3/4 bg-gray-200 rounded"></div>
-                       </div>
-                    </div>
-                    
-                    <div className="absolute bottom-40 -mr-48 bg-white rounded-xl shadow-lg p-2.5 flex items-center gap-2 border border-gray-50 z-20">
-                      <div className="bg-[#22c55e] text-white text-sm font-bold px-2 py-1 rounded-md">81%</div>
-                      <div className="text-[12px] font-bold text-gray-700 leading-tight pr-1">Resume<br/>Score</div>
-                    </div>
-                </div>
-                
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Target size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Recruiter Match</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Recruiters come to us with roles they can't fill. We close-match your resume and then send it to 50 recruiters a week.</p>
-                    <div className="absolute bottom-0 translate-y-12 hover:translate-y-6 transition-transform duration-500 flex justify-center w-full z-0 h-48">
-                    </div>
-                </div>
-              </motion.div>
-            )}
-
-            {activeToolsTab === 2 && (
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Search size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Job Board</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">See every online job board in one place. We search the entire internet every day. If a role goes live, you won't miss it.</p>
-                </div>
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Send size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Auto Apply</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Our team of experts apply for you. All they need is your resume and your target salary. Interviews come by email.</p>
-                </div>
-              </motion.div>
-            )}
-
-            {activeToolsTab === 3 && (
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><MessageSquare size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Interview Prep</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Practice the questions that get you hired. Choose from the world's best employers and see instant feedback.</p>
-                </div>
-
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Gauge size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Salary Analyzer</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Get paid 7% more. Our salary analyzer shows you if your job offer is at the market rate. Always negotiate!</p>
-                </div>
-              </motion.div>
-            )}
-
-            {activeToolsTab === 4 && (
-              <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="col-span-1 lg:col-span-2 grid lg:grid-cols-2 gap-6 h-full">
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><User size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Career Coaching</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Work 1-1 with an expert to expand your network, give better interviews and negotiate a higher salary.</p>
-                </div>
-
-                <div className="bg-tool-surface text-tool-surface-foreground border border-border rounded-2xl p-6 pb-56 sm:p-8 sm:pb-56 lg:p-10 lg:pb-56 text-left relative overflow-hidden flex flex-col items-center">
-                    <div className="flex items-center gap-3 w-full mb-4">
-                      <div className="bg-tool-icon-surface p-2 rounded-xl text-brand-accent shadow-sm"><Sparkles size={28} className="fill-brand-accent/20" /></div>
-                      <h3 className="text-[26px] font-semibold text-tool-surface-foreground">Future Learn</h3>
-                    </div>
-                    <p className="text-muted-foreground text-[16px] leading-relaxed mb-8 z-10 w-full">Future proof yourself. Get the courses you need to grow. Accredited, certified and respected by employers.</p>
-                </div>
-              </motion.div>
-            )}
-         </div>
+          );
+        })()}
       </div>
 
       {/* Way beyond a resume builder section */}

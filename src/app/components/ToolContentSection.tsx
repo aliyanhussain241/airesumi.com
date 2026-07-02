@@ -72,6 +72,28 @@ export function ToolContentSection({
           ))}
         </div>
 
+        {/* Features */}
+        {features && features.length > 0 && (
+          <div className="mb-16">
+            <h2 className="text-3xl font-medium text-[#2d3748] mb-6">{featuresTitle}</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {features.map((f, i) => (
+                <div key={i} className="bg-white border border-[#e2e8f0] rounded-xl p-5 hover:border-[#FF6321]/40 hover:shadow-sm transition-all">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center shrink-0">
+                      <CheckCircle2 size={18} className="text-[#FF6321]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-[#1a202c] text-[15px] mb-1">{f.title}</h3>
+                      <p className="text-[#4a5568] text-[14px] leading-relaxed">{f.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* How to */}
         <div className="mb-16">
           <h2 className="text-3xl font-medium text-[#2d3748] mb-6">{howToTitle}</h2>

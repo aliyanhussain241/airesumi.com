@@ -39,6 +39,8 @@ export function ToolContentSection({
   howToSteps,
   faqTitle = "Frequently Asked Questions",
   faqs,
+  featuresTitle = "Key Features",
+  features,
 }: ToolContentSectionProps) {
   const faqSchema = React.useMemo(
     () =>

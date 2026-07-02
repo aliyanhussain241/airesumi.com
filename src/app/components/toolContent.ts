@@ -284,4 +284,12 @@ export const RESIGNATION_CONTENT: ToolContent = {
     { q: "Can I resign by email?", a: "Only after telling your manager in a live conversation. The email or letter formalizes what you've already discussed — it should never be the first they hear of it." },
     { q: "What tone should my resignation letter use?", a: "Professional and grateful, even if the job wasn't. The letter goes into your HR file and often gets shown to future reference checkers years later." },
   ],
+  features: [
+    { title: "4 Tone Presets", desc: "Formal, Grateful, Brief, or Career-change — matched to your relationship with the company." },
+    { title: "Notice Period Quick-Pick", desc: "One-tap 2-week, 3-week, or 1-month notice with the correct last-day date auto-filled." },
+    { title: "Live Letter Preview", desc: "See a paper-textured preview update in real time as you fill in your details." },
+    { title: "Printable PDF Download", desc: "One-page, single-column PDF ready to hand to your manager or email to HR." },
+    { title: "Reference-Safe Wording", desc: "Neutral, professional language that keeps the door open for future references." },
+    { title: "No Sign-Up, No Watermark", desc: "Generate and download unlimited letters — completely free." },
+  ],
 };

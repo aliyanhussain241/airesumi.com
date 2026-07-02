@@ -234,6 +234,14 @@ export const SALARY_CONTENT: ToolContent = {
     { q: "Should I share my current salary with a recruiter?", a: "No — in most US states it's illegal for employers to ask, and it anchors the offer to your last comp rather than the role's market value. Redirect to your target range." },
     { q: "How often does salary data change?", a: "Materially every 6-12 months, faster during hiring booms or freezes. Re-check any role you're targeting within 6 months of your negotiation." },
   ],
+  features: [
+    { title: "Total-Comp Ranges", desc: "Base + bonus + equity in one number — not just base salary that undersells your offer." },
+    { title: "Role & Region Filters", desc: "Benchmark by exact title, seniority, industry, and city — global coverage." },
+    { title: "Negotiation Talking Points", desc: "AI-generated scripts you can use verbatim on recruiter calls to counter an offer." },
+    { title: "Anchor-Range Guidance", desc: "Shows where to open, where to land, and where to walk away for your target role." },
+    { title: "Live Market Data", desc: "Ranges recalibrated regularly against current comp data — not stale 2019 numbers." },
+    { title: "Free Unlimited Compares", desc: "Compare as many roles, cities, and seniorities as you want — no sign-up." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

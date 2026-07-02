@@ -105,23 +105,32 @@ export const DoneView: React.FC<DoneViewProps> = ({
       </div>
 
       <div className="w-full pb-12 flex justify-center overflow-hidden">
-        {previewMode === 'desktop' ? (
-          <div className="print:w-auto" style={{ height: windowWidth < 898 ? `calc(${Math.max(0.35, (windowWidth - 48) / 850)} * 1100px)` : 'auto' }}>
-            <div 
-              className="origin-top flex justify-center print:transform-none"
-              style={{ transform: `scale(${Math.min(1, Math.max(0.35, (windowWidth - 48) / 850))})` }}
+        {previewMode === 'desktop' ? (() => {
+          const scale = Math.min(1, Math.max(0.35, (windowWidth - 32) / 850));
+          return (
+            <div
+              className="print:w-auto print:h-auto mx-auto"
+              style={{
+                width: scale < 1 ? `${850 * scale}px` : 'auto',
+                height: scale < 1 ? `${1100 * scale}px` : 'auto',
+              }}
             >
-            <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col">
-                 <ResumePreview data={resumeData} designId={designId} />
-                 {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
-                   <div className="absolute top-6 right-6 z-10 print:top-6 print:right-6">
-                     <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
-                   </div>
-                 )}
-               </div>
+              <div
+                className="origin-top-left print:transform-none"
+                style={{ transform: scale < 1 ? `scale(${scale})` : 'none', width: '850px' }}
+              >
+                <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col overflow-hidden">
+                  <ResumePreview data={resumeData} designId={designId} />
+                  {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
+                    <div className="absolute top-6 right-6 z-10 print:top-6 print:right-6">
+                      <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        ) : (
+          );
+        })() : (
           <div className="mx-auto w-[375px] h-[812px] transform scale-[0.85] sm:scale-100 origin-top bg-gray-100 border-[14px] border-[#0a0a0a] rounded-[3rem] shadow-2xl shadow-black/20 relative flex flex-col overflow-hidden print:hidden mt-4">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#0a0a0a] rounded-b-2xl z-50"></div>
             <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth pt-10 pb-12 w-full bg-[#f3f4f6]">

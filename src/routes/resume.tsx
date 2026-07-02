@@ -384,6 +384,12 @@ export const Route = createFileRoute("/resume")({
   head: () => ({
     meta: [
       { title: "Create Your Resume — AI Resume Builder | airesumi.com" },
+      { property: "og:image", content: "https://airesumi.com/api/public/og/resume" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/svg+xml" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/api/public/og/resume" },
       { name: "description", content: "Build an ATS-optimized resume tailored to your dream role in minutes." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resume" }],

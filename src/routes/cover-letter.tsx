@@ -284,6 +284,12 @@ export const Route = createFileRoute("/cover-letter")({
   head: () => ({
     meta: [
       { title: "Free AI Cover Letter Generator — Tailored in Seconds | airesumi.com" },
+      { property: "og:image", content: "https://airesumi.com/api/public/og/cover-letter" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/svg+xml" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/api/public/og/cover-letter" },
       { name: "description", content: "Generate a professional, tailored cover letter in seconds using AI. Matches your resume to any job description. Free, no sign-up required." },
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "AI cover letter generator, free cover letter, cover letter maker, cover letter builder, AI cover letter" },

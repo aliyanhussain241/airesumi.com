@@ -259,6 +259,14 @@ export const PDF_SCANNER_CONTENT: ToolContent = {
     { q: "Is the scanner free?", a: "Yes. Unlimited scans, unlimited pages, no watermark — free forever." },
     { q: "What's the maximum PDF file size?", a: "There's no hard limit — the scanner compresses images so a 20-page text document typically stays under 5 MB, small enough to email or upload to any job portal." },
   ],
+  features: [
+    { title: "Auto Edge Detection", desc: "Finds document corners the moment you snap — with a 4-point crop editor for manual override." },
+    { title: "Perspective Correction", desc: "Real bilinear homography warp turns tilted photos into flat, straight-on pages." },
+    { title: "6 Smart Filters", desc: "Original, Magic Auto, Document, Vivid, Grayscale, and B&W — pick the best look per page." },
+    { title: "OCR Text Extraction", desc: "Tesseract-powered OCR pulls copyable text out of any scanned page in your browser." },
+    { title: "Password-Protected PDF", desc: "AES-encrypt sensitive scans with an open password before you download or share." },
+    { title: "100% On-Device", desc: "Nothing uploads — capture, OCR, and PDF export all happen locally in your browser." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

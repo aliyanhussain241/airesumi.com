@@ -137,11 +137,11 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
       <div className="max-w-5xl mx-auto px-6 mb-14 text-center">
         <motion.div
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-[#c2410c] text-xs font-semibold uppercase tracking-widest mb-4 border border-orange-100"
+          className="inline-flex items-center gap-2 px-3 py-1.5 leading-none rounded-full bg-orange-50 text-[#c2410c] text-xs font-semibold uppercase tracking-widest mb-6 border border-orange-100"
         >
           <Sparkles size={12} /> AI-Powered ATS Analysis
         </motion.div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-5 tracking-tight leading-[1.05]">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-5 tracking-tight leading-[1.15] pb-1">
           Beat the bots. <span className="text-[#FF6321]">Land the interview.</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-medium mb-8 max-w-3xl mx-auto">

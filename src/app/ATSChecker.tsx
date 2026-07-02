@@ -105,29 +105,65 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
     }
   };
 
+  const LOADING_STEPS = [
+    { label: "Parsing resume text", icon: FileText },
+    { label: "Scanning ATS-friendly structure", icon: Shield },
+    { label: "Matching keywords vs. job description", icon: Target },
+    { label: "Scoring format & readability", icon: Sparkles },
+    { label: "Compiling improvement plan", icon: Zap },
+  ];
+  const [loadStep, setLoadStep] = useState(0);
+  useEffect(() => {
+    if (analyzeState !== 'analyzing') { setLoadStep(0); return; }
+    const t = setInterval(() => setLoadStep((v) => (v + 1 < LOADING_STEPS.length ? v + 1 : v)), 1500);
+    return () => clearInterval(t);
+  }, [analyzeState]);
+
+  const wordCount = useMemo(() => resumeText.trim().split(/\s+/).filter(Boolean).length, [resumeText]);
+  const jdWords = useMemo(() => jobDescription.trim().split(/\s+/).filter(Boolean).length, [jobDescription]);
+  const readyQuality = Math.min(100, Math.round((wordCount / 400) * 100));
+
+  const handlePasteResume = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text) setResumeText(text);
+    } catch { /* ignore */ }
+  };
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
-      
+    <div className="min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
+
       {/* Hero Section */}
-      <div className="max-w-4xl mx-auto px-6 mb-16 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Free ATS Resume Checker — See Your ATS Score Instantly</h1>
-        <p className="text-xl text-gray-600 leading-relaxed font-medium mb-8">
-          Paste your resume below and find out in seconds if it will pass ATS screening. Get a detailed keyword analysis, formatting report, and exact fixes — no sign-up required.
+      <div className="max-w-5xl mx-auto px-6 mb-14 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-[#c2410c] text-xs font-semibold uppercase tracking-widest mb-4 border border-orange-100"
+        >
+          <Sparkles size={12} /> AI-Powered ATS Analysis
+        </motion.div>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-5 tracking-tight leading-[1.05]">
+          Beat the bots. <span className="text-[#FF6321]">Land the interview.</span>
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-medium mb-8 max-w-3xl mx-auto">
+          Free ATS resume checker. Get an instant score, keyword gap, formatting audit, and personalized fix-plan in under 10 seconds.
         </p>
-
-        <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6 text-left border-l-4 border-[#FF6321] pl-4 bg-white p-4 rounded-r-xl shadow-sm">
-          Over 98% of Fortune 500 companies and 75% of all employers use Applicant Tracking Systems to automatically screen resumes before a human recruiter ever sees them. If your resume is not ATS-optimized, it gets rejected automatically — regardless of how qualified you are. Our free ATS resume checker analyzes your resume against the same criteria used by major ATS platforms including Workday, Greenhouse, Taleo, Lever, and iCIMS. You get an instant ATS compatibility score, a full keyword gap analysis, and a detailed list of formatting fixes — all in under 10 seconds, completely free.
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-[#EA580C]">
-          <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> 100% Free — No Sign-Up Required</span>
-          <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Results in Under 10 Seconds</span>
-          <span className="flex items-center gap-1"><CheckCircle className="w-4 h-4" /> Used by 500,000+ Job Seekers</span>
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-semibold text-gray-700">
+          {[
+            { n: '500K+', l: 'Resumes scanned' },
+            { n: '2.4x', l: 'More interviews' },
+            { n: '<10s', l: 'Average result' },
+            { n: '98%', l: 'ATS coverage' },
+          ].map(s => (
+            <div key={s.l} className="flex items-baseline gap-1.5">
+              <span className="text-[#FF6321] font-extrabold text-lg">{s.n}</span>
+              <span className="text-gray-500 text-xs uppercase tracking-wider">{s.l}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Main Tool Area */}
-      <div className="max-w-5xl mx-auto px-6 mb-24">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-24">
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
             <XCircle className="w-5 h-5 text-red-600 mt-0.5 shrink-0" />
@@ -135,142 +171,244 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
               <h3 className="text-sm font-bold text-red-900">An error occurred</h3>
               <p className="text-sm text-red-700 mt-1">{error}</p>
             </div>
-            <button onClick={() => setError(null)} className="text-red-400 hover:text-red-600">
+            <button onClick={() => setError(null)} aria-label="Dismiss error" className="text-red-400 hover:text-red-600">
               <X className="w-5 h-5" />
             </button>
           </div>
         )}
 
         {analyzeState === 'idle' && (
-          <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-[#FED7AA] overflow-hidden">
-            <div className="flex border-b border-gray-100">
-              <button 
-                onClick={() => setActiveCheckTab(0)} 
-                className={`flex-1 py-4 font-bold text-sm ${activeCheckTab === 0 ? 'text-[#FF6321] border-b-2 border-[#FF6321]' : 'text-gray-500 hover:text-gray-700'}`}
+          <div className="bg-white rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] border border-[#FED7AA]/60 overflow-hidden">
+            <div className="flex border-b border-gray-100 bg-gradient-to-r from-orange-50/40 to-transparent">
+              <button
+                onClick={() => setActiveCheckTab(0)}
+                className={`flex-1 py-4 font-bold text-sm transition-all ${activeCheckTab === 0 ? 'text-[#FF6321] border-b-2 border-[#FF6321] bg-white' : 'text-gray-500 hover:text-gray-700'}`}
               >
                 Basic ATS Check
               </button>
-              <button 
-                onClick={() => setActiveCheckTab(1)} 
-                className={`flex-1 py-4 font-bold text-sm flex items-center justify-center gap-2 ${activeCheckTab === 1 ? 'text-[#FF6321] border-b-2 border-[#FF6321]' : 'text-gray-500 hover:text-gray-700'}`}
+              <button
+                onClick={() => setActiveCheckTab(1)}
+                className={`flex-1 py-4 font-bold text-sm flex items-center justify-center gap-2 transition-all ${activeCheckTab === 1 ? 'text-[#FF6321] border-b-2 border-[#FF6321] bg-white' : 'text-gray-500 hover:text-gray-700'}`}
               >
-                Full ATS Check <span className="bg-[#FF6321] text-white text-[10px] px-2 py-0.5 rounded-full">Recommended</span>
+                Full ATS Check + Job Match
+                <span className="bg-[#FF6321] text-white text-[10px] px-2 py-0.5 rounded-full">Recommended</span>
               </button>
             </div>
-            
-            <div className="p-8">
-              <div className="mb-6 relative">
-                <textarea 
+
+            <div className="p-6 sm:p-8">
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-[11px] font-bold uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
+                  <FileText size={12} /> Your Resume
+                </label>
+                <button
+                  onClick={handlePasteResume}
+                  className="text-[11px] font-semibold text-[#FF6321] hover:underline flex items-center gap-1"
+                >
+                  <ClipboardPaste size={12} /> Paste from clipboard
+                </button>
+              </div>
+              <div className="mb-4 relative">
+                <textarea
                   value={resumeText}
                   onChange={(e) => setResumeText(e.target.value)}
-                  placeholder="Paste your resume text here... Copy all text from your resume (Word or PDF) and paste it here. Include your work experience, skills, education, and contact information."
-                  className="w-full h-64 border border-[#FED7AA] rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-[#FF6321] resize-none"
+                  placeholder="Paste your resume text here — include experience, skills, education, and contact info."
+                  className="w-full h-56 border border-[#FED7AA] rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6321] focus:border-transparent resize-none bg-[#FFFCFA]"
                 />
-                <div className="absolute bottom-4 right-4 text-xs font-medium text-gray-400">
-                  {resumeText.length} / 5000 characters
+                <div className="absolute bottom-3 right-3 flex items-center gap-2 text-[11px] font-medium text-gray-500 bg-white/80 backdrop-blur px-2 py-1 rounded">
+                  <span>{wordCount} words</span>
+                  <span className="w-16 h-1 bg-gray-100 rounded-full overflow-hidden">
+                    <span className="block h-full bg-gradient-to-r from-orange-400 to-[#FF6321] transition-all" style={{ width: `${readyQuality}%` }} />
+                  </span>
                 </div>
               </div>
-              
-              <div className="relative flex flex-col items-center justify-center border-2 border-dashed border-[#FF6321]/30 rounded-xl py-6 bg-[#FFF7ED] hover:bg-[#FFF7ED]/80 transition-colors cursor-pointer mb-6">
-                <input 
-                  type="file" 
+
+              <label className="relative flex flex-col sm:flex-row items-center justify-center gap-3 border-2 border-dashed border-[#FF6321]/40 rounded-xl py-4 px-4 bg-[#FFF7ED] hover:bg-[#FFE9D5] transition-all cursor-pointer mb-6">
+                <input
+                  type="file"
                   accept=".pdf,.txt,.doc,.docx"
                   onChange={handleFileUpload}
                   disabled={isUploading}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-wait"
+                  aria-label="Upload resume file"
                 />
-                <UploadCloud className="w-6 h-6 text-[#FF6321] mb-2" />
-                <span className="text-sm font-medium text-[#EA580C]">Or upload your resume file</span>
-                <span className="text-xs text-gray-500 mt-1">Accepts .txt, .docx, .pdf</span>
-              </div>
+                <div className="w-10 h-10 rounded-full bg-white text-[#FF6321] flex items-center justify-center shadow-sm shrink-0">
+                  {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : <UploadCloud className="w-5 h-5" />}
+                </div>
+                <div className="text-center sm:text-left">
+                  <div className="text-sm font-bold text-[#EA580C]">
+                    {isUploading ? 'Extracting text…' : 'Or upload your resume file'}
+                  </div>
+                  <div className="text-xs text-gray-500">PDF, DOC, DOCX, TXT · up to 5 MB · private</div>
+                </div>
+              </label>
 
               {activeCheckTab === 1 && (
                 <div className="relative mb-6">
-                  <div className="flex items-center justify-center my-6">
+                  <div className="flex items-center justify-center my-5">
                     <div className="border-t border-gray-200 flex-1"></div>
-                    <div className="w-8 h-8 rounded-full bg-[#FF6321] text-white flex items-center justify-center mx-4"><Plus className="w-4 h-4" /></div>
+                    <div className="w-8 h-8 rounded-full bg-[#FF6321] text-white flex items-center justify-center mx-4 shadow-sm"><Plus className="w-4 h-4" /></div>
                     <div className="border-t border-gray-200 flex-1"></div>
                   </div>
-                  <textarea 
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-[11px] font-bold uppercase tracking-widest text-gray-600 flex items-center gap-1.5">
+                      <Target size={12} /> Job Description
+                    </label>
+                    <span className="text-[11px] text-gray-500">{jdWords} words</span>
+                  </div>
+                  <textarea
                     value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
-                    placeholder="Paste the job description here... Copy the full job posting you are applying for and paste it here. The more complete the job description, the more accurate your keyword match score."
-                    className="w-full h-48 border border-[#FED7AA] rounded-xl p-4 focus:outline-none focus:ring-2 focus:ring-[#FF6321] resize-none"
+                    placeholder="Paste the full job posting for the sharpest keyword match."
+                    className="w-full h-40 border border-[#FED7AA] rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6321] focus:border-transparent resize-none bg-[#FFFCFA]"
                   />
                 </div>
               )}
 
-              <button 
+              <button
                 onClick={startAnalysis}
-                className="w-full py-4 bg-[#FF6321] text-white font-bold rounded-xl hover:bg-[#EA580C] hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+                disabled={!resumeText}
+                className="w-full py-4 bg-[#FF6321] text-white font-bold rounded-2xl hover:bg-[#EA580C] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_10px_30px_-10px_rgba(255,99,33,0.6)] active:scale-[0.99]"
               >
-                {activeCheckTab === 1 ? 'Run Full ATS Analysis' : 'Check My ATS Score'} <ArrowRight className="w-4 h-4" />
+                <Zap size={18} />
+                {activeCheckTab === 1 ? 'Run Full ATS Analysis' : 'Check My ATS Score'}
+                <ArrowRight className="w-4 h-4" />
               </button>
-              {activeCheckTab === 1 && (
-                 <p className="text-center text-xs text-gray-500 mt-3">Full ATS check matches your resume keywords against the specific job requirements</p>
-              )}
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-gray-500 mt-3">
+                <span className="flex items-center gap-1"><Check size={12} className="text-green-500" /> No sign-up</span>
+                <span className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Private — never stored</span>
+                <span className="flex items-center gap-1"><Check size={12} className="text-green-500" /> Results in seconds</span>
+              </div>
             </div>
           </div>
         )}
 
         {analyzeState === 'analyzing' && (
-          <div className="bg-white rounded-2xl shadow-sm border border-[#FED7AA] p-12 text-center flex flex-col items-center justify-center min-h-[400px]">
-             <div className="w-16 h-16 rounded-full border-4 border-[#FFF7ED] border-t-[#FF6321] animate-spin mb-6"></div>
-             <h3 className="text-xl font-bold text-gray-900 mb-2">{loadingText}</h3>
-             <div className="w-64 h-2 bg-gray-100 rounded-full mt-4 overflow-hidden">
-               <div className="h-full bg-[#FF6321] animate-[pulse_2s_ease-in-out_infinite]" style={{ width: '60%' }}></div>
-             </div>
+          <div className="bg-white rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] border border-[#FED7AA]/60 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[440px]">
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="relative mb-8"
+            >
+              <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#FF6321] to-orange-400 flex items-center justify-center shadow-[0_20px_40px_-10px_rgba(255,99,33,0.5)]">
+                <Search className="w-8 h-8 text-white" />
+              </div>
+              <motion.div
+                className="absolute inset-0 rounded-3xl border-2 border-[#FF6321]"
+                animate={{ scale: [1, 1.4], opacity: [0.6, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+              />
+            </motion.div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-1">{loadingText}</h3>
+            <p className="text-sm text-gray-500 mb-8">Running against ATS parsing rules and job-match logic</p>
+            <div className="w-full max-w-md space-y-2.5">
+              {LOADING_STEPS.map((s, i) => {
+                const Icon = s.icon;
+                const done = i < loadStep;
+                const active = i === loadStep;
+                return (
+                  <div key={s.label} className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                      done ? 'bg-green-100 text-green-600' :
+                      active ? 'bg-orange-100 text-[#FF6321]' :
+                      'bg-gray-100 text-gray-400'
+                    }`}>
+                      {done ? <Check size={16} /> : active ? <Loader2 size={16} className="animate-spin" /> : <Icon size={16} />}
+                    </div>
+                    <span className={`text-sm font-medium ${done ? 'text-gray-900' : active ? 'text-[#FF6321]' : 'text-gray-400'}`}>
+                      {s.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 
         {analyzeState === 'results' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-            
+
             {/* Score Banner */}
-            {atsResult && (
-            <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-yellow-200 p-8 flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-shrink-0 relative">
-                <svg className="w-32 h-32 transform -rotate-90">
-                  <circle cx="64" cy="64" r="56" fill="none" stroke="#fef08a" strokeWidth="12" />
-                  <circle cx="64" cy="64" r="56" fill="none" stroke="#CA8A04" strokeWidth="12" strokeDasharray="351" strokeDashoffset={351 - (351 * atsResult.score) / 100} className="transition-all duration-1000 ease-out" />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-4xl font-extrabold text-gray-900 leading-none">{atsResult.score}</span>
-                  <span className="text-xs font-bold text-gray-400">/ 100</span>
-                </div>
-              </div>
-              <div className="flex-1 text-center md:text-left">
-                <div className={`inline-block px-3 py-1 text-sm font-bold rounded-full mb-2 ${atsResult.score >= 80 ? 'bg-green-100 text-green-800' : atsResult.score >= 60 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
-                  {atsResult.score >= 80 ? 'Excellent — Ready to Apply' : atsResult.score >= 60 ? 'Fair — Needs Improvement' : 'Poor — Do Not Submit'}
-                </div>
-                <p className="text-gray-600 mb-6">Your resume has a {atsResult.score >= 80 ? 'high' : atsResult.score >= 60 ? 'moderate' : 'low'} chance of passing ATS screening. {atsResult.score < 80 && 'Fix the issues below to improve your score.'}</p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
-                    <div className="text-xs font-bold text-gray-500 mb-1">Keyword Match</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.keywordMatch >= 80 ? 'text-[#FF6321]' : atsResult.metrics?.keywordMatch >= 60 ? 'text-[#CA8A04]' : 'text-red-600'}`}>{atsResult.metrics?.keywordMatch || 0}%</div>
+            {atsResult && (() => {
+              const score = atsResult.score || 0;
+              const tier =
+                score >= 85 ? { label: 'Excellent — Ready to Apply', color: '#16A34A', bg: 'bg-green-50', text: 'text-green-800' } :
+                score >= 70 ? { label: 'Good — Minor Tweaks Needed', color: '#0284C7', bg: 'bg-blue-50', text: 'text-blue-800' } :
+                score >= 50 ? { label: 'Fair — Needs Improvement', color: '#CA8A04', bg: 'bg-yellow-50', text: 'text-yellow-800' } :
+                              { label: 'Poor — Do Not Submit', color: '#DC2626', bg: 'bg-red-50', text: 'text-red-800' };
+              const metrics = [
+                { k: 'Keyword Match', v: atsResult.metrics?.keywordMatch || 0, icon: Target },
+                { k: 'Format Score', v: atsResult.metrics?.formatScore || 0, icon: Shield },
+                { k: 'Content Score', v: atsResult.metrics?.contentScore || 0, icon: FileText },
+                { k: 'Readability', v: atsResult.metrics?.readability || 0, icon: Eye },
+              ];
+              return (
+                <div className="bg-white rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] border border-[#FED7AA]/60 p-6 sm:p-8 relative overflow-hidden">
+                  <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-10 blur-3xl" style={{ background: tier.color }} />
+                  <div className="flex flex-col md:flex-row items-center gap-8 relative">
+                    <div className="flex-shrink-0 relative">
+                      <svg className="w-36 h-36 transform -rotate-90">
+                        <circle cx="72" cy="72" r="62" fill="none" stroke="#f3f4f6" strokeWidth="12" />
+                        <motion.circle
+                          cx="72" cy="72" r="62" fill="none" stroke={tier.color} strokeWidth="12" strokeLinecap="round"
+                          strokeDasharray="389"
+                          initial={{ strokeDashoffset: 389 }}
+                          animate={{ strokeDashoffset: 389 - (389 * score) / 100 }}
+                          transition={{ duration: 1.2, ease: 'easeOut' }}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <motion.span
+                          initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.3 }}
+                          className="text-5xl font-extrabold leading-none"
+                          style={{ color: tier.color }}
+                        >
+                          {score}
+                        </motion.span>
+                        <span className="text-xs font-bold text-gray-400 mt-1">out of 100</span>
+                      </div>
+                    </div>
+                    <div className="flex-1 text-center md:text-left w-full">
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1 text-sm font-bold rounded-full mb-3 ${tier.bg} ${tier.text}`}>
+                        {score >= 70 ? <CheckCircle2 size={14} /> : <AlertTriangle size={14} />} {tier.label}
+                      </div>
+                      <p className="text-gray-600 mb-5 text-[15px]">
+                        Your resume has a <span className="font-semibold" style={{ color: tier.color }}>
+                          {score >= 85 ? 'strong' : score >= 70 ? 'good' : score >= 50 ? 'moderate' : 'low'}
+                        </span> chance of passing ATS screening. {score < 85 && 'Address the items below to boost your score.'}
+                      </p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                        {metrics.map((m) => {
+                          const Icon = m.icon;
+                          const c = m.v >= 80 ? '#16A34A' : m.v >= 60 ? '#CA8A04' : '#DC2626';
+                          return (
+                            <div key={m.k} className="bg-gray-50 border border-gray-100 rounded-xl p-3">
+                              <div className="flex items-center justify-between mb-1.5">
+                                <Icon size={12} className="text-gray-400" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{m.k}</span>
+                              </div>
+                              <div className="text-2xl font-extrabold" style={{ color: c }}>{m.v}<span className="text-sm text-gray-400">%</span></div>
+                              <div className="h-1 bg-gray-200 rounded-full mt-1.5 overflow-hidden">
+                                <motion.div className="h-full rounded-full" style={{ background: c }} initial={{ width: 0 }} animate={{ width: `${m.v}%` }} transition={{ duration: 0.9, ease: 'easeOut' }} />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <button onClick={() => onNavigate(1)} className="px-5 py-2.5 bg-[#FF6321] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all hover:scale-[1.02] flex items-center gap-2 shadow-[0_10px_20px_-8px_rgba(255,99,33,0.6)]">
+                          <Sparkles size={14} /> Fix My Resume With AI <ArrowRight className="w-4 h-4" />
+                        </button>
+                        <button className="px-4 py-2.5 bg-white border border-[#FF6321] text-[#FF6321] font-bold rounded-xl hover:bg-[#FFF7ED] transition-colors flex items-center gap-2"><Download className="w-4 h-4" /> Report</button>
+                        <button onClick={() => setAnalyzeState('idle')} aria-label="Reset analysis" className="px-3 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors"><RefreshCw className="w-4 h-4" /></button>
+                        <button aria-label="Share report" className="px-3 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors"><Share2 className="w-4 h-4" /></button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
-                    <div className="text-xs font-bold text-gray-500 mb-1">Format Score</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.formatScore >= 80 ? 'text-[#FF6321]' : 'text-[#CA8A04]'}`}>{atsResult.metrics?.formatScore || 0}%</div>
-                  </div>
-                  <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
-                    <div className="text-xs font-bold text-gray-500 mb-1">Content Score</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.contentScore >= 80 ? 'text-[#FF6321]' : 'text-blue-600'}`}>{atsResult.metrics?.contentScore || 0}%</div>
-                  </div>
-                  <div className="bg-gray-50 border border-gray-100 rounded-xl p-3 text-center">
-                    <div className="text-xs font-bold text-gray-500 mb-1">Readability</div>
-                    <div className={`text-lg font-extrabold ${atsResult.metrics?.readability >= 80 ? 'text-[#FF6321]' : 'text-blue-600'}`}>{atsResult.metrics?.readability || 0}%</div>
-                  </div>
                 </div>
-                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                  <button onClick={() => onNavigate(1)} className="px-6 py-2.5 bg-[#FF6321] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all hover:scale-[1.02] flex items-center gap-2">Fix My Resume With AI <ArrowRight className="w-4 h-4" /></button>
-                  <button className="px-6 py-2.5 bg-white border border-[#FF6321] text-[#FF6321] font-bold rounded-xl hover:bg-[#FFF7ED] transition-colors flex items-center gap-2"><Download className="w-4 h-4" /> Download Full Report</button>
-                  <button onClick={() => setAnalyzeState('idle')} aria-label="Reset analysis" className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><RefreshCw className="w-4 h-4" /></button>
-                  <button aria-label="Share report" className="px-4 py-2.5 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center gap-2"><Share2 className="w-4 h-4" /></button>
-                </div>
-              </div>
-            </div>
-            )}
+              );
+            })()}
+
 
             {/* Results Tabs */}
             <div className="bg-white rounded-2xl shadow-[0_1px_3px_rgba(22,163,74,0.10)] border border-[#FED7AA] overflow-hidden">

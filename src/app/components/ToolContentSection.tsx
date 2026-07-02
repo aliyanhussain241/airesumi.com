@@ -1,4 +1,5 @@
 import React from "react";
+import { CheckCircle2 } from "lucide-react";
 
 export interface HowToStep {
   title: string;
@@ -10,6 +11,11 @@ export interface FaqItem {
   a: string;
 }
 
+export interface FeatureItem {
+  title: string;
+  desc: string;
+}
+
 export interface ToolContentSectionProps {
   whatTitle: string;
   whatParagraphs: string[];
@@ -17,6 +23,8 @@ export interface ToolContentSectionProps {
   howToSteps: HowToStep[];
   faqTitle?: string;
   faqs: FaqItem[];
+  featuresTitle?: string;
+  features?: FeatureItem[];
 }
 
 /**

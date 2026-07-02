@@ -5,6 +5,33 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
+ * CLS fix — size-adjusted fallback @font-face declarations.
+ * Google Fonts loads with display=swap (non-blocking). Without a metric-matched
+ * fallback, the initial paint uses the system font and text reflows when Sora /
+ * Manrope arrive, spiking CLS. These fallbacks approximate the web-font metrics
+ * so glyph advances line up before and after swap. Use them via
+ * font-family: "Sora", "Sora Fallback", ui-sans-serif, system-ui, sans-serif;
+ * (already wired in src/app/app.css).
+ */
+@font-face {
+  font-family: "Sora Fallback";
+  src: local("Arial");
+  size-adjust: 104%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Manrope Fallback";
+  src: local("Arial");
+  size-adjust: 100%;
+  ascent-override: 100%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+}
+
+
+/*
  * Design system definition.
  *
  * The @theme inline block maps CSS custom properties to Tailwind utility

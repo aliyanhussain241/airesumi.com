@@ -30,6 +30,15 @@ export const DoneView: React.FC<DoneViewProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const qrPosClass: Record<string, string> = {
+    "top-right": "top-6 right-6",
+    "top-left": "top-6 left-6",
+    "bottom-right": "bottom-6 right-6",
+    "bottom-left": "bottom-6 left-6",
+  };
+  const qrPos = qrPosClass[resumeData.header.qrPosition ?? "top-right"] ?? qrPosClass["top-right"];
+  const qrSize = resumeData.header.qrSize ?? 72;
+
   return (
     <motion.div
       key="done"

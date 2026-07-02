@@ -99,6 +99,14 @@ export const SUMMARY_CONTENT: ToolContent = {
     { q: "Is the summary generator free?", a: "Yes, and it produces three variations per generation so you can compare tones side by side." },
     { q: "Can I use the summary as my LinkedIn About section?", a: "Yes, with light editing. LinkedIn About allows a more personal, first-person tone — use the AI output as a starting draft." },
   ],
+  features: [
+    { title: "3 Tone Variations", desc: "Concise, Confident, and Story-driven — pick the voice that fits the company culture." },
+    { title: "Role-Tailored Output", desc: "Summaries reflect your exact title, years, and target industry — not generic templates." },
+    { title: "Recruiter-Optimized Length", desc: "Every summary lands at 50–80 words, the sweet spot for 6-second recruiter skims." },
+    { title: "Achievement Front-Loaded", desc: "Your strongest quantified wins appear in the first two sentences where they get read." },
+    { title: "LinkedIn-Ready", desc: "Reuse the same summary as your LinkedIn About section with minimal edits." },
+    { title: "Instant Regenerate", desc: "Don't like a version? Regenerate three fresh ones in seconds — no credits, no limits." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

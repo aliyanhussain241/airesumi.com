@@ -131,8 +131,8 @@ export const DoneView: React.FC<DoneViewProps> = ({
                 <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col overflow-hidden">
                   <ResumePreview data={resumeData} designId={designId} />
                   {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
-                    <div className="absolute top-6 right-6 z-10 print:top-6 print:right-6">
-                      <ResumeQRCode url={resumeData.header.qrCodeUrl} size={72} />
+                    <div className={`absolute ${qrPos} z-10`}>
+                      <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />
                     </div>
                   )}
                 </div>

@@ -195,26 +195,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      // Non-blocking Google Fonts load: fetch as low-priority, swap to `all` after load.
-      // Saves ~750ms of render-blocking time on mobile. `font-display=swap` on the URL
-      // ensures text paints immediately in the system fallback until the web font is ready.
+      // FCP fix: trimmed to the 4 weights we actually paint above the fold
+      // (Sora 600/700 for headings, Manrope 400/600 for body/nav). Cuts the
+      // Google Fonts CSS + woff2 payload roughly in half vs. the previous
+      // 8-weight set, and drops the duplicate <link> that was fetching the
+      // same stylesheet twice. `display=swap` keeps text visible immediately
+      // in the metric-matched fallback until the web font arrives.
       {
         rel: "preload",
         as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;600&display=swap",
         onLoad: "this.onload=null;this.rel='stylesheet'",
       } as any,
-      // Fallback for no-JS users
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap",
-        media: "print",
-        onLoad: "this.media='all'",
-      } as any,
-      { rel: "stylesheet", href: appCss },
+        href: appCss },
       { rel: "icon", href: "/favicon.webp", type: "image/webp" },
       { rel: "apple-touch-icon", href: "/favicon.webp" },
     ],
+
     // FIX: Full schema markup added
     scripts: [
       {

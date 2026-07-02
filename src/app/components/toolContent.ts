@@ -132,6 +132,14 @@ export const KEYWORD_CONTENT: ToolContent = {
     { q: "Does adding keywords guarantee an interview?", a: "No — it gets you past the automated screen. Once a recruiter opens your resume, achievements and clarity still decide the callback." },
     { q: "Should I copy-paste the keywords exactly?", a: "Match the phrasing where honest ('React' vs 'ReactJS'), but never claim a skill you don't have. ATS gets you seen; the interview verifies the claim." },
   ],
+  features: [
+    { title: "Live Match Score", desc: "Instant 0–100% coverage score with pass / borderline / fail visual tiers." },
+    { title: "Missing Keyword List", desc: "See every required skill, tool, and phrase your resume is missing — ranked by importance." },
+    { title: "Hard vs Soft Skill Split", desc: "Separates technical must-haves from nice-to-have soft skills so you fix the right gaps first." },
+    { title: "ATS Simulation Engine", desc: "Mirrors what Workday, Greenhouse, and Lever actually parse — not a keyword-count toy." },
+    { title: "Unlimited Re-Scans", desc: "Scan the same resume against every posting you apply to — free, no limits." },
+    { title: "Copy-Ready Fix List", desc: "Suggested phrasings you can paste directly into bullets and the skills section." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

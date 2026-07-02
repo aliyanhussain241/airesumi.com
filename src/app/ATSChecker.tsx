@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  CheckCircle2, XCircle, AlertTriangle, ArrowRight, BarChart3, 
-  FileText, UploadCloud, Search, RefreshCw, Download, Share2, Plus, 
-  CheckCircle, ChevronDown, Check, X
+import {
+  CheckCircle2, XCircle, AlertTriangle, ArrowRight,
+  FileText, UploadCloud, RefreshCw, Download, Share2, Plus,
+  CheckCircle, Check, X, Sparkles, Zap, Target, Loader2, Shield,
+  ClipboardPaste, Eye
 } from 'lucide-react';
+
 
 export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   const [activeCheckTab, setActiveCheckTab] = useState(1);

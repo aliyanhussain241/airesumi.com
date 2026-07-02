@@ -371,9 +371,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   }, []);
 
   useEffect(() => {
-    const fn = () => setWidth(window.innerWidth);
-    fn(); // ✅ mount hote hi asal width set karo (sirf browser mein chalta hai, hydration ke baad — safe)
-    window.addEventListener('resize', fn);
+    let ticking = false;
+    const update = () => { setWidth(window.innerWidth); ticking = false; };
+    const fn = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    update();
+    window.addEventListener('resize', fn, { passive: true });
     return () => window.removeEventListener('resize', fn);
   }, []);
 

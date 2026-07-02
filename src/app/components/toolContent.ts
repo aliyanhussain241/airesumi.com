@@ -1,4 +1,4 @@
-import type { HowToStep, FaqItem } from "../components/ToolContentSection";
+import type { HowToStep, FaqItem, FeatureItem } from "../components/ToolContentSection";
 
 export interface ToolContent {
   whatTitle: string;
@@ -6,6 +6,7 @@ export interface ToolContent {
   howToTitle: string;
   howToSteps: HowToStep[];
   faqs: FaqItem[];
+  features?: FeatureItem[];
 }
 
 /* ------------------------------------------------------------------ */
@@ -32,6 +33,14 @@ export const RESUME_CONTENT: ToolContent = {
     { q: "Can I edit the resume after the AI generates it?", a: "Yes. Every field is editable. Tweak bullets, swap templates, and re-download as many times as you want." },
     { q: "What file format do I download?", a: "PDF by default, which is the format 98% of employers request. The PDF is text-based (not an image), so ATS software can still read every word." },
   ],
+  features: [
+    { title: "AI-Powered Content", desc: "Gemini-powered bullets, summary, and skills — tailored to the exact job description you paste." },
+    { title: "ATS-Safe Templates", desc: "Single-column layouts parsed cleanly by Workday, Greenhouse, Lever, and Taleo." },
+    { title: "One-Click CV Import", desc: "Upload your existing PDF or DOCX — we extract and rewrite everything for the target role." },
+    { title: "10+ Premium Designs", desc: "From minimal to executive. Swap templates any time without losing your content." },
+    { title: "Live Preview", desc: "See changes update in real time in a paper-accurate preview before you download." },
+    { title: "PDF Download, No Watermark", desc: "Text-based, recruiter-ready PDF — the format 98% of employers accept." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -56,6 +65,14 @@ export const BULLET_CONTENT: ToolContent = {
     { q: "Can I use these bullets on LinkedIn?", a: "Yes. The generated bullets work directly in LinkedIn Experience sections, cover letters, and interview stories — anywhere achievement-focused writing helps." },
     { q: "What if I don't have exact numbers?", a: "Use ranges or approximations ('~20%', '5+ team members', 'reduced by roughly half'). Recruiters know most metrics are estimates — vague beats missing." },
     { q: "How many bullet variations does the AI generate?", a: "Five variations per input, so you can pick the tone and emphasis that best fits the job description." },
+  ],
+  features: [
+    { title: "5 Variations Per Bullet", desc: "Every generation returns 5 rewrites so you can pick the strongest tone and emphasis." },
+    { title: "STAR-Formatted Output", desc: "Situation, Task, Action, Result — the format recruiters and hiring managers score highest." },
+    { title: "Strong Action Verbs", desc: "Led, shipped, reduced, grew — no 'responsible for' or 'helped with' filler." },
+    { title: "Quantified Impact", desc: "AI adds realistic metrics and percentages so your bullets prove impact, not just activity." },
+    { title: "JD Keyword Matching", desc: "Paste a job description and bullets auto-mirror the exact skills recruiters filter on." },
+    { title: "One-Click Copy", desc: "Copy any bullet — or all five at once — straight into your resume or LinkedIn." },
   ],
 };
 
@@ -82,6 +99,14 @@ export const SUMMARY_CONTENT: ToolContent = {
     { q: "Is the summary generator free?", a: "Yes, and it produces three variations per generation so you can compare tones side by side." },
     { q: "Can I use the summary as my LinkedIn About section?", a: "Yes, with light editing. LinkedIn About allows a more personal, first-person tone — use the AI output as a starting draft." },
   ],
+  features: [
+    { title: "3 Tone Variations", desc: "Concise, Confident, and Story-driven — pick the voice that fits the company culture." },
+    { title: "Role-Tailored Output", desc: "Summaries reflect your exact title, years, and target industry — not generic templates." },
+    { title: "Recruiter-Optimized Length", desc: "Every summary lands at 50–80 words, the sweet spot for 6-second recruiter skims." },
+    { title: "Achievement Front-Loaded", desc: "Your strongest quantified wins appear in the first two sentences where they get read." },
+    { title: "LinkedIn-Ready", desc: "Reuse the same summary as your LinkedIn About section with minimal edits." },
+    { title: "Instant Regenerate", desc: "Don't like a version? Regenerate three fresh ones in seconds — no credits, no limits." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -107,6 +132,14 @@ export const KEYWORD_CONTENT: ToolContent = {
     { q: "Does adding keywords guarantee an interview?", a: "No — it gets you past the automated screen. Once a recruiter opens your resume, achievements and clarity still decide the callback." },
     { q: "Should I copy-paste the keywords exactly?", a: "Match the phrasing where honest ('React' vs 'ReactJS'), but never claim a skill you don't have. ATS gets you seen; the interview verifies the claim." },
   ],
+  features: [
+    { title: "Live Match Score", desc: "Instant 0–100% coverage score with pass / borderline / fail visual tiers." },
+    { title: "Missing Keyword List", desc: "See every required skill, tool, and phrase your resume is missing — ranked by importance." },
+    { title: "Hard vs Soft Skill Split", desc: "Separates technical must-haves from nice-to-have soft skills so you fix the right gaps first." },
+    { title: "ATS Simulation Engine", desc: "Mirrors what Workday, Greenhouse, and Lever actually parse — not a keyword-count toy." },
+    { title: "Unlimited Re-Scans", desc: "Scan the same resume against every posting you apply to — free, no limits." },
+    { title: "Copy-Ready Fix List", desc: "Suggested phrasings you can paste directly into bullets and the skills section." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -131,6 +164,14 @@ export const LINKEDIN_CONTENT: ToolContent = {
     { q: "Will a keyword-optimized profile actually show up in search?", a: "Yes. LinkedIn Recruiter ranks profiles primarily by keyword matches in headline, About, experience titles, and skills — those four fields drive most inbound InMails." },
     { q: "Can I use my resume text as-is on LinkedIn?", a: "No — resume writing is third-person and terse; LinkedIn is first-person and conversational. The generator handles the rewrite." },
     { q: "How often should I update my LinkedIn bio?", a: "Every 6 months, or immediately after a role change, promotion, or new certification. Fresh profiles rank higher in recruiter search." },
+  ],
+  features: [
+    { title: "Headline + About + Skills", desc: "Three assets in one pass — 220-char headline, 2,600-char About, and ranked skills list." },
+    { title: "First-Person Voice", desc: "Conversational LinkedIn tone, not stiff third-person resume copy." },
+    { title: "SEO-Tuned Keywords", desc: "Placed in the four fields LinkedIn Recruiter actually weighs: headline, About, titles, skills." },
+    { title: "Industry Targeting", desc: "Choose your industry and seniority — output speaks the vocabulary of your target market." },
+    { title: "Truncation-Aware", desc: "Front-loads your pitch in the first 370 characters before LinkedIn's '…see more' cut." },
+    { title: "Editable Blocks", desc: "Tweak each section inline before you copy it into your profile — no all-or-nothing regen." },
   ],
 };
 
@@ -193,6 +234,14 @@ export const SALARY_CONTENT: ToolContent = {
     { q: "Should I share my current salary with a recruiter?", a: "No — in most US states it's illegal for employers to ask, and it anchors the offer to your last comp rather than the role's market value. Redirect to your target range." },
     { q: "How often does salary data change?", a: "Materially every 6-12 months, faster during hiring booms or freezes. Re-check any role you're targeting within 6 months of your negotiation." },
   ],
+  features: [
+    { title: "Total-Comp Ranges", desc: "Base + bonus + equity in one number — not just base salary that undersells your offer." },
+    { title: "Role & Region Filters", desc: "Benchmark by exact title, seniority, industry, and city — global coverage." },
+    { title: "Negotiation Talking Points", desc: "AI-generated scripts you can use verbatim on recruiter calls to counter an offer." },
+    { title: "Anchor-Range Guidance", desc: "Shows where to open, where to land, and where to walk away for your target role." },
+    { title: "Live Market Data", desc: "Ranges recalibrated regularly against current comp data — not stale 2019 numbers." },
+    { title: "Free Unlimited Compares", desc: "Compare as many roles, cities, and seniorities as you want — no sign-up." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -218,6 +267,14 @@ export const PDF_SCANNER_CONTENT: ToolContent = {
     { q: "Is the scanner free?", a: "Yes. Unlimited scans, unlimited pages, no watermark — free forever." },
     { q: "What's the maximum PDF file size?", a: "There's no hard limit — the scanner compresses images so a 20-page text document typically stays under 5 MB, small enough to email or upload to any job portal." },
   ],
+  features: [
+    { title: "Auto Edge Detection", desc: "Finds document corners the moment you snap — with a 4-point crop editor for manual override." },
+    { title: "Perspective Correction", desc: "Real bilinear homography warp turns tilted photos into flat, straight-on pages." },
+    { title: "6 Smart Filters", desc: "Original, Magic Auto, Document, Vivid, Grayscale, and B&W — pick the best look per page." },
+    { title: "OCR Text Extraction", desc: "Tesseract-powered OCR pulls copyable text out of any scanned page in your browser." },
+    { title: "Password-Protected PDF", desc: "AES-encrypt sensitive scans with an open password before you download or share." },
+    { title: "100% On-Device", desc: "Nothing uploads — capture, OCR, and PDF export all happen locally in your browser." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */
@@ -242,5 +299,13 @@ export const RESIGNATION_CONTENT: ToolContent = {
     { q: "Should I mention why I'm leaving in the letter?", a: "Only in one neutral sentence, if at all ('to pursue a new opportunity'). The letter is a formal record — save specific feedback for the exit interview." },
     { q: "Can I resign by email?", a: "Only after telling your manager in a live conversation. The email or letter formalizes what you've already discussed — it should never be the first they hear of it." },
     { q: "What tone should my resignation letter use?", a: "Professional and grateful, even if the job wasn't. The letter goes into your HR file and often gets shown to future reference checkers years later." },
+  ],
+  features: [
+    { title: "4 Tone Presets", desc: "Formal, Grateful, Brief, or Career-change — matched to your relationship with the company." },
+    { title: "Notice Period Quick-Pick", desc: "One-tap 2-week, 3-week, or 1-month notice with the correct last-day date auto-filled." },
+    { title: "Live Letter Preview", desc: "See a paper-textured preview update in real time as you fill in your details." },
+    { title: "Printable PDF Download", desc: "One-page, single-column PDF ready to hand to your manager or email to HR." },
+    { title: "Reference-Safe Wording", desc: "Neutral, professional language that keeps the door open for future references." },
+    { title: "No Sign-Up, No Watermark", desc: "Generate and download unlimited letters — completely free." },
   ],
 };

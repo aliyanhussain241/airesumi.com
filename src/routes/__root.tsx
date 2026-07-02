@@ -202,9 +202,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "preload",
         as: "style",
         href: "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap",
-        // @ts-expect-error — valid HTML attribute, not in the type
-        onload: "this.onload=null;this.rel='stylesheet'",
-      },
+        onLoad: "this.onload=null;this.rel='stylesheet'",
+      } as any,
+      // Fallback for no-JS users
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap",
+        media: "print",
+        onLoad: "this.media='all'",
+      } as any,
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.webp", type: "image/webp" },
       { rel: "apple-touch-icon", href: "/favicon.webp" },

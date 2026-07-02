@@ -4,8 +4,11 @@
 
 /* ---------- Typography polish ---------- */
 :root {
-  --font-display: "Sora", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* CLS fix: metric-matched "* Fallback" families (defined in src/styles.css) sit
+     between the web font and system fallbacks so text keeps the same advance
+     width before and after the web font swaps in. */
+  --font-display: "Sora", "Sora Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Manrope", "Manrope Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 html, body {
   font-family: var(--font-body);

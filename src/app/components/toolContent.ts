@@ -165,6 +165,14 @@ export const LINKEDIN_CONTENT: ToolContent = {
     { q: "Can I use my resume text as-is on LinkedIn?", a: "No — resume writing is third-person and terse; LinkedIn is first-person and conversational. The generator handles the rewrite." },
     { q: "How often should I update my LinkedIn bio?", a: "Every 6 months, or immediately after a role change, promotion, or new certification. Fresh profiles rank higher in recruiter search." },
   ],
+  features: [
+    { title: "Headline + About + Skills", desc: "Three assets in one pass — 220-char headline, 2,600-char About, and ranked skills list." },
+    { title: "First-Person Voice", desc: "Conversational LinkedIn tone, not stiff third-person resume copy." },
+    { title: "SEO-Tuned Keywords", desc: "Placed in the four fields LinkedIn Recruiter actually weighs: headline, About, titles, skills." },
+    { title: "Industry Targeting", desc: "Choose your industry and seniority — output speaks the vocabulary of your target market." },
+    { title: "Truncation-Aware", desc: "Front-loads your pitch in the first 370 characters before LinkedIn's '…see more' cut." },
+    { title: "Editable Blocks", desc: "Tweak each section inline before you copy it into your profile — no all-or-nothing regen." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

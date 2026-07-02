@@ -124,6 +124,8 @@ function ResumeBuilder() {
     certifications: [""],
     qrCodeUrl: "",
     showQrCode: true,
+    qrPosition: "top-right",
+    qrSize: 72,
   });
   const [jobData, setJobData] = useState<JobDescription>({
     title: "",

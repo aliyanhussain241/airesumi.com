@@ -13,7 +13,7 @@ const FAQ_SCHEMA = JSON.stringify({
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Is airesumi free to use?",
+      "name": "Is Airesumi free to use?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes, airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates."

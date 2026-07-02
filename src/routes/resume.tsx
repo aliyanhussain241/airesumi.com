@@ -122,6 +122,8 @@ function ResumeBuilder() {
     location: "",
     portfolio: "",
     certifications: [""],
+    qrCodeUrl: "",
+    showQrCode: true,
   });
   const [jobData, setJobData] = useState<JobDescription>({
     title: "",

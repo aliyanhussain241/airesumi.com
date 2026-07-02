@@ -33,6 +33,14 @@ export const RESUME_CONTENT: ToolContent = {
     { q: "Can I edit the resume after the AI generates it?", a: "Yes. Every field is editable. Tweak bullets, swap templates, and re-download as many times as you want." },
     { q: "What file format do I download?", a: "PDF by default, which is the format 98% of employers request. The PDF is text-based (not an image), so ATS software can still read every word." },
   ],
+  features: [
+    { title: "AI-Powered Content", desc: "Gemini-powered bullets, summary, and skills — tailored to the exact job description you paste." },
+    { title: "ATS-Safe Templates", desc: "Single-column layouts parsed cleanly by Workday, Greenhouse, Lever, and Taleo." },
+    { title: "One-Click CV Import", desc: "Upload your existing PDF or DOCX — we extract and rewrite everything for the target role." },
+    { title: "10+ Premium Designs", desc: "From minimal to executive. Swap templates any time without losing your content." },
+    { title: "Live Preview", desc: "See changes update in real time in a paper-accurate preview before you download." },
+    { title: "PDF Download, No Watermark", desc: "Text-based, recruiter-ready PDF — the format 98% of employers accept." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

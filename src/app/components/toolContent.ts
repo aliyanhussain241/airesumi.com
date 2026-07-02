@@ -66,6 +66,14 @@ export const BULLET_CONTENT: ToolContent = {
     { q: "What if I don't have exact numbers?", a: "Use ranges or approximations ('~20%', '5+ team members', 'reduced by roughly half'). Recruiters know most metrics are estimates — vague beats missing." },
     { q: "How many bullet variations does the AI generate?", a: "Five variations per input, so you can pick the tone and emphasis that best fits the job description." },
   ],
+  features: [
+    { title: "5 Variations Per Bullet", desc: "Every generation returns 5 rewrites so you can pick the strongest tone and emphasis." },
+    { title: "STAR-Formatted Output", desc: "Situation, Task, Action, Result — the format recruiters and hiring managers score highest." },
+    { title: "Strong Action Verbs", desc: "Led, shipped, reduced, grew — no 'responsible for' or 'helped with' filler." },
+    { title: "Quantified Impact", desc: "AI adds realistic metrics and percentages so your bullets prove impact, not just activity." },
+    { title: "JD Keyword Matching", desc: "Paste a job description and bullets auto-mirror the exact skills recruiters filter on." },
+    { title: "One-Click Copy", desc: "Copy any bullet — or all five at once — straight into your resume or LinkedIn." },
+  ],
 };
 
 /* ------------------------------------------------------------------ */

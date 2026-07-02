@@ -232,8 +232,9 @@ const GLASS_HEADER_STYLES = `
 
 export const Logo = () => (
   <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">
-    <img src={rezumiLogo} alt="airesumi" className="theme-logo-light h-8 w-auto object-contain" />
-    <img src={rezumiLogoWhite} alt="airesumi" className="theme-logo-dark h-8 w-auto object-contain" />
+    {/* Explicit width/height reserves space so the header doesn't shift when the logo webp decodes (CLS fix). */}
+    <img src={rezumiLogo} alt="airesumi" width={128} height={32} className="theme-logo-light h-8 w-auto object-contain" />
+    <img src={rezumiLogoWhite} alt="airesumi" width={128} height={32} className="theme-logo-dark h-8 w-auto object-contain" />
   </div>
 );
 

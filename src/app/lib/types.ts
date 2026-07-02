@@ -36,6 +36,8 @@ export interface ResumeData {
     contactInfo: string;
     title: string;
     profilePicture?: string;
+    qrCodeUrl?: string;
+    showQrCode?: boolean;
   };
   summary: string;
   experience: {

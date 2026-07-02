@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, Monitor, Smartphone, FileText, Download } from "lucide-react";
 import { Step } from "./App";
 import { ResumePreview, DesignId } from "./components/ResumePreview";
+import { ResumeQRCode } from "./components/ResumeQRCode";
 import { ResumeData } from "./lib/types";
 
 interface DoneViewProps {

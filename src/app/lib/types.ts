@@ -42,6 +42,8 @@ export interface ResumeData {
     profilePicture?: string;
     qrCodeUrl?: string;
     showQrCode?: boolean;
+    qrPosition?: QrPosition;
+    qrSize?: number;
   };
   summary: string;
   experience: {

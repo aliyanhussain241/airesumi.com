@@ -1,3 +1,5 @@
+export type QrPosition = "top-right" | "top-left" | "bottom-right" | "bottom-left";
+
 export interface UserData {
   fullName: string;
   email: string;
@@ -13,6 +15,8 @@ export interface UserData {
   certifications?: string[];
   qrCodeUrl?: string;
   showQrCode?: boolean;
+  qrPosition?: QrPosition;
+  qrSize?: number;
 }
 
 export interface JobDescription {

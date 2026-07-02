@@ -19,6 +19,12 @@ export const Route = createFileRoute("/interview-prep")({
   head: () => ({
     meta: [
       { title: "Free AI Interview Question Generator 2026 — Practice by Role, Seniority & Industry | airesumi" },
+      { property: "og:image", content: "https://airesumi.com/api/public/og/interview-prep" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/svg+xml" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/api/public/og/interview-prep" },
       { name: "description", content: "Practice realistic interview questions tailored to your exact role, seniority, and industry. Behavioral, technical, situational, case-study & salary-negotiation prompts with STAR answer frameworks. 100% free, no sign-up." },
       { name: "keywords", content: "AI interview questions, interview preparation, behavioral interview questions, technical interview practice, STAR method interview, mock interview generator, job interview prep 2026, situational interview questions, case study interview, salary negotiation questions" },
       { property: "og:title", content: "Free AI Interview Question Generator — Tailored to Your Exact Role | airesumi" },

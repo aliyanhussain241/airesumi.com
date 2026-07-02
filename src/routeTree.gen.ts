@@ -52,6 +52,7 @@ import { Route as ApiGenerateBulletsRouteImport } from './routes/api/generate-bu
 import { Route as ApiCreateCheckoutRouteImport } from './routes/api/create-checkout'
 import { Route as ApiAnalyzeAtsRouteImport } from './routes/api/analyze-ats'
 import { Route as AdminBlogRouteImport } from './routes/admin/blog'
+import { Route as ApiPublicOgSlugRouteImport } from './routes/api/public/og.$slug'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -268,6 +269,11 @@ const AdminBlogRoute = AdminBlogRouteImport.update({
   path: '/admin/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicOgSlugRoute = ApiPublicOgSlugRouteImport.update({
+  id: '/api/public/og/$slug',
+  path: '/api/public/og/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -313,6 +319,7 @@ export interface FileRoutesByFullPath {
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/premium /success': typeof PremiumSuccessRoute
+  '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -358,6 +365,7 @@ export interface FileRoutesByTo {
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/premium /success': typeof PremiumSuccessRoute
+  '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -404,6 +412,7 @@ export interface FileRoutesById {
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/premium /success': typeof PremiumSuccessRoute
+  '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -451,6 +460,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/blog/$slug'
     | '/premium /success'
+    | '/api/public/og/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -496,6 +506,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/blog/$slug'
     | '/premium /success'
+    | '/api/public/og/$slug'
   id:
     | '__root__'
     | '/'
@@ -541,6 +552,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/blog/$slug'
     | '/premium /success'
+    | '/api/public/og/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -586,6 +598,7 @@ export interface RootRouteChildren {
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   PremiumSuccessRoute: typeof PremiumSuccessRoute
+  ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -891,6 +904,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/og/$slug': {
+      id: '/api/public/og/$slug'
+      path: '/api/public/og/$slug'
+      fullPath: '/api/public/og/$slug'
+      preLoaderRoute: typeof ApiPublicOgSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -947,6 +967,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   PremiumSuccessRoute: PremiumSuccessRoute,
+  ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

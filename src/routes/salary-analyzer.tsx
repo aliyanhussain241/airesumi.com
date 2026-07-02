@@ -19,6 +19,12 @@ export const Route = createFileRoute("/salary-analyzer")({
   head: () => ({
     meta: [
       { title: "Free AI Salary Analyzer — Compare Comp by Role & Region | airesumi.com" },
+      { property: "og:image", content: "https://airesumi.com/api/public/og/salary-analyzer" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/svg+xml" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/api/public/og/salary-analyzer" },
       { name: "description", content: "Benchmark salaries across roles, regions, and experience levels. Get total-comp ranges plus AI-powered negotiation talking points. Free, no sign-up." },
       { name: "keywords", content: "salary analyzer, salary comparison, compensation benchmark, total comp calculator, salary negotiation" },
       { property: "og:title", content: "Free AI Salary Analyzer | airesumi.com" },

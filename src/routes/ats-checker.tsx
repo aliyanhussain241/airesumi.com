@@ -167,6 +167,12 @@ export const Route = createFileRoute("/ats-checker")({
   head: () => ({
     meta: [
       { title: "Free ATS Resume Checker — Score Your Resume Instantly | airesumi.com" },
+      { property: "og:image", content: "https://airesumi.com/api/public/og/ats-checker" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/svg+xml" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/api/public/og/ats-checker" },
       { name: "description", content: "Check how your resume scores against Applicant Tracking Systems. Get an instant ATS score, keyword analysis, and fixes. Free — no sign-up required." },
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "ATS resume checker, ATS score, applicant tracking system, resume scanner, ATS optimization" },

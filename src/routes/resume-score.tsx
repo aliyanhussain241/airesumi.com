@@ -410,6 +410,12 @@ export const Route = createFileRoute("/resume-score")({
   head: () => ({
     meta: [
       { title: "Resume Score & Roast — Brutally Honest AI Feedback | airesumi" },
+      { property: "og:image", content: "https://airesumi.com/api/public/og/resume-score" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/svg+xml" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/api/public/og/resume-score" },
       {
         name: "description",
         content:

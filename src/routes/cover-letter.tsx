@@ -272,6 +272,29 @@ function CoverLetterPage() {
         handlePrintCoverLetter={handlePrintCoverLetter}
       />
       <CoverLetterContentSection />
+
+      {/* Blog internal links */}
+      <div className="max-w-3xl mx-auto px-6 pb-12">
+        <div className="liquid-card rounded-2xl p-6">
+          <span className="liquid-card-shine" />
+          <div className="liquid-card-content">
+            <p className="text-xs font-bold text-[#FF6321] uppercase tracking-widest mb-4">From Our Blog</p>
+            <div className="flex flex-col gap-3">
+              {[
+                { title: "How to Write a Cover Letter with AI in 2026", href: "/blog/how-to-write-cover-letter-with-ai" },
+                { title: "How to Build a Resume with AI in 2026", href: "/blog/build-resume-with-ai" },
+                { title: "AI Resume vs. Human-Written: What Recruiters Notice", href: "/blog/ai-resume-vs-human-written-resume" },
+              ].map((post) => (
+                <a key={post.href} href={post.href} className="flex items-center gap-2 text-sm text-[#374151] hover:text-[#FF6321] transition-colors group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF6321] shrink-0 group-hover:scale-125 transition-transform" />
+                  {post.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: COVER_LETTER_FAQ_SCHEMA }}
@@ -284,12 +307,6 @@ export const Route = createFileRoute("/cover-letter")({
   head: () => ({
     meta: [
       { title: "Free AI Cover Letter Generator — Tailored in Seconds | airesumi.com" },
-      { property: "og:image", content: "https://airesumi.com/api/public/og/cover-letter" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:type", content: "image/svg+xml" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://airesumi.com/api/public/og/cover-letter" },
       { name: "description", content: "Generate a professional, tailored cover letter in seconds using AI. Matches your resume to any job description. Free, no sign-up required." },
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "AI cover letter generator, free cover letter, cover letter maker, cover letter builder, AI cover letter" },

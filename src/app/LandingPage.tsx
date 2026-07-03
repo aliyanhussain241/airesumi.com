@@ -13,7 +13,7 @@ const FAQ_SCHEMA = JSON.stringify({
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Is Airesumi free to use?",
+      "name": "Is airesumi free to use?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes, airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates."
@@ -722,6 +722,31 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               </summary>
               <p className="mt-3 text-[#4a5568] leading-relaxed text-[15px]">{item.a}</p>
             </details>
+          ))}
+        </div>
+      </div>
+
+      {/* From Our Blog Section */}
+      <div className="max-w-5xl mx-auto px-6 py-14">
+        <div className="text-center mb-8">
+          <p className="text-xs font-bold text-[#FF6321] uppercase tracking-widest mb-2">Career Resources</p>
+          <h2 className="text-2xl font-black text-[#111827]">From Our Blog</h2>
+          <p className="text-[#6B7280] text-sm mt-2">Step-by-step guides to land more interviews</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { title: "How to Build a Resume with AI in 2026", excerpt: "The 6-step process with copy-paste prompts and before/after examples.", href: "/blog/build-resume-with-ai" },
+            { title: "ATS Score: What Number Do You Actually Need?", excerpt: "Full breakdown by industry, company size, and how to fix a low score fast.", href: "/blog/ats-resume-checker-what-score-do-you-need" },
+            { title: "How to Tailor Your Resume for Every Job", excerpt: "AI-powered tailoring in under 2 minutes per application.", href: "/blog/how-to-tailor-resume-for-every-job" },
+          ].map((post) => (
+            <a key={post.href} href={post.href} className="liquid-card rounded-2xl p-5 block group hover:shadow-lg transition-all">
+              <span className="liquid-card-shine" />
+              <div className="liquid-card-content">
+                <p className="font-bold text-[#111827] text-[15px] mb-2 group-hover:text-[#FF6321] transition-colors leading-snug">{post.title}</p>
+                <p className="text-[#6B7280] text-[13px] leading-relaxed">{post.excerpt}</p>
+                <p className="text-[#FF6321] text-[13px] font-semibold mt-3">Read guide →</p>
+              </div>
+            </a>
           ))}
         </div>
       </div>

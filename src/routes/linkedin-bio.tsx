@@ -852,12 +852,23 @@ export const Route = createFileRoute("/linkedin-bio")({
       { property: "og:description", content: "3 headline variants, About section, banner tagline, and recruiter keywords — generated from your resume." },
       { property: "og:url", content: "https://airesumi.com/linkedin-bio" },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://airesumi.com/api/public/og/linkedin-bio" },
-      { name: "twitter:image", content: "https://airesumi.com/api/public/og/linkedin-bio" },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
       { name: "twitter:title", content: "AI LinkedIn Bio Generator | airesumi.com" },
       { name: "twitter:description", content: "3 headline variants, About section, banner tagline, and recruiter keywords — generated from your resume." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/linkedin-bio" }],
   }),
-  component: () => (<><LinkedInBioGenerator /><ToolContentSection {...LINKEDIN_CONTENT} /></>),
+  component: () => (
+    <>
+      <LinkedInBioGenerator />
+      <ToolContentSection {...LINKEDIN_CONTENT} />
+      <div className="max-w-xl mx-auto px-6 pb-12">
+        <div className="bg-[#FFF7ED] border border-orange-100 rounded-2xl p-5 text-center">
+          <p className="text-sm font-semibold text-[#111827] mb-1">Want a full resume to match your LinkedIn?</p>
+          <p className="text-xs text-[#6B7280] mb-3">Learn how to build a resume with AI in 6 steps — ATS-ready, tailored to every job.</p>
+          <a href="/blog/build-resume-with-ai" className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FF6321] hover:underline">Read the Guide →</a>
+        </div>
+      </div>
+    </>
+  ),
 });

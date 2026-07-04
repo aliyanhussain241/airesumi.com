@@ -173,6 +173,7 @@ export const Route = createFileRoute("/summary-generator")({
       { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/summary-generator" }],
+    scripts: toolSchemaScripts(SUMMARY_CONTENT),
   }),
   component: () => (
     <>

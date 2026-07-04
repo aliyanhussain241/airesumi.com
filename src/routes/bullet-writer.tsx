@@ -152,10 +152,16 @@ export const Route = createFileRoute("/bullet-writer")({
   head: () => ({
     meta: [
       { title: "Resume Bullet Writer — AI Powered | airesumi.com" },
-      { name: "description", content: "Generate powerful, metric-driven resume bullet points with AI." },
+      { name: "description", content: "Generate powerful, metric-driven resume bullet points with AI. Free, no sign-up required." },
       { property: "og:title", content: "Resume Bullet Writer — AI Powered | airesumi.com" },
-      { property: "og:description", content: "Generate powerful, metric-driven resume bullet points with AI." },
+      { property: "og:description", content: "Generate powerful, metric-driven resume bullet points with AI. Free, no sign-up required." },
       { property: "og:url", content: "https://airesumi.com/bullet-writer" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/assets/og-image.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Resume Bullet Writer — AI Powered | airesumi.com" },
+      { name: "twitter:description", content: "Generate powerful, metric-driven resume bullet points with AI. Free, no sign-up." },
+      { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/bullet-writer" }],
     scripts: [{

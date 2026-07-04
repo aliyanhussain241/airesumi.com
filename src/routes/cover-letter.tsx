@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { BlogHighlights } from "@/app/components/BlogHighlights";
 import React, { useEffect, useState } from "react";
 // FIX #1: Removed top-level toPng and jsPDF imports.
 // They are now dynamically imported only when the user clicks Download PDF.

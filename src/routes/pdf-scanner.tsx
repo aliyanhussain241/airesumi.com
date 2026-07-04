@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
 import { BlogHighlights } from "@/app/components/BlogHighlights";
+import {
   Camera, FileText, Trash2, Download, Plus, MoveUp, MoveDown, RotateCw,
   ScanLine, Sliders, CheckCircle2, ChevronLeft, Sun, Contrast, Sparkles,
   FileType2, Layers, Zap, Shield, ImagePlus, GripVertical, Copy, X,

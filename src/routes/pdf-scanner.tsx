@@ -12,6 +12,7 @@ import jsPDF from "jspdf";
 import JSZip from "jszip";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { PDF_SCANNER_CONTENT } from "../app/components/toolContent";
+import { toolSchemaScripts } from "@/lib/tool-schemas";
 
 interface Corner { x: number; y: number } // normalized 0..1
 interface ScannedPage {

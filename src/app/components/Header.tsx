@@ -659,6 +659,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50">
                   <LayoutDashboard size={14} /> {t('cta.myResumes')}
                 </Link>
+                <Link to="/manage-subscription"
+                  className="hdr-tag hidden lg:flex items-center gap-1.5 text-[13px] font-medium text-[#374151] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50 hover:text-[#EA580C]"
+                  title="Manage Subscription">
+                  <CreditCard size={14} /> Billing
+                </Link>
                 <button onClick={handleLogout}
                   className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
                   <LogOut size={13} /> {t('cta.logout')}

@@ -150,7 +150,9 @@ export const DoneView: React.FC<DoneViewProps> = ({
             <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth pt-10 pb-12 w-full bg-[#f3f4f6]">
               <div className="w-[850px] mx-auto origin-top-left flex flex-col" style={{ transform: 'scale(0.407)' }}>
               <div id="resume-document-mobile" className="relative bg-white shadow-xl flex-1 w-full min-h-[1100px] flex flex-col">
-                   <ResumePreview data={resumeData} designId={designId} />
+                   <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
+                     <ResumePreview data={resumeData} designId={designId} />
+                   </Suspense>
                    {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
                      <div className={`absolute ${qrPos} z-10`}>
                        <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />

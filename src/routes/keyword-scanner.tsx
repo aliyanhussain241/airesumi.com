@@ -182,10 +182,16 @@ export const Route = createFileRoute("/keyword-scanner")({
   head: () => ({
     meta: [
       { title: "Resume Keyword Scanner — ATS Match | airesumi.com" },
-      { name: "description", content: "See which keywords your resume is missing and boost your ATS match score." },
+      { name: "description", content: "See which keywords your resume is missing and boost your ATS match score. Free, no sign-up required." },
       { property: "og:title", content: "Resume Keyword Scanner — ATS Match | airesumi.com" },
-      { property: "og:description", content: "See which keywords your resume is missing and boost your ATS match score." },
+      { property: "og:description", content: "See which keywords your resume is missing and boost your ATS match score. Free, no sign-up required." },
       { property: "og:url", content: "https://airesumi.com/keyword-scanner" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/assets/og-image.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Resume Keyword Scanner — ATS Match | airesumi.com" },
+      { name: "twitter:description", content: "See which keywords your resume is missing. Free ATS keyword scanner." },
+      { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/keyword-scanner" }],
     scripts: [{

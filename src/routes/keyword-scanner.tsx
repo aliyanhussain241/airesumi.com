@@ -5,6 +5,7 @@ import { Target, Sparkles, RefreshCw, AlertCircle, CheckCircle2, XCircle, Lightb
 import { supabase } from "@/integrations/supabase/client";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { KEYWORD_CONTENT } from "../app/components/toolContent";
+import { toolSchemaScripts } from "@/lib/tool-schemas";
 import { BlogHighlights } from "@/app/components/BlogHighlights";
 
 function ScoreRing({ score }: { score: number }) {

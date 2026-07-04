@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import jsPDF from "jspdf";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { RESIGNATION_CONTENT } from "../app/components/toolContent";
+import { toolSchemaScripts } from "@/lib/tool-schemas";
 
 const TONES = [
   { id: "Professional", desc: "Formal, corporate", icon: Briefcase },

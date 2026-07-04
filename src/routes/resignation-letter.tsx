@@ -1,8 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
 import { BlogHighlights } from "@/app/components/BlogHighlights";
+import {
   FileText, Sparkles, Copy, Check, RefreshCw, AlertCircle, Download,
   Calendar, Mail, Briefcase, User, Heart, Zap, Clock, ChevronRight,
   Info, Wand2, ShieldCheck, Building2, ArrowRight

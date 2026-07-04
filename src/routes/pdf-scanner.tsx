@@ -1139,6 +1139,7 @@ export const Route = createFileRoute("/pdf-scanner")({
       { name: "twitter:description", content: "Auto-crop, OCR, password protection — all in your browser." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/pdf-scanner" }],
+    scripts: toolSchemaScripts(PDF_SCANNER_CONTENT),
   }),
   component: () => (
     <>

@@ -72,6 +72,13 @@ const LIMITS: Record<string, number> = {
   "/api/analyze-ats": 10,
   "/api/upload-cv": 10,
   "/api/parse-cv-text": 10,
+  "/api/generate-bullets": 10,
+  "/api/scan-keywords": 10,
+  "/api/generate-summary": 10,
+  "/api/generate-linkedin-bio": 5,
+  "/api/roast-resume": 5,
+  "/api/generate-resignation": 5,
+  "/api/translate": 20,
 };
 
 function isRateLimited(ip: string, path: string): boolean {

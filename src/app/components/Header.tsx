@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Menu, X, LogOut, ChevronDown, FileText, Mail, Target,
-  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon,
+  Linkedin, PenLine, List, Briefcase, Wand2, LayoutDashboard, ScanLine, Sun, Moon, CreditCard,
   ArrowRight, Sparkles, Zap, TrendingUp
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

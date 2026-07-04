@@ -924,6 +924,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                       >
                         <LayoutDashboard size={18} className="text-[#EA580C]" /> {t('cta.myResumes')}
                       </Link>
+                      <Link
+                        to="/manage-subscription"
+                        onClick={() => setIsMobileOpen(false)}
+                        className="flex items-center gap-3 min-h-[52px] px-4 rounded-2xl text-[15px] font-semibold text-[#374151] dark:text-gray-200 no-underline active:scale-[0.98] transition-all hover:bg-black/5 dark:hover:bg-white/5"
+                      >
+                        <CreditCard size={18} className="text-[#EA580C]" /> Manage Subscription
+                      </Link>
                       <button
                         onClick={() => { setIsMobileOpen(false); handleLogout(); }}
                         className="w-full flex items-center gap-3 min-h-[52px] px-4 rounded-2xl text-left text-[15px] font-semibold text-red-500 bg-transparent border-none cursor-pointer active:scale-[0.98] transition-transform"

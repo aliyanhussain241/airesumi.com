@@ -1,11 +1,11 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Plus, FileText, Trash2, Edit3, Download, Clock,
   Briefcase, LayoutGrid, List, Search, AlertCircle,
   Copy, Star, TrendingUp, Sparkles, Filter, ArrowUpDown,
-  MoreVertical, Check, X, Pencil, Share2, Archive,
+  MoreVertical, Check, X, Pencil, Share2, Archive, CreditCard,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ResumeData, UserData } from "../app/lib/types";

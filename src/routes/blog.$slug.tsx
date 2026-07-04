@@ -486,30 +486,38 @@ function BlogPost() {
 }
 
 export const Route = createFileRoute("/blog/$slug")({
-  head: ({ params }) => {
+  loader: async ({ params }) => {
+    const { getBlogPostSeo } = await import("@/lib/blog.functions");
+    const post = await getBlogPostSeo({ data: { slug: params.slug } });
+    return { post };
+  },
+  head: ({ params, loaderData }) => {
     const slug = params.slug;
-    const title = slug
+    const post = loaderData?.post ?? null;
+    const fallbackTitle = slug
       .split("-")
       .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
+    const title = (post?.seo_title || post?.title || fallbackTitle) + " | airesumi Career Blog";
+    const description =
+      post?.seo_description ||
+      post?.excerpt ||
+      `Read our guide on ${fallbackTitle.toLowerCase()}. Expert career advice, resume tips, and job search strategies from Airesumi.`;
+    const ogImage = post?.cover_image_url || "https://airesumi.com/assets/og-image.png";
     return {
       meta: [
-        { title: `${title} | Airesumi Career Blog` },
-        {
-          name: "description",
-          content: `Read our guide on ${title.toLowerCase()}. Expert career advice, resume tips, and job search strategies from Airesumi.`,
-        },
+        { title },
+        { name: "description", content: description },
         { name: "robots", content: "index, follow" },
-        { property: "og:title", content: `${title} | Airesumi Career Blog` },
-        {
-          property: "og:description",
-          content: `Read our guide on ${title.toLowerCase()}. Expert career advice from Airesumi.`,
-        },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: `https://airesumi.com/blog/${slug}` },
-        { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+        { property: "og:image", content: ogImage },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: `${title} | Airesumi Career Blog` },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: ogImage },
       ],
       links: [{ rel: "canonical", href: `https://airesumi.com/blog/${slug}` }],
     };

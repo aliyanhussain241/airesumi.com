@@ -10,6 +10,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { LINKEDIN_CONTENT } from "../app/components/toolContent";
+import { toolSchemaScripts } from "@/lib/tool-schemas";
 import { ResumeData, UserData } from "../app/lib/types";
 
 interface LinkedInBio {

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BlogHighlights } from "@/app/components/BlogHighlights";
 import { motion } from "motion/react";
 import { ATSChecker } from "../app/ATSChecker";
 import { useStepNavigate } from "../app/lib/navigation";

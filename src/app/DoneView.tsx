@@ -132,7 +132,9 @@ export const DoneView: React.FC<DoneViewProps> = ({
                 style={{ transform: scale < 1 ? `scale(${scale})` : 'none', width: '850px' }}
               >
                 <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col overflow-hidden">
-                  <ResumePreview data={resumeData} designId={designId} />
+                  <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
+                    <ResumePreview data={resumeData} designId={designId} />
+                  </Suspense>
                   {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
                     <div className={`absolute ${qrPos} z-10`}>
                       <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />

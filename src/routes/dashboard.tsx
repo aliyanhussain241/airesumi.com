@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Plus, FileText, Trash2, Edit3, Download, Clock,
@@ -9,7 +9,10 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ResumeData, UserData } from "../app/lib/types";
-import { ResumePreview, DesignId } from "../app/components/ResumePreview";
+import type { DesignId } from "../app/components/ResumePreview";
+const ResumePreview = React.lazy(() =>
+  import("../app/components/ResumePreview").then((m) => ({ default: m.ResumePreview }))
+);
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 import "../app/app.css";
@@ -160,7 +163,9 @@ function ResumeCard({
           className="absolute inset-0 origin-top-left pointer-events-none"
           style={{ transform: "scale(0.22)", width: "850px", height: "1100px" }}
         >
-          <ResumePreview data={resume.resume_data} designId={resume.design_id} />
+          <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
+            <ResumePreview data={resume.resume_data} designId={resume.design_id} />
+          </Suspense>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f9fafb]/60" />
         <div className="absolute top-2 right-2">
@@ -436,7 +441,13 @@ function Dashboard() {
     const { createRoot } = await import("react-dom/client");
     const { createElement } = await import("react");
     const root = createRoot(container);
-    root.render(createElement(ResumePreview, { data: resume.resume_data, designId: resume.design_id }));
+    root.render(
+      createElement(
+        Suspense,
+        { fallback: createElement("div", null) },
+        createElement(ResumePreview, { data: resume.resume_data, designId: resume.design_id })
+      )
+    );
     await new Promise((r) => setTimeout(r, 600));
     try {
       const dataUrl = await toPng(container, { pixelRatio: 2, backgroundColor: "#ffffff" });

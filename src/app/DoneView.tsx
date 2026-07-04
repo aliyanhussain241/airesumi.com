@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowLeft, Monitor, Smartphone, FileText, Download } from "lucide-react";
 import { Step } from "./App";
-import { ResumePreview, DesignId } from "./components/ResumePreview";
+import type { DesignId } from "./components/ResumePreview";
+const ResumePreview = React.lazy(() =>
+  import("./components/ResumePreview").then((m) => ({ default: m.ResumePreview }))
+);
 import { ResumeQRCode } from "./components/ResumeQRCode";
 import { ResumeData } from "./lib/types";
 
@@ -129,7 +132,9 @@ export const DoneView: React.FC<DoneViewProps> = ({
                 style={{ transform: scale < 1 ? `scale(${scale})` : 'none', width: '850px' }}
               >
                 <div id="resume-document" className="relative bg-white w-[850px] min-h-[1100px] shadow-2xl shadow-black/5 ring-1 ring-black/5 print:shadow-none print:ring-0 print:w-[850px] print:min-h-auto flex flex-col overflow-hidden">
-                  <ResumePreview data={resumeData} designId={designId} />
+                  <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
+                    <ResumePreview data={resumeData} designId={designId} />
+                  </Suspense>
                   {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
                     <div className={`absolute ${qrPos} z-10`}>
                       <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />
@@ -145,7 +150,9 @@ export const DoneView: React.FC<DoneViewProps> = ({
             <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth pt-10 pb-12 w-full bg-[#f3f4f6]">
               <div className="w-[850px] mx-auto origin-top-left flex flex-col" style={{ transform: 'scale(0.407)' }}>
               <div id="resume-document-mobile" className="relative bg-white shadow-xl flex-1 w-full min-h-[1100px] flex flex-col">
-                   <ResumePreview data={resumeData} designId={designId} />
+                   <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
+                     <ResumePreview data={resumeData} designId={designId} />
+                   </Suspense>
                    {resumeData.header.qrCodeUrl && resumeData.header.showQrCode !== false && (
                      <div className={`absolute ${qrPos} z-10`}>
                        <ResumeQRCode url={resumeData.header.qrCodeUrl} size={qrSize} />

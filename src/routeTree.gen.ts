@@ -34,7 +34,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as PremiumSuccessRouteImport } from './routes/premium /success'
+import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
@@ -182,9 +182,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
-  id: '/premium /success',
-  path: '/premium /success',
-  getParentRoute: () => rootRouteImport,
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => PremiumRoute,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
@@ -303,7 +303,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
-  '/premium': typeof PremiumRoute
+  '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
@@ -332,7 +332,7 @@ export interface FileRoutesByFullPath {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/premium /success': typeof PremiumSuccessRoute
+  '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesByTo {
@@ -351,7 +351,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
-  '/premium': typeof PremiumRoute
+  '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
@@ -380,7 +380,7 @@ export interface FileRoutesByTo {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/premium /success': typeof PremiumSuccessRoute
+  '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesById {
@@ -400,7 +400,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
-  '/premium': typeof PremiumRoute
+  '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
@@ -429,7 +429,7 @@ export interface FileRoutesById {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/premium /success': typeof PremiumSuccessRoute
+  '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRouteTypes {
@@ -479,7 +479,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
-    | '/premium /success'
+    | '/premium/success'
     | '/api/public/og/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -527,7 +527,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
-    | '/premium /success'
+    | '/premium/success'
     | '/api/public/og/$slug'
   id:
     | '__root__'
@@ -575,7 +575,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
-    | '/premium /success'
+    | '/premium/success'
     | '/api/public/og/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -595,7 +595,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ManageSubscriptionRoute: typeof ManageSubscriptionRoute
   PdfScannerRoute: typeof PdfScannerRoute
-  PremiumRoute: typeof PremiumRoute
+  PremiumRoute: typeof PremiumRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResignationLetterRoute: typeof ResignationLetterRoute
@@ -623,7 +623,6 @@ export interface RootRouteChildren {
   ApiTranslateRoute: typeof ApiTranslateRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
-  PremiumSuccessRoute: typeof PremiumSuccessRoute
   ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
 }
 
@@ -804,12 +803,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/premium /success': {
-      id: '/premium /success'
-      path: '/premium /success'
-      fullPath: '/premium /success'
+    '/premium/success': {
+      id: '/premium/success'
+      path: '/success'
+      fullPath: '/premium/success'
       preLoaderRoute: typeof PremiumSuccessRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof PremiumRoute
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -964,6 +963,17 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface PremiumRouteChildren {
+  PremiumSuccessRoute: typeof PremiumSuccessRoute
+}
+
+const PremiumRouteChildren: PremiumRouteChildren = {
+  PremiumSuccessRoute: PremiumSuccessRoute,
+}
+
+const PremiumRouteWithChildren =
+  PremiumRoute._addFileChildren(PremiumRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -980,7 +990,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ManageSubscriptionRoute: ManageSubscriptionRoute,
   PdfScannerRoute: PdfScannerRoute,
-  PremiumRoute: PremiumRoute,
+  PremiumRoute: PremiumRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResignationLetterRoute: ResignationLetterRoute,
@@ -1008,7 +1018,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiTranslateRoute: ApiTranslateRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
-  PremiumSuccessRoute: PremiumSuccessRoute,
   ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
 }
 export const routeTree = rootRouteImport

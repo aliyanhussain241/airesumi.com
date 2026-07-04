@@ -447,6 +447,7 @@ export const Route = createFileRoute("/resignation-letter")({
       { name: "twitter:description", content: "Generate a professional resignation letter in seconds. Free, AI-powered, downloadable as PDF." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resignation-letter" }],
+    scripts: toolSchemaScripts(RESIGNATION_CONTENT),
   }),
   component: () => (
     <>

@@ -441,7 +441,13 @@ function Dashboard() {
     const { createRoot } = await import("react-dom/client");
     const { createElement } = await import("react");
     const root = createRoot(container);
-    root.render(createElement(ResumePreview, { data: resume.resume_data, designId: resume.design_id }));
+    root.render(
+      createElement(
+        Suspense,
+        { fallback: createElement("div", null) },
+        createElement(ResumePreview, { data: resume.resume_data, designId: resume.design_id })
+      )
+    );
     await new Promise((r) => setTimeout(r, 600));
     try {
       const dataUrl = await toPng(container, { pixelRatio: 2, backgroundColor: "#ffffff" });

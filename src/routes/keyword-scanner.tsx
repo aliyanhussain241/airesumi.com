@@ -183,7 +183,22 @@ export const Route = createFileRoute("/keyword-scanner")({
     meta: [
       { title: "Resume Keyword Scanner — ATS Match | airesumi.com" },
       { name: "description", content: "See which keywords your resume is missing and boost your ATS match score." },
+      { property: "og:title", content: "Resume Keyword Scanner — ATS Match | airesumi.com" },
+      { property: "og:description", content: "See which keywords your resume is missing and boost your ATS match score." },
+      { property: "og:url", content: "https://airesumi.com/keyword-scanner" },
     ],
+    links: [{ rel: "canonical", href: "https://airesumi.com/keyword-scanner" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "Resume Keyword Scanner",
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      }),
+    }],
   }),
   component: () => (
     <>

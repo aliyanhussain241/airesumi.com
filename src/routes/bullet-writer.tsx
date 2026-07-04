@@ -5,6 +5,7 @@ import { PenLine, Sparkles, Copy, Check, RefreshCw, AlertCircle, Plus, Trash2 } 
 import { supabase } from "@/integrations/supabase/client";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { BULLET_CONTENT } from "../app/components/toolContent";
+import { toolSchemaScripts } from "@/lib/tool-schemas";
 import { BlogHighlights } from "@/app/components/BlogHighlights";
 
 

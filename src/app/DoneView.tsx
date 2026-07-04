@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowLeft, Monitor, Smartphone, FileText, Download } from "lucide-react";
 import { Step } from "./App";
-import { ResumePreview, DesignId } from "./components/ResumePreview";
+import type { DesignId } from "./components/ResumePreview";
+const ResumePreview = React.lazy(() =>
+  import("./components/ResumePreview").then((m) => ({ default: m.ResumePreview }))
+);
 import { ResumeQRCode } from "./components/ResumeQRCode";
 import { ResumeData } from "./lib/types";
 

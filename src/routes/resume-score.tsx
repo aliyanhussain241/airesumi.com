@@ -446,6 +446,34 @@ export const Route = createFileRoute("/resume-score")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resume-score" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: "How to Score and Improve Your Resume",
+          step: [
+            { "@type": "HowToStep", name: "Paste your resume", text: "Copy your full resume text into the scanner." },
+            { "@type": "HowToStep", name: "Run the AI analysis", text: "The AI checks ATS compatibility, content quality, and impact language." },
+            { "@type": "HowToStep", name: "Review your score", text: "See a 0–100 score plus a breakdown of what's working and what isn't." },
+            { "@type": "HowToStep", name: "Fix the flagged issues", text: "Rewrite weak bullets, add metrics, and align keywords to the target role." },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            { "@type": "Question", name: "Is the resume score free?", acceptedAnswer: { "@type": "Answer", text: "Yes. Scoring and the AI roast are completely free — no sign-up required." } },
+            { "@type": "Question", name: "What score should I aim for?", acceptedAnswer: { "@type": "Answer", text: "Aim for 80 or higher. Anything below 70 usually gets filtered by ATS or skimmed past by recruiters." } },
+            { "@type": "Question", name: "Does it work with any resume?", acceptedAnswer: { "@type": "Answer", text: "Yes. Paste plain text from any PDF, DOCX, or template — the AI parses and scores it the same way." } },
+          ],
+        }),
+      },
+    ],
   }),
   component: ResumeScore,
 });

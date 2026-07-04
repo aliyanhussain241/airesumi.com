@@ -5,6 +5,7 @@ import { Target, Sparkles, RefreshCw, AlertCircle, CheckCircle2, XCircle, Lightb
 import { supabase } from "@/integrations/supabase/client";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { KEYWORD_CONTENT } from "../app/components/toolContent";
+import { toolSchemaScripts } from "@/lib/tool-schemas";
 import { BlogHighlights } from "@/app/components/BlogHighlights";
 
 function ScoreRing({ score }: { score: number }) {
@@ -194,17 +195,20 @@ export const Route = createFileRoute("/keyword-scanner")({
       { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/keyword-scanner" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        name: "Resume Keyword Scanner",
-        applicationCategory: "BusinessApplication",
-        operatingSystem: "Web",
-        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "Resume Keyword Scanner",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }),
+      },
+      ...toolSchemaScripts(KEYWORD_CONTENT),
+    ],
   }),
   component: () => (
     <>

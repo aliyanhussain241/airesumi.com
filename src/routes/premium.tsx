@@ -424,6 +424,22 @@ export const Route = createFileRoute("/premium")({
       { property: "og:url", content: "https://airesumi.com/premium" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/premium" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: "airesumi Pro",
+        description: "Unlimited resumes, premium templates, and priority AI generation.",
+        brand: { "@type": "Brand", name: "airesumi" },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: "https://airesumi.com/premium",
+        },
+      }),
+    }],
   }),
   component: PremiumPage,
 });

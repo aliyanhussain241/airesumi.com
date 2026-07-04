@@ -27,6 +27,16 @@ export const Route = createFileRoute("/examples")({
       { name: "twitter:description", content: "Download 500+ ATS-optimized resume examples by job title and industry." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/examples" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Resume Examples by Job Title",
+        description: "Browse ATS-optimized resume examples for every industry and experience level.",
+        url: "https://airesumi.com/examples",
+      }),
+    }],
   }),
   component: Page,
 });

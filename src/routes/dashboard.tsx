@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Plus, FileText, Trash2, Edit3, Download, Clock,
@@ -9,7 +9,10 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ResumeData, UserData } from "../app/lib/types";
-import { ResumePreview, DesignId } from "../app/components/ResumePreview";
+import type { DesignId } from "../app/components/ResumePreview";
+const ResumePreview = React.lazy(() =>
+  import("../app/components/ResumePreview").then((m) => ({ default: m.ResumePreview }))
+);
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 import "../app/app.css";

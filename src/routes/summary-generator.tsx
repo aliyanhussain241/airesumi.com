@@ -160,10 +160,16 @@ export const Route = createFileRoute("/summary-generator")({
   head: () => ({
     meta: [
       { title: "Resume Summary Generator — AI Powered | airesumi.com" },
-      { name: "description", content: "Generate 3 tailored professional resume summaries with AI." },
+      { name: "description", content: "Generate 3 tailored professional resume summaries with AI. Free, no sign-up required." },
       { property: "og:title", content: "Resume Summary Generator — AI Powered | airesumi.com" },
-      { property: "og:description", content: "Generate 3 tailored professional resume summaries with AI." },
+      { property: "og:description", content: "Generate 3 tailored professional resume summaries with AI. Free, no sign-up required." },
       { property: "og:url", content: "https://airesumi.com/summary-generator" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://airesumi.com/assets/og-image.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Resume Summary Generator — AI Powered | airesumi.com" },
+      { name: "twitter:description", content: "Generate 3 tailored professional resume summaries with AI. Free." },
+      { name: "twitter:image", content: "https://airesumi.com/assets/og-image.png" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/summary-generator" }],
   }),

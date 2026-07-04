@@ -20,6 +20,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as PdfScannerRouteImport } from './routes/pdf-scanner'
+import { Route as ManageSubscriptionRouteImport } from './routes/manage-subscription'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LinkedinBioRouteImport } from './routes/linkedin-bio'
 import { Route as KeywordScannerRouteImport } from './routes/keyword-scanner'
@@ -49,6 +50,7 @@ import { Route as ApiGenerateResignationRouteImport } from './routes/api/generat
 import { Route as ApiGenerateLinkedinBioRouteImport } from './routes/api/generate-linkedin-bio'
 import { Route as ApiGenerateCoverLetterRouteImport } from './routes/api/generate-cover-letter'
 import { Route as ApiGenerateBulletsRouteImport } from './routes/api/generate-bullets'
+import { Route as ApiCreatePortalSessionRouteImport } from './routes/api/create-portal-session'
 import { Route as ApiCreateCheckoutRouteImport } from './routes/api/create-checkout'
 import { Route as ApiAnalyzeAtsRouteImport } from './routes/api/analyze-ats'
 import { Route as AdminBlogRouteImport } from './routes/admin/blog'
@@ -107,6 +109,11 @@ const PremiumRoute = PremiumRouteImport.update({
 const PdfScannerRoute = PdfScannerRouteImport.update({
   id: '/pdf-scanner',
   path: '/pdf-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManageSubscriptionRoute = ManageSubscriptionRouteImport.update({
+  id: '/manage-subscription',
+  path: '/manage-subscription',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -254,6 +261,11 @@ const ApiGenerateBulletsRoute = ApiGenerateBulletsRouteImport.update({
   path: '/api/generate-bullets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCreatePortalSessionRoute = ApiCreatePortalSessionRouteImport.update({
+  id: '/api/create-portal-session',
+  path: '/api/create-portal-session',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiCreateCheckoutRoute = ApiCreateCheckoutRouteImport.update({
   id: '/api/create-checkout',
   path: '/api/create-checkout',
@@ -289,6 +301,7 @@ export interface FileRoutesByFullPath {
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
+  '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
@@ -303,6 +316,7 @@ export interface FileRoutesByFullPath {
   '/admin/blog': typeof AdminBlogRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
+  '/api/create-portal-session': typeof ApiCreatePortalSessionRoute
   '/api/generate-bullets': typeof ApiGenerateBulletsRoute
   '/api/generate-cover-letter': typeof ApiGenerateCoverLetterRoute
   '/api/generate-linkedin-bio': typeof ApiGenerateLinkedinBioRoute
@@ -335,6 +349,7 @@ export interface FileRoutesByTo {
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
+  '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
@@ -349,6 +364,7 @@ export interface FileRoutesByTo {
   '/admin/blog': typeof AdminBlogRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
+  '/api/create-portal-session': typeof ApiCreatePortalSessionRoute
   '/api/generate-bullets': typeof ApiGenerateBulletsRoute
   '/api/generate-cover-letter': typeof ApiGenerateCoverLetterRoute
   '/api/generate-linkedin-bio': typeof ApiGenerateLinkedinBioRoute
@@ -382,6 +398,7 @@ export interface FileRoutesById {
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
+  '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRoute
   '/privacy': typeof PrivacyRoute
@@ -396,6 +413,7 @@ export interface FileRoutesById {
   '/admin/blog': typeof AdminBlogRoute
   '/api/analyze-ats': typeof ApiAnalyzeAtsRoute
   '/api/create-checkout': typeof ApiCreateCheckoutRoute
+  '/api/create-portal-session': typeof ApiCreatePortalSessionRoute
   '/api/generate-bullets': typeof ApiGenerateBulletsRoute
   '/api/generate-cover-letter': typeof ApiGenerateCoverLetterRoute
   '/api/generate-linkedin-bio': typeof ApiGenerateLinkedinBioRoute
@@ -430,6 +448,7 @@ export interface FileRouteTypes {
     | '/keyword-scanner'
     | '/linkedin-bio'
     | '/login'
+    | '/manage-subscription'
     | '/pdf-scanner'
     | '/premium'
     | '/privacy'
@@ -444,6 +463,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/api/analyze-ats'
     | '/api/create-checkout'
+    | '/api/create-portal-session'
     | '/api/generate-bullets'
     | '/api/generate-cover-letter'
     | '/api/generate-linkedin-bio'
@@ -476,6 +496,7 @@ export interface FileRouteTypes {
     | '/keyword-scanner'
     | '/linkedin-bio'
     | '/login'
+    | '/manage-subscription'
     | '/pdf-scanner'
     | '/premium'
     | '/privacy'
@@ -490,6 +511,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/api/analyze-ats'
     | '/api/create-checkout'
+    | '/api/create-portal-session'
     | '/api/generate-bullets'
     | '/api/generate-cover-letter'
     | '/api/generate-linkedin-bio'
@@ -522,6 +544,7 @@ export interface FileRouteTypes {
     | '/keyword-scanner'
     | '/linkedin-bio'
     | '/login'
+    | '/manage-subscription'
     | '/pdf-scanner'
     | '/premium'
     | '/privacy'
@@ -536,6 +559,7 @@ export interface FileRouteTypes {
     | '/admin/blog'
     | '/api/analyze-ats'
     | '/api/create-checkout'
+    | '/api/create-portal-session'
     | '/api/generate-bullets'
     | '/api/generate-cover-letter'
     | '/api/generate-linkedin-bio'
@@ -569,6 +593,7 @@ export interface RootRouteChildren {
   KeywordScannerRoute: typeof KeywordScannerRoute
   LinkedinBioRoute: typeof LinkedinBioRoute
   LoginRoute: typeof LoginRoute
+  ManageSubscriptionRoute: typeof ManageSubscriptionRoute
   PdfScannerRoute: typeof PdfScannerRoute
   PremiumRoute: typeof PremiumRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -583,6 +608,7 @@ export interface RootRouteChildren {
   AdminBlogRoute: typeof AdminBlogRoute
   ApiAnalyzeAtsRoute: typeof ApiAnalyzeAtsRoute
   ApiCreateCheckoutRoute: typeof ApiCreateCheckoutRoute
+  ApiCreatePortalSessionRoute: typeof ApiCreatePortalSessionRoute
   ApiGenerateBulletsRoute: typeof ApiGenerateBulletsRoute
   ApiGenerateCoverLetterRoute: typeof ApiGenerateCoverLetterRoute
   ApiGenerateLinkedinBioRoute: typeof ApiGenerateLinkedinBioRoute
@@ -678,6 +704,13 @@ declare module '@tanstack/react-router' {
       path: '/pdf-scanner'
       fullPath: '/pdf-scanner'
       preLoaderRoute: typeof PdfScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manage-subscription': {
+      id: '/manage-subscription'
+      path: '/manage-subscription'
+      fullPath: '/manage-subscription'
+      preLoaderRoute: typeof ManageSubscriptionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -883,6 +916,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGenerateBulletsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/create-portal-session': {
+      id: '/api/create-portal-session'
+      path: '/api/create-portal-session'
+      fullPath: '/api/create-portal-session'
+      preLoaderRoute: typeof ApiCreatePortalSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/create-checkout': {
       id: '/api/create-checkout'
       path: '/api/create-checkout'
@@ -938,6 +978,7 @@ const rootRouteChildren: RootRouteChildren = {
   KeywordScannerRoute: KeywordScannerRoute,
   LinkedinBioRoute: LinkedinBioRoute,
   LoginRoute: LoginRoute,
+  ManageSubscriptionRoute: ManageSubscriptionRoute,
   PdfScannerRoute: PdfScannerRoute,
   PremiumRoute: PremiumRoute,
   PrivacyRoute: PrivacyRoute,
@@ -952,6 +993,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminBlogRoute: AdminBlogRoute,
   ApiAnalyzeAtsRoute: ApiAnalyzeAtsRoute,
   ApiCreateCheckoutRoute: ApiCreateCheckoutRoute,
+  ApiCreatePortalSessionRoute: ApiCreatePortalSessionRoute,
   ApiGenerateBulletsRoute: ApiGenerateBulletsRoute,
   ApiGenerateCoverLetterRoute: ApiGenerateCoverLetterRoute,
   ApiGenerateLinkedinBioRoute: ApiGenerateLinkedinBioRoute,

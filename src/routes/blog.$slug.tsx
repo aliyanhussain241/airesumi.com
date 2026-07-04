@@ -93,8 +93,8 @@ function BlogPost() {
         setLoading(false);
         // Related — same category, exclude self
         if (p.category) {
-          const { data: rel } = await supabase
-            .from("blog_posts")
+          const { data: rel } = await (supabase
+            .from("blog_posts") as any)
             .select("*")
             .eq("published", true)
             .eq("category", p.category)

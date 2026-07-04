@@ -161,7 +161,11 @@ export const Route = createFileRoute("/summary-generator")({
     meta: [
       { title: "Resume Summary Generator — AI Powered | airesumi.com" },
       { name: "description", content: "Generate 3 tailored professional resume summaries with AI." },
+      { property: "og:title", content: "Resume Summary Generator — AI Powered | airesumi.com" },
+      { property: "og:description", content: "Generate 3 tailored professional resume summaries with AI." },
+      { property: "og:url", content: "https://airesumi.com/summary-generator" },
     ],
+    links: [{ rel: "canonical", href: "https://airesumi.com/summary-generator" }],
   }),
   component: () => (
     <>

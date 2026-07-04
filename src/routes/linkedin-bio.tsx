@@ -857,6 +857,7 @@ export const Route = createFileRoute("/linkedin-bio")({
       { name: "twitter:description", content: "3 headline variants, About section, banner tagline, and recruiter keywords — generated from your resume." },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/linkedin-bio" }],
+    scripts: toolSchemaScripts(LINKEDIN_CONTENT),
   }),
   component: () => (
     <>

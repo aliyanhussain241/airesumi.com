@@ -1,11 +1,11 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Plus, FileText, Trash2, Edit3, Download, Clock,
   Briefcase, LayoutGrid, List, Search, AlertCircle,
   Copy, Star, TrendingUp, Sparkles, Filter, ArrowUpDown,
-  MoreVertical, Check, X, Pencil, Share2, Archive,
+  MoreVertical, Check, X, Pencil, Share2, Archive, CreditCard,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ResumeData, UserData } from "../app/lib/types";
@@ -508,12 +508,20 @@ function Dashboard() {
               {resumes.length} resume{resumes.length !== 1 ? "s" : ""} saved · {favs.size} favorited
             </p>
           </div>
-          <button
-            onClick={() => navigate({ to: "/resume" })}
-            className="flex items-center gap-2 bg-[#FF6321] text-white px-5 py-2.5 rounded-xl font-bold text-[14px] hover:bg-[#ea580c] hover:shadow-lg hover:shadow-orange-500/25 hover:-translate-y-0.5 transition-all"
-          >
-            <Plus size={16} /> New Resume
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/manage-subscription"
+              className="hidden sm:inline-flex items-center gap-2 bg-white border border-[#e5e7eb] text-[#374151] px-4 py-2.5 rounded-xl font-semibold text-[14px] hover:border-[#FF6321] hover:text-[#FF6321] transition-colors no-underline"
+            >
+              <CreditCard size={15} /> Manage Subscription
+            </Link>
+            <button
+              onClick={() => navigate({ to: "/resume" })}
+              className="flex items-center gap-2 bg-[#FF6321] text-white px-5 py-2.5 rounded-xl font-bold text-[14px] hover:bg-[#ea580c] hover:shadow-lg hover:shadow-orange-500/25 hover:-translate-y-0.5 transition-all"
+            >
+              <Plus size={16} /> New Resume
+            </button>
+          </div>
         </div>
 
         {/* Stats */}

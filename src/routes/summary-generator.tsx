@@ -5,6 +5,7 @@ import { List, Sparkles, Copy, Check, RefreshCw, AlertCircle, ChevronDown } from
 import { supabase } from "@/integrations/supabase/client";
 import { ToolContentSection } from "../app/components/ToolContentSection";
 import { SUMMARY_CONTENT } from "../app/components/toolContent";
+import { BlogHighlights } from "@/app/components/BlogHighlights";
 
 const TONES = ["Professional", "Confident", "Conversational", "Creative"];
 
@@ -166,26 +167,11 @@ export const Route = createFileRoute("/summary-generator")({
     <>
       <SummaryGenerator />
       <ToolContentSection {...SUMMARY_CONTENT} />
-      <div className="max-w-3xl mx-auto px-6 pb-12">
-        <div className="liquid-card rounded-2xl p-6">
-          <span className="liquid-card-shine" />
-          <div className="liquid-card-content">
-            <p className="text-xs font-bold text-[#FF6321] uppercase tracking-widest mb-4">From Our Blog</p>
-            <div className="flex flex-col gap-3">
-              {[
+      <BlogHighlights posts={[
                 { title: "How to Build a Resume with AI in 2026", href: "/blog/build-resume-with-ai" },
                 { title: "AI Resume vs. Human-Written: What Recruiters Notice", href: "/blog/ai-resume-vs-human-written-resume" },
                 { title: "How to Tailor Your Resume for Every Job", href: "/blog/how-to-tailor-resume-for-every-job" },
-              ].map((post) => (
-                <a key={post.href} href={post.href} className="flex items-center gap-2 text-sm text-[#374151] hover:text-[#FF6321] transition-colors group">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF6321] shrink-0 group-hover:scale-125 transition-transform" />
-                  {post.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+              ]} />
     </>
   ),
 });

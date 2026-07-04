@@ -163,7 +163,9 @@ function ResumeCard({
           className="absolute inset-0 origin-top-left pointer-events-none"
           style={{ transform: "scale(0.22)", width: "850px", height: "1100px" }}
         >
-          <ResumePreview data={resume.resume_data} designId={resume.design_id} />
+          <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
+            <ResumePreview data={resume.resume_data} designId={resume.design_id} />
+          </Suspense>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#f9fafb]/60" />
         <div className="absolute top-2 right-2">

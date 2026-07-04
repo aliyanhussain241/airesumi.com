@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
+import { BlogHighlights } from "@/app/components/BlogHighlights";
   FileText, Sparkles, Copy, Check, RefreshCw, AlertCircle, Download,
   Calendar, Mail, Briefcase, User, Heart, Zap, Clock, ChevronRight,
   Info, Wand2, ShieldCheck, Building2, ArrowRight
@@ -450,26 +451,11 @@ export const Route = createFileRoute("/resignation-letter")({
     <>
       <ResignationLetterPage />
       <ToolContentSection {...RESIGNATION_CONTENT} />
-      <div className="max-w-3xl mx-auto px-6 pb-12">
-        <div className="liquid-card rounded-2xl p-6">
-          <span className="liquid-card-shine" />
-          <div className="liquid-card-content">
-            <p className="text-xs font-bold text-[#FF6321] uppercase tracking-widest mb-4">From Our Blog</p>
-            <div className="flex flex-col gap-3">
-              {[
+      <BlogHighlights posts={[
                 { title: "How to Build a Resume with AI in 2026", href: "/blog/build-resume-with-ai" },
                 { title: "How to Write a Cover Letter with AI", href: "/blog/how-to-write-cover-letter-with-ai" },
                 { title: "AI Resume Builder for Career Change", href: "/blog/ai-resume-builder-for-career-change" },
-              ].map((post) => (
-                <a key={post.href} href={post.href} className="flex items-center gap-2 text-sm text-[#374151] hover:text-[#FF6321] transition-colors group">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF6321] shrink-0 group-hover:scale-125 transition-transform" />
-                  {post.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+              ]} />
     </>
   ),
 });

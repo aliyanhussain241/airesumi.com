@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
+import { BlogHighlights } from "@/app/components/BlogHighlights";
   Camera, FileText, Trash2, Download, Plus, MoveUp, MoveDown, RotateCw,
   ScanLine, Sliders, CheckCircle2, ChevronLeft, Sun, Contrast, Sparkles,
   FileType2, Layers, Zap, Shield, ImagePlus, GripVertical, Copy, X,
@@ -1142,26 +1143,11 @@ export const Route = createFileRoute("/pdf-scanner")({
     <>
       <PDFScanner />
       <ToolContentSection {...PDF_SCANNER_CONTENT} />
-      <div className="max-w-3xl mx-auto px-6 pb-12">
-        <div className="liquid-card rounded-2xl p-6">
-          <span className="liquid-card-shine" />
-          <div className="liquid-card-content">
-            <p className="text-xs font-bold text-[#FF6321] uppercase tracking-widest mb-4">From Our Blog</p>
-            <div className="flex flex-col gap-3">
-              {[
+      <BlogHighlights posts={[
                 { title: "How to Build a Resume with AI in 2026", href: "/blog/build-resume-with-ai" },
                 { title: "ATS Resume Score: What Number Do You Actually Need?", href: "/blog/ats-resume-checker-what-score-do-you-need" },
                 { title: "Best AI Resume Builders in 2026", href: "/blog/best-ai-resume-builders-2026" },
-              ].map((post) => (
-                <a key={post.href} href={post.href} className="flex items-center gap-2 text-sm text-[#374151] hover:text-[#FF6321] transition-colors group">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF6321] shrink-0 group-hover:scale-125 transition-transform" />
-                  {post.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+              ]} />
     </>
   ),
 });

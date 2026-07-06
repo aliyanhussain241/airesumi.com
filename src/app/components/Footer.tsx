@@ -44,11 +44,13 @@ export const Footer = () => {
                   { Icon: Twitter, href: "#", label: "Twitter" },
                   { Icon: Github, href: "#", label: "GitHub" },
                   { Icon: Linkedin, href: "#", label: "LinkedIn" },
-                  { Icon: Instagram, href: "#", label: "Instagram" },
+                  { Icon: Instagram, href: "https://www.instagram.com/ai_resumi", label: "Instagram" },
                 ].map(({ Icon, href, label }) => (
                   <a
                     key={label}
                     href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={label}
                     className="w-11 h-11 shrink-0 rounded-full bg-[#FF6321]/15 border border-[#FF6321]/30 flex items-center justify-center text-[#FF6321] hover:bg-[#FF6321] hover:text-white transition-all hover:scale-110"
                   >

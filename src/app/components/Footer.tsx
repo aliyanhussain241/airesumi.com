@@ -49,6 +49,8 @@ export const Footer = () => {
                   <a
                     key={label}
                     href={href}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                     aria-label={label}
                     className="w-11 h-11 shrink-0 rounded-full bg-[#FF6321]/15 border border-[#FF6321]/30 flex items-center justify-center text-[#FF6321] hover:bg-[#FF6321] hover:text-white transition-all hover:scale-110"
                   >

@@ -705,9 +705,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
             {/* Mobile */}
-            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl md:hidden no-underline">
+            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl hidden sm:inline-flex md:hidden no-underline">
               {t('cta.startFreeShort')}
             </Link>
+
             <button onClick={() => setIsMobileOpen(true)}
               aria-label="Open menu"
               aria-expanded={isMobileOpen}

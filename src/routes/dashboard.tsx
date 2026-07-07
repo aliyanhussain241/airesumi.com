@@ -16,6 +16,7 @@ const ResumePreview = React.lazy(() =>
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 import "../app/app.css";
+import { PlanCreditsCard } from "../app/components/PlanCreditsCard";
 
 interface SavedResume {
   id: string;
@@ -534,6 +535,9 @@ function Dashboard() {
             </button>
           </div>
         </div>
+
+        {/* Plan & credits */}
+        <PlanCreditsCard />
 
         {/* Stats */}
         {!loading && resumes.length > 0 && (

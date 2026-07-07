@@ -11,7 +11,7 @@ import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
 import rezumiLogoWhite from '@/assets/rezumi-white.webp';
-import { LanguageSwitcher } from './LanguageSwitcher';
+
 import { CreditsBadge } from './CreditsBadge';
 
 const GLASS_HEADER_STYLES = `
@@ -688,10 +688,6 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               </div>
             )}
 
-            {/* Language switcher */}
-            <div className="block">
-              <LanguageSwitcher />
-            </div>
 
             {/* Theme toggle */}
             <button

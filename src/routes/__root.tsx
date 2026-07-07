@@ -11,12 +11,10 @@ import {
 import appCss from "../styles.css?url";
 import { Header } from "../app/components/Header";
 import { Footer } from "../app/components/Footer";
-import { AutoTranslate } from "../app/components/AutoTranslate";
 import { RouteProgressBar } from "../app/components/RouteProgressBar";
 import { initI18n } from "../app/lib/i18n";
 
-
-// Initialize i18next once (SSR-safe).
+// Initialize i18next once (SSR-safe). English only.
 initI18n();
 
 // ── Schema markup ────────────────────────────────────────────────────────────
@@ -268,7 +266,6 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        <AutoTranslate />
       </div>
     </QueryClientProvider>
 

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
 import { requireAuth } from "@/lib/auth";
+import { consumeCredit, OUT_OF_CREDITS_RESPONSE } from "@/lib/credits";
 
 export const Route = createFileRoute("/api/generate-linkedin-bio")({
   server: {
@@ -13,6 +14,8 @@ export const Route = createFileRoute("/api/generate-linkedin-bio")({
           } catch (err: any) {
             return new Response(JSON.stringify({ error: err.message }), { status: 401 });
           }
+
+          if (!(await consumeCredit(user.id))) return OUT_OF_CREDITS_RESPONSE();
 
           const { resumeData, userData, tone, industry, targetAudience, useEmojis } = await request.json() as any;
 

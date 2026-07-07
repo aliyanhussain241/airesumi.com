@@ -70,6 +70,7 @@ export const Route = createFileRoute("/api/create-checkout")({
           // Create checkout session
           const sessionConfig: Stripe.Checkout.SessionCreateParams = {
             customer: customerId,
+            client_reference_id: user.id,
             success_url: `${origin}/premium/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/premium`,
             metadata: { user_id: user.id, plan },

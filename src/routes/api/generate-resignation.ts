@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway } from "@/lib/ai-gateway";
 import { createClient } from "@supabase/supabase-js";
+import { consumeCredit, OUT_OF_CREDITS_RESPONSE } from "@/lib/credits";
 
 export const Route = createFileRoute("/api/generate-resignation")({
   server: {
@@ -20,6 +21,8 @@ export const Route = createFileRoute("/api/generate-resignation")({
           if (authError || !user) {
             return new Response(JSON.stringify({ error: "Invalid session." }), { status: 401 });
           }
+
+          if (!(await consumeCredit(user.id))) return OUT_OF_CREDITS_RESPONSE();
 
           const { yourName, jobTitle, companyName, managerName, lastDay, reason, tone, highlights } = await request.json() as any;
 

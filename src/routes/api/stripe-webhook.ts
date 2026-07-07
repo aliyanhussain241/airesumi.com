@@ -53,7 +53,7 @@ export const Route = createFileRoute("/api/stripe-webhook")({
             // ✅ Subscription created or renewed
             case "checkout.session.completed": {
               const session = event.data.object as Stripe.Checkout.Session;
-              const userId = session.metadata?.user_id;
+              const userId = session.metadata?.user_id || (session.client_reference_id ?? undefined);
               const plan = session.metadata?.plan || "pro";
               if (!userId) break;
 
@@ -77,6 +77,13 @@ export const Route = createFileRoute("/api/stripe-webhook")({
                   current_period_end: new Date((sub as any).current_period_end * 1000),
                 });
               }
+
+              // ✅ Grant credits + set plan='pro' (1000 = effectively unlimited).
+              await supabase.rpc("grant_credits", {
+                _user_id: userId,
+                _amount: 1000,
+                _new_plan: "pro",
+              });
               break;
             }
 

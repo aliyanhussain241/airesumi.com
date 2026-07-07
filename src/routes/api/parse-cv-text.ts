@@ -58,7 +58,7 @@ export const Route = createFileRoute("/api/parse-cv-text")({
             let binary = "";
             for (let i = 0; i < buf.length; i++) binary += String.fromCharCode(buf[i]);
             const dataUrl = `data:${file.type || "application/octet-stream"};base64,${btoa(binary)}`;
-            const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
+            const text = await callAIGateway({
               messages: [{
                 role: "user",
                 content: [
@@ -76,7 +76,7 @@ export const Route = createFileRoute("/api/parse-cv-text")({
           for (let i = 0; i < buf.length; i++) binary += String.fromCharCode(buf[i]);
           const dataUrl = `data:application/pdf;base64,${btoa(binary)}`;
 
-          const text = await callAIGateway({ language: request.headers.get("x-user-language") || undefined,
+          const text = await callAIGateway({
             messages: [
               {
                 role: "user",

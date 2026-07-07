@@ -38,10 +38,6 @@ function partsFromContent(content: AIMessage["content"]): GeminiPart[] {
   return parts;
 }
 
-const LANG_NAMES: Record<string, string> = {
-  en: "English", es: "Spanish", fr: "French", de: "German", pt: "Portuguese",
-  ar: "Arabic", hi: "Hindi", zh: "Simplified Chinese", ja: "Japanese", ru: "Russian",
-};
 
 async function fetchWithRetry(
   url: string,
@@ -69,7 +65,6 @@ async function callGemini(opts: {
   model?: string;
   temperature?: number;
   json?: boolean;
-  language?: string;
 }): Promise<string> {
   const apiKey = (globalThis as any).GEMINI_API_KEY ?? process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error("GEMINI_API_KEY missing");
@@ -78,13 +73,6 @@ async function callGemini(opts: {
   const systemTexts: string[] = [];
   const contents: { role: "user" | "model"; parts: GeminiPart[] }[] = [];
 
-  if (opts.language && opts.language !== "en") {
-    const langName = LANG_NAMES[opts.language] || opts.language;
-    const note = opts.json
-      ? `Write all human-readable content in ${langName}. Keep JSON property/field names in English exactly as specified.`
-      : `Respond in ${langName}.`;
-    systemTexts.push(note);
-  }
 
   for (const msg of opts.messages) {
     if (msg.role === "system") {
@@ -133,22 +121,12 @@ async function callOpenRouter(opts: {
   messages: AIMessage[];
   temperature?: number;
   json?: boolean;
-  language?: string;
 }): Promise<string> {
   const apiKey = (globalThis as any).OPENROUTER_API_KEY ?? process.env.OPENROUTER_API_KEY;
   if (!apiKey) throw new Error("OPENROUTER_API_KEY missing");
 
   const messages: { role: string; content: string }[] = [];
 
-  if (opts.language && opts.language !== "en") {
-    const langName = LANG_NAMES[opts.language] || opts.language;
-    messages.push({
-      role: "system",
-      content: opts.json
-        ? `Write all human-readable content in ${langName}. Keep JSON property/field names in English.`
-        : `Respond in ${langName}.`,
-    });
-  }
 
   for (const msg of opts.messages) {
     messages.push({
@@ -193,7 +171,6 @@ export async function callAIGateway(opts: {
   model?: string;
   temperature?: number;
   json?: boolean;
-  language?: string;
 }): Promise<string> {
   try {
     return await callGemini(opts);

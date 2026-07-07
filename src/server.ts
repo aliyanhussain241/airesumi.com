@@ -78,7 +78,7 @@ const LIMITS: Record<string, number> = {
   "/api/generate-linkedin-bio": 5,
   "/api/roast-resume": 5,
   "/api/generate-resignation": 5,
-  "/api/translate": 20,
+  
 };
 
 function isRateLimited(ip: string, path: string): boolean {

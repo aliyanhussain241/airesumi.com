@@ -150,10 +150,54 @@ export const CoverLetterGenerator: React.FC<CoverLetterGeneratorProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, y: -20 }}
-      className={`flex flex-col min-h-screen ${
+      className={`cover-letter-page flex flex-col min-h-screen ${
         coverLetterState === "GENERATING" ? "items-center justify-center" : ""
-      } bg-gradient-to-b from-[#f9fafb] via-white to-[#f9fafb] relative pb-20 pt-[68px]`}
+      } bg-gradient-to-b from-[#f9fafb] via-white to-[#f9fafb] dark:from-[#0b0d12] dark:via-[#0f1218] dark:to-[#0b0d12] relative pb-20 pt-[68px]`}
     >
+      <style>{`
+        .dark .cover-letter-page h1,
+        .dark .cover-letter-page h2,
+        .dark .cover-letter-page h3,
+        .dark .cover-letter-page h4 { color: #f5f5f4 !important; }
+        .dark .cover-letter-page p,
+        .dark .cover-letter-page label,
+        .dark .cover-letter-page li,
+        .dark .cover-letter-page span { color: inherit; }
+        .dark .cover-letter-page .text-\\[\\#0a0a0a\\],
+        .dark .cover-letter-page .text-\\[\\#111827\\] { color: #f5f5f4 !important; }
+        .dark .cover-letter-page .text-\\[\\#374151\\],
+        .dark .cover-letter-page .text-\\[\\#4b5563\\] { color: #d4d4d4 !important; }
+        .dark .cover-letter-page .text-\\[\\#6b7280\\],
+        .dark .cover-letter-page .text-\\[\\#9ca3af\\] { color: #a1a1aa !important; }
+        .dark .cover-letter-page .bg-white { background-color: #16191f !important; }
+        .dark .cover-letter-page .bg-\\[\\#f9fafb\\],
+        .dark .cover-letter-page .bg-\\[\\#f3f4f6\\] { background-color: #1c2027 !important; }
+        .dark .cover-letter-page .border-\\[\\#e5e7eb\\] { border-color: rgba(255,255,255,0.08) !important; }
+        .dark .cover-letter-page .bg-orange-50 { background-color: rgba(234,88,12,0.15) !important; }
+        .dark .cover-letter-page .bg-orange-100 { background-color: rgba(234,88,12,0.22) !important; }
+        .dark .cover-letter-page .text-\\[\\#c2410c\\] { color: #fdba74 !important; }
+        .dark .cover-letter-page .bg-green-50 { background-color: rgba(34,197,94,0.15) !important; }
+        .dark .cover-letter-page .text-green-600 { color: #4ade80 !important; }
+        .dark .cover-letter-page .bg-red-50 { background-color: rgba(239,68,68,0.15) !important; }
+        .dark .cover-letter-page .border-red-200 { border-color: rgba(239,68,68,0.35) !important; }
+        .dark .cover-letter-page .text-red-700 { color: #fca5a5 !important; }
+        .dark .cover-letter-page input,
+        .dark .cover-letter-page textarea {
+          background-color: #1c2027 !important;
+          color: #f5f5f4 !important;
+          border-color: rgba(255,255,255,0.08) !important;
+        }
+        .dark .cover-letter-page input::placeholder,
+        .dark .cover-letter-page textarea::placeholder { color: #71717a !important; }
+        .dark .cover-letter-page .focus\\:bg-white:focus { background-color: #23272f !important; }
+        .dark .cover-letter-page .hover\\:bg-orange-50:hover,
+        .dark .cover-letter-page .hover\\:bg-orange-50\\/50:hover,
+        .dark .cover-letter-page .hover\\:bg-orange-50\\/40:hover { background-color: rgba(234,88,12,0.12) !important; }
+        .dark .cover-letter-page .bg-orange-50.ring-2 { background-color: rgba(234,88,12,0.18) !important; }
+        .dark .cover-letter-page .ring-orange-200 { --tw-ring-color: rgba(234,88,12,0.4) !important; }
+        .dark .cover-letter-page .bg-\\[\\#111827\\] { background-color: #FF6321 !important; }
+      `}</style>
+
       {/* ================= IDLE ================= */}
       {coverLetterState === "IDLE" && (
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pt-10 lg:pt-14">

@@ -38,7 +38,6 @@ import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
-import { Route as ApiTranslateRouteImport } from './routes/api/translate'
 import { Route as ApiSubscriptionStatusRouteImport } from './routes/api/subscription-status'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe-webhook'
 import { Route as ApiScanKeywordsRouteImport } from './routes/api/scan-keywords'
@@ -201,11 +200,6 @@ const ApiUploadCvRoute = ApiUploadCvRouteImport.update({
   path: '/api/upload-cv',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiTranslateRoute = ApiTranslateRouteImport.update({
-  id: '/api/translate',
-  path: '/api/translate',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiSubscriptionStatusRoute = ApiSubscriptionStatusRouteImport.update({
   id: '/api/subscription-status',
   path: '/api/subscription-status',
@@ -328,7 +322,6 @@ export interface FileRoutesByFullPath {
   '/api/scan-keywords': typeof ApiScanKeywordsRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/subscription-status': typeof ApiSubscriptionStatusRoute
-  '/api/translate': typeof ApiTranslateRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -376,7 +369,6 @@ export interface FileRoutesByTo {
   '/api/scan-keywords': typeof ApiScanKeywordsRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/subscription-status': typeof ApiSubscriptionStatusRoute
-  '/api/translate': typeof ApiTranslateRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -425,7 +417,6 @@ export interface FileRoutesById {
   '/api/scan-keywords': typeof ApiScanKeywordsRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/subscription-status': typeof ApiSubscriptionStatusRoute
-  '/api/translate': typeof ApiTranslateRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -475,7 +466,6 @@ export interface FileRouteTypes {
     | '/api/scan-keywords'
     | '/api/stripe-webhook'
     | '/api/subscription-status'
-    | '/api/translate'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
@@ -523,7 +513,6 @@ export interface FileRouteTypes {
     | '/api/scan-keywords'
     | '/api/stripe-webhook'
     | '/api/subscription-status'
-    | '/api/translate'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
@@ -571,7 +560,6 @@ export interface FileRouteTypes {
     | '/api/scan-keywords'
     | '/api/stripe-webhook'
     | '/api/subscription-status'
-    | '/api/translate'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
@@ -620,7 +608,6 @@ export interface RootRouteChildren {
   ApiScanKeywordsRoute: typeof ApiScanKeywordsRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ApiSubscriptionStatusRoute: typeof ApiSubscriptionStatusRoute
-  ApiTranslateRoute: typeof ApiTranslateRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
@@ -831,13 +818,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadCvRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/translate': {
-      id: '/api/translate'
-      path: '/api/translate'
-      fullPath: '/api/translate'
-      preLoaderRoute: typeof ApiTranslateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/subscription-status': {
       id: '/api/subscription-status'
       path: '/api/subscription-status'
@@ -1015,7 +995,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiScanKeywordsRoute: ApiScanKeywordsRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ApiSubscriptionStatusRoute: ApiSubscriptionStatusRoute,
-  ApiTranslateRoute: ApiTranslateRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
@@ -1023,13 +1002,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

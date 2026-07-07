@@ -3,7 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Sparkles, Zap, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-type CreditRow = { credits_remaining: number; plan: "free" | "pro" };
+type CreditRow = { credits_remaining: number; total_credits_used: number; plan: "free" | "pro" };
+const FREE_ALLOWANCE = 3;
 
 export function CreditsBadge() {
   const [userId, setUserId] = useState<string | null>(null);

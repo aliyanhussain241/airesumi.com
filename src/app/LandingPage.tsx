@@ -492,7 +492,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
           return (
             <div className="grid lg:grid-cols-12 gap-6 h-auto lg:h-[520px]">
               {/* Sidebar Nav */}
-              <div className="lg:col-span-4 bg-white rounded-3xl border border-gray-100 text-left flex flex-col overflow-hidden" style={{ boxShadow: "0 20px 45px -25px rgba(15,23,42,0.15)" }}>
+              <div className="lg:col-span-4 bg-white dark:bg-[#16191f] rounded-3xl border border-gray-100 dark:border-white/10 text-left flex flex-col overflow-hidden" style={{ boxShadow: "0 20px 45px -25px rgba(15,23,42,0.15)" }}>
                 {TABS.map((tab) => {
                   const active = activeToolsTab === tab.id;
                   const Icon = tab.icon;
@@ -500,19 +500,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab.id)}
-                      className={`flex items-center gap-4 p-5 lg:p-6 cursor-pointer relative text-left transition-colors border-b border-gray-100 last:border-b-0 ${active ? "bg-gradient-to-r from-[#FF6321]/10 via-[#FF6321]/5 to-transparent" : "hover:bg-gray-50"}`}
+                      className={`flex items-center gap-4 p-5 lg:p-6 cursor-pointer relative text-left transition-colors border-b border-gray-100 dark:border-white/10 last:border-b-0 ${active ? "bg-gradient-to-r from-[#FF6321]/10 via-[#FF6321]/5 to-transparent" : "hover:bg-gray-50 dark:hover:bg-white/5"}`}
                     >
                       {active && (
                         <motion.div layoutId="toolTabIndicator" className="absolute right-0 top-2 bottom-2 w-1 rounded-l-full bg-[#FF6321]" transition={{ type: "spring", stiffness: 400, damping: 34 }} />
                       )}
-                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all ${active ? "bg-[#FF6321] text-white shadow-lg shadow-[#FF6321]/30" : "bg-gray-100 text-gray-500"}`}>
+                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all ${active ? "bg-[#FF6321] text-white shadow-lg shadow-[#FF6321]/30" : "bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-300"}`}>
                         <Icon size={20} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className={`text-[15px] font-bold ${active ? "text-[#FF6321]" : "text-[#1a202c]"}`}>
-                          <span className="text-gray-400 font-medium mr-1.5">0{tab.id}.</span>{tab.label}
+                        <div className={`text-[15px] font-bold ${active ? "text-[#FF6321]" : "text-[#1a202c] dark:text-[#f5f5f4]"}`}>
+                          <span className="text-gray-400 dark:text-gray-500 font-medium mr-1.5">0{tab.id}.</span>{tab.label}
                         </div>
-                        <div className="text-[12px] text-gray-500 mt-0.5 truncate">{tab.short}</div>
+                        <div className="text-[12px] text-gray-500 dark:text-gray-400 mt-0.5 truncate">{tab.short}</div>
+
                       </div>
                       {active && (
                         <div className="w-7 h-7 flex items-center justify-center shrink-0">
@@ -543,37 +544,38 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: i * 0.08 }}
-                      className="group relative bg-gradient-to-br from-orange-50/70 via-white to-white rounded-3xl border border-orange-100/60 p-7 lg:p-8 text-left overflow-hidden flex flex-col hover:border-[#FF6321]/40 hover:-translate-y-1 transition-all duration-300"
+                      className="group relative bg-gradient-to-br from-orange-50/70 via-white to-white dark:from-[#FF6321]/10 dark:via-[#1c2027] dark:to-[#16191f] rounded-3xl border border-orange-100/60 dark:border-white/10 p-7 lg:p-8 text-left overflow-hidden flex flex-col hover:border-[#FF6321]/40 hover:-translate-y-1 transition-all duration-300"
                       style={{ boxShadow: "0 20px 45px -25px rgba(255,99,33,0.2)" }}
                     >
                       {/* corner glow */}
                       <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-[#FF6321]/15 blur-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                       <div className="flex items-start justify-between mb-5 relative z-10">
-                        <div className="w-12 h-12 rounded-2xl bg-white border border-orange-100 flex items-center justify-center text-[#FF6321] shadow-sm">
+                        <div className="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-orange-100 dark:border-white/10 flex items-center justify-center text-[#FF6321] shadow-sm">
                           <Icon size={22} />
                         </div>
                         <div className="text-right">
                           <div className="text-2xl font-bold text-[#FF6321] leading-none">{c.stat}</div>
-                          <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{c.statLabel}</div>
+                          <div className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1">{c.statLabel}</div>
                         </div>
                       </div>
 
-                      <h3 className="text-[22px] font-bold text-[#1a202c] mb-2 relative z-10">{c.title}</h3>
-                      <p className="text-[#4a5568] text-[15px] leading-relaxed mb-6 relative z-10 flex-1">{c.desc}</p>
+                      <h3 className="text-[22px] font-bold text-[#1a202c] dark:text-[#f5f5f4] mb-2 relative z-10">{c.title}</h3>
+                      <p className="text-[#4a5568] dark:text-gray-300 text-[15px] leading-relaxed mb-6 relative z-10 flex-1">{c.desc}</p>
 
                       {/* Preview strip */}
-                      <div className="relative z-10 bg-white/80 backdrop-blur border border-gray-100 rounded-2xl p-4 mb-5">
+                      <div className="relative z-10 bg-white/80 dark:bg-white/5 backdrop-blur border border-gray-100 dark:border-white/10 rounded-2xl p-4 mb-5">
                         <div className="flex items-center gap-2 mb-3">
                           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                          <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Live preview</span>
+                          <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Live preview</span>
                         </div>
                         <div className="space-y-1.5">
                           <div className="h-2 rounded-full bg-gradient-to-r from-[#FF6321]/40 to-[#FF6321]/10" style={{ width: "88%" }} />
-                          <div className="h-2 rounded-full bg-gray-100" style={{ width: "72%" }} />
-                          <div className="h-2 rounded-full bg-gray-100" style={{ width: "60%" }} />
+                          <div className="h-2 rounded-full bg-gray-100 dark:bg-white/10" style={{ width: "72%" }} />
+                          <div className="h-2 rounded-full bg-gray-100 dark:bg-white/10" style={{ width: "60%" }} />
                         </div>
                       </div>
+
 
                       <div className="flex items-center gap-2 text-[#FF6321] font-bold text-sm relative z-10 group-hover:gap-3 transition-all">
                         Explore tool <ArrowRight size={16} />

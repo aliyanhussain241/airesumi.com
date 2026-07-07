@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { Header } from "../app/components/Header";
 import { Footer } from "../app/components/Footer";
 import { AutoTranslate } from "../app/components/AutoTranslate";
+import { RouteProgressBar } from "../app/components/RouteProgressBar";
 import { initI18n } from "../app/lib/i18n";
 
 
@@ -261,6 +262,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="app-shell min-h-dvh flex flex-col liquid-bg text-[#0a0a0a] dark:text-orange-50 font-sans selection:bg-[#FF6321] selection:text-white print:bg-white print:m-0 print:p-0">
+        <RouteProgressBar />
         <Header />
         <main className="app-main flex-1 min-h-[60vh]">
           <Outlet />

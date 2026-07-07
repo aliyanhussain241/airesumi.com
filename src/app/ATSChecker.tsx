@@ -131,7 +131,52 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
+    <div className="ats-checker-page min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] dark:from-[#0b0d12] dark:via-[#0f1218] dark:to-[#0b0d12] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
+      <style>{`
+        .dark .ats-checker-page .text-gray-900,
+        .dark .ats-checker-page .text-\\[\\#0a0a0a\\],
+        .dark .ats-checker-page .text-\\[\\#111827\\] { color: #f5f5f4 !important; }
+        .dark .ats-checker-page .text-gray-700,
+        .dark .ats-checker-page .text-\\[\\#374151\\],
+        .dark .ats-checker-page .text-\\[\\#4b5563\\] { color: #d4d4d4 !important; }
+        .dark .ats-checker-page .text-gray-600,
+        .dark .ats-checker-page .text-gray-500,
+        .dark .ats-checker-page .text-\\[\\#6b7280\\],
+        .dark .ats-checker-page .text-\\[\\#9ca3af\\] { color: #a1a1aa !important; }
+        .dark .ats-checker-page .text-gray-400 { color: #71717a !important; }
+        .dark .ats-checker-page .bg-white { background-color: #16191f !important; }
+        .dark .ats-checker-page .bg-\\[\\#F8FAFC\\],
+        .dark .ats-checker-page .bg-\\[\\#f9fafb\\],
+        .dark .ats-checker-page .bg-\\[\\#f3f4f6\\],
+        .dark .ats-checker-page .bg-gray-50,
+        .dark .ats-checker-page .bg-gray-100 { background-color: #1c2027 !important; }
+        .dark .ats-checker-page .border-\\[\\#e5e7eb\\],
+        .dark .ats-checker-page .border-gray-200,
+        .dark .ats-checker-page .border-gray-100 { border-color: rgba(255,255,255,0.08) !important; }
+        .dark .ats-checker-page .bg-orange-50 { background-color: rgba(234,88,12,0.15) !important; }
+        .dark .ats-checker-page .bg-orange-100 { background-color: rgba(234,88,12,0.22) !important; }
+        .dark .ats-checker-page .border-orange-100 { border-color: rgba(234,88,12,0.3) !important; }
+        .dark .ats-checker-page .text-\\[\\#c2410c\\] { color: #fdba74 !important; }
+        .dark .ats-checker-page .bg-red-50 { background-color: rgba(239,68,68,0.15) !important; }
+        .dark .ats-checker-page .border-red-200 { border-color: rgba(239,68,68,0.35) !important; }
+        .dark .ats-checker-page .text-red-700,
+        .dark .ats-checker-page .text-red-900,
+        .dark .ats-checker-page .text-red-600,
+        .dark .ats-checker-page .text-red-400 { color: #fca5a5 !important; }
+        .dark .ats-checker-page .bg-green-50 { background-color: rgba(34,197,94,0.15) !important; }
+        .dark .ats-checker-page .text-green-700,
+        .dark .ats-checker-page .text-green-600 { color: #4ade80 !important; }
+        .dark .ats-checker-page input,
+        .dark .ats-checker-page textarea {
+          background-color: #1c2027 !important;
+          color: #f5f5f4 !important;
+          border-color: rgba(255,255,255,0.08) !important;
+        }
+        .dark .ats-checker-page input::placeholder,
+        .dark .ats-checker-page textarea::placeholder { color: #71717a !important; }
+        .dark .ats-checker-page .bg-\\[\\#111827\\],
+        .dark .ats-checker-page .bg-gray-900 { background-color: #FF6321 !important; }
+      `}</style>
 
       {/* Hero Section */}
       <div className="max-w-5xl mx-auto px-6 mb-14 text-center">

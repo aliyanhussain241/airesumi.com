@@ -48,7 +48,7 @@ const GLASS_HEADER_STYLES = `
     transition: background 0.28s ease;
     will-change: transform, opacity;
   }
-  :global(html.dark) .hdr-dropdown {
+  html.dark .hdr-dropdown {
     background: rgba(17, 20, 28, 0.98);
     border: 1px solid rgba(234, 88, 12, 0.22);
     box-shadow:
@@ -77,7 +77,7 @@ const GLASS_HEADER_STYLES = `
     background: linear-gradient(160deg, rgba(234,88,12,0.10) 0%, rgba(251,146,60,0.06) 60%, transparent 100%);
     border-right: 1px solid rgba(234,88,12,0.10);
   }
-  :global(html.dark) .hdr-featured {
+  html.dark .hdr-featured {
     background: linear-gradient(160deg, rgba(234,88,12,0.18) 0%, rgba(194,65,12,0.08) 60%, transparent 100%);
     border-right: 1px solid rgba(234,88,12,0.20);
   }
@@ -97,7 +97,7 @@ const GLASS_HEADER_STYLES = `
     background: rgba(249, 250, 251, 0.9);
     border-top: 1px solid rgba(17, 24, 39, 0.06);
   }
-  :global(html.dark) .hdr-dropdown-footer {
+  html.dark .hdr-dropdown-footer {
     background: rgba(10, 12, 18, 0.7);
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
@@ -123,7 +123,7 @@ const GLASS_HEADER_STYLES = `
     border-color: rgba(234, 88, 12, 0.15);
     transform: translateY(-1px);
   }
-  :global(html.dark) .hdr-tool-item:hover {
+  html.dark .hdr-tool-item:hover {
     background: rgba(234, 88, 12, 0.14);
     border-color: rgba(234, 88, 12, 0.28);
   }
@@ -146,8 +146,8 @@ const GLASS_HEADER_STYLES = `
   .hdr-tool-desc {
     color: #6b7280;
   }
-  :global(html.dark) .hdr-tool-name { color: #f3f4f6; }
-  :global(html.dark) .hdr-tool-desc { color: #9ca3af; }
+  html.dark .hdr-tool-name { color: #f3f4f6; }
+  html.dark .hdr-tool-desc { color: #9ca3af; }
 
   .hdr-badge-new {
     background: linear-gradient(135deg, #EA580C, #F97316);
@@ -169,7 +169,7 @@ const GLASS_HEADER_STYLES = `
     border-radius: 6px;
     text-transform: uppercase;
   }
-  :global(html.dark) .hdr-badge-pro {
+  html.dark .hdr-badge-pro {
     background: rgba(234, 88, 12, 0.25);
     color: #FDBA74;
   }
@@ -221,7 +221,7 @@ const GLASS_HEADER_STYLES = `
     backdrop-filter: blur(40px) saturate(200%);
     -webkit-backdrop-filter: blur(40px) saturate(200%);
   }
-  :global(html.dark) .hdr-mobile {
+  html.dark .hdr-mobile {
     background: rgba(17, 20, 28, 0.98);
   }
   .hdr-tag {

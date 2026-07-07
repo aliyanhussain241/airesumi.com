@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
 import { requireAuth } from "@/lib/auth";
 import { checkUsage } from "@/lib/usage";
+import { consumeCredit, OUT_OF_CREDITS_RESPONSE } from "@/lib/credits";
 
 export const Route = createFileRoute("/api/generate-cover-letter")({
   server: {
@@ -14,6 +15,8 @@ export const Route = createFileRoute("/api/generate-cover-letter")({
           } catch (err: any) {
             return new Response(JSON.stringify({ error: err.message }), { status: 401 });
           }
+
+          if (!(await consumeCredit(user.id))) return OUT_OF_CREDITS_RESPONSE();
 
           try {
             await checkUsage(supabase, user.id, "coverLetter");

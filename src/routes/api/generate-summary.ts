@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { callAIGateway, safeJSON } from "@/lib/ai-gateway";
 import { requireAuth } from "@/lib/auth";
+import { consumeCredit, OUT_OF_CREDITS_RESPONSE } from "@/lib/credits";
 
 export const Route = createFileRoute("/api/generate-summary")({
   server: {
@@ -13,6 +14,8 @@ export const Route = createFileRoute("/api/generate-summary")({
           } catch (err: any) {
             return new Response(JSON.stringify({ error: err.message }), { status: 401 });
           }
+
+          if (!(await consumeCredit(user.id))) return OUT_OF_CREDITS_RESPONSE();
 
           const { role, experience, skills, jobTitle, tone } = await request.json() as any;
 

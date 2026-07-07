@@ -12,6 +12,7 @@ import { supabase } from '@/integrations/supabase/client';
 import rezumiLogo from '@/assets/ai-resumi.webp';
 import rezumiLogoWhite from '@/assets/rezumi-white.webp';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { CreditsBadge } from './CreditsBadge';
 
 const GLASS_HEADER_STYLES = `
   .hdr-glass {
@@ -655,6 +656,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           <div className="flex items-center gap-2 flex-shrink-0">
             {user ? (
               <div className="hidden md:flex items-center gap-2">
+                <CreditsBadge />
                 <Link to="/dashboard"
                   className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50">
                   <LayoutDashboard size={14} /> {t('cta.myResumes')}

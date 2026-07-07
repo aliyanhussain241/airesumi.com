@@ -44,7 +44,7 @@ export const Footer = () => {
                   { Icon: Facebook, href: "https://www.facebook.com/airesumi", label: "Facebook" },
                   { Icon: Pointer, href: "#", label: "Pinterest" },
                   { Icon: Github, href: "#", label: "GitHub" },
-                  { Icon: Linkedin, href: "#", label: "LinkedIn" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/ai-resumi", label: "LinkedIn" },
                   { Icon: Instagram, href: "https://www.instagram.com/ai_resumi", label: "Instagram" },
                 ].map(({ Icon, href, label }) => (
                   <a

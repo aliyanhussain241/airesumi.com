@@ -51,7 +51,6 @@ Skills: ${skills}
 Experience: ${exp}`;
 
           const response = await callAIGateway({
-            language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             json: true,
             temperature: 0.75,

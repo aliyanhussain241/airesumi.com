@@ -38,7 +38,6 @@ Experience: ${(userData.experience || []).map((e: string) => trim(e, 300)).join(
 Skills: ${(userData.skills || []).map((s: string) => trim(s, 150)).join(", ")}`;
 
           const text = await callAIGateway({
-            language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             temperature: 0.5,
             json: true,

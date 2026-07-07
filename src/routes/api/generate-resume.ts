@@ -47,7 +47,6 @@ Education: ${trim(userData.education, 200)}
 Certs: ${(userData.certifications || []).filter(Boolean).map((c: string) => trim(c, 100)).join(", ") || "None"}`;
 
           const text = await callAIGateway({
-            language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             temperature: 0.3,
             json: true,

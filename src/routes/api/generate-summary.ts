@@ -28,7 +28,6 @@ Skills: ${String(skills || "").slice(0, 300)}
 Tone: ${String(tone || "Professional").slice(0, 50)}`;
 
           const response = await callAIGateway({
-            language: request.headers.get("x-user-language") || undefined,
             messages: [{ role: "user", content: prompt }],
             json: true,
             temperature: 0.7,

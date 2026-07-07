@@ -1,9 +1,8 @@
-// i18n setup for airesumi — top 10 languages with RTL support for Arabic.
-// English keys fall back gracefully when a translation is missing.
+// i18n setup for airesumi — English only. Multi-language support removed.
+// The i18next runtime is kept so existing `t(...)` calls continue to work.
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
 
 export type LangCode =
   | "en" | "es" | "fr" | "de" | "pt" | "ar" | "hi" | "zh" | "ja" | "ru";
@@ -334,43 +333,26 @@ export function initI18n() {
   if (initialized) return i18n;
   initialized = true;
 
-  const isBrowser = typeof window !== "undefined";
-
-  const chain = i18n.use(initReactI18next);
-  if (isBrowser) chain.use(LanguageDetector);
-
-  chain.init({
-    resources,
+  i18n.use(initReactI18next).init({
+    resources: { en: resources.en },
+    lng: "en",
     fallbackLng: "en",
     defaultNS: "common",
-    supportedLngs: LANGUAGES.map((l) => l.code),
+    supportedLngs: ["en"],
     interpolation: { escapeValue: false },
-    detection: isBrowser
-      ? {
-          order: ["localStorage", "navigator", "htmlTag"],
-          lookupLocalStorage: "airesumi-lng",
-          caches: ["localStorage"],
-        }
-      : undefined,
     react: { useSuspense: false },
   });
+
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+  }
 
   return i18n;
 }
 
-export function setLanguage(code: LangCode) {
-  i18n.changeLanguage(code);
-  if (typeof window !== "undefined") {
-    try { localStorage.setItem("airesumi-lng", code); } catch {}
-    const meta = LANGUAGES.find((l) => l.code === code);
-    document.documentElement.lang = code;
-    document.documentElement.dir = meta?.dir ?? "ltr";
-  }
-}
-
-export function getCurrentLanguage(): LangCode {
-  const code = (i18n.language || "en").split("-")[0] as LangCode;
-  return (LANGUAGES.find((l) => l.code === code)?.code) ?? "en";
-}
+// Kept as no-ops for backward compatibility with any remaining callers.
+export function setLanguage(_code: LangCode) {}
+export function getCurrentLanguage(): LangCode { return "en"; }
 
 export default i18n;

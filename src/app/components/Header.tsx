@@ -689,7 +689,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             )}
 
             {/* Language switcher */}
-            <div className="hidden md:block">
+            <div className="block">
               <LanguageSwitcher />
             </div>
 
@@ -697,10 +697,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             <button
               onClick={toggleTheme}
               aria-label={t('theme.toggle')}
-              className="hidden md:flex hdr-btn-outline items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
+              className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
+
 
 
             {/* Mobile */}

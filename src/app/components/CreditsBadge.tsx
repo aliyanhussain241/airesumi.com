@@ -31,7 +31,7 @@ export function CreditsBadge() {
     const load = async () => {
       const { data } = await supabase
         .from("user_credits")
-        .select("credits_remaining, plan")
+        .select("credits_remaining, total_credits_used, plan")
         .eq("user_id", userId)
         .maybeSingle();
       if (!cancelled && data) setRow(data as CreditRow);
@@ -45,7 +45,11 @@ export function CreditsBadge() {
         { event: "*", schema: "public", table: "user_credits", filter: `user_id=eq.${userId}` },
         (payload) => {
           const next = (payload.new || payload.old) as any;
-          if (next) setRow({ credits_remaining: next.credits_remaining, plan: next.plan });
+          if (next) setRow({
+            credits_remaining: next.credits_remaining,
+            total_credits_used: next.total_credits_used ?? 0,
+            plan: next.plan,
+          });
         }
       )
       .subscribe();
@@ -60,6 +64,7 @@ export function CreditsBadge() {
 
   const isPro = row.plan === "pro";
   const isOut = !isPro && row.credits_remaining <= 0;
+  const used = row.total_credits_used ?? 0;
 
   return (
     <>
@@ -73,12 +78,12 @@ export function CreditsBadge() {
               ? "bg-red-50 text-red-700 border-red-200 hover:bg-red-100 cursor-pointer"
               : "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
         }`}
-        title={isPro ? "Pro plan · unlimited" : `${row.credits_remaining} credits left`}
+        title={isPro ? "Pro plan · unlimited" : `${row.credits_remaining} of ${FREE_ALLOWANCE} credits left · ${used} used`}
       >
         {isPro ? (
-          <><Sparkles size={13} /> Pro · unlimited</>
+          <><Sparkles size={13} /> Pro · {used} used</>
         ) : (
-          <><Zap size={13} /> {row.credits_remaining} credit{row.credits_remaining === 1 ? "" : "s"} left</>
+          <><Zap size={13} /> {row.credits_remaining}/{FREE_ALLOWANCE} left · {used} used</>
         )}
       </button>
 

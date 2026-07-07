@@ -1,23 +1,16 @@
 import { CoverLetterData, JobDescription, ResumeData, UserData } from "./types";
 import { supabase } from "@/integrations/supabase/client";
 
-// ✅ Helper — attach auth token + user's UI language on every request.
-// The active language is read from localStorage (set by the language switcher /
-// i18next-browser-languagedetector). API routes forward it to the AI gateway so
-// generated content is returned in the user's selected language.
+// ✅ Helper — attach auth token on every request.
 async function getAuthHeaders(): Promise<Record<string, string>> {
   const { data: { session } } = await supabase.auth.getSession();
   const token = session?.access_token;
-  let lang = "en";
-  if (typeof window !== "undefined") {
-    try { lang = (localStorage.getItem("airesumi-lng") || "en").split("-")[0]; } catch {}
-  }
   return {
     "Content-Type": "application/json",
-    "X-User-Language": lang,
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 }
+
 
 
 export async function generateOptimizedResume(

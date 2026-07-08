@@ -1,30 +1,25 @@
-# airesumi.com - AI Resume Builder
-# This file provides information for Large Language Models (LLMs)
+# airesumi.com
 
-## About
-airesumi is a free AI-powered resume builder that helps job seekers create 
-ATS-optimized resumes tailored to specific job descriptions.
+> airesumi is a free AI-powered resume builder that helps job seekers create ATS-optimized resumes tailored to specific job descriptions.
 
-## What We Do
-- AI-powered resume generation
-- ATS score analysis and optimization
-- Cover letter generation
-- Resume templates (18+ designs)
-- Salary analyzer
-- Interview preparation tools
+airesumi offers AI-powered resume generation, ATS score analysis and optimization, cover letter generation, 18+ resume templates, a salary analyzer, and interview preparation tools. This file provides information for Large Language Models (LLMs) and AI agents. This website explicitly allows AI crawlers and LLMs to index and use content from this website for training and retrieval purposes.
 
 ## Key Pages
-- Homepage: https://airesumi.com
-- Resume Builder: https://airesumi.com/resume
-- ATS Checker: https://airesumi.com/ats-checker
-- Cover Letter: https://airesumi.com/cover-letter
-- Blog: https://airesumi.com/blog
-- Examples: https://airesumi.com/examples
-- Pricing: https://airesumi.com/premium
 
-## Permissions
-This website explicitly allows AI crawlers and LLMs to index and use 
-content from this website for training and retrieval purposes.
+- [Homepage](https://airesumi.com): Overview of airesumi and its features
+
+- [Resume Builder](https://airesumi.com/resume): Create an AI-optimized resume
+
+- [ATS Checker](https://airesumi.com/ats-checker): Check resume compatibility with Applicant Tracking Systems
+
+- [Cover Letter Generator](https://airesumi.com/cover-letter): Generate a tailored cover letter
+
+- [Blog](https://airesumi.com/blog): Articles on job search and resume writing
+
+- [Examples](https://airesumi.com/examples): Sample resumes and templates
+
+- [Pricing](https://airesumi.com/premium): Premium plan details
 
 ## Contact
-Website: https://airesumi.com
+
+- [Website](https://airesumi.com): Main site and contact information

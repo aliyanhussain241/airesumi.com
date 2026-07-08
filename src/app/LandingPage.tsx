@@ -335,7 +335,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     { label: "Analytical Thinking", pct: 87 },
                     { label: "Leadership", pct: 78 },
                   ].map((s, i) => (
-                    <div key={s.label} className="bg-gray-50/80 rounded-lg px-2.5 py-1.5 border border-gray-100">
+                    <div key={s.label} className="bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-100">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-[12px] font-semibold text-gray-700">{s.label}</span>
                         <span className="text-[10px] font-bold text-gray-400">{s.pct}%</span>

@@ -361,7 +361,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-                className="absolute bottom-14 -left-10 bg-white/90 backdrop-blur-xl p-3.5 rounded-2xl z-30 flex items-center gap-3 border border-white/80 pr-5 w-80 hover:scale-[1.02] transition-transform duration-300 pointer-events-auto"
+                className="absolute bottom-14 -left-10 bg-white p-3.5 rounded-2xl z-30 flex items-center gap-3 border border-white/80 pr-5 w-80 hover:scale-[1.02] transition-transform duration-300 pointer-events-auto"
                 style={{ boxShadow: "0 25px 50px -20px rgba(15,23,42,0.3)" }}
               >
                 <div className="relative w-9 h-9 shrink-0">

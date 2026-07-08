@@ -275,7 +275,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial={{ opacity: 0, x: -30, y: 10 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-                className="absolute top-40 -left-14 bg-white/85 backdrop-blur-xl rounded-2xl p-3 pr-4 flex items-center gap-3 z-30 hover:-translate-y-1 transition-transform duration-300 pointer-events-auto cursor-default border border-white"
+                className="absolute top-40 -left-14 bg-white rounded-2xl p-3 pr-4 flex items-center gap-3 z-30 hover:-translate-y-1 transition-transform duration-300 pointer-events-auto cursor-default border border-white"
                 style={{ boxShadow: "0 20px 45px -18px rgba(15,23,42,0.25)" }}
               >
                 <div className="relative w-12 h-12">
@@ -317,7 +317,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-                className="absolute bottom-20 -right-10 bg-white/90 backdrop-blur-xl p-5 rounded-2xl z-20 w-60 border border-white/80 hover:-translate-y-1 transition-transform duration-300"
+                className="absolute bottom-20 -right-10 bg-white p-5 rounded-2xl z-20 w-60 border border-white/80 hover:-translate-y-1 transition-transform duration-300"
                 style={{ boxShadow: "0 25px 50px -20px rgba(15,23,42,0.3)" }}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -335,7 +335,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     { label: "Analytical Thinking", pct: 87 },
                     { label: "Leadership", pct: 78 },
                   ].map((s, i) => (
-                    <div key={s.label} className="bg-gray-50/80 rounded-lg px-2.5 py-1.5 border border-gray-100">
+                    <div key={s.label} className="bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-100">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-[12px] font-semibold text-gray-700">{s.label}</span>
                         <span className="text-[10px] font-bold text-gray-400">{s.pct}%</span>
@@ -361,7 +361,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-                className="absolute bottom-14 -left-10 bg-white/90 backdrop-blur-xl p-3.5 rounded-2xl z-30 flex items-center gap-3 border border-white/80 pr-5 w-80 hover:scale-[1.02] transition-transform duration-300 pointer-events-auto"
+                className="absolute bottom-14 -left-10 bg-white p-3.5 rounded-2xl z-30 flex items-center gap-3 border border-white/80 pr-5 w-80 hover:scale-[1.02] transition-transform duration-300 pointer-events-auto"
                 style={{ boxShadow: "0 25px 50px -20px rgba(15,23,42,0.3)" }}
               >
                 <div className="relative w-9 h-9 shrink-0">

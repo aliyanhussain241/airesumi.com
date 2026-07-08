@@ -302,7 +302,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial={{ opacity: 0, scale: 0.8, x: 30 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.6, ease: "backOut" }}
-                className="absolute top-[42%] right-[-10%] text-white px-4 py-3 rounded-xl font-bold flex items-center gap-2 z-30 hover:scale-105 transition-transform duration-300 cursor-default"
+                className="absolute top-[28%] -right-16 text-white px-4 py-3 rounded-xl font-bold flex items-center gap-2 z-30 hover:scale-105 transition-transform duration-300 cursor-default"
                 style={{
                   background: "linear-gradient(135deg, #FF6321 0%, #ff8c5a 100%)",
                   boxShadow: "0 15px 40px -10px rgba(255,99,33,0.6), inset 0 1px 0 rgba(255,255,255,0.3)",

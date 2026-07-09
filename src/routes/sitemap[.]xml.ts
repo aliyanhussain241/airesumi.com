@@ -15,11 +15,15 @@ const STATIC_ENTRIES = [
   { path: "/keyword-scanner",   changefreq: "monthly", priority: "0.7" },
   { path: "/interview-prep",    changefreq: "monthly", priority: "0.7" },
   { path: "/salary-analyzer",   changefreq: "monthly", priority: "0.7" },
+  { path: "/pdf-scanner",       changefreq: "monthly", priority: "0.7" },
+  { path: "/resignation-letter",changefreq: "monthly", priority: "0.6" },
   { path: "/examples",          changefreq: "weekly",  priority: "0.7" },
   { path: "/blog",              changefreq: "weekly",  priority: "0.7" },
   { path: "/premium",           changefreq: "monthly", priority: "0.6" },
   { path: "/about",             changefreq: "monthly", priority: "0.5" },
   { path: "/contact",           changefreq: "yearly",  priority: "0.4" },
+  { path: "/privacy",           changefreq: "yearly",  priority: "0.3" },
+  { path: "/terms",             changefreq: "yearly",  priority: "0.3" },
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({

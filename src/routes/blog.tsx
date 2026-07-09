@@ -23,6 +23,7 @@ export const Route = createFileRoute("/blog")({
       { name: "twitter:image", content: "https://airesumi.com/api/public/og/blog" },
       { name: "twitter:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
       { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
+      { name: "twitter:url", content: "https://airesumi.com/blog" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
   }),

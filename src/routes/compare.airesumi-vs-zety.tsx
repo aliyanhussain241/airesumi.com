@@ -25,7 +25,7 @@ const ROWS: Array<{ feature: string; Airesumi: string; competitor: string }> = [
   {
     feature: "Paid pricing (entry)",
     Airesumi: "Pro plans available; one-time and subscription options on the /premium page.",
-    competitor: "Publicly advertises a 14-day trial that auto-renews into a monthly subscription (~$23.70/4 weeks per Zety's site).",
+    competitor: "Publicly advertises a $1.95 14-day trial that auto-renews at $25.95 billed every 4 weeks (per zety.com/pricing).",
   },
   {
     feature: "ATS optimization",

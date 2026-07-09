@@ -109,24 +109,20 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           <div className="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-amber-500/15 blur-[100px]" />
         </div>
         <div className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div className="flex flex-col gap-6 mb-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold mb-4">
-                <Sparkles className="w-3.5 h-3.5" /> 500+ ATS-Optimized Resume Examples
+                <Sparkles className="w-3.5 h-3.5" /> ATS-Optimized Resume Examples
               </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-4 max-w-3xl">
-                Resume Examples that <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">get interviews</span> in 2025
+                Resume Examples that <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">get interviews</span> in 2026
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
                 Browse hand-crafted resume samples by job title, industry, and experience level — every one recruiter-approved and ATS-safe.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Stat icon={<FileText className="w-4 h-4" />} label="Examples" value="500+" />
-              <Stat icon={<Users className="w-4 h-4" />} label="Downloads" value="1.2M" />
-              <Stat icon={<Award className="w-4 h-4" />} label="Avg ATS" value="94%" />
-            </div>
           </div>
+
 
           {/* Featured hero example */}
           <div onClick={() => setSelected(featured)} className="group relative rounded-3xl p-6 md:p-10 cursor-pointer overflow-hidden border border-border/60 bg-gradient-to-br from-orange-500 to-amber-600 text-white shadow-[0_20px_60px_-20px_rgba(234,88,12,0.5)] hover:shadow-[0_30px_80px_-20px_rgba(234,88,12,0.7)] transition-all">

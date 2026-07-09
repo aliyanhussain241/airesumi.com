@@ -24,6 +24,7 @@ export const Route = createFileRoute("/about")({
       { property: "og:image", content: "https://airesumi.com/og-image.webp" },
       { name: "twitter:title", content: "About airesumi — Our Mission" },
       { name: "twitter:description", content: "airesumi helps job seekers build better resumes with AI." },
+      { name: "twitter:url", content: "https://airesumi.com/about" },
     ],
         scripts: [
       {

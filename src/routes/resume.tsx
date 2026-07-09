@@ -396,6 +396,7 @@ export const Route = createFileRoute("/resume")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Free AI Resume Builder | airesumi" },
       { name: "twitter:description", content: "Build a free ATS-optimized resume in minutes. No sign-up required." },
+      { name: "twitter:url", content: "https://airesumi.com/resume" },
       { name: "twitter:image", content: "https://airesumi.com/api/public/og/resume" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/resume" }],

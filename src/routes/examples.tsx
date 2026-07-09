@@ -25,6 +25,7 @@ export const Route = createFileRoute("/examples")({
       { name: "twitter:image", content: "https://airesumi.com/api/public/og/examples" },
       { name: "twitter:title", content: "Free Resume Examples by Job Title | airesumi.com" },
       { name: "twitter:description", content: "ATS-optimized resume examples by job title and industry." },
+      { name: "twitter:url", content: "https://airesumi.com/examples" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/examples" }],
 

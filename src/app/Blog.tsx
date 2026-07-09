@@ -876,7 +876,7 @@ const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts, hasInitialPosts
 };
 
 // ─── ROOT COMPONENT ───────────────────────────────────────────
-export const Blog = ({ initialPosts = [] }: { initialPosts?: Post[] } = {}) => {
+export const Blog = ({ initialPosts, hasInitialPosts = false }: { initialPosts?: Post[]; hasInitialPosts?: boolean } = {}) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);

@@ -164,6 +164,12 @@ function Page() {
               </Link>{" "}
               — how Airesumi stacks up against Zety's paid-PDF model.
             </li>
+            <li>
+              <Link to="/compare/airesumi-vs-kickresume" className="text-[#FF6321] hover:underline">
+                Airesumi vs Kickresume →
+              </Link>{" "}
+              — how Airesumi compares to Kickresume's design-forward templates and website builder.
+            </li>
           </ul>
         </section>
 

@@ -954,7 +954,7 @@ export const Blog = ({ initialPosts = [] }: { initialPosts?: Post[] } = {}) => {
 
   return (
     <div className="relative">
-      <PublicBlog onAdminClick={() => setShowAdmin(true)}/>
+      <PublicBlog onAdminClick={() => setShowAdmin(true)} initialPosts={initialPosts}/>
       {/* Subtle admin link */}
       <button onClick={() => setShowAdmin(true)}
         className="fixed bottom-6 right-6 w-10 h-10 bg-white border border-[#E5E7EB] rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-[#FF6321] hover:border-[#FF6321] transition-all shadow-md z-50"

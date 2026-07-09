@@ -6,7 +6,7 @@ import { Footer } from "@/app/components/Footer";
 import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
 
 function RoleExamplePage() {
-  const data = Route.useLoaderData();
+  const data = Route.useLoaderData() as ResumeRoleWithRelated;
   const { slug } = Route.useParams();
 
   if (!data) {

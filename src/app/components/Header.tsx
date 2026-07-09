@@ -9,8 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/hooks/use-theme';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
-import rezumiLogo from '@/assets/ai-resumi.webp';
-import rezumiLogoWhite from '@/assets/rezumi-white.webp';
+import airesumiLogo from '@/assets/ai-resumi.webp';
+import airesumiLogoWhite from '@/assets/rezumi-white.webp';
 
 import { CreditsBadge } from './CreditsBadge';
 
@@ -234,8 +234,8 @@ const GLASS_HEADER_STYLES = `
 export const Logo = () => (
   <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">
     {/* Explicit width/height reserves space so the header doesn't shift when the logo webp decodes (CLS fix). */}
-    <img src={rezumiLogo} alt="airesumi" width={128} height={32} className="theme-logo-light h-8 w-auto object-contain" />
-    <img src={rezumiLogoWhite} alt="airesumi" width={128} height={32} className="theme-logo-dark h-8 w-auto object-contain" />
+    <img src={airesumiLogo} alt="airesumi" width={128} height={32} className="theme-logo-light h-8 w-auto object-contain" />
+    <img src={airesumiLogoWhite} alt="airesumi" width={128} height={32} className="theme-logo-dark h-8 w-auto object-contain" />
   </div>
 );
 

@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Facebook, Github, Linkedin, Instagram, Pointer } from "lucide-react";
-import rezumiLogo from "@/assets/ai-resumi.webp";
-import rezumiLogoWhite from "@/assets/rezumi-white.webp";
+import airesumiLogo from "@/assets/ai-resumi.webp";
+import airesumiLogoWhite from "@/assets/rezumi-white.webp";
 
 const linkCls =
   "block py-2 -mx-2 px-2 rounded-md text-[15px] sm:text-[14px] text-neutral-300 hover:text-[#FF6321] hover:bg-white/5 active:bg-white/10 transition-colors no-underline whitespace-nowrap";
@@ -31,7 +31,7 @@ export const Footer = () => {
             <div className="sm:col-span-2 space-y-5 text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start">
                 <img
-                  src={rezumiLogoWhite}
+                  src={airesumiLogoWhite}
                   alt="airesumi - AI Resume Builder"
                   className="h-10 w-auto shrink-0"
                 />

@@ -6,8 +6,8 @@ import {
   ArrowLeft, AlertCircle, CheckCircle2, Loader2
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import rezumiLogo from "@/assets/ai-resumi.webp";
-import rezumiLogoWhite from "@/assets/rezumi-white.webp";
+import airesumiLogo from "@/assets/ai-resumi.webp";
+import airesumiLogoWhite from "@/assets/rezumi-white.webp";
 
 
 // ── LIQUID GLASS STYLES ──────────────────────────────────────────────────────
@@ -274,8 +274,8 @@ function LoginPage() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-7">
           <div className="flex items-center justify-center mb-4">
-            <img src={rezumiLogo} alt="airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
-            <img src={rezumiLogoWhite} alt="airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />
+            <img src={airesumiLogo} alt="airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
+            <img src={airesumiLogoWhite} alt="airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />
           </div>
 
           <h1 className="text-[22px] font-bold text-[#111827] dark:text-gray-100 tracking-tight">

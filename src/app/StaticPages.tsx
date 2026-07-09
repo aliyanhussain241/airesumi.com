@@ -663,7 +663,7 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           {[
             { t: "AI Resume Builder", d: "Our flagship tool. Enter your job title, experience, and skills — our AI writes a complete, ATS-optimized resume in under 2 minutes. Tailored to any job description automatically." },
             { t: "ATS Resume Checker", d: "Paste your existing resume and get an instant ATS compatibility score. See exactly which keywords are missing, which formatting issues will cause rejection, and how to fix them." },
-            { t: "Resume Examples Library", d: "Browse 500+ professional resume examples by job title and industry. Study real resumes that got people hired and use our AI to build your own version instantly." },
+            { t: "Resume Examples Library", d: "Browse professional resume examples by job title and industry. Study real resumes that got people hired and use our AI to build your own version instantly." },
             { t: "Cover Letter Generator", d: "Generate a personalized, job-specific cover letter in 60 seconds. Our AI matches your cover letter tone and keywords to the job description automatically." },
             { t: "Interview Questions Generator", d: "Get role-specific interview questions with expert model answers before your interview. Practice behavioral, technical, and situational questions for any job title." },
             { t: "Salary Analyzer", d: "Find out if you are being paid fairly. Enter your job title, experience, and location and get an instant salary analysis with negotiation tips based on real market data." }
@@ -690,24 +690,9 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           ))}
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">The Team Behind airesumi</h2>
-        <p className="text-gray-600 mb-8 text-lg">airesumi is built by a small, passionate team of engineers, career coaches, and product designers who have all personally experienced the frustration of the job search process.</p>
-        <div className="grid md:grid-cols-3 gap-6 mb-24">
-          {[
-            { n: "Alex Rahman", r: "CEO & Co-Founder", d: "Former software engineer turned career coach. Helped 2,000+ professionals rewrite their resumes before building airesumi to scale that impact." },
-            { n: "Sarah Chen", r: "Head of AI", d: "Machine learning engineer with 8 years of NLP experience. Previously built language models at a Fortune 500 tech company. Leads all AI development at airesumi." },
-            { n: "Maria Torres", r: "Head of Career Content", d: "Certified professional resume writer (CPRW) with 12 years of experience. Former recruiter at two global staffing agencies. Ensures every AI output meets recruiter standards." }
-          ].map((t, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
-              <div className="w-16 h-16 bg-orange-100 text-[#FF6321] rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                {t.n.split(' ').map(n=>n[0]).join('')}
-              </div>
-              <h3 className="font-bold text-gray-900">{t.n}</h3>
-              <p className="text-[#FF6321] text-sm mb-4 font-medium">{t.r}</p>
-              <p className="text-gray-600 text-sm">{t.d}</p>
-            </div>
-          ))}
-        </div>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Built by a Small Team</h2>
+        <p className="text-gray-600 mb-24 text-lg">airesumi is built by a small team of engineers, designers, and career-content contributors who have all personally lived the frustration of the job search process. We keep the team lean so we can ship improvements faster and keep the product free for as many job seekers as possible.</p>
+
 
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Why Job Seekers Choose airesumi</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">

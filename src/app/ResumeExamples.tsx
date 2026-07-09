@@ -109,24 +109,20 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           <div className="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-amber-500/15 blur-[100px]" />
         </div>
         <div className="max-w-7xl mx-auto px-6 pt-16 pb-12">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <div className="flex flex-col gap-6 mb-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold mb-4">
-                <Sparkles className="w-3.5 h-3.5" /> 500+ ATS-Optimized Resume Examples
+                <Sparkles className="w-3.5 h-3.5" /> ATS-Optimized Resume Examples
               </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-4 max-w-3xl">
-                Resume Examples that <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">get interviews</span> in 2025
+                Resume Examples that <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">get interviews</span> in 2026
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
                 Browse hand-crafted resume samples by job title, industry, and experience level — every one recruiter-approved and ATS-safe.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Stat icon={<FileText className="w-4 h-4" />} label="Examples" value="500+" />
-              <Stat icon={<Users className="w-4 h-4" />} label="Downloads" value="1.2M" />
-              <Stat icon={<Award className="w-4 h-4" />} label="Avg ATS" value="94%" />
-            </div>
           </div>
+
 
           {/* Featured hero example */}
           <div onClick={() => setSelected(featured)} className="group relative rounded-3xl p-6 md:p-10 cursor-pointer overflow-hidden border border-border/60 bg-gradient-to-br from-orange-500 to-amber-600 text-white shadow-[0_20px_60px_-20px_rgba(234,88,12,0.5)] hover:shadow-[0_30px_80px_-20px_rgba(234,88,12,0.7)] transition-all">
@@ -140,9 +136,9 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
                 <p className="text-white/90 text-base md:text-lg mb-5 max-w-xl">{featured.highlights[0]}. {featured.highlights[1]}.</p>
                 <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
                   <span className="flex items-center gap-1.5"><Star className="w-4 h-4 fill-white" /> {featured.rating}</span>
-                  <span className="flex items-center gap-1.5"><Download className="w-4 h-4" /> {fmt(featured.downloads)}</span>
                   <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4" /> {featured.atsScore}% ATS</span>
                 </div>
+
               </div>
               <button className="px-6 py-3 rounded-full bg-white text-orange-600 font-bold shadow-lg group-hover:scale-105 transition-transform flex items-center gap-2">
                 Preview <ArrowRight className="w-4 h-4" />
@@ -239,7 +235,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
                     <span className="text-2xl font-extrabold text-orange-500 leading-none w-6">{i + 1}</span>
                     <div className="min-w-0">
                       <div className="text-sm font-semibold group-hover:text-orange-500 transition-colors line-clamp-2">{r.title}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{fmt(r.downloads)} downloads</div>
+                      <div className="text-xs text-muted-foreground mt-0.5">{r.level} · {r.industry}</div>
                     </div>
                   </button>
                 </li>
@@ -453,7 +449,6 @@ function ExampleCard({ r, onOpen, fav, onFav }: { r: any; onOpen: () => void; fa
       <div className="px-5 py-3 border-t border-border/60 flex items-center justify-between text-xs">
         <div className="flex items-center gap-3 text-muted-foreground">
           <span className="flex items-center gap-1 font-semibold text-foreground"><Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> {r.rating}</span>
-          <span className="flex items-center gap-1"><Download className="w-3 h-3" /> {fmt(r.downloads)}</span>
         </div>
         <span className="font-bold text-emerald-600 dark:text-emerald-400">{r.atsScore}% ATS</span>
       </div>
@@ -480,7 +475,6 @@ function ExampleRow({ r, onOpen, fav, onFav }: { r: any; onOpen: () => void; fav
       </div>
       <div className="flex items-center gap-4 text-xs shrink-0">
         <span className="flex items-center gap-1 font-semibold"><Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> {r.rating}</span>
-        <span className="flex items-center gap-1 text-muted-foreground"><Download className="w-3 h-3" /> {fmt(r.downloads)}</span>
         <span className="font-bold text-emerald-600 dark:text-emerald-400">{r.atsScore}% ATS</span>
         <button onClick={e => { e.stopPropagation(); onFav(); }} className="p-1.5 rounded-full hover:bg-muted"><Heart className={`w-4 h-4 ${fav ? 'fill-orange-500 text-orange-500' : 'text-muted-foreground'}`} /></button>
       </div>

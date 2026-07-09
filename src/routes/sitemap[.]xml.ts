@@ -109,6 +109,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const allEntries = [
           ...STATIC_ENTRIES.map((e) => ({ ...e, lastmod: today })),
           ...blogEntries,
+          ...roleEntries,
         ];
 
         const urls = allEntries.map(

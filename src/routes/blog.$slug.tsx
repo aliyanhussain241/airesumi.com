@@ -498,13 +498,23 @@ function BlogPost() {
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
-    const { getBlogPostSeo } = await import("@/lib/blog.functions");
-    const post = await getBlogPostSeo({ data: { slug: params.slug } });
-    return { post };
+    const { getBlogPostWithRelated } = await import("@/lib/blog.functions");
+    const data = await getBlogPostWithRelated({ data: { slug: params.slug } });
+    return { post: data?.post ?? null, related: data?.related ?? [] };
   },
   head: ({ params, loaderData }) => {
     const slug = params.slug;
     const post = loaderData?.post ?? null;
+    const fallbackTitle = slug
+      .split("-")
+      .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+    const title = (post?.seo_title || post?.title || fallbackTitle) + " | airesumi Career Blog";
+    const description =
+      post?.seo_description ||
+      post?.excerpt ||
+      `Read our guide on ${fallbackTitle.toLowerCase()}. Expert career advice, resume tips, and job search strategies from Airesumi.`;
+    const ogImage = post?.cover_image_url || "https://airesumi.com/assets/og-image.png";
     const fallbackTitle = slug
       .split("-")
       .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))

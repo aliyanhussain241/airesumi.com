@@ -29,12 +29,16 @@ export function CreditsBadge() {
 
     let cancelled = false;
     const load = async () => {
-      const { data } = await supabase
-        .from("user_credits")
-        .select("credits_remaining, total_credits_used, plan")
-        .eq("user_id", userId)
-        .maybeSingle();
-      if (!cancelled && data) setRow(data as CreditRow);
+      if (!userId) return;
+      try {
+        const { data, error } = await supabase
+          .from("user_credits")
+          .select("credits_remaining, total_credits_used, plan")
+          .eq("user_id", userId)
+          .maybeSingle();
+        if (cancelled || error) return;
+        if (data) setRow(data as CreditRow);
+      } catch { /* ignore transient errors */ }
     };
     load();
 

@@ -36,6 +36,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as CompareAiresumiVsZetyRouteImport } from './routes/compare.airesumi-vs-zety'
+import { Route as CompareAiresumiVsReziRouteImport } from './routes/compare.airesumi-vs-rezi'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
@@ -191,6 +192,11 @@ const CompareAiresumiVsZetyRoute = CompareAiresumiVsZetyRouteImport.update({
   path: '/compare/airesumi-vs-zety',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompareAiresumiVsReziRoute = CompareAiresumiVsReziRouteImport.update({
+  id: '/compare/airesumi-vs-rezi',
+  path: '/compare/airesumi-vs-rezi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -331,6 +337,7 @@ export interface FileRoutesByFullPath {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
@@ -379,6 +386,7 @@ export interface FileRoutesByTo {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
@@ -428,6 +436,7 @@ export interface FileRoutesById {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
@@ -478,6 +487,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
     | '/api/public/og/$slug'
@@ -526,6 +536,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
     | '/api/public/og/$slug'
@@ -574,6 +585,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
     | '/api/public/og/$slug'
@@ -622,6 +634,7 @@ export interface RootRouteChildren {
   ApiSubscriptionStatusRoute: typeof ApiSubscriptionStatusRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  CompareAiresumiVsReziRoute: typeof CompareAiresumiVsReziRoute
   CompareAiresumiVsZetyRoute: typeof CompareAiresumiVsZetyRoute
   ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
 }
@@ -815,6 +828,13 @@ declare module '@tanstack/react-router' {
       path: '/compare/airesumi-vs-zety'
       fullPath: '/compare/airesumi-vs-zety'
       preLoaderRoute: typeof CompareAiresumiVsZetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare/airesumi-vs-rezi': {
+      id: '/compare/airesumi-vs-rezi'
+      path: '/compare/airesumi-vs-rezi'
+      fullPath: '/compare/airesumi-vs-rezi'
+      preLoaderRoute: typeof CompareAiresumiVsReziRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -1017,6 +1037,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSubscriptionStatusRoute: ApiSubscriptionStatusRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  CompareAiresumiVsReziRoute: CompareAiresumiVsReziRoute,
   CompareAiresumiVsZetyRoute: CompareAiresumiVsZetyRoute,
   ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
 }

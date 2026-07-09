@@ -185,6 +185,19 @@ function Page() {
           </p>
         </section>
 
+        {/* Compare other tools */}
+        <section className="mb-12 border-t border-[#e2e8f0] dark:border-white/10 pt-8">
+          <h2 className="text-xl font-semibold text-[#1a202c] dark:text-orange-50 mb-4">Compare other tools</h2>
+          <ul className="space-y-2 text-[#4a5568] dark:text-orange-100/70">
+            <li>
+              <Link to="/compare/airesumi-vs-rezi" className="text-[#FF6321] hover:underline">
+                Airesumi vs Rezi →
+              </Link>{" "}
+              — how Airesumi compares to Rezi's 23-point ATS score and lifetime plan.
+            </li>
+          </ul>
+        </section>
+
         {/* CTA */}
         <section className="bg-gradient-to-br from-[#FF6321] to-[#e5541a] rounded-2xl p-8 md:p-10 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">

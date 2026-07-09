@@ -31,7 +31,7 @@ export const Footer = () => {
             <div className="sm:col-span-2 space-y-5 text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start">
                 <img
-                  src={rezumiLogoWhite}
+                  src={airesumiLogoWhite}
                   alt="airesumi - AI Resume Builder"
                   className="h-10 w-auto shrink-0"
                 />

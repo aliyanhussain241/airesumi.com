@@ -34,6 +34,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResumeExamplesSlugRouteImport } from './routes/resume-examples.$slug'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as CompareAiresumiVsZetyRouteImport } from './routes/compare.airesumi-vs-zety'
 import { Route as CompareAiresumiVsReziRouteImport } from './routes/compare.airesumi-vs-rezi'
@@ -181,6 +182,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeExamplesSlugRoute = ResumeExamplesSlugRouteImport.update({
+  id: '/resume-examples/$slug',
+  path: '/resume-examples/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
@@ -348,6 +354,7 @@ export interface FileRoutesByFullPath {
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
+  '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesByTo {
@@ -398,6 +405,7 @@ export interface FileRoutesByTo {
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
+  '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesById {
@@ -449,6 +457,7 @@ export interface FileRoutesById {
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
+  '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRouteTypes {
@@ -501,6 +510,7 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
+    | '/resume-examples/$slug'
     | '/api/public/og/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -551,6 +561,7 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
+    | '/resume-examples/$slug'
     | '/api/public/og/$slug'
   id:
     | '__root__'
@@ -601,6 +612,7 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
+    | '/resume-examples/$slug'
     | '/api/public/og/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -650,6 +662,7 @@ export interface RootRouteChildren {
   CompareAiresumiVsKickresumeRoute: typeof CompareAiresumiVsKickresumeRoute
   CompareAiresumiVsReziRoute: typeof CompareAiresumiVsReziRoute
   CompareAiresumiVsZetyRoute: typeof CompareAiresumiVsZetyRoute
+  ResumeExamplesSlugRoute: typeof ResumeExamplesSlugRoute
   ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
 }
 
@@ -828,6 +841,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume-examples/$slug': {
+      id: '/resume-examples/$slug'
+      path: '/resume-examples/$slug'
+      fullPath: '/resume-examples/$slug'
+      preLoaderRoute: typeof ResumeExamplesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/premium/success': {
@@ -1061,6 +1081,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompareAiresumiVsKickresumeRoute: CompareAiresumiVsKickresumeRoute,
   CompareAiresumiVsReziRoute: CompareAiresumiVsReziRoute,
   CompareAiresumiVsZetyRoute: CompareAiresumiVsZetyRoute,
+  ResumeExamplesSlugRoute: ResumeExamplesSlugRoute,
   ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
 }
 export const routeTree = rootRouteImport

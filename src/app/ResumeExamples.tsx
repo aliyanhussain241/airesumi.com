@@ -449,7 +449,6 @@ function ExampleCard({ r, onOpen, fav, onFav }: { r: any; onOpen: () => void; fa
       <div className="px-5 py-3 border-t border-border/60 flex items-center justify-between text-xs">
         <div className="flex items-center gap-3 text-muted-foreground">
           <span className="flex items-center gap-1 font-semibold text-foreground"><Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> {r.rating}</span>
-          <span className="flex items-center gap-1"><Download className="w-3 h-3" /> {fmt(r.downloads)}</span>
         </div>
         <span className="font-bold text-emerald-600 dark:text-emerald-400">{r.atsScore}% ATS</span>
       </div>
@@ -476,7 +475,6 @@ function ExampleRow({ r, onOpen, fav, onFav }: { r: any; onOpen: () => void; fav
       </div>
       <div className="flex items-center gap-4 text-xs shrink-0">
         <span className="flex items-center gap-1 font-semibold"><Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> {r.rating}</span>
-        <span className="flex items-center gap-1 text-muted-foreground"><Download className="w-3 h-3" /> {fmt(r.downloads)}</span>
         <span className="font-bold text-emerald-600 dark:text-emerald-400">{r.atsScore}% ATS</span>
         <button onClick={e => { e.stopPropagation(); onFav(); }} className="p-1.5 rounded-full hover:bg-muted"><Heart className={`w-4 h-4 ${fav ? 'fill-orange-500 text-orange-500' : 'text-muted-foreground'}`} /></button>
       </div>

@@ -75,7 +75,7 @@ export const TermsOfService = ({ onNavigate: _onNavigate }: { onNavigate: (step:
             <h2>1. Acceptance of Terms</h2>
             <p>By accessing or using Airesumi (airesumi.com) and any related services, applications, or tools (collectively, the 'Service'), you agree to be bound by these Terms of Service ('Terms') and our Privacy Policy, which is incorporated into these Terms by reference.</p>
             <p>If you are using Airesumi on behalf of an organization, company, or institution, you represent that you have the authority to bind that organization to these Terms.</p>
-            <p>If you do not agree to these Terms, you may not access or use airesumi. Your continued use of the Service following any updates to these Terms constitutes your acceptance of the revised Terms.</p>
+            <p>If you do not agree to these Terms, you may not access or use Airesumi. Your continued use of the Service following any updates to these Terms constitutes your acceptance of the revised Terms.</p>
             <p>These Terms constitute a legally binding agreement between you ('User') and Airesumi ('Company', 'we', 'us', 'our').</p>
           </div>
 
@@ -126,7 +126,7 @@ export const TermsOfService = ({ onNavigate: _onNavigate }: { onNavigate: (step:
               <li><strong>Abuse the Service:</strong> Attempt to gain unauthorized access to Airesumi systems, reverse engineer the AI models, scrape resume data at scale, or use automated bots to access the Service.</li>
               <li><strong>Harm Others:</strong> Use Airesumi to harass, impersonate, or harm other users, or to generate content that is defamatory, threatening, or discriminatory.</li>
               <li><strong>Circumvent Limits:</strong> Create multiple accounts, use VPNs, or take other actions to circumvent free plan limits or access paid features without a valid subscription.</li>
-              <li><strong>Commercial Resale:</strong> Resell, redistribute, or sublicense access to Airesumi without written permission from airesumi.</li>
+              <li><strong>Commercial Resale:</strong> Resell, redistribute, or sublicense access to Airesumi without written permission from Airesumi.</li>
             </ul>
             <p>Violation of this Acceptable Use Policy may result in immediate suspension or termination of your account without refund.</p>
           </div>
@@ -263,7 +263,7 @@ export const PrivacyPolicy = ({ onNavigate: _onNavigate }: { onNavigate: (step: 
     <LegalPageShell
       kind="privacy"
       title="Privacy Policy — How Airesumi Protects Your Data"
-      subtitle="Your privacy isn't a checkbox for us — it's core to how we build airesumi. We never sell your data, never share your resume with employers, and give you full control over your information."
+      subtitle="Your privacy isn't a checkbox for us — it's core to how we build Airesumi. We never sell your data, never share your resume with employers, and give you full control over your information."
       lastUpdated="January 1, 2025"
       plainEnglish="We collect only the data we need to run our service. We store it securely. We never sell it. We never share it with employers or recruiters. You can delete it anytime. Full legal details below."
       toc={toc}
@@ -284,7 +284,7 @@ export const PrivacyPolicy = ({ onNavigate: _onNavigate }: { onNavigate: (step: 
             <h3>Information Collected Automatically</h3>
             <p>When you use Airesumi, we automatically collect certain technical information:</p>
             <ul>
-              <li><strong>Usage Data:</strong> Pages visited, features used, buttons clicked, time spent on each section, and which tools you use within airesumi. This helps us understand how people use our service and improve it.</li>
+              <li><strong>Usage Data:</strong> Pages visited, features used, buttons clicked, time spent on each section, and which tools you use within Airesumi. This helps us understand how people use our service and improve it.</li>
               <li><strong>Device and Browser Data:</strong> Your browser type, operating system, screen resolution, and device type. We use this to ensure Airesumi works correctly across all devices.</li>
               <li><strong>IP Address:</strong> Your approximate location based on IP address, used for fraud prevention and to ensure compliance with regional privacy laws.</li>
               <li><strong>Cookies:</strong> Small text files placed on your device to keep you logged in and remember your preferences. See our Cookies section for full details.</li>

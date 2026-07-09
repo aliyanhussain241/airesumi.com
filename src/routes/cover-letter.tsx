@@ -296,7 +296,7 @@ export const Route = createFileRoute("/cover-letter")({
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "AI cover letter generator, free cover letter, cover letter maker, cover letter builder, AI cover letter" },
       { property: "og:title", content: "Free AI Cover Letter Generator | airesumi.com" },
-      { property: "og:description", content: "Generate a tailored cover letter in seconds. Free AI tool by airesumi." },
+      { property: "og:description", content: "Generate a tailored cover letter in seconds. Free AI tool by Airesumi." },
       { property: "og:url", content: "https://airesumi.com/cover-letter" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

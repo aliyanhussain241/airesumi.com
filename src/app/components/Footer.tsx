@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Facebook, Github, Linkedin, Instagram, Pointer } from "lucide-react";
+import { Facebook, Linkedin, Instagram } from "lucide-react";
 import airesumiLogo from "@/assets/ai-resumi.webp";
 import airesumiLogoWhite from "@/assets/rezumi-white.webp";
 
@@ -42,8 +42,6 @@ export const Footer = () => {
               <div className="flex gap-3 pt-1 justify-center sm:justify-start">
                 {[
                   { Icon: Facebook, href: "https://www.facebook.com/Airesumi", label: "Facebook" },
-                  { Icon: Pointer, href: "#", label: "Pinterest" },
-                  { Icon: Github, href: "#", label: "GitHub" },
                   { Icon: Linkedin, href: "https://www.linkedin.com/in/ai-resumi", label: "LinkedIn" },
                   { Icon: Instagram, href: "https://www.instagram.com/ai_resumi", label: "Instagram" },
                 ].map(({ Icon, href, label }) => (

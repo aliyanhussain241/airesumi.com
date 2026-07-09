@@ -107,7 +107,7 @@ function ResumeExamplesIndex() {
   );
 }
 
-export const Route = createFileRoute("/resume-examples")({
+export const Route = createFileRoute("/resume-examples/")({
   loader: () => getPublishedRoleExamples(),
   head: () => ({
     meta: [

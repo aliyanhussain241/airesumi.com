@@ -582,8 +582,27 @@ function FAQItem({ question, answer }: { question: string, answer: string, key?:
 }
 export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
   return (
-    <div className="min-h-screen bg-[#FFFBF7] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-24">
+    <div className="about-page min-h-screen bg-[#FFFBF7] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-24 dark:bg-[#0a0a0a]">
+      <style>{`
+        html.dark .about-page { background-color: #0a0a0a; }
+        html.dark .about-page h1,
+        html.dark .about-page h2,
+        html.dark .about-page h3 { color: #f5f5f5 !important; }
+        html.dark .about-page p,
+        html.dark .about-page li,
+        html.dark .about-page .prose { color: #d4d4d4 !important; }
+        html.dark .about-page .text-gray-900 { color: #f5f5f5 !important; }
+        html.dark .about-page .text-gray-800 { color: #e5e5e5 !important; }
+        html.dark .about-page .text-gray-600,
+        html.dark .about-page .text-gray-500 { color: #b5b5b5 !important; }
+        html.dark .about-page .bg-white { background-color: #16191f !important; }
+        html.dark .about-page .bg-orange-50 { background-color: rgba(255,99,33,0.08) !important; }
+        html.dark .about-page .border-gray-100,
+        html.dark .about-page .border-gray-200,
+        html.dark .about-page .border-orange-100 { border-color: rgba(255,255,255,0.1) !important; }
+      `}</style>
       <Navbar onNavigate={onNavigate} />
+
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">

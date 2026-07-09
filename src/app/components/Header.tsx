@@ -656,7 +656,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           <div className="flex items-center gap-2 flex-shrink-0">
             {user ? (
               <div className="hidden md:flex items-center gap-2">
-                <CreditsBadge />
+                {(() => {
+                  const p = location.pathname;
+                  const appPrefixes = ['/dashboard', '/resume', '/premium', '/manage-subscription', '/cover-letter', '/ats-checker', '/bullet-writer', '/summary-generator', '/keyword-scanner', '/pdf-scanner', '/resignation-letter', '/linkedin-optimizer', '/salary-analyzer', '/admin'];
+                  return appPrefixes.some(pref => p === pref || p.startsWith(pref + '/')) ? <CreditsBadge /> : null;
+                })()}
                 <Link to="/dashboard"
                   className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50">
                   <LayoutDashboard size={14} /> {t('cta.myResumes')}

@@ -7,7 +7,7 @@ function Page() {
   const posts = Route.useLoaderData();
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Blog initialPosts={posts} />
+      <Blog initialPosts={posts} hasInitialPosts />
     </motion.div>
   );
 }

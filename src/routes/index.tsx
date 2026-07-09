@@ -80,6 +80,10 @@ export const Route = createFileRoute("/")({
         name: "twitter:description",
         content: "Build a professional ATS-optimized resume in minutes. Free, no sign-up required.",
       },
+      {
+        name: "twitter:url",
+        content: "https://airesumi.com/",
+      },
     ],
     links: [
       {

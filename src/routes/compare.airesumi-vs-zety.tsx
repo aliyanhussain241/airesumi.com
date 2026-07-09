@@ -195,6 +195,12 @@ function Page() {
               </Link>{" "}
               — how Airesumi compares to Rezi's 23-point ATS score and lifetime plan.
             </li>
+            <li>
+              <Link to="/compare/airesumi-vs-kickresume" className="text-[#FF6321] hover:underline">
+                Airesumi vs Kickresume →
+              </Link>{" "}
+              — how Airesumi compares to Kickresume's design-forward templates and website builder.
+            </li>
           </ul>
         </section>
 

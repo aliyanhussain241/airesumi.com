@@ -3,67 +3,67 @@ import { motion } from "motion/react";
 import { Check, X, ArrowRight, Sparkles } from "lucide-react";
 
 const COMPETITOR = {
-  name: "Rezi",
-  slug: "rezi",
-  site: "rezi.ai",
+  name: "Kickresume",
+  slug: "kickresume",
+  site: "kickresume.com",
 };
 
-const PATH = "/compare/airesumi-vs-rezi";
+const PATH = "/compare/airesumi-vs-kickresume";
 const URL = `https://airesumi.com${PATH}`;
-const TITLE = "Airesumi vs Rezi (2026): Honest Side-by-Side Comparison";
+const TITLE = "Airesumi vs Kickresume (2026): Honest Side-by-Side Comparison";
 const DESCRIPTION =
-  "Compare Airesumi and Rezi on pricing, free tier limits, ATS scoring, templates, and AI tools. An honest 2026 breakdown to help you pick the right AI resume builder.";
+  "Compare Airesumi and Kickresume on pricing, free PDF export, AI writing, ATS features, and templates. An honest 2026 breakdown to help you pick the right AI resume builder.";
 
 const ROWS: Array<{ feature: string; Airesumi: string; competitor: string }> = [
   {
     feature: "Free tier — resumes",
     Airesumi: "Unlimited resumes on the free plan.",
-    competitor: "1 resume only — creating a new one overwrites the previous.",
+    competitor: "Unlimited resumes, but only 4 basic templates on free.",
   },
   {
-    feature: "Free tier — PDF downloads",
-    Airesumi: "PDF export with watermark. 3 AI generations, 3 ATS scans, 1 cover letter per month.",
-    competitor: "3 PDF downloads total (lifetime cap). Unlimited DOCX and Google Drive exports.",
+    feature: "Free formatted PDF",
+    Airesumi: "Yes — PDF export on free (with watermark).",
+    competitor: "No — free tier is limited to a watermark-free PNG preview and a text-only DOCX. Formatted PDF requires Premium.",
   },
   {
     feature: "Paid pricing",
     Airesumi: "$9/mo · $59/yr ($4.92/mo effective) · $99 lifetime one-time.",
-    competitor: "$29/mo Pro · $149 lifetime one-time (breaks even ~5 months vs monthly).",
-  },
-  {
-    feature: "ATS scoring approach",
-    Airesumi: "Dedicated ATS checker + keyword scanner + JD-tailored bullet rewriter.",
-    competitor: "Rezi Score — signature 23-point ATS scoring system with real-time feedback.",
+    competitor: "Starts from ~$8/month on annual billing; monthly plans are significantly higher (~$19–24/month).",
   },
   {
     feature: "Templates",
     Airesumi: "12 premium templates on Pro; standard templates on free.",
-    competitor: "20+ ATS-friendly templates (Modern, Standard, Compact, Bold, Alternative).",
+    competitor: "40+ templates on Premium; only 4 basic resume templates on free.",
   },
   {
-    feature: "Cover letter builder",
-    Airesumi: "AI cover letter generator (1/month free, unlimited on Pro).",
-    competitor: "Unlimited cover letter generation, even on the free plan.",
+    feature: "AI writing",
+    Airesumi: "AI bullet writer and summary generator that accept a job description and tailor content to it.",
+    competitor: "AI Resume Writer & Cover Letter Writer (GPT-4.1), but per multiple reviews it does not accept a job description as input, so it can't tailor to a specific posting.",
   },
   {
-    feature: "Resignation letter",
-    Airesumi: "AI resignation letter builder included.",
-    competitor: "Unlimited resignation letter generation on all plans.",
+    feature: "ATS checker",
+    Airesumi: "Dedicated ATS checker + keyword scanner (free-tier access).",
+    competitor: "ATS Resume Checker — Premium only.",
   },
   {
-    feature: "Interview prep",
-    Airesumi: "Interview prep tool included.",
-    competitor: "AI interview practice tool included on Pro.",
+    feature: "Content library",
+    Airesumi: "AI-generated bullets and summaries tailored per job description.",
+    competitor: "20,000+ pre-written phrases and 1,500+ resume examples (free).",
+  },
+  {
+    feature: "Extras",
+    Airesumi: "LinkedIn bio, salary analyzer, interview prep, cover letter, resignation letter — all in one toolkit.",
+    competitor: "Personal website builder (7 templates), Career Map, mobile app — Premium only.",
   },
   {
     feature: "Standout feature",
-    Airesumi: "All-in-one free AI toolkit: ATS checker, keyword scanner, cover letter, LinkedIn bio, salary analyzer, interview prep — plus a $99 lifetime plan.",
-    competitor: "Rezi Score (23-point ATS system) — one of the most detailed real-time ATS scores available.",
+    Airesumi: "Free formatted PDF export + JD-tailored AI + $99 lifetime plan.",
+    competitor: "Design-forward templates, huge phrase library, and bundled personal website builder.",
   },
   {
     feature: "Public rating",
     Airesumi: "—",
-    competitor: "~4.3–4.4/5 on Trustpilot (2026).",
+    competitor: "~4.6/5 on Trustpilot (2026). ~8M users, founded 2014, EU-based (GDPR compliant).",
   },
 ];
 
@@ -80,11 +80,12 @@ function Page() {
           </h1>
           <p className="text-lg text-[#4a5568] dark:text-orange-100/70 leading-relaxed">
             This comparison is for job seekers deciding between{" "}
-            <strong>Airesumi</strong> — a free, AI-first resume toolkit with a
-            $99 lifetime plan — and <strong>{COMPETITOR.name}</strong>, a
-            well-known ATS-focused resume builder famous for its 23-point Rezi
-            Score. We stick to publicly verifiable facts from each vendor's
-            own pricing pages so you can decide based on what each product
+            <strong>Airesumi</strong> — a free, AI-first resume toolkit with
+            job-description-tailored writing — and{" "}
+            <strong>{COMPETITOR.name}</strong>, an established design-forward
+            resume builder with ~8 million users and a large phrase library.
+            We stick to publicly verifiable facts from each vendor's own
+            pricing pages so you can decide based on what each product
             actually offers today.
           </p>
         </header>
@@ -116,8 +117,8 @@ function Page() {
           <p className="text-xs text-[#718096] dark:text-orange-100/50 mt-3">
             Facts about {COMPETITOR.name} are drawn from its public pricing
             page at {COMPETITOR.site} and independent 2026 reviews. Pricing
-            and features may change — check the vendor's site for the latest
-            terms before subscribing.
+            (especially monthly vs annual) varies by region and promotion —
+            check the vendor's site for the latest terms before subscribing.
           </p>
         </section>
 
@@ -127,10 +128,10 @@ function Page() {
             When Airesumi might be the better fit
           </h2>
           <ul className="space-y-3 text-[#4a5568] dark:text-orange-100/70 leading-relaxed">
-            <li><strong>You want unlimited resumes on the free plan.</strong> Rezi's free tier caps you at a single resume that gets overwritten.</li>
-            <li><strong>You want a cheaper lifetime option.</strong> Airesumi lifetime is $99 one-time vs Rezi's $149.</li>
-            <li><strong>You want a broader AI toolkit</strong> beyond the resume: LinkedIn bio, salary analyzer, keyword scanner, and JD-tailored bullet rewriting all in one place.</li>
-            <li><strong>You want Pro at a lower monthly price.</strong> $9/mo vs Rezi's $29/mo — roughly a third of the cost.</li>
+            <li><strong>You want a real formatted PDF on the free plan.</strong> Kickresume's free tier only gives a PNG preview and a text-only DOCX — a formatted PDF requires Premium.</li>
+            <li><strong>You want AI that tailors to a specific job description.</strong> Airesumi's bullet writer and summary generator take a JD and rewrite your content to match; Kickresume's AI writer does not accept a JD as input.</li>
+            <li><strong>You want ATS scoring for free.</strong> Kickresume's ATS Resume Checker is Premium-only.</li>
+            <li><strong>You want a cheaper lifetime option.</strong> Airesumi is $99 lifetime one-time; Kickresume charges recurring Premium ~$8/mo (annual) up to ~$19–24/mo (monthly).</li>
           </ul>
         </section>
 
@@ -140,17 +141,18 @@ function Page() {
             When {COMPETITOR.name} might be the better fit
           </h2>
           <ul className="space-y-3 text-[#4a5568] dark:text-orange-100/70 leading-relaxed">
-            <li><strong>You want the Rezi Score specifically.</strong> The 23-point real-time ATS scoring system is Rezi's signature feature and one of the most detailed ATS scores available.</li>
-            <li><strong>You need unlimited DOCX exports on the free plan.</strong> Rezi doesn't cap DOCX or Google Drive saves on free — only the 3 lifetime PDF downloads.</li>
-            <li><strong>You want unlimited free cover letters.</strong> Rezi lets you generate unlimited cover and resignation letters even on the free plan.</li>
-            <li><strong>You want a larger ATS-only template catalog.</strong> Rezi ships 20+ ATS-safe templates in several style families.</li>
-            <li><strong>You value an established brand with public reviews.</strong> Rezi has a ~4.3–4.4/5 Trustpilot rating built over years of operation.</li>
+            <li><strong>You want strong visual/design variety.</strong> Kickresume ships 40+ design-forward templates with deep color and font customization on Premium.</li>
+            <li><strong>You want a bundled personal website builder.</strong> Premium includes 7 website templates so your resume and portfolio site live in the same account.</li>
+            <li><strong>You lean on pre-written phrase libraries.</strong> 20,000+ curated phrases and 1,500+ example resumes are available even on the free plan.</li>
+            <li><strong>You value an established EU-based brand.</strong> Kickresume was founded in 2014, is headquartered in Slovakia (GDPR compliant), has ~8M users, and holds a ~4.6/5 Trustpilot rating.</li>
+            <li><strong>You want a native mobile app.</strong> Kickresume ships an iOS/Android app for Premium users; Airesumi is a web app.</li>
           </ul>
           <p className="text-sm text-[#718096] dark:text-orange-100/50 mt-4 italic">
-            Bottom line: if you want unlimited resumes, a broad AI toolkit,
-            and a cheaper lifetime plan, Airesumi is the stronger pick. If
-            the 23-point Rezi Score or unlimited free cover letters matter
-            most to you, {COMPETITOR.name} is a reasonable choice.
+            Bottom line: if you want free formatted PDFs, JD-tailored AI
+            writing, and a cheaper lifetime plan, Airesumi is the stronger
+            pick. If design variety, a bundled website builder, and a large
+            phrase library matter most, {COMPETITOR.name} is a reasonable
+            choice.
           </p>
         </section>
 
@@ -159,22 +161,18 @@ function Page() {
           <h2 className="text-xl font-semibold text-[#1a202c] dark:text-orange-50 mb-4">Compare other tools</h2>
           <ul className="space-y-2 text-[#4a5568] dark:text-orange-100/70">
             <li>
-              <Link to="/compare/airesumi-vs-zety" className="text-[#FF6321] hover:underline">
-                Airesumi vs Zety →
-              </Link>{" "}
-              — how Airesumi stacks up against Zety's paid-PDF model.
+              <Link to="/compare/airesumi-vs-zety" className="text-[#FF6321] hover:underline">Airesumi vs Zety →</Link>{" "}
+              — how Airesumi compares to Zety's paid-PDF model.
             </li>
             <li>
-              <Link to="/compare/airesumi-vs-kickresume" className="text-[#FF6321] hover:underline">
-                Airesumi vs Kickresume →
-              </Link>{" "}
-              — how Airesumi compares to Kickresume's design-forward templates and website builder.
+              <Link to="/compare/airesumi-vs-rezi" className="text-[#FF6321] hover:underline">Airesumi vs Rezi →</Link>{" "}
+              — how Airesumi compares to Rezi's 23-point ATS score and lifetime plan.
             </li>
           </ul>
         </section>
 
         <section className="bg-gradient-to-br from-[#FF6321] to-[#e5541a] rounded-2xl p-8 md:p-10 text-center text-white">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">Try Airesumi free — unlimited resumes, no credit card</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">Try Airesumi free — real PDF export, no credit card</h2>
           <p className="text-white/90 mb-6 max-w-2xl mx-auto">
             Build an ATS-optimized resume, generate a matching cover letter,
             and scan it against any job description. Download the PDF for free.
@@ -188,7 +186,7 @@ function Page() {
   );
 }
 
-export const Route = createFileRoute("/compare/airesumi-vs-rezi")({
+export const Route = createFileRoute("/compare/airesumi-vs-kickresume")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -233,7 +231,7 @@ export const Route = createFileRoute("/compare/airesumi-vs-rezi")({
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://airesumi.com/" },
             { "@type": "ListItem", position: 2, name: "Compare", item: "https://airesumi.com/compare" },
-            { "@type": "ListItem", position: 3, name: "Airesumi vs Rezi", item: URL },
+            { "@type": "ListItem", position: 3, name: "Airesumi vs Kickresume", item: URL },
           ],
         }),
       },

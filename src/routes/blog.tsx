@@ -1,16 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Blog } from "../app/Blog";
+import { getPublishedBlogPosts } from "@/lib/blog.functions";
 
 function Page() {
+  const posts = Route.useLoaderData();
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Blog />
+      <Blog initialPosts={posts} />
     </motion.div>
   );
 }
 
 export const Route = createFileRoute("/blog")({
+  loader: () => getPublishedBlogPosts(),
   head: () => ({
     meta: [
       { title: "Resume Tips & Career Advice Blog | airesumi.com" },
@@ -27,5 +30,14 @@ export const Route = createFileRoute("/blog")({
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
   }),
+  errorComponent: ({ error }) => (
+    <div className="min-h-screen flex items-center justify-center p-6 text-center">
+      <div>
+        <h1 className="text-2xl font-bold mb-2">Blog unavailable</h1>
+        <p className="text-sm text-[#6B7280]">{error.message}</p>
+      </div>
+    </div>
+  ),
+  notFoundComponent: () => <div className="p-10 text-center">No posts found.</div>,
   component: Page,
 });

@@ -80,6 +80,57 @@ export type Database = {
         }
         Relationships: []
       }
+      resume_role_examples: {
+        Row: {
+          created_at: string
+          id: string
+          industry: string | null
+          intro_content: string | null
+          job_title: string
+          key_skills: Json
+          published: boolean
+          related_role_slugs: Json
+          resume_tips: Json
+          sample_bullet_points: Json
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          industry?: string | null
+          intro_content?: string | null
+          job_title: string
+          key_skills?: Json
+          published?: boolean
+          related_role_slugs?: Json
+          resume_tips?: Json
+          sample_bullet_points?: Json
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          industry?: string | null
+          intro_content?: string | null
+          job_title?: string
+          key_skills?: Json
+          published?: boolean
+          related_role_slugs?: Json
+          resume_tips?: Json
+          sample_bullet_points?: Json
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       saved_resumes: {
         Row: {
           company: string | null

@@ -14,6 +14,7 @@ import { Route as SummaryGeneratorRouteImport } from './routes/summary-generator
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SalaryAnalyzerRouteImport } from './routes/salary-analyzer'
 import { Route as ResumeScoreRouteImport } from './routes/resume-score'
+import { Route as ResumeExamplesRouteImport } from './routes/resume-examples'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as ResignationLetterRouteImport } from './routes/resignation-letter'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -34,6 +35,8 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResumeExamplesIndexRouteImport } from './routes/resume-examples.index'
+import { Route as ResumeExamplesSlugRouteImport } from './routes/resume-examples.$slug'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as CompareAiresumiVsZetyRouteImport } from './routes/compare.airesumi-vs-zety'
 import { Route as CompareAiresumiVsReziRouteImport } from './routes/compare.airesumi-vs-rezi'
@@ -81,6 +84,11 @@ const SalaryAnalyzerRoute = SalaryAnalyzerRouteImport.update({
 const ResumeScoreRoute = ResumeScoreRouteImport.update({
   id: '/resume-score',
   path: '/resume-score',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeExamplesRoute = ResumeExamplesRouteImport.update({
+  id: '/resume-examples',
+  path: '/resume-examples',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeRoute = ResumeRouteImport.update({
@@ -182,6 +190,16 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeExamplesIndexRoute = ResumeExamplesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ResumeExamplesRoute,
+} as any)
+const ResumeExamplesSlugRoute = ResumeExamplesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ResumeExamplesRoute,
 } as any)
 const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
   id: '/success',
@@ -321,6 +339,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
+  '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -348,6 +367,8 @@ export interface FileRoutesByFullPath {
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
+  '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/resume-examples/': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesByTo {
@@ -398,6 +419,8 @@ export interface FileRoutesByTo {
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
+  '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/resume-examples': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRoutesById {
@@ -422,6 +445,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
+  '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -449,6 +473,8 @@ export interface FileRoutesById {
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
+  '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/resume-examples/': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
 export interface FileRouteTypes {
@@ -474,6 +500,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
+    | '/resume-examples'
     | '/resume-score'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -501,6 +528,8 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
+    | '/resume-examples/$slug'
+    | '/resume-examples/'
     | '/api/public/og/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -551,6 +580,8 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
+    | '/resume-examples/$slug'
+    | '/resume-examples'
     | '/api/public/og/$slug'
   id:
     | '__root__'
@@ -574,6 +605,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
+    | '/resume-examples'
     | '/resume-score'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -601,6 +633,8 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
     | '/premium/success'
+    | '/resume-examples/$slug'
+    | '/resume-examples/'
     | '/api/public/og/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -625,6 +659,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResignationLetterRoute: typeof ResignationLetterRoute
   ResumeRoute: typeof ResumeRoute
+  ResumeExamplesRoute: typeof ResumeExamplesRouteWithChildren
   ResumeScoreRoute: typeof ResumeScoreRoute
   SalaryAnalyzerRoute: typeof SalaryAnalyzerRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -688,6 +723,13 @@ declare module '@tanstack/react-router' {
       path: '/resume-score'
       fullPath: '/resume-score'
       preLoaderRoute: typeof ResumeScoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume-examples': {
+      id: '/resume-examples'
+      path: '/resume-examples'
+      fullPath: '/resume-examples'
+      preLoaderRoute: typeof ResumeExamplesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resume': {
@@ -829,6 +871,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/resume-examples/': {
+      id: '/resume-examples/'
+      path: '/'
+      fullPath: '/resume-examples/'
+      preLoaderRoute: typeof ResumeExamplesIndexRouteImport
+      parentRoute: typeof ResumeExamplesRoute
+    }
+    '/resume-examples/$slug': {
+      id: '/resume-examples/$slug'
+      path: '/$slug'
+      fullPath: '/resume-examples/$slug'
+      preLoaderRoute: typeof ResumeExamplesSlugRouteImport
+      parentRoute: typeof ResumeExamplesRoute
     }
     '/premium/success': {
       id: '/premium/success'
@@ -1015,6 +1071,20 @@ const PremiumRouteChildren: PremiumRouteChildren = {
 const PremiumRouteWithChildren =
   PremiumRoute._addFileChildren(PremiumRouteChildren)
 
+interface ResumeExamplesRouteChildren {
+  ResumeExamplesSlugRoute: typeof ResumeExamplesSlugRoute
+  ResumeExamplesIndexRoute: typeof ResumeExamplesIndexRoute
+}
+
+const ResumeExamplesRouteChildren: ResumeExamplesRouteChildren = {
+  ResumeExamplesSlugRoute: ResumeExamplesSlugRoute,
+  ResumeExamplesIndexRoute: ResumeExamplesIndexRoute,
+}
+
+const ResumeExamplesRouteWithChildren = ResumeExamplesRoute._addFileChildren(
+  ResumeExamplesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -1036,6 +1106,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   ResignationLetterRoute: ResignationLetterRoute,
   ResumeRoute: ResumeRoute,
+  ResumeExamplesRoute: ResumeExamplesRouteWithChildren,
   ResumeScoreRoute: ResumeScoreRoute,
   SalaryAnalyzerRoute: SalaryAnalyzerRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

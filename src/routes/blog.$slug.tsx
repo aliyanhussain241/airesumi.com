@@ -59,11 +59,14 @@ const extractHeadings = (md: string) => {
 
 function BlogPost() {
   const { slug } = Route.useParams();
+  const loaderData = Route.useLoaderData();
+  const initialPost = loaderData?.post ?? null;
+  const initialRelated = loaderData?.related ?? [];
   const navigate = useNavigate();
-  const [post, setPost] = useState<Post | null>(null);
-  const [related, setRelated] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+  const [post, setPost] = useState<Post | null>(initialPost as Post | null);
+  const [related, setRelated] = useState<Post[]>(initialRelated as Post[]);
+  const [loading, setLoading] = useState(!initialPost);
+  const [notFound, setNotFound] = useState(!initialPost);
   const [copied, setCopied] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
   const [activeHeading, setActiveHeading] = useState<string>("");
@@ -73,6 +76,14 @@ function BlogPost() {
   const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
+    // If SSR gave us the post, no client fetch needed.
+    if (initialPost) {
+      setPost(initialPost as Post);
+      setRelated(initialRelated as Post[]);
+      setLoading(false);
+      setNotFound(false);
+      return;
+    }
     setLoading(true);
     setNotFound(false);
     setPost(null);
@@ -91,7 +102,6 @@ function BlogPost() {
         const p = data as Post;
         setPost(p);
         setLoading(false);
-        // Related — same category, exclude self
         if (p.category) {
           const { data: rel } = await (supabase
             .from("blog_posts") as any)
@@ -113,7 +123,8 @@ function BlogPost() {
           setRelated((rel as Post[]) || []);
         }
       });
-  }, [slug]);
+  }, [slug, initialPost, initialRelated]);
+
 
   // Bookmark state
   useEffect(() => {

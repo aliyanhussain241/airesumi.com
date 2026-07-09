@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { ArrowRight, Briefcase, CheckCircle2, Lightbulb, Sparkles, Target } from "lucide-react";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import { getRoleExampleWithRelated } from "@/lib/resume-roles.functions";
+import { Header } from "@/app/components/Header";
+import { Footer } from "@/app/components/Footer";
+import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
 
 function RoleExamplePage() {
   const data = Route.useLoaderData();

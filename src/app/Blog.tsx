@@ -495,12 +495,12 @@ const AdminPanel = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
 // ─── PUBLIC BLOG (Advanced) ──────────────────────────────────
 const POSTS_PER_PAGE = 9;
 
-const PublicBlog = ({ onAdminClick: _onAdminClick }: { onAdminClick: () => void }) => {
+const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts, hasInitialPosts = false }: { onAdminClick: () => void; initialPosts?: Post[]; hasInitialPosts?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>(initialPosts ?? []);
   const [active, setActive] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasInitialPosts);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'reading'>('newest');
@@ -510,9 +510,10 @@ const PublicBlog = ({ onAdminClick: _onAdminClick }: { onAdminClick: () => void 
   const [newsletterStatus, setNewsletterStatus] = useState<null | 'ok' | 'err'>(null);
 
   useEffect(() => {
+    if (hasInitialPosts) return;
     supabase.from('blog_posts').select('*').eq('published', true).order('published_at', { ascending: false })
       .then(({ data }) => { setPosts((data as Post[]) || []); setLoading(false); });
-  }, []);
+  }, [hasInitialPosts]);
 
   useEffect(() => {
     const slug = location.pathname.startsWith('/blog/') ? location.pathname.replace('/blog/', '') : null;
@@ -875,7 +876,7 @@ const PublicBlog = ({ onAdminClick: _onAdminClick }: { onAdminClick: () => void 
 };
 
 // ─── ROOT COMPONENT ───────────────────────────────────────────
-export const Blog = () => {
+export const Blog = ({ initialPosts, hasInitialPosts = false }: { initialPosts?: Post[]; hasInitialPosts?: boolean } = {}) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdmin, setShowAdmin] = useState(false);
@@ -953,7 +954,7 @@ export const Blog = () => {
 
   return (
     <div className="relative">
-      <PublicBlog onAdminClick={() => setShowAdmin(true)}/>
+      <PublicBlog onAdminClick={() => setShowAdmin(true)} initialPosts={initialPosts} hasInitialPosts={hasInitialPosts}/>
       {/* Subtle admin link */}
       <button onClick={() => setShowAdmin(true)}
         className="fixed bottom-6 right-6 w-10 h-10 bg-white border border-[#E5E7EB] rounded-full flex items-center justify-center text-[#9CA3AF] hover:text-[#FF6321] hover:border-[#FF6321] transition-all shadow-md z-50"

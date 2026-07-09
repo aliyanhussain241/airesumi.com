@@ -14,6 +14,7 @@ import { Route as SummaryGeneratorRouteImport } from './routes/summary-generator
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SalaryAnalyzerRouteImport } from './routes/salary-analyzer'
 import { Route as ResumeScoreRouteImport } from './routes/resume-score'
+import { Route as ResumeExamplesRouteImport } from './routes/resume-examples'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as ResignationLetterRouteImport } from './routes/resignation-letter'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -82,6 +83,11 @@ const SalaryAnalyzerRoute = SalaryAnalyzerRouteImport.update({
 const ResumeScoreRoute = ResumeScoreRouteImport.update({
   id: '/resume-score',
   path: '/resume-score',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeExamplesRoute = ResumeExamplesRouteImport.update({
+  id: '/resume-examples',
+  path: '/resume-examples',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeRoute = ResumeRouteImport.update({
@@ -185,9 +191,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeExamplesSlugRoute = ResumeExamplesSlugRouteImport.update({
-  id: '/resume-examples/$slug',
-  path: '/resume-examples/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ResumeExamplesRoute,
 } as any)
 const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
   id: '/success',
@@ -327,6 +333,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
+  '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -378,6 +385,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
+  '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -430,6 +438,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
+  '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -483,6 +492,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
+    | '/resume-examples'
     | '/resume-score'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -534,6 +544,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
+    | '/resume-examples'
     | '/resume-score'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -585,6 +596,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
+    | '/resume-examples'
     | '/resume-score'
     | '/salary-analyzer'
     | '/sitemap.xml'
@@ -637,6 +649,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResignationLetterRoute: typeof ResignationLetterRoute
   ResumeRoute: typeof ResumeRoute
+  ResumeExamplesRoute: typeof ResumeExamplesRouteWithChildren
   ResumeScoreRoute: typeof ResumeScoreRoute
   SalaryAnalyzerRoute: typeof SalaryAnalyzerRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -662,7 +675,6 @@ export interface RootRouteChildren {
   CompareAiresumiVsKickresumeRoute: typeof CompareAiresumiVsKickresumeRoute
   CompareAiresumiVsReziRoute: typeof CompareAiresumiVsReziRoute
   CompareAiresumiVsZetyRoute: typeof CompareAiresumiVsZetyRoute
-  ResumeExamplesSlugRoute: typeof ResumeExamplesSlugRoute
   ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
 }
 
@@ -701,6 +713,13 @@ declare module '@tanstack/react-router' {
       path: '/resume-score'
       fullPath: '/resume-score'
       preLoaderRoute: typeof ResumeScoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume-examples': {
+      id: '/resume-examples'
+      path: '/resume-examples'
+      fullPath: '/resume-examples'
+      preLoaderRoute: typeof ResumeExamplesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resume': {
@@ -845,10 +864,10 @@ declare module '@tanstack/react-router' {
     }
     '/resume-examples/$slug': {
       id: '/resume-examples/$slug'
-      path: '/resume-examples/$slug'
+      path: '/$slug'
       fullPath: '/resume-examples/$slug'
       preLoaderRoute: typeof ResumeExamplesSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ResumeExamplesRoute
     }
     '/premium/success': {
       id: '/premium/success'
@@ -1035,6 +1054,18 @@ const PremiumRouteChildren: PremiumRouteChildren = {
 const PremiumRouteWithChildren =
   PremiumRoute._addFileChildren(PremiumRouteChildren)
 
+interface ResumeExamplesRouteChildren {
+  ResumeExamplesSlugRoute: typeof ResumeExamplesSlugRoute
+}
+
+const ResumeExamplesRouteChildren: ResumeExamplesRouteChildren = {
+  ResumeExamplesSlugRoute: ResumeExamplesSlugRoute,
+}
+
+const ResumeExamplesRouteWithChildren = ResumeExamplesRoute._addFileChildren(
+  ResumeExamplesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -1056,6 +1087,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   ResignationLetterRoute: ResignationLetterRoute,
   ResumeRoute: ResumeRoute,
+  ResumeExamplesRoute: ResumeExamplesRouteWithChildren,
   ResumeScoreRoute: ResumeScoreRoute,
   SalaryAnalyzerRoute: SalaryAnalyzerRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -1081,7 +1113,6 @@ const rootRouteChildren: RootRouteChildren = {
   CompareAiresumiVsKickresumeRoute: CompareAiresumiVsKickresumeRoute,
   CompareAiresumiVsReziRoute: CompareAiresumiVsReziRoute,
   CompareAiresumiVsZetyRoute: CompareAiresumiVsZetyRoute,
-  ResumeExamplesSlugRoute: ResumeExamplesSlugRoute,
   ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
 }
 export const routeTree = rootRouteImport

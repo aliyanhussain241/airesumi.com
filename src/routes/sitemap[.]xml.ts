@@ -18,6 +18,7 @@ const STATIC_ENTRIES = [
   { path: "/pdf-scanner",       changefreq: "monthly", priority: "0.7" },
   { path: "/resignation-letter",changefreq: "monthly", priority: "0.6" },
   { path: "/examples",          changefreq: "weekly",  priority: "0.7" },
+  { path: "/resume-examples",   changefreq: "weekly",  priority: "0.7" },
   { path: "/blog",              changefreq: "weekly",  priority: "0.7" },
   { path: "/premium",           changefreq: "monthly", priority: "0.6" },
   { path: "/compare/airesumi-vs-zety", changefreq: "monthly", priority: "0.6" },

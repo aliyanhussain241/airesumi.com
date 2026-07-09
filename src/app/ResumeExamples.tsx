@@ -235,7 +235,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
                     <span className="text-2xl font-extrabold text-orange-500 leading-none w-6">{i + 1}</span>
                     <div className="min-w-0">
                       <div className="text-sm font-semibold group-hover:text-orange-500 transition-colors line-clamp-2">{r.title}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{fmt(r.downloads)} downloads</div>
+                      <div className="text-xs text-muted-foreground mt-0.5">{r.level} · {r.industry}</div>
                     </div>
                   </button>
                 </li>

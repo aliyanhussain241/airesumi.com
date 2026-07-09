@@ -35,6 +35,7 @@ import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
+import { Route as CompareAiresumiVsZetyRouteImport } from './routes/compare.airesumi-vs-zety'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
@@ -185,6 +186,11 @@ const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
   path: '/success',
   getParentRoute: () => PremiumRoute,
 } as any)
+const CompareAiresumiVsZetyRoute = CompareAiresumiVsZetyRouteImport.update({
+  id: '/compare/airesumi-vs-zety',
+  path: '/compare/airesumi-vs-zety',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -325,6 +331,7 @@ export interface FileRoutesByFullPath {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
@@ -372,6 +379,7 @@ export interface FileRoutesByTo {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
@@ -420,6 +428,7 @@ export interface FileRoutesById {
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
@@ -469,6 +478,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/compare/airesumi-vs-zety'
     | '/premium/success'
     | '/api/public/og/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -516,6 +526,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/compare/airesumi-vs-zety'
     | '/premium/success'
     | '/api/public/og/$slug'
   id:
@@ -563,6 +574,7 @@ export interface FileRouteTypes {
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
+    | '/compare/airesumi-vs-zety'
     | '/premium/success'
     | '/api/public/og/$slug'
   fileRoutesById: FileRoutesById
@@ -610,6 +622,7 @@ export interface RootRouteChildren {
   ApiSubscriptionStatusRoute: typeof ApiSubscriptionStatusRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  CompareAiresumiVsZetyRoute: typeof CompareAiresumiVsZetyRoute
   ApiPublicOgSlugRoute: typeof ApiPublicOgSlugRoute
 }
 
@@ -796,6 +809,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/premium/success'
       preLoaderRoute: typeof PremiumSuccessRouteImport
       parentRoute: typeof PremiumRoute
+    }
+    '/compare/airesumi-vs-zety': {
+      id: '/compare/airesumi-vs-zety'
+      path: '/compare/airesumi-vs-zety'
+      fullPath: '/compare/airesumi-vs-zety'
+      preLoaderRoute: typeof CompareAiresumiVsZetyRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -997,6 +1017,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSubscriptionStatusRoute: ApiSubscriptionStatusRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  CompareAiresumiVsZetyRoute: CompareAiresumiVsZetyRoute,
   ApiPublicOgSlugRoute: ApiPublicOgSlugRoute,
 }
 export const routeTree = rootRouteImport

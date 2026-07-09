@@ -136,9 +136,9 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
                 <p className="text-white/90 text-base md:text-lg mb-5 max-w-xl">{featured.highlights[0]}. {featured.highlights[1]}.</p>
                 <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
                   <span className="flex items-center gap-1.5"><Star className="w-4 h-4 fill-white" /> {featured.rating}</span>
-                  <span className="flex items-center gap-1.5"><Download className="w-4 h-4" /> {fmt(featured.downloads)}</span>
                   <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4" /> {featured.atsScore}% ATS</span>
                 </div>
+
               </div>
               <button className="px-6 py-3 rounded-full bg-white text-orange-600 font-bold shadow-lg group-hover:scale-105 transition-transform flex items-center gap-2">
                 Preview <ArrowRight className="w-4 h-4" />

@@ -14,10 +14,10 @@ const FAQ_SCHEMA = JSON.stringify({
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Is airesumi free to use?",
+      "name": "Is Airesumi free to use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates."
+        "text": "Yes, Airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates."
       }
     },
     {
@@ -25,7 +25,7 @@ const FAQ_SCHEMA = JSON.stringify({
       "name": "What is an ATS resume and why does it matter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "An ATS (Applicant Tracking System) resume is formatted to pass the automated screening software used by 99% of large employers. Without ATS optimization, your resume may never reach a human recruiter. airesumi automatically formats and optimizes every resume for ATS compatibility."
+        "text": "An ATS (Applicant Tracking System) resume is formatted to pass the automated screening software used by 99% of large employers. Without ATS optimization, your resume may never reach a human recruiter. Airesumi automatically formats and optimizes every resume for ATS compatibility."
       }
     },
     {
@@ -38,7 +38,7 @@ const FAQ_SCHEMA = JSON.stringify({
     },
     {
       "@type": "Question",
-      "name": "Do I need to sign up to use airesumi?",
+      "name": "Do I need to sign up to use Airesumi?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "No sign-up is required to build your first resume. Create a free account to save and manage multiple resumes across sessions."
@@ -46,26 +46,26 @@ const FAQ_SCHEMA = JSON.stringify({
     },
     {
       "@type": "Question",
-      "name": "Can airesumi generate a cover letter too?",
+      "name": "Can Airesumi generate a cover letter too?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. airesumi has a free AI cover letter generator that creates a tailored cover letter matching your resume and the target job description — in under 2 minutes."
+        "text": "Yes. Airesumi has a free AI cover letter generator that creates a tailored cover letter matching your resume and the target job description — in under 2 minutes."
       }
     },
     {
       "@type": "Question",
-      "name": "How is airesumi different from other resume builders?",
+      "name": "How is Airesumi different from other resume builders?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "airesumi uses AI to tailor your resume to each specific job description, not just a generic template. It also includes an ATS checker, cover letter generator, LinkedIn bio tool, salary analyzer, and interview prep — all in one free platform."
+        "text": "Airesumi uses AI to tailor your resume to each specific job description, not just a generic template. It also includes an ATS checker, cover letter generator, LinkedIn bio tool, salary analyzer, and interview prep — all in one free platform."
       }
     },
     {
       "@type": "Question",
-      "name": "What resume formats does airesumi support?",
+      "name": "What resume formats does Airesumi support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application."
+        "text": "Airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application."
       }
     }
   ]
@@ -687,32 +687,32 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
         <div className="space-y-3">
           {[
             {
-              q: "Is airesumi free to use?",
-              a: "Yes, airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates.",
+              q: "Is Airesumi free to use?",
+              a: "Yes, Airesumi is completely free to use. You can build and download ATS-optimized resumes without any sign-up. A Pro plan is available for unlimited resumes and premium templates.",
             },
             {
               q: "What is an ATS resume and why does it matter?",
-              a: "An ATS (Applicant Tracking System) resume is formatted to pass the automated screening software used by 99% of large employers. Without ATS optimization, your resume may never reach a human recruiter. airesumi automatically formats and optimizes every resume for ATS compatibility.",
+              a: "An ATS (Applicant Tracking System) resume is formatted to pass the automated screening software used by 99% of large employers. Without ATS optimization, your resume may never reach a human recruiter. Airesumi automatically formats and optimizes every resume for ATS compatibility.",
             },
             {
               q: "How does the AI resume builder work?",
               a: "Paste the job description and your career details. Our AI generates a tailored, ATS-optimized resume in under 10 minutes — no manual formatting needed. You can then download it as a PDF.",
             },
             {
-              q: "Do I need to sign up to use airesumi?",
+              q: "Do I need to sign up to use Airesumi?",
               a: "No sign-up is required to build your first resume. Create a free account to save and manage multiple resumes across sessions.",
             },
             {
-              q: "Can airesumi generate a cover letter too?",
-              a: "Yes. airesumi has a free AI cover letter generator that creates a tailored cover letter matching your resume and the target job description — in under 2 minutes.",
+              q: "Can Airesumi generate a cover letter too?",
+              a: "Yes. Airesumi has a free AI cover letter generator that creates a tailored cover letter matching your resume and the target job description — in under 2 minutes.",
             },
             {
-              q: "How is airesumi different from other resume builders?",
-              a: "airesumi uses AI to tailor your resume to each specific job description, not just a generic template. It also includes an ATS checker, cover letter generator, LinkedIn bio tool, salary analyzer, and interview prep — all in one free platform.",
+              q: "How is Airesumi different from other resume builders?",
+              a: "Airesumi uses AI to tailor your resume to each specific job description, not just a generic template. It also includes an ATS checker, cover letter generator, LinkedIn bio tool, salary analyzer, and interview prep — all in one free platform.",
             },
             {
-              q: "What resume formats does airesumi support?",
-              a: "airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application.",
+              q: "What resume formats does Airesumi support?",
+              a: "Airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application.",
             },
           ].map((item, i) => (
             <details

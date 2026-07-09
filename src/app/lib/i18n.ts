@@ -1,4 +1,4 @@
-// i18n setup for airesumi — English only. Multi-language support removed.
+// i18n setup for Airesumi — English only. Multi-language support removed.
 // The i18next runtime is kept so existing `t(...)` calls continue to work.
 
 import i18n from "i18next";
@@ -260,7 +260,7 @@ const resources = {
       interviewQuestions: "面试问题", salaryAnalyzer: "薪资分析",
       about: "关于我们", contact: "联系我们", privacy: "隐私政策", terms: "服务条款",
       privacyShort: "隐私", termsShort: "条款",
-      copyright: "© {{year}} airesumi。保留所有权利。",
+      copyright: "© {{year}} Airesumi。保留所有权利。",
     },
     language: { switch: "语言", select: "选择语言" },
     theme: { toggle: "切换深色模式" },

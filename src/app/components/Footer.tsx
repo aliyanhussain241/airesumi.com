@@ -32,7 +32,7 @@ export const Footer = () => {
               <div className="flex items-center justify-center sm:justify-start">
                 <img
                   src={airesumiLogoWhite}
-                  alt="airesumi - AI Resume Builder"
+                  alt="Airesumi - AI Resume Builder"
                   className="h-10 w-auto shrink-0"
                 />
               </div>
@@ -41,7 +41,7 @@ export const Footer = () => {
               </p>
               <div className="flex gap-3 pt-1 justify-center sm:justify-start">
                 {[
-                  { Icon: Facebook, href: "https://www.facebook.com/airesumi", label: "Facebook" },
+                  { Icon: Facebook, href: "https://www.facebook.com/Airesumi", label: "Facebook" },
                   { Icon: Pointer, href: "#", label: "Pinterest" },
                   { Icon: Github, href: "#", label: "GitHub" },
                   { Icon: Linkedin, href: "https://www.linkedin.com/in/ai-resumi", label: "LinkedIn" },

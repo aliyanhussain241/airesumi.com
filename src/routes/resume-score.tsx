@@ -431,7 +431,7 @@ function ResumeScore() {
 export const Route = createFileRoute("/resume-score")({
   head: () => ({
     meta: [
-      { title: "Resume Score & Roast — Brutally Honest AI Feedback | airesumi" },
+      { title: "Resume Score & Roast — Brutally Honest AI Feedback | Airesumi" },
       {
         name: "description",
         content:

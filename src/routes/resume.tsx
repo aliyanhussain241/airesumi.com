@@ -383,10 +383,10 @@ function ResumeBuilder() {
 export const Route = createFileRoute("/resume")({
   head: () => ({
     meta: [
-      { title: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi" },
+      { title: "AI Resume Builder — Free ATS-Optimized Resumes | Airesumi" },
       { name: "description", content: "Build a free ATS-optimized resume in minutes. AI writes your bullets, summary, and keywords. No sign-up required." },
       { name: "robots", content: "index, follow" },
-      { property: "og:title", content: "Free AI Resume Builder | airesumi" },
+      { property: "og:title", content: "Free AI Resume Builder | Airesumi" },
       { property: "og:description", content: "Build a free ATS-optimized resume in minutes. AI writes your bullets, summary, and keywords. No sign-up required." },
       { property: "og:url", content: "https://airesumi.com/resume" },
       { property: "og:type", content: "website" },
@@ -394,7 +394,7 @@ export const Route = createFileRoute("/resume")({
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Free AI Resume Builder | airesumi" },
+      { name: "twitter:title", content: "Free AI Resume Builder | Airesumi" },
       { name: "twitter:description", content: "Build a free ATS-optimized resume in minutes. No sign-up required." },
       { name: "twitter:url", content: "https://airesumi.com/resume" },
       { name: "twitter:image", content: "https://airesumi.com/api/public/og/resume" },

@@ -165,7 +165,7 @@ function BlogPost() {
   }, [headings]);
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : `https://airesumi.com/blog/${slug}`;
-  const shareText = post?.title || "Great read from airesumi";
+  const shareText = post?.title || "Great read from Airesumi";
 
   const share = (target: "twitter" | "linkedin" | "facebook") => {
     const u = encodeURIComponent(shareUrl);
@@ -470,7 +470,7 @@ function BlogPost() {
               <div className="liquid-card rounded-2xl">
                 <span className="liquid-card-shine"/>
                 <div className="liquid-card-content p-5 text-center bg-gradient-to-br from-[#FFF7ED]/60 to-orange-100/40 rounded-2xl">
-                  <p className="text-sm font-bold text-[#111827] mb-1">Try airesumi free</p>
+                  <p className="text-sm font-bold text-[#111827] mb-1">Try Airesumi free</p>
                   <p className="text-xs text-[#6B7280] mb-3">AI resume in 60 seconds.</p>
                   <Link to="/resume" className="block w-full bg-[#111827] hover:bg-[#FF6321] text-white text-xs font-semibold py-2 rounded-xl transition-all no-underline">
                     Start now →
@@ -509,7 +509,7 @@ export const Route = createFileRoute("/blog/$slug")({
       .split("-")
       .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
-    const title = (post?.seo_title || post?.title || fallbackTitle) + " | airesumi Career Blog";
+    const title = (post?.seo_title || post?.title || fallbackTitle) + " | Airesumi Career Blog";
     const description =
       post?.seo_description ||
       post?.excerpt ||

@@ -38,7 +38,7 @@ const COMPARE_ROWS = [
 ];
 
 const TESTIMONIALS = [
-  { name: "Sarah K.", role: "Software Engineer · Meta",   text: "Got 3 interview calls in the first week after using airesumi Pro. The ATS optimization is on another level.", avatar: "SK", rating: 5 },
+  { name: "Sarah K.", role: "Software Engineer · Meta",   text: "Got 3 interview calls in the first week after using Airesumi Pro. The ATS optimization is on another level.", avatar: "SK", rating: 5 },
   { name: "Ali R.",   role: "Marketing Manager · Shopify", text: "The ATS checker alone is worth it. My resume score went from 52% to 91% overnight.", avatar: "AR", rating: 5 },
   { name: "Priya M.", role: "Data Analyst · Stripe",       text: "Best $9 I ever spent. Landed my dream job in 2 weeks flat. The bullet writer is magic.", avatar: "PM", rating: 5 },
 ];
@@ -124,7 +124,7 @@ function PremiumPage() {
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center mb-14">
           <div className="inline-flex items-center gap-2 bg-white/[0.06] backdrop-blur px-4 py-1.5 rounded-full text-orange-300 font-bold text-[12px] mb-6 border border-orange-500/25 uppercase tracking-[0.14em]">
-            <Crown size={13} className="fill-orange-400" /> airesumi Pro
+            <Crown size={13} className="fill-orange-400" /> Airesumi Pro
           </div>
           <h1 className="text-[44px] sm:text-[62px] lg:text-[72px] font-bold tracking-[-0.03em] mb-5 leading-[1.02] text-balance">
             Unlock your full
@@ -367,7 +367,7 @@ function PremiumPage() {
               { q: "Is my payment secure?", a: "100%. Payments are processed by Stripe — the same payment system used by Amazon, Google, and Shopify. We never see or store your card details." },
               { q: "What's the difference between Monthly, Yearly, and Lifetime?", a: "Same features across all plans. Yearly saves you 45% compared to monthly billing. Lifetime is a one-time payment for permanent access, no renewals ever." },
               { q: "Do you offer a refund?", a: "Yes — every plan comes with a 14-day money-back guarantee. If Pro isn't for you, email us and we'll refund you, no questions asked." },
-              { q: "Do I need Pro to use airesumi?", a: "No. The free plan works forever with limits. Pro removes every limit and unlocks premium templates and advanced AI tools." },
+              { q: "Do I need Pro to use Airesumi?", a: "No. The free plan works forever with limits. Pro removes every limit and unlocks premium templates and advanced AI tools." },
             ].map(({ q, a }, i) => (
               <details key={q} className="group rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.05] transition-colors p-5 sm:p-6" open={i === 0}>
                 <summary className="flex items-center justify-between gap-4 cursor-pointer list-none">
@@ -395,7 +395,7 @@ function PremiumPage() {
               Ready to land your dream job?
             </h3>
             <p className="text-gray-300 text-[15px] sm:text-[16px] mb-8 max-w-lg mx-auto">
-              Join 180,000+ professionals who upgraded their careers with airesumi Pro.
+              Join 180,000+ professionals who upgraded their careers with Airesumi Pro.
             </p>
             {!isPro && (
               <button
@@ -417,9 +417,9 @@ function PremiumPage() {
 export const Route = createFileRoute("/premium")({
   head: () => ({
     meta: [
-      { title: "airesumi Pro — Premium AI Resume Tools | airesumi.com" },
-      { name: "description", content: "Unlock unlimited resumes, ATS scans, cover letters, and premium templates with airesumi Pro. Plans from $4.92/month. 14-day money-back guarantee." },
-      { property: "og:title", content: "airesumi Pro — Unlock your full career potential" },
+      { title: "Airesumi Pro — Premium AI Resume Tools | airesumi.com" },
+      { name: "description", content: "Unlock unlimited resumes, ATS scans, cover letters, and premium templates with Airesumi Pro. Plans from $4.92/month. 14-day money-back guarantee." },
+      { property: "og:title", content: "Airesumi Pro — Unlock your full career potential" },
       { property: "og:description", content: "Every AI tool, every premium template, zero limits. From $4.92/month." },
       { property: "og:url", content: "https://airesumi.com/premium" },
     ],
@@ -429,9 +429,9 @@ export const Route = createFileRoute("/premium")({
       children: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Product",
-        name: "airesumi Pro",
+        name: "Airesumi Pro",
         description: "Unlimited resumes, premium templates, and priority AI generation.",
-        brand: { "@type": "Brand", name: "airesumi" },
+        brand: { "@type": "Brand", name: "Airesumi" },
         offers: {
           "@type": "Offer",
           priceCurrency: "USD",

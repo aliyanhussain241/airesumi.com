@@ -16,9 +16,9 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact Us | airesumi.com" },
-      { name: "description", content: "Get in touch with the airesumi team." },
+      { name: "description", content: "Get in touch with the Airesumi team." },
       { property: "og:title", content: "Contact Us | airesumi.com" },
-      { property: "og:description", content: "Get in touch with the airesumi team." },
+      { property: "og:description", content: "Get in touch with the Airesumi team." },
       { property: "og:url", content: "https://airesumi.com/contact" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/contact" }],

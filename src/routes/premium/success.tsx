@@ -28,7 +28,7 @@ function SuccessPage() {
           </span>
         </h1>
         <p className="text-[16px] text-gray-400 mb-10 leading-relaxed">
-          Your payment was successful. You now have unlimited access to all airesumi Pro features.
+          Your payment was successful. You now have unlimited access to all Airesumi Pro features.
         </p>
 
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-left space-y-3">
@@ -62,7 +62,7 @@ function SuccessPage() {
 
 export const Route = createFileRoute("/premium/success")({
   head: () => ({
-    meta: [{ title: "Payment Successful — airesumi Pro" }],
+    meta: [{ title: "Payment Successful — Airesumi Pro" }],
   }),
   component: SuccessPage,
 });

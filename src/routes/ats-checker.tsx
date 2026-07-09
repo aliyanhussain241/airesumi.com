@@ -37,15 +37,15 @@ const ATS_FAQ_SCHEMA = JSON.stringify({
       "name": "How do I improve my ATS score?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Use keywords from the job description, avoid tables and graphics, use standard section headings like Experience and Education, and save your resume as a PDF or Word doc. airesumi's ATS checker shows you exactly what to fix."
+        "text": "Use keywords from the job description, avoid tables and graphics, use standard section headings like Experience and Education, and save your resume as a PDF or Word doc. Airesumi's ATS checker shows you exactly what to fix."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the airesumi ATS checker free?",
+      "name": "Is the Airesumi ATS checker free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, the airesumi ATS resume checker is completely free to use. Paste your resume and job description to get an instant ATS score and improvement suggestions."
+        "text": "Yes, the Airesumi ATS resume checker is completely free to use. Paste your resume and job description to get an instant ATS score and improvement suggestions."
       }
     }
   ]
@@ -64,7 +64,7 @@ function ATSContentSection() {
           An ATS (Applicant Tracking System) resume checker scans your resume the same way employer software does — checking for the right keywords, formatting, and structure before a human ever reads it.
         </p>
         <p className="text-[#4a5568] text-[16px] leading-relaxed">
-          Over 99% of Fortune 500 companies use ATS to filter applications. Without optimization, even the most qualified candidates get automatically rejected. airesumi's free ATS checker tells you exactly where your resume falls short and how to fix it instantly.
+          Over 99% of Fortune 500 companies use ATS to filter applications. Without optimization, even the most qualified candidates get automatically rejected. Airesumi's free ATS checker tells you exactly where your resume falls short and how to fix it instantly.
         </p>
       </div>
 
@@ -88,7 +88,7 @@ function ATSContentSection() {
             {
               step: "3",
               title: "Check your score before applying",
-              desc: "Paste your resume and the job description into airesumi's ATS checker. Get an instant score and a list of exactly what to improve before you submit.",
+              desc: "Paste your resume and the job description into Airesumi's ATS checker. Get an instant score and a list of exactly what to improve before you submit.",
             },
           ].map((item) => (
             <div key={item.step} className="flex gap-5 bg-[#f8fafc] rounded-xl p-6">
@@ -125,10 +125,10 @@ function ATSContentSection() {
             },
             {
               q: "How do I improve my ATS score?",
-              a: "Use keywords from the job description, avoid tables and graphics, use standard section headings like Experience and Education, and save your resume as a PDF or Word doc. airesumi's ATS checker shows you exactly what to fix.",
+              a: "Use keywords from the job description, avoid tables and graphics, use standard section headings like Experience and Education, and save your resume as a PDF or Word doc. Airesumi's ATS checker shows you exactly what to fix.",
             },
             {
-              q: "Is the airesumi ATS checker free?",
+              q: "Is the Airesumi ATS checker free?",
               a: "Yes, completely free. Paste your resume and job description to get an instant ATS score and improvement suggestions — no sign-up required.",
             },
           ].map((item, i) => (

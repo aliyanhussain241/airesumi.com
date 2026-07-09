@@ -663,7 +663,7 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           {[
             { t: "AI Resume Builder", d: "Our flagship tool. Enter your job title, experience, and skills — our AI writes a complete, ATS-optimized resume in under 2 minutes. Tailored to any job description automatically." },
             { t: "ATS Resume Checker", d: "Paste your existing resume and get an instant ATS compatibility score. See exactly which keywords are missing, which formatting issues will cause rejection, and how to fix them." },
-            { t: "Resume Examples Library", d: "Browse 500+ professional resume examples by job title and industry. Study real resumes that got people hired and use our AI to build your own version instantly." },
+            { t: "Resume Examples Library", d: "Browse professional resume examples by job title and industry. Study real resumes that got people hired and use our AI to build your own version instantly." },
             { t: "Cover Letter Generator", d: "Generate a personalized, job-specific cover letter in 60 seconds. Our AI matches your cover letter tone and keywords to the job description automatically." },
             { t: "Interview Questions Generator", d: "Get role-specific interview questions with expert model answers before your interview. Practice behavioral, technical, and situational questions for any job title." },
             { t: "Salary Analyzer", d: "Find out if you are being paid fairly. Enter your job title, experience, and location and get an instant salary analysis with negotiation tips based on real market data." }

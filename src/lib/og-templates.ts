@@ -161,7 +161,7 @@ export function renderOgSvg(cfg: OgConfig): string {
   <g transform="translate(80,80)">
     <rect width="52" height="52" rx="14" fill="${accent}"/>
     <text x="26" y="36" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="30" font-weight="800" fill="#ffffff">a</text>
-    <text x="72" y="36" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="700" fill="#0f172a">airesumi</text>
+    <text x="72" y="36" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="700" fill="#0f172a">Airesumi</text>
   </g>
 
   <!-- Badge -->

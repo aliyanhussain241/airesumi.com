@@ -18,7 +18,7 @@ const COVER_LETTER_FAQ_SCHEMA = JSON.stringify({
       "name": "How does the AI cover letter generator work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Paste the job description and upload your resume. airesumi's AI reads both and generates a tailored cover letter in seconds — matching your experience to the exact role you are applying for."
+        "text": "Paste the job description and upload your resume. Airesumi's AI reads both and generates a tailored cover letter in seconds — matching your experience to the exact role you are applying for."
       }
     },
     {
@@ -26,7 +26,7 @@ const COVER_LETTER_FAQ_SCHEMA = JSON.stringify({
       "name": "Is the cover letter generator free?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, airesumi's AI cover letter generator is completely free to use. No sign-up required to generate your first cover letter."
+        "text": "Yes, Airesumi's AI cover letter generator is completely free to use. No sign-up required to generate your first cover letter."
       }
     },
     {
@@ -42,7 +42,7 @@ const COVER_LETTER_FAQ_SCHEMA = JSON.stringify({
       "name": "Can I customize the tone of my cover letter?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. airesumi lets you choose the tone of your cover letter — Professional, Confident, Friendly, or Creative — so it matches the company culture and the role you are applying for."
+        "text": "Yes. Airesumi lets you choose the tone of your cover letter — Professional, Confident, Friendly, or Creative — so it matches the company culture and the role you are applying for."
       }
     },
     {
@@ -69,7 +69,7 @@ function CoverLetterContentSection() {
           An AI cover letter generator creates a personalized cover letter by reading your resume and the job description together. Instead of a generic template, you get a letter that speaks directly to the role — using the right keywords, tone, and structure.
         </p>
         <p className="text-[#4a5568] text-[16px] leading-relaxed">
-          airesumi's free cover letter generator takes under 2 minutes. Paste the job description, upload your CV, choose your tone, and download a ready-to-send PDF.
+          Airesumi's free cover letter generator takes under 2 minutes. Paste the job description, upload your CV, choose your tone, and download a ready-to-send PDF.
         </p>
       </div>
 
@@ -98,7 +98,7 @@ function CoverLetterContentSection() {
             {
               step: "4",
               title: "Match the tone to the company culture",
-              desc: "A cover letter for a startup should sound different from one for a bank. airesumi lets you pick Professional, Confident, Friendly, or Creative tone automatically.",
+              desc: "A cover letter for a startup should sound different from one for a bank. Airesumi lets you pick Professional, Confident, Friendly, or Creative tone automatically.",
             },
           ].map((item) => (
             <div key={item.step} className="flex gap-5 bg-[#f8fafc] rounded-xl p-6">
@@ -123,7 +123,7 @@ function CoverLetterContentSection() {
           {[
             {
               q: "How does the AI cover letter generator work?",
-              a: "Paste the job description and upload your resume. airesumi's AI reads both and generates a tailored cover letter in seconds — matching your experience to the exact role you are applying for.",
+              a: "Paste the job description and upload your resume. Airesumi's AI reads both and generates a tailored cover letter in seconds — matching your experience to the exact role you are applying for.",
             },
             {
               q: "Is the cover letter generator free?",
@@ -135,7 +135,7 @@ function CoverLetterContentSection() {
             },
             {
               q: "Can I customize the tone of my cover letter?",
-              a: "Yes. airesumi lets you choose Professional, Confident, Friendly, or Creative tone so it matches the company culture and the role you are applying for.",
+              a: "Yes. Airesumi lets you choose Professional, Confident, Friendly, or Creative tone so it matches the company culture and the role you are applying for.",
             },
             {
               q: "Does a cover letter really matter in 2025?",
@@ -296,7 +296,7 @@ export const Route = createFileRoute("/cover-letter")({
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "AI cover letter generator, free cover letter, cover letter maker, cover letter builder, AI cover letter" },
       { property: "og:title", content: "Free AI Cover Letter Generator | airesumi.com" },
-      { property: "og:description", content: "Generate a tailored cover letter in seconds. Free AI tool by airesumi." },
+      { property: "og:description", content: "Generate a tailored cover letter in seconds. Free AI tool by Airesumi." },
       { property: "og:url", content: "https://airesumi.com/cover-letter" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -16,9 +16,9 @@ export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Service | airesumi.com" },
-      { name: "description", content: "airesumi terms of service and usage policy." },
+      { name: "description", content: "Airesumi terms of service and usage policy." },
       { property: "og:title", content: "Terms of Service | airesumi.com" },
-      { property: "og:description", content: "airesumi terms of service and usage policy." },
+      { property: "og:description", content: "Airesumi terms of service and usage policy." },
       { property: "og:url", content: "https://airesumi.com/terms" },
     ],
     links: [{ rel: "canonical", href: "https://airesumi.com/terms" }],

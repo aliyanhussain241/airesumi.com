@@ -16,7 +16,7 @@ export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy | airesumi.com" },
-      { name: "description", content: "How airesumi handles your data and privacy." },
+      { name: "description", content: "How Airesumi handles your data and privacy." },
     ],
   }),
   component: Page,

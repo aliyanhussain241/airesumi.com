@@ -10,46 +10,46 @@ const COMPETITOR = {
 
 const PATH = "/compare/airesumi-vs-zety";
 const URL = `https://airesumi.com${PATH}`;
-const TITLE = "airesumi vs Zety (2026): Honest Side-by-Side Comparison";
+const TITLE = "Airesumi vs Zety (2026): Honest Side-by-Side Comparison";
 const DESCRIPTION =
-  "Compare airesumi and Zety on pricing, ATS features, templates, and download limits. An honest 2026 breakdown to help you pick the right AI resume builder.";
+  "Compare Airesumi and Zety on pricing, ATS features, templates, and download limits. An honest 2026 breakdown to help you pick the right AI resume builder.";
 
 // Facts sourced from each product's own public pricing/help pages.
 // Update if the vendors change their public terms.
-const ROWS: Array<{ feature: string; airesumi: string; competitor: string }> = [
+const ROWS: Array<{ feature: string; Airesumi: string; competitor: string }> = [
   {
     feature: "Free tier",
-    airesumi: "Free to build & download PDF resumes. 3 free AI credits for premium tools.",
+    Airesumi: "Free to build & download PDF resumes. 3 free AI credits for premium tools.",
     competitor: "Free to build a resume, but downloading as PDF requires a paid plan (Zety's public pricing page).",
   },
   {
     feature: "Paid pricing (entry)",
-    airesumi: "Pro plans available; one-time and subscription options on the /premium page.",
+    Airesumi: "Pro plans available; one-time and subscription options on the /premium page.",
     competitor: "Publicly advertises a 14-day trial that auto-renews into a monthly subscription (~$23.70/4 weeks per Zety's site).",
   },
   {
     feature: "ATS optimization",
-    airesumi: "Dedicated ATS checker, keyword scanner, and job-description-tailored bullet writer.",
+    Airesumi: "Dedicated ATS checker, keyword scanner, and job-description-tailored bullet writer.",
     competitor: "Content suggestions and pre-written examples; no standalone ATS score tool on the free tier.",
   },
   {
     feature: "Templates",
-    airesumi: "Multiple ATS-safe templates with configurable QR placement and sizing.",
+    Airesumi: "Multiple ATS-safe templates with configurable QR placement and sizing.",
     competitor: "Large template library marketed on the homepage; premium templates behind paid plan.",
   },
   {
     feature: "Download restrictions",
-    airesumi: "PDF download available on the free tier without a subscription.",
+    Airesumi: "PDF download available on the free tier without a subscription.",
     competitor: "PDF download gated behind trial/subscription per Zety's public pricing.",
   },
   {
     feature: "AI writing",
-    airesumi: "AI bullet writer, summary generator, cover letter, and LinkedIn bio — job-description aware.",
+    Airesumi: "AI bullet writer, summary generator, cover letter, and LinkedIn bio — job-description aware.",
     competitor: "Pre-written phrase suggestions and content library; AI assist depends on plan tier.",
   },
   {
     feature: "Standout feature",
-    airesumi: "All-in-one free AI toolkit: ATS checker, keyword scanner, cover letter, LinkedIn bio, salary analyzer, interview prep.",
+    Airesumi: "All-in-one free AI toolkit: ATS checker, keyword scanner, cover letter, LinkedIn bio, salary analyzer, interview prep.",
     competitor: "Mature content library and example database built over years of operation.",
   },
 ];
@@ -68,11 +68,11 @@ function Page() {
             <Sparkles size={14} /> Honest comparison · Updated 2026
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-[#1a202c] dark:text-orange-50 leading-tight mb-4">
-            airesumi vs {COMPETITOR.name}: which AI resume builder should you use?
+            Airesumi vs {COMPETITOR.name}: which AI resume builder should you use?
           </h1>
           <p className="text-lg text-[#4a5568] dark:text-orange-100/70 leading-relaxed">
             This comparison is for job seekers deciding between{" "}
-            <strong>airesumi</strong> — a free, AI-first resume toolkit — and{" "}
+            <strong>Airesumi</strong> — a free, AI-first resume toolkit — and{" "}
             <strong>{COMPETITOR.name}</strong>, one of the most established
             paid resume builders on the web. We stick to publicly verifiable
             facts from each vendor's own pricing and help pages, so you can
@@ -90,7 +90,7 @@ function Page() {
               <thead className="bg-[#f8fafc] dark:bg-white/5">
                 <tr>
                   <th className="p-4 font-semibold text-[#1a202c] dark:text-orange-50 w-1/4">Feature</th>
-                  <th className="p-4 font-semibold text-[#FF6321]">airesumi</th>
+                  <th className="p-4 font-semibold text-[#FF6321]">Airesumi</th>
                   <th className="p-4 font-semibold text-[#1a202c] dark:text-orange-50">{COMPETITOR.name}</th>
                 </tr>
               </thead>
@@ -108,7 +108,7 @@ function Page() {
                       {r.feature}
                     </td>
                     <td className="p-4 text-[#4a5568] dark:text-orange-100/70 align-top">
-                      {r.airesumi}
+                      {r.Airesumi}
                     </td>
                     <td className="p-4 text-[#4a5568] dark:text-orange-100/70 align-top">
                       {r.competitor}
@@ -125,16 +125,16 @@ function Page() {
           </p>
         </section>
 
-        {/* When to choose airesumi */}
+        {/* When to choose Airesumi */}
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-[#1a202c] dark:text-orange-50 mb-4 flex items-center gap-2">
             <Check className="text-green-600" size={22} />
-            When to choose airesumi
+            When to choose Airesumi
           </h2>
           <ul className="space-y-3 text-[#4a5568] dark:text-orange-100/70 leading-relaxed">
             <li>
               <strong>You want to download a real PDF for free.</strong>{" "}
-              airesumi does not gate PDF export behind a trial or subscription.
+              Airesumi does not gate PDF export behind a trial or subscription.
             </li>
             <li>
               <strong>You want AI tools beyond the resume itself:</strong> ATS
@@ -142,7 +142,7 @@ function Page() {
               salary analyzer, and interview prep — all in one place.
             </li>
             <li>
-              <strong>You tailor per application.</strong> airesumi's bullet
+              <strong>You tailor per application.</strong> Airesumi's bullet
               writer and summary generator take a job description and rewrite
               your content to match it.
             </li>
@@ -179,7 +179,7 @@ function Page() {
           </ul>
           <p className="text-sm text-[#718096] dark:text-orange-100/50 mt-4 italic">
             Bottom line: if you need PDF downloads without a subscription and
-            a full AI job-search toolkit, airesumi is the stronger pick. If
+            a full AI job-search toolkit, Airesumi is the stronger pick. If
             you want the deepest template library and don't mind a paid
             subscription, {COMPETITOR.name} is a reasonable choice.
           </p>
@@ -188,7 +188,7 @@ function Page() {
         {/* CTA */}
         <section className="bg-gradient-to-br from-[#FF6321] to-[#e5541a] rounded-2xl p-8 md:p-10 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">
-            Try airesumi free — no credit card, no trial trap
+            Try Airesumi free — no credit card, no trial trap
           </h2>
           <p className="text-white/90 mb-6 max-w-2xl mx-auto">
             Build an ATS-optimized resume, generate a matching cover letter,
@@ -230,10 +230,10 @@ export const Route = createFileRoute("/compare/airesumi-vs-zety")({
           "@type": "Article",
           headline: TITLE,
           description: DESCRIPTION,
-          author: { "@type": "Organization", name: "airesumi" },
+          author: { "@type": "Organization", name: "Airesumi" },
           publisher: {
             "@type": "Organization",
-            name: "airesumi",
+            name: "Airesumi",
             logo: {
               "@type": "ImageObject",
               url: "https://airesumi.com/assets/ai-resumi-DYjBNKey.webp",
@@ -241,7 +241,7 @@ export const Route = createFileRoute("/compare/airesumi-vs-zety")({
           },
           mainEntityOfPage: URL,
           about: [
-            { "@type": "SoftwareApplication", name: "airesumi", url: "https://airesumi.com/" },
+            { "@type": "SoftwareApplication", name: "Airesumi", url: "https://airesumi.com/" },
             { "@type": "SoftwareApplication", name: COMPETITOR.name, url: `https://${COMPETITOR.site}/` },
           ],
         }),
@@ -254,7 +254,7 @@ export const Route = createFileRoute("/compare/airesumi-vs-zety")({
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: "https://airesumi.com/" },
             { "@type": "ListItem", position: 2, name: "Compare", item: "https://airesumi.com/compare" },
-            { "@type": "ListItem", position: 3, name: "airesumi vs Zety", item: URL },
+            { "@type": "ListItem", position: 3, name: "Airesumi vs Zety", item: URL },
           ],
         }),
       },

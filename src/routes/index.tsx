@@ -15,7 +15,7 @@ function Index() {
 const schemaMarkup = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "airesumi",
+  name: "Airesumi",
   url: "https://airesumi.com",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",

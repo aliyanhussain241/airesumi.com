@@ -16,18 +16,18 @@ export const RESUME_CONTENT: ToolContent = {
   whatTitle: "What is an AI Resume Builder?",
   whatParagraphs: [
     "An AI resume builder reads your work history and the job you're targeting, then writes an ATS-friendly resume that matches the two. Instead of a blank template, you get bullet points, a summary, and section ordering tuned for the specific role.",
-    "airesumi's free AI resume builder takes under 3 minutes. Upload your CV or fill in the details, pick a template, and download a recruiter-ready PDF that passes automated screeners.",
+    "Airesumi's free AI resume builder takes under 3 minutes. Upload your CV or fill in the details, pick a template, and download a recruiter-ready PDF that passes automated screeners.",
   ],
   howToTitle: "How to Build a Resume That Gets Interviews",
   howToSteps: [
     { title: "Start with the job description", desc: "Paste the exact role you're applying for. The AI extracts required skills and keywords so your resume mirrors what recruiters and ATS software are scanning for." },
     { title: "Lead each bullet with a result", desc: "Recruiters skim in 6 seconds. Start every bullet with a measurable outcome — 'Increased conversion 34%' beats 'Responsible for conversion optimization'." },
     { title: "Keep it to one page (unless senior)", desc: "0-10 years of experience → one page. 10+ years or executive → up to two. Anything longer gets skimmed and dropped." },
-    { title: "Pick a clean, ATS-safe template", desc: "Avoid columns, text boxes, and graphics. All airesumi templates are single-column and parse cleanly in Workday, Greenhouse, Lever, and Taleo." },
+    { title: "Pick a clean, ATS-safe template", desc: "Avoid columns, text boxes, and graphics. All Airesumi templates are single-column and parse cleanly in Workday, Greenhouse, Lever, and Taleo." },
   ],
   faqs: [
     { q: "Is the AI resume builder free?", a: "Yes. Building and downloading your first resume is completely free. No credit card, no sign-up required to generate." },
-    { q: "Will my resume pass ATS (Applicant Tracking Systems)?", a: "Yes. Every airesumi template is built single-column with standard headings — the exact format that Workday, Greenhouse, Lever, and Taleo parse without errors." },
+    { q: "Will my resume pass ATS (Applicant Tracking Systems)?", a: "Yes. Every Airesumi template is built single-column with standard headings — the exact format that Workday, Greenhouse, Lever, and Taleo parse without errors." },
     { q: "Can I upload my existing CV?", a: "Yes. Upload your PDF or DOCX and the AI extracts your details, then rewrites bullets and summary to match the role you're targeting." },
     { q: "How long does it take to build a resume?", a: "Most users go from a blank page to a downloaded PDF in under 3 minutes when they upload an existing CV, and about 8 minutes starting from scratch." },
     { q: "Can I edit the resume after the AI generates it?", a: "Yes. Every field is editable. Tweak bullets, swap templates, and re-download as many times as you want." },
@@ -50,7 +50,7 @@ export const BULLET_CONTENT: ToolContent = {
   whatTitle: "What is a Resume Bullet Writer?",
   whatParagraphs: [
     "A resume bullet writer turns a plain task description into a metric-driven achievement bullet. You describe what you did; the AI rewrites it in the STAR format (Situation, Task, Action, Result) with strong action verbs and quantified impact.",
-    "Great bullets are the single biggest lever for interview callbacks. airesumi's free bullet writer gives you five variations per input so you can pick the one that best matches the role you're applying for.",
+    "Great bullets are the single biggest lever for interview callbacks. Airesumi's free bullet writer gives you five variations per input so you can pick the one that best matches the role you're applying for.",
   ],
   howToTitle: "How to Write Resume Bullets That Get Noticed",
   howToSteps: [
@@ -83,7 +83,7 @@ export const SUMMARY_CONTENT: ToolContent = {
   whatTitle: "What is a Resume Summary Generator?",
   whatParagraphs: [
     "A resume summary is the 3-4 sentence pitch at the top of your resume — the first thing a recruiter reads. A summary generator writes it for you based on your experience, target role, and industry.",
-    "airesumi's AI summary generator produces three tailored variations at once — Concise, Confident, and Story-driven — so you can pick the tone that matches the company culture.",
+    "Airesumi's AI summary generator produces three tailored variations at once — Concise, Confident, and Story-driven — so you can pick the tone that matches the company culture.",
   ],
   howToTitle: "How to Write a Resume Summary That Gets You Read",
   howToSteps: [
@@ -116,7 +116,7 @@ export const KEYWORD_CONTENT: ToolContent = {
   whatTitle: "What is a Resume Keyword Scanner?",
   whatParagraphs: [
     "A resume keyword scanner compares your resume against a job description and shows you exactly which required skills, tools, and phrases are missing. It mirrors what an ATS (Applicant Tracking System) does when it screens your application.",
-    "airesumi's free scanner extracts the important keywords from any job posting, checks your resume for coverage, and returns a match score plus a fix-list you can apply in minutes.",
+    "Airesumi's free scanner extracts the important keywords from any job posting, checks your resume for coverage, and returns a match score plus a fix-list you can apply in minutes.",
   ],
   howToTitle: "How to Use Keyword Analysis to Beat the ATS",
   howToSteps: [
@@ -149,7 +149,7 @@ export const LINKEDIN_CONTENT: ToolContent = {
   whatTitle: "What is a LinkedIn Bio Generator?",
   whatParagraphs: [
     "A LinkedIn bio generator turns your resume into three key profile assets: a keyword-optimized headline (220 chars), a compelling About section (2,600 chars), and a skills list ordered by recruiter demand.",
-    "airesumi's AI generator writes in first person, uses LinkedIn's SEO signals so recruiters find you in searches, and produces a bio you can paste directly into your profile.",
+    "Airesumi's AI generator writes in first person, uses LinkedIn's SEO signals so recruiters find you in searches, and produces a bio you can paste directly into your profile.",
   ],
   howToTitle: "How to Write a LinkedIn Profile That Attracts Recruiters",
   howToSteps: [
@@ -183,7 +183,7 @@ export const INTERVIEW_CONTENT: ToolContent = {
   whatParagraphs: [
     "An AI interview question generator produces realistic, role-specific interview questions in seconds — behavioral, technical, situational, culture-fit, case-study, and salary-negotiation prompts calibrated to your job title, seniority, industry, and company size. Instead of scrolling through generic \"top 100 questions\" lists that were written for everyone and no one, you rehearse the exact patterns hiring managers use for roles like yours in 2026.",
     "Research from LinkedIn's Global Talent Trends and Glassdoor's hiring reports consistently shows that candidates who complete at least 3 structured mock-interview sessions are roughly 2× more likely to receive an offer. The reason is simple: interviewing is a performance skill. Reading questions is not practice — answering them out loud, timing yourself, and iterating on weak answers is.",
-    "airesumi's free AI interview coach mirrors modern hiring loops at companies like Google, Amazon, Stripe, Microsoft, and high-growth startups. It combines the STAR method (Situation, Task, Action, Result) for behavioral rounds, the CARL method (Context, Action, Result, Learning) for reflection questions, and role-specific technical prompts — so a Senior Data Engineer doesn't waste time practicing entry-level SQL, and a first-time PM isn't ambushed by staff-level system design.",
+    "Airesumi's free AI interview coach mirrors modern hiring loops at companies like Google, Amazon, Stripe, Microsoft, and high-growth startups. It combines the STAR method (Situation, Task, Action, Result) for behavioral rounds, the CARL method (Context, Action, Result, Learning) for reflection questions, and role-specific technical prompts — so a Senior Data Engineer doesn't waste time practicing entry-level SQL, and a first-time PM isn't ambushed by staff-level system design.",
   ],
   howToTitle: "How to Prepare for a Job Interview in 2026 (Recruiter-Backed Playbook)",
   howToSteps: [
@@ -218,7 +218,7 @@ export const SALARY_CONTENT: ToolContent = {
   whatTitle: "What is a Salary Analyzer?",
   whatParagraphs: [
     "A salary analyzer benchmarks compensation for a specific role, location, and experience level against current market data — base, bonus, equity, and total comp — so you know your number before you negotiate.",
-    "airesumi's AI salary analyzer factors in role, seniority, industry, and region to produce a realistic salary range plus negotiation talking points you can use in your next offer conversation.",
+    "Airesumi's AI salary analyzer factors in role, seniority, industry, and region to produce a realistic salary range plus negotiation talking points you can use in your next offer conversation.",
   ],
   howToTitle: "How to Use Salary Data to Negotiate a Better Offer",
   howToSteps: [
@@ -251,7 +251,7 @@ export const PDF_SCANNER_CONTENT: ToolContent = {
   whatTitle: "What is a Mobile Document Scanner?",
   whatParagraphs: [
     "A mobile document scanner uses your phone camera to capture a document, auto-detect the edges, correct perspective, and export it as a clean, multi-page PDF — no scanner hardware required.",
-    "airesumi's browser-based scanner works on any phone with a camera. Capture, reorder, apply document filters, and download a PDF you can attach to a job application or email in seconds.",
+    "Airesumi's browser-based scanner works on any phone with a camera. Capture, reorder, apply document filters, and download a PDF you can attach to a job application or email in seconds.",
   ],
   howToTitle: "How to Get Scanner-Quality PDFs From Your Phone",
   howToSteps: [
@@ -284,7 +284,7 @@ export const RESIGNATION_CONTENT: ToolContent = {
   whatTitle: "What is a Resignation Letter Generator?",
   whatParagraphs: [
     "A resignation letter is a short, formal document that confirms your last day, thanks your employer, and leaves the door open for a good reference. A generator writes it for you in the right tone — professional, brief, and non-confrontational.",
-    "airesumi's free resignation letter generator asks for your details (name, role, last day, manager) and produces a printable PDF in seconds, in the tone you choose: Formal, Grateful, Brief, or Career-change.",
+    "Airesumi's free resignation letter generator asks for your details (name, role, last day, manager) and produces a printable PDF in seconds, in the tone you choose: Formal, Grateful, Brief, or Career-change.",
   ],
   howToTitle: "How to Resign Professionally and Protect Your Reference",
   howToSteps: [

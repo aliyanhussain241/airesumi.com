@@ -277,7 +277,7 @@ export const Route = createFileRoute("/manage-subscription")({
     meta: [
       { name: "robots", content: "noindex, nofollow" },
       { title: "Manage Subscription | airesumi.com" },
-      { name: "description", content: "Update your payment method, view invoices, or cancel your airesumi Pro subscription." },
+      { name: "description", content: "Update your payment method, view invoices, or cancel your Airesumi Pro subscription." },
     ],
   }),
   component: ManageSubscriptionPage,

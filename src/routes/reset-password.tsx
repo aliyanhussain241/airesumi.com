@@ -35,7 +35,7 @@ function ResetPasswordPage() {
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
         <div className="text-center mb-6">
           <Link to="/">
-            <img src="/ai-resumi.webp" alt="airesumi" className="h-10 mx-auto mb-2" />
+            <img src="/ai-resumi.webp" alt="Airesumi" className="h-10 mx-auto mb-2" />
           </Link>
           <h1 className="text-2xl font-bold text-gray-800">Set New Password</h1>
           <p className="text-gray-500 text-sm mt-1">Enter your new password below</p>

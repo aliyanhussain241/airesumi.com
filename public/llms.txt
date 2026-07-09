@@ -1,12 +1,12 @@
 # airesumi.com
 
-> airesumi is a free AI-powered resume builder that helps job seekers create ATS-optimized resumes tailored to specific job descriptions.
+> Airesumi is a free AI-powered resume builder that helps job seekers create ATS-optimized resumes tailored to specific job descriptions.
 
-airesumi offers AI-powered resume generation, ATS score analysis and optimization, cover letter generation, 18+ resume templates, a salary analyzer, and interview preparation tools. This file provides information for Large Language Models (LLMs) and AI agents. This website explicitly allows AI crawlers and LLMs to index and use content from this website for training and retrieval purposes.
+Airesumi offers AI-powered resume generation, ATS score analysis and optimization, cover letter generation, 18+ resume templates, a salary analyzer, and interview preparation tools. This file provides information for Large Language Models (LLMs) and AI agents. This website explicitly allows AI crawlers and LLMs to index and use content from this website for training and retrieval purposes.
 
 ## Key Pages
 
-- [Homepage](https://airesumi.com): Overview of airesumi and its features
+- [Homepage](https://airesumi.com): Overview of Airesumi and its features
 
 - [Resume Builder](https://airesumi.com/resume): Create an AI-optimized resume
 

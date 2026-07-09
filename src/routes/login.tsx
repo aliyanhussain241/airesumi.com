@@ -274,15 +274,15 @@ function LoginPage() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-7">
           <div className="flex items-center justify-center mb-4">
-            <img src={airesumiLogo} alt="airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
-            <img src={airesumiLogoWhite} alt="airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />
+            <img src={airesumiLogo} alt="Airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
+            <img src={airesumiLogoWhite} alt="Airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />
           </div>
 
           <h1 className="text-[22px] font-bold text-[#111827] dark:text-gray-100 tracking-tight">
             {tab === "login" ? "Welcome back" : tab === "signup" ? "Create account" : "Reset password"}
           </h1>
           <p className="text-[13px] text-gray-500 dark:text-gray-400 mt-1">
-            {tab === "login" ? "Sign in to airesumi" : tab === "signup" ? "Join airesumi for free" : "We'll send you a reset link"}
+            {tab === "login" ? "Sign in to Airesumi" : tab === "signup" ? "Join Airesumi for free" : "We'll send you a reset link"}
           </p>
 
         </div>
@@ -427,7 +427,7 @@ export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Sign In — airesumi.com" },
-      { name: "description", content: "Sign in to your airesumi account." },
+      { name: "description", content: "Sign in to your Airesumi account." },
     ],
   }),
   component: LoginPage,

@@ -495,12 +495,12 @@ const AdminPanel = ({ user, onLogout }: { user: User; onLogout: () => void }) =>
 // ─── PUBLIC BLOG (Advanced) ──────────────────────────────────
 const POSTS_PER_PAGE = 9;
 
-const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts = [] }: { onAdminClick: () => void; initialPosts?: Post[] }) => {
+const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts, hasInitialPosts = false }: { onAdminClick: () => void; initialPosts?: Post[]; hasInitialPosts?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [posts, setPosts] = useState<Post[]>(initialPosts);
+  const [posts, setPosts] = useState<Post[]>(initialPosts ?? []);
   const [active, setActive] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(initialPosts.length === 0);
+  const [loading, setLoading] = useState(!hasInitialPosts);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'reading'>('newest');
@@ -510,10 +510,10 @@ const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts = [] }: { onAdmi
   const [newsletterStatus, setNewsletterStatus] = useState<null | 'ok' | 'err'>(null);
 
   useEffect(() => {
-    if (initialPosts.length > 0) return;
+    if (hasInitialPosts) return;
     supabase.from('blog_posts').select('*').eq('published', true).order('published_at', { ascending: false })
       .then(({ data }) => { setPosts((data as Post[]) || []); setLoading(false); });
-  }, [initialPosts.length]);
+  }, [hasInitialPosts]);
 
   useEffect(() => {
     const slug = location.pathname.startsWith('/blog/') ? location.pathname.replace('/blog/', '') : null;

@@ -21,6 +21,7 @@ const STATIC_ENTRIES = [
   { path: "/blog",              changefreq: "weekly",  priority: "0.7" },
   { path: "/premium",           changefreq: "monthly", priority: "0.6" },
   { path: "/compare/airesumi-vs-zety", changefreq: "monthly", priority: "0.6" },
+  { path: "/compare/airesumi-vs-rezi", changefreq: "monthly", priority: "0.6" },
   { path: "/about",             changefreq: "monthly", priority: "0.5" },
   { path: "/contact",           changefreq: "yearly",  priority: "0.4" },
   { path: "/privacy",           changefreq: "yearly",  priority: "0.3" },

@@ -266,6 +266,7 @@ function RootComponent() {
         <main className="app-main flex-1 min-h-[60vh]">
           <Outlet />
         </main>
+        <AdBanner />
         <Footer />
       </div>
     </QueryClientProvider>

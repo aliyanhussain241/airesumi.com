@@ -388,58 +388,100 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       </div>
       
       {/* Stats & Features Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-24 mt-20 text-center">
-         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
+      <div className="max-w-7xl mx-auto px-6 pb-24 mt-20">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
+            <TrendingUp size={13} /> Trusted this week
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
             <div className="bg-orange-50 p-2.5 rounded-xl text-orange-400 shrink-0">
               <Wand2 size={32} />
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] text-center sm:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] dark:text-[#f5f5f4] text-center sm:text-left">
               <span className="text-[#FF6321]">52,000+</span> resumes built this week — here's why job seekers choose airesumi
             </h2>
-         </div>
+          </div>
+
+          {/* Live stats strip */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12 max-w-5xl mx-auto">
+            {[
+              { value: "52,000+", label: "Resumes built this week", icon: FileText },
+              { value: "98%", label: "ATS pass rate", icon: CheckCircle2 },
+              { value: "3.2x", label: "More interview callbacks", icon: TrendingUp },
+              { value: "120+", label: "Countries served", icon: Compass },
+            ].map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.06 }}
+                  className="relative bg-white dark:bg-[#16191f] rounded-2xl border border-gray-100 dark:border-white/10 p-4 sm:p-5 text-left overflow-hidden group"
+                  style={{ boxShadow: "0 10px 30px -18px rgba(15,23,42,0.18)" }}
+                >
+                  <div className="absolute -right-4 -top-4 w-20 h-20 rounded-full bg-[#FF6321]/8 group-hover:bg-[#FF6321]/14 transition-colors" />
+                  <Icon size={18} className="text-[#FF6321] mb-2 relative" />
+                  <div className="text-2xl sm:text-3xl font-bold text-[#1a202c] dark:text-[#f5f5f4] tracking-tight relative">{s.value}</div>
+                  <div className="text-[12px] text-gray-500 dark:text-gray-400 mt-0.5 relative">{s.label}</div>
+                </motion.div>
+              );
+            })}
+          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-            {/* Feature 1 */}
-            <div className="liquid-card rounded-2xl">
-              <span className="liquid-card-shine" aria-hidden="true" />
-              <div className="liquid-card-content p-8">
-                <Sparkles size={32} className="text-[#1a202c] mb-6" />
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Your first draft in under 10 minutes</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">Most people spend 3–4 hours on a resume and still aren't happy with it. With airesumi, fill in your details once — the AI handles the rest.</p>
-              </div>
-            </div>
+            {[
+              { icon: Sparkles, badge: "01", title: "Your first draft in under 10 minutes", desc: "Most people spend 3–4 hours on a resume and still aren't happy with it. With airesumi, fill in your details once — the AI handles the rest." },
+              { icon: Wand2, badge: "02", title: "No more second-guessing every sentence", desc: "Not everyone is a professional writer — and that's fine. The AI fixes awkward phrasing and makes your experience sound the way it deserves to." },
+              { icon: Target, badge: "03", title: "Built to pass ATS — not just look good", desc: "A resume that looks great but fails the ATS scan never reaches anyone. Every template is structured to clear the filters 99% of large companies use." },
+              { icon: CircleDollarSign, badge: "04", title: "Know what you're worth before you negotiate", desc: "Most people accept the first offer. Our salary analyzer shows you the real market rate for your role — so you walk in knowing your number." },
+            ].map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className="liquid-card rounded-2xl"
+                >
+                  <span className="liquid-card-shine" aria-hidden="true" />
+                  <div className="liquid-card-content p-8 relative">
+                    <div className="absolute top-6 right-6 text-[11px] font-bold text-gray-300 dark:text-white/20 tracking-widest">{f.badge}</div>
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FF6321]/15 to-[#FF6321]/5 flex items-center justify-center mb-6 group-hover:from-[#FF6321]/25 transition-colors">
+                      <Icon size={22} className="text-[#FF6321]" />
+                    </div>
+                    <h3 className="font-semibold text-[#1a202c] dark:text-[#f5f5f4] text-xl mb-3 leading-snug">{f.title}</h3>
+                    <p className="text-[#64748b] dark:text-gray-400 text-[15px] leading-relaxed">{f.desc}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
 
-            {/* Feature 2 */}
-            <div className="liquid-card rounded-2xl">
-              <span className="liquid-card-shine" aria-hidden="true" />
-              <div className="liquid-card-content p-8">
-                <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">No more second-guessing every sentence</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">Not everyone is a professional writer — and that's fine. The AI fixes awkward phrasing and makes your experience sound the way it deserves to.</p>
+          {/* Trust footer strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[13px] text-gray-500 dark:text-gray-400"
+          >
+            <div className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-[#FF6321]" /> No credit card required</div>
+            <div className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-[#FF6321]" /> Download as PDF instantly</div>
+            <div className="flex items-center gap-1.5"><CheckCircle2 size={15} className="text-[#FF6321]" /> ATS-tested templates</div>
+            <div className="flex items-center gap-1.5">
+              <div className="flex -space-x-0.5">
+                {[...Array(5)].map((_, i) => <Star key={i} size={13} className="fill-[#FF6321] text-[#FF6321]" />)}
               </div>
+              4.8/5 from 1,200+ users
             </div>
-
-            {/* Feature 3 */}
-            <div className="liquid-card rounded-2xl">
-              <span className="liquid-card-shine" aria-hidden="true" />
-              <div className="liquid-card-content p-8">
-                <Target size={32} className="text-[#1a202c] mb-6" />
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Built to pass ATS — not just look good</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">A resume that looks great but fails the ATS scan never reaches anyone. Every template is structured to clear the filters 99% of large companies use.</p>
-              </div>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="liquid-card rounded-2xl">
-              <span className="liquid-card-shine" aria-hidden="true" />
-              <div className="liquid-card-content p-8">
-                <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Know what you're worth before you negotiate</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">Most people accept the first offer. Our salary analyzer shows you the real market rate for your role — so you walk in knowing your number.</p>
-              </div>
-            </div>
-         </div>
+          </motion.div>
+        </div>
       </div>
+
 
       {/* Tools Section */}
       <div className="max-w-7xl mx-auto px-6 pb-32">

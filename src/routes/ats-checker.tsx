@@ -58,14 +58,43 @@ function ATSContentSection() {
       {/* What is ATS */}
       <div className="mb-16">
         <h2 className="text-3xl font-medium text-[#2d3748] mb-6">
-          What is an ATS Resume Checker?
+          What Does an ATS Resume Checker Actually Do?
         </h2>
         <p className="text-[#4a5568] text-[16px] leading-relaxed mb-4">
-          An ATS (Applicant Tracking System) resume checker scans your resume the same way employer software does — checking for the right keywords, formatting, and structure before a human ever reads it.
+          When you apply to a job online, your resume usually doesn't go straight to a recruiter. It goes through software first — an Applicant Tracking System (ATS) — that scans it for keywords, checks the formatting, and scores it against the job description.
+        </p>
+        <p className="text-[#4a5568] text-[16px] leading-relaxed mb-4">
+          If your score is too low, the system filters you out. The recruiter never sees your name. It doesn't matter how qualified you are.
         </p>
         <p className="text-[#4a5568] text-[16px] leading-relaxed">
-          Over 99% of Fortune 500 companies use ATS to filter applications. Without optimization, even the most qualified candidates get automatically rejected. Airesumi's free ATS checker tells you exactly where your resume falls short and how to fix it instantly.
+          An ATS checker runs your resume through that same logic before you submit. It tells you where you're falling short — missing keywords, bad formatting, sections that confuse the parser — so you can fix it before it costs you an opportunity. The airesumi ATS checker is free. Paste your resume and the job description, and you'll get a score with specific suggestions, not just a number.
         </p>
+      </div>
+
+      {/* Common Reasons */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-medium text-[#2d3748] mb-6">
+          5 Reasons Resumes Fail ATS Scans
+        </h2>
+        <div className="space-y-4">
+          {[
+            { num: "1", title: "Using a template with columns or text boxes", desc: "Most ATS software reads top-to-bottom, left-to-right. Two-column layouts often get read out of order or skip sections entirely. Keep it single-column." },
+            { num: "2", title: "Missing keywords from the job description", desc: "ATS systems match your resume to the job posting word-by-word. If the posting says 'project management' and your resume says 'managing projects,' some systems won't count it as a match." },
+            { num: "3", title: "Using non-standard section headings", desc: "'Where I've Worked' instead of 'Work Experience.' 'Things I Know' instead of 'Skills.' Non-standard headings confuse parsers and your sections get skipped." },
+            { num: "4", title: "Submitting the wrong file format", desc: "Some ATS systems handle PDFs badly; others handle Word badly. If the job posting doesn't specify, PDF is usually the safer choice." },
+            { num: "5", title: "Putting contact info in the header or footer", desc: "Many ATS tools don't parse headers and footers correctly. Put your name, email, and phone number in the main body of the document." },
+          ].map((item) => (
+            <div key={item.num} className="flex gap-5 bg-[#fff5ef] rounded-xl p-6">
+              <div className="w-10 h-10 rounded-full bg-[#FF6321] text-white font-bold flex items-center justify-center shrink-0 text-lg">
+                {item.num}
+              </div>
+              <div>
+                <h3 className="font-semibold text-[#1a202c] text-[17px] mb-1">{item.title}</h3>
+                <p className="text-[#4a5568] text-[15px] leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* How it works */}
@@ -131,6 +160,18 @@ function ATSContentSection() {
               q: "Is the Airesumi ATS checker free?",
               a: "Yes, completely free. Paste your resume and job description to get an instant ATS score and improvement suggestions — no sign-up required.",
             },
+            {
+              q: "Can a well-qualified candidate still fail an ATS scan?",
+              a: "Yes — and it happens all the time. ATS doesn't evaluate your actual qualifications. It scores keyword coverage and formatting. A 10-year veteran who used a two-column template and didn't match the exact phrasing in the job posting can score below a less-experienced candidate who did.",
+            },
+            {
+              q: "Should I use exact keywords from the job posting or paraphrase?",
+              a: "Match exactly where honest. If the posting says 'Python' and you know Python, write 'Python' — not 'Python programming' or 'scripting languages.' Modern ATS handles some synonyms, but exact matches score highest. Never add a skill you don't actually have.",
+            },
+            {
+              q: "How often should I re-check my resume with an ATS checker?",
+              a: "Every time you apply to a different role. Keywords change between postings — even for the same job title at different companies. Tailoring and re-checking for each application takes 5 minutes and meaningfully increases your callback rate.",
+            },
           ].map((item, i) => (
             <details
               key={i}
@@ -175,7 +216,7 @@ export const Route = createFileRoute("/ats-checker")({
   head: () => ({
     meta: [
       { title: "Free ATS Resume Checker — Score Your Resume Instantly | airesumi.com" },
-      { name: "description", content: "Check how your resume scores against Applicant Tracking Systems. Get an instant ATS score, keyword analysis, and fixes. Free — no sign-up required." },
+      { name: "description", content: "Run your resume through the same filter employers use. Get an instant ATS score, see exactly which keywords are missing, and fix it before you apply. Free." },
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "ATS resume checker, ATS score, applicant tracking system, resume scanner, ATS optimization" },
       { property: "og:title", content: "Free ATS Resume Checker — Score Your Resume | airesumi.com" },

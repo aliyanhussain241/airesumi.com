@@ -125,10 +125,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
            <div className="max-w-xl relative z-10">
              <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
-               Free AI Resume Builder — <span className="text-[#FF6321]">ATS-Optimized</span> Resumes
+               AI Resume Creator That Gets You Past the Filter — <span className="text-[#FF6321]">Free</span>
              </h1>
              <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
-               Only 2% of resumes win. Yours will be one of them.
+               Most resumes fail not because of bad experience — but because no one ever reads them. Build yours with AI in 10 minutes and land on the recruiter's desk, not the reject pile.
              </p>
              <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
                <a
@@ -394,7 +394,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <Wand2 size={32} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] text-center sm:text-left">
-              <span className="text-[#FF6321]">Built</span> for every job seeker, free
+              <span className="text-[#FF6321]">52,000+</span> resumes built this week — here's why job seekers choose airesumi
             </h2>
          </div>
 
@@ -404,8 +404,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <span className="liquid-card-shine" aria-hidden="true" />
               <div className="liquid-card-content p-8">
                 <Sparkles size={32} className="text-[#1a202c] mb-6" />
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">A draft in 10 mins</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">The AI builder is 10 x faster than doing on your own.</p>
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Your first draft in under 10 minutes</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">Most people spend 3–4 hours on a resume and still aren't happy with it. With airesumi, fill in your details once — the AI handles the rest.</p>
               </div>
             </div>
 
@@ -414,8 +414,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <span className="liquid-card-shine" aria-hidden="true" />
               <div className="liquid-card-content p-8">
                 <div className="bg-[#1a202c] rounded-full w-10 h-10 flex items-center justify-center text-white font-bold mb-6">A+</div>
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Zero mistakes</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">Don't stress over typos; you'll sound great!</p>
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">No more second-guessing every sentence</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">Not everyone is a professional writer — and that's fine. The AI fixes awkward phrasing and makes your experience sound the way it deserves to.</p>
               </div>
             </div>
 
@@ -424,8 +424,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <span className="liquid-card-shine" aria-hidden="true" />
               <div className="liquid-card-content p-8">
                 <Target size={32} className="text-[#1a202c] mb-6" />
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">ATS templates</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">Your resume will be 100% compliant. Recruiters will see you.</p>
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Built to pass ATS — not just look good</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">A resume that looks great but fails the ATS scan never reaches anyone. Every template is structured to clear the filters 99% of large companies use.</p>
               </div>
             </div>
 
@@ -434,8 +434,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <span className="liquid-card-shine" aria-hidden="true" />
               <div className="liquid-card-content p-8">
                 <CircleDollarSign size={32} className="text-[#1a202c] mb-6" />
-                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Get paid 7% more</h3>
-                <p className="text-[#64748b] text-[15px] leading-relaxed">We can help you negotiate a higher starting salary...</p>
+                <h3 className="font-semibold text-[#1a202c] text-xl mb-3">Know what you're worth before you negotiate</h3>
+                <p className="text-[#64748b] text-[15px] leading-relaxed">Most people accept the first offer. Our salary analyzer shows you the real market rate for your role — so you walk in knowing your number.</p>
               </div>
             </div>
          </div>
@@ -713,6 +713,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             {
               q: "What resume formats does Airesumi support?",
               a: "Airesumi offers 18+ professional resume templates that are all ATS-friendly. You can download your resume as a PDF ready to submit to any job application.",
+            },
+            {
+              q: "Can I create a resume with AI for free — no credit card?",
+              a: "Yes, airesumi is completely free to use. You paste your job description and career details, and the AI generates a tailored, formatted resume in under 10 minutes. No credit card, no hidden paywall for the core builder.",
+            },
+            {
+              q: "How good are AI-generated resumes compared to writing one yourself?",
+              a: "A well-prompted AI resume is typically stronger than what most people write on their own — not because AI is smarter, but because it doesn't second-guess itself or undersell your experience. The key is giving it accurate information. airesumi asks the right questions so the output is specific to you, not generic.",
+            },
+            {
+              q: "Can airesumi tailor my resume to a specific job description?",
+              a: "That's one of the main things it does. Paste the job description and your background, and the AI aligns your resume to match the keywords, skills, and priorities the employer listed. This is what gets resumes past ATS filters.",
             },
           ].map((item, i) => (
             <details

@@ -13,10 +13,10 @@ export interface ToolContent {
 /* Resume builder                                                      */
 /* ------------------------------------------------------------------ */
 export const RESUME_CONTENT: ToolContent = {
-  whatTitle: "What is an AI Resume Builder?",
+  whatTitle: "What Is an AI Resume Creator — and How Is It Different?",
   whatParagraphs: [
-    "An AI resume builder reads your work history and the job you're targeting, then writes an ATS-friendly resume that matches the two. Instead of a blank template, you get bullet points, a summary, and section ordering tuned for the specific role.",
-    "Airesumi's free AI resume builder takes under 3 minutes. Upload your CV or fill in the details, pick a template, and download a recruiter-ready PDF that passes automated screeners.",
+    "A lot of people expect an AI resume creator to drop their name into a generic template. That's not what this does. It reads the job description you paste and builds your resume around it — your experience, your skills, your job title, formatted and worded to match what that specific employer is looking for.",
+    "The output is a complete, ATS-ready PDF. It's not perfect for everyone on the first pass — some people need to tweak a bullet or adjust the summary — but you're editing a solid draft, not starting from a blank page. And the whole thing is free. No credit card, no paywall on the core builder.",
   ],
   howToTitle: "How to Build a Resume That Gets Interviews",
   howToSteps: [
@@ -32,6 +32,9 @@ export const RESUME_CONTENT: ToolContent = {
     { q: "How long does it take to build a resume?", a: "Most users go from a blank page to a downloaded PDF in under 3 minutes when they upload an existing CV, and about 8 minutes starting from scratch." },
     { q: "Can I edit the resume after the AI generates it?", a: "Yes. Every field is editable. Tweak bullets, swap templates, and re-download as many times as you want." },
     { q: "What file format do I download?", a: "PDF by default, which is the format 98% of employers request. The PDF is text-based (not an image), so ATS software can still read every word." },
+    { q: "Is there a truly free AI resume creator — no credit card?", a: "Yes. airesumi's core resume builder is free with no credit card required. Build, customize, and download your resume as a PDF. A Pro plan exists for unlimited saves and premium templates, but it's not required to get a complete, usable resume." },
+    { q: "Can airesumi tailor my resume to a specific job description?", a: "That's the main thing it does. Paste the job description and your background, and the AI aligns your resume to match the keywords, skills, and priorities the employer listed. This is what gets resumes past ATS filters and in front of humans." },
+    { q: "How good are AI-generated resumes compared to writing one yourself?", a: "A well-prompted AI resume is typically stronger than what most people write on their own — not because AI is smarter, but because it doesn't second-guess itself or undersell experience. The key is giving it accurate information. airesumi asks the right questions so the output is specific to you, not generic." },
   ],
   features: [
     { title: "AI-Powered Content", desc: "Gemini-powered bullets, summary, and skills — tailored to the exact job description you paste." },

@@ -30,9 +30,12 @@ function ResumeExamplesIndex() {
       <Header />
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-6 py-12">
         <header className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-black text-[#111827]">Resume Examples by Role</h1>
+          <h1 className="text-4xl md:text-5xl font-black text-[#111827]">Free AI Resume Templates — ATS-Ready for Every Role</h1>
           <p className="mt-4 text-lg text-[#6B7280] max-w-2xl mx-auto">
-            Browse ATS-optimized resume examples with sample bullet points, key skills, and expert tips for each role.
+            Most resume templates look fine on screen and fall apart the moment they hit an ATS. Tables get scrambled. Columns confuse the parser. Every template here is tested to pass ATS scanning — pick the one that fits your role, fill in your details, and download as a PDF.
+          </p>
+          <p className="mt-3 text-base text-[#9CA3AF] max-w-xl mx-auto">
+            No "unlock to download." No watermarks. Just templates that work.
           </p>
         </header>
 
@@ -111,8 +114,8 @@ export const Route = createFileRoute("/resume-examples/")({
   loader: () => getPublishedRoleExamples(),
   head: () => ({
     meta: [
-      { title: "Resume Examples by Job Title & Industry | Airesumi" },
-      { name: "description", content: "Free ATS-optimized resume examples for every role. Sample bullet points, key skills, and expert writing tips by job title and industry." },
+      { title: "Free AI Resume Templates & Examples by Job Title | Airesumi" },
+      { name: "description", content: "Free ATS-optimized resume templates and examples for every role. Tested to pass ATS, no watermarks, download as PDF instantly." },
       { property: "og:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
       { property: "og:description", content: "Free ATS-optimized resume examples by role, with bullet points, skills, and tips." },
       { property: "og:type", content: "website" },

@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { motion, useScroll, useSpring } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { AdBanner } from "@/app/components/AdBanner";
 import {
   BookOpen, Clock, Calendar, ArrowRight, ArrowLeft, Share2, Twitter, Linkedin,
   Facebook, Link as LinkIcon, Check, Bookmark, ChevronUp, List,
@@ -357,6 +358,11 @@ function BlogPost() {
                 className="prose max-w-none"
                 dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
               />
+
+              {/* In-content ad */}
+              <AdBanner variant="medium-rectangle" className="!my-10" />
+
+
 
               {/* Tags */}
               {post.tags && (

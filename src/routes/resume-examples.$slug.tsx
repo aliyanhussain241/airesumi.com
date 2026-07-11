@@ -4,6 +4,7 @@ import { ArrowRight, Briefcase, CheckCircle2, Lightbulb, Sparkles, Target } from
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
+import { AdBanner } from "@/app/components/AdBanner";
 
 function RoleExamplePage() {
   const data = Route.useLoaderData() as ResumeRoleWithRelated;
@@ -128,6 +129,9 @@ function RoleExamplePage() {
             Start Free →
           </Link>
         </section>
+
+        {/* In-content ad */}
+        <AdBanner variant="medium-rectangle" className="!my-10" />
 
         {/* Related roles */}
         {related.length > 0 && (

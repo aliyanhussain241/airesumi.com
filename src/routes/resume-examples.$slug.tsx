@@ -130,6 +130,9 @@ function RoleExamplePage() {
           </Link>
         </section>
 
+        {/* In-content ad */}
+        <AdBanner variant="medium-rectangle" className="!my-10" />
+
         {/* Related roles */}
         {related.length > 0 && (
           <section>

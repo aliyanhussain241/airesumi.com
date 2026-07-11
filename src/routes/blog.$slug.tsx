@@ -359,6 +359,11 @@ function BlogPost() {
                 dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
               />
 
+              {/* In-content ad */}
+              <AdBanner variant="medium-rectangle" className="!my-10" />
+
+
+
               {/* Tags */}
               {post.tags && (
                 <div className="mt-10 pt-6 border-t border-[#F3F4F6] flex flex-wrap gap-2">

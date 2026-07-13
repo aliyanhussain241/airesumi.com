@@ -474,13 +474,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
       </svg>
 
       <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] print:hidden font-['Inter',sans-serif] ${isScrolled ? 'hdr-glass-scrolled' : 'hdr-glass'}`}>
-        <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 w-full h-full flex items-center justify-between gap-3">
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 no-underline"><Logo /></Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-0.5 flex-1">
+          {/* Desktop nav — only render at lg+ to prevent mid-width cramping */}
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
 
             <Link to="/"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>

@@ -669,11 +669,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   <span className="hidden xl:inline">{t('cta.myResumes')}</span>
                 </Link>
                 <Link to="/premium"
-                  title="Premium"
-                  aria-label="Premium"
+                  title="Pricing"
+                  aria-label="Pricing"
                   className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
                   <Sparkles size={16} />
-                  <span className="hidden xl:inline">Premium</span>
+                  <span className="hidden xl:inline">Pricing</span>
                 </Link>
                 <button onClick={handleLogout}
                   className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
@@ -938,7 +938,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                         onClick={() => setIsMobileOpen(false)}
                         className="flex items-center gap-3 min-h-[52px] px-4 rounded-2xl text-[15px] font-semibold text-[#EA580C] no-underline active:scale-[0.98] transition-all hover:bg-orange-50 dark:hover:bg-orange-500/10"
                       >
-                        <Sparkles size={18} className="text-[#EA580C]" /> Premium
+                        <Sparkles size={18} className="text-[#EA580C]" /> Pricing
                       </Link>
                       <button
                         onClick={() => { setIsMobileOpen(false); handleLogout(); }}

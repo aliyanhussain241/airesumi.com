@@ -676,7 +676,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 </button>
                 <Link to="/resume"
                   className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1024 ? t('cta.buildResume') : t('cta.start')}
+                  {width >= 1280 ? t('cta.buildResume') : t('cta.start')}
                 </Link>
               </div>
             ) : (

@@ -30,13 +30,20 @@ function ResumeExamplesIndex() {
       <Header />
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-6 py-12">
         <header className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-black text-[#111827]">Free AI Resume Templates — ATS-Ready for Every Role</h1>
-          <p className="mt-4 text-lg text-[#6B7280] max-w-2xl mx-auto">
-            Most resume templates look fine on screen and fall apart the moment they hit an ATS. Tables get scrambled. Columns confuse the parser. Every template here is tested to pass ATS scanning — pick the one that fits your role, fill in your details, and download as a PDF.
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF1EA] text-[#FF6321] text-xs font-semibold mb-4">
+            <Briefcase size={12} /> Resume examples by job title
+          </div>
+          <h1 className="text-4xl md:text-5xl font-black text-[#111827] tracking-tight">
+            Free ATS-Ready Resume Examples for Every Role
+          </h1>
+          <p className="mt-5 text-lg text-[#4B5563] max-w-2xl mx-auto leading-relaxed">
+            Most templates look fine on screen and fall apart the moment they hit an applicant tracking system. Tables get scrambled, columns confuse the parser, icons turn into gibberish. Every example here uses a single-column, parser-friendly structure — pick the role that fits, edit the content in our builder, and download a clean PDF.
           </p>
-          <p className="mt-3 text-base text-[#9CA3AF] max-w-xl mx-auto">
-            No "unlock to download." No watermarks. Just templates that work.
-          </p>
+          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-[#374151]">
+            <li className="inline-flex items-center gap-1.5"><span className="text-[#FF6321]">•</span> Real bullet points written for each role</li>
+            <li className="inline-flex items-center gap-1.5"><span className="text-[#FF6321]">•</span> Editable in the builder in one click</li>
+            <li className="inline-flex items-center gap-1.5"><span className="text-[#FF6321]">•</span> No watermarks, no paywall to download</li>
+          </ul>
         </header>
 
         {/* Filters */}

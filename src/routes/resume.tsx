@@ -227,7 +227,7 @@ function ResumeBuilder() {
         navigate({ to: "/interview-prep" });
         return;
       case Step.RESUME_EXAMPLES:
-        navigate({ to: "/examples" });
+        navigate({ to: "/resume-examples" });
         return;
       case Step.ABOUT:
         navigate({ to: "/about" });

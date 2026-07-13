@@ -1,34 +1,73 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useMemo, useState } from "react";
-import { ArrowRight, Briefcase, Filter, Search } from "lucide-react";
+import { ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap } from "lucide-react";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
 import { getPublishedRoleExamples, type ResumeRoleSummary } from "@/lib/resume-roles.functions";
+
+const FAQ = [
+  {
+    q: "Are these resume examples really free?",
+    a: "Yes. Every example is free to view, edit in the builder, and download as a PDF. No watermark, no paywall on export.",
+  },
+  {
+    q: "Will these resumes pass an ATS?",
+    a: "Every example uses a single-column, parser-friendly layout with plain text — no tables, columns, or icons that break applicant tracking systems.",
+  },
+  {
+    q: "Can I edit the bullet points?",
+    a: "Yes. Click 'Edit This Template' on any example and the builder opens pre-filled with that role's summary, bullets, and skills — all editable.",
+  },
+  {
+    q: "Do I need to sign up to download?",
+    a: "You can preview and edit any example without an account. A free account is only required to save resumes to your dashboard.",
+  },
+];
 
 function ResumeExamplesIndex() {
   const roles = Route.useLoaderData() as ResumeRoleSummary[];
   const [industry, setIndustry] = useState<string>("All");
   const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<"az" | "za" | "industry">("az");
 
-  const industries = useMemo(() => {
-    const set = new Set<string>();
-    roles.forEach((r) => r.industry && set.add(r.industry));
-    return ["All", ...Array.from(set).sort()];
+  const industriesWithCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    roles.forEach((r) => {
+      if (r.industry) counts.set(r.industry, (counts.get(r.industry) ?? 0) + 1);
+    });
+    const list = Array.from(counts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+    return [{ name: "All", count: roles.length }, ...list.map(([name, count]) => ({ name, count }))];
   }, [roles]);
 
   const filtered = useMemo(() => {
-    return roles.filter((r) => {
+    const out = roles.filter((r) => {
       if (industry !== "All" && r.industry !== industry) return false;
       if (query && !r.job_title.toLowerCase().includes(query.toLowerCase())) return false;
       return true;
     });
-  }, [roles, industry, query]);
+    if (sort === "az") out.sort((a, b) => a.job_title.localeCompare(b.job_title));
+    if (sort === "za") out.sort((a, b) => b.job_title.localeCompare(a.job_title));
+    if (sort === "industry") out.sort((a, b) => (a.industry ?? "").localeCompare(b.industry ?? "") || a.job_title.localeCompare(b.job_title));
+    return out;
+  }, [roles, industry, query, sort]);
+
+  const totalIndustries = industriesWithCounts.length - 1;
+  const hasActiveFilters = industry !== "All" || query.length > 0;
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Header />
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-6 py-12">
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#6B7280]">
+          <ol className="flex items-center gap-2">
+            <li><Link to="/" className="hover:text-[#FF6321]">Home</Link></li>
+            <li aria-hidden>/</li>
+            <li className="text-[#111827] font-medium">Resume Examples</li>
+          </ol>
+        </nav>
+
         <header className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF1EA] text-[#FF6321] text-xs font-semibold mb-4">
             <Briefcase size={12} /> Resume examples by job title
@@ -37,80 +76,204 @@ function ResumeExamplesIndex() {
             Free ATS-Ready Resume Examples for Every Role
           </h1>
           <p className="mt-5 text-lg text-[#4B5563] max-w-2xl mx-auto leading-relaxed">
-            Most templates look fine on screen and fall apart the moment they hit an applicant tracking system. Tables get scrambled, columns confuse the parser, icons turn into gibberish. Every example here uses a single-column, parser-friendly structure — pick the role that fits, edit the content in our builder, and download a clean PDF.
+            Every example uses a single-column, parser-friendly structure — pick the role that fits, edit the content in our builder, and download a clean PDF. No watermarks, no paywall.
           </p>
+
+          {/* Real, data-derived stats */}
+          <div className="mt-8 grid grid-cols-3 gap-3 max-w-xl mx-auto">
+            <div className="bg-white rounded-xl p-4 border border-[#E5E7EB]">
+              <div className="text-2xl font-black text-[#111827]">{roles.length}</div>
+              <div className="text-xs text-[#6B7280] mt-1">Role examples</div>
+            </div>
+            <div className="bg-white rounded-xl p-4 border border-[#E5E7EB]">
+              <div className="text-2xl font-black text-[#111827]">{totalIndustries}</div>
+              <div className="text-xs text-[#6B7280] mt-1">Industries</div>
+            </div>
+            <div className="bg-white rounded-xl p-4 border border-[#E5E7EB]">
+              <div className="text-2xl font-black text-[#111827]">Free</div>
+              <div className="text-xs text-[#6B7280] mt-1">PDF download</div>
+            </div>
+          </div>
+
           <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-[#374151]">
-            <li className="inline-flex items-center gap-1.5"><span className="text-[#FF6321]">•</span> Real bullet points written for each role</li>
-            <li className="inline-flex items-center gap-1.5"><span className="text-[#FF6321]">•</span> Editable in the builder in one click</li>
-            <li className="inline-flex items-center gap-1.5"><span className="text-[#FF6321]">•</span> No watermarks, no paywall to download</li>
+            <li className="inline-flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#FF6321]" /> Real bullets written per role</li>
+            <li className="inline-flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#FF6321]" /> One-click edit in the builder</li>
+            <li className="inline-flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#FF6321]" /> No watermarks, no paywall</li>
           </ul>
         </header>
 
-        {/* Filters */}
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-[#E5E7EB] mb-8 flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
-            <input
-              type="text"
-              placeholder="Search roles..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2.5 border border-[#E5E7EB] rounded-lg text-sm focus:outline-none focus:border-[#FF6321]"
-            />
+        {/* How it works */}
+        <section className="grid md:grid-cols-3 gap-4 mb-10">
+          {[
+            { icon: Search, title: "1. Find your role", desc: "Search or filter by industry to find a resume that matches your target job." },
+            { icon: Sparkles, title: "2. Edit in the builder", desc: "Click 'Edit This Template' — the builder opens pre-filled with the role's bullets and skills." },
+            { icon: Download, title: "3. Download PDF", desc: "Export a clean, single-column ATS-friendly PDF. No watermark, no signup wall." },
+          ].map((s, i) => (
+            <div key={i} className="bg-white rounded-2xl p-5 border border-[#E5E7EB]">
+              <div className="w-9 h-9 rounded-lg bg-[#FFF1EA] text-[#FF6321] flex items-center justify-center mb-3">
+                <s.icon size={18} />
+              </div>
+              <div className="font-bold text-[#111827] text-sm">{s.title}</div>
+              <p className="text-sm text-[#6B7280] mt-1 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </section>
+
+        {/* Filters — sticky */}
+        <div className="sticky top-16 z-20 bg-[#F8FAFC]/95 backdrop-blur -mx-6 px-6 py-3 mb-6">
+          <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#E5E7EB] flex flex-col lg:flex-row gap-3">
+            <div className="flex-1 relative">
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
+              <input
+                type="text"
+                placeholder="Search roles by title..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="w-full pl-9 pr-9 py-2.5 border border-[#E5E7EB] rounded-lg text-sm focus:outline-none focus:border-[#FF6321]"
+              />
+              {query && (
+                <button
+                  onClick={() => setQuery("")}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-[#9CA3AF] hover:text-[#FF6321]"
+                  aria-label="Clear search"
+                >
+                  <X size={14} />
+                </button>
+              )}
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Sort</label>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as typeof sort)}
+                className="text-sm border border-[#E5E7EB] rounded-lg px-2.5 py-2 bg-white focus:outline-none focus:border-[#FF6321]"
+              >
+                <option value="az">Title A–Z</option>
+                <option value="za">Title Z–A</option>
+                <option value="industry">By industry</option>
+              </select>
+            </div>
           </div>
-          <div className="flex items-center gap-2 flex-wrap">
+
+          <div className="mt-3 flex items-center gap-2 flex-wrap">
             <Filter size={14} className="text-[#6B7280]" />
-            {industries.map((ind) => (
+            {industriesWithCounts.map((ind) => (
               <button
-                key={ind}
-                onClick={() => setIndustry(ind)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                  industry === ind
+                key={ind.name}
+                onClick={() => setIndustry(ind.name)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors inline-flex items-center gap-1.5 ${
+                  industry === ind.name
                     ? "bg-[#FF6321] text-white"
-                    : "bg-[#F3F4F6] text-[#374151] hover:bg-[#E5E7EB]"
+                    : "bg-white border border-[#E5E7EB] text-[#374151] hover:border-[#FF6321]"
                 }`}
               >
-                {ind}
+                {ind.name}
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${industry === ind.name ? "bg-white/20" : "bg-[#F3F4F6] text-[#6B7280]"}`}>
+                  {ind.count}
+                </span>
               </button>
             ))}
+            {hasActiveFilters && (
+              <button
+                onClick={() => { setIndustry("All"); setQuery(""); }}
+                className="ml-1 text-xs font-semibold text-[#FF6321] hover:underline inline-flex items-center gap-1"
+              >
+                <X size={12} /> Clear
+              </button>
+            )}
+          </div>
+
+          <div className="mt-2 text-xs text-[#6B7280]">
+            Showing <span className="font-semibold text-[#111827]">{filtered.length}</span> of {roles.length} examples
           </div>
         </div>
 
         {/* Grid */}
         {filtered.length === 0 ? (
-          <div className="text-center py-16 text-[#6B7280]">
-            No role examples match your filters yet.
+          <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-[#E5E7EB]">
+            <FileText size={36} className="mx-auto text-[#D1D5DB] mb-3" />
+            <div className="font-semibold text-[#111827]">No roles match your filters</div>
+            <p className="text-sm text-[#6B7280] mt-1">Try clearing filters or searching a different keyword.</p>
+            <button
+              onClick={() => { setIndustry("All"); setQuery(""); }}
+              className="mt-4 px-4 py-2 rounded-lg bg-[#FF6321] text-white text-sm font-semibold hover:bg-[#e5561a]"
+            >
+              Reset filters
+            </button>
           </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((r) => (
-              <Link
+            {filtered.map((r, idx) => (
+              <motion.div
                 key={r.slug}
-                to="/resume-examples/$slug"
-                params={{ slug: r.slug }}
-                className="group block bg-white p-6 rounded-2xl border border-[#E5E7EB] hover:border-[#FF6321] hover:shadow-md transition-all no-underline"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, delay: Math.min(idx * 0.02, 0.2) }}
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <Briefcase size={16} className="text-[#FF6321]" />
-                  {r.industry && (
-                    <span className="text-[10px] uppercase tracking-wide font-semibold text-[#FF6321]">
-                      {r.industry}
-                    </span>
+                <Link
+                  to="/resume-examples/$slug"
+                  params={{ slug: r.slug }}
+                  className="group block h-full bg-white p-6 rounded-2xl border border-[#E5E7EB] hover:border-[#FF6321] hover:shadow-md transition-all no-underline"
+                >
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-[#FFF1EA] flex items-center justify-center">
+                      <Briefcase size={14} className="text-[#FF6321]" />
+                    </div>
+                    {r.industry && (
+                      <span className="text-[10px] uppercase tracking-wide font-semibold text-[#FF6321]">
+                        {r.industry}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="font-bold text-lg text-[#111827] group-hover:text-[#FF6321] transition-colors">
+                    {r.job_title}
+                  </h2>
+                  {r.seo_description && (
+                    <p className="mt-2 text-sm text-[#6B7280] line-clamp-3">{r.seo_description}</p>
                   )}
-                </div>
-                <h2 className="font-bold text-lg text-[#111827] group-hover:text-[#FF6321] transition-colors">
-                  {r.job_title}
-                </h2>
-                {r.seo_description && (
-                  <p className="mt-2 text-sm text-[#6B7280] line-clamp-3">{r.seo_description}</p>
-                )}
-                <div className="mt-4 text-sm font-semibold text-[#FF6321] inline-flex items-center gap-1">
-                  View example <ArrowRight size={13} />
-                </div>
-              </Link>
+                  <div className="mt-4 pt-4 border-t border-[#F3F4F6] flex items-center justify-between">
+                    <span className="text-sm font-semibold text-[#FF6321] inline-flex items-center gap-1">
+                      View example <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                    </span>
+                    <span className="text-[10px] text-[#9CA3AF] inline-flex items-center gap-1">
+                      <Zap size={10} /> ATS-ready
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
         )}
+
+        {/* CTA */}
+        <section className="mt-14 rounded-2xl bg-gradient-to-br from-[#FF6321] to-[#FF8A4C] p-8 md:p-10 text-white text-center">
+          <h2 className="text-2xl md:text-3xl font-black">Can't find your exact role?</h2>
+          <p className="mt-2 text-white/90 max-w-xl mx-auto">
+            Start from a blank template and our AI builder will help you write bullet points tailored to any job description.
+          </p>
+          <Link
+            to="/resume"
+            className="inline-flex items-center gap-2 mt-5 px-5 py-3 rounded-xl bg-white text-[#FF6321] font-bold text-sm hover:bg-white/95 no-underline"
+          >
+            Build from scratch <ArrowRight size={16} />
+          </Link>
+        </section>
+
+        {/* FAQ */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-black text-[#111827] mb-6 text-center">Frequently asked questions</h2>
+          <div className="max-w-3xl mx-auto space-y-3">
+            {FAQ.map((f, i) => (
+              <details key={i} className="group bg-white rounded-xl border border-[#E5E7EB] p-5 open:border-[#FF6321] transition-colors">
+                <summary className="cursor-pointer font-semibold text-[#111827] flex items-center justify-between list-none">
+                  <span>{f.q}</span>
+                  <span className="text-[#FF6321] text-xl leading-none transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-3 text-sm text-[#4B5563] leading-relaxed">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
       </motion.main>
       <Footer />
     </div>
@@ -119,31 +282,62 @@ function ResumeExamplesIndex() {
 
 export const Route = createFileRoute("/resume-examples/")({
   loader: () => getPublishedRoleExamples(),
-  head: () => ({
-    meta: [
-      { title: "Free AI Resume Templates & Examples by Job Title | Airesumi" },
-      { name: "description", content: "Free ATS-optimized resume templates and examples for every role. Tested to pass ATS, no watermarks, download as PDF instantly." },
-      { property: "og:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
-      { property: "og:description", content: "Free ATS-optimized resume examples by role, with bullet points, skills, and tips." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://airesumi.com/resume-examples" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
-      { name: "twitter:description", content: "Free ATS-optimized resume examples by role." },
-    ],
-    links: [{ rel: "canonical", href: "https://airesumi.com/resume-examples" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "Resume Examples by Role",
-          url: "https://airesumi.com/resume-examples",
-        }),
-      },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const roles = (loaderData ?? []) as ResumeRoleSummary[];
+    return {
+      meta: [
+        { title: "Free AI Resume Templates & Examples by Job Title | Airesumi" },
+        { name: "description", content: "Free ATS-optimized resume templates and examples for every role. Tested to pass ATS, no watermarks, download as PDF instantly." },
+        { property: "og:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
+        { property: "og:description", content: "Free ATS-optimized resume examples by role, with bullet points, skills, and tips." },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://airesumi.com/resume-examples" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
+        { name: "twitter:description", content: "Free ATS-optimized resume examples by role." },
+      ],
+      links: [{ rel: "canonical", href: "https://airesumi.com/resume-examples" }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "Resume Examples by Role",
+            url: "https://airesumi.com/resume-examples",
+            hasPart: roles.slice(0, 50).map((r) => ({
+              "@type": "CreativeWork",
+              name: `${r.job_title} Resume Example`,
+              url: `https://airesumi.com/resume-examples/${r.slug}`,
+            })),
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://airesumi.com/" },
+              { "@type": "ListItem", position: 2, name: "Resume Examples", item: "https://airesumi.com/resume-examples" },
+            ],
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQ.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        },
+      ],
+    };
+  },
   errorComponent: ({ error }) => (
     <div className="p-10 text-center">
       <h1 className="text-2xl font-bold mb-2">Unable to load examples</h1>

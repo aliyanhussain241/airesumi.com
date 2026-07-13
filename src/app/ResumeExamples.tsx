@@ -1,56 +1,51 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Search, ArrowRight, CheckCircle2, Download, Star, Filter,
-  Briefcase, FileText, X, LayoutGrid, List, Heart, TrendingUp,
-  SlidersHorizontal, ChevronLeft, ChevronRight, Sparkles, Eye, Bookmark,
-  Award, Users, Clock, Zap
+  Search, ArrowRight, CheckCircle2, Filter,
+  FileText, X, LayoutGrid, List, Heart, TrendingUp,
+  ChevronLeft, ChevronRight, Sparkles, Clock, Zap
 } from 'lucide-react';
 
 const resumeExamples = [
-  { title: "Software Engineer Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", atsScore: 96, downloads: 34200, rating: 4.9, badge: "Most Popular", highlights: ["Landed jobs at Google, Meta, Amazon", "Skills-first ATS format", "Used by 34,000+ engineers"], keywords: ["Python", "JavaScript", "AWS", "React", "System Design", "Agile"] },
-  { title: "Data Scientist Resume Example", industry: "Technology", level: "Senior", format: "Chronological", atsScore: 94, downloads: 18700, rating: 4.8, badge: "New", highlights: ["Quantified ML project results", "PhD and non-PhD versions", "98% recruiter approval rate"], keywords: ["Python", "Machine Learning", "SQL", "TensorFlow", "Data Analysis", "Statistics"] },
-  { title: "Entry Level Resume Example — No Experience", industry: "General", level: "Entry Level", format: "Functional", atsScore: 91, downloads: 28900, rating: 4.8, badge: "Most Popular", highlights: ["Perfect for fresh graduates", "Skills-based format hides lack of experience", "Works for any industry"], keywords: ["Communication", "Teamwork", "Microsoft Office", "Problem Solving", "Leadership", "Adaptability"] },
-  { title: "Registered Nurse Resume Example", industry: "Healthcare", level: "Mid Level", format: "Chronological", atsScore: 95, downloads: 22100, rating: 4.9, badge: "Popular", highlights: ["Hospital and clinic versions", "Licenses and certifications section", "HIPAA-compliant language"], keywords: ["Patient Care", "EMR Systems", "HIPAA", "Critical Care", "BLS Certified", "Clinical Assessment"] },
-  { title: "Marketing Manager Resume Example", industry: "Marketing", level: "Senior", format: "Chronological", atsScore: 93, downloads: 15400, rating: 4.7, badge: "Popular", highlights: ["ROI-focused achievement bullets", "Digital and traditional marketing", "B2B and B2C versions"], keywords: ["SEO", "Google Analytics", "Campaign Management", "Content Strategy", "CRM", "Lead Generation"] },
-  { title: "Financial Analyst Resume Example", industry: "Finance", level: "Mid Level", format: "Chronological", atsScore: 94, downloads: 12800, rating: 4.8, badge: "New", highlights: ["CFA and non-CFA versions", "Quantified financial impact", "Investment banking format"], keywords: ["Financial Modeling", "Excel", "Bloomberg", "Valuation", "DCF Analysis", "Risk Assessment"] },
-  { title: "UX Designer Resume Example", industry: "Design", level: "Mid Level", format: "Combination", atsScore: 92, downloads: 11200, rating: 4.7, badge: "Popular", highlights: ["Portfolio link section included", "Design tools prominently featured", "User research focused"], keywords: ["Figma", "User Research", "Prototyping", "Wireframing", "Usability Testing", "Adobe XD"] },
-  { title: "Product Manager Resume Example", industry: "Technology", level: "Senior", format: "Chronological", atsScore: 95, downloads: 16300, rating: 4.9, badge: "Most Popular", highlights: ["Metrics-driven achievement format", "Used at FAANG and startups", "B2B and B2C versions"], keywords: ["Product Roadmap", "Agile", "Stakeholder Management", "User Stories", "KPIs", "Go-to-Market"] },
-  { title: "Sales Executive Resume Example", industry: "Sales", level: "Senior", format: "Chronological", atsScore: 93, downloads: 13600, rating: 4.8, badge: "Popular", highlights: ["Revenue numbers front and center", "Quota attainment highlighted", "SaaS and enterprise versions"], keywords: ["Salesforce", "CRM", "Revenue Growth", "Pipeline Management", "B2B Sales", "Account Management"] },
-  { title: "HR Manager Resume Example", industry: "HR", level: "Mid Level", format: "Chronological", atsScore: 91, downloads: 9800, rating: 4.7, badge: "New", highlights: ["Talent acquisition focused", "SHRM certification section", "Culture and DEI experience"], keywords: ["Talent Acquisition", "HRIS", "Employee Relations", "Performance Management", "Onboarding", "SHRM"] },
-  { title: "Graphic Designer Resume Example", industry: "Design", level: "Entry Level", format: "Combination", atsScore: 90, downloads: 8900, rating: 4.6, badge: "Popular", highlights: ["Portfolio-first layout", "Creative yet ATS-safe format", "Print and digital design versions"], keywords: ["Adobe Illustrator", "Photoshop", "InDesign", "Typography", "Brand Identity", "Print Design"] },
-  { title: "Teacher Resume Example", industry: "Education", level: "Mid Level", format: "Chronological", atsScore: 92, downloads: 14200, rating: 4.8, badge: "Popular", highlights: ["K-12 and university versions", "Classroom management highlighted", "Curriculum development focus"], keywords: ["Curriculum Development", "Classroom Management", "Google Classroom", "IEP", "Differentiated Instruction", "STEM"] },
-  { title: "Business Analyst Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", atsScore: 93, downloads: 11700, rating: 4.7, badge: "Popular", highlights: ["Process improvement metrics", "JIRA and Agile experience", "Stakeholder communication focus"], keywords: ["Business Analysis", "JIRA", "SQL", "Process Improvement", "Requirements Gathering", "Agile"] },
-  { title: "DevOps Engineer Resume Example", industry: "Technology", level: "Senior", format: "Chronological", atsScore: 96, downloads: 10400, rating: 4.9, badge: "New", highlights: ["CI/CD pipeline experience", "Cloud certifications section", "Infrastructure as code focused"], keywords: ["AWS", "Docker", "Kubernetes", "Jenkins", "Terraform", "CI/CD"] },
-  { title: "Content Writer Resume Example", industry: "Creative", level: "Entry Level", format: "Combination", atsScore: 89, downloads: 9100, rating: 4.6, badge: "Popular", highlights: ["Portfolio and bylines section", "SEO writing skills highlighted", "Freelance and agency versions"], keywords: ["SEO Writing", "Content Strategy", "WordPress", "Copywriting", "Social Media", "Editorial Calendar"] },
-  { title: "Project Manager Resume Example", industry: "Engineering", level: "Senior", format: "Chronological", atsScore: 94, downloads: 13300, rating: 4.8, badge: "Popular", highlights: ["PMP certification highlighted", "Budget and scope management", "Cross-functional team leadership"], keywords: ["PMP", "Agile", "Scrum", "Risk Management", "Stakeholder Communication", "MS Project"] },
-  { title: "Accountant Resume Example", industry: "Finance", level: "Mid Level", format: "Chronological", atsScore: 92, downloads: 10600, rating: 4.7, badge: "Popular", highlights: ["CPA and non-CPA versions", "Tax and audit experience", "Big 4 and corporate formats"], keywords: ["QuickBooks", "CPA", "Tax Preparation", "Financial Reporting", "GAAP", "Audit"] },
-  { title: "Customer Success Manager Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", atsScore: 91, downloads: 8700, rating: 4.7, badge: "New", highlights: ["NPS and retention metrics", "SaaS customer success format", "Onboarding and churn reduction"], keywords: ["Customer Retention", "NPS", "Salesforce", "Churn Reduction", "Onboarding", "SaaS"] },
-  { title: "Frontend Developer Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", atsScore: 95, downloads: 17800, rating: 4.9, badge: "Most Popular", highlights: ["GitHub portfolio section", "React and Vue.js focused", "Performance optimization metrics"], keywords: ["React", "JavaScript", "TypeScript", "CSS", "Vue.js", "REST APIs"] },
-  { title: "Operations Manager Resume Example", industry: "Engineering", level: "Senior", format: "Chronological", atsScore: 93, downloads: 9400, rating: 4.7, badge: "Popular", highlights: ["Supply chain and logistics versions", "Cost reduction achievements", "Team size and P&L responsibility"], keywords: ["Operations Management", "Supply Chain", "Lean Six Sigma", "P&L", "Process Improvement", "KPIs"] },
-  { title: "Social Media Manager Resume Example", industry: "Marketing", level: "Entry Level", format: "Combination", atsScore: 90, downloads: 12100, rating: 4.7, badge: "Popular", highlights: ["Follower growth metrics", "Platform-specific expertise", "Content calendar management"], keywords: ["Instagram", "TikTok", "Content Creation", "Analytics", "Community Management", "Paid Social"] },
-  { title: "Civil Engineer Resume Example", industry: "Engineering", level: "Mid Level", format: "Chronological", atsScore: 92, downloads: 7800, rating: 4.6, badge: "New", highlights: ["PE license section", "Infrastructure project scale", "AutoCAD and BIM software"], keywords: ["AutoCAD", "BIM", "Structural Analysis", "Project Management", "PE License", "Construction Management"] },
-  { title: "Career Change Resume Example", industry: "General", level: "Career Change", format: "Functional", atsScore: 90, downloads: 19400, rating: 4.8, badge: "Most Popular", highlights: ["Transferable skills format", "Works for any industry switch", "Hides employment gaps naturally"], keywords: ["Transferable Skills", "Leadership", "Communication", "Problem Solving", "Adaptability", "Project Management"] },
-  { title: "Digital Marketing Specialist Resume Example", industry: "Marketing", level: "Mid Level", format: "Chronological", atsScore: 92, downloads: 11300, rating: 4.7, badge: "Popular", highlights: ["PPC and SEO metrics", "Google Ads certified format", "ROAS and CPA achievements"], keywords: ["Google Ads", "SEO", "PPC", "Facebook Ads", "Email Marketing", "Google Analytics"] },
-  { title: "Executive Resume Example — C-Suite", industry: "General", level: "Executive", format: "Two Page", atsScore: 94, downloads: 8200, rating: 4.9, badge: "Premium", highlights: ["Board-ready format", "P&L and company growth focus", "CEO, COO, CFO versions"], keywords: ["Executive Leadership", "Board Presentations", "Strategic Planning", "P&L Management", "M&A", "Organizational Growth"] }
+  { title: "Software Engineer Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["Skills-first ATS-friendly format", "Clear technical stack section", "Quantified engineering impact"], keywords: ["Python", "JavaScript", "AWS", "React", "System Design", "Agile"] },
+  { title: "Data Scientist Resume Example", industry: "Technology", level: "Senior", format: "Chronological", badge: "New", highlights: ["Quantified ML project results", "PhD and non-PhD versions", "Portfolio-friendly layout"], keywords: ["Python", "Machine Learning", "SQL", "TensorFlow", "Data Analysis", "Statistics"] },
+  { title: "Entry Level Resume Example — No Experience", industry: "General", level: "Entry Level", format: "Functional", badge: "Popular", highlights: ["Built for fresh graduates", "Skills-based format for limited experience", "Works across industries"], keywords: ["Communication", "Teamwork", "Microsoft Office", "Problem Solving", "Leadership", "Adaptability"] },
+  { title: "Registered Nurse Resume Example", industry: "Healthcare", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["Hospital and clinic versions", "Licenses and certifications section", "HIPAA-conscious phrasing"], keywords: ["Patient Care", "EMR Systems", "HIPAA", "Critical Care", "BLS Certified", "Clinical Assessment"] },
+  { title: "Marketing Manager Resume Example", industry: "Marketing", level: "Senior", format: "Chronological", badge: "Popular", highlights: ["ROI-focused achievement bullets", "Digital and traditional marketing", "B2B and B2C versions"], keywords: ["SEO", "Google Analytics", "Campaign Management", "Content Strategy", "CRM", "Lead Generation"] },
+  { title: "Financial Analyst Resume Example", industry: "Finance", level: "Mid Level", format: "Chronological", badge: "New", highlights: ["CFA and non-CFA versions", "Quantified financial impact", "Investment banking format"], keywords: ["Financial Modeling", "Excel", "Bloomberg", "Valuation", "DCF Analysis", "Risk Assessment"] },
+  { title: "UX Designer Resume Example", industry: "Design", level: "Mid Level", format: "Combination", badge: "Popular", highlights: ["Portfolio link section included", "Design tools prominently featured", "User research focused"], keywords: ["Figma", "User Research", "Prototyping", "Wireframing", "Usability Testing", "Adobe XD"] },
+  { title: "Product Manager Resume Example", industry: "Technology", level: "Senior", format: "Chronological", badge: "Popular", highlights: ["Metrics-driven achievement format", "Works for startups and enterprise", "B2B and B2C versions"], keywords: ["Product Roadmap", "Agile", "Stakeholder Management", "User Stories", "KPIs", "Go-to-Market"] },
+  { title: "Sales Executive Resume Example", industry: "Sales", level: "Senior", format: "Chronological", badge: "Popular", highlights: ["Revenue numbers front and center", "Quota attainment highlighted", "SaaS and enterprise versions"], keywords: ["Salesforce", "CRM", "Revenue Growth", "Pipeline Management", "B2B Sales", "Account Management"] },
+  { title: "HR Manager Resume Example", industry: "HR", level: "Mid Level", format: "Chronological", badge: "New", highlights: ["Talent acquisition focused", "SHRM certification section", "Culture and DEI experience"], keywords: ["Talent Acquisition", "HRIS", "Employee Relations", "Performance Management", "Onboarding", "SHRM"] },
+  { title: "Graphic Designer Resume Example", industry: "Design", level: "Entry Level", format: "Combination", badge: "Popular", highlights: ["Portfolio-first layout", "Creative yet ATS-safe format", "Print and digital design versions"], keywords: ["Adobe Illustrator", "Photoshop", "InDesign", "Typography", "Brand Identity", "Print Design"] },
+  { title: "Teacher Resume Example", industry: "Education", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["K-12 and university versions", "Classroom management highlighted", "Curriculum development focus"], keywords: ["Curriculum Development", "Classroom Management", "Google Classroom", "IEP", "Differentiated Instruction", "STEM"] },
+  { title: "Business Analyst Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["Process improvement metrics", "JIRA and Agile experience", "Stakeholder communication focus"], keywords: ["Business Analysis", "JIRA", "SQL", "Process Improvement", "Requirements Gathering", "Agile"] },
+  { title: "DevOps Engineer Resume Example", industry: "Technology", level: "Senior", format: "Chronological", badge: "New", highlights: ["CI/CD pipeline experience", "Cloud certifications section", "Infrastructure as code focused"], keywords: ["AWS", "Docker", "Kubernetes", "Jenkins", "Terraform", "CI/CD"] },
+  { title: "Content Writer Resume Example", industry: "Creative", level: "Entry Level", format: "Combination", badge: "Popular", highlights: ["Portfolio and bylines section", "SEO writing skills highlighted", "Freelance and agency versions"], keywords: ["SEO Writing", "Content Strategy", "WordPress", "Copywriting", "Social Media", "Editorial Calendar"] },
+  { title: "Project Manager Resume Example", industry: "Engineering", level: "Senior", format: "Chronological", badge: "Popular", highlights: ["PMP certification highlighted", "Budget and scope management", "Cross-functional team leadership"], keywords: ["PMP", "Agile", "Scrum", "Risk Management", "Stakeholder Communication", "MS Project"] },
+  { title: "Accountant Resume Example", industry: "Finance", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["CPA and non-CPA versions", "Tax and audit experience", "Big 4 and corporate formats"], keywords: ["QuickBooks", "CPA", "Tax Preparation", "Financial Reporting", "GAAP", "Audit"] },
+  { title: "Customer Success Manager Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", badge: "New", highlights: ["NPS and retention metrics", "SaaS customer success format", "Onboarding and churn reduction"], keywords: ["Customer Retention", "NPS", "Salesforce", "Churn Reduction", "Onboarding", "SaaS"] },
+  { title: "Frontend Developer Resume Example", industry: "Technology", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["GitHub portfolio section", "React and Vue.js focused", "Performance optimization metrics"], keywords: ["React", "JavaScript", "TypeScript", "CSS", "Vue.js", "REST APIs"] },
+  { title: "Operations Manager Resume Example", industry: "Engineering", level: "Senior", format: "Chronological", badge: "Popular", highlights: ["Supply chain and logistics versions", "Cost reduction achievements", "Team size and P&L responsibility"], keywords: ["Operations Management", "Supply Chain", "Lean Six Sigma", "P&L", "Process Improvement", "KPIs"] },
+  { title: "Social Media Manager Resume Example", industry: "Marketing", level: "Entry Level", format: "Combination", badge: "Popular", highlights: ["Follower growth metrics", "Platform-specific expertise", "Content calendar management"], keywords: ["Instagram", "TikTok", "Content Creation", "Analytics", "Community Management", "Paid Social"] },
+  { title: "Civil Engineer Resume Example", industry: "Engineering", level: "Mid Level", format: "Chronological", badge: "New", highlights: ["PE license section", "Infrastructure project scale", "AutoCAD and BIM software"], keywords: ["AutoCAD", "BIM", "Structural Analysis", "Project Management", "PE License", "Construction Management"] },
+  { title: "Career Change Resume Example", industry: "General", level: "Career Change", format: "Functional", badge: "Popular", highlights: ["Transferable skills format", "Works for any industry switch", "Handles employment gaps"], keywords: ["Transferable Skills", "Leadership", "Communication", "Problem Solving", "Adaptability", "Project Management"] },
+  { title: "Digital Marketing Specialist Resume Example", industry: "Marketing", level: "Mid Level", format: "Chronological", badge: "Popular", highlights: ["PPC and SEO metrics", "Google Ads certified format", "ROAS and CPA achievements"], keywords: ["Google Ads", "SEO", "PPC", "Facebook Ads", "Email Marketing", "Google Analytics"] },
+  { title: "Executive Resume Example — C-Suite", industry: "General", level: "Executive", format: "Two Page", badge: "Premium", highlights: ["Board-ready format", "P&L and company growth focus", "CEO, COO, CFO versions"], keywords: ["Executive Leadership", "Board Presentations", "Strategic Planning", "P&L Management", "M&A", "Organizational Growth"] }
 ];
 
-type SortKey = 'popular' | 'rating' | 'ats' | 'az';
+type SortKey = 'az' | 'za';
 type View = 'grid' | 'list';
 const PAGE_SIZE = 9;
 
 const industries = ["All", "Technology", "Healthcare", "Finance", "Marketing", "Design", "Education", "Engineering", "Sales", "HR", "Creative", "General"];
 const levels = ["All", "Entry Level", "Mid Level", "Senior", "Executive", "Career Change"];
 
-function fmt(n: number) {
-  return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : `${n}`;
-}
-
 export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (step: any) => void, onLoadTemplate?: (resumeData: any) => void }) {
   const [industry, setIndustry] = useState('All');
   const [level, setLevel] = useState('All');
   const [query, setQuery] = useState('');
-  const [sort, setSort] = useState<SortKey>('popular');
+  const [sort, setSort] = useState<SortKey>('az');
   const [view, setView] = useState<View>('grid');
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState<any>(null);
@@ -79,10 +74,8 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
       const mf = !showFavs || favs.includes(r.title);
       return mi && ml && mq && mf;
     });
-    if (sort === 'popular') list.sort((a, b) => b.downloads - a.downloads);
-    if (sort === 'rating') list.sort((a, b) => b.rating - a.rating);
-    if (sort === 'ats') list.sort((a, b) => b.atsScore - a.atsScore);
     if (sort === 'az') list.sort((a, b) => a.title.localeCompare(b.title));
+    if (sort === 'za') list.sort((a, b) => b.title.localeCompare(a.title));
     return list;
   }, [industry, level, query, sort, showFavs, favs]);
 
@@ -90,7 +83,10 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-  const featured = resumeExamples.reduce((a, b) => b.downloads > a.downloads ? b : a);
+  const featured = resumeExamples[0];
+
+  const totalExamples = resumeExamples.length;
+  const totalIndustries = useMemo(() => new Set(resumeExamples.map(r => r.industry)).size, []);
 
   const allKeywords = useMemo(() => {
     const map = new Map<string, number>();
@@ -98,7 +94,7 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
     return [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
   }, []);
 
-  const trending = [...resumeExamples].sort((a, b) => b.downloads - a.downloads).slice(0, 5);
+  const featuredList = resumeExamples.slice(0, 5);
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-[68px] font-sans">
@@ -112,14 +108,25 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           <div className="flex flex-col gap-6 mb-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-semibold mb-4">
-                <Sparkles className="w-3.5 h-3.5" /> ATS-Optimized Resume Examples
+                <Sparkles className="w-3.5 h-3.5" /> ATS-Friendly Resume Examples
               </div>
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-4 max-w-3xl">
-                Resume Examples that <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">get interviews</span> in 2026
+                Resume examples that <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">get interviews</span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-                Browse hand-crafted resume samples by job title, industry, and experience level — every one recruiter-approved and ATS-safe.
+                Browse hand-crafted resume samples by job title, industry, and experience level — every one built with ATS-friendly formatting principles.
               </p>
+              <div className="mt-6 flex flex-wrap gap-3 text-sm">
+                <span className="px-3 py-1.5 rounded-full bg-muted font-semibold">
+                  {totalExamples} examples
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-muted font-semibold">
+                  {totalIndustries} industries
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-muted font-semibold">
+                  {levels.length - 1} experience levels
+                </span>
+              </div>
             </div>
           </div>
 
@@ -130,13 +137,14 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
             <div className="relative flex flex-col md:flex-row gap-8 items-start md:items-center">
               <div className="flex-1">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/20 backdrop-blur text-xs font-bold uppercase tracking-wider mb-4">
-                  <TrendingUp className="w-3 h-3" /> #1 This Week
+                  <TrendingUp className="w-3 h-3" /> Featured
                 </div>
                 <h2 className="text-3xl md:text-4xl font-extrabold mb-3 leading-tight">{featured.title}</h2>
                 <p className="text-white/90 text-base md:text-lg mb-5 max-w-xl">{featured.highlights[0]}. {featured.highlights[1]}.</p>
-                <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
-                  <span className="flex items-center gap-1.5"><Star className="w-4 h-4 fill-white" /> {featured.rating}</span>
-                  <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4" /> {featured.atsScore}% ATS</span>
+                <div className="flex flex-wrap items-center gap-3 text-sm font-medium">
+                  <span className="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur">{featured.industry}</span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur">{featured.level}</span>
+                  <span className="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur">{featured.format}</span>
                 </div>
 
               </div>
@@ -157,10 +165,8 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             <select value={sort} onChange={e => setSort(e.target.value as SortKey)} className="px-3 py-2 rounded-full border border-border bg-background text-sm font-medium focus:border-orange-500 outline-none">
-              <option value="popular">Most Popular</option>
-              <option value="rating">Top Rated</option>
-              <option value="ats">Highest ATS</option>
               <option value="az">A–Z</option>
+              <option value="za">Z–A</option>
             </select>
             <button onClick={() => setShowFavs(v => !v)} className={`px-3 py-2 rounded-full border text-sm font-medium flex items-center gap-1.5 transition-colors ${showFavs ? 'bg-orange-500 text-white border-orange-500' : 'border-border bg-background hover:border-orange-500'}`}>
               <Heart className={`w-4 h-4 ${showFavs ? 'fill-current' : ''}`} /> {favs.length}
@@ -227,9 +233,9 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
 
         {/* Sidebar */}
         <aside className="space-y-6 lg:sticky lg:top-[220px] lg:self-start">
-          <SidebarCard title="Trending Now" icon={<TrendingUp className="w-4 h-4" />}>
+          <SidebarCard title="Featured Examples" icon={<TrendingUp className="w-4 h-4" />}>
             <ol className="space-y-3">
-              {trending.map((r, i) => (
+              {featuredList.map((r, i) => (
                 <li key={r.title}>
                   <button onClick={() => setSelected(r)} className="flex items-start gap-3 w-full text-left group">
                     <span className="text-2xl font-extrabold text-orange-500 leading-none w-6">{i + 1}</span>
@@ -269,10 +275,10 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           <p className="text-muted-foreground mb-10 max-w-2xl">Four things every recruiter looks for — and every ATS system scores against.</p>
           <div className="grid md:grid-cols-4 gap-5">
             {[
-              { i: <Clock className="w-5 h-5" />, t: "Keep it 1–2 pages", d: "Recruiters spend 6 seconds on the first scan. Every line must earn its place." },
-              { i: <Search className="w-5 h-5" />, t: "Mirror the job keywords", d: "75% of resumes are filtered by ATS. Use the exact terms from the posting." },
-              { i: <TrendingUp className="w-5 h-5" />, t: "Quantify everything", d: "‘Grew revenue 40%’ beats ‘managed sales.’ Numbers make callbacks 40% more likely." },
-              { i: <Zap className="w-5 h-5" />, t: "Tailor per role", d: "One resume for every job kills your interview rate. AI can retarget in 2 minutes." }
+              { i: <Clock className="w-5 h-5" />, t: "Keep it 1–2 pages", d: "Recruiters spend seconds on the first scan. Every line should earn its place." },
+              { i: <Search className="w-5 h-5" />, t: "Mirror the job keywords", d: "Most resumes are filtered by ATS. Use the exact terms from the posting." },
+              { i: <TrendingUp className="w-5 h-5" />, t: "Quantify everything", d: "‘Grew revenue 40%’ beats ‘managed sales.’ Numbers make bullets more credible." },
+              { i: <Zap className="w-5 h-5" />, t: "Tailor per role", d: "One resume for every job hurts your interview rate. AI can retarget in 2 minutes." }
             ].map((t, i) => (
               <div key={i} className="p-6 rounded-2xl border border-border bg-card hover:border-orange-500/50 hover:shadow-lg transition-all">
                 <div className="w-10 h-10 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center mb-4">{t.i}</div>
@@ -291,9 +297,9 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
           <p className="text-muted-foreground text-center mb-10">Everything about picking and using a resume example.</p>
           <div className="space-y-3">
             {[
-              { q: "What is the best resume format in 2025?", a: "Reverse-chronological works for most people. Career changers and long gaps benefit from functional or combination formats. Our examples cover all three." },
+              { q: "What is the best resume format?", a: "Reverse-chronological works for most people. Career changers and long gaps benefit from functional or combination formats. Our examples cover all three." },
               { q: "How long should my resume be?", a: "One page if under 10 years' experience, two pages otherwise. Executive resumes can stretch to three, but only if every line matters." },
-              { q: "What does ATS-optimized actually mean?", a: "The layout uses standard sections, no tables or images, real text (not shapes), and keywords from the job posting. Every example here averages a 94% ATS score." },
+              { q: "What does ATS-friendly actually mean?", a: "It means using standard sections, real text (not images or shapes), no tables or complex columns, and keywords pulled from the job posting. Every example here follows those formatting principles." },
               { q: "How do I write a resume with no experience?", a: "Lead with skills, education, projects, and volunteer work. Our entry-level examples show the exact structure that lands first interviews." },
               { q: "Template or from scratch?", a: "Always start from a proven example. You'll finish faster and pass ATS on the first try. Then customize with our AI builder." },
               { q: "How do I tailor a resume to a job?", a: "Copy repeated phrases and skills from the posting into your summary, skills, and top bullets. Our AI builder does this automatically in under 2 minutes." }
@@ -360,12 +366,6 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
                 <h3 className="text-2xl font-extrabold mb-1 leading-tight">{selected.title}</h3>
                 <p className="text-sm text-muted-foreground mb-6">{selected.industry} • {selected.level} • {selected.format}</p>
 
-                <div className="grid grid-cols-3 gap-2 mb-6">
-                  <MiniStat label="ATS" value={`${selected.atsScore}%`} tone="green" />
-                  <MiniStat label="Rating" value={selected.rating.toFixed(1)} tone="amber" />
-                  <MiniStat label="Downloads" value={fmt(selected.downloads)} tone="orange" />
-                </div>
-
                 <h4 className="font-bold mb-3 text-sm">Why this works</h4>
                 <ul className="space-y-2 mb-6">
                   {selected.highlights.map((h: string, i: number) => (
@@ -394,18 +394,6 @@ export function ResumeExamples({ onNavigate, onLoadTemplate }: { onNavigate: (st
 }
 
 /* ---------- helpers ---------- */
-
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
-  return (
-    <div className="px-4 py-3 rounded-2xl border border-border bg-card/60 backdrop-blur flex items-center gap-3">
-      <div className="w-9 h-9 rounded-xl bg-orange-500/10 text-orange-500 flex items-center justify-center">{icon}</div>
-      <div>
-        <div className="text-lg font-extrabold leading-none">{value}</div>
-        <div className="text-xs text-muted-foreground">{label}</div>
-      </div>
-    </div>
-  );
-}
 
 function ChipRow({ items, value, onChange, accent }: { items: string[]; value: string; onChange: (v: string) => void; accent?: boolean }) {
   return (
@@ -446,11 +434,9 @@ function ExampleCard({ r, onOpen, fav, onFav }: { r: any; onOpen: () => void; fa
           {r.keywords.slice(0, 3).map((k: string) => <span key={k} className="text-[10px] px-1.5 py-0.5 bg-muted rounded font-medium text-muted-foreground">{k}</span>)}
         </div>
       </div>
-      <div className="px-5 py-3 border-t border-border/60 flex items-center justify-between text-xs">
-        <div className="flex items-center gap-3 text-muted-foreground">
-          <span className="flex items-center gap-1 font-semibold text-foreground"><Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> {r.rating}</span>
-        </div>
-        <span className="font-bold text-emerald-600 dark:text-emerald-400">{r.atsScore}% ATS</span>
+      <div className="px-5 py-3 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
+        <span className="font-semibold text-foreground flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" /> {r.format}</span>
+        <span className="font-semibold">{r.level}</span>
       </div>
     </div>
   );
@@ -474,8 +460,6 @@ function ExampleRow({ r, onOpen, fav, onFav }: { r: any; onOpen: () => void; fav
         <p className="text-xs text-muted-foreground">{r.level} • {r.format} • {r.keywords.slice(0, 4).join(' · ')}</p>
       </div>
       <div className="flex items-center gap-4 text-xs shrink-0">
-        <span className="flex items-center gap-1 font-semibold"><Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> {r.rating}</span>
-        <span className="font-bold text-emerald-600 dark:text-emerald-400">{r.atsScore}% ATS</span>
         <button onClick={e => { e.stopPropagation(); onFav(); }} className="p-1.5 rounded-full hover:bg-muted"><Heart className={`w-4 h-4 ${fav ? 'fill-orange-500 text-orange-500' : 'text-muted-foreground'}`} /></button>
       </div>
     </div>
@@ -487,16 +471,6 @@ function SidebarCard({ title, icon, children }: { title: string; icon: React.Rea
     <div className="rounded-2xl border border-border bg-card p-5">
       <div className="flex items-center gap-2 mb-4 text-sm font-bold uppercase tracking-wider text-muted-foreground">{icon} {title}</div>
       {children}
-    </div>
-  );
-}
-
-function MiniStat({ label, value, tone }: { label: string; value: string; tone: 'green' | 'amber' | 'orange' }) {
-  const c = tone === 'green' ? 'text-emerald-600 dark:text-emerald-400' : tone === 'amber' ? 'text-amber-600 dark:text-amber-400' : 'text-orange-600 dark:text-orange-400';
-  return (
-    <div className="p-3 rounded-xl bg-muted/50 text-center">
-      <div className={`text-lg font-extrabold ${c}`}>{value}</div>
-      <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">{label}</div>
     </div>
   );
 }

@@ -474,13 +474,13 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
       </svg>
 
       <header className={`fixed top-0 left-0 right-0 h-[68px] z-[1000] print:hidden font-['Inter',sans-serif] ${isScrolled ? 'hdr-glass-scrolled' : 'hdr-glass'}`}>
-        <div className="max-w-7xl mx-auto px-6 w-full h-full flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 w-full h-full flex items-center justify-between gap-3">
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 no-underline"><Logo /></Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-0.5 flex-1">
+          {/* Desktop nav — only render at lg+ to prevent mid-width cramping */}
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
 
             <Link to="/"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
@@ -655,7 +655,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           {/* Right side */}
           <div className="flex items-center gap-2 flex-shrink-0">
             {user ? (
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2">
                 {(() => {
                   const p = location.pathname;
                   const appPrefixes = ['/dashboard', '/resume', '/premium', '/manage-subscription', '/cover-letter', '/ats-checker', '/bullet-writer', '/summary-generator', '/keyword-scanner', '/pdf-scanner', '/resignation-letter', '/linkedin-optimizer', '/salary-analyzer', '/admin'];
@@ -666,7 +666,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   <LayoutDashboard size={14} /> {t('cta.myResumes')}
                 </Link>
                 <Link to="/premium"
-                  className="hdr-tag hidden lg:flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50"
+                  className="hdr-tag hidden xl:flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50"
                   title="Premium">
                   <Sparkles size={14} /> Premium
                 </Link>
@@ -676,18 +676,18 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 </button>
                 <Link to="/resume"
                   className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1024 ? t('cta.buildResume') : t('cta.start')}
+                  {width >= 1280 ? t('cta.buildResume') : t('cta.start')}
                 </Link>
               </div>
             ) : (
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2">
                 <Link to="/login"
                   className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
                   {t('cta.login')}
                 </Link>
                 <Link to="/resume"
                   className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1024 ? t('cta.buildResume') : t('cta.startFree')}
+                  {width >= 1280 ? t('cta.buildResume') : t('cta.startFree')}
                 </Link>
               </div>
             )}
@@ -704,8 +704,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
 
-            {/* Mobile */}
-            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl hidden sm:inline-flex md:hidden no-underline">
+            {/* Mobile / tablet CTA */}
+            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl hidden sm:inline-flex lg:hidden no-underline">
               {t('cta.startFreeShort')}
             </Link>
 
@@ -714,7 +714,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               aria-expanded={isMobileOpen}
               aria-controls="mobile-navigation"
               /* Fixed w/h so the icon-only button reserves a stable box (CLS fix). */
-              className="md:hidden w-10 h-10 flex items-center justify-center text-[#374151] dark:text-orange-200 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-[#374151] dark:text-orange-200 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
               <Menu size={22} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>

@@ -662,13 +662,18 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   return appPrefixes.some(pref => p === pref || p.startsWith(pref + '/')) ? <CreditsBadge /> : null;
                 })()}
                 <Link to="/dashboard"
-                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50">
-                  <LayoutDashboard size={14} /> {t('cta.myResumes')}
+                  title={t('cta.myResumes')}
+                  aria-label={t('cta.myResumes')}
+                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
+                  <LayoutDashboard size={16} />
+                  <span className="hidden xl:inline">{t('cta.myResumes')}</span>
                 </Link>
                 <Link to="/premium"
-                  className="hdr-tag hidden xl:flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50"
-                  title="Premium">
-                  <Sparkles size={14} /> Premium
+                  title="Premium"
+                  aria-label="Premium"
+                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
+                  <Sparkles size={16} />
+                  <span className="hidden xl:inline">Premium</span>
                 </Link>
                 <button onClick={handleLogout}
                   className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">

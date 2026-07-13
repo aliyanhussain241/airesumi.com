@@ -938,7 +938,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                         onClick={() => setIsMobileOpen(false)}
                         className="flex items-center gap-3 min-h-[52px] px-4 rounded-2xl text-[15px] font-semibold text-[#EA580C] no-underline active:scale-[0.98] transition-all hover:bg-orange-50 dark:hover:bg-orange-500/10"
                       >
-                        <Sparkles size={18} className="text-[#EA580C]" /> Premium
+                        <Sparkles size={18} className="text-[#EA580C]" /> Pricing
                       </Link>
                       <button
                         onClick={() => { setIsMobileOpen(false); handleLogout(); }}

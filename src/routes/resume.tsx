@@ -109,6 +109,7 @@ async function saveResumeToSupabase(
 
 function ResumeBuilder() {
   const navigate = useNavigate();
+  const { fromExample } = Route.useSearch();
   const [phase, setPhase] = useState<Phase>(Step.DETAILS);
   const [designId, setDesignId] = useState<DesignId>("classic");
   const [savedResumeId, setSavedResumeId] = useState<string | undefined>(undefined);

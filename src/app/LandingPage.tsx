@@ -393,14 +393,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
             <TrendingUp size={13} /> Trusted this week
           </div>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+          <div className="flex flex-col items-center justify-center gap-4 mb-10 max-w-4xl mx-auto">
             <div className="bg-orange-50 p-2.5 rounded-xl text-orange-400 shrink-0">
               <Wand2 size={32} />
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] dark:text-[#f5f5f4] text-center sm:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] dark:text-[#f5f5f4] text-center leading-tight tracking-tight">
               <span className="text-[#FF6321]">52,000+</span> resumes built this week — here's why job seekers choose airesumi
             </h2>
           </div>
+
 
           {/* Live stats strip */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-12 max-w-5xl mx-auto">

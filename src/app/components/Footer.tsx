@@ -80,7 +80,7 @@ export const Footer = () => {
                 <li><Link to="/linkedin-bio" className={linkCls}>{t("tools.linkedinBio.name")}</Link></li>
                 <li><Link to="/interview-prep" className={linkCls}>{t("footer.interviewQuestions")}</Link></li>
                 <li><Link to="/salary-analyzer" className={linkCls}>{t("footer.salaryAnalyzer")}</Link></li>
-                <li><Link to="/examples" className={linkCls}>{t("footer.resumeExamples")}</Link></li>
+                <li><Link to="/resume-examples" className={linkCls}>{t("footer.resumeExamples")}</Link></li>
               </ul>
             </div>
 

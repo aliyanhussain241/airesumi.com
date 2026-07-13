@@ -503,6 +503,10 @@ export const Route = createFileRoute("/resume-examples/$slug")({
             ],
           }),
         },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(buildFaqSchema(role.job_title)),
+        },
       ],
     };
   },

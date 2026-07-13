@@ -788,7 +788,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 {/* Primary links */}
                 {[
                   { to: '/', label: t('nav.home') },
-                  { to: '/examples', label: t('nav.examples') },
+                  { to: '/resume-examples', label: t('nav.examples') },
                   { to: '/blog', label: t('nav.blog') },
                 ].map(link => (
                   <motion.div

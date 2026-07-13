@@ -40,7 +40,7 @@ const HOMEPAGE_SCHEMA = {
       "url": "https://airesumi.com/",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://airesumi.com/examples?q={search_term_string}",
+        "target": "https://airesumi.com/resume-examples?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },

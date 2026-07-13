@@ -666,7 +666,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                   <LayoutDashboard size={14} /> {t('cta.myResumes')}
                 </Link>
                 <Link to="/premium"
-                  className="hdr-tag hidden lg:flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50"
+                  className="hdr-tag hidden xl:flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-3 py-2 rounded-xl no-underline transition-all hover:bg-orange-50"
                   title="Premium">
                   <Sparkles size={14} /> Premium
                 </Link>

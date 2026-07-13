@@ -50,7 +50,7 @@ Allow: /resignation-letter
 Allow: /pdf-scanner
 Allow: /interview-prep
 Allow: /salary-analyzer
-Allow: /examples
+Allow: /resume-examples
 Allow: /blog
 Allow: /premium
 Allow: /about

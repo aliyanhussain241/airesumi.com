@@ -704,8 +704,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
 
-            {/* Mobile */}
-            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl hidden sm:inline-flex md:hidden no-underline">
+            {/* Mobile / tablet CTA */}
+            <Link to="/resume" className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl hidden sm:inline-flex lg:hidden no-underline">
               {t('cta.startFreeShort')}
             </Link>
 
@@ -714,7 +714,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               aria-expanded={isMobileOpen}
               aria-controls="mobile-navigation"
               /* Fixed w/h so the icon-only button reserves a stable box (CLS fix). */
-              className="md:hidden w-10 h-10 flex items-center justify-center text-[#374151] dark:text-orange-200 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
+              className="lg:hidden w-10 h-10 flex items-center justify-center text-[#374151] dark:text-orange-200 rounded-xl cursor-pointer bg-transparent border-none hdr-btn-outline">
               <Menu size={22} strokeWidth={2} aria-hidden="true" />
             </button>
           </div>

@@ -655,7 +655,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           {/* Right side */}
           <div className="flex items-center gap-2 flex-shrink-0">
             {user ? (
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2">
                 {(() => {
                   const p = location.pathname;
                   const appPrefixes = ['/dashboard', '/resume', '/premium', '/manage-subscription', '/cover-letter', '/ats-checker', '/bullet-writer', '/summary-generator', '/keyword-scanner', '/pdf-scanner', '/resignation-letter', '/linkedin-optimizer', '/salary-analyzer', '/admin'];

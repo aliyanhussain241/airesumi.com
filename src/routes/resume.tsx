@@ -16,6 +16,7 @@ import { JobForm } from "../app/JobForm";
 import { GeneratingView } from "../app/GeneratingView";
 import { DoneView } from "../app/DoneView";
 import { supabase } from "@/integrations/supabase/client";
+import { getRoleExampleWithRelated } from "@/lib/resume-roles.functions";
 
 type Phase = Step.DETAILS | Step.DESIGN | Step.JOB | Step.GENERATING | Step.DONE;
 

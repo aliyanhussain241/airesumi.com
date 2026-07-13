@@ -16,6 +16,7 @@ import { JobForm } from "../app/JobForm";
 import { GeneratingView } from "../app/GeneratingView";
 import { DoneView } from "../app/DoneView";
 import { supabase } from "@/integrations/supabase/client";
+import { getRoleExampleWithRelated } from "@/lib/resume-roles.functions";
 
 type Phase = Step.DETAILS | Step.DESIGN | Step.JOB | Step.GENERATING | Step.DONE;
 
@@ -108,6 +109,7 @@ async function saveResumeToSupabase(
 
 function ResumeBuilder() {
   const navigate = useNavigate();
+  const { fromExample } = Route.useSearch();
   const [phase, setPhase] = useState<Phase>(Step.DETAILS);
   const [designId, setDesignId] = useState<DesignId>("classic");
   const [savedResumeId, setSavedResumeId] = useState<string | undefined>(undefined);
@@ -164,27 +166,38 @@ function ResumeBuilder() {
       }
     }
 
-    // ✅ Examples se "Edit This Template" kiya? template_prefill load karo
-    const templateData = sessionStorage.getItem("template_prefill");
-    if (templateData) {
-      try {
-        const tmpl = JSON.parse(templateData);
-        if (tmpl.user_data) setUserData(tmpl.user_data);
-        if (tmpl.job_data) {
-          setJobData({
-            title: tmpl.job_data.title || "",
-            company: tmpl.job_data.company || "",
-            description: tmpl.job_data.description || "",
-          });
+    // ✅ Examples se "Edit This Template" kiya? fromExample query param se load karo
+    if (fromExample) {
+      let cancelled = false;
+      (async () => {
+        try {
+          const result = await getRoleExampleWithRelated({ data: { slug: fromExample } });
+          if (cancelled || !result) return;
+          const { role } = result;
+          // Seed experience: first line "title, company, dates" placeholder so
+          // buildResumeFromUserData doesn't eat a real bullet as the header.
+          const seededExperience =
+            `${role.job_title}, , \n` + (role.sample_bullet_points || []).join("\n");
+          const seededSkills = (role.key_skills || []).join(", ");
+          setUserData((prev) => ({
+            ...prev,
+            currentRole: prev.currentRole || role.job_title,
+            experience: [seededExperience],
+            skills: seededSkills ? [seededSkills] : prev.skills,
+          }));
+          setJobData((prev) => ({ ...prev, title: prev.title || role.job_title }));
+          setPhase(Step.DETAILS);
+          // Strip the param so a refresh doesn't overwrite user edits
+          navigate({ to: "/resume", search: {}, replace: true });
+        } catch (e) {
+          console.error("Failed to load role example", e);
         }
-        // DETAILS step pe le jao taake user apni info fill kare
-        setPhase(Step.DETAILS);
-        sessionStorage.removeItem("template_prefill");
-      } catch (e) {
-        console.error("Failed to load template data", e);
-      }
+      })();
+      return () => {
+        cancelled = true;
+      };
     }
-  }, []);
+  }, [fromExample, navigate]);
 
   const setStep = (target: Step) => {
     switch (target) {
@@ -381,6 +394,9 @@ function ResumeBuilder() {
 }
 
 export const Route = createFileRoute("/resume")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    fromExample: typeof search.fromExample === "string" ? search.fromExample : "",
+  }),
   head: () => ({
     meta: [
       { title: "AI Resume Builder — Free ATS-Optimized Resumes | Airesumi" },

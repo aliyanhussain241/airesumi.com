@@ -680,14 +680,14 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 </Link>
               </div>
             ) : (
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-2">
                 <Link to="/login"
                   className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
                   {t('cta.login')}
                 </Link>
                 <Link to="/resume"
                   className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1024 ? t('cta.buildResume') : t('cta.startFree')}
+                  {width >= 1280 ? t('cta.buildResume') : t('cta.startFree')}
                 </Link>
               </div>
             )}

@@ -125,9 +125,18 @@ function RoleExamplePage() {
         <section className="bg-gradient-to-br from-[#111827] to-[#1F2937] rounded-2xl p-8 text-center text-white mb-10">
           <h2 className="text-2xl font-bold mb-2">Build your {role.job_title} resume in 60 seconds</h2>
           <p className="text-[#9CA3AF] mb-5">AI-powered, ATS-optimized, free to start.</p>
-          <Link to="/resume" className="inline-block bg-[#FF6321] hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl no-underline transition-colors">
-            Start Free →
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <Link
+              to="/resume"
+              search={{ fromExample: role.slug }}
+              className="inline-block bg-[#FF6321] hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl no-underline transition-colors w-full sm:w-auto"
+            >
+              Edit This Template →
+            </Link>
+            <Link to="/resume" className="inline-block bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl no-underline transition-colors w-full sm:w-auto">
+              Start From Scratch
+            </Link>
+          </div>
         </section>
 
         {/* In-content ad */}

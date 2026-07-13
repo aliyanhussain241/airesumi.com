@@ -641,8 +641,8 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             </div>
 
 
-            <Link to="/examples"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+            <Link to="/resume-examples"
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.examples')}
             </Link>
             <Link to="/blog"

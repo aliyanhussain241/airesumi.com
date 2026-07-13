@@ -13,7 +13,7 @@ export const stepToPath: Record<number, string> = {
   [Step.PREMIUM]: "/premium",
   [Step.SALARY_ANALYZER]: "/salary-analyzer",
   [Step.INTERVIEW_PREP]: "/interview-prep",
-  [Step.RESUME_EXAMPLES]: "/examples",
+  [Step.RESUME_EXAMPLES]: "/resume-examples",
   [Step.ABOUT]: "/about",
   [Step.CONTACT]: "/contact",
   [Step.PRIVACY]: "/privacy",

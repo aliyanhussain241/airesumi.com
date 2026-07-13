@@ -394,6 +394,9 @@ function ResumeBuilder() {
 }
 
 export const Route = createFileRoute("/resume")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    fromExample: typeof search.fromExample === "string" ? search.fromExample : "",
+  }),
   head: () => ({
     meta: [
       { title: "AI Resume Builder — Free ATS-Optimized Resumes | Airesumi" },

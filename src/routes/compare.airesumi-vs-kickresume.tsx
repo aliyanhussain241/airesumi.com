@@ -90,17 +90,30 @@ function Page() {
           </p>
         </header>
 
-        <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-[#1a202c] dark:text-orange-50 mb-6">
+        <section className="mb-16" aria-labelledby="compare-kick-heading">
+          <h2 id="compare-kick-heading" className="text-2xl font-semibold text-[#1a202c] dark:text-orange-50 mb-6">
             Feature-by-feature comparison
           </h2>
-          <div className="overflow-x-auto border border-[#e2e8f0] dark:border-white/10 rounded-2xl">
+          <p className="sr-only" id="compare-kick-hint">
+            Scrollable table. Use arrow keys, Page Up, Page Down, Home, or End to scroll horizontally when focused.
+          </p>
+          <p className="md:hidden text-xs text-[#64748b] dark:text-orange-100/60 mb-2" aria-hidden="true">
+            Swipe or use arrow keys to see all columns →
+          </p>
+          <div
+            role="region"
+            aria-labelledby="compare-kick-heading"
+            aria-describedby="compare-kick-hint"
+            tabIndex={0}
+            className="overflow-x-auto border border-[#e2e8f0] dark:border-white/10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6321] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+          >
             <table className="w-full min-w-[560px] text-left text-sm">
+              <caption className="sr-only">Feature-by-feature comparison between Airesumi and {COMPETITOR.name}</caption>
               <thead className="bg-[#f8fafc] dark:bg-white/5">
                 <tr>
-                  <th className="p-4 font-semibold text-[#1a202c] dark:text-orange-50 w-1/4">Feature</th>
-                  <th className="p-4 font-semibold text-[#FF6321]">Airesumi</th>
-                  <th className="p-4 font-semibold text-[#1a202c] dark:text-orange-50">{COMPETITOR.name}</th>
+                  <th scope="col" className="p-4 font-semibold text-[#1a202c] dark:text-orange-50 w-1/4">Feature</th>
+                  <th scope="col" className="p-4 font-semibold text-[#FF6321]">Airesumi</th>
+                  <th scope="col" className="p-4 font-semibold text-[#1a202c] dark:text-orange-50">{COMPETITOR.name}</th>
                 </tr>
               </thead>
               <tbody>

@@ -127,8 +127,8 @@ function RoleExamplePage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#FFF7ED] via-white to-[#F8FAFC] border-b border-[#E5E7EB]">
-        <div className="max-w-6xl mx-auto px-6 py-10 md:py-14">
+      <section className="pt-app-header bg-gradient-to-br from-[#FFF7ED] via-white to-[#F8FAFC] border-b border-[#E5E7EB]">
+        <div className="max-w-6xl mx-auto px-6 py-8 md:py-12">
           <nav className="text-sm text-[#6B7280] mb-5" aria-label="Breadcrumb">
             <Link to="/" className="hover:text-[#FF6321] no-underline">Home</Link>
             <span className="mx-2">/</span>

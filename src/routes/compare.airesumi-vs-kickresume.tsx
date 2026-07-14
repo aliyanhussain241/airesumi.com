@@ -95,7 +95,7 @@ function Page() {
             Feature-by-feature comparison
           </h2>
           <div className="overflow-x-auto border border-[#e2e8f0] dark:border-white/10 rounded-2xl">
-            <table className="w-full text-left text-sm">
+            <table className="w-full min-w-[560px] text-left text-sm [<table className="w-full text-left text-sm">_td]:break-words [<table className="w-full text-left text-sm">_td]:align-top">
               <thead className="bg-[#f8fafc] dark:bg-white/5">
                 <tr>
                   <th className="p-4 font-semibold text-[#1a202c] dark:text-orange-50 w-1/4">Feature</th>

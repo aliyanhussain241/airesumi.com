@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import airesumiLogo from "@/assets/ai-resumi.webp";
-import airesumiLogoWhite from "@/assets/rezumi-white.webp";
+import airesumiLogoWhite from "@/assets/airesumi-white.webp";
 
 
 // ── LIQUID GLASS STYLES ──────────────────────────────────────────────────────

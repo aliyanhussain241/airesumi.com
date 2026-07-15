@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Facebook, Linkedin, Instagram } from "lucide-react";
 import airesumiLogo from "@/assets/ai-resumi.webp";
-import airesumiLogoWhite from "@/assets/rezumi-white.webp";
+import airesumiLogoWhite from "@/assets/airesumi-white.webp";
 
 const linkCls =
   "block py-2 -mx-2 px-2 rounded-md text-[15px] sm:text-[14px] text-neutral-300 hover:text-[#FF6321] hover:bg-white/5 active:bg-white/10 transition-colors no-underline whitespace-nowrap";

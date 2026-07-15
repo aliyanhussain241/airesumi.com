@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap } from "lucide-react";
-import { Header } from "@/app/components/Header";
 
 import { getPublishedRoleExamples, type ResumeRoleSummary } from "@/lib/resume-roles.functions";
 
@@ -57,7 +56,6 @@ function ResumeExamplesIndex() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
-      <Header />
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-6 py-12">
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#6B7280]">

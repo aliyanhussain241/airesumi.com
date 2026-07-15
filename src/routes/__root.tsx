@@ -181,6 +181,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "msvalidate.01", content: "4C70133835C8224F8583D870395B0618" },
       // FIX: Default meta — individual pages override these in their own head()
       { title: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi.com" },
       { name: "description", content: "Build a professional, ATS-optimized resume in minutes using AI. Free resume builder trusted by job seekers worldwide. No sign-up required." },

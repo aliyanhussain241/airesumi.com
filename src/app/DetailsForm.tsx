@@ -137,9 +137,9 @@ export const DetailsForm: React.FC<DetailsFormProps> = ({
           <div className="inline-flex items-center gap-2 bg-[#FF6321]/10 text-[#FF6321] px-3 py-1 rounded-full text-[11.5px] font-bold uppercase tracking-widest mb-3">
             <Sparkles size={12} className="fill-[#FF6321]" /> Step 1 of 3 · Your Details
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-foreground text-balance">
+          <h1 className="text-3xl lg:text-5xl font-bold tracking-tight text-foreground text-balance">
             Let's build a resume that <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6321] to-amber-500">gets you hired.</span>
-          </h2>
+          </h1>
           <p className="text-muted-foreground text-[15px] mt-2 max-w-xl">
             Upload your existing CV to autofill, or start fresh. Everything you enter is private and never shared.
           </p>

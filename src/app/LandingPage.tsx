@@ -125,7 +125,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
            <div className="max-w-xl relative z-10">
              <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
-               AI Resume Creator That Gets You Past the Filter — <span className="text-[#FF6321]">Free</span>
+               AI Resume Builder — Free ATS-Optimized Resumes That Get You <span className="text-[#FF6321]">Hired</span>
              </h1>
              <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
                Most resumes fail not because of bad experience — but because no one ever reads them. Build yours with AI in 10 minutes and land on the recruiter's desk, not the reject pile.

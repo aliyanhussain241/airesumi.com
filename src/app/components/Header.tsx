@@ -10,7 +10,7 @@ import { useTheme } from '@/hooks/use-theme';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import airesumiLogo from '@/assets/ai-resumi.webp';
-import airesumiLogoWhite from '@/assets/rezumi-white.webp';
+import airesumiLogoWhite from '@/assets/airesumi-white.webp';
 
 import { CreditsBadge } from './CreditsBadge';
 

@@ -20,8 +20,7 @@ import {
   ListChecks,
   HelpCircle,
 } from "lucide-react";
-import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer";
+
 import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
 import { AdBanner } from "@/app/components/AdBanner";
 
@@ -69,7 +68,6 @@ function RoleExamplePage() {
   if (!data) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
         <main className="flex-1 flex items-center justify-center p-6 text-center">
           <div>
             <h1 className="text-3xl font-bold mb-2">Role example not found</h1>
@@ -79,7 +77,7 @@ function RoleExamplePage() {
             </Link>
           </div>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -124,7 +122,6 @@ function RoleExamplePage() {
         <div className="h-full bg-[#FF6321] transition-[width] duration-150" style={{ width: `${progress}%` }} />
       </div>
 
-      <Header />
 
       {/* Hero */}
       <section className="pt-app-header bg-gradient-to-br from-[#FFF7ED] via-white to-[#F8FAFC] border-b border-[#E5E7EB]">
@@ -405,7 +402,6 @@ function RoleExamplePage() {
           </aside>
         </div>
       </motion.main>
-      <Footer />
     </div>
   );
 }

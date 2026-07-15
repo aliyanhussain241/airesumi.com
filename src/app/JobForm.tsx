@@ -131,9 +131,9 @@ export const JobForm: React.FC<JobFormProps> = ({
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#FF6321] mb-3 block">
             Step 03 / 03 · Almost there
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
             Who are you targeting?
-          </h2>
+          </h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
             Add job details and our AI will tailor keywords, tone, and structure to match. All fields optional — skip to generate a general resume.
           </p>

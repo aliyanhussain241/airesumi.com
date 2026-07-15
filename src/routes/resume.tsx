@@ -397,25 +397,35 @@ export const Route = createFileRoute("/resume")({
   validateSearch: (search: Record<string, unknown>) => ({
     fromExample: typeof search.fromExample === "string" ? search.fromExample : "",
   }),
-  head: () => ({
-    meta: [
-      { title: "AI Resume Builder — Free ATS-Optimized Resumes | Airesumi" },
-      { name: "description", content: "Build a free ATS-optimized resume in minutes. AI writes your bullets, summary, and keywords. No sign-up required." },
-      { name: "robots", content: "index, follow" },
-      { property: "og:title", content: "Free AI Resume Builder | Airesumi" },
-      { property: "og:description", content: "Build a free ATS-optimized resume in minutes. AI writes your bullets, summary, and keywords. No sign-up required." },
-      { property: "og:url", content: "https://airesumi.com/resume" },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://airesumi.com/api/public/og/resume" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Free AI Resume Builder | Airesumi" },
-      { name: "twitter:description", content: "Build a free ATS-optimized resume in minutes. No sign-up required." },
-      { name: "twitter:url", content: "https://airesumi.com/resume" },
-      { name: "twitter:image", content: "https://airesumi.com/api/public/og/resume" },
-    ],
-    links: [{ rel: "canonical", href: "https://airesumi.com/resume" }],
-  }),
+  head: (ctx: any) => {
+    // If ANY query param is present (e.g. ?fromExample=...), noindex the
+    // pre-filled variant so it doesn't compete with the clean canonical URL.
+    const search = ctx?.match?.search ?? {};
+    const hasQueryParams = Object.values(search).some(
+      (v) => v !== undefined && v !== null && v !== ""
+    );
+    return {
+      meta: [
+        { title: "AI Resume Builder — Free ATS-Optimized Resumes | Airesumi" },
+        { name: "description", content: "Build a free ATS-optimized resume in minutes. AI writes your bullets, summary, and keywords. No sign-up required." },
+        { name: "robots", content: hasQueryParams ? "noindex, follow" : "index, follow" },
+        { property: "og:title", content: "Free AI Resume Builder | Airesumi" },
+        { property: "og:description", content: "Build a free ATS-optimized resume in minutes. AI writes your bullets, summary, and keywords. No sign-up required." },
+        { property: "og:url", content: "https://airesumi.com/resume" },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: "https://airesumi.com/api/public/og/resume" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: "Free AI Resume Builder | Airesumi" },
+        { name: "twitter:description", content: "Build a free ATS-optimized resume in minutes. No sign-up required." },
+        { name: "twitter:url", content: "https://airesumi.com/resume" },
+        { name: "twitter:image", content: "https://airesumi.com/api/public/og/resume" },
+      ],
+      // Canonical always points to the clean URL — query-string variants
+      // (?fromExample=, ?lng=, etc.) collapse into /resume.
+      links: [{ rel: "canonical", href: "https://airesumi.com/resume" }],
+    };
+  },
   component: () => (<><ResumeBuilder /><ToolContentSection {...RESUME_CONTENT} /></>),
 });

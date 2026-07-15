@@ -546,7 +546,7 @@ export const CoverLetterGenerator: React.FC<CoverLetterGeneratorProps> = ({
               className="bg-white p-8 sm:p-12 rounded-2xl border border-[#e5e7eb] shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] min-h-[600px] print:p-0 print:border-none print:shadow-none print:min-h-0"
             >
               <div className="pb-6 mb-6 border-b border-[#e5e7eb] print:border-black">
-                <h1 className="text-2xl font-bold text-[#0a0a0a] tracking-tight">{userData.fullName || "Your Name"}</h1>
+                <h2 className="text-2xl font-bold text-[#0a0a0a] tracking-tight">{userData.fullName || "Your Name"}</h2>
                 <p className="text-sm text-[#6b7280] mt-1">
                   {[userData.email, userData.phone, userData.linkedin].filter(Boolean).join(" · ")}
                 </p>

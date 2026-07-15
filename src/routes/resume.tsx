@@ -397,10 +397,10 @@ export const Route = createFileRoute("/resume")({
   validateSearch: (search: Record<string, unknown>) => ({
     fromExample: typeof search.fromExample === "string" ? search.fromExample : "",
   }),
-  head: (ctx: any) => {
+  head: ({ match }) => {
     // If ANY query param is present (e.g. ?fromExample=...), noindex the
     // pre-filled variant so it doesn't compete with the clean canonical URL.
-    const search = ctx?.match?.search ?? {};
+    const search = (match?.search ?? {}) as Record<string, unknown>;
     const hasQueryParams = Object.values(search).some(
       (v) => v !== undefined && v !== null && v !== ""
     );

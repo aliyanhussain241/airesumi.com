@@ -21,7 +21,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer";
+
 import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
 import { AdBanner } from "@/app/components/AdBanner";
 
@@ -79,7 +79,7 @@ function RoleExamplePage() {
             </Link>
           </div>
         </main>
-        <Footer />
+        
       </div>
     );
   }
@@ -405,7 +405,6 @@ function RoleExamplePage() {
           </aside>
         </div>
       </motion.main>
-      <Footer />
     </div>
   );
 }

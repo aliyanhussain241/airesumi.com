@@ -598,7 +598,7 @@ const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts, hasInitialPosts
             <Sparkles size={12}/> Career Insights
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#111827] mb-4 tracking-tight">
-            The <span className="text-[#FF6321]">Resumi</span> Blog
+            The <span className="text-[#FF6321]">Airesumi</span> Blog
           </h1>
           <p className="text-lg sm:text-xl text-[#6B7280] mb-8 max-w-2xl mx-auto">
             Expert resume strategies, interview prep, and AI-powered career advice — fresh every week.

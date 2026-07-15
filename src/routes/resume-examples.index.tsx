@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap } from "lucide-react";
 import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer";
+
 import { getPublishedRoleExamples, type ResumeRoleSummary } from "@/lib/resume-roles.functions";
 
 const FAQ = [
@@ -275,7 +275,7 @@ function ResumeExamplesIndex() {
           </div>
         </section>
       </motion.main>
-      <Footer />
+      
     </div>
   );
 }

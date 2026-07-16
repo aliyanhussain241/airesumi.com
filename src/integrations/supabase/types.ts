@@ -56,6 +56,63 @@ export type Database = {
         }
         Relationships: []
       }
+      pk_guides: {
+        Row: {
+          category: string
+          created_at: string
+          cta_href: string | null
+          cta_label: string | null
+          faqs: Json
+          hero_intro: string | null
+          id: string
+          published: boolean
+          related_slugs: Json
+          sections: Json
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          cta_href?: string | null
+          cta_label?: string | null
+          faqs?: Json
+          hero_intro?: string | null
+          id?: string
+          published?: boolean
+          related_slugs?: Json
+          sections?: Json
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          cta_href?: string | null
+          cta_label?: string | null
+          faqs?: Json
+          hero_intro?: string | null
+          id?: string
+          published?: boolean
+          related_slugs?: Json
+          sections?: Json
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

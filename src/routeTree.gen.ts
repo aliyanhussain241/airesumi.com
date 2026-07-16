@@ -20,6 +20,7 @@ import { Route as ResignationLetterRouteImport } from './routes/resignation-lett
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as PkRouteImport } from './routes/pk'
 import { Route as PdfScannerRouteImport } from './routes/pdf-scanner'
 import { Route as ManageSubscriptionRouteImport } from './routes/manage-subscription'
 import { Route as LoginRouteImport } from './routes/login'
@@ -36,8 +37,10 @@ import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResumeExamplesIndexRouteImport } from './routes/resume-examples.index'
+import { Route as PkIndexRouteImport } from './routes/pk.index'
 import { Route as ResumeExamplesSlugRouteImport } from './routes/resume-examples.$slug'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
+import { Route as PkSlugRouteImport } from './routes/pk.$slug'
 import { Route as CompareAiresumiVsZetyRouteImport } from './routes/compare.airesumi-vs-zety'
 import { Route as CompareAiresumiVsReziRouteImport } from './routes/compare.airesumi-vs-rezi'
 import { Route as CompareAiresumiVsKickresumeRouteImport } from './routes/compare.airesumi-vs-kickresume'
@@ -114,6 +117,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const PremiumRoute = PremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PkRoute = PkRouteImport.update({
+  id: '/pk',
+  path: '/pk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PdfScannerRoute = PdfScannerRouteImport.update({
@@ -196,6 +204,11 @@ const ResumeExamplesIndexRoute = ResumeExamplesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ResumeExamplesRoute,
 } as any)
+const PkIndexRoute = PkIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PkRoute,
+} as any)
 const ResumeExamplesSlugRoute = ResumeExamplesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -205,6 +218,11 @@ const PremiumSuccessRoute = PremiumSuccessRouteImport.update({
   id: '/success',
   path: '/success',
   getParentRoute: () => PremiumRoute,
+} as any)
+const PkSlugRoute = PkSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PkRoute,
 } as any)
 const CompareAiresumiVsZetyRoute = CompareAiresumiVsZetyRouteImport.update({
   id: '/compare/airesumi-vs-zety',
@@ -334,6 +352,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
+  '/pk': typeof PkRouteWithChildren
   '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -366,8 +385,10 @@ export interface FileRoutesByFullPath {
   '/compare/airesumi-vs-kickresume': typeof CompareAiresumiVsKickresumeRoute
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
+  '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/pk/': typeof PkIndexRoute
   '/resume-examples/': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
@@ -418,8 +439,10 @@ export interface FileRoutesByTo {
   '/compare/airesumi-vs-kickresume': typeof CompareAiresumiVsKickresumeRoute
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
+  '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/pk': typeof PkIndexRoute
   '/resume-examples': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
@@ -440,6 +463,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
+  '/pk': typeof PkRouteWithChildren
   '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -472,8 +496,10 @@ export interface FileRoutesById {
   '/compare/airesumi-vs-kickresume': typeof CompareAiresumiVsKickresumeRoute
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
+  '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/pk/': typeof PkIndexRoute
   '/resume-examples/': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
 }
@@ -495,6 +521,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/manage-subscription'
     | '/pdf-scanner'
+    | '/pk'
     | '/premium'
     | '/privacy'
     | '/reset-password'
@@ -527,8 +554,10 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-kickresume'
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
+    | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/pk/'
     | '/resume-examples/'
     | '/api/public/og/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -579,8 +608,10 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-kickresume'
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
+    | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/pk'
     | '/resume-examples'
     | '/api/public/og/$slug'
   id:
@@ -600,6 +631,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/manage-subscription'
     | '/pdf-scanner'
+    | '/pk'
     | '/premium'
     | '/privacy'
     | '/reset-password'
@@ -632,8 +664,10 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-kickresume'
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
+    | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/pk/'
     | '/resume-examples/'
     | '/api/public/og/$slug'
   fileRoutesById: FileRoutesById
@@ -654,6 +688,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ManageSubscriptionRoute: typeof ManageSubscriptionRoute
   PdfScannerRoute: typeof PdfScannerRoute
+  PkRoute: typeof PkRouteWithChildren
   PremiumRoute: typeof PremiumRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -765,6 +800,13 @@ declare module '@tanstack/react-router' {
       path: '/premium'
       fullPath: '/premium'
       preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pk': {
+      id: '/pk'
+      path: '/pk'
+      fullPath: '/pk'
+      preLoaderRoute: typeof PkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pdf-scanner': {
@@ -879,6 +921,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeExamplesIndexRouteImport
       parentRoute: typeof ResumeExamplesRoute
     }
+    '/pk/': {
+      id: '/pk/'
+      path: '/'
+      fullPath: '/pk/'
+      preLoaderRoute: typeof PkIndexRouteImport
+      parentRoute: typeof PkRoute
+    }
     '/resume-examples/$slug': {
       id: '/resume-examples/$slug'
       path: '/$slug'
@@ -892,6 +941,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/premium/success'
       preLoaderRoute: typeof PremiumSuccessRouteImport
       parentRoute: typeof PremiumRoute
+    }
+    '/pk/$slug': {
+      id: '/pk/$slug'
+      path: '/$slug'
+      fullPath: '/pk/$slug'
+      preLoaderRoute: typeof PkSlugRouteImport
+      parentRoute: typeof PkRoute
     }
     '/compare/airesumi-vs-zety': {
       id: '/compare/airesumi-vs-zety'
@@ -1060,6 +1116,18 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface PkRouteChildren {
+  PkSlugRoute: typeof PkSlugRoute
+  PkIndexRoute: typeof PkIndexRoute
+}
+
+const PkRouteChildren: PkRouteChildren = {
+  PkSlugRoute: PkSlugRoute,
+  PkIndexRoute: PkIndexRoute,
+}
+
+const PkRouteWithChildren = PkRoute._addFileChildren(PkRouteChildren)
+
 interface PremiumRouteChildren {
   PremiumSuccessRoute: typeof PremiumSuccessRoute
 }
@@ -1101,6 +1169,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ManageSubscriptionRoute: ManageSubscriptionRoute,
   PdfScannerRoute: PdfScannerRoute,
+  PkRoute: PkRouteWithChildren,
   PremiumRoute: PremiumRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
@@ -1137,13 +1206,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

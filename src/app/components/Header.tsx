@@ -642,11 +642,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
             <Link to="/resume-examples"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.examples')}
             </Link>
             <Link to="/blog"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.blog')}
             </Link>
           </nav>

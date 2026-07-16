@@ -328,7 +328,7 @@ function LoginPage() {
         <form onSubmit={submitHandler} className="space-y-3">
           {/* Google */}
           {tab !== "forgot" && (
-            <div className="mb-4">
+            <div className="mb-4 flex justify-center">
               <LiquidMetalButton
                 onClick={handleGoogle}
                 fullWidth
@@ -418,7 +418,7 @@ function LoginPage() {
 
 
           {/* Submit */}
-          <div className="mt-1">
+          <div className="mt-1 flex justify-center">
             <LiquidMetalButton
               type="submit"
               disabled={loading}
@@ -426,11 +426,11 @@ function LoginPage() {
               height={50}
             >
               {loading ? (
-                <><Loader2 size={17} className="animate-spin" /> Please wait...</>
+                <><Loader2 size={17} className="animate-spin text-white" /> Please wait...</>
               ) : (
                 <>
                   {tab === "login" ? "Sign In" : tab === "signup" ? "Create Account" : "Send Reset Link"}
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="text-white" />
                 </>
               )}
             </LiquidMetalButton>

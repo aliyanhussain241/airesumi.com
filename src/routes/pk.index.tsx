@@ -100,7 +100,7 @@ function PkHubPage() {
           <nav className={`text-sm ${TXT_SUBTLE} mb-4`} aria-label="Breadcrumb">
             <Link to="/" className="hover:text-[#FF6321] no-underline">Home</Link>
             <span className="mx-2">/</span>
-            <span className={TXT_HEAD.replace("text-", "!text-")}>Pakistan</span>
+            <span className={TXT_HEAD}>Pakistan</span>
           </nav>
 
           <div className="grid md:grid-cols-[1fr_auto] gap-8 md:items-end">

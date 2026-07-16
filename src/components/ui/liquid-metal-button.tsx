@@ -152,15 +152,13 @@ export function LiquidMetalButton({
           maskComposite: "exclude",
         }}
       />
-      {/* Border ring */}
+      {/* Outer soft glow only (inner stays transparent) */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           borderRadius: "100px",
-          border: "1px solid rgba(255,255,255,0.35)",
-          boxShadow:
-            "0 8px 24px rgba(234,88,12,0.25), inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.2)",
+          boxShadow: "0 6px 20px rgba(234,88,12,0.18)",
           pointerEvents: "none",
         }}
       />

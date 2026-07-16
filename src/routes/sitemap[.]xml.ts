@@ -107,10 +107,41 @@ export const Route = createFileRoute("/sitemap.xml")({
           console.warn("[sitemap] role examples fetch failed:", e);
         }
 
+        // Pakistan guide slugs
+        let pkEntries: { path: string; changefreq: string; priority: string; lastmod: string }[] = [];
+        try {
+          const SUPABASE_URL =
+            process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "";
+          const SUPABASE_KEY =
+            process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+            process.env.SUPABASE_PUBLISHABLE_KEY ||
+            "";
+          if (SUPABASE_URL && SUPABASE_KEY) {
+            const client = createClient(SUPABASE_URL, SUPABASE_KEY);
+            const { data } = await client
+              .from("pk_guides")
+              .select("slug, updated_at")
+              .eq("published", true);
+            if (data) {
+              pkEntries = data.map((row: any) => ({
+                path: `/pk/${row.slug}`,
+                changefreq: "monthly",
+                priority: "0.6",
+                lastmod: row.updated_at
+                  ? new Date(row.updated_at).toISOString().split("T")[0]
+                  : today,
+              }));
+            }
+          }
+        } catch (e) {
+          console.warn("[sitemap] pk guides fetch failed:", e);
+        }
+
         const allEntries = [
           ...STATIC_ENTRIES.map((e) => ({ ...e, lastmod: today })),
           ...blogEntries,
           ...roleEntries,
+          ...pkEntries,
         ];
 
         const urls = allEntries.map(

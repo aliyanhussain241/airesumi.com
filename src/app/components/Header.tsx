@@ -664,45 +664,46 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 <Link to="/dashboard"
                   title={t('cta.myResumes')}
                   aria-label={t('cta.myResumes')}
-                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
-                  <LayoutDashboard size={16} />
+                  className="hdr-btn-outline h-9 flex items-center gap-1.5 text-[13px] font-semibold text-[#EA580C] px-3 rounded-xl no-underline whitespace-nowrap">
+                  <LayoutDashboard size={15} />
                   <span className="hidden xl:inline">{t('cta.myResumes')}</span>
                 </Link>
                 <Link to="/premium"
                   title="Pricing"
                   aria-label="Pricing"
-                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
-                  <Sparkles size={16} />
+                  className="hdr-btn-outline h-9 flex items-center gap-1.5 text-[13px] font-semibold text-[#EA580C] px-3 rounded-xl no-underline whitespace-nowrap">
+                  <Sparkles size={15} />
                   <span className="hidden xl:inline">Pricing</span>
                 </Link>
                 <button onClick={handleLogout}
-                  className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
-                  <LogOut size={13} /> {t('cta.logout')}
+                  className="hdr-btn-outline h-9 flex items-center gap-1.5 text-[13px] font-semibold px-3 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer whitespace-nowrap">
+                  <LogOut size={14} /> {t('cta.logout')}
                 </button>
                 <Link to="/resume"
-                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
+                  className="hdr-btn-primary h-9 flex items-center text-white text-[13px] font-bold px-4 rounded-xl no-underline whitespace-nowrap">
                   {width >= 1280 ? t('cta.buildResume') : t('cta.start')}
                 </Link>
               </div>
             ) : (
               <div className="hidden lg:flex items-center gap-2">
                 <Link to="/login"
-                  className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
+                  className="hdr-btn-outline h-9 flex items-center text-[13px] font-semibold px-4 rounded-xl text-[#EA580C] no-underline whitespace-nowrap">
                   {t('cta.login')}
                 </Link>
                 <Link to="/resume"
-                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
+                  className="hdr-btn-primary h-9 flex items-center text-white text-[13px] font-bold px-4 rounded-xl no-underline whitespace-nowrap">
                   {width >= 1280 ? t('cta.buildResume') : t('cta.startFree')}
                 </Link>
               </div>
             )}
 
 
+
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
               aria-label={t('theme.toggle')}
-              className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
+              className="hdr-btn-outline h-9 w-9 flex items-center justify-center rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>

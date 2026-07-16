@@ -20,11 +20,11 @@ import { listPkGuides, type PkGuideSummary } from "@/lib/pk-guides.functions";
 const CANONICAL = "https://airesumi.com/pk";
 
 const CATEGORY_META: Record<string, { label: string; icon: any; color: string }> = {
-  resume: { label: "Resume Format", icon: FileText, color: "text-orange-600 bg-orange-50" },
-  portals: { label: "Job Portals", icon: Briefcase, color: "text-blue-600 bg-blue-50" },
-  gulf: { label: "Gulf & Middle East", icon: Plane, color: "text-emerald-600 bg-emerald-50" },
-  fresher: { label: "Fresh Graduates", icon: GraduationCap, color: "text-purple-600 bg-purple-50" },
-  interview: { label: "Interview Prep", icon: MessageSquare, color: "text-pink-600 bg-pink-50" },
+  resume: { label: "Resume Format", icon: FileText, color: "text-orange-600 bg-orange-50 dark:text-orange-300 dark:bg-orange-500/10" },
+  portals: { label: "Job Portals", icon: Briefcase, color: "text-blue-600 bg-blue-50 dark:text-blue-300 dark:bg-blue-500/10" },
+  gulf: { label: "Gulf & Middle East", icon: Plane, color: "text-emerald-600 bg-emerald-50 dark:text-emerald-300 dark:bg-emerald-500/10" },
+  fresher: { label: "Fresh Graduates", icon: GraduationCap, color: "text-purple-600 bg-purple-50 dark:text-purple-300 dark:bg-purple-500/10" },
+  interview: { label: "Interview Prep", icon: MessageSquare, color: "text-pink-600 bg-pink-50 dark:text-pink-300 dark:bg-pink-500/10" },
 };
 
 const STATS = [
@@ -60,6 +60,15 @@ const HUB_FAQS = [
   },
 ];
 
+// Semantic color aliases (with dark variants)
+const TXT_HEAD = "text-[#111827] dark:text-slate-100";
+const TXT_BODY = "text-[#374151] dark:text-slate-300";
+const TXT_MUTED = "text-[#4B5563] dark:text-slate-400";
+const TXT_SUBTLE = "text-[#6B7280] dark:text-slate-400";
+const CARD = "bg-white dark:bg-slate-900";
+const CARD_BORDER = "border-[#E5E7EB] dark:border-slate-800";
+const PAGE_BG = "bg-[#F8FAFC] dark:bg-slate-950";
+
 function PkHubPage() {
   const guides = Route.useLoaderData() as PkGuideSummary[];
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -78,32 +87,32 @@ function PkHubPage() {
   const rest = filtered.filter((g) => activeCategory !== "all" || g.slug !== featured?.slug);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className={`min-h-screen ${PAGE_BG}`}>
       {/* HERO */}
-      <section className="pt-app-header relative overflow-hidden bg-gradient-to-br from-[#FFF7ED] via-white to-[#F0FDF4] border-b border-[#E5E7EB]">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+      <section className={`pt-app-header relative overflow-hidden bg-gradient-to-br from-[#FFF7ED] via-white to-[#F0FDF4] dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 border-b ${CARD_BORDER}`}>
+        <div className="absolute inset-0 opacity-[0.04] dark:opacity-[0.06] pointer-events-none"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, #111 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
             backgroundSize: "24px 24px",
           }}
         />
         <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 relative">
-          <nav className="text-sm text-[#6B7280] mb-4" aria-label="Breadcrumb">
+          <nav className={`text-sm ${TXT_SUBTLE} mb-4`} aria-label="Breadcrumb">
             <Link to="/" className="hover:text-[#FF6321] no-underline">Home</Link>
             <span className="mx-2">/</span>
-            <span className="text-[#111827]">Pakistan</span>
+            <span className={TXT_HEAD.replace("text-", "!text-")}>Pakistan</span>
           </nav>
 
           <div className="grid md:grid-cols-[1fr_auto] gap-8 md:items-end">
             <div>
-              <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wide font-semibold text-[#FF6321] bg-white border border-[#FF6321]/20 px-3 py-1 rounded-full mb-4 shadow-sm">
+              <span className={`inline-flex items-center gap-1.5 text-xs uppercase tracking-wide font-semibold text-[#FF6321] ${CARD} border border-[#FF6321]/20 px-3 py-1 rounded-full mb-4 shadow-sm`}>
                 <MapPin size={12} /> Pakistan Career Hub · 🇵🇰
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-[#111827] leading-[1.05] tracking-tight">
+              <h1 className={`text-4xl md:text-6xl font-black ${TXT_HEAD} leading-[1.05] tracking-tight`}>
                 Career & Resume Guides <br className="hidden md:block" />
                 <span className="text-[#FF6321]">for Pakistan</span>
               </h1>
-              <p className="text-lg text-[#4B5563] mt-5 max-w-2xl leading-relaxed">
+              <p className={`text-lg ${TXT_MUTED} mt-5 max-w-2xl leading-relaxed`}>
                 Locally accurate resume, job portal, and interview advice for the Pakistani job market — plus
                 tips for Pakistanis applying to jobs in the UAE, Saudi Arabia, Qatar and beyond.
               </p>
@@ -116,12 +125,12 @@ function PkHubPage() {
                 </Link>
                 <Link
                   to="/ats-checker"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F8FAFC] text-[#111827] font-semibold px-5 py-3 rounded-xl no-underline border border-[#E5E7EB] transition-colors"
+                  className={`inline-flex items-center justify-center gap-2 ${CARD} hover:bg-[#F8FAFC] dark:hover:bg-slate-800 ${TXT_HEAD} font-semibold px-5 py-3 rounded-xl no-underline border ${CARD_BORDER} transition-colors`}
                 >
                   Check my CV score
                 </Link>
               </div>
-              <div className="flex items-center gap-2 mt-5 text-sm text-[#4B5563]">
+              <div className={`flex items-center gap-2 mt-5 text-sm ${TXT_MUTED}`}>
                 <div className="flex text-yellow-500">
                   {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                 </div>
@@ -133,10 +142,10 @@ function PkHubPage() {
           {/* stat strip */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10">
             {STATS.map((s) => (
-              <div key={s.label} className="bg-white/80 backdrop-blur border border-[#E5E7EB] rounded-xl p-4">
+              <div key={s.label} className={`bg-white/80 dark:bg-slate-900/70 backdrop-blur border ${CARD_BORDER} rounded-xl p-4`}>
                 <s.icon size={18} className="text-[#FF6321] mb-2" />
-                <div className="text-xl md:text-2xl font-black text-[#111827] leading-none">{s.value}</div>
-                <div className="text-xs text-[#6B7280] mt-1.5">{s.label}</div>
+                <div className={`text-xl md:text-2xl font-black ${TXT_HEAD} leading-none`}>{s.value}</div>
+                <div className={`text-xs ${TXT_SUBTLE} mt-1.5`}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -157,8 +166,8 @@ function PkHubPage() {
                   onClick={() => setActiveCategory(c)}
                   className={`text-sm font-semibold px-4 py-2 rounded-full border transition-colors ${
                     active
-                      ? "bg-[#111827] text-white border-[#111827]"
-                      : "bg-white text-[#374151] border-[#E5E7EB] hover:border-[#FF6321]/40"
+                      ? "bg-[#111827] text-white border-[#111827] dark:bg-slate-100 dark:text-slate-900 dark:border-slate-100"
+                      : `${CARD} ${TXT_BODY} ${CARD_BORDER} hover:border-[#FF6321]/40`
                   }`}
                 >
                   {label}
@@ -169,15 +178,15 @@ function PkHubPage() {
         )}
 
         {guides.length === 0 ? (
-          <p className="text-[#6B7280]">No guides published yet.</p>
+          <p className={TXT_SUBTLE}>No guides published yet.</p>
         ) : (
           <>
-            {/* Featured guide (only on "all") */}
+            {/* Featured guide */}
             {activeCategory === "all" && featured && (
               <Link
                 to="/pk/$slug"
                 params={{ slug: featured.slug }}
-                className="group block bg-gradient-to-br from-[#111827] to-[#1F2937] text-white rounded-2xl p-8 md:p-10 mb-8 no-underline relative overflow-hidden"
+                className="group block bg-gradient-to-br from-[#111827] to-[#1F2937] dark:from-slate-800 dark:to-slate-900 text-white rounded-2xl p-8 md:p-10 mb-8 no-underline relative overflow-hidden border border-transparent dark:border-slate-800"
               >
                 <div className="absolute -top-16 -right-16 w-64 h-64 bg-[#FF6321]/20 blur-3xl rounded-full" />
                 <div className="relative">
@@ -208,19 +217,19 @@ function PkHubPage() {
                     <Link
                       to="/pk/$slug"
                       params={{ slug: g.slug }}
-                      className="group block h-full bg-white rounded-2xl p-6 shadow-sm border border-[#E5E7EB] hover:border-[#FF6321]/40 hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
+                      className={`group block h-full ${CARD} rounded-2xl p-6 shadow-sm border ${CARD_BORDER} hover:border-[#FF6321]/40 hover:shadow-lg dark:hover:shadow-black/40 hover:-translate-y-0.5 transition-all no-underline`}
                     >
-                      <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4 ${meta?.color || "text-orange-600 bg-orange-50"}`}>
+                      <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4 ${meta?.color || "text-orange-600 bg-orange-50 dark:text-orange-300 dark:bg-orange-500/10"}`}>
                         <Icon size={18} />
                       </div>
                       <span className="inline-block text-[11px] uppercase tracking-wider font-bold text-[#FF6321] mb-2">
                         {meta?.label || g.category}
                       </span>
-                      <h3 className="text-lg font-bold text-[#111827] mb-2 leading-snug group-hover:text-[#FF6321] transition-colors">
+                      <h3 className={`text-lg font-bold ${TXT_HEAD} mb-2 leading-snug group-hover:text-[#FF6321] transition-colors`}>
                         {g.title}
                       </h3>
                       {g.subtitle && (
-                        <p className="text-sm text-[#4B5563] mb-4 leading-relaxed line-clamp-3">{g.subtitle}</p>
+                        <p className={`text-sm ${TXT_MUTED} mb-4 leading-relaxed line-clamp-3`}>{g.subtitle}</p>
                       )}
                       <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF6321]">
                         Read guide <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -237,14 +246,14 @@ function PkHubPage() {
         <section className="mt-16">
           <div className="flex items-center gap-2 mb-4">
             <Building2 size={18} className="text-[#FF6321]" />
-            <h2 className="text-xl font-bold text-[#111827]">Job seekers we help across Pakistan</h2>
+            <h2 className={`text-xl font-bold ${TXT_HEAD}`}>Job seekers we help across Pakistan</h2>
           </div>
-          <p className="text-sm text-[#6B7280] mb-4">
+          <p className={`text-sm ${TXT_SUBTLE} mb-4`}>
             Location-aware tips for candidates in every major city.
           </p>
           <div className="flex flex-wrap gap-2">
             {CITIES.map((city) => (
-              <span key={city} className="inline-flex items-center gap-1.5 text-sm font-medium text-[#374151] bg-white border border-[#E5E7EB] px-3 py-1.5 rounded-full">
+              <span key={city} className={`inline-flex items-center gap-1.5 text-sm font-medium ${TXT_BODY} ${CARD} border ${CARD_BORDER} px-3 py-1.5 rounded-full`}>
                 <MapPin size={12} className="text-[#FF6321]" /> {city}
               </span>
             ))}
@@ -252,17 +261,17 @@ function PkHubPage() {
         </section>
 
         {/* Employers */}
-        <section className="mt-12 bg-white rounded-2xl p-7 border border-[#E5E7EB]">
+        <section className={`mt-12 ${CARD} rounded-2xl p-7 border ${CARD_BORDER}`}>
           <div className="flex items-center gap-2 mb-1">
             <Users size={18} className="text-[#FF6321]" />
-            <h2 className="text-xl font-bold text-[#111827]">Land roles at Pakistan's top employers</h2>
+            <h2 className={`text-xl font-bold ${TXT_HEAD}`}>Land roles at Pakistan's top employers</h2>
           </div>
-          <p className="text-sm text-[#6B7280] mb-5">
+          <p className={`text-sm ${TXT_SUBTLE} mb-5`}>
             From banking giants to software houses and Gulf portals — our guides cover what each recruiter actually looks for.
           </p>
           <div className="flex flex-wrap gap-2">
             {EMPLOYERS.map((e) => (
-              <span key={e} className="text-sm font-semibold text-[#111827] bg-[#F8FAFC] border border-[#E5E7EB] px-3 py-1.5 rounded-lg">
+              <span key={e} className={`text-sm font-semibold ${TXT_HEAD} bg-[#F8FAFC] dark:bg-slate-800 border ${CARD_BORDER} px-3 py-1.5 rounded-lg`}>
                 {e}
               </span>
             ))}
@@ -271,25 +280,25 @@ function PkHubPage() {
 
         {/* FAQs */}
         <section className="mt-12">
-          <h2 className="text-2xl font-bold text-[#111827] mb-5">Frequently asked questions</h2>
-          <div className="bg-white rounded-2xl border border-[#E5E7EB] divide-y divide-[#E5E7EB]">
+          <h2 className={`text-2xl font-bold ${TXT_HEAD} mb-5`}>Frequently asked questions</h2>
+          <div className={`${CARD} rounded-2xl border ${CARD_BORDER} divide-y divide-[#E5E7EB] dark:divide-slate-800`}>
             {HUB_FAQS.map((f, i) => (
               <details key={i} className="p-5 group">
-                <summary className="cursor-pointer font-semibold text-[#111827] list-none flex justify-between items-start gap-4">
+                <summary className={`cursor-pointer font-semibold ${TXT_HEAD} list-none flex justify-between items-start gap-4`}>
                   <span>{f.q}</span>
                   <span className="text-[#FF6321] text-xl leading-none group-open:rotate-45 transition-transform">+</span>
                 </summary>
-                <p className="text-[#4B5563] leading-relaxed mt-3">{f.a}</p>
+                <p className={`${TXT_MUTED} leading-relaxed mt-3`}>{f.a}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="mt-12 bg-gradient-to-br from-[#FFF7ED] via-white to-[#FEF2F2] rounded-2xl p-8 md:p-10 border border-[#FF6321]/20 flex flex-col md:flex-row md:items-center gap-5 md:justify-between">
+        <section className="mt-12 bg-gradient-to-br from-[#FFF7ED] via-white to-[#FEF2F2] dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 rounded-2xl p-8 md:p-10 border border-[#FF6321]/20 flex flex-col md:flex-row md:items-center gap-5 md:justify-between">
           <div>
-            <h2 className="text-2xl md:text-3xl font-black text-[#111827]">Ready to build your CV?</h2>
-            <p className="text-[#4B5563] mt-2 max-w-xl">
+            <h2 className={`text-2xl md:text-3xl font-black ${TXT_HEAD}`}>Ready to build your CV?</h2>
+            <p className={`${TXT_MUTED} mt-2 max-w-xl`}>
               Free ATS-safe templates tuned for Rozee.pk, Bayt.com and Pakistani HR. Takes about 6 minutes.
             </p>
           </div>
@@ -302,7 +311,7 @@ function PkHubPage() {
             </Link>
             <Link
               to="/resume-examples"
-              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F8FAFC] text-[#111827] font-semibold px-6 py-3.5 rounded-xl no-underline border border-[#E5E7EB] transition-colors whitespace-nowrap"
+              className={`inline-flex items-center justify-center gap-2 ${CARD} hover:bg-[#F8FAFC] dark:hover:bg-slate-800 ${TXT_HEAD} font-semibold px-6 py-3.5 rounded-xl no-underline border ${CARD_BORDER} transition-colors whitespace-nowrap`}
             >
               Browse examples
             </Link>
@@ -365,7 +374,7 @@ export const Route = createFileRoute("/pk/")({
     <div className="min-h-screen flex items-center justify-center p-6 text-center">
       <div>
         <h1 className="text-2xl font-bold mb-2">Something went wrong</h1>
-        <p className="text-sm text-[#6B7280]">{error.message}</p>
+        <p className="text-sm text-slate-500">{error.message}</p>
       </div>
     </div>
   ),

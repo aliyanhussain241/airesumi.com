@@ -703,7 +703,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             <button
               onClick={toggleTheme}
               aria-label={t('theme.toggle')}
-              className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
+              className="hdr-btn-outline h-9 w-9 flex items-center justify-center rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>

@@ -480,15 +480,15 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           <Link to="/" className="flex-shrink-0 no-underline"><Logo /></Link>
 
           {/* Desktop nav — only render at lg+ to prevent mid-width cramping */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1 min-w-0">
 
             <Link to="/"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.home')}
             </Link>
 
             {/* Resume Tools */}
-            <div ref={resumeRef} className="relative">
+            <div ref={resumeRef} className="relative flex-shrink-0">
               <button
                 ref={resumeBtnRef}
                 type="button"
@@ -497,7 +497,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 aria-controls="hdr-menu-resume"
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isResumeOpen, () => { setIsResumeOpen(true); setIsOtherOpen(false); })}
-                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent whitespace-nowrap ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 {t('nav.resumeTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -565,7 +565,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
             {/* Other Tools */}
-            <div ref={otherRef} className="relative">
+            <div ref={otherRef} className="relative flex-shrink-0">
               <button
                 ref={otherBtnRef}
                 type="button"
@@ -574,7 +574,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 aria-controls="hdr-menu-other"
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isOtherOpen, () => { setIsOtherOpen(true); setIsResumeOpen(false); })}
-                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent whitespace-nowrap ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 {t('nav.otherTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -642,11 +642,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
             <Link to="/resume-examples"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.examples')}
             </Link>
             <Link to="/blog"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.blog')}
             </Link>
           </nav>

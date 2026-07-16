@@ -97,10 +97,22 @@ const GLASS_STYLES = `
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
     -webkit-text-fill-color: #1f2937 !important;
+    caret-color: #1f2937;
     transition: background-color 5000s ease-in-out 0s !important;
+  }
+  html.dark input:-webkit-autofill,
+  html.dark input:-webkit-autofill:hover,
+  html.dark input:-webkit-autofill:focus,
+  html.dark input:-webkit-autofill:active {
+    -webkit-text-fill-color: #f3f4f6 !important;
+    caret-color: #f3f4f6;
   }
 
   /* ── DARK MODE ──────────────────────────────────────────────────── */
@@ -114,11 +126,9 @@ const GLASS_STYLES = `
       inset 0 -1px 0 rgba(0,0,0,0.4);
   }
   html.dark .glass-input {
-    background: rgba(255,255,255,0.05);
+    background: transparent;
     border: 1px solid rgba(255,255,255,0.12);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.06),
-      0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: none;
   }
   html.dark .glass-input:focus-within {
     background: rgba(255,255,255,0.08);

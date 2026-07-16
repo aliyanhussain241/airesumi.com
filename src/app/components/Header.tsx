@@ -480,15 +480,15 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           <Link to="/" className="flex-shrink-0 no-underline"><Logo /></Link>
 
           {/* Desktop nav — only render at lg+ to prevent mid-width cramping */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1 min-w-0">
+          <nav className="hidden lg:flex items-center gap-0.5 flex-1">
 
             <Link to="/"
-              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.home')}
             </Link>
 
             {/* Resume Tools */}
-            <div ref={resumeRef} className="relative flex-shrink-0">
+            <div ref={resumeRef} className="relative">
               <button
                 ref={resumeBtnRef}
                 type="button"
@@ -497,7 +497,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 aria-controls="hdr-menu-resume"
                 onClick={() => { setIsResumeOpen(v => !v); setIsOtherOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isResumeOpen, () => { setIsResumeOpen(true); setIsOtherOpen(false); })}
-                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent whitespace-nowrap ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isResumeActive || isResumeOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 {t('nav.resumeTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -565,7 +565,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
             {/* Other Tools */}
-            <div ref={otherRef} className="relative flex-shrink-0">
+            <div ref={otherRef} className="relative">
               <button
                 ref={otherBtnRef}
                 type="button"
@@ -574,7 +574,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 aria-controls="hdr-menu-other"
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isOtherOpen, () => { setIsOtherOpen(true); setIsResumeOpen(false); })}
-                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent whitespace-nowrap ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 {t('nav.otherTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -642,11 +642,11 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
 
 
             <Link to="/resume-examples"
-              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.examples')}
             </Link>
             <Link to="/blog"
-              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.blog')}
             </Link>
           </nav>
@@ -664,46 +664,45 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 <Link to="/dashboard"
                   title={t('cta.myResumes')}
                   aria-label={t('cta.myResumes')}
-                  className="hdr-btn-outline h-9 flex items-center gap-1.5 text-[13px] font-semibold text-[#EA580C] px-3 rounded-xl no-underline whitespace-nowrap">
-                  <LayoutDashboard size={15} />
+                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
+                  <LayoutDashboard size={16} />
                   <span className="hidden xl:inline">{t('cta.myResumes')}</span>
                 </Link>
                 <Link to="/premium"
                   title="Pricing"
                   aria-label="Pricing"
-                  className="hdr-btn-outline h-9 flex items-center gap-1.5 text-[13px] font-semibold text-[#EA580C] px-3 rounded-xl no-underline whitespace-nowrap">
-                  <Sparkles size={15} />
+                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
+                  <Sparkles size={16} />
                   <span className="hidden xl:inline">Pricing</span>
                 </Link>
                 <button onClick={handleLogout}
-                  className="hdr-btn-outline h-9 flex items-center gap-1.5 text-[13px] font-semibold px-3 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer whitespace-nowrap">
-                  <LogOut size={14} /> {t('cta.logout')}
+                  className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
+                  <LogOut size={13} /> {t('cta.logout')}
                 </button>
                 <Link to="/resume"
-                  className="hdr-btn-primary h-9 flex items-center text-white text-[13px] font-bold px-4 rounded-xl no-underline whitespace-nowrap">
+                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
                   {width >= 1280 ? t('cta.buildResume') : t('cta.start')}
                 </Link>
               </div>
             ) : (
               <div className="hidden lg:flex items-center gap-2">
                 <Link to="/login"
-                  className="hdr-btn-outline h-9 flex items-center text-[13px] font-semibold px-4 rounded-xl text-[#EA580C] no-underline whitespace-nowrap">
+                  className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
                   {t('cta.login')}
                 </Link>
                 <Link to="/resume"
-                  className="hdr-btn-primary h-9 flex items-center text-white text-[13px] font-bold px-4 rounded-xl no-underline whitespace-nowrap">
+                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
                   {width >= 1280 ? t('cta.buildResume') : t('cta.startFree')}
                 </Link>
               </div>
             )}
 
 
-
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
               aria-label={t('theme.toggle')}
-              className="hdr-btn-outline h-9 w-9 flex items-center justify-center rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
+              className="hdr-btn-outline flex items-center justify-center p-2 rounded-xl text-[#374151] dark:text-orange-200 cursor-pointer"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>

@@ -8,6 +8,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import airesumiLogo from "@/assets/ai-resumi.webp";
 import airesumiLogoWhite from "@/assets/airesumi-white.webp";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 
 // ── LIQUID GLASS STYLES ──────────────────────────────────────────────────────
@@ -299,14 +300,26 @@ function LoginPage() {
 
         {/* Tab switcher */}
         {tab !== "forgot" && (
-          <div className="flex bg-black/5 dark:bg-white/5 rounded-2xl p-1 mb-6">
+          <div className="flex gap-2 mb-6 justify-center">
             {(["login", "signup"] as const).map(t => (
-              <button key={t} onClick={() => switchTab(t)}
-                className={`flex-1 py-2 text-[13px] font-semibold rounded-xl transition-all cursor-pointer border-none ${
-                  tab === t ? "glass-tab-active text-[#111827] dark:text-gray-100" : "text-gray-400 dark:text-gray-500 bg-transparent"
-                }`}>
-                {t === "login" ? "Sign In" : "Sign Up"}
-              </button>
+              tab === t ? (
+                <LiquidMetalButton
+                  key={t}
+                  onClick={() => switchTab(t)}
+                  width={140}
+                  height={40}
+                  label={t === "login" ? "Sign In" : "Sign Up"}
+                />
+              ) : (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => switchTab(t)}
+                  className="flex-1 max-w-[140px] h-10 text-[13px] font-semibold rounded-full transition-all cursor-pointer border border-black/10 dark:border-white/10 bg-transparent text-gray-500 dark:text-gray-400 hover:text-[#111827] dark:hover:text-gray-100"
+                >
+                  {t === "login" ? "Sign In" : "Sign Up"}
+                </button>
+              )
             ))}
           </div>
         )}
@@ -315,11 +328,16 @@ function LoginPage() {
         <form onSubmit={submitHandler} className="space-y-3">
           {/* Google */}
           {tab !== "forgot" && (
-            <button type="button" onClick={handleGoogle}
-              className="glass-btn-outline w-full flex items-center justify-center gap-3 py-3 rounded-2xl text-[14px] font-semibold text-[#374151] dark:text-gray-100 cursor-pointer mb-4">
-              <img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="Google" />
-              Continue with Google
-            </button>
+            <div className="mb-4">
+              <LiquidMetalButton
+                onClick={handleGoogle}
+                fullWidth
+                height={46}
+                icon={<img src="https://www.google.com/favicon.ico" className="w-4 h-4" alt="" />}
+              >
+                Continue with Google
+              </LiquidMetalButton>
+            </div>
           )}
 
           {tab !== "forgot" && (
@@ -400,16 +418,23 @@ function LoginPage() {
 
 
           {/* Submit */}
-          <button type="submit" disabled={loading}
-            className="glass-btn w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[15px] font-bold text-white cursor-pointer border-none disabled:opacity-60 disabled:cursor-not-allowed mt-1">
-            {loading
-              ? <><Loader2 size={17} className="animate-spin" /> Please wait...</>
-              : <>
+          <div className="mt-1">
+            <LiquidMetalButton
+              type="submit"
+              disabled={loading}
+              fullWidth
+              height={50}
+            >
+              {loading ? (
+                <><Loader2 size={17} className="animate-spin" /> Please wait...</>
+              ) : (
+                <>
                   {tab === "login" ? "Sign In" : tab === "signup" ? "Create Account" : "Send Reset Link"}
                   <ArrowRight size={16} />
                 </>
-            }
-          </button>
+              )}
+            </LiquidMetalButton>
+          </div>
 
           {/* Back to login */}
           {tab === "forgot" && (

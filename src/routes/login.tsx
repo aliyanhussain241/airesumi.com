@@ -97,10 +97,22 @@ const GLASS_STYLES = `
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
     -webkit-text-fill-color: #1f2937 !important;
+    caret-color: #1f2937;
     transition: background-color 5000s ease-in-out 0s !important;
+  }
+  html.dark input:-webkit-autofill,
+  html.dark input:-webkit-autofill:hover,
+  html.dark input:-webkit-autofill:focus,
+  html.dark input:-webkit-autofill:active {
+    -webkit-text-fill-color: #f3f4f6 !important;
+    caret-color: #f3f4f6;
   }
 
   /* ── DARK MODE ──────────────────────────────────────────────────── */

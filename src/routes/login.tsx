@@ -8,6 +8,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import airesumiLogo from "@/assets/ai-resumi.webp";
 import airesumiLogoWhite from "@/assets/airesumi-white.webp";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 
 // ── LIQUID GLASS STYLES ──────────────────────────────────────────────────────

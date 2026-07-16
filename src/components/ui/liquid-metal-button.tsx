@@ -134,7 +134,7 @@ export function LiquidMetalButton({
         opacity: disabled ? 0.6 : 1,
       }}
     >
-      {/* Shader fills the entire button */}
+      {/* Shader ring only — animation visible only on the outline */}
       <div
         ref={shaderRef}
         className="lm-shader"
@@ -144,6 +144,12 @@ export function LiquidMetalButton({
           borderRadius: "100px",
           overflow: "hidden",
           pointerEvents: "none",
+          padding: "3px",
+          WebkitMask:
+            "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          maskComposite: "exclude",
         }}
       />
       {/* Outer soft glow only (inner stays transparent) */}

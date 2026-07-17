@@ -166,7 +166,7 @@ function RoleExamplePage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 to="/resume"
-                search={{ fromExample: role.slug }}
+                
                 className="inline-flex items-center justify-center gap-2 bg-[#FF6321] hover:bg-orange-600 text-white font-semibold px-5 py-3 rounded-xl no-underline transition-colors shadow-sm"
               >
                 <Sparkles size={16} /> Use This Template
@@ -307,7 +307,7 @@ function RoleExamplePage() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                 <Link
                   to="/resume"
-                  search={{ fromExample: role.slug }}
+                  
                   className="inline-block bg-[#FF6321] hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl no-underline transition-colors w-full sm:w-auto"
                 >
                   Edit This Template →
@@ -392,7 +392,7 @@ function RoleExamplePage() {
                 <p className="text-xs text-[#6B7280] mb-3">Fill this template with your details — free, no sign-up needed.</p>
                 <Link
                   to="/resume"
-                  search={{ fromExample: role.slug }}
+                  
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF6321] no-underline hover:underline"
                 >
                   Use template <ArrowRight size={14} />

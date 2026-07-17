@@ -185,21 +185,33 @@ function LiquidBackground() {
 
 // ── GLASS INPUT ──────────────────────────────────────────────────────────────
 function GlassInput({
-  icon, type = "text", placeholder, value, onChange, rightAction
+  icon, type = "text", placeholder, value, onChange, rightAction, label, labelRight,
 }: {
   icon: React.ReactNode; type?: string; placeholder: string;
   value: string; onChange: (v: string) => void; rightAction?: React.ReactNode;
+  label?: string; labelRight?: React.ReactNode;
 }) {
   return (
-    <div className="glass-input rounded-2xl flex items-center gap-3 px-4 py-3.5">
-      <span className="text-orange-400 flex-shrink-0">{icon}</span>
-      <input
-        type={type} placeholder={placeholder} value={value}
-        onChange={e => onChange(e.target.value)}
-        className="flex-1 bg-transparent text-[#1f2937] dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-[15px] focus:outline-none"
-      />
-      {rightAction}
-
+    <div>
+      {(label || labelRight) && (
+        <div className="flex justify-between items-center mb-1.5 px-1">
+          {label && (
+            <label className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.14em]">
+              {label}
+            </label>
+          )}
+          {labelRight}
+        </div>
+      )}
+      <div className="glass-input rounded-2xl flex items-center gap-3 px-4 py-3.5">
+        <span className="text-orange-400 flex-shrink-0">{icon}</span>
+        <input
+          type={type} placeholder={placeholder} value={value}
+          onChange={e => onChange(e.target.value)}
+          className="flex-1 bg-transparent text-[#1f2937] dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-[15px] focus:outline-none"
+        />
+        {rightAction}
+      </div>
     </div>
   );
 }
@@ -274,15 +286,20 @@ function LoginPage() {
       <style>{GLASS_STYLES}</style>
       <LiquidBackground />
 
-      {/* Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="glass-card relative z-10 w-full max-w-[400px] mx-4 rounded-3xl p-8"
-      >
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-7">
+      {/* Card + outer gradient halo */}
+      <div className="relative z-10 w-full max-w-[420px] mx-4">
+        <div
+          aria-hidden="true"
+          className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-tr from-orange-500/25 via-amber-400/15 to-orange-600/25 dark:from-orange-500/20 dark:via-amber-500/10 dark:to-orange-600/20 blur-2xl opacity-70 pointer-events-none"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 24, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="glass-card relative rounded-3xl p-8"
+        >
+          {/* Logo */}
+          <div className="flex flex-col items-center mb-7">
           <div className="flex items-center justify-center mb-4">
             <img src={airesumiLogo} alt="Airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
             <img src={airesumiLogoWhite} alt="Airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />
@@ -332,8 +349,11 @@ function LoginPage() {
 
 
           {/* Email */}
-          <GlassInput icon={<Mail size={17} />} type="email" placeholder="Email address"
-            value={email} onChange={setEmail} />
+          <GlassInput
+            icon={<Mail size={17} />} type="email" placeholder="name@example.com"
+            value={email} onChange={setEmail}
+            label={tab === "forgot" ? "Email to reset" : "Email address"}
+          />
 
           {/* Password */}
           <AnimatePresence>
@@ -342,7 +362,14 @@ function LoginPage() {
                 initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
                 <GlassInput icon={<Lock size={17} />} type={showPass ? "text" : "password"}
-                  placeholder="Password" value={password} onChange={setPassword}
+                  placeholder="••••••••" value={password} onChange={setPassword}
+                  label="Password"
+                  labelRight={tab === "login" ? (
+                    <button type="button" onClick={() => switchTab("forgot")}
+                      className="text-[10px] font-bold uppercase tracking-[0.14em] text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors cursor-pointer bg-transparent border-none">
+                      Forgot?
+                    </button>
+                  ) : undefined}
                   rightAction={
                     <button type="button" onClick={() => setShowPass(!showPass)}
                       className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer bg-transparent border-none">
@@ -361,6 +388,7 @@ function LoginPage() {
                 exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
                 <GlassInput icon={<Lock size={17} />} type={showConfirm ? "text" : "password"}
                   placeholder="Confirm password" value={confirmPassword} onChange={setConfirmPassword}
+                  label="Confirm password"
                   rightAction={
                     <button type="button" onClick={() => setShowConfirm(!showConfirm)}
                       className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer bg-transparent border-none">
@@ -371,15 +399,7 @@ function LoginPage() {
             )}
           </AnimatePresence>
 
-          {/* Forgot password link */}
-          {tab === "login" && (
-            <div className="text-right">
-              <button type="button" onClick={() => switchTab("forgot")}
-                className="text-[12px] text-orange-500 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-none">
-                Forgot password?
-              </button>
-            </div>
-          )}
+
 
           {/* Error / success message */}
           <AnimatePresence>
@@ -399,14 +419,13 @@ function LoginPage() {
           </AnimatePresence>
 
 
-          {/* Submit */}
           <button type="submit" disabled={loading}
-            className="glass-btn w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[15px] font-bold text-white cursor-pointer border-none disabled:opacity-60 disabled:cursor-not-allowed mt-1">
+            className="glass-btn group w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[15px] font-bold text-white cursor-pointer border-none disabled:opacity-60 disabled:cursor-not-allowed mt-2">
             {loading
               ? <><Loader2 size={17} className="animate-spin" /> Please wait...</>
               : <>
                   {tab === "login" ? "Sign In" : tab === "signup" ? "Create Account" : "Send Reset Link"}
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
                 </>
             }
           </button>
@@ -428,7 +447,8 @@ function LoginPage() {
           <Link to="/privacy" className="text-orange-500 dark:text-orange-400 hover:underline no-underline">Privacy Policy</Link>
         </p>
 
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }

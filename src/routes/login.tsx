@@ -349,8 +349,11 @@ function LoginPage() {
 
 
           {/* Email */}
-          <GlassInput icon={<Mail size={17} />} type="email" placeholder="Email address"
-            value={email} onChange={setEmail} />
+          <GlassInput
+            icon={<Mail size={17} />} type="email" placeholder="name@example.com"
+            value={email} onChange={setEmail}
+            label={tab === "forgot" ? "Email to reset" : "Email address"}
+          />
 
           {/* Password */}
           <AnimatePresence>
@@ -359,7 +362,14 @@ function LoginPage() {
                 initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
                 <GlassInput icon={<Lock size={17} />} type={showPass ? "text" : "password"}
-                  placeholder="Password" value={password} onChange={setPassword}
+                  placeholder="••••••••" value={password} onChange={setPassword}
+                  label="Password"
+                  labelRight={tab === "login" ? (
+                    <button type="button" onClick={() => switchTab("forgot")}
+                      className="text-[10px] font-bold uppercase tracking-[0.14em] text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 transition-colors cursor-pointer bg-transparent border-none">
+                      Forgot?
+                    </button>
+                  ) : undefined}
                   rightAction={
                     <button type="button" onClick={() => setShowPass(!showPass)}
                       className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer bg-transparent border-none">
@@ -378,6 +388,7 @@ function LoginPage() {
                 exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.2 }}>
                 <GlassInput icon={<Lock size={17} />} type={showConfirm ? "text" : "password"}
                   placeholder="Confirm password" value={confirmPassword} onChange={setConfirmPassword}
+                  label="Confirm password"
                   rightAction={
                     <button type="button" onClick={() => setShowConfirm(!showConfirm)}
                       className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer bg-transparent border-none">
@@ -388,15 +399,7 @@ function LoginPage() {
             )}
           </AnimatePresence>
 
-          {/* Forgot password link */}
-          {tab === "login" && (
-            <div className="text-right">
-              <button type="button" onClick={() => switchTab("forgot")}
-                className="text-[12px] text-orange-500 hover:text-orange-600 transition-colors cursor-pointer bg-transparent border-none">
-                Forgot password?
-              </button>
-            </div>
-          )}
+
 
           {/* Error / success message */}
           <AnimatePresence>

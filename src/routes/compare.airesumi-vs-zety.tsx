@@ -10,9 +10,9 @@ const COMPETITOR = {
 
 const PATH = "/compare/airesumi-vs-zety";
 const URL = `https://airesumi.com${PATH}`;
-const TITLE = "Airesumi vs Zety (2026): Honest Side-by-Side Comparison";
+const TITLE = "Airesumi vs Zety (2026): Which Free AI Resume Builder Wins?";
 const DESCRIPTION =
-  "Compare Airesumi and Zety on pricing, ATS features, templates, and download limits. An honest 2026 breakdown to help you pick the right AI resume builder.";
+  "Airesumi vs Zety head-to-head comparison. ATS tools, free PDF download, pricing, and AI writing — see which resume builder is right for you in 2026.";
 
 // Facts sourced from each product's own public pricing/help pages.
 // Update if the vendors change their public terms.

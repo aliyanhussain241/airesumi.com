@@ -1,7 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useMemo, useState } from "react";
-import { ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap } from "lucide-react";
+import {
+  ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap,
+  LayoutGrid, BarChart3, GraduationCap, Calculator, HeartPulse, Megaphone, Handshake, Cpu, Layers,
+} from "lucide-react";
+
+const INDUSTRY_META: Record<string, { icon: typeof Briefcase; color: string; bg: string }> = {
+  "All": { icon: LayoutGrid, color: "#FF6321", bg: "#FFF1EA" },
+  "Business Operations": { icon: Layers, color: "#7C3AED", bg: "#F3EEFF" },
+  "Data & Analytics": { icon: BarChart3, color: "#0EA5E9", bg: "#E0F2FE" },
+  "Education": { icon: GraduationCap, color: "#F59E0B", bg: "#FEF3C7" },
+  "Finance & Accounting": { icon: Calculator, color: "#059669", bg: "#D1FAE5" },
+  "Healthcare": { icon: HeartPulse, color: "#E11D48", bg: "#FFE4E6" },
+  "Marketing": { icon: Megaphone, color: "#DB2777", bg: "#FCE7F3" },
+  "Sales": { icon: Handshake, color: "#EA580C", bg: "#FFEDD5" },
+  "Technology": { icon: Cpu, color: "#2563EB", bg: "#DBEAFE" },
+};
+const defaultMeta = { icon: Briefcase, color: "#6B7280", bg: "#F3F4F6" };
+
 
 import { getPublishedRoleExamples, type ResumeRoleSummary } from "@/lib/resume-roles.functions";
 

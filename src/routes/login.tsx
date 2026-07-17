@@ -185,21 +185,33 @@ function LiquidBackground() {
 
 // ── GLASS INPUT ──────────────────────────────────────────────────────────────
 function GlassInput({
-  icon, type = "text", placeholder, value, onChange, rightAction
+  icon, type = "text", placeholder, value, onChange, rightAction, label, labelRight,
 }: {
   icon: React.ReactNode; type?: string; placeholder: string;
   value: string; onChange: (v: string) => void; rightAction?: React.ReactNode;
+  label?: string; labelRight?: React.ReactNode;
 }) {
   return (
-    <div className="glass-input rounded-2xl flex items-center gap-3 px-4 py-3.5">
-      <span className="text-orange-400 flex-shrink-0">{icon}</span>
-      <input
-        type={type} placeholder={placeholder} value={value}
-        onChange={e => onChange(e.target.value)}
-        className="flex-1 bg-transparent text-[#1f2937] dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-[15px] focus:outline-none"
-      />
-      {rightAction}
-
+    <div>
+      {(label || labelRight) && (
+        <div className="flex justify-between items-center mb-1.5 px-1">
+          {label && (
+            <label className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.14em]">
+              {label}
+            </label>
+          )}
+          {labelRight}
+        </div>
+      )}
+      <div className="glass-input rounded-2xl flex items-center gap-3 px-4 py-3.5">
+        <span className="text-orange-400 flex-shrink-0">{icon}</span>
+        <input
+          type={type} placeholder={placeholder} value={value}
+          onChange={e => onChange(e.target.value)}
+          className="flex-1 bg-transparent text-[#1f2937] dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-[15px] focus:outline-none"
+        />
+        {rightAction}
+      </div>
     </div>
   );
 }

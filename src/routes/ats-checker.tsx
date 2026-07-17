@@ -216,7 +216,7 @@ export const Route = createFileRoute("/ats-checker")({
   head: () => ({
     meta: [
       { title: "Free ATS Resume Checker — Score Your Resume Instantly | airesumi.com" },
-      { name: "description", content: "Run your resume through the same filter employers use. Get an instant ATS score, see exactly which keywords are missing, and fix it before you apply. Free." },
+      { name: "description", content: "Run your resume through a free ATS checker. Get an instant keyword match score, see what is missing, and fix it before you apply. Sign up required." },
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "ATS resume checker, ATS score, applicant tracking system, resume scanner, ATS optimization" },
       { property: "og:title", content: "Free ATS Resume Checker — Score Your Resume | airesumi.com" },

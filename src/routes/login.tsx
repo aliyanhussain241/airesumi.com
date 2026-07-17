@@ -298,6 +298,8 @@ function LoginPage() {
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="glass-card relative rounded-3xl p-8"
         >
+          {/* Logo */}
+          <div className="flex flex-col items-center mb-7">
           <div className="flex items-center justify-center mb-4">
             <img src={airesumiLogo} alt="Airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
             <img src={airesumiLogoWhite} alt="Airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />

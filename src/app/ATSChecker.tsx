@@ -13,7 +13,9 @@ import {
 
 
 export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
+  const navigate = useNavigate();
   const [activeCheckTab, setActiveCheckTab] = useState(1);
+
   const [resumeText, setResumeText] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [analyzeState, setAnalyzeState] = useState<'idle' | 'analyzing' | 'results'>('idle');

@@ -1128,8 +1128,9 @@ function CropView({ page, onCancel, onApply, processing }: {
 export const Route = createFileRoute("/pdf-scanner")({
   head: () => ({
     meta: [
-      { title: "CamScanner Alternative — Free Online Document Scanner | airesumi.com" },
-      { name: "description", content: "Free browser-based CamScanner alternative. Auto edge detection, 4-corner perspective crop, magic enhance, OCR text extraction, password-protect and watermark PDFs — 100% private." },
+      { title: "Free Online Document Scanner — OCR, Crop & Watermark | Airesumi" },
+      { name: "description", content: "Free browser-based document scanner. Auto edge detection, OCR text extraction, password-protect and watermark PDFs. No sign-up, fully private." },
+      { name: "robots", content: "index, follow" },
       { property: "og:title", content: "Free CamScanner Alternative — Scan, OCR & Password-Protect PDFs" },
       { property: "og:description", content: "Auto-crop, OCR, watermark, password-protect. Scan documents to PDF right in your browser." },
       { property: "og:url", content: "https://airesumi.com/pdf-scanner" },

@@ -248,6 +248,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           ]
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Airesumi",
+          "url": "https://airesumi.com",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Free AI resume builder that creates ATS-optimized resumes tailored to specific job descriptions."
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,

@@ -419,14 +419,13 @@ function LoginPage() {
           </AnimatePresence>
 
 
-          {/* Submit */}
           <button type="submit" disabled={loading}
-            className="glass-btn w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[15px] font-bold text-white cursor-pointer border-none disabled:opacity-60 disabled:cursor-not-allowed mt-1">
+            className="glass-btn group w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-[15px] font-bold text-white cursor-pointer border-none disabled:opacity-60 disabled:cursor-not-allowed mt-2">
             {loading
               ? <><Loader2 size={17} className="animate-spin" /> Please wait...</>
               : <>
                   {tab === "login" ? "Sign In" : tab === "signup" ? "Create Account" : "Send Reset Link"}
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
                 </>
             }
           </button>

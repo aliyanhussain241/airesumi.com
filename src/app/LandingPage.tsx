@@ -533,9 +533,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
           const current = TABS.find(t => t.id === activeToolsTab)!;
 
           return (
-            <div className="grid lg:grid-cols-12 gap-6">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
               {/* Sidebar Nav */}
-              <div className="lg:col-span-4 bg-white dark:bg-[#16191f] rounded-3xl border border-gray-100 dark:border-white/10 text-left flex flex-col overflow-hidden p-2" style={{ boxShadow: "0 20px 45px -25px rgba(15,23,42,0.15)" }}>
+              <div className="w-full lg:w-80 flex flex-col gap-3 shrink-0">
                 {TABS.map((tab) => {
                   const active = activeToolsTab === tab.id;
                   const Icon = tab.icon;
@@ -543,28 +543,55 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab.id)}
-                      className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 cursor-pointer relative text-left rounded-2xl transition-colors ${active ? "bg-gradient-to-r from-[#FF6321]/12 via-[#FF6321]/6 to-transparent" : "hover:bg-gray-50 dark:hover:bg-white/5"}`}
+                      className={`group flex items-start gap-4 p-4 rounded-2xl text-left transition-all ${
+                        active
+                          ? "bg-white dark:bg-slate-900 shadow-sm border border-orange-100 dark:border-slate-800"
+                          : "border border-transparent hover:bg-white/60 dark:hover:bg-slate-900/50 cursor-pointer"
+                      }`}
                     >
-                      <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all ${active ? "bg-[#FF6321] text-white shadow-lg shadow-[#FF6321]/30" : "bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-300"}`}>
-                        <Icon size={20} />
+                      <div className="relative flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                        {active ? (
+                          <>
+                            <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">
+                              <circle cx="24" cy="24" r="22" fill="none" className="stroke-[#FFE9E0] dark:stroke-slate-800" strokeWidth="3" />
+                              <motion.circle
+                                key={progressKey}
+                                cx="24"
+                                cy="24"
+                                r="22"
+                                fill="none"
+                                stroke="#FF6321"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeDasharray="138.23"
+                                initial={{ strokeDashoffset: 138.23 }}
+                                animate={{ strokeDashoffset: 0 }}
+                                transition={{ duration: 5, ease: "linear" }}
+                              />
+                            </svg>
+                            <div className="relative z-10 p-2.5 bg-[#FF6321] rounded-full text-white shadow-md shadow-[#FF6321]/30">
+                              <Icon size={18} />
+                            </div>
+                          </>
+                        ) : (
+                          <div className="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-full text-slate-400 group-hover:text-[#FF6321] transition-colors">
+                            <Icon size={18} />
+                          </div>
+                        )}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className={`text-[15px] font-bold flex items-center gap-1.5 ${active ? "text-[#FF6321]" : "text-[#1a202c] dark:text-[#f5f5f4]"}`}>
-                          <span className="text-gray-400 dark:text-gray-500 font-medium">0{tab.id}.</span>
-                          <span className="truncate">{tab.label}</span>
+                      <div className="min-w-0 pt-1">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-xs font-bold tracking-widest ${active ? "text-[#FF6321]" : "text-slate-400"}`}>
+                            0{tab.id}.
+                          </span>
+                          <h3 className={`font-bold truncate ${active ? "text-slate-900 dark:text-white" : "text-slate-600 dark:text-slate-300"}`}>
+                            {tab.label}
+                          </h3>
                         </div>
-                        <div className="text-[12px] text-gray-500 dark:text-gray-400 mt-0.5 truncate">{tab.short}</div>
+                        <p className={`text-sm mt-1 ${active ? "text-slate-500 dark:text-slate-400" : "text-slate-400 dark:text-slate-500"}`}>
+                          {tab.short}
+                        </p>
                       </div>
-                      {active ? (
-                        <div className="w-6 h-6 flex items-center justify-center shrink-0">
-                          <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
-                            <circle cx="12" cy="12" r="10" className="stroke-[#FF6321]/20" strokeWidth="2.5" fill="none" />
-                            <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-[#FF6321]" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
-                          </svg>
-                        </div>
-                      ) : (
-                        <ArrowRight size={16} className="text-gray-300 dark:text-gray-600 shrink-0" />
-                      )}
                     </button>
                   );
                 })}
@@ -576,7 +603,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="lg:col-span-8 grid sm:grid-cols-2 gap-6 h-full"
+                className="flex-1 grid md:grid-cols-2 gap-6 lg:gap-8 items-start"
               >
                 {current.cards.map((c, i) => {
                   const Icon = c.icon;
@@ -586,40 +613,49 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: i * 0.08 }}
-                      className="group relative bg-gradient-to-br from-orange-50/70 via-white to-white dark:from-[#FF6321]/10 dark:via-[#1c2027] dark:to-[#16191f] rounded-3xl border border-orange-100/60 dark:border-white/10 p-7 lg:p-8 text-left overflow-hidden flex flex-col hover:border-[#FF6321]/40 hover:-translate-y-1 transition-all duration-300"
-                      style={{ boxShadow: "0 20px 45px -25px rgba(255,99,33,0.2)" }}
+                      className={`group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col ${i === 1 ? "md:mt-12" : ""}`}
+                      style={{ boxShadow: "0 20px 50px rgba(15,23,42,0.06)" }}
                     >
-                      {/* corner glow */}
-                      <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-[#FF6321]/15 blur-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                      <div className="flex items-start justify-between mb-5 relative z-10">
-                        <div className="w-12 h-12 rounded-2xl bg-white dark:bg-white/10 border border-orange-100 dark:border-white/10 flex items-center justify-center text-[#FF6321] shadow-sm">
-                          <Icon size={22} />
+                      <div className="flex items-start justify-between mb-6">
+                        <div className="inline-flex p-3 rounded-2xl bg-orange-50 dark:bg-orange-500/10 text-[#FF6321]">
+                          <Icon size={26} />
                         </div>
                         <div className="text-right">
                           <div className="text-2xl font-bold text-[#FF6321] leading-none">{c.stat}</div>
-                          <div className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-1">{c.statLabel}</div>
+                          <div className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">{c.statLabel}</div>
                         </div>
                       </div>
 
-                      <h3 className="text-[22px] font-bold text-[#1a202c] dark:text-[#f5f5f4] mb-2 relative z-10">{c.title}</h3>
-                      <p className="text-[#4a5568] dark:text-gray-300 text-[15px] leading-relaxed mb-6 relative z-10 flex-1">{c.desc}</p>
+                      <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">{c.title}</h2>
+                      <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6 flex-1">{c.desc}</p>
 
-                      {/* Preview strip */}
-                      <div className="relative z-10 bg-white/80 dark:bg-white/5 backdrop-blur border border-gray-100 dark:border-white/10 rounded-2xl p-4 mb-5">
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                          <span className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Live preview</span>
+                      {/* Live preview */}
+                      <div className="relative bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-5 mb-6 border border-slate-100 dark:border-slate-800">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Live preview</span>
+                          </div>
+                          <div className="flex gap-1">
+                            <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
+                            <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600" />
+                          </div>
                         </div>
-                        <div className="space-y-1.5">
-                          <div className="h-2 rounded-full bg-gradient-to-r from-[#FF6321]/40 to-[#FF6321]/10" style={{ width: "88%" }} />
-                          <div className="h-2 rounded-full bg-gray-100 dark:bg-white/10" style={{ width: "72%" }} />
-                          <div className="h-2 rounded-full bg-gray-100 dark:bg-white/10" style={{ width: "60%" }} />
+                        <div className="space-y-2">
+                          <div className="h-1.5 w-full bg-orange-200 dark:bg-orange-500/30 rounded-full overflow-hidden">
+                            <motion.div
+                              className="h-full bg-[#FF6321] rounded-full"
+                              initial={{ width: 0 }}
+                              animate={{ width: "66%" }}
+                              transition={{ duration: 1.1, delay: 0.2 + i * 0.1, ease: "easeOut" }}
+                            />
+                          </div>
+                          <div className="h-1.5 w-4/5 bg-slate-200 dark:bg-slate-700 rounded-full" />
+                          <div className="h-1.5 w-3/5 bg-slate-200 dark:bg-slate-700 rounded-full" />
                         </div>
                       </div>
 
-
-                      <div className="flex items-center gap-2 text-[#FF6321] font-bold text-sm relative z-10 group-hover:gap-3 transition-all">
+                      <div className="inline-flex items-center gap-2 font-bold text-[#FF6321] text-sm group-hover:gap-3 transition-all">
                         Explore tool <ArrowRight size={16} />
                       </div>
                     </motion.div>

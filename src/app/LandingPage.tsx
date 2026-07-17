@@ -533,9 +533,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
           const current = TABS.find(t => t.id === activeToolsTab)!;
 
           return (
-            <div className="grid lg:grid-cols-12 gap-6 h-auto lg:h-[520px]">
+            <div className="grid lg:grid-cols-12 gap-6">
               {/* Sidebar Nav */}
-              <div className="lg:col-span-4 bg-white dark:bg-[#16191f] rounded-3xl border border-gray-100 dark:border-white/10 text-left flex flex-col overflow-hidden" style={{ boxShadow: "0 20px 45px -25px rgba(15,23,42,0.15)" }}>
+              <div className="lg:col-span-4 bg-white dark:bg-[#16191f] rounded-3xl border border-gray-100 dark:border-white/10 text-left flex flex-col overflow-hidden p-2" style={{ boxShadow: "0 20px 45px -25px rgba(15,23,42,0.15)" }}>
                 {TABS.map((tab) => {
                   const active = activeToolsTab === tab.id;
                   const Icon = tab.icon;
@@ -543,28 +543,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(tab.id)}
-                      className={`flex items-center gap-4 p-5 lg:p-6 cursor-pointer relative text-left transition-colors border-b border-gray-100 dark:border-white/10 last:border-b-0 ${active ? "bg-gradient-to-r from-[#FF6321]/10 via-[#FF6321]/5 to-transparent" : "hover:bg-gray-50 dark:hover:bg-white/5"}`}
+                      className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 cursor-pointer relative text-left rounded-2xl transition-colors ${active ? "bg-gradient-to-r from-[#FF6321]/12 via-[#FF6321]/6 to-transparent" : "hover:bg-gray-50 dark:hover:bg-white/5"}`}
                     >
-                      {active && (
-                        <motion.div layoutId="toolTabIndicator" className="absolute right-0 top-2 bottom-2 w-1 rounded-l-full bg-[#FF6321]" transition={{ type: "spring", stiffness: 400, damping: 34 }} />
-                      )}
                       <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-all ${active ? "bg-[#FF6321] text-white shadow-lg shadow-[#FF6321]/30" : "bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-300"}`}>
                         <Icon size={20} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className={`text-[15px] font-bold ${active ? "text-[#FF6321]" : "text-[#1a202c] dark:text-[#f5f5f4]"}`}>
-                          <span className="text-gray-400 dark:text-gray-500 font-medium mr-1.5">0{tab.id}.</span>{tab.label}
+                        <div className={`text-[15px] font-bold flex items-center gap-1.5 ${active ? "text-[#FF6321]" : "text-[#1a202c] dark:text-[#f5f5f4]"}`}>
+                          <span className="text-gray-400 dark:text-gray-500 font-medium">0{tab.id}.</span>
+                          <span className="truncate">{tab.label}</span>
                         </div>
                         <div className="text-[12px] text-gray-500 dark:text-gray-400 mt-0.5 truncate">{tab.short}</div>
-
                       </div>
-                      {active && (
-                        <div className="w-7 h-7 flex items-center justify-center shrink-0">
-                          <svg width="28" height="28" viewBox="0 0 24 24" className="-rotate-90">
+                      {active ? (
+                        <div className="w-6 h-6 flex items-center justify-center shrink-0">
+                          <svg width="24" height="24" viewBox="0 0 24 24" className="-rotate-90">
                             <circle cx="12" cy="12" r="10" className="stroke-[#FF6321]/20" strokeWidth="2.5" fill="none" />
                             <motion.circle key={progressKey} cx="12" cy="12" r="10" className="stroke-[#FF6321]" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeDasharray="62.83" initial={{ strokeDashoffset: 62.83 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 5, ease: "linear" }} />
                           </svg>
                         </div>
+                      ) : (
+                        <ArrowRight size={16} className="text-gray-300 dark:text-gray-600 shrink-0" />
                       )}
                     </button>
                   );

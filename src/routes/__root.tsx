@@ -224,6 +224,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "alternate", hrefLang: "ja", href: "https://airesumi.com/?lng=ja" },
       { rel: "alternate", hrefLang: "ru", href: "https://airesumi.com/?lng=ru" },
       { rel: "alternate", hrefLang: "x-default", href: "https://airesumi.com/" },
+      { rel: "publisher", href: "https://airesumi.com" },
     ],
 
     // FIX: Full schema markup added
@@ -231,6 +232,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         type: "application/ld+json",
         children: JSON.stringify(HOMEPAGE_SCHEMA),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Airesumi",
+          "url": "https://airesumi.com",
+          "logo": "https://airesumi.com/og-image.webp",
+          "foundingDate": "2024",
+          "description": "Free AI resume builder that tailors resumes to job descriptions and optimizes for ATS screening.",
+          "sameAs": [
+            "https://www.producthunt.com/products/airesumi"
+          ]
+        }),
       },
     ],
   }),

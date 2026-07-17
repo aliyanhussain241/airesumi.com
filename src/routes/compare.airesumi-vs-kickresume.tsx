@@ -10,9 +10,9 @@ const COMPETITOR = {
 
 const PATH = "/compare/airesumi-vs-kickresume";
 const URL = `https://airesumi.com${PATH}`;
-const TITLE = "Airesumi vs Kickresume (2026): Honest Side-by-Side Comparison";
+const TITLE = "Airesumi vs Kickresume (2026): Free AI Resume Builder Comparison";
 const DESCRIPTION =
-  "Compare Airesumi and Kickresume on pricing, free PDF export, AI writing, ATS features, and templates. An honest 2026 breakdown to help you pick the right AI resume builder.";
+  "Airesumi vs Kickresume compared on ATS optimization, free features, AI writing, and pricing. Find out which resume builder gets you more interviews in 2026.";
 
 const ROWS: Array<{ feature: string; Airesumi: string; competitor: string }> = [
   {

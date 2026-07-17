@@ -584,10 +584,11 @@ body {
   font-synthesis: none;
 }
 
-img, svg, video, canvas, audio, iframe, embed, object {
-  display: block;
+img, video, canvas, iframe, embed, object {
   max-width: 100%;
 }
+/* NOTE: intentionally NOT forcing `display: block` on svg — it breaks
+   inline icons inside buttons/links (baseline alignment). */
 
 /* Remove default form control chrome across engines */
 button, input, select, textarea {

@@ -445,7 +445,8 @@ function LoginPage() {
           <Link to="/privacy" className="text-orange-500 dark:text-orange-400 hover:underline no-underline">Privacy Policy</Link>
         </p>
 
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }

@@ -286,15 +286,18 @@ function LoginPage() {
       <style>{GLASS_STYLES}</style>
       <LiquidBackground />
 
-      {/* Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="glass-card relative z-10 w-full max-w-[400px] mx-4 rounded-3xl p-8"
-      >
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-7">
+      {/* Card + outer gradient halo */}
+      <div className="relative z-10 w-full max-w-[420px] mx-4">
+        <div
+          aria-hidden="true"
+          className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-tr from-orange-500/25 via-amber-400/15 to-orange-600/25 dark:from-orange-500/20 dark:via-amber-500/10 dark:to-orange-600/20 blur-2xl opacity-70 pointer-events-none"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 24, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="glass-card relative rounded-3xl p-8"
+        >
           <div className="flex items-center justify-center mb-4">
             <img src={airesumiLogo} alt="Airesumi" width={140} height={36} className="theme-logo-light h-9 w-auto object-contain" />
             <img src={airesumiLogoWhite} alt="Airesumi" width={140} height={36} className="theme-logo-dark h-9 w-auto object-contain" />

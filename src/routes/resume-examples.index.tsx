@@ -1,7 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { useMemo, useState } from "react";
-import { ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap } from "lucide-react";
+import {
+  ArrowRight, Briefcase, CheckCircle2, Filter, Search, Sparkles, X, FileText, Download, Zap,
+  LayoutGrid, BarChart3, GraduationCap, Calculator, HeartPulse, Megaphone, Handshake, Cpu, Layers,
+} from "lucide-react";
+
+const INDUSTRY_META: Record<string, { icon: typeof Briefcase; color: string; bg: string }> = {
+  "All": { icon: LayoutGrid, color: "#FF6321", bg: "#FFF1EA" },
+  "Business Operations": { icon: Layers, color: "#7C3AED", bg: "#F3EEFF" },
+  "Data & Analytics": { icon: BarChart3, color: "#0EA5E9", bg: "#E0F2FE" },
+  "Education": { icon: GraduationCap, color: "#F59E0B", bg: "#FEF3C7" },
+  "Finance & Accounting": { icon: Calculator, color: "#059669", bg: "#D1FAE5" },
+  "Healthcare": { icon: HeartPulse, color: "#E11D48", bg: "#FFE4E6" },
+  "Marketing": { icon: Megaphone, color: "#DB2777", bg: "#FCE7F3" },
+  "Sales": { icon: Handshake, color: "#EA580C", bg: "#FFEDD5" },
+  "Technology": { icon: Cpu, color: "#2563EB", bg: "#DBEAFE" },
+};
+const defaultMeta = { icon: Briefcase, color: "#6B7280", bg: "#F3F4F6" };
+
 
 import { getPublishedRoleExamples, type ResumeRoleSummary } from "@/lib/resume-roles.functions";
 
@@ -154,23 +171,44 @@ function ResumeExamplesIndex() {
           </div>
 
           <div className="mt-3 flex items-center gap-2 flex-wrap">
-            <Filter size={14} className="text-[#6B7280]" />
-            {industriesWithCounts.map((ind) => (
-              <button
-                key={ind.name}
-                onClick={() => setIndustry(ind.name)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors inline-flex items-center gap-1.5 ${
-                  industry === ind.name
-                    ? "bg-[#FF6321] text-white"
-                    : "bg-white border border-[#E5E7EB] text-[#374151] hover:border-[#FF6321]"
-                }`}
-              >
-                {ind.name}
-                <span className={`text-[10px] px-1.5 py-0.5 rounded ${industry === ind.name ? "bg-white/20" : "bg-[#F3F4F6] text-[#6B7280]"}`}>
-                  {ind.count}
-                </span>
-              </button>
-            ))}
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#6B7280] pr-1">
+              <Filter size={12} /> Filter
+            </div>
+            {industriesWithCounts.map((ind) => {
+              const meta = INDUSTRY_META[ind.name] ?? defaultMeta;
+              const Icon = meta.icon;
+              const active = industry === ind.name;
+              return (
+                <motion.button
+                  key={ind.name}
+                  onClick={() => setIndustry(ind.name)}
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.97 }}
+                  aria-pressed={active}
+                  className={`group relative px-3 py-1.5 rounded-full text-xs font-semibold transition-all inline-flex items-center gap-2 ${
+                    active
+                      ? "text-white shadow-[0_6px_18px_-6px_rgba(255,99,33,0.55)]"
+                      : "bg-white border border-[#E5E7EB] text-[#374151] hover:border-transparent hover:shadow-sm"
+                  }`}
+                  style={active ? { background: `linear-gradient(135deg, ${meta.color}, ${meta.color}dd)` } : undefined}
+                >
+                  <span
+                    className={`w-5 h-5 rounded-full inline-flex items-center justify-center transition-colors`}
+                    style={active ? { background: "rgba(255,255,255,0.22)" } : { background: meta.bg, color: meta.color }}
+                  >
+                    <Icon size={11} style={active ? { color: "#fff" } : undefined} />
+                  </span>
+                  {ind.name}
+                  <span
+                    className={`text-[10px] font-bold px-1.5 min-w-[18px] text-center rounded-full ${
+                      active ? "bg-white/25 text-white" : "bg-[#F3F4F6] text-[#6B7280] group-hover:bg-[#FFF1EA] group-hover:text-[#FF6321]"
+                    }`}
+                  >
+                    {ind.count}
+                  </span>
+                </motion.button>
+              );
+            })}
             {hasActiveFilters && (
               <button
                 onClick={() => { setIndustry("All"); setQuery(""); }}
@@ -183,8 +221,14 @@ function ResumeExamplesIndex() {
 
           <div className="mt-2 text-xs text-[#6B7280]">
             Showing <span className="font-semibold text-[#111827]">{filtered.length}</span> of {roles.length} examples
+            {industry !== "All" && (
+              <span className="ml-1">
+                in <span className="font-semibold text-[#111827]">{industry}</span>
+              </span>
+            )}
           </div>
         </div>
+
 
         {/* Grid */}
         {filtered.length === 0 ? (

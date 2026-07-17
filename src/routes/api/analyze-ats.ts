@@ -8,28 +8,31 @@ export const Route = createFileRoute("/api/analyze-ats")({
     handlers: {
       POST: async ({ request }) => {
         try {
-          // ✅ AUTH CHECK
-          let user: any;
-          let supabase: any;
-
-          try {
-            ({ user, supabase } = await requireAuth(request));
-          } catch (err: any) {
-            return new Response(
-              JSON.stringify({ error: err.message }),
-              { status: 401 }
-            );
+          // ✅ AUTH IS OPTIONAL — guests can run the ATS checker.
+          // If a bearer is provided, validate it and enforce per-user usage.
+          // Guests skip auth + usage tracking entirely.
+          const authHeader = request.headers.get("Authorization");
+          if (authHeader?.startsWith("Bearer ")) {
+            let user: any;
+            let supabase: any;
+            try {
+              ({ user, supabase } = await requireAuth(request));
+            } catch (err: any) {
+              return new Response(
+                JSON.stringify({ error: err.message }),
+                { status: 401 }
+              );
+            }
+            try {
+              await checkUsage(supabase, user.id, "ats");
+            } catch (err: any) {
+              return new Response(
+                JSON.stringify({ error: err.message }),
+                { status: 429 }
+              );
+            }
           }
 
-          // ✅ USAGE CHECK (daily limit)
-          try {
-            await checkUsage(supabase, user.id, "ats");
-          } catch (err: any) {
-            return new Response(
-              JSON.stringify({ error: err.message }),
-              { status: 429 }
-            );
-          }
 
           const { resumeText, jobDescription } = (await request.json()) as any;
           if (!resumeText) {

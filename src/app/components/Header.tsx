@@ -779,50 +779,60 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
           </nav>
 
 
-          {/* Right side */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          {/* Right side — zone-divided, grouped account cluster */}
+          <div className="flex items-center gap-3 flex-shrink-0">
             {user ? (
-              <div className="hidden lg:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-3">
                 {(() => {
                   const p = location.pathname;
                   const appPrefixes = ['/dashboard', '/resume', '/premium', '/manage-subscription', '/cover-letter', '/ats-checker', '/bullet-writer', '/summary-generator', '/keyword-scanner', '/pdf-scanner', '/resignation-letter', '/linkedin-optimizer', '/salary-analyzer', '/admin'];
-                  return appPrefixes.some(pref => p === pref || p.startsWith(pref + '/')) ? <CreditsBadge /> : null;
+                  const show = appPrefixes.some(pref => p === pref || p.startsWith(pref + '/'));
+                  return show ? (
+                    <>
+                      <CreditsBadge />
+                      <div className="hdr-divider" aria-hidden="true" />
+                    </>
+                  ) : null;
                 })()}
-                <Link to="/dashboard"
-                  title={t('cta.myResumes')}
-                  aria-label={t('cta.myResumes')}
-                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
-                  <LayoutDashboard size={16} />
-                  <span className="hidden xl:inline">{t('cta.myResumes')}</span>
-                </Link>
-                <Link to="/premium"
-                  title="Pricing"
-                  aria-label="Pricing"
-                  className="hdr-tag flex items-center gap-1.5 text-[13px] font-medium text-[#EA580C] px-2.5 py-2 xl:px-3 rounded-xl no-underline transition-all hover:bg-orange-50">
-                  <Sparkles size={16} />
-                  <span className="hidden xl:inline">Pricing</span>
-                </Link>
-                <button onClick={handleLogout}
-                  className="hdr-btn-outline flex items-center gap-1.5 text-[13px] font-medium px-4 py-2 rounded-xl text-[#374151] cursor-pointer">
-                  <LogOut size={13} /> {t('cta.logout')}
-                </button>
+
+                {/* Grouped account cluster */}
+                <div className="hdr-account-cluster">
+                  <Link to="/dashboard" className="hdr-account-item" title={t('cta.myResumes')} aria-label={t('cta.myResumes')}>
+                    <LayoutDashboard size={15} />
+                    <span className="hidden xl:inline">{t('cta.myResumes')}</span>
+                  </Link>
+                  <Link to="/premium" className="hdr-account-item" title="Pricing" aria-label="Pricing">
+                    <Sparkles size={15} />
+                    <span className="hidden xl:inline">Pricing</span>
+                  </Link>
+                  <button onClick={handleLogout} className="hdr-account-item" aria-label={t('cta.logout')}>
+                    <LogOut size={15} />
+                    <span className="hidden xl:inline">{t('cta.logout')}</span>
+                  </button>
+                </div>
+
+                <div className="hdr-divider" aria-hidden="true" />
+
                 <Link to="/resume"
-                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1280 ? t('cta.buildResume') : t('cta.start')}
+                  className="hdr-btn-primary inline-flex items-center gap-2 text-white text-[13px] font-bold px-4 py-2.5 rounded-xl no-underline whitespace-nowrap">
+                  <span>{width >= 1280 ? t('cta.buildResume') : t('cta.start')}</span>
+                  <ArrowRight size={14} className="hdr-cta-arrow" aria-hidden="true" />
                 </Link>
               </div>
             ) : (
               <div className="hidden lg:flex items-center gap-2">
                 <Link to="/login"
-                  className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#EA580C] no-underline">
+                  className="hdr-btn-outline text-[13px] font-semibold px-4 py-2 rounded-xl text-[#374151] dark:text-orange-200 no-underline">
                   {t('cta.login')}
                 </Link>
                 <Link to="/resume"
-                  className="hdr-btn-primary text-white text-[13px] font-bold px-4 py-2 rounded-xl no-underline whitespace-nowrap">
-                  {width >= 1280 ? t('cta.buildResume') : t('cta.startFree')}
+                  className="hdr-btn-primary inline-flex items-center gap-2 text-white text-[13px] font-bold px-4 py-2.5 rounded-xl no-underline whitespace-nowrap">
+                  <span>{width >= 1280 ? t('cta.buildResume') : t('cta.startFree')}</span>
+                  <ArrowRight size={14} className="hdr-cta-arrow" aria-hidden="true" />
                 </Link>
               </div>
             )}
+
 
 
             {/* Theme toggle */}

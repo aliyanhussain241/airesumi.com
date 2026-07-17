@@ -584,10 +584,11 @@ body {
   font-synthesis: none;
 }
 
-img, svg, video, canvas, audio, iframe, embed, object {
-  display: block;
+img, video, canvas, iframe, embed, object {
   max-width: 100%;
 }
+/* NOTE: intentionally NOT forcing `display: block` on svg — it breaks
+   inline icons inside buttons/links (baseline alignment). */
 
 /* Remove default form control chrome across engines */
 button, input, select, textarea {
@@ -598,7 +599,11 @@ button, input, select, textarea {
   appearance: none;
   margin: 0;
 }
-button { background: none; border: 0; cursor: pointer; padding: 0; }
+/* NOTE: do NOT reset button background/border/padding globally — it beats
+   Tailwind's `utilities` layer (unlayered wins) and flattens shadcn buttons.
+   `appearance: none` above is enough to remove native chrome; Tailwind
+   utilities on each button supply background, border, and padding. */
+button { cursor: pointer; }
 
 button::-moz-focus-inner,
 input::-moz-focus-inner { border: 0; padding: 0; }
@@ -645,8 +650,12 @@ html.dark * { scrollbar-color: rgba(255, 255, 255, 0.25) transparent; }
 html.dark *::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); }
 html.dark *::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.35); }
 
-/* Flex/Grid: Firefox vs WebKit min-size auto parity — prevent overflow */
-.flex > *, .inline-flex > *, .grid > * { min-width: 0; }
+/* Flex/Grid: Firefox vs WebKit min-size auto parity.
+   Scoped via an opt-in utility instead of applying to every flex/grid child
+   globally — the global version caused header items and cards to overlap. */
+@utility min-w-0-children {
+  & > * { min-width: 0; }
+}
 
 /* iOS Safari: font-size < 16px triggers input zoom */
 @supports (-webkit-touch-callout: none) {

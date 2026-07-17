@@ -599,7 +599,11 @@ button, input, select, textarea {
   appearance: none;
   margin: 0;
 }
-button { background: none; border: 0; cursor: pointer; padding: 0; }
+/* NOTE: do NOT reset button background/border/padding globally — it beats
+   Tailwind's `utilities` layer (unlayered wins) and flattens shadcn buttons.
+   `appearance: none` above is enough to remove native chrome; Tailwind
+   utilities on each button supply background, border, and padding. */
+button { cursor: pointer; }
 
 button::-moz-focus-inner,
 input::-moz-focus-inner { border: 0; padding: 0; }

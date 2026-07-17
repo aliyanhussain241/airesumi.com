@@ -19,6 +19,20 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   const [activeResultTab, setActiveResultTab] = useState(0);
   const [atsResult, setAtsResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isAuthed, setIsAuthed] = useState<boolean>(false);
+  const [bannerDismissed, setBannerDismissed] = useState<boolean>(false);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setIsAuthed(!!data.session);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setIsAuthed(!!session);
+    });
+    return () => { mounted = false; sub.subscription.unsubscribe(); };
+  }, []);
+
 
   useEffect(() => {
     document.title = "Free ATS Resume Checker – Instant ATS Score & Keyword Analysis | AIResumi";

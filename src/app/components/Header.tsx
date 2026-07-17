@@ -15,28 +15,107 @@ import airesumiLogoWhite from '@/assets/airesumi-white.webp';
 import { CreditsBadge } from './CreditsBadge';
 
 const GLASS_HEADER_STYLES = `
+  /* ==============================================================
+     PRECISION HEADER — refined glass surface, hairline zone dividers,
+     sliding nav underline, elevated CTA with orange glow.
+     ============================================================== */
   .hdr-glass {
-    background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid rgba(255,255,255,0.5);
-    box-shadow: 0 2px 24px rgba(234,88,12,0.06), 0 1px 0 rgba(255,255,255,0.8) inset;
-    transition: all 0.3s ease;
+    background: rgba(255, 253, 250, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(234, 88, 12, 0.08);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+    transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
   .hdr-glass-scrolled {
-    background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
-    box-shadow: 0 4px 32px rgba(234,88,12,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
-    border-bottom: 1px solid rgba(234,88,12,0.1);
+    background: rgba(255, 253, 250, 0.88);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    box-shadow:
+      0 8px 32px -12px rgba(234, 88, 12, 0.14),
+      0 1px 0 rgba(255, 255, 255, 0.95) inset;
+    border-bottom: 1px solid rgba(234, 88, 12, 0.14);
+  }
+  html.dark .hdr-glass {
+    background: rgba(17, 20, 28, 0.72);
+    border-bottom: 1px solid rgba(234, 88, 12, 0.16);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+  }
+  html.dark .hdr-glass-scrolled {
+    background: rgba(13, 16, 24, 0.88);
+    box-shadow:
+      0 10px 40px -12px rgba(0, 0, 0, 0.6),
+      0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    border-bottom: 1px solid rgba(234, 88, 12, 0.24);
   }
 
-  /* ADVANCED DROPDOWN — high-visibility opaque glass with premium feel */
+  /* Ambient top accent line */
+  .hdr-glass::before,
+  .hdr-glass-scrolled::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 15%; right: 15%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.35), transparent);
+    pointer-events: none;
+  }
+
+  /* ---------- Zone dividers ---------- */
+  .hdr-zone {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hdr-divider {
+    width: 1px;
+    height: 22px;
+    background: linear-gradient(180deg, transparent, rgba(17, 24, 39, 0.12), transparent);
+    flex-shrink: 0;
+  }
+  html.dark .hdr-divider {
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  }
+
+  /* ---------- Nav links with sliding underline ---------- */
+  .hdr-nav-link {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: #374151;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  html.dark .hdr-nav-link { color: #d1d5db; }
+
+  .hdr-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px; bottom: 2px;
+    height: 2px;
+    background: linear-gradient(90deg, #F97316, #EA580C);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hdr-nav-link:hover {
+    color: #EA580C;
+    background: rgba(234, 88, 12, 0.05);
+  }
+  .hdr-nav-link:hover::after,
+  .hdr-nav-link.active::after {
+    transform: scaleX(1);
+  }
+  .hdr-nav-link.active {
+    color: #EA580C;
+  }
+  html.dark .hdr-nav-link:hover,
+  html.dark .hdr-nav-link.active { color: #FDBA74; }
+
+  /* ---------- Dropdown (unchanged behavior) ---------- */
   .hdr-dropdown {
     --hdr-blur: 32px;
     --hdr-sat: 180%;
     position: absolute;
-    border-radius: 1.5rem;
+    border-radius: 1.25rem;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.98);
     border: 1px solid rgba(234, 88, 12, 0.12);
@@ -56,8 +135,6 @@ const GLASS_HEADER_STYLES = `
       0 10px 20px -5px rgba(234, 88, 12, 0.15),
       0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   }
-
-  /* Ambient glow at top of dropdown */
   .hdr-dropdown::before {
     content: "";
     position: absolute;
@@ -66,13 +143,8 @@ const GLASS_HEADER_STYLES = `
     pointer-events: none;
     z-index: 4;
   }
+  .hdr-dropdown > .hdr-dropdown-content { position: relative; z-index: 3; }
 
-  .hdr-dropdown > .hdr-dropdown-content {
-    position: relative;
-    z-index: 3;
-  }
-
-  /* Featured side panel */
   .hdr-featured {
     background: linear-gradient(160deg, rgba(234,88,12,0.10) 0%, rgba(251,146,60,0.06) 60%, transparent 100%);
     border-right: 1px solid rgba(234,88,12,0.10);
@@ -102,7 +174,6 @@ const GLASS_HEADER_STYLES = `
     border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
-  /* Keyboard focus rings */
   .hdr-nav-link:focus-visible,
   .hdr-tool-item:focus-visible,
   .hdr-dropdown-footer a:focus-visible {
@@ -111,7 +182,6 @@ const GLASS_HEADER_STYLES = `
     border-radius: 10px;
   }
 
-  /* Tool item card */
   .hdr-tool-item {
     position: relative;
     border: 1px solid transparent;
@@ -140,12 +210,8 @@ const GLASS_HEADER_STYLES = `
     opacity: 1;
     transform: translateX(0);
   }
-  .hdr-tool-name {
-    color: #111827;
-  }
-  .hdr-tool-desc {
-    color: #6b7280;
-  }
+  .hdr-tool-name { color: #111827; }
+  .hdr-tool-desc { color: #6b7280; }
   html.dark .hdr-tool-name { color: #f3f4f6; }
   html.dark .hdr-tool-desc { color: #9ca3af; }
 
@@ -174,62 +240,123 @@ const GLASS_HEADER_STYLES = `
     color: #FDBA74;
   }
 
-  .hdr-dropdown-grid {
-    display: grid;
-    gap: 6px;
-  }
+  .hdr-dropdown-grid { display: grid; gap: 6px; }
   .hdr-dropdown-grid.cols-1 { grid-template-columns: 1fr; }
   .hdr-dropdown-grid.cols-2 { grid-template-columns: 1fr 1fr; }
 
+  /* ---------- Elevated primary CTA with sheen + arrow slide ---------- */
   .hdr-btn-primary {
-    background: linear-gradient(135deg, rgba(234,88,12,0.92), rgba(194,65,12,0.95));
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 4px 14px rgba(234,88,12,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
-    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #F97316 0%, #EA580C 50%, #C2410C 100%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+      0 6px 18px -4px rgba(234, 88, 12, 0.5),
+      0 2px 4px -1px rgba(194, 65, 12, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .hdr-btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transition: left 0.6s ease;
   }
   .hdr-btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(234,88,12,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+    box-shadow:
+      0 10px 26px -4px rgba(234, 88, 12, 0.6),
+      0 2px 4px -1px rgba(194, 65, 12, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
+  .hdr-btn-primary:hover::before { left: 120%; }
+  .hdr-btn-primary .hdr-cta-arrow {
+    display: inline-block;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hdr-btn-primary:hover .hdr-cta-arrow { transform: translateX(3px); }
+
+  /* ---------- Outline / ghost buttons ---------- */
   .hdr-btn-outline {
-    background: rgba(255,255,255,0.45);
+    background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(234,88,12,0.25);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
-    transition: all 0.2s ease;
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    transition: all 0.18s ease;
   }
   .hdr-btn-outline:hover {
-    background: rgba(255,255,255,0.65);
-    border-color: rgba(234,88,12,0.4);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(234, 88, 12, 0.3);
+    color: #EA580C;
   }
-  .hdr-nav-link {
-    transition: all 0.18s ease;
+  html.dark .hdr-btn-outline {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  html.dark .hdr-btn-outline:hover {
+    background: rgba(234, 88, 12, 0.12);
+    border-color: rgba(234, 88, 12, 0.35);
+    color: #FDBA74;
+  }
+
+  /* ---------- Account cluster (grouped card for utility items) ---------- */
+  .hdr-account-cluster {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(17, 24, 39, 0.06);
+    border-radius: 14px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+  html.dark .hdr-account-cluster {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+  .hdr-account-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
     border-radius: 10px;
-    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+    cursor: pointer;
+    background: transparent;
+    border: none;
   }
-  .hdr-nav-link:hover {
-    background: rgba(234,88,12,0.08);
+  .hdr-account-item:hover {
+    background: rgba(234, 88, 12, 0.08);
     color: #EA580C;
   }
-  .hdr-nav-link.active {
-    background: rgba(234,88,12,0.1);
-    color: #EA580C;
+  html.dark .hdr-account-item { color: #d1d5db; }
+  html.dark .hdr-account-item:hover {
+    background: rgba(234, 88, 12, 0.16);
+    color: #FDBA74;
   }
+
   .hdr-mobile {
     background: rgba(255,255,255,0.98);
     backdrop-filter: blur(40px) saturate(200%);
     -webkit-backdrop-filter: blur(40px) saturate(200%);
   }
-  html.dark .hdr-mobile {
-    background: rgba(17, 20, 28, 0.98);
-  }
+  html.dark .hdr-mobile { background: rgba(17, 20, 28, 0.98); }
+
   .hdr-tag {
     background: rgba(234,88,12,0.12);
     border: 1px solid rgba(234,88,12,0.15);
     backdrop-filter: blur(4px);
   }
 `;
+
 
 export const Logo = () => (
   <div className="flex items-center select-none transition-transform duration-200 hover:scale-[1.02]">

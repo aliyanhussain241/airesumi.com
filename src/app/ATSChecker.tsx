@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useNavigate } from '@tanstack/react-router';
+
 import { motion, AnimatePresence } from 'motion/react';
 import {
   CheckCircle2, XCircle, AlertTriangle, ArrowRight, Search, ChevronDown,
@@ -11,7 +13,9 @@ import {
 
 
 export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
+  const navigate = useNavigate();
   const [activeCheckTab, setActiveCheckTab] = useState(1);
+
   const [resumeText, setResumeText] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const [analyzeState, setAnalyzeState] = useState<'idle' | 'analyzing' | 'results'>('idle');
@@ -19,6 +23,20 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   const [activeResultTab, setActiveResultTab] = useState(0);
   const [atsResult, setAtsResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isAuthed, setIsAuthed] = useState<boolean>(false);
+  const [bannerDismissed, setBannerDismissed] = useState<boolean>(false);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setIsAuthed(!!data.session);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setIsAuthed(!!session);
+    });
+    return () => { mounted = false; sub.subscription.unsubscribe(); };
+  }, []);
+
 
   useEffect(() => {
     document.title = "Free ATS Resume Checker – Instant ATS Score & Keyword Analysis | AIResumi";
@@ -453,6 +471,47 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                 </div>
               );
             })()}
+
+            {/* Guest signup nudge — shown after results for logged-out users */}
+            {!isAuthed && !bannerDismissed && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="relative overflow-hidden rounded-2xl border-2 border-[#FF6321]/40 bg-gradient-to-br from-[#FFF7ED] via-white to-[#FFF1E5] p-6 sm:p-7 shadow-[0_10px_40px_-15px_rgba(255,99,33,0.35)]"
+              >
+                <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#FF6321]/10 blur-3xl pointer-events-none" />
+                <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FF6321] text-white flex items-center justify-center shadow-lg shrink-0">
+                    <Sparkles className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 mb-1">
+                      Want to save your results and fix these issues?
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      Create a free account — it takes 30 seconds. Save your ATS reports, track improvements, and rebuild your resume with AI.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
+                    <button
+                      onClick={() => navigate({ to: '/login' })}
+                      className="flex-1 sm:flex-none px-5 py-3 bg-[#FF6321] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all shadow-[0_10px_20px_-8px_rgba(255,99,33,0.6)] flex items-center justify-center gap-2 whitespace-nowrap"
+                    >
+                      Create Free Account <ArrowRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setBannerDismissed(true)}
+                      className="text-sm font-semibold text-gray-500 hover:text-gray-800 underline underline-offset-2 whitespace-nowrap"
+                    >
+                      Maybe later
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+
 
 
             {/* Results Tabs */}

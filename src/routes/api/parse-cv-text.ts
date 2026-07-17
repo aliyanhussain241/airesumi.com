@@ -7,20 +7,20 @@ export const Route = createFileRoute("/api/parse-cv-text")({
     handlers: {
       POST: async ({ request }) => {
         try {
-          // ✅ AUTH CHECK
+          // ✅ AUTH IS OPTIONAL — guests can use ATS checker.
           const authHeader = request.headers.get("Authorization");
-          if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return new Response(JSON.stringify({ error: "Unauthorized. Please log in." }), { status: 401 });
+          if (authHeader?.startsWith("Bearer ")) {
+            const token = authHeader.replace("Bearer ", "");
+            const supabase = createClient(
+              (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL)!,
+              (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY)!
+            );
+            const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+            if (authError || !user) {
+              return new Response(JSON.stringify({ error: "Invalid or expired session. Please log in again." }), { status: 401 });
+            }
           }
-          const token = authHeader.replace("Bearer ", "");
-          const supabase = createClient(
-  (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL)!,
-  (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY)!
-);
-          const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-          if (authError || !user) {
-            return new Response(JSON.stringify({ error: "Invalid or expired session. Please log in again." }), { status: 401 });
-          }
+
 
           const form = await request.formData();
           const file = form.get("cv") as File | null;

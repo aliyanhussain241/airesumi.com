@@ -495,7 +495,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
                   </div>
                   <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
                     <button
-                      onClick={() => onNavigate('login' as any)}
+                      onClick={() => navigate({ to: '/login' })}
                       className="flex-1 sm:flex-none px-5 py-3 bg-[#FF6321] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-all shadow-[0_10px_20px_-8px_rgba(255,99,33,0.6)] flex items-center justify-center gap-2 whitespace-nowrap"
                     >
                       Create Free Account <ArrowRight className="w-4 h-4" />

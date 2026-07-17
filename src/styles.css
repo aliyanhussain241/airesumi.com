@@ -650,8 +650,12 @@ html.dark * { scrollbar-color: rgba(255, 255, 255, 0.25) transparent; }
 html.dark *::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); }
 html.dark *::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.35); }
 
-/* Flex/Grid: Firefox vs WebKit min-size auto parity — prevent overflow */
-.flex > *, .inline-flex > *, .grid > * { min-width: 0; }
+/* Flex/Grid: Firefox vs WebKit min-size auto parity.
+   Scoped via an opt-in utility instead of applying to every flex/grid child
+   globally — the global version caused header items and cards to overlap. */
+@utility min-w-0-children {
+  & > * { min-width: 0; }
+}
 
 /* iOS Safari: font-size < 16px triggers input zoom */
 @supports (-webkit-touch-callout: none) {

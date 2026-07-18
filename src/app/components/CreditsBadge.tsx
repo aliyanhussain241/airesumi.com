@@ -75,7 +75,7 @@ export function CreditsBadge() {
       <button
         type="button"
         onClick={() => { if (isOut) setShowModal(true); }}
-        className={`hidden sm:inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-[12px] font-semibold border transition-all ${
+        className={`hidden lg:inline-flex items-center gap-1 h-7 px-2.5 rounded-full text-[11px] font-semibold border transition-all whitespace-nowrap ${
           isPro
             ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white border-orange-500 shadow-sm"
             : isOut
@@ -83,11 +83,12 @@ export function CreditsBadge() {
               : "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
         }`}
         title={isPro ? "Pro plan · unlimited" : `${row.credits_remaining} of ${FREE_ALLOWANCE} credits left · ${used} used`}
+        aria-label={isPro ? "Pro plan" : `${row.credits_remaining} of ${FREE_ALLOWANCE} credits remaining`}
       >
         {isPro ? (
-          <><Sparkles size={13} /> Pro · {used} used</>
+          <><Sparkles size={11} /> Pro</>
         ) : (
-          <><Zap size={13} /> {row.credits_remaining}/{FREE_ALLOWANCE} left · {used} used</>
+          <><Zap size={11} /> {row.credits_remaining}/{FREE_ALLOWANCE}</>
         )}
       </button>
 
@@ -95,6 +96,7 @@ export function CreditsBadge() {
     </>
   );
 }
+
 
 export function OutOfCreditsModal({ onClose }: { onClose: () => void }) {
   return (

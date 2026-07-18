@@ -16,7 +16,7 @@ Airesumi offers AI-powered resume generation, ATS score analysis and optimizatio
 
 - [Blog](https://airesumi.com/blog): Articles on job search and resume writing
 
-- [Examples](https://airesumi.com/examples): Sample resumes and templates
+- [Resume Examples](https://airesumi.com/resume-examples): Sample resumes and templates
 
 - [Pricing](https://airesumi.com/premium): Premium plan details
 

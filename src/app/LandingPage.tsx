@@ -524,7 +524,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             {
               id: 2, icon: Briefcase, label: "Get Hired", short: "Land interviews faster",
               cards: [
-                { icon: Search, title: "Job Board", desc: "Every online job board in one place. We scan the entire internet every day.", stat: "1.2M+", statLabel: "live jobs" },
+                { icon: Search, title: "Job Board", desc: "Every online job board in one place. We scan the entire internet every day.", stat: "1.2M+", statLabel: "live jobs", href: "/job-board" },
                 { icon: Send, title: "Auto Apply", desc: "Our experts apply for you. Interviews land straight in your inbox.", stat: "10x", statLabel: "faster applies" },
               ],
             },

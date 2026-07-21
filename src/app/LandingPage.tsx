@@ -153,7 +153,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                   { icon: <CheckCircle2 size={14} className="text-white" />, iconBg: "bg-[#22c55e]", label: "ATS-optimized", sub: "recruiter-approved" },
                   { icon: <Star size={14} fill="white" className="text-white" />, iconBg: "bg-[#00b67a]", label: "100% free", sub: "no card required" },
                   { icon: <span className="text-white text-[11px] font-bold">10m</span>, iconBg: "bg-[#FF6321]", label: "Ready in minutes", sub: "not hours" },
-                  { icon: <span className="text-white text-[11px] font-bold">4.8★</span>, iconBg: "bg-[#1a202c]", label: "Loved by 12k+", sub: "job seekers" },
                 ].map((t, i) => (
                   <motion.div
                     key={i}

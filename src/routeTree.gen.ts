@@ -19,6 +19,7 @@ import { Route as ResumeExamplesRouteImport } from './routes/resume-examples'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as ResignationLetterRouteImport } from './routes/resignation-letter'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RecruiterMatchRouteImport } from './routes/recruiter-match'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as PkRouteImport } from './routes/pk'
@@ -114,6 +115,11 @@ const ResignationLetterRoute = ResignationLetterRouteImport.update({
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecruiterMatchRoute = RecruiterMatchRouteImport.update({
+  id: '/recruiter-match',
+  path: '/recruiter-match',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -367,6 +373,7 @@ export interface FileRoutesByFullPath {
   '/pk': typeof PkRouteWithChildren
   '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
+  '/recruiter-match': typeof RecruiterMatchRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
@@ -424,6 +431,7 @@ export interface FileRoutesByTo {
   '/pdf-scanner': typeof PdfScannerRoute
   '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
+  '/recruiter-match': typeof RecruiterMatchRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
@@ -482,6 +490,7 @@ export interface FileRoutesById {
   '/pk': typeof PkRouteWithChildren
   '/premium': typeof PremiumRouteWithChildren
   '/privacy': typeof PrivacyRoute
+  '/recruiter-match': typeof RecruiterMatchRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
@@ -542,6 +551,7 @@ export interface FileRouteTypes {
     | '/pk'
     | '/premium'
     | '/privacy'
+    | '/recruiter-match'
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
@@ -599,6 +609,7 @@ export interface FileRouteTypes {
     | '/pdf-scanner'
     | '/premium'
     | '/privacy'
+    | '/recruiter-match'
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
@@ -656,6 +667,7 @@ export interface FileRouteTypes {
     | '/pk'
     | '/premium'
     | '/privacy'
+    | '/recruiter-match'
     | '/reset-password'
     | '/resignation-letter'
     | '/resume'
@@ -715,6 +727,7 @@ export interface RootRouteChildren {
   PkRoute: typeof PkRouteWithChildren
   PremiumRoute: typeof PremiumRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
+  RecruiterMatchRoute: typeof RecruiterMatchRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResignationLetterRoute: typeof ResignationLetterRoute
   ResumeRoute: typeof ResumeRoute
@@ -819,6 +832,13 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recruiter-match': {
+      id: '/recruiter-match'
+      path: '/recruiter-match'
+      fullPath: '/recruiter-match'
+      preLoaderRoute: typeof RecruiterMatchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -1212,6 +1232,7 @@ const rootRouteChildren: RootRouteChildren = {
   PkRoute: PkRouteWithChildren,
   PremiumRoute: PremiumRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
+  RecruiterMatchRoute: RecruiterMatchRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResignationLetterRoute: ResignationLetterRoute,
   ResumeRoute: ResumeRoute,

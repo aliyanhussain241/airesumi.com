@@ -531,7 +531,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             {
               id: 3, icon: CircleDollarSign, label: "Get Paid More", short: "Negotiate with confidence",
               cards: [
-                { icon: MessageSquare, title: "Interview Prep", desc: "Practice the questions that get you hired with instant AI feedback.", stat: "500+", statLabel: "questions" },
+                { icon: MessageSquare, title: "Interview Prep", desc: "Practice the questions that get you hired with instant AI feedback.", stat: "500+", statLabel: "questions", href: "/interview-prep" },
                 { icon: Gauge, title: "Salary Analyzer", desc: "See if your offer beats the market. Always negotiate — earn 7% more.", stat: "+7%", statLabel: "avg. lift" },
               ],
             },

@@ -13,6 +13,7 @@ const STATIC_ENTRIES = [
   { path: "/bullet-writer",     changefreq: "monthly", priority: "0.7" },
   { path: "/summary-generator", changefreq: "monthly", priority: "0.7" },
   { path: "/keyword-scanner",   changefreq: "monthly", priority: "0.7" },
+  { path: "/resume-tailor",     changefreq: "monthly", priority: "0.8" },
   { path: "/interview-prep",    changefreq: "monthly", priority: "0.7" },
   { path: "/salary-analyzer",   changefreq: "monthly", priority: "0.7" },
   { path: "/pdf-scanner",       changefreq: "monthly", priority: "0.7" },

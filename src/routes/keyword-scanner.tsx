@@ -167,6 +167,21 @@ function KeywordScanner() {
                 </div>
               )}
 
+              {/* Cross-tool CTA */}
+              <a href="/resume-tailor"
+                className="flex items-center justify-between gap-3 bg-gradient-to-r from-orange-50 to-orange-100/60 border border-orange-200 rounded-2xl px-5 py-4 hover:border-[#FF6321] hover:shadow-md transition-all group">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-[#FF6321] text-white flex items-center justify-center shrink-0">
+                    <Sparkles size={16} />
+                  </div>
+                  <div>
+                    <p className="text-[14px] font-bold text-[#111827]">Want AI-tailored bullet rewrites?</p>
+                    <p className="text-[12px] text-[#6b7280]">Resume Tailor rewrites your bullets to include the missing keywords — free.</p>
+                  </div>
+                </div>
+                <span className="text-[13px] font-semibold text-[#EA580C] whitespace-nowrap group-hover:translate-x-1 transition-transform">Try Resume Tailor →</span>
+              </a>
+
               <button onClick={() => { setResult(null); setResumeText(""); setJobDescription(""); }}
                 className="w-full py-3 border border-[#e5e7eb] rounded-xl text-[14px] font-medium text-[#374151] hover:border-[#FF6321] hover:text-[#FF6321] transition-all flex items-center justify-center gap-2">
                 <RefreshCw size={14} /> Scan Another

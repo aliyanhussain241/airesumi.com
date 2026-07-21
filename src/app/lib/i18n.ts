@@ -35,6 +35,7 @@ const resources = {
       bulletWriter:    { name: "Resume Bullet Writer", desc: "Stronger bullet points instantly" },
       summary:         { name: "Resume Summary",       desc: "Generate a compelling summary" },
       keywordScanner:  { name: "Keyword Scanner",      desc: "Match keywords to job posting" },
+      resumeTailor:    { name: "Resume Tailor",        desc: "Match your resume to any job" },
       coverLetter:     { name: "Cover Letter",         desc: "Tailored cover letters" },
       linkedinBio:     { name: "LinkedIn Bio",         desc: "Profile generator" },
       atsChecker:      { name: "ATS Checker",          desc: "Score your resume" },

@@ -196,6 +196,19 @@ function Page() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full bg-[#F8FAFC]">
       <ATSChecker onNavigate={onNavigate} />
+
+      {/* Cross-tool CTA — link to Resume Tailor */}
+      <div className="max-w-3xl mx-auto px-6 -mt-4">
+        <a href="/resume-tailor"
+          className="flex items-center justify-between gap-3 bg-gradient-to-r from-orange-50 to-orange-100/60 border border-orange-200 rounded-2xl px-5 py-4 hover:border-[#FF6321] hover:shadow-md transition-all group">
+          <div>
+            <p className="text-[15px] font-bold text-[#111827]">Want to match against a specific job?</p>
+            <p className="text-[13px] text-[#6b7280]">Resume Tailor scores your resume against any job description and rewrites bullets to close the gap.</p>
+          </div>
+          <span className="text-[14px] font-semibold text-[#EA580C] whitespace-nowrap group-hover:translate-x-1 transition-transform">Try Resume Tailor →</span>
+        </a>
+      </div>
+
       <ATSContentSection />
 
       <BlogHighlights posts={[

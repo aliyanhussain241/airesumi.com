@@ -627,7 +627,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: i * 0.08 }}
-                      className={`group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col ${i === 1 ? "md:mt-12" : ""}`}
+                      className={i === 1 ? "md:mt-12" : ""}
+                    >
+                    {(c as any).href ? (
+                      <Link
+                        to={(c as any).href}
+                        className={`group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col`}
+                        style={{ boxShadow: "0 20px 50px rgba(15,23,42,0.06)" }}
+                      >
+                    ) : (
+                    <div
+                      className={`group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col`}
                       style={{ boxShadow: "0 20px 50px rgba(15,23,42,0.06)" }}
                     >
                       <div className="flex items-start justify-between mb-6">

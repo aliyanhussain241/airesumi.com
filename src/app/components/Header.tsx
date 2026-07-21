@@ -702,7 +702,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 aria-controls="hdr-menu-other"
                 onClick={() => { setIsOtherOpen(v => !v); setIsResumeOpen(false); }}
                 onKeyDown={(e) => handleTriggerKeyDown(e, isOtherOpen, () => { setIsOtherOpen(true); setIsResumeOpen(false); })}
-                className={`hdr-nav-link flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+                className={`hdr-nav-link whitespace-nowrap flex items-center gap-1.5 text-[14px] font-medium cursor-pointer border-none bg-transparent ${isOtherActive || isOtherOpen ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
                 {t('nav.otherTools')}
                 <ChevronDown size={13} aria-hidden="true" className={`transition-transform duration-200 ${isOtherOpen ? 'rotate-180' : ''}`} />
               </button>

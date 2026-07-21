@@ -621,25 +621,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               >
                 {current.cards.map((c, i) => {
                   const Icon = c.icon;
-                  return (
-                    <motion.div
-                      key={c.title}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.08 }}
-                      className={i === 1 ? "md:mt-12" : ""}
-                    >
-                    {(c as any).href ? (
-                      <Link
-                        to={(c as any).href}
-                        className={`group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col`}
-                        style={{ boxShadow: "0 20px 50px rgba(15,23,42,0.06)" }}
-                      >
-                    ) : (
-                    <div
-                      className={`group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col`}
-                      style={{ boxShadow: "0 20px 50px rgba(15,23,42,0.06)" }}
-                    >
+                  const href = (c as any).href as string | undefined;
+                  const cardClass = `group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-7 lg:p-8 border border-orange-50 dark:border-slate-800 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/10 flex flex-col`;
+                  const cardStyle = { boxShadow: "0 20px 50px rgba(15,23,42,0.06)" };
+                  const inner = (
+                    <>
                       <div className="flex items-start justify-between mb-6">
                         <div className="inline-flex p-3 rounded-2xl bg-orange-50 dark:bg-orange-500/10 text-[#FF6321]">
                           <Icon size={26} />
@@ -682,6 +668,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                       <div className="inline-flex items-center gap-2 font-bold text-[#FF6321] text-sm group-hover:gap-3 transition-all">
                         Explore tool <ArrowRight size={16} />
                       </div>
+                    </>
+                  );
+                  return (
+                    <motion.div
+                      key={c.title}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: i * 0.08 }}
+                      className={i === 1 ? "md:mt-12" : ""}
+                    >
+                      {href ? (
+                        <Link to={href} className={cardClass} style={cardStyle}>{inner}</Link>
+                      ) : (
+                        <div className={cardClass} style={cardStyle}>{inner}</div>
+                      )}
                     </motion.div>
                   );
                 })}

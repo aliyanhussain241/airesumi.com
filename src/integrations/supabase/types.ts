@@ -137,6 +137,24 @@ export type Database = {
         }
         Relationships: []
       }
+      recruiter_match_waitlist: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
       resume_role_examples: {
         Row: {
           created_at: string

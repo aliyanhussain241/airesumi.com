@@ -411,7 +411,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               <Wand2 size={32} />
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#2d3748] dark:text-[#f5f5f4] text-center leading-tight tracking-tight">
-              <span className="text-[#FF6321]">52,000+</span> resumes built this week — here's why job seekers choose airesumi
+              <span className="text-[#FF6321]">52,000+</span> resumes built this week — here's why job seekers choose Airesumi
             </h2>
           </div>
 
@@ -446,7 +446,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {[
-              { icon: Sparkles, badge: "01", title: "Your first draft in under 10 minutes", desc: "Most people spend 3–4 hours on a resume and still aren't happy with it. With airesumi, fill in your details once — the AI handles the rest." },
+              { icon: Sparkles, badge: "01", title: "Your first draft in under 10 minutes", desc: "Most people spend 3–4 hours on a resume and still aren't happy with it. With Airesumi, fill in your details once — the AI handles the rest." },
               { icon: Wand2, badge: "02", title: "No more second-guessing every sentence", desc: "Not everyone is a professional writer — and that's fine. The AI fixes awkward phrasing and makes your experience sound the way it deserves to." },
               { icon: Target, badge: "03", title: "Built to pass ATS — not just look good", desc: "A resume that looks great but fails the ATS scan never reaches anyone. Every template is structured to clear the filters 99% of large companies use." },
               { icon: CircleDollarSign, badge: "04", title: "Know what you're worth before you negotiate", desc: "Most people accept the first offer. Our salary analyzer shows you the real market rate for your role — so you walk in knowing your number." },
@@ -807,14 +807,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
             },
             {
               q: "Can I create a resume with AI for free — no credit card?",
-              a: "Yes, airesumi is completely free to use. You paste your job description and career details, and the AI generates a tailored, formatted resume in under 10 minutes. No credit card, no hidden paywall for the core builder.",
+              a: "Yes, Airesumi is completely free to use. You paste your job description and career details, and the AI generates a tailored, formatted resume in under 10 minutes. No credit card, no hidden paywall for the core builder.",
             },
             {
               q: "How good are AI-generated resumes compared to writing one yourself?",
-              a: "A well-prompted AI resume is typically stronger than what most people write on their own — not because AI is smarter, but because it doesn't second-guess itself or undersell your experience. The key is giving it accurate information. airesumi asks the right questions so the output is specific to you, not generic.",
+              a: "A well-prompted AI resume is typically stronger than what most people write on their own — not because AI is smarter, but because it doesn't second-guess itself or undersell your experience. The key is giving it accurate information. Airesumi asks the right questions so the output is specific to you, not generic.",
             },
             {
-              q: "Can airesumi tailor my resume to a specific job description?",
+              q: "Can Airesumi tailor my resume to a specific job description?",
               a: "That's one of the main things it does. Paste the job description and your background, and the AI aligns your resume to match the keywords, skills, and priorities the employer listed. This is what gets resumes past ATS filters.",
             },
           ].map((item, i) => (

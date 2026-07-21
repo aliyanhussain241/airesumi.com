@@ -143,21 +143,35 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                </a>
              </div>
              
-             <div className="space-y-4">
-               <div className="flex items-center gap-2 text-[#4a5568]">
-                 <div className="bg-[#22c55e] rounded-full p-0.5">
-                   <CheckCircle2 size={16} className="text-white" />
-                 </div>
-                 <span className="text-[15px]"><strong className="text-[#22c55e] font-semibold"> </strong> ATS-optimized & recruiter-approved formatting</span>
-               </div>
-               <div className="flex items-center gap-2 text-[15px] text-[#4a5568]">
-                 <div className="flex text-[#00b67a] gap-1 items-center">
-                    <Star size={20} fill="#00b67a" className="text-[#00b67a]" />
-                    <span className="font-bold text-[#1a202c]">100% free to start </span>
-                 </div>
-                 <span> No credit card required</span>
-               </div>
-             </div>
+              <motion.div
+                initial="hidden"
+                animate="show"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }}
+                className="flex flex-wrap items-center gap-2.5"
+              >
+                {[
+                  { icon: <CheckCircle2 size={14} className="text-white" />, iconBg: "bg-[#22c55e]", label: "ATS-optimized", sub: "recruiter-approved" },
+                  { icon: <Star size={14} fill="white" className="text-white" />, iconBg: "bg-[#00b67a]", label: "100% free", sub: "no card required" },
+                  { icon: <span className="text-white text-[11px] font-bold">10m</span>, iconBg: "bg-[#FF6321]", label: "Ready in minutes", sub: "not hours" },
+                  { icon: <span className="text-white text-[11px] font-bold">4.8★</span>, iconBg: "bg-[#1a202c]", label: "Loved by 12k+", sub: "job seekers" },
+                ].map((t, i) => (
+                  <motion.div
+                    key={i}
+                    variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                    whileHover={{ y: -2, scale: 1.03 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="group relative flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#e2e8f0] shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(255,99,33,0.12)] hover:border-[#FF6321]/30 transition-all"
+                  >
+                    <div className={`${t.iconBg} rounded-full w-6 h-6 flex items-center justify-center shrink-0 shadow-sm`}>
+                      {t.icon}
+                    </div>
+                    <div className="flex items-baseline gap-1.5 leading-none">
+                      <span className="text-[13px] font-semibold text-[#1a202c]">{t.label}</span>
+                      <span className="text-[12px] text-[#64748b]">{t.sub}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
            </div>
            
             <div className="relative h-[500px] lg:h-[620px] flex items-center justify-center mt-8 lg:mt-0 transform scale-[0.6] sm:scale-[0.8] lg:scale-100 origin-top -mb-[150px] sm:-mb-[80px] lg:mb-0">

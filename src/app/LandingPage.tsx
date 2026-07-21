@@ -518,7 +518,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               id: 1, icon: FileText, label: "Get Noticed", short: "Stand out from 1,000+ applicants",
               cards: [
                 { icon: FileText, title: "Resume Builder", desc: "Build the resume that gets you hired. Finish a draft in 20 minutes with Recruiter‑AI.", stat: "20 min", statLabel: "avg. draft" },
-                { icon: Target, title: "Recruiter Match", desc: "We close-match your resume and send it to 50 recruiters every week.", stat: "50/wk", statLabel: "recruiter sends" },
+                { icon: Target, title: "Recruiter Match", desc: "We close-match your resume and send it to 50 recruiters every week.", stat: "50/wk", statLabel: "recruiter sends", href: "/recruiter-match" },
               ],
             },
             {

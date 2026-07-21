@@ -368,9 +368,10 @@ export const Logo = () => (
 
 const resumeToolsBase = [
   { key: 'resumeBuilder',  to: '/resume',            icon: FileText, badge: 'popular' as const },
+  { key: 'resumeTailor',   to: '/resume-tailor',     icon: Wand2,    badge: 'new' as const },
   { key: 'bulletWriter',   to: '/bullet-writer',     icon: PenLine,  badge: null },
   { key: 'summary',        to: '/summary-generator', icon: List,     badge: null },
-  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target,   badge: 'new' as const },
+  { key: 'keywordScanner', to: '/keyword-scanner',   icon: Target,   badge: null },
 ] as const;
 
 const otherToolsBase = [

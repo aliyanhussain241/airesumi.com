@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SummaryGeneratorRouteImport } from './routes/summary-generator'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SalaryAnalyzerRouteImport } from './routes/salary-analyzer'
+import { Route as ResumeTailorRouteImport } from './routes/resume-tailor'
 import { Route as ResumeScoreRouteImport } from './routes/resume-score'
 import { Route as ResumeExamplesRouteImport } from './routes/resume-examples'
 import { Route as ResumeRouteImport } from './routes/resume'
@@ -47,6 +48,7 @@ import { Route as CompareAiresumiVsKickresumeRouteImport } from './routes/compar
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ApiUploadCvRouteImport } from './routes/api/upload-cv'
+import { Route as ApiTailorResumeRouteImport } from './routes/api/tailor-resume'
 import { Route as ApiSubscriptionStatusRouteImport } from './routes/api/subscription-status'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe-webhook'
 import { Route as ApiScanKeywordsRouteImport } from './routes/api/scan-keywords'
@@ -82,6 +84,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SalaryAnalyzerRoute = SalaryAnalyzerRouteImport.update({
   id: '/salary-analyzer',
   path: '/salary-analyzer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeTailorRoute = ResumeTailorRouteImport.update({
+  id: '/resume-tailor',
+  path: '/resume-tailor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResumeScoreRoute = ResumeScoreRouteImport.update({
@@ -255,6 +262,11 @@ const ApiUploadCvRoute = ApiUploadCvRouteImport.update({
   path: '/api/upload-cv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiTailorResumeRoute = ApiTailorResumeRouteImport.update({
+  id: '/api/tailor-resume',
+  path: '/api/tailor-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiSubscriptionStatusRoute = ApiSubscriptionStatusRouteImport.update({
   id: '/api/subscription-status',
   path: '/api/subscription-status',
@@ -360,6 +372,7 @@ export interface FileRoutesByFullPath {
   '/resume': typeof ResumeRoute
   '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
+  '/resume-tailor': typeof ResumeTailorRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/summary-generator': typeof SummaryGeneratorRoute
@@ -379,6 +392,7 @@ export interface FileRoutesByFullPath {
   '/api/scan-keywords': typeof ApiScanKeywordsRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/subscription-status': typeof ApiSubscriptionStatusRoute
+  '/api/tailor-resume': typeof ApiTailorResumeRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -414,6 +428,7 @@ export interface FileRoutesByTo {
   '/resignation-letter': typeof ResignationLetterRoute
   '/resume': typeof ResumeRoute
   '/resume-score': typeof ResumeScoreRoute
+  '/resume-tailor': typeof ResumeTailorRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/summary-generator': typeof SummaryGeneratorRoute
@@ -433,6 +448,7 @@ export interface FileRoutesByTo {
   '/api/scan-keywords': typeof ApiScanKeywordsRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/subscription-status': typeof ApiSubscriptionStatusRoute
+  '/api/tailor-resume': typeof ApiTailorResumeRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -471,6 +487,7 @@ export interface FileRoutesById {
   '/resume': typeof ResumeRoute
   '/resume-examples': typeof ResumeExamplesRouteWithChildren
   '/resume-score': typeof ResumeScoreRoute
+  '/resume-tailor': typeof ResumeTailorRoute
   '/salary-analyzer': typeof SalaryAnalyzerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/summary-generator': typeof SummaryGeneratorRoute
@@ -490,6 +507,7 @@ export interface FileRoutesById {
   '/api/scan-keywords': typeof ApiScanKeywordsRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/subscription-status': typeof ApiSubscriptionStatusRoute
+  '/api/tailor-resume': typeof ApiTailorResumeRoute
   '/api/upload-cv': typeof ApiUploadCvRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -529,6 +547,7 @@ export interface FileRouteTypes {
     | '/resume'
     | '/resume-examples'
     | '/resume-score'
+    | '/resume-tailor'
     | '/salary-analyzer'
     | '/sitemap.xml'
     | '/summary-generator'
@@ -548,6 +567,7 @@ export interface FileRouteTypes {
     | '/api/scan-keywords'
     | '/api/stripe-webhook'
     | '/api/subscription-status'
+    | '/api/tailor-resume'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
@@ -583,6 +603,7 @@ export interface FileRouteTypes {
     | '/resignation-letter'
     | '/resume'
     | '/resume-score'
+    | '/resume-tailor'
     | '/salary-analyzer'
     | '/sitemap.xml'
     | '/summary-generator'
@@ -602,6 +623,7 @@ export interface FileRouteTypes {
     | '/api/scan-keywords'
     | '/api/stripe-webhook'
     | '/api/subscription-status'
+    | '/api/tailor-resume'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
@@ -639,6 +661,7 @@ export interface FileRouteTypes {
     | '/resume'
     | '/resume-examples'
     | '/resume-score'
+    | '/resume-tailor'
     | '/salary-analyzer'
     | '/sitemap.xml'
     | '/summary-generator'
@@ -658,6 +681,7 @@ export interface FileRouteTypes {
     | '/api/scan-keywords'
     | '/api/stripe-webhook'
     | '/api/subscription-status'
+    | '/api/tailor-resume'
     | '/api/upload-cv'
     | '/auth/callback'
     | '/blog/$slug'
@@ -696,6 +720,7 @@ export interface RootRouteChildren {
   ResumeRoute: typeof ResumeRoute
   ResumeExamplesRoute: typeof ResumeExamplesRouteWithChildren
   ResumeScoreRoute: typeof ResumeScoreRoute
+  ResumeTailorRoute: typeof ResumeTailorRoute
   SalaryAnalyzerRoute: typeof SalaryAnalyzerRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SummaryGeneratorRoute: typeof SummaryGeneratorRoute
@@ -715,6 +740,7 @@ export interface RootRouteChildren {
   ApiScanKeywordsRoute: typeof ApiScanKeywordsRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ApiSubscriptionStatusRoute: typeof ApiSubscriptionStatusRoute
+  ApiTailorResumeRoute: typeof ApiTailorResumeRoute
   ApiUploadCvRoute: typeof ApiUploadCvRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   CompareAiresumiVsKickresumeRoute: typeof CompareAiresumiVsKickresumeRoute
@@ -751,6 +777,13 @@ declare module '@tanstack/react-router' {
       path: '/salary-analyzer'
       fullPath: '/salary-analyzer'
       preLoaderRoute: typeof SalaryAnalyzerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume-tailor': {
+      id: '/resume-tailor'
+      path: '/resume-tailor'
+      fullPath: '/resume-tailor'
+      preLoaderRoute: typeof ResumeTailorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/resume-score': {
@@ -991,6 +1024,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadCvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/tailor-resume': {
+      id: '/api/tailor-resume'
+      path: '/api/tailor-resume'
+      fullPath: '/api/tailor-resume'
+      preLoaderRoute: typeof ApiTailorResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/subscription-status': {
       id: '/api/subscription-status'
       path: '/api/subscription-status'
@@ -1177,6 +1217,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResumeRoute: ResumeRoute,
   ResumeExamplesRoute: ResumeExamplesRouteWithChildren,
   ResumeScoreRoute: ResumeScoreRoute,
+  ResumeTailorRoute: ResumeTailorRoute,
   SalaryAnalyzerRoute: SalaryAnalyzerRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SummaryGeneratorRoute: SummaryGeneratorRoute,
@@ -1196,6 +1237,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiScanKeywordsRoute: ApiScanKeywordsRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ApiSubscriptionStatusRoute: ApiSubscriptionStatusRoute,
+  ApiTailorResumeRoute: ApiTailorResumeRoute,
   ApiUploadCvRoute: ApiUploadCvRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   CompareAiresumiVsKickresumeRoute: CompareAiresumiVsKickresumeRoute,
@@ -1206,13 +1248,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

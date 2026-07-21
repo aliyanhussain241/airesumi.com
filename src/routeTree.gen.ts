@@ -28,6 +28,7 @@ import { Route as ManageSubscriptionRouteImport } from './routes/manage-subscrip
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LinkedinBioRouteImport } from './routes/linkedin-bio'
 import { Route as KeywordScannerRouteImport } from './routes/keyword-scanner'
+import { Route as JobBoardRouteImport } from './routes/job-board'
 import { Route as InterviewPrepRouteImport } from './routes/interview-prep'
 import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -160,6 +161,11 @@ const LinkedinBioRoute = LinkedinBioRouteImport.update({
 const KeywordScannerRoute = KeywordScannerRouteImport.update({
   id: '/keyword-scanner',
   path: '/keyword-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobBoardRoute = JobBoardRouteImport.update({
+  id: '/job-board',
+  path: '/job-board',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InterviewPrepRoute = InterviewPrepRouteImport.update({
@@ -365,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/job-board': typeof JobBoardRoute
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
@@ -424,6 +431,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/job-board': typeof JobBoardRoute
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
@@ -482,6 +490,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
+  '/job-board': typeof JobBoardRoute
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
   '/login': typeof LoginRoute
@@ -543,6 +552,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/examples'
     | '/interview-prep'
+    | '/job-board'
     | '/keyword-scanner'
     | '/linkedin-bio'
     | '/login'
@@ -602,6 +612,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/examples'
     | '/interview-prep'
+    | '/job-board'
     | '/keyword-scanner'
     | '/linkedin-bio'
     | '/login'
@@ -659,6 +670,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/examples'
     | '/interview-prep'
+    | '/job-board'
     | '/keyword-scanner'
     | '/linkedin-bio'
     | '/login'
@@ -719,6 +731,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
   InterviewPrepRoute: typeof InterviewPrepRoute
+  JobBoardRoute: typeof JobBoardRoute
   KeywordScannerRoute: typeof KeywordScannerRoute
   LinkedinBioRoute: typeof LinkedinBioRoute
   LoginRoute: typeof LoginRoute
@@ -895,6 +908,13 @@ declare module '@tanstack/react-router' {
       path: '/keyword-scanner'
       fullPath: '/keyword-scanner'
       preLoaderRoute: typeof KeywordScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/job-board': {
+      id: '/job-board'
+      path: '/job-board'
+      fullPath: '/job-board'
+      preLoaderRoute: typeof JobBoardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/interview-prep': {
@@ -1224,6 +1244,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
   InterviewPrepRoute: InterviewPrepRoute,
+  JobBoardRoute: JobBoardRoute,
   KeywordScannerRoute: KeywordScannerRoute,
   LinkedinBioRoute: LinkedinBioRoute,
   LoginRoute: LoginRoute,

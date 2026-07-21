@@ -67,7 +67,7 @@ function ATSContentSection() {
           If your score is too low, the system filters you out. The recruiter never sees your name. It doesn't matter how qualified you are.
         </p>
         <p className="text-[#4a5568] text-[16px] leading-relaxed">
-          An ATS checker runs your resume through that same logic before you submit. It tells you where you're falling short — missing keywords, bad formatting, sections that confuse the parser — so you can fix it before it costs you an opportunity. The airesumi ATS checker is free. Paste your resume and the job description, and you'll get a score with specific suggestions, not just a number.
+          An ATS checker runs your resume through that same logic before you submit. It tells you where you're falling short — missing keywords, bad formatting, sections that confuse the parser — so you can fix it before it costs you an opportunity. The Airesumi ATS checker is free. Paste your resume and the job description, and you'll get a score with specific suggestions, not just a number.
         </p>
       </div>
 
@@ -228,18 +228,18 @@ function Page() {
 export const Route = createFileRoute("/ats-checker")({
   head: () => ({
     meta: [
-      { title: "Free ATS Resume Checker — Score Your Resume Instantly | airesumi.com" },
+      { title: "Free ATS Resume Checker — Score Your Resume Instantly | Airesumi.com" },
       { name: "description", content: "Run your resume through a free ATS checker. Get an instant keyword match score, see what is missing, and fix it before you apply. Sign up required." },
       { name: "robots", content: "index, follow" },
       { name: "keywords", content: "ATS resume checker, ATS score, applicant tracking system, resume scanner, ATS optimization" },
-      { property: "og:title", content: "Free ATS Resume Checker — Score Your Resume | airesumi.com" },
+      { property: "og:title", content: "Free ATS Resume Checker — Score Your Resume | Airesumi.com" },
       { property: "og:description", content: "Instantly check your resume's ATS score and get keyword fixes. Free tool by Airesumi." },
-      { property: "og:url", content: "https://airesumi.com/ats-checker" },
+      { property: "og:url", content: "https://Airesumi.com/ats-checker" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Free ATS Resume Checker | airesumi.com" },
+      { name: "twitter:title", content: "Free ATS Resume Checker | Airesumi.com" },
     ],
-    links: [{ rel: "canonical", href: "https://airesumi.com/ats-checker" }],
+    links: [{ rel: "canonical", href: "https://Airesumi.com/ats-checker" }],
   }),
   component: Page,
 });

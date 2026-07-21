@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link, redirect } from "@tanstack/react-router";
 import { motion, useScroll, useSpring } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -503,6 +503,11 @@ function BlogPost() {
 }
 
 export const Route = createFileRoute("/blog/$slug")({
+  beforeLoad: ({ params }) => {
+    if (params.slug === "how-to-make-a-resume-with-ai-2026-guide") {
+      throw redirect({ to: "/blog/$slug", params: { slug: "how-to-make-a-resume-with-ai-2026" }, statusCode: 301 });
+    }
+  },
   loader: async ({ params }) => {
     const { getBlogPostWithRelated } = await import("@/lib/blog.functions");
     const data = await getBlogPostWithRelated({ data: { slug: params.slug } });

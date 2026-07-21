@@ -505,7 +505,7 @@ function BlogPost() {
 export const Route = createFileRoute("/blog/$slug")({
   beforeLoad: ({ params }) => {
     if (params.slug === "how-to-make-a-resume-with-ai-2026-guide") {
-      throw redirect({ to: "/blog/$slug", params: { slug: "how-to-make-a-resume-with-ai-2026" }, statusCode: 301 });
+      throw redirect({ to: "/blog/$slug", params: { slug: "how-to-make-a-resume-with-ai-2026" } });
     }
   },
   loader: async ({ params }) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Sparkles, Target, CircleDollarSign, Crown, Search, Send, MessageSquare, Gauge, User, CheckCircle2, Star, Wand2, FileText, Briefcase, CheckCircle, ArrowRight, Compass, Mic, Mail, Link2, Users, GraduationCap, TrendingUp, Zap } from "lucide-react";
 import { Step } from "./App";
-import { BlogHighlights } from "./components/BlogHighlights";
+import { BlogHighlightsLazy } from "./components/BlogHighlightsLazy";
 import { Link } from "@tanstack/react-router";
 
 interface LandingPageProps {
@@ -845,7 +845,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       </div>
 
       {/* From Our Blog Section */}
-      <BlogHighlights
+      <BlogHighlightsLazy
         eyebrow="Career Resources"
         heading="Step-by-step guides to land more interviews"
         subheading="Editor-picked reads — copy-paste prompts, real before/after examples, and ATS breakdowns."

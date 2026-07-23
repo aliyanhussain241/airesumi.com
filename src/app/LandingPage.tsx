@@ -160,14 +160,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                     variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
                     whileHover={{ y: -2, scale: 1.03 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="group relative flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-white/70 backdrop-blur-md border border-[#e2e8f0] shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(255,99,33,0.12)] hover:border-[#FF6321]/30 transition-all"
+                    className="group relative flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-white/70 dark:bg-white/10 backdrop-blur-md border border-[#e2e8f0] dark:border-white/15 shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_16px_rgba(255,99,33,0.12)] hover:border-[#FF6321]/30 dark:hover:border-[#FF6321]/50 transition-all"
                   >
                     <div className={`${t.iconBg} rounded-full w-6 h-6 flex items-center justify-center shrink-0 shadow-sm`}>
                       {t.icon}
                     </div>
                     <div className="flex items-baseline gap-1.5 leading-none">
-                      <span className="text-[13px] font-semibold text-[#1a202c]">{t.label}</span>
-                      <span className="text-[12px] text-[#64748b]">{t.sub}</span>
+                      <span className="text-[13px] font-semibold text-[#1a202c] dark:text-white">{t.label}</span>
+                      <span className="text-[12px] text-[#64748b] dark:text-slate-300">{t.sub}</span>
                     </div>
                   </motion.div>
                 ))}

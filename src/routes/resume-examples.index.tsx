@@ -75,7 +75,7 @@ function ResumeExamplesIndex() {
     <div className="min-h-screen bg-[#F8FAFC]">
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-4 py-6 sm:px-6 sm:py-12">
         {/* Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#6B7280]">
+        <nav aria-label="Breadcrumb" className="mb-6 hidden text-sm text-[#6B7280] sm:block">
           <ol className="flex items-center gap-2">
             <li><Link to="/" className="hover:text-[#FF6321]">Home</Link></li>
             <li aria-hidden>/</li>
@@ -83,19 +83,19 @@ function ResumeExamplesIndex() {
           </ol>
         </nav>
 
-        <header className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF1EA] text-[#FF6321] text-xs font-semibold mb-4">
+        <header className="text-center mb-5 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF1EA] text-[#FF6321] text-xs font-semibold mb-3 sm:mb-4">
             <Briefcase size={12} /> Resume examples by job title
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-[#111827] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#111827] tracking-tight">
             Free ATS-Ready Resume Examples for Every Role
           </h1>
-          <p className="mt-5 text-lg text-[#4B5563] max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-3 text-base text-[#4B5563] max-w-2xl mx-auto leading-relaxed sm:mt-5 sm:text-lg">
             Every example uses a single-column, parser-friendly structure — pick the role that fits, edit the content in our builder, and download a clean PDF. No watermarks, no paywall.
           </p>
 
           {/* Real, data-derived stats */}
-          <div className="mt-8 grid grid-cols-3 gap-3 max-w-xl mx-auto">
+          <div className="mt-8 hidden grid-cols-3 gap-3 max-w-xl mx-auto sm:grid">
             <div className="bg-white rounded-xl p-4 border border-[#E5E7EB]">
               <div className="text-2xl font-black text-[#111827]">{roles.length}</div>
               <div className="text-xs text-[#6B7280] mt-1">Role examples</div>
@@ -110,7 +110,7 @@ function ResumeExamplesIndex() {
             </div>
           </div>
 
-          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-[#374151]">
+          <ul className="mt-6 hidden flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-[#374151] sm:flex">
             <li className="inline-flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#FF6321]" /> Real bullets written per role</li>
             <li className="inline-flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#FF6321]" /> One-click edit in the builder</li>
             <li className="inline-flex items-center gap-1.5"><CheckCircle2 size={14} className="text-[#FF6321]" /> No watermarks, no paywall</li>
@@ -118,7 +118,7 @@ function ResumeExamplesIndex() {
         </header>
 
         {/* How it works */}
-        <section className="grid md:grid-cols-3 gap-4 mb-10">
+        <section className="hidden md:grid md:grid-cols-3 gap-4 mb-10">
           {[
             { icon: Search, title: "1. Find your role", desc: "Search or filter by industry to find a resume that matches your target job." },
             { icon: Sparkles, title: "2. Edit in the builder", desc: "Click 'Edit This Template' — the builder opens pre-filled with the role's bullets and skills." },

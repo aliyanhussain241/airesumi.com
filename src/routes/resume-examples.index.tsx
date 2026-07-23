@@ -73,7 +73,7 @@ function ResumeExamplesIndex() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
-      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-6 py-12">
+      <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-6xl mx-auto px-4 py-6 sm:px-6 sm:py-12">
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#6B7280]">
           <ol className="flex items-center gap-2">
@@ -135,8 +135,8 @@ function ResumeExamplesIndex() {
         </section>
 
         {/* Filters — sticky */}
-        <div className="sticky top-16 z-20 bg-[#F8FAFC]/95 backdrop-blur -mx-6 px-6 py-3 mb-6">
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-[#E5E7EB] flex flex-col lg:flex-row gap-3">
+        <div className="sm:sticky sm:top-16 z-20 bg-[#F8FAFC]/95 backdrop-blur -mx-4 px-4 py-2 mb-4 sm:-mx-6 sm:px-6 sm:py-3 sm:mb-6">
+          <div className="bg-white rounded-xl p-3 shadow-sm border border-[#E5E7EB] grid grid-cols-1 gap-2 sm:rounded-2xl sm:p-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-3">
             <div className="flex-1 relative">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
               <input
@@ -156,12 +156,12 @@ function ResumeExamplesIndex() {
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-2">
-              <label className="text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Sort</label>
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-2 sm:flex sm:items-center">
+              <label className="text-[10px] font-semibold text-[#6B7280] uppercase tracking-wide sm:text-xs">Sort</label>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as typeof sort)}
-                className="text-sm border border-[#E5E7EB] rounded-lg px-2.5 py-2 bg-white focus:outline-none focus:border-[#FF6321]"
+                className="min-w-0 text-sm border border-[#E5E7EB] rounded-lg px-2.5 py-2 bg-white focus:outline-none focus:border-[#FF6321]"
               >
                 <option value="az">Title A–Z</option>
                 <option value="za">Title Z–A</option>
@@ -170,8 +170,8 @@ function ResumeExamplesIndex() {
             </div>
           </div>
 
-          <div className="mt-3 flex items-center gap-2 flex-wrap">
-            <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#6B7280] pr-1">
+          <div className="mt-2 flex items-center gap-2 overflow-x-auto pb-2 sm:mt-3 sm:flex-wrap sm:overflow-visible sm:pb-0">
+            <div className="shrink-0 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#6B7280] pr-1">
               <Filter size={12} /> Filter
             </div>
             {industriesWithCounts.map((ind) => {
@@ -187,8 +187,8 @@ function ResumeExamplesIndex() {
                   aria-pressed={active}
                   className={`group relative px-3 py-1.5 rounded-full text-xs font-semibold transition-all inline-flex items-center gap-2 ${
                     active
-                      ? "text-white shadow-[0_6px_18px_-6px_rgba(255,99,33,0.55)]"
-                      : "bg-white border border-[#E5E7EB] text-[#374151] hover:border-transparent hover:shadow-sm"
+                      ? "shrink-0 text-white shadow-[0_6px_18px_-6px_rgba(255,99,33,0.55)]"
+                      : "shrink-0 bg-white border border-[#E5E7EB] text-[#374151] hover:border-transparent hover:shadow-sm"
                   }`}
                   style={active ? { background: `linear-gradient(135deg, ${meta.color}, ${meta.color}dd)` } : undefined}
                 >
@@ -212,14 +212,14 @@ function ResumeExamplesIndex() {
             {hasActiveFilters && (
               <button
                 onClick={() => { setIndustry("All"); setQuery(""); }}
-                className="ml-1 text-xs font-semibold text-[#FF6321] hover:underline inline-flex items-center gap-1"
+                className="ml-1 shrink-0 text-xs font-semibold text-[#FF6321] hover:underline inline-flex items-center gap-1"
               >
                 <X size={12} /> Clear
               </button>
             )}
           </div>
 
-          <div className="mt-2 text-xs text-[#6B7280]">
+          <div className="mt-0 text-xs text-[#6B7280] sm:mt-2">
             Showing <span className="font-semibold text-[#111827]">{filtered.length}</span> of {roles.length} examples
             {industry !== "All" && (
               <span className="ml-1">

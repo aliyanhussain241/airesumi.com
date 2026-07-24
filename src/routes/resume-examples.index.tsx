@@ -219,11 +219,11 @@ function ResumeExamplesIndex() {
             )}
           </div>
 
-          <div className="mt-0 text-xs text-[#6B7280] sm:mt-2">
-            Showing <span className="font-semibold text-[#111827]">{filtered.length}</span> of {roles.length} examples
+          <div className="mt-0 text-xs text-[#6B7280] dark:text-slate-400 sm:mt-2">
+            Showing <span className="font-semibold text-[#111827] dark:text-white">{filtered.length}</span> of {roles.length} examples
             {industry !== "All" && (
               <span className="ml-1">
-                in <span className="font-semibold text-[#111827]">{industry}</span>
+                in <span className="font-semibold text-[#111827] dark:text-white">{industry}</span>
               </span>
             )}
           </div>

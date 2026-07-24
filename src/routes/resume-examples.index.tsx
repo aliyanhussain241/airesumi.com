@@ -171,7 +171,7 @@ function ResumeExamplesIndex() {
           </div>
 
           <div className="mt-2 flex items-center gap-2 overflow-x-auto pb-2 sm:mt-3 sm:flex-wrap sm:overflow-visible sm:pb-0">
-            <div className="shrink-0 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#6B7280] pr-1">
+            <div className="shrink-0 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#6B7280] dark:text-slate-400 pr-1">
               <Filter size={12} /> Filter
             </div>
             {industriesWithCounts.map((ind) => {

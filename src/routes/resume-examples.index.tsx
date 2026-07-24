@@ -201,7 +201,7 @@ function ResumeExamplesIndex() {
                   {ind.name}
                   <span
                     className={`text-[10px] font-bold px-1.5 min-w-[18px] text-center rounded-full ${
-                      active ? "bg-white/25 text-white" : "bg-[#F3F4F6] text-[#6B7280] group-hover:bg-[#FFF1EA] group-hover:text-[#FF6321]"
+                      active ? "bg-white/25 text-white" : "bg-[#F3F4F6] dark:bg-white/10 text-[#6B7280] dark:text-slate-300 group-hover:bg-[#FFF1EA] group-hover:text-[#FF6321]"
                     }`}
                   >
                     {ind.count}

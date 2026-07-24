@@ -188,7 +188,7 @@ function ResumeExamplesIndex() {
                   className={`group relative px-3 py-1.5 rounded-full text-xs font-semibold transition-all inline-flex items-center gap-2 ${
                     active
                       ? "shrink-0 text-white shadow-[0_6px_18px_-6px_rgba(255,99,33,0.55)]"
-                      : "shrink-0 bg-white border border-[#E5E7EB] text-[#374151] hover:border-transparent hover:shadow-sm"
+                      : "shrink-0 bg-white dark:bg-slate-900 border border-[#E5E7EB] dark:border-white/10 text-[#374151] dark:text-slate-200 hover:border-transparent hover:shadow-sm"
                   }`}
                   style={active ? { background: `linear-gradient(135deg, ${meta.color}, ${meta.color}dd)` } : undefined}
                 >

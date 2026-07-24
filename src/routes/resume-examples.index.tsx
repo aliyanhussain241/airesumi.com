@@ -135,8 +135,8 @@ function ResumeExamplesIndex() {
         </section>
 
         {/* Filters — sticky */}
-        <div className="sm:sticky sm:top-16 z-20 bg-[#F8FAFC]/95 backdrop-blur -mx-4 px-4 py-2 mb-4 sm:-mx-6 sm:px-6 sm:py-3 sm:mb-6">
-          <div className="bg-white rounded-xl p-3 shadow-sm border border-[#E5E7EB] grid grid-cols-1 gap-2 sm:rounded-2xl sm:p-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-3">
+        <div className="sm:sticky sm:top-16 z-20 bg-[#F8FAFC]/95 dark:bg-slate-950/95 backdrop-blur -mx-4 px-4 py-2 mb-4 sm:-mx-6 sm:px-6 sm:py-3 sm:mb-6">
+          <div className="bg-white dark:bg-slate-900 rounded-xl p-3 shadow-sm border border-[#E5E7EB] dark:border-white/10 grid grid-cols-1 gap-2 sm:rounded-2xl sm:p-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-3">
             <div className="flex-1 relative">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
               <input
@@ -144,7 +144,7 @@ function ResumeExamplesIndex() {
                 placeholder="Search roles by title..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full pl-9 pr-9 py-2.5 border border-[#E5E7EB] rounded-lg text-sm focus:outline-none focus:border-[#FF6321]"
+                className="w-full pl-9 pr-9 py-2.5 border border-[#E5E7EB] dark:border-white/10 bg-white dark:bg-slate-950 text-[#111827] dark:text-white placeholder:text-[#9CA3AF] dark:placeholder:text-slate-500 rounded-lg text-sm focus:outline-none focus:border-[#FF6321]"
               />
               {query && (
                 <button
@@ -157,11 +157,11 @@ function ResumeExamplesIndex() {
               )}
             </div>
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-2 sm:flex sm:items-center">
-              <label className="text-[10px] font-semibold text-[#6B7280] uppercase tracking-wide sm:text-xs">Sort</label>
+              <label className="text-[10px] font-semibold text-[#6B7280] dark:text-slate-400 uppercase tracking-wide sm:text-xs">Sort</label>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as typeof sort)}
-                className="min-w-0 text-sm border border-[#E5E7EB] rounded-lg px-2.5 py-2 bg-white focus:outline-none focus:border-[#FF6321]"
+                className="min-w-0 text-sm border border-[#E5E7EB] dark:border-white/10 rounded-lg px-2.5 py-2 bg-white dark:bg-slate-950 text-[#111827] dark:text-white focus:outline-none focus:border-[#FF6321]"
               >
                 <option value="az">Title A–Z</option>
                 <option value="za">Title Z–A</option>

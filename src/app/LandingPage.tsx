@@ -125,77 +125,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       <div className="max-w-7xl mx-auto px-6 pt-8 lg:pt-12 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
            <div className="max-w-xl relative z-10">
-             {/* Eyebrow: live status + rating */}
-             <motion.div
-               initial={{ opacity: 0, y: -8 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.5 }}
-               className="inline-flex items-center gap-2 mb-6 pl-1.5 pr-3 py-1.5 rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md border border-[#e2e8f0] dark:border-white/15 shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
-             >
-               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-[#FF6321] to-[#ff8c5a] shadow-sm">
-                 <Sparkles size={12} className="text-white" />
-               </span>
-               <span className="text-[12px] font-semibold text-[#1a202c] dark:text-white">New · AI Coach v2</span>
-               <span className="h-3 w-px bg-slate-300/70 dark:bg-white/20" />
-               <span className="flex items-center gap-0.5">
-                 {[0,1,2,3,4].map(i => (
-                   <Star key={i} size={11} fill="#FF6321" className="text-[#FF6321]" />
-                 ))}
-               </span>
-               <span className="text-[12px] font-medium text-[#64748b] dark:text-slate-300">4.9 · 1,200+ hired</span>
-             </motion.div>
-
-             <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] dark:text-white leading-[1.1] mb-6">
-               AI Resume Builder — Free ATS-Optimized Resumes That Get You{" "}
-               <span className="relative inline-block text-[#FF6321]">
-                 Hired
-                 <motion.span
-                   initial={{ scaleX: 0 }}
-                   animate={{ scaleX: 1 }}
-                   transition={{ duration: 0.9, delay: 0.6, ease: "easeOut" }}
-                   className="absolute left-0 -bottom-1 h-[6px] w-full rounded-full origin-left bg-gradient-to-r from-[#FF6321]/60 via-[#ff8c5a]/60 to-transparent"
-                 />
-               </span>
+             <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
+               AI Resume Builder — Free ATS-Optimized Resumes That Get You <span className="text-[#FF6321]">Hired</span>
              </h1>
-             <p className="text-[20px] text-[#4a5568] dark:text-slate-300 mb-8 leading-[1.6]">
+             <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
                Most resumes fail not because of bad experience — but because no one ever reads them. Build yours with AI in 10 minutes and land on the recruiter's desk, not the reject pile.
              </p>
-
-             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
-               <motion.a
+             <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
+               <a
                  href="/resume"
-                 whileHover={{ y: -2 }}
-                 whileTap={{ scale: 0.98 }}
-                 className="hdr-btn-primary group text-white text-[17px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap inline-flex items-center justify-center gap-2">
-                 <Wand2 size={18} className="relative z-10" />
+                 className="hdr-btn-primary text-white text-[17px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap">
                  <span className="relative z-10">Create my resume</span>
-                 <ArrowRight size={18} className="relative z-10 transition-transform group-hover:translate-x-1" />
-               </motion.a>
-               <motion.a
+               </a>
+               <a
                  href="/resume"
-                 whileHover={{ y: -2 }}
-                 whileTap={{ scale: 0.98 }}
-                 className="hdr-tag inline-flex items-center justify-center gap-2 text-[17px] font-medium text-[#EA580C] px-10 py-4 rounded-xl no-underline transition-all hover:bg-orange-50 dark:hover:bg-white/10">
-                 <FileText size={18} />
+               className="hdr-tag flex items-center gap-1.5 text-[17px] font-medium text-[#EA580C] px-10 py-4 rounded-xl no-underline transition-all hover:bg-orange-50">
                  Upload my resume
-               </motion.a>
+               </a>
              </div>
-
-             {/* Social proof avatars */}
-             <div className="flex items-center gap-3 mb-8">
-               <div className="flex -space-x-2">
-                 {["#FF6321","#22c55e","#6366f1","#ec4899","#0ea5e9"].map((c,i)=>(
-                   <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 shadow-sm flex items-center justify-center text-white text-[11px] font-bold" style={{ background: `linear-gradient(135deg, ${c}, ${c}cc)` }}>
-                     {["A","M","J","S","K"][i]}
-                   </div>
-                 ))}
-               </div>
-               <div className="flex flex-col leading-tight">
-                 <span className="text-[13px] font-semibold text-[#1a202c] dark:text-white">Joined by 12,400+ job seekers</span>
-                 <span className="text-[12px] text-[#64748b] dark:text-slate-400">this month across 40+ countries</span>
-               </div>
-             </div>
-
+             
               <motion.div
                 initial="hidden"
                 animate="show"

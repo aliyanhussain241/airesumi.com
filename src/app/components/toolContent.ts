@@ -15,7 +15,7 @@ export interface ToolContent {
 export const RESUME_CONTENT: ToolContent = {
   whatTitle: "What Is an AI Resume Creator — and How Is It Different?",
   whatParagraphs: [
-    "A lot of people expect an AI resume creator to drop their name into a generic template. That's not what this does. It reads the job description you paste and builds your resume around it — your experience, your skills, your job title, formatted and worded to match what that specific employer is looking for.",
+    "A lot of people expect an AI resume creator to drop their name into a generic template. That's not what this does. It reads the job description you paste and builds your resume around it — your experience, your skills, your job title, formatted and worded to match what that specific employer is looking for. Whether you call it a resume builder, resume maker, or resume creator, the goal is the same: a complete, ATS-ready resume without starting from a blank page.",
     "The output is a complete, ATS-ready PDF. It's not perfect for everyone on the first pass — some people need to tweak a bullet or adjust the summary — but you're editing a solid draft, not starting from a blank page. And the whole thing is free. No credit card, no paywall on the core builder.",
   ],
   howToTitle: "How to Build a Resume That Gets Interviews",
@@ -35,6 +35,7 @@ export const RESUME_CONTENT: ToolContent = {
     { q: "Is there a truly free AI resume creator — no credit card?", a: "Yes. Airesumi's core resume builder is free with no credit card required. Build, customize, and download your resume as a PDF. A Pro plan exists for unlimited saves and premium templates, but it's not required to get a complete, usable resume." },
     { q: "Can Airesumi tailor my resume to a specific job description?", a: "That's the main thing it does. Paste the job description and your background, and the AI aligns your resume to match the keywords, skills, and priorities the employer listed. This is what gets resumes past ATS filters and in front of humans." },
     { q: "How good are AI-generated resumes compared to writing one yourself?", a: "A well-prompted AI resume is typically stronger than what most people write on their own — not because AI is smarter, but because it doesn't second-guess itself or undersell experience. The key is giving it accurate information. Airesumi asks the right questions so the output is specific to you, not generic." },
+    { q: "What's the difference between a resume builder, resume maker, and resume creator?", a: "Nothing meaningful - these are just different terms people use for the same type of tool. A resume builder, resume maker, resume creator, and resume editor all describe software that helps you build a resume. Airesumi works as all of these: a builder for starting from scratch, a maker for quick formatting, an editor for refining an existing resume, and a creator for generating one tailored to a specific job." },
   ],
   features: [
     { title: "AI-Powered Content", desc: "Gemini-powered bullets, summary, and skills — tailored to the exact job description you paste." },

@@ -39,6 +39,10 @@ const FAQ = [
     q: "Do I need to sign up to download?",
     a: "You can preview and edit any example without an account. A free account is only required to save resumes to your dashboard.",
   },
+  {
+    q: "Can I download these resume templates for free?",
+    a: "Yes. Every template on this page is free to download in PDF format, with no signup wall and no watermark. Just pick a role, customize the content in the builder, and export.",
+  },
 ];
 
 function ResumeExamplesIndex() {

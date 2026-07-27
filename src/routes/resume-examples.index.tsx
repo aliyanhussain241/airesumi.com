@@ -39,6 +39,10 @@ const FAQ = [
     q: "Do I need to sign up to download?",
     a: "You can preview and edit any example without an account. A free account is only required to save resumes to your dashboard.",
   },
+  {
+    q: "Can I download these resume templates for free?",
+    a: "Yes. Every template on this page is free to download in PDF format, with no signup wall and no watermark. Just pick a role, customize the content in the builder, and export.",
+  },
 ];
 
 function ResumeExamplesIndex() {
@@ -91,7 +95,7 @@ function ResumeExamplesIndex() {
             Free ATS-Ready Resume Examples for Every Role
           </h1>
           <p className="mt-3 text-base text-[#4B5563] max-w-2xl mx-auto leading-relaxed sm:mt-5 sm:text-lg">
-            Every example uses a single-column, parser-friendly structure — pick the role that fits, edit the content in our builder, and download a clean PDF. No watermarks, no paywall.
+            Every resume template here uses a basic, single-column format that passes ATS scanning. Pick the role that fits, edit the content in our builder, and download your resume as a free PDF — no watermarks, no signup required.
           </p>
 
           {/* Real, data-derived stats */}
@@ -328,8 +332,8 @@ export const Route = createFileRoute("/resume-examples/")({
     const roles = (loaderData ?? []) as ResumeRoleSummary[];
     return {
       meta: [
-        { title: "Free AI Resume Templates & Examples by Job Title | Airesumi" },
-        { name: "description", content: "Free ATS-optimized resume templates and examples for every role. Tested to pass ATS, no watermarks, download as PDF instantly." },
+        { title: "Free Resume Templates — Basic & Downloadable Formats by Role | Airesumi" },
+        { name: "description", content: "Browse free, downloadable resume templates in a basic, ATS-safe format. Pick your role, edit the content, and download instantly — no signup, no watermark." },
         { property: "og:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
         { property: "og:description", content: "Free ATS-optimized resume examples by role, with bullet points, skills, and tips." },
         { property: "og:type", content: "website" },

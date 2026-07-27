@@ -396,7 +396,7 @@ function ResumeBuilder() {
 export const Route = createFileRoute("/resume")({
   validateSearch: (search: Record<string, unknown>) => {
     const fromExample = typeof search.fromExample === "string" ? search.fromExample.trim() : "";
-    return { fromExample };
+    return fromExample ? { fromExample } : {};
   },
   beforeLoad: ({ location }) => {
     const rawSearch = location.href.split("?")[1] ?? "";

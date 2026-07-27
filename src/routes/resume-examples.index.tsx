@@ -95,7 +95,7 @@ function ResumeExamplesIndex() {
             Free ATS-Ready Resume Examples for Every Role
           </h1>
           <p className="mt-3 text-base text-[#4B5563] max-w-2xl mx-auto leading-relaxed sm:mt-5 sm:text-lg">
-            Every example uses a single-column, parser-friendly structure — pick the role that fits, edit the content in our builder, and download a clean PDF. No watermarks, no paywall.
+            Every resume template here uses a basic, single-column format that passes ATS scanning. Pick the role that fits, edit the content in our builder, and download your resume as a free PDF — no watermarks, no signup required.
           </p>
 
           {/* Real, data-derived stats */}

@@ -396,12 +396,14 @@ function ResumeBuilder() {
 export const Route = createFileRoute("/resume")({
   validateSearch: (search: Record<string, unknown>) => {
     const fromExample = typeof search.fromExample === "string" ? search.fromExample.trim() : "";
-    // If fromExample was passed but empty (e.g. /resume?fromExample=), redirect
-    // to the clean canonical URL with a 308 so search engines collapse duplicates.
-    if ("fromExample" in search && !fromExample) {
-      throw redirect({ to: "/resume", search: {}, replace: true, statusCode: 308 });
+    return fromExample ? { fromExample } : {};
+  },
+  beforeLoad: ({ location }) => {
+    const rawSearch = location.href.split("?")[1] ?? "";
+    const params = new URLSearchParams(rawSearch.split("#")[0] ?? "");
+    if (params.has("fromExample") && !params.get("fromExample")?.trim()) {
+      throw redirect({ href: "/resume", replace: true, statusCode: 308 });
     }
-    return { fromExample };
   },
   head: ({ match }) => {
     // If ANY query param is present (e.g. ?fromExample=...), noindex the

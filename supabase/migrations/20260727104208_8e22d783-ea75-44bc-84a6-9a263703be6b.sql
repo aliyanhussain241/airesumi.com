@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.consume_credit(uuid) TO anon, authenticated, service_role;

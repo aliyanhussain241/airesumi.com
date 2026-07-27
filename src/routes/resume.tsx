@@ -396,11 +396,12 @@ function ResumeBuilder() {
 export const Route = createFileRoute("/resume")({
   validateSearch: (search: Record<string, unknown>) => {
     const fromExample = typeof search.fromExample === "string" ? search.fromExample.trim() : "";
-    const shouldCleanEmptyFromExample = "fromExample" in search && !fromExample;
-    return { fromExample, shouldCleanEmptyFromExample };
+    return { fromExample };
   },
-  beforeLoad: ({ search }) => {
-    if (search.shouldCleanEmptyFromExample) {
+  beforeLoad: ({ location }) => {
+    const rawSearch = location.href.split("?")[1] ?? "";
+    const params = new URLSearchParams(rawSearch.split("#")[0] ?? "");
+    if (params.has("fromExample") && !params.get("fromExample")?.trim()) {
       throw redirect({ href: "/resume", replace: true, statusCode: 308 });
     }
   },

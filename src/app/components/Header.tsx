@@ -773,6 +773,10 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.examples')}
             </Link>
+            <Link to="/cover-letter-examples"
+              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname.startsWith('/cover-letter-examples') ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
+              Cover Letters
+            </Link>
             <Link to="/blog"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.blog')}
@@ -927,7 +931,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 {[
                   { to: '/', label: t('nav.home') },
                   { to: '/resume-examples', label: t('nav.examples') },
+                  { to: '/cover-letter-examples', label: 'Cover Letters' },
                   { to: '/blog', label: t('nav.blog') },
+
                 ].map(link => (
                   <motion.div
                     key={link.to}

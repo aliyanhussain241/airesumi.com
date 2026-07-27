@@ -32,6 +32,7 @@ import { Route as JobBoardRouteImport } from './routes/job-board'
 import { Route as InterviewPrepRouteImport } from './routes/interview-prep'
 import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CoverLetterExamplesRouteImport } from './routes/cover-letter-examples'
 import { Route as CoverLetterRouteImport } from './routes/cover-letter'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BulletWriterRouteImport } from './routes/bullet-writer'
@@ -41,9 +42,11 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResumeExamplesIndexRouteImport } from './routes/resume-examples.index'
 import { Route as PkIndexRouteImport } from './routes/pk.index'
+import { Route as CoverLetterExamplesIndexRouteImport } from './routes/cover-letter-examples.index'
 import { Route as ResumeExamplesSlugRouteImport } from './routes/resume-examples.$slug'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as PkSlugRouteImport } from './routes/pk.$slug'
+import { Route as CoverLetterExamplesSlugRouteImport } from './routes/cover-letter-examples.$slug'
 import { Route as CompareAiresumiVsZetyRouteImport } from './routes/compare.airesumi-vs-zety'
 import { Route as CompareAiresumiVsReziRouteImport } from './routes/compare.airesumi-vs-rezi'
 import { Route as CompareAiresumiVsKickresumeRouteImport } from './routes/compare.airesumi-vs-kickresume'
@@ -183,6 +186,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoverLetterExamplesRoute = CoverLetterExamplesRouteImport.update({
+  id: '/cover-letter-examples',
+  path: '/cover-letter-examples',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoverLetterRoute = CoverLetterRouteImport.update({
   id: '/cover-letter',
   path: '/cover-letter',
@@ -228,6 +236,12 @@ const PkIndexRoute = PkIndexRouteImport.update({
   path: '/',
   getParentRoute: () => PkRoute,
 } as any)
+const CoverLetterExamplesIndexRoute =
+  CoverLetterExamplesIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => CoverLetterExamplesRoute,
+  } as any)
 const ResumeExamplesSlugRoute = ResumeExamplesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -242,6 +256,11 @@ const PkSlugRoute = PkSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => PkRoute,
+} as any)
+const CoverLetterExamplesSlugRoute = CoverLetterExamplesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CoverLetterExamplesRoute,
 } as any)
 const CompareAiresumiVsZetyRoute = CompareAiresumiVsZetyRouteImport.update({
   id: '/compare/airesumi-vs-zety',
@@ -368,6 +387,7 @@ export interface FileRoutesByFullPath {
   '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
+  '/cover-letter-examples': typeof CoverLetterExamplesRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
@@ -413,9 +433,11 @@ export interface FileRoutesByFullPath {
   '/compare/airesumi-vs-kickresume': typeof CompareAiresumiVsKickresumeRoute
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
+  '/cover-letter-examples/$slug': typeof CoverLetterExamplesSlugRoute
   '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/cover-letter-examples/': typeof CoverLetterExamplesIndexRoute
   '/pk/': typeof PkIndexRoute
   '/resume-examples/': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
@@ -471,9 +493,11 @@ export interface FileRoutesByTo {
   '/compare/airesumi-vs-kickresume': typeof CompareAiresumiVsKickresumeRoute
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
+  '/cover-letter-examples/$slug': typeof CoverLetterExamplesSlugRoute
   '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/cover-letter-examples': typeof CoverLetterExamplesIndexRoute
   '/pk': typeof PkIndexRoute
   '/resume-examples': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
@@ -487,6 +511,7 @@ export interface FileRoutesById {
   '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
+  '/cover-letter-examples': typeof CoverLetterExamplesRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/examples': typeof ExamplesRoute
   '/interview-prep': typeof InterviewPrepRoute
@@ -532,9 +557,11 @@ export interface FileRoutesById {
   '/compare/airesumi-vs-kickresume': typeof CompareAiresumiVsKickresumeRoute
   '/compare/airesumi-vs-rezi': typeof CompareAiresumiVsReziRoute
   '/compare/airesumi-vs-zety': typeof CompareAiresumiVsZetyRoute
+  '/cover-letter-examples/$slug': typeof CoverLetterExamplesSlugRoute
   '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/cover-letter-examples/': typeof CoverLetterExamplesIndexRoute
   '/pk/': typeof PkIndexRoute
   '/resume-examples/': typeof ResumeExamplesIndexRoute
   '/api/public/og/$slug': typeof ApiPublicOgSlugRoute
@@ -549,6 +576,7 @@ export interface FileRouteTypes {
     | '/bullet-writer'
     | '/contact'
     | '/cover-letter'
+    | '/cover-letter-examples'
     | '/dashboard'
     | '/examples'
     | '/interview-prep'
@@ -594,9 +622,11 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-kickresume'
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
+    | '/cover-letter-examples/$slug'
     | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/cover-letter-examples/'
     | '/pk/'
     | '/resume-examples/'
     | '/api/public/og/$slug'
@@ -652,9 +682,11 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-kickresume'
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
+    | '/cover-letter-examples/$slug'
     | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/cover-letter-examples'
     | '/pk'
     | '/resume-examples'
     | '/api/public/og/$slug'
@@ -667,6 +699,7 @@ export interface FileRouteTypes {
     | '/bullet-writer'
     | '/contact'
     | '/cover-letter'
+    | '/cover-letter-examples'
     | '/dashboard'
     | '/examples'
     | '/interview-prep'
@@ -712,9 +745,11 @@ export interface FileRouteTypes {
     | '/compare/airesumi-vs-kickresume'
     | '/compare/airesumi-vs-rezi'
     | '/compare/airesumi-vs-zety'
+    | '/cover-letter-examples/$slug'
     | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/cover-letter-examples/'
     | '/pk/'
     | '/resume-examples/'
     | '/api/public/og/$slug'
@@ -728,6 +763,7 @@ export interface RootRouteChildren {
   BulletWriterRoute: typeof BulletWriterRoute
   ContactRoute: typeof ContactRoute
   CoverLetterRoute: typeof CoverLetterRoute
+  CoverLetterExamplesRoute: typeof CoverLetterExamplesRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   ExamplesRoute: typeof ExamplesRoute
   InterviewPrepRoute: typeof InterviewPrepRoute
@@ -938,6 +974,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cover-letter-examples': {
+      id: '/cover-letter-examples'
+      path: '/cover-letter-examples'
+      fullPath: '/cover-letter-examples'
+      preLoaderRoute: typeof CoverLetterExamplesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cover-letter': {
       id: '/cover-letter'
       path: '/cover-letter'
@@ -1001,6 +1044,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PkIndexRouteImport
       parentRoute: typeof PkRoute
     }
+    '/cover-letter-examples/': {
+      id: '/cover-letter-examples/'
+      path: '/'
+      fullPath: '/cover-letter-examples/'
+      preLoaderRoute: typeof CoverLetterExamplesIndexRouteImport
+      parentRoute: typeof CoverLetterExamplesRoute
+    }
     '/resume-examples/$slug': {
       id: '/resume-examples/$slug'
       path: '/$slug'
@@ -1021,6 +1071,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/pk/$slug'
       preLoaderRoute: typeof PkSlugRouteImport
       parentRoute: typeof PkRoute
+    }
+    '/cover-letter-examples/$slug': {
+      id: '/cover-letter-examples/$slug'
+      path: '/$slug'
+      fullPath: '/cover-letter-examples/$slug'
+      preLoaderRoute: typeof CoverLetterExamplesSlugRouteImport
+      parentRoute: typeof CoverLetterExamplesRoute
     }
     '/compare/airesumi-vs-zety': {
       id: '/compare/airesumi-vs-zety'
@@ -1196,6 +1253,19 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface CoverLetterExamplesRouteChildren {
+  CoverLetterExamplesSlugRoute: typeof CoverLetterExamplesSlugRoute
+  CoverLetterExamplesIndexRoute: typeof CoverLetterExamplesIndexRoute
+}
+
+const CoverLetterExamplesRouteChildren: CoverLetterExamplesRouteChildren = {
+  CoverLetterExamplesSlugRoute: CoverLetterExamplesSlugRoute,
+  CoverLetterExamplesIndexRoute: CoverLetterExamplesIndexRoute,
+}
+
+const CoverLetterExamplesRouteWithChildren =
+  CoverLetterExamplesRoute._addFileChildren(CoverLetterExamplesRouteChildren)
+
 interface PkRouteChildren {
   PkSlugRoute: typeof PkSlugRoute
   PkIndexRoute: typeof PkIndexRoute
@@ -1241,6 +1311,7 @@ const rootRouteChildren: RootRouteChildren = {
   BulletWriterRoute: BulletWriterRoute,
   ContactRoute: ContactRoute,
   CoverLetterRoute: CoverLetterRoute,
+  CoverLetterExamplesRoute: CoverLetterExamplesRouteWithChildren,
   DashboardRoute: DashboardRoute,
   ExamplesRoute: ExamplesRoute,
   InterviewPrepRoute: InterviewPrepRoute,

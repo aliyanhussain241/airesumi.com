@@ -56,6 +56,51 @@ export type Database = {
         }
         Relationships: []
       }
+      cover_letter_examples: {
+        Row: {
+          created_at: string
+          example_letter: string
+          id: string
+          industry: string | null
+          intro_content: string | null
+          job_title: string
+          key_tips: Json
+          published: boolean
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          example_letter: string
+          id?: string
+          industry?: string | null
+          intro_content?: string | null
+          job_title: string
+          key_tips?: Json
+          published?: boolean
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          example_letter?: string
+          id?: string
+          industry?: string | null
+          intro_content?: string | null
+          job_title?: string
+          key_tips?: Json
+          published?: boolean
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       pk_guides: {
         Row: {
           category: string

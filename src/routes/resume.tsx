@@ -401,7 +401,7 @@ export const Route = createFileRoute("/resume")({
   },
   beforeLoad: ({ search }) => {
     if (search.shouldCleanEmptyFromExample) {
-      throw redirect({ to: "/resume", search: {}, replace: true, statusCode: 308 });
+      throw redirect({ href: "/resume", replace: true, statusCode: 308 });
     }
   },
   head: ({ match }) => {

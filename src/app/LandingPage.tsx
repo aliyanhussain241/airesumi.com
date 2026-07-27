@@ -123,15 +123,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       className="min-h-screen bg-[#f9fafb] relative print:hidden overflow-x-hidden pt-[68px]"
     >
       <div className="max-w-7xl mx-auto px-6 pt-8 lg:pt-12 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-           <div className="max-w-xl relative z-10">
-             <h1 className="text-4xl md:text-5xl lg:text-[72px] font-medium text-[#2d3748] leading-[1.1] mb-6">
+        <div className="flex flex-col items-center">
+           <div className="w-full max-w-5xl relative z-10 text-center">
+             <motion.div
+               initial={{ opacity: 0, y: -8 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.5 }}
+               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-6"
+             >
+               <Sparkles size={13} /> #1 AI Resume Builder of 2026
+             </motion.div>
+             <h1 className="text-4xl md:text-6xl lg:text-[84px] font-medium text-[#2d3748] dark:text-[#f5f5f4] leading-[1.05] mb-6 tracking-tight">
                AI Resume Builder — Free ATS-Optimized Resumes That Get You <span className="text-[#FF6321]">Hired</span>
              </h1>
-             <p className="text-[20px] text-[#4a5568] mb-10 leading-[1.6]">
+             <p className="text-[18px] md:text-[20px] text-[#4a5568] dark:text-slate-300 mb-10 leading-[1.6] max-w-3xl mx-auto">
                Most resumes fail not because of bad experience — but because no one ever reads them. Build yours with AI in 10 minutes and land on the recruiter's desk, not the reject pile.
              </p>
-             <div className="flex flex-col sm:flex-row items-center gap-4 mb-10">
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
                <a
                  href="/resume"
                  className="hdr-btn-primary text-white text-[17px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap">
@@ -148,7 +156,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial="hidden"
                 animate="show"
                 variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }}
-                className="flex flex-wrap items-center gap-2.5"
+                className="flex flex-wrap items-center justify-center gap-2.5"
               >
                 {[
                   { icon: <CheckCircle2 size={14} className="text-white" />, iconBg: "bg-[#22c55e]", label: "ATS-optimized", sub: "recruiter-approved" },
@@ -174,7 +182,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               </motion.div>
            </div>
            
-            <div className="relative h-[500px] lg:h-[620px] flex items-center justify-center mt-8 lg:mt-0 transform scale-[0.6] sm:scale-[0.8] lg:scale-100 origin-top -mb-[150px] sm:-mb-[80px] lg:mb-0">
+            <div className="relative w-full h-[560px] sm:h-[600px] lg:h-[680px] flex items-center justify-center mt-20 lg:mt-24 transform scale-[0.62] sm:scale-[0.82] lg:scale-100 origin-top -mb-[180px] sm:-mb-[100px] lg:mb-0">
               {/* Ambient Gradient Glows */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}

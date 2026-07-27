@@ -156,7 +156,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 initial="hidden"
                 animate="show"
                 variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }}
-                className="flex flex-wrap items-center justify-center gap-2.5"
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5"
               >
                 {[
                   { icon: <CheckCircle2 size={14} className="text-white" />, iconBg: "bg-[#22c55e]", label: "ATS-optimized", sub: "recruiter-approved" },

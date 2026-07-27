@@ -182,7 +182,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               </motion.div>
            </div>
            
-            <div className="relative w-full h-[560px] sm:h-[600px] lg:h-[680px] flex items-center justify-center mt-20 lg:mt-24 transform scale-[0.62] sm:scale-[0.82] lg:scale-100 origin-top -mb-[180px] sm:-mb-[100px] lg:mb-0">
+            <div className="relative w-full h-[560px] sm:h-[600px] lg:h-[680px] flex items-center justify-center mt-16 lg:mt-0 transform scale-[0.62] sm:scale-[0.82] lg:scale-90 origin-top lg:origin-center -mb-[180px] sm:-mb-[100px] lg:mb-0">
               {/* Ambient Gradient Glows */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}

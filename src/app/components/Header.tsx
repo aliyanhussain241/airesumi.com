@@ -931,7 +931,9 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
                 {[
                   { to: '/', label: t('nav.home') },
                   { to: '/resume-examples', label: t('nav.examples') },
+                  { to: '/cover-letter-examples', label: 'Cover Letters' },
                   { to: '/blog', label: t('nav.blog') },
+
                 ].map(link => (
                   <motion.div
                     key={link.to}

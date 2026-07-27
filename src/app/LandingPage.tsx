@@ -133,13 +133,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
              >
                <Sparkles size={13} /> #1 AI Resume Builder of 2026
              </motion.div>
-             <h1 className="text-4xl md:text-6xl lg:text-[84px] font-medium text-[#2d3748] dark:text-[#f5f5f4] leading-[1.05] mb-6 tracking-tight">
+             <h1 className="text-4xl md:text-5xl lg:text-[64px] font-medium text-[#2d3748] dark:text-[#f5f5f4] leading-[1.05] mb-6 tracking-tight">
                AI Resume Builder — Free ATS-Optimized Resumes That Get You <span className="text-[#FF6321]">Hired</span>
              </h1>
-             <p className="text-[18px] md:text-[20px] text-[#4a5568] dark:text-slate-300 mb-10 leading-[1.6] max-w-3xl mx-auto">
+             <p className="text-[18px] md:text-[19px] text-[#4a5568] dark:text-slate-300 mb-10 leading-[1.6] max-w-2xl mx-auto lg:mx-0">
                Most resumes fail not because of bad experience — but because no one ever reads them. Build yours with AI in 10 minutes and land on the recruiter's desk, not the reject pile.
              </p>
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4 mb-10">
                <a
                  href="/resume"
                  className="hdr-btn-primary text-white text-[17px] font-bold px-10 py-4 rounded-xl no-underline whitespace-nowrap">

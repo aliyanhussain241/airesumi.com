@@ -1,29 +1,33 @@
 import { createClient } from "@supabase/supabase-js";
 
-function getAdmin() {
+function getClient() {
   const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+  const key = serviceKey || publishableKey;
   if (!url || !key) {
-    console.error("[credits] Missing service env vars");
+    console.error("[credits] Missing supabase env vars");
     return null;
   }
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
 /**
- * Atomically consume 1 credit. Returns true if consumed (or pro plan),
- * false if the user is out of free credits.
- * Fails-open if the service client cannot be created (so a misconfig
- * doesn't take AI features offline for everyone).
+ * Atomically consume 1 credit via the SECURITY DEFINER RPC.
+ * Returns true if consumed (or pro plan), false if the user is out of credits.
  */
 export async function consumeCredit(userId: string): Promise<boolean> {
-  const admin = getAdmin();
-  if (!admin) return true;
-  const { data, error } = await admin.rpc("consume_credit", { _user_id: userId });
+  const client = getClient();
+  if (!client) {
+    console.error("[credits] no client available, failing open");
+    return true;
+  }
+  const { data, error } = await client.rpc("consume_credit", { _user_id: userId });
   if (error) {
     console.error("[credits] consume_credit rpc error:", error.message);
     return true; // fail-open
   }
+  console.log(`[credits] consume_credit(${userId}) -> ${data}`);
   return data === true;
 }
 

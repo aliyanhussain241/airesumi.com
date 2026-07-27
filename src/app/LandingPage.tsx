@@ -123,8 +123,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       className="min-h-screen bg-[#f9fafb] relative print:hidden overflow-x-hidden pt-[68px]"
     >
       <div className="max-w-7xl mx-auto px-6 pt-8 lg:pt-12 pb-20">
-        <div className="flex flex-col items-center">
-           <div className="w-full max-w-5xl relative z-10 text-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+           <div className="w-full relative z-10 text-center lg:text-left">
              <motion.div
                initial={{ opacity: 0, y: -8 }}
                animate={{ opacity: 1, y: 0 }}

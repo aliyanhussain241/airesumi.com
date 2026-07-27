@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence } from "motion/react";
 import React, { useEffect, useState } from "react";
 // FIX #1: jsPDF and html-to-image removed from top-level imports.
@@ -394,9 +394,15 @@ function ResumeBuilder() {
 }
 
 export const Route = createFileRoute("/resume")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    fromExample: typeof search.fromExample === "string" ? search.fromExample : "",
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const fromExample = typeof search.fromExample === "string" ? search.fromExample.trim() : "";
+    // If fromExample was passed but empty (e.g. /resume?fromExample=), redirect
+    // to the clean canonical URL with a 308 so search engines collapse duplicates.
+    if ("fromExample" in search && !fromExample) {
+      throw redirect({ to: "/resume", search: {}, replace: true, statusCode: 308 });
+    }
+    return { fromExample };
+  },
   head: ({ match }) => {
     // If ANY query param is present (e.g. ?fromExample=...), noindex the
     // pre-filled variant so it doesn't compete with the clean canonical URL.

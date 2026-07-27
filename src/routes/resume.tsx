@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence } from "motion/react";
 import React, { useEffect, useState } from "react";
 // FIX #1: jsPDF and html-to-image removed from top-level imports.

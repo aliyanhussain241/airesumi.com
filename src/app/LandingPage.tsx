@@ -791,7 +791,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
 
       {/* FAQ Section */}
-      <div className="max-w-3xl mx-auto px-6 pb-24">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
         <h2 className="text-3xl lg:text-4xl font-medium text-[#2d3748] mb-10 text-center">
           Frequently Asked Questions
         </h2>

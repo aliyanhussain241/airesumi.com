@@ -285,7 +285,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                 className="absolute top-8 right-2 w-40 h-40 rounded-full border-[6px] border-white z-20 overflow-hidden hover:scale-105 transition-transform duration-300"
                 style={{ boxShadow: "0 20px 45px -15px rgba(255,99,33,0.45), 0 8px 20px -8px rgba(15,23,42,0.2)" }}
               >
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="Avatar" className="w-full h-full object-cover" loading="lazy" width="300" height="300" />
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=70" alt="Avatar" className="w-full h-full object-cover" loading="lazy" width="200" height="200" />
                 {/* Verified badge */}
                 <div className="absolute bottom-1 right-1 w-8 h-8 rounded-full bg-[#FF6321] border-2 border-white flex items-center justify-center shadow-md">
                   <CheckCircle2 size={14} className="text-white" />

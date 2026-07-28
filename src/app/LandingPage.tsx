@@ -410,7 +410,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       </div>
       
       {/* Stats & Features Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-24 mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24 mt-8 sm:mt-16 lg:mt-20">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
             <TrendingUp size={13} /> Trusted this week

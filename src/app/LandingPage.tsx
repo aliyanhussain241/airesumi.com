@@ -122,8 +122,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       exit={{ opacity: 0, y: -20 }}
       className="min-h-screen bg-[#f9fafb] relative print:hidden overflow-x-hidden pt-[68px]"
     >
-      <div className="max-w-7xl mx-auto px-6 pt-8 lg:pt-12 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 lg:pt-12 pb-12 sm:pb-16 lg:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-8 items-center">
            <div className="w-full relative z-10 text-center lg:text-left">
              <motion.div
                initial={{ opacity: 0, y: -8 }}
@@ -182,7 +182,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
               </motion.div>
            </div>
            
-            <div className="relative w-full h-[560px] sm:h-[600px] lg:h-[680px] flex items-center justify-center mt-16 lg:mt-0 transform scale-[0.62] sm:scale-[0.82] lg:scale-90 origin-top lg:origin-center -mb-[180px] sm:-mb-[100px] lg:mb-0">
+            <div className="relative w-full h-[380px] sm:h-[520px] lg:h-[680px] flex items-center justify-center mt-4 sm:mt-8 lg:mt-0 transform scale-[0.58] sm:scale-[0.78] lg:scale-90 origin-top lg:origin-center -mb-[110px] sm:-mb-[80px] lg:mb-0">
               {/* Ambient Gradient Glows */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -410,7 +410,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
       </div>
       
       {/* Stats & Features Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-24 mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24 mt-8 sm:mt-16 lg:mt-20">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
             <TrendingUp size={13} /> Trusted this week
@@ -507,7 +507,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
 
       {/* Tools Section */}
-      <div className="max-w-7xl mx-auto px-6 pb-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24 lg:pb-32">
         <div className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#FF6321]/25 bg-[#FF6321]/8 text-[#FF6321] text-[12px] font-semibold uppercase tracking-[0.14em] mb-5">
             <Sparkles size={13} /> The Career Toolkit
@@ -791,7 +791,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
 
       {/* FAQ Section */}
-      <div className="max-w-3xl mx-auto px-6 pb-24">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
         <h2 className="text-3xl lg:text-4xl font-medium text-[#2d3748] mb-10 text-center">
           Frequently Asked Questions
         </h2>

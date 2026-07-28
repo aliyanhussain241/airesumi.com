@@ -392,6 +392,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen]   = useState(false);
+  const [isExamplesOpen, setIsExamplesOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<'resume' | 'other' | null>('resume');
   const [user, setUser]                 = useState<any>(null);
   const { theme, toggle: toggleTheme } = useTheme();
@@ -769,14 +770,66 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
             </div>
 
 
-            <Link to="/resume-examples"
-              className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/resume-examples' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-              {t('nav.examples')}
-            </Link>
-            <Link to="/cover-letter-examples"
-              className={`hdr-nav-link text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname.startsWith('/cover-letter-examples') ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
-              Cover Letters
-            </Link>
+            <div
+              className="relative"
+              onMouseEnter={() => setIsExamplesOpen(true)}
+              onMouseLeave={() => setIsExamplesOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setIsExamplesOpen(v => !v)}
+                aria-haspopup="menu"
+                aria-expanded={isExamplesOpen}
+                className={`hdr-nav-link inline-flex items-center gap-1 text-[14px] font-medium no-underline whitespace-nowrap ${location.pathname.startsWith('/resume-examples') || location.pathname.startsWith('/cover-letter-examples') ? 'active text-[#EA580C]' : 'text-[#374151]'}`}
+              >
+                {t('nav.examples')}
+                <ChevronDown size={14} className={`transition-transform ${isExamplesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              <AnimatePresence>
+                {isExamplesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.16 }}
+                    role="menu"
+                    className="hdr-dropdown mt-2 w-64 p-2"
+                    style={{ left: 0, top: '100%' }}
+                  >
+                    <Link
+                      to="/resume-examples"
+                      role="menuitem"
+                      onClick={() => setIsExamplesOpen(false)}
+                      className="hdr-tool-item flex items-start gap-3 p-3 no-underline"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center flex-shrink-0">
+                        <FileText size={16} className="text-[#EA580C]" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="hdr-tool-name text-[13px] font-semibold">Resume Examples</div>
+                        <div className="hdr-tool-desc text-[11px]">Free ATS-safe resume templates</div>
+                      </div>
+                      <ArrowRight size={14} className="hdr-tool-arrow text-[#EA580C] mt-1" />
+                    </Link>
+                    <Link
+                      to="/cover-letter-examples"
+                      role="menuitem"
+                      onClick={() => setIsExamplesOpen(false)}
+                      className="hdr-tool-item flex items-start gap-3 p-3 no-underline"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center flex-shrink-0">
+                        <Mail size={16} className="text-[#EA580C]" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="hdr-tool-name text-[13px] font-semibold">Cover Letter Examples</div>
+                        <div className="hdr-tool-desc text-[11px]">Copy-ready cover letters by role</div>
+                      </div>
+                      <ArrowRight size={14} className="hdr-tool-arrow text-[#EA580C] mt-1" />
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <Link to="/blog"
               className={`hdr-nav-link text-[14px] font-medium no-underline ${location.pathname === '/blog' ? 'active text-[#EA580C]' : 'text-[#374151]'}`}>
               {t('nav.blog')}

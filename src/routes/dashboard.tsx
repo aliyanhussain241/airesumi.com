@@ -161,7 +161,7 @@ function ResumeCard({
       {/* Mini Resume Preview */}
       <div className="relative h-[180px] bg-[#f9fafb] overflow-hidden border-b border-[#e5e7eb]">
         <div
-          className="absolute inset-0 origin-top-left pointer-events-none"
+          className="resume-paper absolute inset-0 origin-top-left pointer-events-none"
           style={{ transform: "scale(0.22)", width: "850px", height: "1100px" }}
         >
           <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>
@@ -437,6 +437,7 @@ function Dashboard() {
   async function handleDownload(resume: SavedResume) {
     setDownloadingId(resume.id);
     const container = document.createElement("div");
+    container.className = "resume-paper";
     container.style.cssText = "position:fixed;left:-9999px;top:0;width:850px;background:white;z-index:-1";
     document.body.appendChild(container);
     const { createRoot } = await import("react-dom/client");

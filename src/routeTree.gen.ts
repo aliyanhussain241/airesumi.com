@@ -26,6 +26,7 @@ import { Route as PkRouteImport } from './routes/pk'
 import { Route as PdfScannerRouteImport } from './routes/pdf-scanner'
 import { Route as ManageSubscriptionRouteImport } from './routes/manage-subscription'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as LinkedinBioRouteImport } from './routes/linkedin-bio'
 import { Route as KeywordScannerRouteImport } from './routes/keyword-scanner'
 import { Route as JobBoardRouteImport } from './routes/job-board'
@@ -154,6 +155,11 @@ const ManageSubscriptionRoute = ManageSubscriptionRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LinkedinBioRoute = LinkedinBioRouteImport.update({
@@ -394,6 +400,7 @@ export interface FileRoutesByFullPath {
   '/job-board': typeof JobBoardRoute
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
@@ -456,6 +463,7 @@ export interface FileRoutesByTo {
   '/job-board': typeof JobBoardRoute
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
@@ -518,6 +526,7 @@ export interface FileRoutesById {
   '/job-board': typeof JobBoardRoute
   '/keyword-scanner': typeof KeywordScannerRoute
   '/linkedin-bio': typeof LinkedinBioRoute
+  '/llms.txt': typeof LlmsDottxtRoute
   '/login': typeof LoginRoute
   '/manage-subscription': typeof ManageSubscriptionRoute
   '/pdf-scanner': typeof PdfScannerRoute
@@ -583,6 +592,7 @@ export interface FileRouteTypes {
     | '/job-board'
     | '/keyword-scanner'
     | '/linkedin-bio'
+    | '/llms.txt'
     | '/login'
     | '/manage-subscription'
     | '/pdf-scanner'
@@ -645,6 +655,7 @@ export interface FileRouteTypes {
     | '/job-board'
     | '/keyword-scanner'
     | '/linkedin-bio'
+    | '/llms.txt'
     | '/login'
     | '/manage-subscription'
     | '/pdf-scanner'
@@ -706,6 +717,7 @@ export interface FileRouteTypes {
     | '/job-board'
     | '/keyword-scanner'
     | '/linkedin-bio'
+    | '/llms.txt'
     | '/login'
     | '/manage-subscription'
     | '/pdf-scanner'
@@ -770,6 +782,7 @@ export interface RootRouteChildren {
   JobBoardRoute: typeof JobBoardRoute
   KeywordScannerRoute: typeof KeywordScannerRoute
   LinkedinBioRoute: typeof LinkedinBioRoute
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
   LoginRoute: typeof LoginRoute
   ManageSubscriptionRoute: typeof ManageSubscriptionRoute
   PdfScannerRoute: typeof PdfScannerRoute
@@ -930,6 +943,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/linkedin-bio': {
@@ -1318,6 +1338,7 @@ const rootRouteChildren: RootRouteChildren = {
   JobBoardRoute: JobBoardRoute,
   KeywordScannerRoute: KeywordScannerRoute,
   LinkedinBioRoute: LinkedinBioRoute,
+  LlmsDottxtRoute: LlmsDottxtRoute,
   LoginRoute: LoginRoute,
   ManageSubscriptionRoute: ManageSubscriptionRoute,
   PdfScannerRoute: PdfScannerRoute,
@@ -1361,13 +1382,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

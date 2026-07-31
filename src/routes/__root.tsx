@@ -203,11 +203,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // same stylesheet twice. `display=swap` keeps text visible immediately
       // in the metric-matched fallback until the web font arrives.
       {
-        rel: "preload",
-        as: "style",
+        rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;600&display=swap",
-        onLoad: "this.onload=null;this.rel='stylesheet'",
-      } as any,
+      },
       {
         rel: "stylesheet",
         href: appCss },

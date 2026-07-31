@@ -437,6 +437,7 @@ function Dashboard() {
   async function handleDownload(resume: SavedResume) {
     setDownloadingId(resume.id);
     const container = document.createElement("div");
+    container.className = "resume-paper";
     container.style.cssText = "position:fixed;left:-9999px;top:0;width:850px;background:white;z-index:-1";
     document.body.appendChild(container);
     const { createRoot } = await import("react-dom/client");

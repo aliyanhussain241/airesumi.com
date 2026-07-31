@@ -161,7 +161,7 @@ function ResumeCard({
       {/* Mini Resume Preview */}
       <div className="relative h-[180px] bg-[#f9fafb] overflow-hidden border-b border-[#e5e7eb]">
         <div
-          className="absolute inset-0 origin-top-left pointer-events-none"
+          className="resume-paper absolute inset-0 origin-top-left pointer-events-none"
           style={{ transform: "scale(0.22)", width: "850px", height: "1100px" }}
         >
           <Suspense fallback={<div className="animate-pulse bg-gray-100 rounded-lg h-96" />}>

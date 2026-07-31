@@ -97,17 +97,19 @@ export const DoneView: React.FC<DoneViewProps> = ({
       className="max-w-[900px] mx-auto py-8 sm:py-12 px-4 sm:px-6 print:p-0 print:py-0 print:max-w-none"
     >
       {/* Sticky Action Bar */}
-      <div className="sticky top-[76px] z-40 bg-white/95 backdrop-blur-md border border-border shadow-lg shadow-black/5 rounded-2xl px-3 sm:px-4 py-2.5 mb-6 print:hidden mx-auto w-full">
-        <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:gap-3">
+      <div className="sticky top-[76px] z-40 bg-background/95 backdrop-blur-md border border-border shadow-lg shadow-black/5 rounded-2xl px-3 sm:px-4 py-3 mb-6 print:hidden mx-auto w-full">
+        <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+          {/* Left: back */}
           <button
             onClick={() => setStep(Step.JOB)}
-            className="flex shrink-0 items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-widest hover:text-[#FF6321] transition-colors"
+            className="flex shrink-0 items-center gap-1.5 rounded-full border border-border px-3 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-foreground hover:border-[#FF6321] hover:text-[#FF6321] transition-colors"
           >
             <ArrowLeft size={14} /> <span className="hidden sm:inline">Edit</span>
           </button>
 
-          <div className="flex min-w-0 items-center justify-center gap-2">
-            <div className="hidden md:flex items-center gap-1 bg-muted/60 p-1 rounded-full">
+          {/* Middle: template + view controls */}
+          <div className="order-3 w-full lg:order-none lg:w-auto flex flex-wrap items-center justify-center gap-2">
+            <div className="hidden xl:flex items-center gap-1 bg-muted p-1 rounded-full">
               {CORE_DESIGNS.map((d) => (
                 <button
                   key={d}
@@ -123,13 +125,13 @@ export const DoneView: React.FC<DoneViewProps> = ({
               ))}
             </div>
 
-            <div className="flex min-w-0 items-center gap-1.5 bg-muted/60 px-2.5 py-1.5 rounded-full">
+            <div className="flex min-w-0 items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-2">
               <Sparkles size={12} className="shrink-0 text-[#FF6321]" />
               <select
                 value={designId}
                 onChange={(e) => setDesignId(e.target.value as DesignId)}
                 aria-label="Choose resume template"
-                className="min-w-0 max-w-[130px] sm:max-w-none truncate bg-transparent text-[10px] sm:text-[11px] font-bold uppercase tracking-wider outline-none text-foreground"
+                className="min-w-0 max-w-[150px] truncate bg-transparent text-[10px] sm:text-[11px] font-bold uppercase tracking-wider outline-none text-foreground [&>optgroup]:bg-background [&>option]:bg-background [&>optgroup]:text-foreground [&>option]:text-foreground"
               >
                 <optgroup label="Free">
                   {CORE_DESIGNS.map((d) => (
@@ -148,7 +150,7 @@ export const DoneView: React.FC<DoneViewProps> = ({
               </select>
             </div>
 
-            <div className="hidden lg:flex items-center gap-1 bg-muted/60 p-1 rounded-full">
+            <div className="hidden sm:flex items-center gap-1 bg-muted p-1 rounded-full">
               <button
                 onClick={() => setZoomIndex((i) => Math.max(0, i - 1))}
                 disabled={zoomIndex === 0}
@@ -157,7 +159,7 @@ export const DoneView: React.FC<DoneViewProps> = ({
               >
                 <ZoomOut size={14} />
               </button>
-              <span className="text-[10px] font-bold tabular-nums text-muted-foreground w-8 text-center">
+              <span className="w-9 text-center text-[10px] font-bold tabular-nums text-foreground">
                 {Math.round(ZOOM_STEPS[zoomIndex] * 100)}%
               </span>
               <button
@@ -170,7 +172,7 @@ export const DoneView: React.FC<DoneViewProps> = ({
               </button>
             </div>
 
-            <div className="hidden lg:flex items-center gap-1 bg-muted/60 p-1 rounded-full">
+            <div className="hidden lg:flex items-center gap-1 bg-muted p-1 rounded-full">
               <button
                 onClick={() => setPreviewMode("desktop")}
                 className={`p-1.5 rounded-full transition-all ${previewMode === "desktop" ? "bg-background shadow-sm text-[#FF6321]" : "text-muted-foreground hover:text-foreground"}`}
@@ -188,22 +190,24 @@ export const DoneView: React.FC<DoneViewProps> = ({
             </div>
           </div>
 
-          <div className="flex shrink-0 gap-1.5 sm:gap-2">
+          {/* Right: actions */}
+          <div className="flex shrink-0 items-center gap-2">
             <button
               onClick={() => setStep(Step.COVER_LETTER)}
-              className="flex items-center gap-1 sm:gap-2 bg-gradient-to-r from-orange-500 to-[#FF6321] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold uppercase tracking-widest text-[9px] sm:text-xs hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-[#FF6321] text-white px-3 sm:px-4 py-2 rounded-full font-bold uppercase tracking-widest text-[9px] sm:text-[11px] hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all"
             >
               <FileText size={12} /> <span className="hidden sm:inline">Cover</span> Letter
             </button>
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1 sm:gap-2 bg-[#0a0a0a] text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold uppercase tracking-widest text-[9px] sm:text-xs hover:bg-[#FF6321] hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all"
+              className="flex items-center gap-1.5 bg-foreground text-background px-3 sm:px-5 py-2 rounded-full font-bold uppercase tracking-widest text-[9px] sm:text-[11px] hover:bg-[#FF6321] hover:text-white hover:shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5 transition-all"
             >
               <Download size={12} /> PDF
             </button>
           </div>
         </div>
       </div>
+
 
       {/* Status strip */}
       <div className="flex flex-wrap items-center justify-center gap-2 mb-6 print:hidden">

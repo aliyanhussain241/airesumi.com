@@ -38,6 +38,7 @@ import { Route as CoverLetterRouteImport } from './routes/cover-letter'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BulletWriterRouteImport } from './routes/bullet-writer'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AtsResumeCheckerRouteImport } from './routes/ats-resume-checker'
 import { Route as AtsCheckerRouteImport } from './routes/ats-checker'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -217,6 +218,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtsResumeCheckerRoute = AtsResumeCheckerRouteImport.update({
+  id: '/ats-resume-checker',
+  path: '/ats-resume-checker',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AtsCheckerRoute = AtsCheckerRouteImport.update({
   id: '/ats-checker',
   path: '/ats-checker',
@@ -389,6 +395,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
+  '/ats-resume-checker': typeof AtsResumeCheckerRoute
   '/blog': typeof BlogRouteWithChildren
   '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
@@ -453,6 +460,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
+  '/ats-resume-checker': typeof AtsResumeCheckerRoute
   '/blog': typeof BlogRouteWithChildren
   '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
@@ -515,6 +523,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
+  '/ats-resume-checker': typeof AtsResumeCheckerRoute
   '/blog': typeof BlogRouteWithChildren
   '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
@@ -581,6 +590,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ats-checker'
+    | '/ats-resume-checker'
     | '/blog'
     | '/bullet-writer'
     | '/contact'
@@ -645,6 +655,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ats-checker'
+    | '/ats-resume-checker'
     | '/blog'
     | '/bullet-writer'
     | '/contact'
@@ -706,6 +717,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ats-checker'
+    | '/ats-resume-checker'
     | '/blog'
     | '/bullet-writer'
     | '/contact'
@@ -771,6 +783,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AtsCheckerRoute: typeof AtsCheckerRoute
+  AtsResumeCheckerRoute: typeof AtsResumeCheckerRoute
   BlogRoute: typeof BlogRouteWithChildren
   BulletWriterRoute: typeof BulletWriterRoute
   ContactRoute: typeof ContactRoute
@@ -1027,6 +1040,13 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ats-resume-checker': {
+      id: '/ats-resume-checker'
+      path: '/ats-resume-checker'
+      fullPath: '/ats-resume-checker'
+      preLoaderRoute: typeof AtsResumeCheckerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ats-checker': {
@@ -1327,6 +1347,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AtsCheckerRoute: AtsCheckerRoute,
+  AtsResumeCheckerRoute: AtsResumeCheckerRoute,
   BlogRoute: BlogRouteWithChildren,
   BulletWriterRoute: BulletWriterRoute,
   ContactRoute: ContactRoute,

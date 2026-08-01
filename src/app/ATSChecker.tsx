@@ -197,7 +197,7 @@ export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step
         .dark .ats-checker-page .bg-gray-900 { background-color: #FF6321 !important; }
       `}</style>
 
-      {/* Hero Section */}
+      {!embedded && (
       <div className="max-w-5xl mx-auto px-6 mb-14 text-center">
         <motion.div
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}

@@ -662,7 +662,7 @@ export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step
         )}
       </div>
 
-      {/* Info Sections */}
+      {!embedded && (
       <div className="max-w-4xl mx-auto px-6 pb-24">
         
         <h2 className="text-3xl font-bold text-gray-900 mb-6">What Your ATS Score Means and How to Improve It</h2>

@@ -225,6 +225,7 @@ export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step
           ))}
         </div>
       </div>
+      )}
 
       {/* Main Tool Area */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-24">

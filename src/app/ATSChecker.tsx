@@ -150,7 +150,7 @@ export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step
   };
 
   return (
-    <div className="ats-checker-page min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] dark:from-[#0b0d12] dark:via-[#0f1218] dark:to-[#0b0d12] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
+    <div className={`ats-checker-page font-sans selection:bg-[#FF6321] selection:text-white ${embedded ? "" : "min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] dark:from-[#0b0d12] dark:via-[#0f1218] dark:to-[#0b0d12] pb-20 pt-[68px]"}`}>
       <style>{`
         .dark .ats-checker-page .text-gray-900,
         .dark .ats-checker-page .text-\\[\\#0a0a0a\\],

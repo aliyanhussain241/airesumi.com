@@ -15,6 +15,7 @@ Airesumi offers AI-powered resume generation, ATS score analysis and optimizatio
 ## Free AI Tools
 
 - [ATS Resume Checker](https://airesumi.com/ats-checker): Instant ATS compatibility score and keyword match check.
+- [Is Your Resume ATS-Friendly? Free Check](https://airesumi.com/ats-resume-checker): Free ATS-friendly resume scan plus an 8-point parsing checklist and myth-busting explainer.
 - [Resume Score & Roast](https://airesumi.com/resume-score): Brutally honest AI feedback on ATS compatibility and content quality.
 - [Resume Tailor](https://airesumi.com/resume-tailor): Rewrites resume bullets to match a specific job description's keywords.
 - [Keyword Scanner](https://airesumi.com/keyword-scanner): Finds missing keywords and boosts ATS match score.

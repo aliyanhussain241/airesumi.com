@@ -12,7 +12,7 @@ import {
 
 
 
-export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
+export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step: any) => void; embedded?: boolean }) => {
   const navigate = useNavigate();
   const [activeCheckTab, setActiveCheckTab] = useState(1);
 
@@ -39,10 +39,11 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
 
 
   useEffect(() => {
+    if (embedded) return;
     document.title = "Free ATS Resume Checker – Instant ATS Score & Keyword Analysis | AIResumi";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", "Check your resume's ATS score instantly for free. Our ATS resume checker analyzes keyword match, formatting issues, and ATS compatibility — no sign-up required. See your score in seconds.");
-  }, []);
+  }, [embedded]);
 
   const [isUploading, setIsUploading] = useState(false);
 
@@ -149,7 +150,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
   };
 
   return (
-    <div className="ats-checker-page min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] dark:from-[#0b0d12] dark:via-[#0f1218] dark:to-[#0b0d12] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-[68px]">
+    <div className={`ats-checker-page font-sans selection:bg-[#FF6321] selection:text-white ${embedded ? "" : "min-h-screen bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] dark:from-[#0b0d12] dark:via-[#0f1218] dark:to-[#0b0d12] pb-20 pt-[68px]"}`}>
       <style>{`
         .dark .ats-checker-page .text-gray-900,
         .dark .ats-checker-page .text-\\[\\#0a0a0a\\],
@@ -196,7 +197,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
         .dark .ats-checker-page .bg-gray-900 { background-color: #FF6321 !important; }
       `}</style>
 
-      {/* Hero Section */}
+      {!embedded && (
       <div className="max-w-5xl mx-auto px-6 mb-14 text-center">
         <motion.div
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
@@ -224,6 +225,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
           ))}
         </div>
       </div>
+      )}
 
       {/* Main Tool Area */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-24">
@@ -660,7 +662,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
         )}
       </div>
 
-      {/* Info Sections */}
+      {!embedded && (
       <div className="max-w-4xl mx-auto px-6 pb-24">
         
         <h2 className="text-3xl font-bold text-gray-900 mb-6">What Your ATS Score Means and How to Improve It</h2>
@@ -841,6 +843,7 @@ export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) 
           <p className="text-[#FED7AA] text-sm font-medium">No sign-up required. Instant results. Used by 500,000+ job seekers in 120+ countries.</p>
         </div>
       </div>
+      )}
     </div>
   );
 };

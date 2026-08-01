@@ -12,7 +12,7 @@ import {
 
 
 
-export const ATSChecker = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
+export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step: any) => void; embedded?: boolean }) => {
   const navigate = useNavigate();
   const [activeCheckTab, setActiveCheckTab] = useState(1);
 

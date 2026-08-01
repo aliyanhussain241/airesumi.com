@@ -843,6 +843,7 @@ export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step
           <p className="text-[#FED7AA] text-sm font-medium">No sign-up required. Instant results. Used by 500,000+ job seekers in 120+ countries.</p>
         </div>
       </div>
+      )}
     </div>
   );
 };

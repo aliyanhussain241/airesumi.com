@@ -36,6 +36,26 @@ const FAQS = [
     q: "How can I check if my resume is ATS-friendly for free?",
     a: "Upload or paste your resume into the scanner on this page. It extracts the text the way a parser would, shows which sections it detected, and flags formatting patterns that commonly break extraction. It is free, and you can run it as many times as you like while you edit.",
   },
+  {
+    q: "Can a well-qualified candidate still fail an ATS scan?",
+    a: "Yes — and it happens all the time. ATS doesn't evaluate your actual qualifications. It scores keyword coverage and formatting. A 10-year veteran who used a two-column template and didn't match the exact phrasing in the job posting can score below a less-experienced candidate who did.",
+  },
+  {
+    q: "Should I use exact keywords from the job posting or paraphrase?",
+    a: "Match exactly where honest. If the posting says 'Python' and you know Python, write 'Python' — not 'Python programming' or 'scripting languages.' Modern ATS handles some synonyms, but exact matches score highest. Never add a skill you don't actually have.",
+  },
+  {
+    q: "How often should I re-check my resume with an ATS checker?",
+    a: "Every time you apply to a different role. Keywords change between postings — even for the same job title at different companies. Tailoring and re-checking for each application takes 5 minutes and meaningfully increases your callback rate.",
+  },
+];
+
+const FAIL_REASONS = [
+  { num: "1", title: "Using a template with columns or text boxes", desc: "Most ATS software reads top-to-bottom, left-to-right. Two-column layouts often get read out of order or skip sections entirely. Keep it single-column." },
+  { num: "2", title: "Missing keywords from the job description", desc: "ATS systems match your resume to the job posting word-by-word. If the posting says 'project management' and your resume says 'managing projects,' some systems won't count it as a match." },
+  { num: "3", title: "Using non-standard section headings", desc: "'Where I've Worked' instead of 'Work Experience.' 'Things I Know' instead of 'Skills.' Non-standard headings confuse parsers and your sections get skipped." },
+  { num: "4", title: "Submitting the wrong file format", desc: "Some ATS systems handle PDFs badly; others handle Word badly. If the job posting doesn't specify, PDF is usually the safer choice." },
+  { num: "5", title: "Putting contact info in the header or footer", desc: "Many ATS tools don't parse headers and footers correctly. Put your name, email, and phone number in the main body of the document." },
 ];
 
 const CHECKLIST = [
@@ -163,6 +183,45 @@ function Page() {
               Build mine <ArrowRight size={15} />
             </span>
           </a>
+          <a
+            href="/resume-tailor"
+            className="group mt-3 flex items-center justify-between gap-3 rounded-2xl border border-black/[0.07] dark:border-white/10 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl px-5 py-4 hover:border-[#FF6321] hover:shadow-md transition-all"
+          >
+            <div>
+              <p className="text-[15px] font-bold text-[#111827] dark:text-zinc-100">
+                Want to match against a specific job?
+              </p>
+              <p className="text-[13px] text-[#6b7280] dark:text-zinc-400">
+                Resume Tailor scores your resume against any job description and rewrites bullets to close the gap.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1 text-[14px] font-semibold text-[#EA580C] dark:text-orange-300 whitespace-nowrap group-hover:translate-x-1 transition-transform">
+              Try Resume Tailor <ArrowRight size={15} />
+            </span>
+          </a>
+        </div>
+      </section>
+
+      {/* 5 reasons resumes fail */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
+        <h2 className="text-[24px] sm:text-[30px] font-semibold tracking-tight text-[#2d3748] dark:text-zinc-100 mb-6">
+          5 reasons resumes fail ATS scans
+        </h2>
+        <div className="space-y-4">
+          {FAIL_REASONS.map((item) => (
+            <div
+              key={item.num}
+              className="flex gap-5 rounded-2xl border border-black/[0.06] dark:border-white/10 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6"
+            >
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#FF6321] text-[17px] font-bold text-white">
+                {item.num}
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-[16px] font-semibold text-[#1a202c] dark:text-zinc-100 mb-1">{item.title}</h3>
+                <p className="text-[14px] leading-relaxed text-[#4a5568] dark:text-zinc-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

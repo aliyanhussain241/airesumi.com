@@ -124,7 +124,7 @@ function PkHubPage() {
                   <Sparkles size={16} /> Build my CV — free
                 </Link>
                 <Link
-                  to="/ats-checker"
+                  to="/ats-resume-checker"
                   className={`inline-flex items-center justify-center gap-2 ${CARD} hover:bg-[#F8FAFC] dark:hover:bg-slate-800 ${TXT_HEAD} font-semibold px-5 py-3 rounded-xl no-underline border ${CARD_BORDER} transition-colors`}
                 >
                   Check my CV score

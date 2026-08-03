@@ -172,7 +172,7 @@ function RoleExamplePage() {
                 <Sparkles size={16} /> Use This Template
               </Link>
               <Link
-                to="/ats-checker"
+                to="/ats-resume-checker"
                 className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F3F4F6] text-[#111827] font-semibold px-5 py-3 rounded-xl no-underline transition-colors border border-[#E5E7EB]"
               >
                 <Target size={16} /> Check ATS Score

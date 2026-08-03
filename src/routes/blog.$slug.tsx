@@ -221,6 +221,16 @@ function BlogPost() {
   const readTime = post.read_time || Math.max(1, Math.ceil(wordCount / 200));
   const publishDate = post.published_at || post.created_at;
 
+  const isAtsScorePost = post.slug === ATS_SCORE_SLUG;
+  // Split the markdown roughly mid-article (at an H2 boundary) to place an inline CTA.
+  const atsSplit: [string, string] | null = (() => {
+    if (!isAtsScorePost) return null;
+    const parts = post.content.split(/\n(?=## )/);
+    if (parts.length < 4) return null;
+    const mid = Math.ceil(parts.length / 2);
+    return [parts.slice(0, mid).join("\n"), parts.slice(mid).join("\n")];
+  })();
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",

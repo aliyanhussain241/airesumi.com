@@ -377,7 +377,7 @@ const resumeToolsBase = [
 const otherToolsBase = [
   { key: 'coverLetter',    to: '/cover-letter',       icon: Mail,     badge: 'popular' as const },
   { key: 'linkedinBio',    to: '/linkedin-bio',       icon: Linkedin, badge: null },
-  { key: 'atsChecker',     to: '/ats-checker',        icon: Target,   badge: null },
+  { key: 'atsChecker',     to: '/ats-resume-checker',        icon: Target,   badge: null },
   { key: 'interviewPrep',  to: '/interview-prep',     icon: Wand2,    badge: 'new' as const },
   { key: 'resignation',    to: '/resignation-letter', icon: FileText, badge: null },
   { key: 'pdfScanner',     to: '/pdf-scanner',        icon: ScanLine, badge: null },
@@ -843,7 +843,7 @@ export const Header = ({ windowWidth }: { windowWidth?: number }) => {
               <div className="hidden lg:flex items-center gap-3">
                 {(() => {
                   const p = location.pathname;
-                  const appPrefixes = ['/dashboard', '/resume', '/premium', '/manage-subscription', '/cover-letter', '/ats-checker', '/bullet-writer', '/summary-generator', '/keyword-scanner', '/pdf-scanner', '/resignation-letter', '/linkedin-optimizer', '/salary-analyzer', '/admin'];
+                  const appPrefixes = ['/dashboard', '/resume', '/premium', '/manage-subscription', '/cover-letter', '/ats-resume-checker', '/bullet-writer', '/summary-generator', '/keyword-scanner', '/pdf-scanner', '/resignation-letter', '/linkedin-optimizer', '/salary-analyzer', '/admin'];
                   const show = appPrefixes.some(pref => p === pref || p.startsWith(pref + '/'));
                   return show ? (
                     <>

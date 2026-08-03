@@ -242,7 +242,7 @@ function ResumeBuilder() {
         navigate({ to: "/terms" });
         return;
       case Step.ATS_CHECKER:
-        navigate({ to: "/ats-checker" });
+        navigate({ to: "/ats-resume-checker" });
         return;
     }
   };

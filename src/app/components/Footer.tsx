@@ -70,7 +70,7 @@ export const Footer = () => {
                 <li><Link to="/summary-generator" className={linkCls}>{t("tools.summary.name")}</Link></li>
                 <li><Link to="/keyword-scanner" className={linkCls}>{t("tools.keywordScanner.name")}</Link></li>
                 <li><Link to="/resume-tailor" className={linkCls}>{t("tools.resumeTailor.name")}</Link></li>
-                <li><Link to="/ats-checker" className={linkCls}>{t("tools.atsChecker.name")}</Link></li>
+                <li><Link to="/ats-resume-checker" className={linkCls}>{t("tools.atsChecker.name")}</Link></li>
               </ul>
             </div>
 

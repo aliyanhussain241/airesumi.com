@@ -18,7 +18,7 @@ export const stepToPath: Record<number, string> = {
   [Step.CONTACT]: "/contact",
   [Step.PRIVACY]: "/privacy",
   [Step.TERMS]: "/terms",
-  [Step.ATS_CHECKER]: "/ats-checker",
+  [Step.ATS_CHECKER]: "/ats-resume-checker",
 };
 
 /**

@@ -7,7 +7,6 @@ const BASE_URL = "https://airesumi.com";
 const STATIC_ENTRIES = [
   { path: "/",                  changefreq: "weekly",  priority: "1.0" },
   { path: "/resume",            changefreq: "monthly", priority: "0.9" },
-  { path: "/ats-checker",       changefreq: "monthly", priority: "0.8" },
   { path: "/ats-resume-checker", changefreq: "monthly", priority: "0.8" },
   { path: "/cover-letter",      changefreq: "monthly", priority: "0.8" },
   { path: "/linkedin-bio",      changefreq: "monthly", priority: "0.7" },

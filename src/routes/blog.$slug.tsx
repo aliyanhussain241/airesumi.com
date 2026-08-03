@@ -357,14 +357,33 @@ function BlogPost() {
                 </details>
               )}
 
+              {/* Direct answer + variance + score bands (this post only) */}
+              {isAtsScorePost && <AtsScoreDirectAnswer />}
+
               {/* Content */}
-              <div
-                className="prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
-              />
+              {isAtsScorePost && atsSplit ? (
+                <>
+                  <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(atsSplit[0]) }} />
+                  <AtsScoreToolCta />
+                  <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(atsSplit[1]) }} />
+                </>
+              ) : (
+                <div
+                  className="prose max-w-none"
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
+                />
+              )}
+
+              {isAtsScorePost && (
+                <>
+                  <AtsScoreFaq />
+                  <AtsScoreToolCta variant="final" />
+                </>
+              )}
 
               {/* In-content ad */}
               <AdBanner variant="medium-rectangle" className="!my-10" />
+
 
 
 

@@ -249,7 +249,9 @@ function BlogPost() {
   };
 
   const faqMatches = [...post.content.matchAll(/\*\*Q[:\d.]\s*(.+?)\*\*[\s\S]*?\n(.+?)(?=\n\*\*Q|\n##|$)/g)];
-  const faqSchema = faqMatches.length > 0 ? {
+  const faqSchema = isAtsScorePost
+    ? ATS_SCORE_FAQ_SCHEMA
+    : faqMatches.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqMatches.map(m => ({

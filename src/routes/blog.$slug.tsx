@@ -4,6 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AdBanner } from "@/app/components/AdBanner";
 import {
+  ATS_SCORE_SLUG, ATS_SCORE_SEO_TITLE, ATS_SCORE_SEO_DESCRIPTION, ATS_SCORE_FAQ_SCHEMA,
+  AtsScoreDirectAnswer, AtsScoreToolCta, AtsScoreFaq,
+} from "@/app/components/AtsScoreBlogEnhancements";
+import {
   BookOpen, Clock, Calendar, ArrowRight, ArrowLeft, Share2, Twitter, Linkedin,
   Facebook, Link as LinkIcon, Check, Bookmark, ChevronUp, List,
 } from "lucide-react";
@@ -146,7 +150,20 @@ function BlogPost() {
     } catch { /* noop */ }
   };
 
-  const headings = useMemo(() => (post ? extractHeadings(post.content) : []), [post]);
+  const headings = useMemo(() => {
+    if (!post) return [];
+    const base = extractHeadings(post.content);
+    if (post.slug !== ATS_SCORE_SLUG) return base;
+    return [
+      { level: 2, text: "Why ATS scores vary so much", id: "why-ats-scores-vary-so-much" },
+      ...base,
+      {
+        level: 2,
+        text: "ATS score questions people actually search",
+        id: "ats-score-questions-people-actually-search",
+      },
+    ];
+  }, [post]);
 
   // Active heading tracking
   useEffect(() => {
@@ -217,6 +234,16 @@ function BlogPost() {
   const readTime = post.read_time || Math.max(1, Math.ceil(wordCount / 200));
   const publishDate = post.published_at || post.created_at;
 
+  const isAtsScorePost = post.slug === ATS_SCORE_SLUG;
+  // Split the markdown roughly mid-article (at an H2 boundary) to place an inline CTA.
+  const atsSplit: [string, string] | null = (() => {
+    if (!isAtsScorePost) return null;
+    const parts = post.content.split(/\n(?=## )/);
+    if (parts.length < 4) return null;
+    const mid = Math.ceil(parts.length / 2);
+    return [parts.slice(0, mid).join("\n"), parts.slice(mid).join("\n")];
+  })();
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -235,7 +262,9 @@ function BlogPost() {
   };
 
   const faqMatches = [...post.content.matchAll(/\*\*Q[:\d.]\s*(.+?)\*\*[\s\S]*?\n(.+?)(?=\n\*\*Q|\n##|$)/g)];
-  const faqSchema = faqMatches.length > 0 ? {
+  const faqSchema = isAtsScorePost
+    ? ATS_SCORE_FAQ_SCHEMA
+    : faqMatches.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqMatches.map(m => ({
@@ -353,14 +382,33 @@ function BlogPost() {
                 </details>
               )}
 
+              {/* Direct answer + variance + score bands (this post only) */}
+              {isAtsScorePost && <AtsScoreDirectAnswer />}
+
               {/* Content */}
-              <div
-                className="prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
-              />
+              {isAtsScorePost && atsSplit ? (
+                <>
+                  <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(atsSplit[0]) }} />
+                  <AtsScoreToolCta />
+                  <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(atsSplit[1]) }} />
+                </>
+              ) : (
+                <div
+                  className="prose max-w-none"
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
+                />
+              )}
+
+              {isAtsScorePost && (
+                <>
+                  <AtsScoreFaq />
+                  <AtsScoreToolCta variant="final" />
+                </>
+              )}
 
               {/* In-content ad */}
               <AdBanner variant="medium-rectangle" className="!my-10" />
+
 
 
 
@@ -520,9 +568,13 @@ export const Route = createFileRoute("/blog/$slug")({
       .split("-")
       .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
-    const title = (post?.seo_title || post?.title || fallbackTitle) + " | Airesumi Career Blog";
-    const description =
-      post?.seo_description ||
+    const isAts = slug === ATS_SCORE_SLUG;
+    const title = isAts
+      ? ATS_SCORE_SEO_TITLE + " | Airesumi Career Blog"
+      : (post?.seo_title || post?.title || fallbackTitle) + " | Airesumi Career Blog";
+    const description = isAts
+      ? ATS_SCORE_SEO_DESCRIPTION
+      : post?.seo_description ||
       post?.excerpt ||
       `Read our guide on ${fallbackTitle.toLowerCase()}. Expert career advice, resume tips, and job search strategies from Airesumi.`;
     const ogImage = post?.cover_image_url || "https://airesumi.com/assets/og-image.png";

@@ -4,6 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AdBanner } from "@/app/components/AdBanner";
 import {
+  ATS_SCORE_SLUG, ATS_SCORE_SEO_TITLE, ATS_SCORE_SEO_DESCRIPTION, ATS_SCORE_FAQ_SCHEMA,
+  AtsScoreDirectAnswer, AtsScoreToolCta, AtsScoreFaq,
+} from "@/app/components/AtsScoreBlogEnhancements";
+import {
   BookOpen, Clock, Calendar, ArrowRight, ArrowLeft, Share2, Twitter, Linkedin,
   Facebook, Link as LinkIcon, Check, Bookmark, ChevronUp, List,
 } from "lucide-react";

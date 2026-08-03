@@ -555,9 +555,13 @@ export const Route = createFileRoute("/blog/$slug")({
       .split("-")
       .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
-    const title = (post?.seo_title || post?.title || fallbackTitle) + " | Airesumi Career Blog";
-    const description =
-      post?.seo_description ||
+    const isAts = slug === ATS_SCORE_SLUG;
+    const title = isAts
+      ? ATS_SCORE_SEO_TITLE + " | Airesumi Career Blog"
+      : (post?.seo_title || post?.title || fallbackTitle) + " | Airesumi Career Blog";
+    const description = isAts
+      ? ATS_SCORE_SEO_DESCRIPTION
+      : post?.seo_description ||
       post?.excerpt ||
       `Read our guide on ${fallbackTitle.toLowerCase()}. Expert career advice, resume tips, and job search strategies from Airesumi.`;
     const ogImage = post?.cover_image_url || "https://airesumi.com/assets/og-image.png";

@@ -183,6 +183,45 @@ function Page() {
               Build mine <ArrowRight size={15} />
             </span>
           </a>
+          <a
+            href="/resume-tailor"
+            className="group mt-3 flex items-center justify-between gap-3 rounded-2xl border border-black/[0.07] dark:border-white/10 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl px-5 py-4 hover:border-[#FF6321] hover:shadow-md transition-all"
+          >
+            <div>
+              <p className="text-[15px] font-bold text-[#111827] dark:text-zinc-100">
+                Want to match against a specific job?
+              </p>
+              <p className="text-[13px] text-[#6b7280] dark:text-zinc-400">
+                Resume Tailor scores your resume against any job description and rewrites bullets to close the gap.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1 text-[14px] font-semibold text-[#EA580C] dark:text-orange-300 whitespace-nowrap group-hover:translate-x-1 transition-transform">
+              Try Resume Tailor <ArrowRight size={15} />
+            </span>
+          </a>
+        </div>
+      </section>
+
+      {/* 5 reasons resumes fail */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20">
+        <h2 className="text-[24px] sm:text-[30px] font-semibold tracking-tight text-[#2d3748] dark:text-zinc-100 mb-6">
+          5 reasons resumes fail ATS scans
+        </h2>
+        <div className="space-y-4">
+          {FAIL_REASONS.map((item) => (
+            <div
+              key={item.num}
+              className="flex gap-5 rounded-2xl border border-black/[0.06] dark:border-white/10 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6"
+            >
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#FF6321] text-[17px] font-bold text-white">
+                {item.num}
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-[16px] font-semibold text-[#1a202c] dark:text-zinc-100 mb-1">{item.title}</h3>
+                <p className="text-[14px] leading-relaxed text-[#4a5568] dark:text-zinc-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

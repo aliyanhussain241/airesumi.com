@@ -150,7 +150,20 @@ function BlogPost() {
     } catch { /* noop */ }
   };
 
-  const headings = useMemo(() => (post ? extractHeadings(post.content) : []), [post]);
+  const headings = useMemo(() => {
+    if (!post) return [];
+    const base = extractHeadings(post.content);
+    if (post.slug !== ATS_SCORE_SLUG) return base;
+    return [
+      { level: 2, text: "Why ATS scores vary so much", id: "why-ats-scores-vary-so-much" },
+      ...base,
+      {
+        level: 2,
+        text: "ATS score questions people actually search",
+        id: "ats-score-questions-people-actually-search",
+      },
+    ];
+  }, [post]);
 
   // Active heading tracking
   useEffect(() => {

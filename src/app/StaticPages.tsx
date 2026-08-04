@@ -427,7 +427,7 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Contact Airesumi — We Are Here to Help</h1>
-          <p className="text-xl text-gray-600 leading-relaxed font-medium">Have a question about your resume, our AI tools, your account, or a partnership opportunity? Our team responds to every message within 24 hours.</p>
+          <p className="text-xl text-gray-600 leading-relaxed font-medium">Have a question about your resume, our AI tools, your account, or a partnership opportunity? Reach out below — most messages get a reply within a few hours.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-20">
@@ -527,7 +527,7 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-gray-900 mb-3">Connect With Us</h3>
-            <p className="text-sm text-gray-600">For all inquiries, use the contact form above or email us directly. We typically respond within 24 hours.</p>
+            <p className="text-sm text-gray-600">For all inquiries, use the contact form above or email us directly. We typically respond within a few hours.</p>
           </div>
         </div>
 
@@ -642,10 +642,10 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
               The resume writing industry is broken. Career coaches charge $200 to $500 to write a single resume. Resume writing services take days to deliver. Most job seekers cannot afford either — and they end up submitting weak resumes that never get seen.
             </p>
             <p>
-              We built Airesumi to change that. Our AI resume builder gives every job seeker access to the same quality of resume writing that top executives pay hundreds of dollars for — in 2 minutes, for free. Whether you are writing your first resume with no experience, switching careers after 10 years, or applying for a senior leadership role, Airesumi tailors your resume to the exact job description and ensures it passes every major ATS system.
+              I built Airesumi to change that. Our AI resume builder gives every job seeker access to the same quality of resume writing that top executives pay hundreds of dollars for — in 2 minutes, for free. Whether you are writing your first resume with no experience, switching careers after 10 years, or applying for a senior leadership role, Airesumi tailors your resume to the exact job description and ensures it passes every major ATS system.
             </p>
             <p>
-              We believe that your resume should never be the reason you do not get the job. That is what drives everything we build.
+              I believe that your resume should never be the reason you do not get the job. That is what drives everything I build.
             </p>
           </div>
           <div className="bg-orange-50 rounded-3xl p-8 border border-orange-100 flex items-center justify-center">
@@ -668,13 +668,13 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           </div>
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">The Story Behind Airesumi — Why We Built This</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">The Story Behind Airesumi — Why I Built This</h2>
         <div className="bg-white p-8 md:p-12 rounded-3xl border border-gray-100 shadow-sm space-y-6 text-gray-600 text-lg mb-24">
           <p>Airesumi started with a frustration that millions of job seekers share.</p>
-          <p>Our founder spent months applying for jobs after university, sending carefully written resumes into what felt like a black hole. No callbacks. No interviews. Just silence. After finally getting help from a career coach, the callbacks started coming. The resume content had not changed dramatically — the format, keywords, and ATS compliance had.</p>
+          <p>I spent months applying for jobs after university, sending carefully written resumes into what felt like a black hole. No callbacks. No interviews. Just silence. After finally getting help from a career coach, the callbacks started coming. The resume content had not changed dramatically — the format, keywords, and ATS compliance had.</p>
           <p>That experience raised a simple but powerful question: why should getting your resume right require an expensive career coach? Why is this knowledge locked behind services most people cannot afford?</p>
-          <p>We built an AI system that understands resume writing the way an expert career coach does — analyzing job descriptions, identifying the right keywords, structuring achievements for maximum impact, and formatting everything to pass ATS screening automatically.</p>
-          <p>Airesumi is built for every job seeker — from fresh graduates applying for their first internship to senior executives targeting C-suite positions. Every resume we help create reflects our core belief: the right resume should not be a privilege. It should be accessible to everyone.</p>
+          <p>So I built an AI system that understands resume writing the way an expert career coach does — analyzing job descriptions, identifying the right keywords, structuring achievements for maximum impact, and formatting everything to pass ATS screening automatically.</p>
+          <p>Airesumi is built for every job seeker — from fresh graduates applying for their first internship to senior executives targeting C-suite positions. Every resume this tool helps create reflects a core belief: the right resume should not be a privilege. It should be accessible to everyone.</p>
         </div>
 
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Our AI Resume Tools — Everything You Need to Land Your Next Job</h2>
@@ -697,10 +697,10 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8">The Values That Drive Airesumi</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
           {[
-            { t: "Accessibility", d: "Career tools should be available to everyone — not just those who can afford career coaches. We price our premium features fairly and keep our core tools free forever." },
-            { t: "Transparency", d: "We tell you exactly how our AI works, what data we use, and how we generate your resume. No black boxes. No misleading claims. Just honest, useful tools." },
-            { t: "Privacy", d: "Your resume data is your private information. We never sell your data to third parties, never share your information with employers, and give you full control to delete your data at any time." },
-            { t: "Continuous Improvement", d: "The job market changes every year. ATS systems evolve. Recruiter preferences shift. We update our AI models continuously to reflect the latest hiring practices across every industry." }
+            { t: "Accessibility", d: "Career tools should be available to everyone — not just those who can afford career coaches. Premium features are priced fairly and the core tools stay free forever." },
+            { t: "Transparency", d: "I tell you exactly how the AI works, what data is used, and how your resume is generated. No black boxes. No misleading claims. Just honest, useful tools." },
+            { t: "Privacy", d: "Your resume data is your private information. It is never sold to third parties, never shared with employers, and you have full control to delete it at any time." },
+            { t: "Continuous Improvement", d: "The job market changes every year. ATS systems evolve. Recruiter preferences shift. Airesumi's AI models are updated continuously to reflect the latest hiring practices across every industry." }
           ].map((c, i) => (
             <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
               <h3 className="font-bold text-gray-900 mb-3">{c.t}</h3>
@@ -709,16 +709,34 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
           ))}
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Built by a Small Team</h2>
-        <p className="text-gray-600 mb-24 text-lg">Airesumi is built by a small team of engineers, designers, and career-content contributors who have all personally lived the frustration of the job search process. We keep the team lean so we can ship improvements faster and keep the product free for as many job seekers as possible.</p>
-
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Who Built Airesumi</h2>
+        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm mb-24 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-orange-50 text-[#FF6321] flex items-center justify-center font-serif text-2xl font-bold shrink-0">
+            AH
+          </div>
+          <div>
+            <p className="font-bold text-gray-900 text-lg">Aliyan Hussain</p>
+            <p className="text-gray-500 text-sm mb-3">Founder & Developer, Airesumi</p>
+            <p className="text-gray-600 leading-relaxed">
+              Airesumi is designed, built, and maintained by me — Aliyan Hussain. I handle the product, the AI prompting, and the day-to-day development myself, which is why the roadmap moves fast and the core builder stays free.
+            </p>
+            <a
+              href="https://www.linkedin.com/in/aliyan-hussain-2768b939b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-[#FF6321] font-bold text-sm hover:underline"
+            >
+              Connect on LinkedIn →
+            </a>
+          </div>
+        </div>
 
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Why Job Seekers Choose Airesumi</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
           {[
             "100% Free to Start — No Credit Card Required",
             "AI-Powered ATS Optimization",
-            "Built by Career & Recruiting Experts",
+            "Built and Maintained by a Real, Named Developer",
             "No Sign-Up Required to Build Your First Resume"
           ].map((n, i) => (
             <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm font-medium text-gray-800 text-center">
@@ -730,16 +748,14 @@ export const About = ({ onNavigate }: { onNavigate: (step: any) => void }) => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Built for Every Stage of Your Career</h2>
         <div className="grid md:grid-cols-3 gap-6 mb-24">
           {[
-            { q: "Whether you're applying to your first job or your fifteenth, our AI tailors your resume to the exact role you want — highlighting the experience, skills, and achievements that matter most.", a: "For Every Job Seeker", r: "Entry-level to executive" },
-            { q: "Switching careers shouldn't mean starting from scratch. Our AI identifies your transferable skills and reframes your experience for the industry you're moving into.", a: "For Career Changers", r: "New industry, same expertise" },
-            { q: "Every resume is automatically checked against real ATS criteria — keyword matching, formatting, and structure — so your application reaches a human recruiter, not the rejection pile.", a: "ATS-First Approach", r: "Built to pass automated screening" }
+            { a: "For Every Job Seeker", q: "Whether you're applying to your first job or your fifteenth, the AI tailors your resume to the exact role you want — highlighting the experience, skills, and achievements that matter most.", r: "Entry-level to executive" },
+            { a: "For Career Changers", q: "Switching careers shouldn't mean starting from scratch. The AI identifies your transferable skills and reframes your experience for the industry you're moving into.", r: "New industry, same expertise" },
+            { a: "ATS-First Approach", q: "Every resume is automatically checked against real ATS criteria — keyword matching, formatting, and structure — so your application reaches a human recruiter, not the rejection pile.", r: "Built to pass automated screening" }
           ].map((t, i) => (
             <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
-              <p className="text-gray-600 italic mb-6 flex-1">"{t.q}"</p>
-              <div>
-                <p className="font-bold text-gray-900">{t.a}</p>
-                <p className="text-sm text-gray-500">{t.r}</p>
-              </div>
+              <p className="font-bold text-gray-900 mb-2">{t.a}</p>
+              <p className="text-gray-600 mb-4 flex-1">{t.q}</p>
+              <p className="text-sm text-gray-500">{t.r}</p>
             </div>
           ))}
         </div>

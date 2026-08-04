@@ -416,7 +416,7 @@ function BlogPost() {
               {post.tags && (
                 <div className="mt-10 pt-6 border-t border-[#F3F4F6] flex flex-wrap gap-2">
                   {post.tags.split(",").map((tag, i) => (
-                    <Link key={i} to="/blog" search={{ q: tag.trim() } as never}
+                    <Link key={i} to="/blog" search={{ q: tag.trim() } as never} rel="nofollow"
                       className="text-xs bg-[#F3F4F6] hover:bg-[#FF6321] hover:text-white text-[#6B7280] px-3 py-1.5 rounded-full transition-all">
                       #{tag.trim()}
                     </Link>

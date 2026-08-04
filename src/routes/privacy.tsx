@@ -18,6 +18,7 @@ export const Route = createFileRoute("/privacy")({
       { title: "Privacy Policy | airesumi.com" },
       { name: "description", content: "How Airesumi handles your data and privacy." },
     ],
+    links: [{ rel: "canonical", href: "https://airesumi.com/privacy" }],
   }),
   component: Page,
 });

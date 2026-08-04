@@ -14,22 +14,33 @@ function Page() {
 
 export const Route = createFileRoute("/blog/")({
   loader: () => getPublishedBlogPosts(),
-  head: () => ({
-    meta: [
-      { title: "Resume Tips & Career Advice Blog | airesumi.com" },
-      { name: "description", content: "Expert resume writing tips, interview advice, salary guides, and AI career tools. Updated weekly to help job seekers land their dream job faster." },
-      { property: "og:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
-      { property: "og:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
-      { property: "og:url", content: "https://airesumi.com/blog" },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://airesumi.com/api/public/og/blog" },
-      { name: "twitter:image", content: "https://airesumi.com/api/public/og/blog" },
-      { name: "twitter:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
-      { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
-      { name: "twitter:url", content: "https://airesumi.com/blog" },
-    ],
-    links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
-  }),
+  head: ({ match }) => {
+    // Tag links on blog posts navigate to /blog?q=<tag> for client-side
+    // filtering. That's a real crawlable <Link>, so noindex the query-string
+    // variant and keep canonical pointed at the clean /blog URL — otherwise
+    // every tag becomes its own "duplicate page without canonical".
+    const search = (match?.search ?? {}) as Record<string, unknown>;
+    const hasQueryParams = Object.values(search).some(
+      (v) => v !== undefined && v !== null && v !== ""
+    );
+    return {
+      meta: [
+        { title: "Resume Tips & Career Advice Blog | airesumi.com" },
+        { name: "description", content: "Expert resume writing tips, interview advice, salary guides, and AI career tools. Updated weekly to help job seekers land their dream job faster." },
+        { name: "robots", content: hasQueryParams ? "noindex, follow" : "index, follow" },
+        { property: "og:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
+        { property: "og:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
+        { property: "og:url", content: "https://airesumi.com/blog" },
+        { property: "og:type", content: "website" },
+        { property: "og:image", content: "https://airesumi.com/api/public/og/blog" },
+        { name: "twitter:image", content: "https://airesumi.com/api/public/og/blog" },
+        { name: "twitter:title", content: "Resume Tips & Career Advice Blog | airesumi.com" },
+        { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
+        { name: "twitter:url", content: "https://airesumi.com/blog" },
+      ],
+      links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
+    };
+  },
   errorComponent: ({ error }) => (
     <div className="min-h-screen flex items-center justify-center p-6 text-center">
       <div>

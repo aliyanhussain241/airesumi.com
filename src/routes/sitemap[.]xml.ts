@@ -18,8 +18,12 @@ const STATIC_ENTRIES = [
   { path: "/salary-analyzer",   changefreq: "monthly", priority: "0.7" },
   { path: "/pdf-scanner",       changefreq: "monthly", priority: "0.7" },
   { path: "/resignation-letter",changefreq: "monthly", priority: "0.6" },
+  { path: "/resume-score",      changefreq: "monthly", priority: "0.7" },
+  { path: "/job-board",         changefreq: "weekly",  priority: "0.6" },
+  { path: "/recruiter-match",   changefreq: "monthly", priority: "0.6" },
   
   { path: "/resume-examples",   changefreq: "weekly",  priority: "0.7" },
+  { path: "/cover-letter-examples", changefreq: "weekly", priority: "0.7" },
   { path: "/pk",                changefreq: "weekly",  priority: "0.7" },
   { path: "/blog",              changefreq: "weekly",  priority: "0.7" },
   { path: "/premium",           changefreq: "monthly", priority: "0.6" },
@@ -108,6 +112,36 @@ export const Route = createFileRoute("/sitemap.xml")({
           console.warn("[sitemap] role examples fetch failed:", e);
         }
 
+        // Cover letter example slugs
+        let coverLetterEntries: { path: string; changefreq: string; priority: string; lastmod: string }[] = [];
+        try {
+          const SUPABASE_URL =
+            process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "";
+          const SUPABASE_KEY =
+            process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+            process.env.SUPABASE_PUBLISHABLE_KEY ||
+            "";
+          if (SUPABASE_URL && SUPABASE_KEY) {
+            const client = createClient(SUPABASE_URL, SUPABASE_KEY);
+            const { data } = await client
+              .from("cover_letter_examples")
+              .select("slug, updated_at")
+              .eq("published", true);
+            if (data) {
+              coverLetterEntries = data.map((row: any) => ({
+                path: `/cover-letter-examples/${row.slug}`,
+                changefreq: "monthly",
+                priority: "0.6",
+                lastmod: row.updated_at
+                  ? new Date(row.updated_at).toISOString().split("T")[0]
+                  : today,
+              }));
+            }
+          }
+        } catch (e) {
+          console.warn("[sitemap] cover letter examples fetch failed:", e);
+        }
+
         // Pakistan guide slugs
         let pkEntries: { path: string; changefreq: string; priority: string; lastmod: string }[] = [];
         try {
@@ -142,6 +176,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...STATIC_ENTRIES.map((e) => ({ ...e, lastmod: today })),
           ...blogEntries,
           ...roleEntries,
+          ...coverLetterEntries,
           ...pkEntries,
         ];
 

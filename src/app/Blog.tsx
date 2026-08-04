@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { useNavigate, useLocation } from '@tanstack/react-router';
+import { useNavigate, useLocation, Link as RouterLink } from '@tanstack/react-router';
 import { supabase } from '@/integrations/supabase/client';
 import type { User } from '@supabase/supabase-js';
 import {
@@ -781,6 +781,29 @@ const PublicBlog = ({ onAdminClick: _onAdminClick, initialPosts, hasInitialPosts
                 <span className="liquid-card-content"><ChevronRight size={16}/></span>
               </button>
             </div>
+          )}
+
+          {/* All Articles — real crawlable links to every post, independent of
+              pagination state. Pagination above is client-side (button, not
+              URL-based), so posts past page 1 would otherwise have zero
+              internal inlinks and get flagged as orphan pages. */}
+          {posts.length > 0 && (
+            <nav aria-label="All blog articles" className="mt-16 pt-10 border-t border-[#F3F4F6]">
+              <h2 className="text-sm font-bold text-[#6B7280] uppercase tracking-wide mb-4">All Articles</h2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
+                {posts.map(p => (
+                  <li key={p.id}>
+                    <RouterLink
+                      to="/blog/$slug"
+                      params={{ slug: p.slug }}
+                      className="text-sm text-[#6B7280] hover:text-[#FF6321] no-underline"
+                    >
+                      {p.title}
+                    </RouterLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           )}
         </div>
 

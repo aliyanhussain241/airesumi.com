@@ -3,6 +3,13 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/reset-password")({
+  head: () => ({
+    meta: [
+      { title: "Reset Password — airesumi.com" },
+      { name: "description", content: "Reset your Airesumi account password." },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: ResetPasswordPage,
 });
 

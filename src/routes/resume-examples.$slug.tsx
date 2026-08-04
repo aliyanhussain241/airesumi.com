@@ -45,7 +45,9 @@ function RoleExamplePage() {
   const faqs = useMemo(() => {
     if (!data) return [];
     const t = data.role.job_title;
-    return [
+    const topSkill = data.role.key_skills?.[0];
+    const industry = data.role.industry;
+    const list = [
       {
         q: `How long should a ${t} resume be?`,
         a: `One page if you have under 8 years of experience, two pages if you're senior or have deep specialization. Recruiters spend under 30 seconds on the first pass — density beats length.`,
@@ -63,6 +65,15 @@ function RoleExamplePage() {
         a: `Yes — single-column, standard section headings, no images, tables, or text boxes. It parses cleanly in Workday, Greenhouse, Lever, Taleo, and iCIMS.`,
       },
     ];
+    if (topSkill) {
+      list.push({
+        q: `What's the most important skill on a ${t} resume?`,
+        a: industry
+          ? `${topSkill}. It's the first thing recruiters and ATS filters scan for in ${industry} roles — pair it with a quantified bullet that proves you've actually used it, not just listed it.`
+          : `${topSkill}. Recruiters and ATS filters scan for it first — pair it with a quantified bullet that proves you've actually used it, not just listed it.`,
+      });
+    }
+    return list;
   }, [data]);
 
   if (!data) {
@@ -407,7 +418,7 @@ function RoleExamplePage() {
 }
 
 // Build FAQ JSON-LD for a given role (kept in sync with in-page FAQ copy)
-function buildFaqSchema(jobTitle: string) {
+function buildFaqSchema(jobTitle: string, topSkill?: string | null, industry?: string | null) {
   const faqs = [
     {
       q: `How long should a ${jobTitle} resume be?`,
@@ -426,6 +437,14 @@ function buildFaqSchema(jobTitle: string) {
       a: `Yes — single-column, standard section headings, no images, tables, or text boxes. It parses cleanly in Workday, Greenhouse, Lever, Taleo, and iCIMS.`,
     },
   ];
+  if (topSkill) {
+    faqs.push({
+      q: `What's the most important skill on a ${jobTitle} resume?`,
+      a: industry
+        ? `${topSkill}. It's the first thing recruiters and ATS filters scan for in ${industry} roles — pair it with a quantified bullet that proves you've actually used it, not just listed it.`
+        : `${topSkill}. Recruiters and ATS filters scan for it first — pair it with a quantified bullet that proves you've actually used it, not just listed it.`,
+    });
+  }
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -501,7 +520,7 @@ export const Route = createFileRoute("/resume-examples/$slug")({
         },
         {
           type: "application/ld+json",
-          children: JSON.stringify(buildFaqSchema(role.job_title)),
+          children: JSON.stringify(buildFaqSchema(role.job_title, role.key_skills?.[0], role.industry)),
         },
       ],
     };

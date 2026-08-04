@@ -45,6 +45,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResumeExamplesIndexRouteImport } from './routes/resume-examples.index'
 import { Route as PkIndexRouteImport } from './routes/pk.index'
 import { Route as CoverLetterExamplesIndexRouteImport } from './routes/cover-letter-examples.index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as ResumeExamplesSlugRouteImport } from './routes/resume-examples.$slug'
 import { Route as PremiumSuccessRouteImport } from './routes/premium/success'
 import { Route as PkSlugRouteImport } from './routes/pk.$slug'
@@ -254,6 +255,11 @@ const CoverLetterExamplesIndexRoute =
     path: '/',
     getParentRoute: () => CoverLetterExamplesRoute,
   } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
 const ResumeExamplesSlugRoute = ResumeExamplesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -451,6 +457,7 @@ export interface FileRoutesByFullPath {
   '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/cover-letter-examples/': typeof CoverLetterExamplesIndexRoute
   '/pk/': typeof PkIndexRoute
   '/resume-examples/': typeof ResumeExamplesIndexRoute
@@ -461,7 +468,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/ats-checker': typeof AtsCheckerRoute
   '/ats-resume-checker': typeof AtsResumeCheckerRoute
-  '/blog': typeof BlogRouteWithChildren
   '/bullet-writer': typeof BulletWriterRoute
   '/contact': typeof ContactRoute
   '/cover-letter': typeof CoverLetterRoute
@@ -513,6 +519,7 @@ export interface FileRoutesByTo {
   '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/cover-letter-examples': typeof CoverLetterExamplesIndexRoute
   '/pk': typeof PkIndexRoute
   '/resume-examples': typeof ResumeExamplesIndexRoute
@@ -579,6 +586,7 @@ export interface FileRoutesById {
   '/pk/$slug': typeof PkSlugRoute
   '/premium/success': typeof PremiumSuccessRoute
   '/resume-examples/$slug': typeof ResumeExamplesSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/cover-letter-examples/': typeof CoverLetterExamplesIndexRoute
   '/pk/': typeof PkIndexRoute
   '/resume-examples/': typeof ResumeExamplesIndexRoute
@@ -646,6 +654,7 @@ export interface FileRouteTypes {
     | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/blog/'
     | '/cover-letter-examples/'
     | '/pk/'
     | '/resume-examples/'
@@ -656,7 +665,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/ats-checker'
     | '/ats-resume-checker'
-    | '/blog'
     | '/bullet-writer'
     | '/contact'
     | '/cover-letter'
@@ -708,6 +716,7 @@ export interface FileRouteTypes {
     | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/blog'
     | '/cover-letter-examples'
     | '/pk'
     | '/resume-examples'
@@ -773,6 +782,7 @@ export interface FileRouteTypes {
     | '/pk/$slug'
     | '/premium/success'
     | '/resume-examples/$slug'
+    | '/blog/'
     | '/cover-letter-examples/'
     | '/pk/'
     | '/resume-examples/'
@@ -1091,6 +1101,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoverLetterExamplesIndexRouteImport
       parentRoute: typeof CoverLetterExamplesRoute
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/resume-examples/$slug': {
       id: '/resume-examples/$slug'
       path: '/$slug'
@@ -1285,10 +1302,12 @@ declare module '@tanstack/react-router' {
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)

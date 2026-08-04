@@ -28,6 +28,7 @@ export const Route = createFileRoute("/blog/")({
       { name: "twitter:description", content: "Expert resume writing tips, interview advice, and AI career strategies. Free guides for job seekers." },
       { name: "twitter:url", content: "https://airesumi.com/blog" },
     ],
+    links: [{ rel: "canonical", href: "https://airesumi.com/blog" }],
   }),
   errorComponent: ({ error }) => (
     <div className="min-h-screen flex items-center justify-center p-6 text-center">

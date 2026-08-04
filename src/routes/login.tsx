@@ -458,6 +458,7 @@ export const Route = createFileRoute("/login")({
     meta: [
       { title: "Sign In — airesumi.com" },
       { name: "description", content: "Sign in to your Airesumi account." },
+      { name: "robots", content: "noindex, nofollow" },
     ],
   }),
   component: LoginPage,

@@ -81,6 +81,7 @@ export const Footer = () => {
                 <li><Link to="/linkedin-bio" className={linkCls}>{t("tools.linkedinBio.name")}</Link></li>
                 <li><Link to="/interview-prep" className={linkCls}>{t("footer.interviewQuestions")}</Link></li>
                 <li><Link to="/salary-analyzer" className={linkCls}>{t("footer.salaryAnalyzer")}</Link></li>
+                <li><Link to="/pdf-scanner" className={linkCls}>PDF Scanner</Link></li>
                 <li><Link to="/resume-examples" className={linkCls}>{t("footer.resumeExamples")}</Link></li>
               </ul>
             </div>
@@ -90,6 +91,7 @@ export const Footer = () => {
               <ul className="space-y-1">
 
                 <li><Link to="/about" className={linkCls}>{t("footer.about")}</Link></li>
+                <li><Link to="/premium" className={linkCls}>{t("footer.pro")}</Link></li>
                 <li><Link to="/blog" className={linkCls}>{t("footer.careerBlog")}</Link></li>
                 <li><Link to="/contact" className={linkCls}>{t("footer.contact")}</Link></li>
                 <li><Link to="/privacy" className={linkCls}>{t("footer.privacy")}</Link></li>

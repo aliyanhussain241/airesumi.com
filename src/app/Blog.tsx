@@ -93,7 +93,7 @@ const renderMarkdown = (md: string) => {
     .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold mt-8 mb-3 text-[#111827]">$1</h2>')
     .replace(/^# (.+)$/gm, '<h1 class="text-3xl font-bold mt-8 mb-4 text-[#111827]">$1</h1>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/_(.+?)_/g, '<em>$1</em>')
+    .replace(/(?<![\w])_([^_\n]+?)_(?!\w)/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code class="bg-[#F3F4F6] px-1.5 py-0.5 rounded text-sm font-mono text-[#DC2626]">$1</code>')
     .replace(/^> (.+)$/gm, '<blockquote class="border-l-4 border-[#FF6321] pl-4 italic text-[#6B7280] my-4">$1</blockquote>')
     .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc text-[#374151]">$1</li>')

@@ -265,6 +265,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           gtag('config', 'G-713GRNZDFF');
         `,
       },
+      // Ahrefs Web Analytics — loads on every page
+      {
+        src: "https://analytics.ahrefs.com/analytics.js",
+        "data-key": "rNBoMaOsRkjAa0xrKSgIwQ",
+        async: true,
+      },
+
     ],
   }),
   shellComponent: RootShell,

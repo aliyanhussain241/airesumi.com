@@ -252,6 +252,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "description": "Free AI resume builder that creates ATS-optimized resumes tailored to specific job descriptions."
         }),
       },
+      // Google tag (gtag.js) — loads on every page
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-713GRNZDFF",
+        async: true,
+      },
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-713GRNZDFF');
+        `,
+      },
     ],
   }),
   shellComponent: RootShell,

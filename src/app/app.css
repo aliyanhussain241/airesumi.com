@@ -252,9 +252,13 @@ html.dark .theme-logo-light { display: none; }
 .dark .border-\[\#E5E7EB\],
 .dark .border-black\/5 { border-color: rgba(255,255,255,0.08) !important; }
 
-/* Liquid card inner pill bg (A+ etc.) */
+/* Liquid card inner pill bg (A+ etc.) — scoped to the inverted pill only.
+   Do NOT invert every `.text-white` inside a glass card: that also hit
+   buttons/links with their own dark backgrounds (e.g. bg-[#111827] CTAs),
+   turning their labels dark-on-dark. */
 .dark .liquid-card .bg-\[\#1a202c\] { background-color: #f1f5f9 !important; color: #14141c !important; }
-.dark .liquid-card .text-white { color: #14141c !important; }
+.dark .liquid-card .bg-\[\#1a202c\].text-white,
+.dark .liquid-card .bg-\[\#1a202c\] .text-white { color: #14141c !important; }
 
 /* ============================================================
    ACCESSIBILITY — focus rings & contrast for liquid glass

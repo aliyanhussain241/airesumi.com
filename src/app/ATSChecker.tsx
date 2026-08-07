@@ -267,7 +267,7 @@ export const ATSChecker = ({ onNavigate, embedded = false }: { onNavigate: (step
                 </label>
                 <button
                   onClick={handlePasteResume}
-                  className="text-[11px] font-semibold text-[#FF6321] hover:underline flex items-center gap-1"
+                  className="text-[11px] font-semibold text-[#C2410C] dark:text-orange-300 hover:underline flex items-center gap-1"
                 >
                   <ClipboardPaste size={12} /> Paste from clipboard
                 </button>

@@ -665,14 +665,19 @@ img, video, canvas, iframe, embed, object {
 /* NOTE: intentionally NOT forcing `display: block` on svg — it breaks
    inline icons inside buttons/links (baseline alignment). */
 
-/* Remove default form control chrome across engines */
-button, input, select, textarea {
-  font: inherit;
-  color: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
+/* Remove default form control chrome across engines.
+   MUST live in @layer base: unlayered `color: inherit` outranks Tailwind's
+   `utilities` layer, so `text-white` on a dark button silently lost to the
+   inherited (often dark) parent color — invisible dark-on-dark labels. */
+@layer base {
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
 }
 /* NOTE: do NOT reset button background/border/padding globally — it beats
    Tailwind's `utilities` layer (unlayered wins) and flattens shadcn buttons.

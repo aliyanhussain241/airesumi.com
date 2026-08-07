@@ -269,7 +269,7 @@ export function InterviewGenerator({ onNavigate }: { onNavigate: (step: any) => 
                       key={type}
                       type="button"
                       onClick={() => handleTypeToggle(type)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${formData.types.includes(type) ? 'border-[#FF6321] bg-orange-50 text-[#FF6321]' : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'}`}
+                      className={`px-4 py-2 rounded-full text-sm font-medium border transition-all ${formData.types.includes(type) ? 'border-[#FF6321] bg-orange-50 text-[#C2410C] dark:text-orange-300' : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'}`}
                     >
                       {type}
                     </button>

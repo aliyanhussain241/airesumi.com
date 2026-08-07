@@ -422,7 +422,7 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFBF7] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-24">
+    <div className="min-h-screen bg-[#FFFBF7] dark:bg-[#0a0a0a] font-sans selection:bg-[#FF6321] selection:text-white pb-20 pt-24">
       <Navbar onNavigate={onNavigate} />
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
@@ -435,21 +435,21 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><MessageSquare /></div>
             <h3 className="font-bold text-gray-900 mb-2">Resume & Tool Support</h3>
             <p className="text-gray-500 text-sm mb-4">Questions about the AI resume builder, ATS checker, cover letter generator, or any of our career tools.</p>
-            <button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })} className="text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Send a Message</button>
+            <button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })} className="text-[#C2410C] dark:text-orange-300 font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Send a Message</button>
             <div className="text-xs text-gray-400 font-medium">Avg response: 4 hours</div>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><CreditCard /></div>
             <h3 className="font-bold text-gray-900 mb-2">Billing & Account Help</h3>
             <p className="text-gray-500 text-sm mb-4">Questions about your subscription, payment, invoice, cancellation, or account settings.</p>
-            <a href="mailto:info@airesumi.com" className="block text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Billing Team</a>
+            <a href="mailto:info@airesumi.com" className="block text-[#C2410C] dark:text-orange-300 font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Billing Team</a>
             <div className="text-xs text-gray-400 font-medium">Avg response: 2 hours</div>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><Handshake /></div>
             <h3 className="font-bold text-gray-900 mb-2">Partnerships & Press</h3>
             <p className="text-gray-500 text-sm mb-4">Interested in partnering with Airesumi, featuring us in an article, or exploring integration opportunities?</p>
-            <a href="mailto:info@airesumi.com" className="block text-[#FF6321] font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Partnerships</a>
+            <a href="mailto:info@airesumi.com" className="block text-[#C2410C] dark:text-orange-300 font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Partnerships</a>
             <div className="text-xs text-gray-400 font-medium">Avg response: 1 business day</div>
           </div>
         </div>

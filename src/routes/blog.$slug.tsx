@@ -33,6 +33,13 @@ const slugifyHeading = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const renderMarkdown = (md: string) => {
+  // Normalize Windows-style line endings (\r\n) to \n. Some posts were saved
+  // with \r\n — without this, a stray \r survives every line split and
+  // breaks any regex that isn't running with the multiline flag (see
+  // extractHeadings below, which is exactly what silently killed the TOC
+  // sidebar on posts saved this way, even though headings still rendered
+  // fine here).
+  md = md.replace(/\r\n/g, "\n");
   const html = md
     .replace(/^### (.+)$/gm, (_m, t) => `<h3 id="${slugifyHeading(t)}" class="text-xl font-bold mt-8 mb-3 text-[#111827] scroll-mt-24">${t}</h3>`)
     .replace(/^## (.+)$/gm, (_m, t) => `<h2 id="${slugifyHeading(t)}" class="text-2xl font-bold mt-10 mb-4 text-[#111827] scroll-mt-24">${t}</h2>`)
@@ -51,6 +58,14 @@ const renderMarkdown = (md: string) => {
 };
 
 const extractHeadings = (md: string) => {
+  // Same normalization as renderMarkdown — this is the actual fix. Without
+  // it, lines from \r\n content keep a trailing \r after split("\n"), and
+  // /^## (.+)$/ (no multiline flag, so $ only matches true end-of-string)
+  // never matches a line ending in \r. Headings would still render inside
+  // the post body (renderMarkdown uses the multiline flag, which treats \r
+  // itself as a line terminator), but this function would silently return
+  // zero headings, hiding the "On this page" sidebar entirely.
+  md = md.replace(/\r\n/g, "\n");
   const lines = md.split("\n");
   const out: { level: number; text: string; id: string }[] = [];
   for (const l of lines) {

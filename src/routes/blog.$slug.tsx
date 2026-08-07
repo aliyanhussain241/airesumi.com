@@ -446,11 +446,12 @@ function BlogPost() {
                     <Share2 size={14}/> Found this helpful? Share it.
                   </p>
                   <div className="flex items-center gap-2">
-                    <button onClick={() => share("twitter")} className="px-3 py-1.5 text-xs bg-black text-white rounded-full inline-flex items-center gap-1.5 hover:opacity-80"><Twitter size={12}/> Tweet</button>
-                    <button onClick={() => share("linkedin")} className="px-3 py-1.5 text-xs bg-[#0A66C2] text-white rounded-full inline-flex items-center gap-1.5 hover:opacity-90"><Linkedin size={12}/> Post</button>
-                    <button onClick={copyLink} className="px-3 py-1.5 text-xs bg-[#F3F4F6] text-[#374151] rounded-full inline-flex items-center gap-1.5 hover:bg-[#E5E7EB]">
-                      {copied ? <><Check size={12} className="text-green-600"/> Copied</> : <><LinkIcon size={12}/> Copy</>}
+                    <button onClick={() => share("twitter")} className="px-3 py-1.5 text-xs bg-black !text-white [&_svg]:!text-white dark:bg-white dark:!text-black dark:[&_svg]:!text-black rounded-full inline-flex items-center gap-1.5 hover:opacity-80"><Twitter size={12}/> Tweet</button>
+                    <button onClick={() => share("linkedin")} className="px-3 py-1.5 text-xs bg-[#0A66C2] !text-white [&_svg]:!text-white rounded-full inline-flex items-center gap-1.5 hover:opacity-90"><Linkedin size={12}/> Post</button>
+                    <button onClick={copyLink} className="px-3 py-1.5 text-xs bg-[#F3F4F6] !text-[#374151] dark:bg-white/10 dark:!text-gray-100 rounded-full inline-flex items-center gap-1.5 hover:bg-[#E5E7EB] dark:hover:bg-white/20">
+                      {copied ? <><Check size={12} className="text-green-600 dark:text-green-400"/> Copied</> : <><LinkIcon size={12}/> Copy</>}
                     </button>
+
                   </div>
                 </div>
               </div>

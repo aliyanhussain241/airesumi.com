@@ -69,7 +69,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:image",
-        content: "https://airesumi.com/assets/og-image.png",
+content: "https://airesumi.com/og-image.webp",
       },
       {
         name: "twitter:card",

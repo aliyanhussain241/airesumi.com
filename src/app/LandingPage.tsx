@@ -240,9 +240,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
 
                 {/* AI-typing summary */}
                 <div className="space-y-2 mb-6">
-                  <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 1.2, delay: 0.6 }} className="h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
-                  <motion.div initial={{ width: 0 }} animate={{ width: "91.6667%" }} transition={{ duration: 1.2, delay: 0.9 }} className="h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
-                  <motion.div initial={{ width: 0 }} animate={{ width: "83.3333%" }} transition={{ duration: 1.2, delay: 1.2 }} className="h-2.5 bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
+                  <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 1.2, delay: 0.6 }} style={{ transformOrigin: "left" }} className="h-2.5 w-full bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
+                  <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 0.916667 }} transition={{ duration: 1.2, delay: 0.9 }} style={{ transformOrigin: "left" }} className="h-2.5 w-full bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
+                  <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 0.833333 }} transition={{ duration: 1.2, delay: 1.2 }} style={{ transformOrigin: "left" }} className="h-2.5 w-full bg-gradient-to-r from-gray-200 to-gray-100 rounded" />
                 </div>
 
                 <div className="space-y-4 flex-1">
@@ -364,10 +364,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ setStep }) => {
                       </div>
                       <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
                         <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${s.pct}%` }}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: s.pct / 100 }}
                           transition={{ duration: 1, delay: 0.9 + i * 0.15, ease: "easeOut" }}
-                          className="h-full rounded-full bg-gradient-to-r from-[#FF6321] to-[#ff8c5a]"
+                          style={{ transformOrigin: "left" }}
+                          className="h-full w-full rounded-full bg-gradient-to-r from-[#FF6321] to-[#ff8c5a]"
                         />
                       </div>
                     </div>

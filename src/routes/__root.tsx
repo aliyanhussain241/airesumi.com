@@ -196,6 +196,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      // Preload hint: gets the browser fetching the font CSS in parallel with
+      // other early requests, instead of discovering it only once it reaches
+      // the <link rel="stylesheet"> below. Doesn't remove the render-block
+      // entirely (the stylesheet link still blocks first paint until it
+      // resolves) but shrinks the effective wait since the fetch is already
+      // in flight by the time the browser gets there.
+      {
+        rel: "preload",
+        as: "style",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;600&display=swap",
+      },
       // FCP fix: trimmed to the 4 weights we actually paint above the fold
       // (Sora 600/700 for headings, Manrope 400/600 for body/nav). Cuts the
       // Google Fonts CSS + woff2 payload roughly in half vs. the previous
@@ -252,26 +263,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "description": "Free AI resume builder that creates ATS-optimized resumes tailored to specific job descriptions."
         }),
       },
-      // Google tag (gtag.js) — loads on every page
-      {
-        src: "https://www.googletagmanager.com/gtag/js?id=G-713GRNZDFF",
-        async: true,
-      },
-      {
-        children: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-713GRNZDFF');
-        `,
-      },
-      // Ahrefs Web Analytics — loads on every page
-      {
-        src: "https://analytics.ahrefs.com/analytics.js",
-        "data-key": "rNBoMaOsRkjAa0xrKSgIwQ",
-        async: true,
-      },
-
     ],
   }),
   shellComponent: RootShell,

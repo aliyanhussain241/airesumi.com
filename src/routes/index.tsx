@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import "../app/app.css";
 import { LandingPage } from "../app/LandingPage";
 import { useStepNavigate } from "../app/lib/navigation";
 
 function Index() {
-  const [mounted, setMounted] = useState(false);
   const setStep = useStepNavigate();
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  // FIX: removed the "mounted" gate that used to blank the entire page
+  // (return null) until client JS hydrated. LandingPage only touches
+  // `document` inside useEffect hooks, which never run during SSR anyway —
+  // so this gate served no purpose except delaying First Contentful Paint
+  // until the full JS bundle downloaded and executed. This was almost
+  // certainly the main cause of the poor mobile PageSpeed score.
   return <LandingPage setStep={setStep} />;
 }
 
@@ -25,16 +27,17 @@ const schemaMarkup = JSON.stringify({
     priceCurrency: "USD",
   },
   description: "AI-powered resume builder that creates ATS-optimized resumes tailored to any job description.",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    reviewCount: "120",
-  },
+  // FIX: removed a hardcoded aggregateRating (4.8 stars, 120 reviews) that
+  // had no real review data behind it. Fabricated ratings in structured
+  // data violate Google's guidelines on review markup and risk a manual
+  // action or the rich-result being suppressed entirely. Add this back
+  // only once there's a real review source (e.g. Trustpilot, G2) to pull
+  // genuine numbers from.
 });
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    title: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi.com",
+    title: "AI Resume Builder — Free ATS-Optimized Resumes | Airesumi",
     meta: [
       {
         name: "description",

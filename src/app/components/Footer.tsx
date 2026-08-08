@@ -33,6 +33,8 @@ export const Footer = () => {
                 <img
                   src={airesumiLogoWhite}
                   alt="Airesumi - AI Resume Builder"
+                  width={160}
+                  height={40}
                   className="h-10 w-auto shrink-0"
                 />
               </div>

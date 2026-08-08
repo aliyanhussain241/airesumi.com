@@ -188,10 +188,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "Airesumi" },
       // Default OG — pages override with their own og: tags
       { property: "og:site_name", content: "Airesumi" },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://airesumi.com/og-image.webp" },
+{ property: "og:type", content: "website" },
+{ property: "og:title", content: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi.com" },
+{ property: "og:description", content: "Build a professional, ATS-optimized resume in minutes using AI. Free resume builder trusted by job seekers worldwide." },
+{ property: "og:image", content: "https://airesumi.com/og-image.webp" },
+{ property: "og:image:width", content: "1200" },
+{ property: "og:image:height", content: "630" },
+{ name: "twitter:card", content: "summary_large_image" },
+{ name: "twitter:image", content: "https://airesumi.com/og-image.webp" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import airesumiLogo from "@/assets/ai-resumi.webp";
 
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
@@ -42,7 +43,7 @@ function ResetPasswordPage() {
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
         <div className="text-center mb-6">
           <Link to="/">
-            <img src="/ai-resumi.webp" alt="Airesumi" className="h-10 mx-auto mb-2" />
+            <img src={airesumiLogo} alt="Airesumi" className="h-10 mx-auto mb-2" />
           </Link>
           <h1 className="text-2xl font-bold text-gray-800">Set New Password</h1>
           <p className="text-gray-500 text-sm mt-1">Enter your new password below</p>

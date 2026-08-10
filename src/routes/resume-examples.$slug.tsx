@@ -217,6 +217,31 @@ function RoleExamplePage() {
               </section>
             )}
 
+            {/* Certifications that matter (only for roles with licensing requirements) */}
+            {role.certifications.length > 0 && (
+              <section id="certifications" className="bg-gradient-to-br from-[#FFF7ED] to-white rounded-2xl p-7 border border-[#FF6321]/25 mb-8 scroll-mt-24">
+                <div className="flex items-center gap-2 mb-2">
+                  <ShieldCheck size={20} className="text-[#FF6321]" />
+                  <h2 className="text-2xl font-bold text-[#111827]">Certifications That Matter</h2>
+                </div>
+                <p className="text-sm text-[#6B7280] mb-5">
+                  List these in a dedicated “Licenses &amp; Certifications” section with the issuing body, licence number and expiry date — screeners check validity before they read your experience.
+                </p>
+                <ul className="space-y-4">
+                  {role.certifications.map((c, i) => (
+                    <li key={i} className="flex gap-3">
+                      <CheckCircle2 size={18} className="text-[#FF6321] flex-shrink-0 mt-1" />
+                      <div>
+                        <div className="font-bold text-[#111827]">{c.name}</div>
+                        <p className="text-[#374151] leading-relaxed text-[15px]">{c.detail}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+
             {/* Key skills */}
             {role.key_skills.length > 0 && (
               <section id="skills" className="bg-white rounded-2xl p-7 shadow-sm border border-[#E5E7EB] mb-8 scroll-mt-24">

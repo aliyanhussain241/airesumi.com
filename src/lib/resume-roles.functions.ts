@@ -2,6 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSupabaseServer } from "./supabase-server";
 
 export type ResumeTip = { heading: string; content: string };
+export type RoleFaq = { q: string; a: string };
+export type RoleCertification = { name: string; detail: string };
 
 export type ResumeRoleExample = {
   id: string;
@@ -15,6 +17,8 @@ export type ResumeRoleExample = {
   key_skills: string[];
   resume_tips: ResumeTip[];
   related_role_slugs: string[];
+  role_faqs: RoleFaq[];
+  certifications: RoleCertification[];
   published: boolean;
   created_at: string;
   updated_at: string;
@@ -32,8 +36,11 @@ function normalize(row: any): ResumeRoleExample {
     key_skills: Array.isArray(row.key_skills) ? row.key_skills : [],
     resume_tips: Array.isArray(row.resume_tips) ? row.resume_tips : [],
     related_role_slugs: Array.isArray(row.related_role_slugs) ? row.related_role_slugs : [],
+    role_faqs: Array.isArray(row.role_faqs) ? row.role_faqs : [],
+    certifications: Array.isArray(row.certifications) ? row.certifications : [],
   };
 }
+
 
 export const getPublishedRoleExamples = createServerFn({ method: "GET" }).handler(
   async (): Promise<ResumeRoleSummary[]> => {

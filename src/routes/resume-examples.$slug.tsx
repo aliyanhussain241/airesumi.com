@@ -21,7 +21,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
+import { getRoleExampleWithRelated, type ResumeRoleWithRelated, type RoleFaq } from "@/lib/resume-roles.functions";
 import { AdBanner } from "@/app/components/AdBanner";
 
 function RoleExamplePage() {
@@ -44,37 +44,14 @@ function RoleExamplePage() {
 
   const faqs = useMemo(() => {
     if (!data) return [];
-    const t = data.role.job_title;
-    const topSkill = data.role.key_skills?.[0];
-    const industry = data.role.industry;
-    const list = [
-      {
-        q: `How long should a ${t} resume be?`,
-        a: `One page if you have under 8 years of experience, two pages if you're senior or have deep specialization. Recruiters spend under 30 seconds on the first pass — density beats length.`,
-      },
-      {
-        q: `Do I need a summary at the top of my ${t} resume?`,
-        a: `Yes. A 2–3 line summary that names your role, years of experience, and one measurable win outperforms a generic objective. It's the first thing both the ATS and the recruiter read.`,
-      },
-      {
-        q: `Which skills should a ${t} highlight?`,
-        a: `Lead with the tools and metrics from the job description you're targeting. Use the key skills list above as a starting point, then cross-check with our Keyword Scanner against the specific posting.`,
-      },
-      {
-        q: `Is this ${t} template ATS-friendly?`,
-        a: `Yes — single-column, standard section headings, no images, tables, or text boxes. It parses cleanly in Workday, Greenhouse, Lever, Taleo, and iCIMS.`,
-      },
-    ];
-    if (topSkill) {
-      list.push({
-        q: `What's the most important skill on a ${t} resume?`,
-        a: industry
-          ? `${topSkill}. It's the first thing recruiters and ATS filters scan for in ${industry} roles — pair it with a quantified bullet that proves you've actually used it, not just listed it.`
-          : `${topSkill}. Recruiters and ATS filters scan for it first — pair it with a quantified bullet that proves you've actually used it, not just listed it.`,
-      });
-    }
-    return list;
+    return buildFaqList(
+      data.role.job_title,
+      data.role.key_skills?.[0],
+      data.role.industry,
+      data.role.role_faqs,
+    );
   }, [data]);
+
 
   if (!data) {
     return (
@@ -240,6 +217,31 @@ function RoleExamplePage() {
               </section>
             )}
 
+            {/* Certifications that matter (only for roles with licensing requirements) */}
+            {role.certifications.length > 0 && (
+              <section id="certifications" className="bg-gradient-to-br from-[#FFF7ED] to-white rounded-2xl p-7 border border-[#FF6321]/25 mb-8 scroll-mt-24">
+                <div className="flex items-center gap-2 mb-2">
+                  <ShieldCheck size={20} className="text-[#FF6321]" />
+                  <h2 className="text-2xl font-bold text-[#111827]">Certifications That Matter</h2>
+                </div>
+                <p className="text-sm text-[#6B7280] mb-5">
+                  List these in a dedicated “Licenses &amp; Certifications” section with the issuing body, licence number and expiry date — screeners check validity before they read your experience.
+                </p>
+                <ul className="space-y-4">
+                  {role.certifications.map((c, i) => (
+                    <li key={i} className="flex gap-3">
+                      <CheckCircle2 size={18} className="text-[#FF6321] flex-shrink-0 mt-1" />
+                      <div>
+                        <div className="font-bold text-[#111827]">{c.name}</div>
+                        <p className="text-[#374151] leading-relaxed text-[15px]">{c.detail}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+
             {/* Key skills */}
             {role.key_skills.length > 0 && (
               <section id="skills" className="bg-white rounded-2xl p-7 shadow-sm border border-[#E5E7EB] mb-8 scroll-mt-24">
@@ -386,6 +388,7 @@ function RoleExamplePage() {
                   {[
                     { href: "#overview", label: "Overview" },
                     { href: "#bullets", label: "Sample bullets" },
+                    ...(role.certifications.length ? [{ href: "#certifications", label: "Certifications" }] : []),
                     { href: "#skills", label: "Key skills" },
                     { href: "#tips", label: "Writing tips" },
                     { href: "#next", label: "Next steps" },
@@ -417,9 +420,16 @@ function RoleExamplePage() {
   );
 }
 
-// Build FAQ JSON-LD for a given role (kept in sync with in-page FAQ copy)
-function buildFaqSchema(jobTitle: string, topSkill?: string | null, industry?: string | null) {
-  const faqs = [
+// Shared FAQ builder — role-specific questions from the database come FIRST so
+// each page has unique lead content instead of the same generic block everywhere.
+function buildFaqList(
+  jobTitle: string,
+  topSkill?: string | null,
+  industry?: string | null,
+  roleFaqs?: RoleFaq[] | null,
+): RoleFaq[] {
+  const specific = (roleFaqs || []).filter((f) => f && f.q && f.a).slice(0, 3);
+  const generic: RoleFaq[] = [
     {
       q: `How long should a ${jobTitle} resume be?`,
       a: `One page if you have under 8 years of experience, two pages if you're senior or have deep specialization. Recruiters spend under 30 seconds on the first pass — density beats length.`,
@@ -437,24 +447,35 @@ function buildFaqSchema(jobTitle: string, topSkill?: string | null, industry?: s
       a: `Yes — single-column, standard section headings, no images, tables, or text boxes. It parses cleanly in Workday, Greenhouse, Lever, Taleo, and iCIMS.`,
     },
   ];
-  if (topSkill) {
-    faqs.push({
+  if (topSkill && specific.length === 0) {
+    generic.push({
       q: `What's the most important skill on a ${jobTitle} resume?`,
       a: industry
         ? `${topSkill}. It's the first thing recruiters and ATS filters scan for in ${industry} roles — pair it with a quantified bullet that proves you've actually used it, not just listed it.`
         : `${topSkill}. Recruiters and ATS filters scan for it first — pair it with a quantified bullet that proves you've actually used it, not just listed it.`,
     });
   }
+  const seen = new Set(specific.map((f) => f.q.toLowerCase()));
+  return [...specific, ...generic.filter((f) => !seen.has(f.q.toLowerCase()))];
+}
+
+function buildFaqSchema(
+  jobTitle: string,
+  topSkill?: string | null,
+  industry?: string | null,
+  roleFaqs?: RoleFaq[] | null,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+    mainEntity: buildFaqList(jobTitle, topSkill, industry, roleFaqs).map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
 }
+
 
 export const Route = createFileRoute("/resume-examples/$slug")({
   loader: async ({ params }) => {
@@ -520,7 +541,7 @@ export const Route = createFileRoute("/resume-examples/$slug")({
         },
         {
           type: "application/ld+json",
-          children: JSON.stringify(buildFaqSchema(role.job_title, role.key_skills?.[0], role.industry)),
+          children: JSON.stringify(buildFaqSchema(role.job_title, role.key_skills?.[0], role.industry, role.role_faqs)),
         },
       ],
     };

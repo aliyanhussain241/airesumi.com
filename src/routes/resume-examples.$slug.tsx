@@ -515,7 +515,7 @@ export const Route = createFileRoute("/resume-examples/$slug")({
         },
         {
           type: "application/ld+json",
-          children: JSON.stringify(buildFaqSchema(role.job_title, role.key_skills?.[0], role.industry)),
+          children: JSON.stringify(buildFaqSchema(role.job_title, role.key_skills?.[0], role.industry, role.role_faqs)),
         },
       ],
     };

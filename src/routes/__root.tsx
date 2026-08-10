@@ -186,6 +186,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Build a professional, ATS-optimized resume in minutes using AI. Free resume builder trusted by job seekers worldwide. No sign-up required." },
       { name: "author", content: "Airesumi" },
       // Default OG — pages override with their own og: tags
+      { name: "google-adsense-account", content: "ca-pub-7272818312777160" },
       { property: "og:site_name", content: "Airesumi" },
 { property: "og:type", content: "website" },
 { property: "og:title", content: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi.com" },

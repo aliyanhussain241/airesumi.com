@@ -188,14 +188,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // Default OG — pages override with their own og: tags
       { name: "google-adsense-account", content: "ca-pub-7272818312777160" },
       { property: "og:site_name", content: "Airesumi" },
-{ property: "og:type", content: "website" },
-{ property: "og:title", content: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi.com" },
-{ property: "og:description", content: "Build a professional, ATS-optimized resume in minutes using AI. Free resume builder trusted by job seekers worldwide." },
-{ property: "og:image", content: "https://airesumi.com/og-image.webp" },
-{ property: "og:image:width", content: "1200" },
-{ property: "og:image:height", content: "630" },
-{ name: "twitter:card", content: "summary_large_image" },
-{ name: "twitter:image", content: "https://airesumi.com/og-image.webp" },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: "AI Resume Builder — Free ATS-Optimized Resumes | airesumi.com" },
+      { property: "og:description", content: "Build a professional, ATS-optimized resume in minutes using AI. Free resume builder trusted by job seekers worldwide." },
+      { property: "og:image", content: "https://airesumi.com/og-image.webp" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://airesumi.com/og-image.webp" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -231,6 +231,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
     // FIX: Full schema markup added
     scripts: [
+      // Google AdSense
+      {
+        async: true,
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7272818312777160",
+        crossOrigin: "anonymous",
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify(HOMEPAGE_SCHEMA),

@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 
 import { getRoleExampleWithRelated, type ResumeRoleWithRelated, type RoleFaq } from "@/lib/resume-roles.functions";
-import { AdBanner } from "@/app/components/AdBanner";
 
 function RoleExamplePage() {
   const data = Route.useLoaderData() as ResumeRoleWithRelated;
@@ -332,7 +331,6 @@ function RoleExamplePage() {
             </section>
 
             {/* In-content ad */}
-            <AdBanner variant="medium-rectangle" className="!my-10" />
 
             {/* FAQ */}
             <section id="faq" className="bg-white rounded-2xl p-7 shadow-sm border border-[#E5E7EB] mb-10 scroll-mt-24">

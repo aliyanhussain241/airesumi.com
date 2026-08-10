@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate, Link, redirect } from "@tanstack/react-ro
 import { motion, useScroll, useSpring } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { AdBanner } from "@/app/components/AdBanner";
 import {
   ATS_SCORE_SLUG, ATS_SCORE_SEO_TITLE, ATS_SCORE_SEO_DESCRIPTION, ATS_SCORE_FAQ_SCHEMA,
   AtsScoreDirectAnswer, AtsScoreToolCta, AtsScoreFaq,
@@ -422,7 +421,6 @@ function BlogPost() {
               )}
 
               {/* In-content ad */}
-              <AdBanner variant="medium-rectangle" className="!my-10" />
 
 
 

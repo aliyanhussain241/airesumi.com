@@ -202,6 +202,7 @@ export type Database = {
       }
       resume_role_examples: {
         Row: {
+          certifications: Json
           created_at: string
           id: string
           industry: string | null
@@ -211,6 +212,7 @@ export type Database = {
           published: boolean
           related_role_slugs: Json
           resume_tips: Json
+          role_faqs: Json
           sample_bullet_points: Json
           seo_description: string | null
           seo_title: string | null
@@ -218,6 +220,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          certifications?: Json
           created_at?: string
           id?: string
           industry?: string | null
@@ -227,6 +230,7 @@ export type Database = {
           published?: boolean
           related_role_slugs?: Json
           resume_tips?: Json
+          role_faqs?: Json
           sample_bullet_points?: Json
           seo_description?: string | null
           seo_title?: string | null
@@ -234,6 +238,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          certifications?: Json
           created_at?: string
           id?: string
           industry?: string | null
@@ -243,6 +248,7 @@ export type Database = {
           published?: boolean
           related_role_slugs?: Json
           resume_tips?: Json
+          role_faqs?: Json
           sample_bullet_points?: Json
           seo_description?: string | null
           seo_title?: string | null

@@ -44,37 +44,14 @@ function RoleExamplePage() {
 
   const faqs = useMemo(() => {
     if (!data) return [];
-    const t = data.role.job_title;
-    const topSkill = data.role.key_skills?.[0];
-    const industry = data.role.industry;
-    const list = [
-      {
-        q: `How long should a ${t} resume be?`,
-        a: `One page if you have under 8 years of experience, two pages if you're senior or have deep specialization. Recruiters spend under 30 seconds on the first pass — density beats length.`,
-      },
-      {
-        q: `Do I need a summary at the top of my ${t} resume?`,
-        a: `Yes. A 2–3 line summary that names your role, years of experience, and one measurable win outperforms a generic objective. It's the first thing both the ATS and the recruiter read.`,
-      },
-      {
-        q: `Which skills should a ${t} highlight?`,
-        a: `Lead with the tools and metrics from the job description you're targeting. Use the key skills list above as a starting point, then cross-check with our Keyword Scanner against the specific posting.`,
-      },
-      {
-        q: `Is this ${t} template ATS-friendly?`,
-        a: `Yes — single-column, standard section headings, no images, tables, or text boxes. It parses cleanly in Workday, Greenhouse, Lever, Taleo, and iCIMS.`,
-      },
-    ];
-    if (topSkill) {
-      list.push({
-        q: `What's the most important skill on a ${t} resume?`,
-        a: industry
-          ? `${topSkill}. It's the first thing recruiters and ATS filters scan for in ${industry} roles — pair it with a quantified bullet that proves you've actually used it, not just listed it.`
-          : `${topSkill}. Recruiters and ATS filters scan for it first — pair it with a quantified bullet that proves you've actually used it, not just listed it.`,
-      });
-    }
-    return list;
+    return buildFaqList(
+      data.role.job_title,
+      data.role.key_skills?.[0],
+      data.role.industry,
+      data.role.role_faqs,
+    );
   }, [data]);
+
 
   if (!data) {
     return (

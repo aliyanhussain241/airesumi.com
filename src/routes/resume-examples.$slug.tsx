@@ -388,6 +388,7 @@ function RoleExamplePage() {
                   {[
                     { href: "#overview", label: "Overview" },
                     { href: "#bullets", label: "Sample bullets" },
+                    ...(role.certifications.length ? [{ href: "#certifications", label: "Certifications" }] : []),
                     { href: "#skills", label: "Key skills" },
                     { href: "#tips", label: "Writing tips" },
                     { href: "#next", label: "Next steps" },

@@ -394,9 +394,16 @@ function RoleExamplePage() {
   );
 }
 
-// Build FAQ JSON-LD for a given role (kept in sync with in-page FAQ copy)
-function buildFaqSchema(jobTitle: string, topSkill?: string | null, industry?: string | null) {
-  const faqs = [
+// Shared FAQ builder — role-specific questions from the database come FIRST so
+// each page has unique lead content instead of the same generic block everywhere.
+function buildFaqList(
+  jobTitle: string,
+  topSkill?: string | null,
+  industry?: string | null,
+  roleFaqs?: RoleFaq[] | null,
+): RoleFaq[] {
+  const specific = (roleFaqs || []).filter((f) => f && f.q && f.a).slice(0, 3);
+  const generic: RoleFaq[] = [
     {
       q: `How long should a ${jobTitle} resume be?`,
       a: `One page if you have under 8 years of experience, two pages if you're senior or have deep specialization. Recruiters spend under 30 seconds on the first pass — density beats length.`,
@@ -414,24 +421,35 @@ function buildFaqSchema(jobTitle: string, topSkill?: string | null, industry?: s
       a: `Yes — single-column, standard section headings, no images, tables, or text boxes. It parses cleanly in Workday, Greenhouse, Lever, Taleo, and iCIMS.`,
     },
   ];
-  if (topSkill) {
-    faqs.push({
+  if (topSkill && specific.length === 0) {
+    generic.push({
       q: `What's the most important skill on a ${jobTitle} resume?`,
       a: industry
         ? `${topSkill}. It's the first thing recruiters and ATS filters scan for in ${industry} roles — pair it with a quantified bullet that proves you've actually used it, not just listed it.`
         : `${topSkill}. Recruiters and ATS filters scan for it first — pair it with a quantified bullet that proves you've actually used it, not just listed it.`,
     });
   }
+  const seen = new Set(specific.map((f) => f.q.toLowerCase()));
+  return [...specific, ...generic.filter((f) => !seen.has(f.q.toLowerCase()))];
+}
+
+function buildFaqSchema(
+  jobTitle: string,
+  topSkill?: string | null,
+  industry?: string | null,
+  roleFaqs?: RoleFaq[] | null,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+    mainEntity: buildFaqList(jobTitle, topSkill, industry, roleFaqs).map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
 }
+
 
 export const Route = createFileRoute("/resume-examples/$slug")({
   loader: async ({ params }) => {

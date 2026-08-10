@@ -21,7 +21,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 
-import { getRoleExampleWithRelated, type ResumeRoleWithRelated } from "@/lib/resume-roles.functions";
+import { getRoleExampleWithRelated, type ResumeRoleWithRelated, type RoleFaq } from "@/lib/resume-roles.functions";
 import { AdBanner } from "@/app/components/AdBanner";
 
 function RoleExamplePage() {

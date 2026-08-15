@@ -332,14 +332,14 @@ export const Route = createFileRoute("/resume-examples/")({
     const roles = (loaderData ?? []) as ResumeRoleSummary[];
     return {
       meta: [
-        { title: "Free Resume Templates — Basic & Downloadable Formats by Role | Airesumi" },
+        { title: "Free ATS-Ready Resume Examples for Every Role | Airesumi" },
         { name: "description", content: "Browse free, downloadable resume templates in a basic, ATS-safe format. Pick your role, edit the content, and download instantly — no signup, no watermark." },
-        { property: "og:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
+        { property: "og:title", content: "Free ATS-Ready Resume Examples for Every Role | Airesumi" },
         { property: "og:description", content: "Free ATS-optimized resume examples by role, with bullet points, skills, and tips." },
         { property: "og:type", content: "website" },
         { property: "og:url", content: "https://airesumi.com/resume-examples" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Resume Examples by Job Title & Industry | Airesumi" },
+        { name: "twitter:title", content: "Free ATS-Ready Resume Examples for Every Role | Airesumi" },
         { name: "twitter:description", content: "Free ATS-optimized resume examples by role." },
       ],
       links: [{ rel: "canonical", href: "https://airesumi.com/resume-examples" }],

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from '@tanstack/react-router';
 
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import {
   CheckCircle2, XCircle, AlertTriangle, ArrowRight, Search, ChevronDown,
   FileText, UploadCloud, RefreshCw, Download, Share2, Plus,
@@ -858,15 +858,16 @@ function FAQ({ q, a }: { q: string, a: string, key?: any }) {
           <ChevronDown className="w-5 h-5" />
         </div>
       </button>
-      <AnimatePresence>
-        {open && (
-           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}>
-             <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4 cursor-text text-sm">
-               {a}
-             </div>
-           </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ overflow: "hidden" }}
+      >
+         <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4 cursor-text text-sm">
+           {a}
+         </div>
+      </motion.div>
     </div>
   );
 }

@@ -503,13 +503,14 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         <span>{question}</span>
         <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${open ? 'rotate-90 text-orange-500' : 'text-muted-foreground'}`} />
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <p className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed">{answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden"
+      >
+        <p className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed">{answer}</p>
+      </motion.div>
     </div>
   );
 }

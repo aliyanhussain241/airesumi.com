@@ -580,22 +580,23 @@ const QuestionCard = ({ question, index, bookmarked, onBookmark, typeColor, dCol
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden bg-gray-50 border-t border-gray-100">
-             <div className="p-6 space-y-6">
-                <div>
-                   <h4 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-500"/> Expert Answer Strategy</h4>
-                   <p className="text-gray-600 text-sm leading-relaxed">{question.expertAnswer}</p>
-                </div>
-                <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
-                   <h4 className="text-sm font-bold text-gray-900 mb-1 flex items-center gap-2"><Lightbulb className="w-4 h-4 text-yellow-500"/> Why They Ask This</h4>
-                   <p className="text-gray-600 text-sm">{question.whyTheyAsk}</p>
-                </div>
-             </div>
-           </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden bg-gray-50 border-t border-gray-100"
+      >
+           <div className="p-6 space-y-6">
+              <div>
+                 <h4 className="text-sm font-bold text-gray-900 mb-2 flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-green-500"/> Expert Answer Strategy</h4>
+                 <p className="text-gray-600 text-sm leading-relaxed">{question.expertAnswer}</p>
+              </div>
+              <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+                 <h4 className="text-sm font-bold text-gray-900 mb-1 flex items-center gap-2"><Lightbulb className="w-4 h-4 text-yellow-500"/> Why They Ask This</h4>
+                 <p className="text-gray-600 text-sm">{question.whyTheyAsk}</p>
+              </div>
+           </div>
+      </motion.div>
     </div>
   );
 };

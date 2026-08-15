@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Search, MapPin, Briefcase, Building2, DollarSign, Lock, ExternalLink, Sparkles } from "lucide-react";
 import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 
 type Job = {
@@ -270,8 +269,6 @@ function JobBoardPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

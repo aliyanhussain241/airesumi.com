@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, MessageSquare, CreditCard, Handshake, ChevronDown, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { LegalPageShell } from './components/LegalPageShell';
 
 
@@ -436,21 +436,21 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
             <h3 className="font-bold text-gray-900 mb-2">Resume & Tool Support</h3>
             <p className="text-gray-500 text-sm mb-4">Questions about the AI resume builder, ATS checker, cover letter generator, or any of our career tools.</p>
             <button onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })} className="text-[#C2410C] dark:text-orange-300 font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Send a Message</button>
-            <div className="text-xs text-gray-400 font-medium">Avg response: 4 hours</div>
+            <div className="text-xs text-gray-400 font-medium">Avg response: a few hours</div>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><CreditCard /></div>
             <h3 className="font-bold text-gray-900 mb-2">Billing & Account Help</h3>
             <p className="text-gray-500 text-sm mb-4">Questions about your subscription, payment, invoice, cancellation, or account settings.</p>
             <a href="mailto:info@airesumi.com" className="block text-[#C2410C] dark:text-orange-300 font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Billing Team</a>
-            <div className="text-xs text-gray-400 font-medium">Avg response: 2 hours</div>
+            <div className="text-xs text-gray-400 font-medium">Avg response: a few hours</div>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center">
             <div className="w-12 h-12 bg-orange-50 text-[#FF6321] rounded-2xl flex items-center justify-center mx-auto mb-4"><Handshake /></div>
             <h3 className="font-bold text-gray-900 mb-2">Partnerships & Press</h3>
             <p className="text-gray-500 text-sm mb-4">Interested in partnering with Airesumi, featuring us in an article, or exploring integration opportunities?</p>
             <a href="mailto:info@airesumi.com" className="block text-[#C2410C] dark:text-orange-300 font-bold text-sm w-full py-2 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors mb-2">Email Partnerships</a>
-            <div className="text-xs text-gray-400 font-medium">Avg response: 1 business day</div>
+            <div className="text-xs text-gray-400 font-medium">Avg response: a few hours</div>
           </div>
         </div>
 
@@ -510,9 +510,9 @@ export const Contact = ({ onNavigate }: { onNavigate: (step: any) => void }) => 
           <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-gray-900 mb-3">Response Time</h3>
             <ul className="text-sm text-gray-600 space-y-2">
-              <li>General Support: Within 4 hours</li>
-              <li>Billing: Within 2 hours</li>
-              <li>Partnerships: Within 1 business day</li>
+              <li>General Support: Within a few hours</li>
+              <li>Billing: Within a few hours</li>
+              <li>Partnerships: Within a few hours</li>
               <li>Support hours: Mon–Fri, 9am–6pm EST</li>
             </ul>
           </div>
@@ -568,15 +568,16 @@ function FAQItem({ question, answer }: { question: string, answer: string, key?:
           <ChevronDown className="w-5 h-5" />
         </div>
       </button>
-      <AnimatePresence>
-        {open && (
-           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}>
-             <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4 cursor-text">
-               {answer}
-             </div>
-           </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ overflow: "hidden" }}
+      >
+         <div className="px-6 pb-6 text-gray-600 leading-relaxed border-t border-gray-100 pt-4 cursor-text">
+           {answer}
+         </div>
+      </motion.div>
     </div>
   );
 }

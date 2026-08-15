@@ -84,9 +84,11 @@ function FaqItem({ q, a }: { q: string; a: string }) {
           className={`shrink-0 text-[#FF6321] transition-transform duration-200 ${open ? "rotate-45" : ""}`}
         />
       </button>
-      {open && (
-        <p className="px-5 pb-5 text-[14px] leading-relaxed text-[#4a5568] dark:text-zinc-400">{a}</p>
-      )}
+      <div
+        className={`grid transition-all duration-200 ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <p className="overflow-hidden px-5 pb-5 text-[14px] leading-relaxed text-[#4a5568] dark:text-zinc-400">{a}</p>
+      </div>
     </div>
   );
 }
